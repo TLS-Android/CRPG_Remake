@@ -46,6 +46,12 @@ dependencies {
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
+    //Koin
+    // Koin Core features
+    implementation "io.insert-koin:koin-core:3.2.2"
+    // Koin Test features
+    testImplementation "io.insert-koin:koin-test:3.2.2"
+
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'

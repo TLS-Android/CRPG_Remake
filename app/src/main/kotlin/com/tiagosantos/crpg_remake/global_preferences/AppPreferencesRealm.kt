@@ -1,7 +1,6 @@
 package com.tiagosantos.crpg_remake.global_preferences
 //import io.realm.annotations.PrimaryKey
 
-
 open class AppPreferencesRealm {
  /*   @RealmField
 

@@ -25,7 +25,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(settings.optionsMenuId != 0 || settings.homeIconBackPressEnabled)
+       /* setHasOptionsMenu(settings.optionsMenuId != 0 || settings.homeIconBackPressEnabled)
 
         if (settings.enterTransition != 0 || settings.exitTransition != 0)
             TransitionInflater.from(requireContext()).let {
@@ -34,6 +34,9 @@ abstract class BaseFragment<B : ViewDataBinding>(
                 if (settings.exitTransition != 0)
                     exitTransition = it.inflateTransition(settings.exitTransition)
             }
+
+            */
+
     }
 
     /**
@@ -58,8 +61,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
         onInitDataBinding()
         observeLifecycleEvents()
         applyResources()
-        if (settings.statusBarColor != 0)
-            setLightOrDarkStatusBarContent(settings.statusBarColor, view)
+        //if (settings.statusBarColor != 0) setLightOrDarkStatusBarContent(settings.statusBarColor, view)
     }
 
     override fun onStop() {
@@ -79,9 +81,8 @@ abstract class BaseFragment<B : ViewDataBinding>(
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         //Menu items are doubling after fragment has been re-created. Need to execute clear()
         menu.clear()
-        if (settings.optionsMenuId != 0) {
-            inflater.inflate(settings.optionsMenuId, menu)
-        }
+        //if (settings.optionsMenuId != 0) inflater.inflate(settings.optionsMenuId, menu)
+
         super.onCreateOptionsMenu(menu, inflater)
     }
 
