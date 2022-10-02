@@ -1,18 +1,6 @@
-package com.mobiledevpro.app.helper
+package com.tiagosantos.crpg_remake.helper
 
 import androidx.databinding.InverseMethod
-
-/**
- * Converter helper for data binding
- *
- *
- * Created by Dmitriy Chernysh
- *
- *
- * http://androiddev.pro
- *
- * #MobileDevPro
- */
 
 object TypeConverter {
 

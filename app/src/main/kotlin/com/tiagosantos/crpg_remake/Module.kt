@@ -1,9 +1,8 @@
 package com.tiagosantos.crpg_remake
 
 import android.content.res.loader.ResourcesProvider
-import com.mobiledevpro.app.helper.ImplResourcesProvider
-import com.mobiledevpro.app.helper.ResourcesProvider
-import com.mobiledevpro.database.di.coreDatabaseModule
+import com.tiagosantos.crpg_remake.helper.ImplResourcesProvider
+import com.tiagosantos.crpg_remake.helper.ResourcesProvider
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
