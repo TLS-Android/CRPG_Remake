@@ -16,7 +16,7 @@ import com.tiagosantos.common.ui.utils.Constants.MODALITY
 import com.tiagosantos.common.ui.utils.Constants.SR_FLAG
 import com.tiagosantos.common.ui.utils.Constants.TTS_FLAG
 
-abstract class BaseMultimodalFragment<B : ViewDataBinding>(
+abstract class BaseModalFragment<B : ViewDataBinding>(
     @LayoutRes
     private val layoutId: Int,
     private val settings: FragmentSettings,
