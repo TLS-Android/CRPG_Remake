@@ -9,4 +9,8 @@
     <string name="label_or">or</string>
     <string name="message_trouble_internet_connection">There is a trouble connecting to server.
         Please, check your internet connection and try again.</string>
+
+
+    //Acronyms
+    <string name="TTS">TTS</string>
 </resources>

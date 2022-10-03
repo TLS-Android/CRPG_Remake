@@ -1,5 +1,4 @@
-
-package com.tiagosantos.access.tts
+package com.tiagosantos.access.modal
 import android.content.res.Configuration
 import android.graphics.drawable.ColorDrawable
 import android.os.Build

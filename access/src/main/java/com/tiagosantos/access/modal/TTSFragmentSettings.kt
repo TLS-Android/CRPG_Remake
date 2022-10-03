@@ -1,4 +1,4 @@
-package com.tiagosantos.access.tts
+package com.tiagosantos.access.modal
 
 data class TTSFragmentSettings(
     val contextualHelp : String?,

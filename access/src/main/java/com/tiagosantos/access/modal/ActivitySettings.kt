@@ -1,14 +1,6 @@
-package com.tiagosantos.access.tts
+package com.tiagosantos.access.modal
 import androidx.annotation.AnimRes
 
-/**
- * Some settings for Activity
- *
- * Created by Dmitri Chernysh on Sep 03, 2020.
- *
- * http://mobile-dev.pro
- *
- */
 data class ActivitySettings(
     @AnimRes
     val openEnterAnimation: Int = 0,
