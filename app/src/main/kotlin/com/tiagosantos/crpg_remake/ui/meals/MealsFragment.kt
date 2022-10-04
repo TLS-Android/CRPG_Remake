@@ -32,18 +32,16 @@ class MealsFragment : BaseFragment<FragmentMealsBinding>(
 
     companion object { fun newInstance() = MealsFragment() }
 
-    init {
-        val cardCarne: MaterialCardView? = view?.findViewById(R.id.frame_opcao_carne)
-        val cardPeixe: MaterialCardView? = view?.findViewById(R.id.frame_opcao_peixe)
-        val cardDieta: MaterialCardView? = view?.findViewById(R.id.frame_opcao_dieta)
-        val cardVeg: MaterialCardView? = view?.findViewById(R.id.frame_opcao_vegetariano)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
+
+        val cardCarne: MaterialCardView? = view?.findViewById(R.id.frame_opcao_carne)
+        val cardPeixe: MaterialCardView? = view?.findViewById(R.id.frame_opcao_peixe)
+        val cardDieta: MaterialCardView? = view?.findViewById(R.id.frame_opcao_dieta)
+        val cardVeg: MaterialCardView? = view?.findViewById(R.id.frame_opcao_vegetariano)
 
         val modalityPreferences = this.requireActivity().getSharedPreferences(
             MODALITY,
@@ -178,7 +176,7 @@ class MealsFragment : BaseFragment<FragmentMealsBinding>(
             cardPeixe?.isChecked = booleanList[1]
             cardDieta?.isChecked = booleanList[2]
             cardVeg?.isChecked = booleanList[3]
-            flagMealChosen = !flagMealChosen
+            updateFlagMealChosen()
         }
     }
 
