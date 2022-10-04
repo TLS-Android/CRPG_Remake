@@ -17,7 +17,9 @@ import java.lang.reflect.Type
 import java.util.*
 
 @SuppressLint("StaticFieldLeak")
-class MealsViewModel(application: Application) : AndroidViewModel(application) {
+class MealsViewModel(
+    application: Application
+) : AndroidViewModel(application) {
 
     private var repo = MealsRepository()
     private val context = getApplication<Application>().applicationContext

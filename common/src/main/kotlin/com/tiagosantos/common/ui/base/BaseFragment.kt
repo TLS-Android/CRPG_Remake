@@ -12,8 +12,11 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.transition.TransitionInflater
 import com.tiagosantos.common.ui.extension.getColorCompatible
+import com.tiagosantos.common.ui.utils.Constants.MODALITY
+import com.tiagosantos.common.ui.utils.Constants.TTS_FLAG
+import com.tiagosantos.common.ui.utils.Constants.SR_FLAG
+
 
 abstract class BaseFragment<B : ViewDataBinding>(
     @LayoutRes
@@ -61,6 +64,15 @@ abstract class BaseFragment<B : ViewDataBinding>(
         onInitDataBinding()
         observeLifecycleEvents()
         applyResources()
+
+        val modalityPreferences =
+            this.requireActivity().getSharedPreferences(MODALITY, Context.MODE_PRIVATE)
+        val ttsFlag = modalityPreferences.getBoolean("TTS", false)
+        val srFlag = modalityPreferences.getBoolean("SR", false)
+
+        val hasRun = modalityPreferences.getBoolean("mealsHasRun", false)
+
+        defineModality(ttsFlag, srFlag, hasRun)
     }
 
     override fun onStop() {
