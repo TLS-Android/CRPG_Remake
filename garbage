@@ -151,3 +151,57 @@ var key = ONE*/
            import java.io.File
            import java.io.FileOutputStream
 
+
+
+/*
+text_opcao_carne.text = mealsViewModel.retrievedMeal.carne
+text_opcao_peixe.text = mealsViewModel.retrievedMeal.peixe
+text_opcao_dieta.text = mealsViewModel.retrievedMeal.dieta
+text_opcao_vegetariano.text = mealsViewModel.retrievedMeal.vegetariano
+*/
+
+******   MEALS FRAGMENT    **********************************************
+
+ if (!cardCarne.isChecked) {
+    mealsViewModel.selectedOption = 1
+} else {
+    mealsViewModel.selectedOption = 0
+}
+cardCarne.isChecked = !cardCarne.isChecked
+cardPeixe?.isChecked = false
+cardDieta?.isChecked = false
+cardVeg?.isChecked = false
+
+
+/*
+if (!cardPeixe.isChecked) {
+    mealsViewModel.selectedOption = 2
+} else {
+    mealsViewModel.selectedOption = 0
+}.apply { !cardPeixe.isChecked }
+cardCarne?.isChecked = false
+cardDieta?.isChecked = false
+cardVeg?.isChecked = false
+
+
+if (!cardDieta.isChecked) {
+    mealsViewModel.selectedOption = 3
+} else {
+    mealsViewModel.selectedOption = 0
+}
+cardDieta.isChecked = !cardDieta.isChecked
+cardCarne?.isChecked = false
+cardPeixe?.isChecked = false
+cardVeg?.isChecked = false
+
+
+if (!cardVeg.isChecked) {
+    mealsViewModel.selectedOption = 4
+} else {
+    mealsViewModel.selectedOption = 0
+}
+cardVeg.isChecked = !cardVeg.isChecked
+cardCarne?.isChecked = false
+cardPeixe?.isChecked = false
+cardDieta?.isChecked = false
+*/

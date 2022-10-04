@@ -6,18 +6,18 @@ import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.tiagosantos.common.ui.extension.getColorCompatible
 import com.tiagosantos.common.ui.utils.Constants.MODALITY
-import com.tiagosantos.common.ui.utils.Constants.TTS_FLAG
-import com.tiagosantos.common.ui.utils.Constants.SR_FLAG
 import com.tiagosantos.crpg_remake.R
-
 
 abstract class BaseFragment<B : ViewDataBinding>(
     @LayoutRes
@@ -72,6 +72,25 @@ abstract class BaseFragment<B : ViewDataBinding>(
         val srFlag = modalityPreferences.getBoolean("SR", false)
 
         val hasRun = modalityPreferences.getBoolean("mealsHasRun", false)
+
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // Handle the back button event
+                val fragment: Fragment = AgendaFragment()
+                val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
+                val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.nav_host_fragment, fragment)
+                fragmentManager.popBackStack()
+                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.commit()
+                onPause()
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            onBackPressedCallback
+        )
 
         defineModality(ttsFlag, srFlag, hasRun)
     }
@@ -200,6 +219,12 @@ abstract class BaseFragment<B : ViewDataBinding>(
             }
         }
 
+    }
+
+    fun showBackButton() {
+        if (activity is MainActivity) {
+            (activity as MainActivity?)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
     }
 
 
