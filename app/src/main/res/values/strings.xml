@@ -15,4 +15,5 @@
     <string name="TTS">TTS</string>
     <string name="permitir">Permitir</string>
     <string name="recusar">Recusar</string>
+    <string name="mealsHasRun">mealsHasRun</string>
 </resources>

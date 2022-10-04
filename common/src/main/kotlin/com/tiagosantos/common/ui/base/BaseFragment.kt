@@ -16,12 +16,13 @@ import com.tiagosantos.common.ui.extension.getColorCompatible
 import com.tiagosantos.common.ui.utils.Constants.MODALITY
 import com.tiagosantos.common.ui.utils.Constants.TTS_FLAG
 import com.tiagosantos.common.ui.utils.Constants.SR_FLAG
+import com.tiagosantos.crpg_remake.R
 
 
 abstract class BaseFragment<B : ViewDataBinding>(
     @LayoutRes
     private val layoutId: Int,
-    private val settings: FragmentSettings
+    private val settings: FragmentSettings,
 ) : Fragment() {
 
     open lateinit var viewBinding: B
@@ -102,6 +103,13 @@ abstract class BaseFragment<B : ViewDataBinding>(
             requireActivity().onBackPressed()
             true
         } else super.onOptionsItemSelected(item)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val sharedPreferences =
+            this.requireActivity().getSharedPreferences(MODALITY, Context.MODE_PRIVATE)
+        sharedPreferences.edit().apply { putBoolean(settings.sharedPreferencesBooleanName, true).apply() }
     }
 
     private fun setLightOrDarkStatusBarContent(@ColorRes statusBarColor: Int, view: View) {

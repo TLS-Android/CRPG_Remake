@@ -3,6 +3,7 @@ package com.tiagosantos.common.ui.base
 data class FragmentSettings(
     val appBarTitle: Any = 0,
     val appBarSubTitle: Any = 0,
+    val sharedPreferencesBooleanName: String? = ""
     /*
     @MenuRes
     val optionsMenuId: Int = 0,

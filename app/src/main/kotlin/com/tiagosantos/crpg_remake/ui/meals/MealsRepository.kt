@@ -1,11 +1,11 @@
-package com.plataforma.crpg.ui.meals
+package com.tiagosantos.crpg_remake.ui.meals
 
-import com.google.firebase.database.DatabaseReference
+//import com.google.firebase.database.DatabaseReference
 import com.plataforma.crpg.model.Meal
 
 class MealsRepository {
 
-    private lateinit var database: DatabaseReference
+    //private lateinit var database: DatabaseReference
     val meal = Meal("01042021", "bife", "atum", "massa", "salada")
 
     val m = Meal(

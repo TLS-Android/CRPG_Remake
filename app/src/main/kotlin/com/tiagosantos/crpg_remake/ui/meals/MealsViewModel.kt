@@ -1,4 +1,4 @@
-package com.plataforma.crpg.ui.meals
+package com.tiagosantos.crpg_remake.ui.meals
 
 import android.annotation.SuppressLint
 import android.app.Application
@@ -7,9 +7,6 @@ import androidx.lifecycle.AndroidViewModel
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
-import com.plataforma.crpg.model.Event
-import com.plataforma.crpg.utils.Constants.EMPTY_STRING
-import com.plataforma.crpg.utils.CustomDateUtils
 import java.io.File
 import java.io.FileOutputStream
 import java.io.FileReader
@@ -23,7 +20,6 @@ class MealsViewModel(
 
     private var repo = MealsRepository()
     private val context = getApplication<Application>().applicationContext
-    var selectedOption = 0
 
     private val FILES_DIR = context?.filesDir.toString()
 

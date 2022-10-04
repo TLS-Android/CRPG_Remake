@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.card.MaterialCardView
 import com.tiagosantos.common.ui.base.BaseFragment
 import com.tiagosantos.common.ui.base.FragmentSettings
+import com.tiagosantos.common.ui.utils.Constants.MODALITY
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentMealsBinding
 
@@ -22,6 +23,7 @@ class MealsFragment : BaseFragment<FragmentMealsBinding>(
     layoutId = R.layout.fragment_meals,
     FragmentSettings(
         appBarTitle = R.string.title_dashboard,
+        sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
     )
 ) {
 
@@ -30,21 +32,11 @@ class MealsFragment : BaseFragment<FragmentMealsBinding>(
 
     companion object { fun newInstance() = MealsFragment() }
 
-    override fun onPause() {
-        super.onPause()
-        val sharedPreferences = this.requireActivity().getSharedPreferences("MODALITY", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-
-        editor.putBoolean("mealsHasRun", true).apply()
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
-    override fun onResume() {
-        super.onResume()
+    init {
+        val cardCarne: MaterialCardView? = view?.findViewById(R.id.frame_opcao_carne)
+        val cardPeixe: MaterialCardView? = view?.findViewById(R.id.frame_opcao_peixe)
+        val cardDieta: MaterialCardView? = view?.findViewById(R.id.frame_opcao_dieta)
+        val cardVeg: MaterialCardView? = view?.findViewById(R.id.frame_opcao_vegetariano)
     }
 
     override fun onCreateView(
@@ -87,13 +79,9 @@ class MealsFragment : BaseFragment<FragmentMealsBinding>(
             ViewModelProvider(activity as AppCompatActivity).get(MealsViewModel::class.java)
 
 
-        /*
-        text_opcao_carne.text = mealsViewModel.retrievedMeal.carne
-        text_opcao_peixe.text = mealsViewModel.retrievedMeal.peixe
-        text_opcao_dieta.text = mealsViewModel.retrievedMeal.dieta
-        text_opcao_vegetariano.text = mealsViewModel.retrievedMeal.vegetariano
-        */
     }
+
+    fun updateFlagMealChosen() {flagMealChosen = !flagMealChosen}
 
     @SuppressLint("SetTextI18n", "ResourceAsColor")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -118,21 +106,18 @@ class MealsFragment : BaseFragment<FragmentMealsBinding>(
             cardPeixe?.isChecked = false
             cardDieta?.isChecked = false
             cardVeg?.isChecked = false
-            flagMealChosen = !flagMealChosen
-        }
+        }.also { updateFlagMealChosen() }
 
         cardPeixe?.setOnClickListener {
             if (!cardPeixe.isChecked) {
                 mealsViewModel.selectedOption = 2
             } else {
                 mealsViewModel.selectedOption = 0
-            }
-            cardPeixe.isChecked = !cardPeixe.isChecked
+            }.apply { !cardPeixe.isChecked }
             cardCarne?.isChecked = false
             cardDieta?.isChecked = false
             cardVeg?.isChecked = false
-            flagMealChosen = !flagMealChosen
-        }
+        }.also { updateFlagMealChosen() }
 
         cardDieta?.setOnClickListener {
             if (!cardDieta.isChecked) {
@@ -144,8 +129,7 @@ class MealsFragment : BaseFragment<FragmentMealsBinding>(
             cardCarne?.isChecked = false
             cardPeixe?.isChecked = false
             cardVeg?.isChecked = false
-            flagMealChosen = !flagMealChosen
-        }
+        }.also { updateFlagMealChosen() }
 
         cardVeg?.setOnClickListener {
 
@@ -158,8 +142,7 @@ class MealsFragment : BaseFragment<FragmentMealsBinding>(
             cardCarne?.isChecked = false
             cardPeixe?.isChecked = false
             cardDieta?.isChecked = false
-            flagMealChosen = !flagMealChosen
-        }
+        }.also { updateFlagMealChosen() }
 
         val mealSuccessView = view?.findViewById<View>(R.id.meal_choice_success)
         val nothingCheckedWarning = view?.findViewById<View>(R.id.aviso_nenhuma_refeicao_checked)
@@ -215,8 +198,6 @@ class MealsFragment : BaseFragment<FragmentMealsBinding>(
         commandToActionMap[a]
     }
 
-
-
     override fun onInitDataBinding() {
         TODO("Not yet implemented")
     }
@@ -225,3 +206,12 @@ class MealsFragment : BaseFragment<FragmentMealsBinding>(
         TODO("Not yet implemented")
     }
 }
+
+
+
+/*
+text_opcao_carne.text = mealsViewModel.retrievedMeal.carne
+text_opcao_peixe.text = mealsViewModel.retrievedMeal.peixe
+text_opcao_dieta.text = mealsViewModel.retrievedMeal.dieta
+text_opcao_vegetariano.text = mealsViewModel.retrievedMeal.vegetariano
+*/
