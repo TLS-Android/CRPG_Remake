@@ -3,16 +3,10 @@ package com.tiagosantos.crpg_remake.ui.meals
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.speech.tts.TextToSpeech
-import android.speech.tts.UtteranceProgressListener
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -43,7 +37,6 @@ class MealsFragment : BaseFragment<FragmentMealsBinding>(
 
         editor.putBoolean("mealsHasRun", true).apply()
 
-        handler.removeCallbacksAndMessages(null)
     }
 
     override fun onDestroy() {
@@ -92,7 +85,6 @@ class MealsFragment : BaseFragment<FragmentMealsBinding>(
         super.onViewCreated(view, savedInstanceState)
         val mealsViewModel =
             ViewModelProvider(activity as AppCompatActivity).get(MealsViewModel::class.java)
-
 
 
         /*
