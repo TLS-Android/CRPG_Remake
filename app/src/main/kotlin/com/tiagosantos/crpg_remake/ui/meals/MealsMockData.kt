@@ -5,8 +5,6 @@ import com.plataforma.crpg.model.Meal
 
 class MealsMockData {
 
-
-
     //private lateinit var database: DatabaseReference
     val meal = Meal(
         "01042021", "bife", "atum", "massa", "salada"

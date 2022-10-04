@@ -6,8 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import org.koin.core.scope.Scope
 
 class HomeViewModel : ViewModel(), DefaultLifecycleObserver {
+
+    override val scope: Scope by getOrCreateScope()
 
     private val coroutinesScope = CoroutineScope(Dispatchers.IO)
 

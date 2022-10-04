@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import org.koin.core.scope.Scope
+import org.koin.android.scope.getOrCreateScope
 import com.tiagosantos.common.ui.base.BaseFragment
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.common.ui.extension.observe
@@ -20,9 +22,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     )
 ) {
 
+    override val scope: Scope by getOrCreateScope()
+
     private var _binding: FragmentHomeBinding? = null
-    private val viewModel =
-        ViewModelProvider(this)[HomeViewModel::class.java]
+    private val viewModel: HomeViewModel
+            by lazy(LazyThreadSafetyMode.NONE) {  }
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -61,11 +65,3 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     }
 }
 
-/*statusBarColor = RApp.color.colorWindowGreyBackground,
-        appBarColor = RApp.color.colorWindowGreyBackground,
-        appBarTitleColor = RApp.color.colorTextPrimary,
-        appWindowBackground = RApp.drawable.background_window_dark,
-        homeIconId = RApp.drawable.ic_list_dark_24dp,
-        optionsMenuId = R.menu.menu_chat_public,
-        homeIconBackPressEnabled = false,
-        exitTransition = RNav.transition.slide_left*/

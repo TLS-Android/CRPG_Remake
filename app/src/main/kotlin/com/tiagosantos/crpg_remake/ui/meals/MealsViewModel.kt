@@ -3,13 +3,14 @@ package com.tiagosantos.crpg_remake.ui.meals
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
+import android.util.Log
+import androidx.lifecycle.*
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import com.tiagosantos.common.ui.utils.GeneralUtils.LOG_TAG_DEBUG
+import com.tiagosantos.crpg_remake.helper.ResourcesProvider
+import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
 import java.io.FileReader
@@ -18,11 +19,12 @@ import java.util.*
 
 @SuppressLint("StaticFieldLeak")
 class MealsViewModel(
-    application: Application
-) : AndroidViewModel(application) {
+    application: Application,
+    private val resourcesProvider: ResourcesProvider,
+) : ViewModel(), DefaultLifecycleObserver {
 
     private var repo = MealsMockData()
-    private val context = getApplication<Application>().applicationContext
+    private val context = application.applicationContext
 
     private val _listMessages = MutableLiveData<List<String>?>()
     val listMessages: LiveData<List<String>?> = _listMessages
@@ -36,6 +38,24 @@ class MealsViewModel(
         private const val EVENT_FILENAME = "event.json"
         val gson = Gson()
     }
+
+    private fun observeMessagesList() {
+        viewModelScope.launch {
+            interactor.getMessagesList()
+                .collect {
+                    it.onSuccess { messagesList ->
+                        Log.d(LOG_TAG_DEBUG, "observeMessagesList: onSuccess: $messagesList ")
+                    }.onFailure {
+                        Log.e(
+                            LOG_TAG_DEBUG,
+                            "observeMessagesList: onFailure: ${it.localizedMessage} "
+                        )
+                        Log.e(
+                            LOG_TAG_DEBUG,
+                            "observeMessagesList: onFailure: Thread ${Thread.currentThread().name} "
+                        )
+                    }
+
 
     fun isLoadingAnimationVisible(): LiveData<Boolean> {
         val isVisible = MediatorLiveData<Boolean>()
