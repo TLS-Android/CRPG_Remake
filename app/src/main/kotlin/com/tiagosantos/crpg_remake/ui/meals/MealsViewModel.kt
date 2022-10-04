@@ -4,6 +4,9 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
@@ -18,8 +21,14 @@ class MealsViewModel(
     application: Application
 ) : AndroidViewModel(application) {
 
-    private var repo = MealsRepository()
+    private var repo = MealsMockData()
     private val context = getApplication<Application>().applicationContext
+
+    private val _listMessages = MutableLiveData<List<String>?>()
+    val listMessages: LiveData<List<String>?> = _listMessages
+
+    private val _selectedOption = MutableLiveData<Int?>()
+    var selectedOption: LiveData<Int?> = _selectedOption
 
     private val FILES_DIR = context?.filesDir.toString()
 
@@ -28,24 +37,22 @@ class MealsViewModel(
         val gson = Gson()
     }
 
-    fun testJSON() {
-        val json = gson.toJson(repo.m)
-        val gsonPretty = GsonBuilder().setPrettyPrinting().create()
-        val prettyJson: String = gsonPretty.toJson(json)
+    fun isLoadingAnimationVisible(): LiveData<Boolean> {
+        val isVisible = MediatorLiveData<Boolean>()
 
-        val file = File(context.filesDir, repo.mealFilename)
-        file.writeText(prettyJson)
-    }
-
-    fun getMealsFromJSON() {
-        val file = File(context.filesDir, repo.mealFilename)
-
-        context.openFileInput(repo.mealFilename).bufferedReader().useLines { lines ->
-            lines.fold("") { some, text ->
-                "$some\n$text"
-            }
+        val b: () -> Boolean = {
+            listMessages.value?.isEmpty() ?: true
         }
+
+        isVisible.value = b()
+
+        isVisible.addSource(listMessages) {
+            isVisible.value = b()
+        }
+
+        return isVisible
     }
+
 
     fun convertMealsToJSON() {
         gson.toJson(repo.m)
@@ -61,7 +68,7 @@ class MealsViewModel(
         }
     }
 
-    fun fetchMealChoiceOnLocalStorage(): String {
+    private fun fetchMealChoiceOnLocalStorage(): String {
         val isLunch = CustomDateUtils.getIsLunchOrDinner()
         val currentDate = CustomDateUtils.getCurrentDay()
 
@@ -146,4 +153,24 @@ class MealsViewModel(
             }
         }
     }
+
+    fun testJSON() {
+        val json = gson.toJson(repo.m)
+        val gsonPretty = GsonBuilder().setPrettyPrinting().create()
+        val prettyJson: String = gsonPretty.toJson(json)
+
+        val file = File(context.filesDir, repo.mealFilename)
+        file.writeText(prettyJson)
+    }
+
+    fun getMealsFromJSON() {
+        val file = File(context.filesDir, repo.mealFilename)
+
+        context.openFileInput(repo.mealFilename).bufferedReader().useLines { lines ->
+            lines.fold("") { some, text ->
+                "$some\n$text"
+            }
+        }
+    }
+
 }

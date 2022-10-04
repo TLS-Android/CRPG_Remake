@@ -57,6 +57,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
     ): View? {
         viewBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         viewBinding.lifecycleOwner = viewLifecycleOwner
+        showBackButton()
         return viewBinding.root
     }
 

@@ -3,10 +3,14 @@ package com.tiagosantos.crpg_remake.ui.meals
 //import com.google.firebase.database.DatabaseReference
 import com.plataforma.crpg.model.Meal
 
-class MealsRepository {
+class MealsMockData {
+
+
 
     //private lateinit var database: DatabaseReference
-    val meal = Meal("01042021", "bife", "atum", "massa", "salada")
+    val meal = Meal(
+        "01042021", "bife", "atum", "massa", "salada"
+    )
 
     val m = Meal(
         "01042021", "a",

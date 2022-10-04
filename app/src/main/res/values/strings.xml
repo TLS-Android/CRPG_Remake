@@ -10,13 +10,18 @@
     <string name="message_trouble_internet_connection">There is a trouble connecting to server.
         Please, check your internet connection and try again.</string>
 
-    //Content description//
+    //MEALS//
 
     <string name="imagem_ilutrativa_de_prato_de_carne">Imagem ilutrativa de prato de carne</string>
     <string name="imagem_ilustrativa_de_prato_de_peixe">Imagem ilustrativa de prato de peixe</string>
     <string name="imagem_ilustrativa_de_prato_de_dieta">Imagem ilustrativa de prato de dieta</string>
     <string name="imagem_ilustrativa_de_prato_vegetariano">Imagem ilustrativa de prato vegetariano</string>
 
+
+    <string name="opcao_carne">Opção Carne</string>
+    <string name="opcao_peixe">Opção Peixe</string>
+    <string name="opcao_dieta">Opção Dieta</string>
+    <string name="opcao_veg">Opção Vegetariana</string>
 
     //Acronyms
     <string name="TTS">TTS</string>

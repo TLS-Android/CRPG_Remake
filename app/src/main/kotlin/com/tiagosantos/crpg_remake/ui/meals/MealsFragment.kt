@@ -2,10 +2,9 @@ package com.tiagosantos.crpg_remake.ui.meals
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.card.MaterialCardView
 import com.tiagosantos.common.ui.base.BaseFragment
@@ -27,17 +26,13 @@ class MealsFragment : BaseFragment<FragmentMealsBinding>(
         true, true, true
     )
 
-    companion object { fun newInstance() = MealsFragment() }
+    private val cardCarne: MaterialCardView? = view?.findViewById(R.id.frame_opcao_carne)
+    private val cardPeixe: MaterialCardView? = view?.findViewById(R.id.frame_opcao_peixe)
+    private val cardDieta: MaterialCardView? = view?.findViewById(R.id.frame_opcao_dieta)
+    private val cardVeg: MaterialCardView? = view?.findViewById(R.id.frame_opcao_vegetariano)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        showBackButton()
-        return view
-        // return inflater.inflate(R.layout.meals_fragment, container, false)
-    }
+
+    companion object { fun newInstance() = MealsFragment() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,7 +40,6 @@ class MealsFragment : BaseFragment<FragmentMealsBinding>(
             ViewModelProvider(activity as AppCompatActivity)[MealsViewModel::class.java]
     }
 
-    private fun updateFlagMealChosen() {flagMealChosen = !flagMealChosen}
 
     @SuppressLint("SetTextI18n", "ResourceAsColor")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -53,11 +47,6 @@ class MealsFragment : BaseFragment<FragmentMealsBinding>(
         val mealsViewModel = ViewModelProvider(activity as AppCompatActivity).get(MealsViewModel::class.java)
         ViewModelProvider(activity as AppCompatActivity).get(SharedViewModel::class.java)
         val isLunch = requireArguments().getBoolean("isLunch")
-
-        val cardCarne: MaterialCardView? = view?.findViewById(R.id.frame_opcao_carne)
-        val cardPeixe: MaterialCardView? = view?.findViewById(R.id.frame_opcao_peixe)
-        val cardDieta: MaterialCardView? = view?.findViewById(R.id.frame_opcao_dieta)
-        val cardVeg: MaterialCardView? = view?.findViewById(R.id.frame_opcao_vegetariano)
 
         val cardList = listOf(
             cardCarne, cardPeixe, cardDieta, cardVeg
@@ -69,7 +58,7 @@ class MealsFragment : BaseFragment<FragmentMealsBinding>(
             } else mealsViewModel.selectedOption = 0
 
             for (s in cardList) {
-                if (s != card) s.isChecked = false
+                if (s != card) s?.isChecked = false
             }
         }
 
@@ -116,10 +105,10 @@ class MealsFragment : BaseFragment<FragmentMealsBinding>(
 
      fun performActionWithVoiceCommand(command: String) {
         val commandToActionMap = mapOf(
-            "Carne" to frame_opcao_carne.performClick(),
-            "Peixe" to frame_opcao_peixe.performClick(),
-            "Dieta" to frame_opcao_dieta.performClick(),
-            "Vegetariano" to frame_opcao_vegetariano.performClick(),
+            "Carne" to cardCarne?.performClick(),
+            "Peixe" to cardPeixe?.performClick(),
+            "Dieta" to cardDieta?.performClick(),
+            "Vegetariano" to cardVeg?.performClick(),
         )
 
         val a = commandToActionMap.keys.find {
@@ -138,18 +127,8 @@ class MealsFragment : BaseFragment<FragmentMealsBinding>(
         TODO("Not yet implemented")
     }
 
-    fun setChecks(selOption: Int, booleanList: List<Boolean>) {
-        if (cardCarne?.isChecked == true) {
-            mealsViewModel.selectedOption = selOption
-        } else {
-            mealsViewModel.selectedOption = 0
-        }
-        cardCarne?.isChecked = cardCarne?.isChecked == booleanList[0]
-        cardPeixe?.isChecked = booleanList[1]
-        cardDieta?.isChecked = booleanList[2]
-        cardVeg?.isChecked = booleanList[3]
-        updateFlagMealChosen()
-    }
+    private fun updateFlagMealChosen() {flagMealChosen = !flagMealChosen}
+
 }
 
 

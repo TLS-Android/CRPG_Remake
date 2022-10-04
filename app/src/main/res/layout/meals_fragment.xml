@@ -10,8 +10,8 @@
     <data>
         <variable
             name="model"
-            type="com.tiagosantos.crpg_remake.ui.meals.MealsFragment" />
-        <import type="android.view.View" />
+            android:type="com.tiagosantos.crpg_remake.ui.meals.MealsFragment" />
+        <import android:type="android.view.View" />
     </data>
 
     <include layout="@layout/meal_choice_success"
