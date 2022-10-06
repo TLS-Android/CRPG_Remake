@@ -1,28 +1,41 @@
 package com.tiagosantos.crpg_remake
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.plataforma.crpg.utils.Constants
+import com.tiagosantos.common.ui.utils.Constants
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class BoardingActivity : AppCompatActivity() {
+
+    private val activityScope = CoroutineScope(Dispatchers.Main)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestMultiModalityOptions()
+
         setContentView(R.layout.splash_screen)
-        val handler = Handler()
-        handler.postDelayed(Runnable {
-            val mInHome = Intent(this@Splash_Screen_Activity, InvoiceASAPTabActivity::class.java)
-            this@Splash_Screen_Activity.startActivity(mInHome)
-            this@Splash_Screen_Activity.finish()
-        }, 3000)
+        activityScope.launch {
+            delay(3000)
+
+            var intent = Intent(this@BoardingActivity, BoardingActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun requestMultiModalityOptions() {
-        val sharedPreferences = this.applicationContext.getSharedPreferences(Constants.MODALITY, Context.MODE_PRIVATE)
+        val sharedPreferences =
+            this.applicationContext.getSharedPreferences(
+                Constants.MODALITY,
+                Context.MODE_PRIVATE
+            )
         val editor = sharedPreferences.edit()
 
         launchAlertDialog(
