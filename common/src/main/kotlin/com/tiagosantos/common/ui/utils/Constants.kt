@@ -16,14 +16,18 @@ object Constants {
 
     // SHARED PREFERENCES
     const val MODALITY = "MODALITY"
-    const val TTS_FLAG = "TTS"
-    const val SR_FLAG = "SR"
+    const val TTS = "TTS"
+    const val SR = "SR"
 
     // AUDIO EXTENSIONS
     const val WAV_EXTENSION = ".wav"
 
     //NUMBERS
     const val ONE = 1
+
+    //PERMISSIONS
+    const val PERMITIR = "PERMITIR"
+    const val RECUSAR = "RECUSAR"
 
 }
 

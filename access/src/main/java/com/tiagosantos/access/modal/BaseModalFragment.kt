@@ -13,8 +13,8 @@ import com.tiagosantos.common.ui.base.BaseFragment
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.common.ui.extension.observe
 import com.tiagosantos.common.ui.utils.Constants.MODALITY
-import com.tiagosantos.common.ui.utils.Constants.SR_FLAG
-import com.tiagosantos.common.ui.utils.Constants.TTS_FLAG
+import com.tiagosantos.common.ui.utils.Constants.SR
+import com.tiagosantos.common.ui.utils.Constants.TTS
 
 abstract class BaseModalFragment<B : ViewDataBinding>(
     @LayoutRes
@@ -25,8 +25,6 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
     layoutId = layoutId,
     settings = settings,
 ) {
-
-    override lateinit var viewBinding: B
 
     private val _flag = MutableLiveData<String?>()
     val flag: LiveData<String?> = _flag
@@ -57,8 +55,8 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
 
         val modalityPreferences =
             this.requireActivity().getSharedPreferences(MODALITY, Context.MODE_PRIVATE)
-        val ttsFlag = modalityPreferences.getBoolean(TTS_FLAG, false)
-        val srFlag = modalityPreferences.getBoolean(SR_FLAG, false)
+        val ttsFlag = modalityPreferences.getBoolean(TTS, false)
+        val srFlag = modalityPreferences.getBoolean(SR, false)
         val hasRun = modalityPreferences.getBoolean(flag.toString(), false)
 
         defineModality(ttsFlag, srFlag, hasRun)
@@ -82,11 +80,6 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
                 ttsFlag && srFlag -> setup.startVoiceRecognition()
             }
         }
-    }
-
-    override fun onStop() {
-        val activity = requireActivity()
-        super.onStop()
     }
 
     override fun observeLifecycleEvents() {
