@@ -6,13 +6,9 @@ import android.os.Looper
 import android.speech.tts.TextToSpeech
 import android.view.*
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import com.tiagosantos.access.R
+import com.tiagosantos.access.modal.settings.TTSFragmentSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.common.ui.extension.observe
 import kotlin.properties.Delegates
@@ -68,22 +64,5 @@ abstract class BaseTTSFragment<B : ViewDataBinding>(
 
     override fun performActionWithVoiceCommand(command: String) {}
 
-    fun manageBackButton(fragment: Fragment) {
-        val onBackPressedCallback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
-                val fragmentTransaction: FragmentTransaction =
-                    fragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.nav_host_fragment, fragment)
-                fragmentManager.popBackStack()
-                fragmentTransaction.addToBackStack(null)
-                fragmentTransaction.commit()
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            onBackPressedCallback
-        )
-    }
 
 }

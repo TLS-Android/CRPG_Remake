@@ -1,4 +1,4 @@
-package modality
+package com.tiagosantos.access.modal.modality
 
 import android.content.Context
 import android.content.SharedPreferences

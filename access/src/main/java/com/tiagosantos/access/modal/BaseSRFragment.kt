@@ -12,10 +12,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.tiagosantos.access.R
+import com.tiagosantos.access.modal.settings.TTSFragmentSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.common.ui.extension.observe
 
-abstract class BaseVoiceReconFragment<B : ViewDataBinding>(
+abstract class BaseSRFragment<B : ViewDataBinding>(
     @LayoutRes
     private val layoutId: Int,
     private val settings: FragmentSettings,

@@ -1,4 +1,4 @@
-package com.tiagosantos.access.modal
+package com.tiagosantos.access.modal.activity
 import android.content.res.Configuration
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
@@ -18,6 +18,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateLayoutParams
+import com.tiagosantos.access.modal.settings.ActivitySettings
 import com.tiagosantos.common.ui.extension.applyStatusBarColor
 import com.tiagosantos.common.ui.extension.dpToPx
 import com.tiagosantos.common.ui.extension.getColorCompatible

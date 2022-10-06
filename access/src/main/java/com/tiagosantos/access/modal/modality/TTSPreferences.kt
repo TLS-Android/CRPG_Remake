@@ -1,4 +1,4 @@
-package modality
+package com.tiagosantos.access.modal.modality
 
 class TTSPreferences {
 /*

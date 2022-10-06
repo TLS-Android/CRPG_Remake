@@ -81,6 +81,7 @@ class MealsFragment : BaseFragment<FragmentMealsBinding>(
         val mealSuccessView = view?.findViewById<View>(R.id.meal_choice_success)
         val nothingCheckedWarning = view?.findViewById<View>(R.id.aviso_nenhuma_refeicao_checked)
 
+        /*
         button_confirm_meal.setOnClickListener {
             if (mealsViewModel.selectedOption != 0) {
                 mealSuccessView?.visibility = View.VISIBLE
@@ -100,7 +101,7 @@ class MealsFragment : BaseFragment<FragmentMealsBinding>(
             } else {
                 nothingCheckedWarning?.visibility = View.VISIBLE
             }
-        }
+        }*/
     }
 
      fun performActionWithVoiceCommand(command: String) {

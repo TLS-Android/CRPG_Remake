@@ -22,6 +22,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     )
 ) {
 
+
     override val scope: Scope by getOrCreateScope()
 
     private var _binding: FragmentHomeBinding? = null
@@ -52,7 +53,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         super.onDestroyView()
         _binding = null
     }
-
+/*
     override fun onInitDataBinding() {
         viewBinding.model = viewModel
         lifecycle.addObserver(viewModel)
@@ -63,5 +64,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
         })
     }
+    */
+
 }
 

@@ -1,4 +1,4 @@
-package com.tiagosantos.access.modal
+package com.tiagosantos.access.modal.settings
 import androidx.annotation.AnimRes
 
 data class ActivitySettings(

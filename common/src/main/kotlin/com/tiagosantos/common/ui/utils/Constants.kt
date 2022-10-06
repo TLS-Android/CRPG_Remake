@@ -9,8 +9,8 @@ object Constants {
 
     // MY LOCALE
     const val EMPTY_STRING = ""
-    private const val LANG_PORTUGUESE = "pt_PT"
-    private const val REGION_PORTUGAL = "POR"
+    const val LANG_PORTUGUESE = "pt_PT"
+    const val REGION_PORTUGAL = "POR"
 
     val myLocale = Locale(LANG_PORTUGUESE, REGION_PORTUGAL)
 

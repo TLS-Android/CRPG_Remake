@@ -5,7 +5,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import modality.ModalityPreferencesRepository
+import com.tiagosantos.access.modal.modality.ModalityPreferencesRepository
 
 @SuppressLint("StaticFieldLeak")
 class RepositoryManagerViewModel(

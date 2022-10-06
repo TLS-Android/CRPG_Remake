@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.tiagosantos.access.modal
+package com.tiagosantos.access.modal.activity
 
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
