@@ -35,8 +35,6 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
     private val _flag = MutableLiveData<String?>()
     val flag: LiveData<String?> = _flag
 
-    abstract val setup: MultimodalSetup
-
     /**
      * Called to Initialize view data binding variables when fragment view is created.
      */
@@ -72,14 +70,14 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
        hasRun: Boolean)
     { if (!hasRun) {
             when {
-                ttsFlag && !srFlag -> setup.startTTS()
-                !ttsFlag && srFlag -> setup.startVoiceRecognition()
-                ttsFlag && srFlag -> setup.multimodalOption()
+                ttsFlag && !srFlag ->
+                !ttsFlag && srFlag ->
+                ttsFlag && srFlag ->
             }
         } else {
             when {
-                !ttsFlag && srFlag -> setup.startVoiceRecognition()
-                ttsFlag && srFlag -> setup.startVoiceRecognition()
+                !ttsFlag && srFlag ->
+                ttsFlag && srFlag ->
             }
         }
     }

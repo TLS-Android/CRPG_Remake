@@ -64,5 +64,4 @@ abstract class BaseTTSFragment<B : ViewDataBinding>(
 
     override fun performActionWithVoiceCommand(command: String) {}
 
-
 }
