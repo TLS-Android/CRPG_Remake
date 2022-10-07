@@ -24,7 +24,10 @@ class BoardingActivity : AppCompatActivity() {
         activityScope.launch {
             delay(3000)
 
-            var intent = Intent(this@BoardingActivity, BoardingActivity::class.java)
+            val intent = Intent(
+                this@BoardingActivity,
+                BoardingActivity::class.java
+            )
             startActivity(intent)
             finish()
         }
@@ -39,14 +42,14 @@ class BoardingActivity : AppCompatActivity() {
         val editor = sharedPreferences.edit()
 
         launchAlertDialog(
-            "Lançar notificações para teste",
+            getString(R.string.lancar_notificacoes_teste),
             "Para teste de usabilidade apenas",
             "test",
             editor
         )
 
         launchAlertDialog(
-            "Permitir Sugestões de Áudio",
+            getString(R.string.permitir_sugestoes_audio),
             "A aplicação possui uma voz virtual que poder dar-lhe indicações de como" +
                 "utilizar a plataforma. Prima o botão \"Permitir\" para ativar esta funcionalidade.",
             "TTS",
@@ -54,7 +57,7 @@ class BoardingActivity : AppCompatActivity() {
         )
 
         launchAlertDialog(
-            "Permitir Comandos de Voz",
+            getString(R.string.permitir_comandos_voz),
             "A aplicação pode ser usada utilizando " +
                 "utilizar a plataforma. Prima o botão \"Permitir\" para ativar esta funcionalidade.",
             "SR",

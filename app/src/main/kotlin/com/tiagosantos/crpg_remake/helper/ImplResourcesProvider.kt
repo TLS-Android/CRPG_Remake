@@ -7,12 +7,6 @@ import androidx.annotation.RequiresApi
 import com.tiagosantos.common.ui.utils.NetworkConnectionThrowable
 import com.tiagosantos.crpg_remake.R
 
-/**
- * Provider for app resources (as example, from strings.xml)
- *
- * Created on Dec 15, 2020.
- *
- */
 @RequiresApi(Build.VERSION_CODES.R)
 class ImplResourcesProvider(
     private val resources: Resources
