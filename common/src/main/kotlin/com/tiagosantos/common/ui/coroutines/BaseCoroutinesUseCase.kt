@@ -5,12 +5,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-/**
- * Base UseCase with Coroutines
- *
- * Created on Sep 12, 2022.
- *
- */
 abstract class BaseCoroutinesUseCase<Results, in Params>(
     executionDispatcher: CoroutineDispatcher
 ) : BaseUseCase(executionDispatcher) {

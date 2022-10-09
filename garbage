@@ -205,3 +205,6 @@ cardCarne?.isChecked = false
 cardPeixe?.isChecked = false
 cardDieta?.isChecked = false
 */
+
+
+    private val MEALS_FILES_DIR = ctx.filesDir.toString()
