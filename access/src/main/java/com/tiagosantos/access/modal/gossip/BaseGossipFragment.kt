@@ -20,7 +20,7 @@ abstract class BaseGossipFragment<B : ViewDataBinding>(
     layoutId = layoutId,
     settings = settings,
     ttsSettings = TTSFragmentSettings(
-        getString(EMPTY_STRING)
+        EMPTY_STRING
     )
 ) {
 

@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.tiagosantos.common.ui.extension.getColorCompatible
+import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.common.ui.utils.Constants.MODALITY
 import com.tiagosantos.crpg_remake.R
 
@@ -27,20 +28,26 @@ abstract class BaseFragment<B : ViewDataBinding>(
 
     open lateinit var viewBinding: B
 
+    val fragment: Fragment
+        get() {
+            TODO()
+        }
+
+    val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction: FragmentTransaction =
+                fragmentManager.beginTransaction()
+            fragmentTransaction.replace(androidx.navigation.fragment.R.id.nav_host_fragment_container, fragment)
+            fragmentManager.popBackStack()
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-    /* setHasOptionsMenu(settings.optionsMenuId != 0 || settings.homeIconBackPressEnabled)
-
-     if (settings.enterTransition != 0 || settings.exitTransition != 0)
-         TransitionInflater.from(requireContext()).let {
-             if (settings.enterTransition != 0)
-                 enterTransition = it.inflateTransition(settings.enterTransition)
-             if (settings.exitTransition != 0)
-                 exitTransition = it.inflateTransition(settings.exitTransition)
-         }
-
-     */
-
     }
 
     /**
@@ -73,20 +80,6 @@ abstract class BaseFragment<B : ViewDataBinding>(
         val srFlag = modalityPreferences.getBoolean("SR", false)
 
         val hasRun = modalityPreferences.getBoolean("mealsHasRun", false)
-
-        val onBackPressedCallback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                // Handle the back button event
-                val fragment: Fragment = AgendaFragment()
-                val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
-                val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.nav_host_fragment, fragment)
-                fragmentManager.popBackStack()
-                fragmentTransaction.addToBackStack(null)
-                fragmentTransaction.commit()
-                onPause()
-            }
-        }
 
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner,
@@ -181,21 +174,20 @@ abstract class BaseFragment<B : ViewDataBinding>(
             }
 
             (requireActivity() as BaseActivityInterface).apply {
-                //apply title
                 setAppBarTitle(
                     when (settings.appBarTitle) {
-                        is Int -> if (settings.appBarTitle != 0) resources.getString(settings.appBarTitle) else ""
-                        is String -> settings.appBarTitle.ifEmpty { "" }
-                        else -> ""
+                        is Int -> if (settings.appBarTitle != 0) resources.getString(settings.appBarTitle) else EMPTY_STRING
+                        is String -> settings.appBarTitle.ifEmpty { EMPTY_STRING }
+                        else -> EMPTY_STRING
                     }
                 )
 
                 //apply sub-title
                 setAppBarSubTitle(
                     when (settings.appBarSubTitle) {
-                        is Int -> if (settings.appBarSubTitle != 0) resources.getString(settings.appBarSubTitle) else ""
-                        is String -> settings.appBarSubTitle.ifEmpty { "" }
-                        else -> ""
+                        is Int -> if (settings.appBarSubTitle != 0) resources.getString(settings.appBarSubTitle) else EMPTY_STRING
+                        is String -> settings.appBarSubTitle.ifEmpty { EMPTY_STRING }
+                        else -> EMPTY_STRING
                     }
                 )
 
@@ -222,13 +214,10 @@ abstract class BaseFragment<B : ViewDataBinding>(
 
     }
 
-    fun showBackButton() {
+    private fun showBackButton() {
         if (activity is MainActivity) {
             (activity as MainActivity?)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
     }
-
-
-    //if (settings.statusBarColor != 0) setLightOrDarkStatusBarContent(settings.statusBarColor, view)
 
 }

@@ -94,7 +94,7 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
                 val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
                 val fragmentTransaction: FragmentTransaction =
                     fragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.nav_host_fragment, fragment)
+                fragmentTransaction.replace(androidx.navigation.fragment.R.id.nav_host_fragment_container, fragment)
                 fragmentManager.popBackStack()
                 fragmentTransaction.addToBackStack(null)
                 fragmentTransaction.commit()

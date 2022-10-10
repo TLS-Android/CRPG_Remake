@@ -22,7 +22,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     )
 ) {
 
-
     override val scope: Scope by getOrCreateScope()
 
     private var _binding: FragmentHomeBinding? = null

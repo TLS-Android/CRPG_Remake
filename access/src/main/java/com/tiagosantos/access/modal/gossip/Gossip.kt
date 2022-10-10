@@ -1,6 +1,5 @@
 package com.tiagosantos.access.modal.gossip
 
-import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Context
 import android.media.AudioManager
@@ -8,6 +7,7 @@ import android.os.Build
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import android.util.Log
+import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -23,7 +23,7 @@ open class Gossip(private val context: Context) : TextToSpeech.OnInitListener {
     private var initialized = false
     var isMuted = false
         private set
-    private var playOnInit: String = ""
+    private var playOnInit: String = EMPTY_STRING
     private var queueMode = TextToSpeech.QUEUE_FLUSH
 
     private val onStartJobs = HashMap<String, suspend () -> Unit>()
@@ -37,9 +37,7 @@ open class Gossip(private val context: Context) : TextToSpeech.OnInitListener {
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
             initialized = true
-            if (playOnInit != null) {
-                playInternal(playOnInit, UTTERANCE_ID_NONE)
-            }
+            playInternal(playOnInit, UTTERANCE_ID_NONE)
         } else {
             Log.e(TAG, "Initialization failed.")
         }
@@ -50,10 +48,6 @@ open class Gossip(private val context: Context) : TextToSpeech.OnInitListener {
         enableVolumeControl(this.activity)
     }
 
-    /**
-     *
-     *
-     */
     fun talk(text: CharSequence) {
         talk(text.toString(), null, null, null)
     }
@@ -77,7 +71,7 @@ open class Gossip(private val context: Context) : TextToSpeech.OnInitListener {
         onDone: (suspend () -> Unit)?,
         onError: (suspend () -> Unit)?
     ) {
-        var text = text
+        val text = text
         if (initialized) {
             val utteranceId = UUID.randomUUID().toString()
             if (onStart != null) {
@@ -109,13 +103,7 @@ open class Gossip(private val context: Context) : TextToSpeech.OnInitListener {
             return
         }
         Log.d(TAG, "Playing: \"$text\"")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            textToSpeech.speak(text, queueMode, null, utteranceId)
-        } else {
-            val params = HashMap<String, String>()
-            params[TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID] = utteranceId
-            textToSpeech.speak(text, queueMode, params)
-        }
+        textToSpeech.speak(text, queueMode, null, utteranceId)
     }
 
     fun mute() {
@@ -253,17 +241,17 @@ open class Gossip(private val context: Context) : TextToSpeech.OnInitListener {
         /**
          * Pitch when we have focus
          */
-        private val FOCUS_PITCH = 1.0f
+        private const val FOCUS_PITCH = 1.0f
 
         /**
          * Pitch when we should duck audio for another app
          */
-        private val DUCK_PITCH = 0.5f
+        private const val DUCK_PITCH = 0.5f
 
         /**
          * ID for when no text is spoken
          */
-        val UTTERANCE_ID_NONE = "-1"
+        const val UTTERANCE_ID_NONE = "-1"
     }
 
 

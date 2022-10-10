@@ -8,9 +8,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.util.*
 
-class ImplChatPublicLocalSource : MealPublicLocalSource {
+class ImplMealPublicLocalSource : MealPublicLocalSource {
 
-    override fun getFakeMessagesList(chatUser: Meal): Flow<List<Meal>> =
+    override fun getFakeMessagesList(meal: Meal): Flow<List<Meal>> =
         flow {
             Log.d(LOG_TAG_DEBUG,
                 "getFakeMessagesList: Thread : ${Thread.currentThread().name}")
