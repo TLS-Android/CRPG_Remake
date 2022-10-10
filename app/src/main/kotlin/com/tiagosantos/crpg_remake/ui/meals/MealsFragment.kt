@@ -49,8 +49,6 @@ class MealsFragment : BaseFragment<FragmentMealsBinding>(
     @SuppressLint("SetTextI18n", "ResourceAsColor")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val mealsViewModel = ViewModelProvider(activity as AppCompatActivity).get(MealsViewModel::class.java)
-        ViewModelProvider(activity as AppCompatActivity).get(SharedViewModel::class.java)
         val isLunch = requireArguments().getBoolean("isLunch")
 
         val cardList = listOf(
@@ -59,8 +57,8 @@ class MealsFragment : BaseFragment<FragmentMealsBinding>(
 
         fun setChecks(cardList: List<MaterialCardView?>, card: MaterialCardView) {
             if (!card.isChecked) {
-                mealsViewModel.selectedOption = 1
-            } else mealsViewModel.selectedOption = 0
+                mealsVM.
+            } else mealsVM.selectedOption = 0
 
             for (s in cardList) {
                 if (s != card) s?.isChecked = false
@@ -89,16 +87,16 @@ class MealsFragment : BaseFragment<FragmentMealsBinding>(
 
         button_confirm_meal.setOnClickListener {
             if (mealsViewModel.selectedOption != 0) {
-                mealSuccessView?.visibility = View.VISIBLE
-                mealSuccessView?.bringToFront()
-                nothingCheckedWarning?.visibility = View.GONE
-                mealsViewModel.updateMealChoiceOnLocalStorage(
-                    mealsViewModel.selectedOption,
-                    isLunch
-                )
-                button_ok.setOnClickListener {
-                    mealSuccessView?.visibility = View.GONE
-                    handler.removeCallbacksAndMessages(null)
+                        mealSuccessView?.visibility = View.VISIBLE
+                        mealSuccessView?.bringToFront()
+                        nothingCheckedWarning?.visibility = View.GONE
+                        mealsViewModel.updateMealChoiceOnLocalStorage(
+                            mealsViewModel.selectedOption,
+                            isLunch
+                        )
+                        button_ok.setOnClickListener {
+                            mealSuccessView?.visibility = View.GONE
+                            handler.removeCallbacksAndMessages(null)
                     if (handler.hasMessages(0)) {
                         handler.removeCallbacks(runnable)
                     }
