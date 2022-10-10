@@ -33,7 +33,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
             TODO()
         }
 
-    val onBackPressedCallback = object : OnBackPressedCallback(true) {
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
             val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction: FragmentTransaction =
@@ -44,7 +44,6 @@ abstract class BaseFragment<B : ViewDataBinding>(
             fragmentTransaction.commit()
         }
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
