@@ -2,7 +2,7 @@ package com.tiagosantos.common.ui.base
 
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
-import io.reactivex.rxjava3.
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 
 abstract class BaseViewModel : ViewModel(), LifecycleObserver {
 
