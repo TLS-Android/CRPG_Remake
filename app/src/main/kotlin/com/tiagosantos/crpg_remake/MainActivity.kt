@@ -3,11 +3,11 @@ package com.tiagosantos.crpg_remake
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tiagosantos.common.ui.base.ActivitySettings
 import com.tiagosantos.common.ui.base.BaseActivity
 import com.tiagosantos.crpg_remake.databinding.ActivityMainBinding
@@ -23,6 +23,8 @@ class MainActivity : BaseActivity(
     )
 ) {
 
+    var PACKAGE_NAME: String? = null
+
     private lateinit var binding: ActivityMainBinding
 
     override fun initToolbar() {
@@ -36,6 +38,8 @@ class MainActivity : BaseActivity(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        PACKAGE_NAME = applicationContext.packageName
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
