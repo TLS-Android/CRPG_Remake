@@ -3,11 +3,15 @@ package com.tiagosantos.crpg_remake.ui.meals
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.card.MaterialCardView
+import com.tiagosantos.access.modal.gossip.GossipViewModel
 import com.tiagosantos.common.ui.base.BaseFragment
 import com.tiagosantos.common.ui.base.FragmentSettings
+import com.tiagosantos.common.ui.extension.observe
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentMealsBinding
 import java.util.*
@@ -32,10 +36,15 @@ class MealsFragment : BaseFragment<FragmentMealsBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val mealsViewModel =
-            ViewModelProvider(activity as AppCompatActivity)[MealsViewModel::class.java]
-    }
+        val mealsVM: MealsViewModel by viewModels()
+        val gossipVM: GossipViewModel by viewModels()
 
+        //observa o contextual help
+        observe(gossipVM.contextualHelp, observer = {
+            Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
+        })
+
+    }
 
     @SuppressLint("SetTextI18n", "ResourceAsColor")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
