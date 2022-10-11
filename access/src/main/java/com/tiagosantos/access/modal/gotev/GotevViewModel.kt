@@ -1,18 +1,47 @@
 package com.tiagosantos.access.modal.gotev
 
 import android.app.Application
-import android.content.res.loader.ResourcesProvider
+import android.os.Bundle
+import android.speech.SpeechRecognizer.RESULTS_RECOGNITION
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.*
+import com.tiagosantos.common.ui.extension.observe
 import net.gotev.speech.GoogleVoiceTypingDisabledException
 import net.gotev.speech.Speech
 import net.gotev.speech.SpeechDelegate
 import net.gotev.speech.SpeechRecognitionNotAvailable
 
-class GotevViewModel(
-    private val resourcesProvider: ResourcesProvider,
-    application: Application,
-) : AndroidViewModel(application) {
+class GotevViewModel(application: Application) : AndroidViewModel(application), Lifecyc {
+
+    private var viewState: MutableLiveData<ViewState>? = null
+
+    val isListening get() = viewState?.value?.isListening ?: false
+
+    fun getViewState(): LiveData<ViewState> {
+        if (viewState == null) {
+            viewState = MutableLiveData()
+            viewState?.value = initViewState()
+        }
+        return viewState as MutableLiveData<ViewState>
+    }
+
+    private fun notifyListening(isRecording: Boolean) {
+        viewState?.value = viewState?.value?.copy(isListening = isRecording)
+    }
+
+    override fun observeLifecycleEvents() {
+        observe(viewModel.errorMessage, observer = {
+            Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
+        })
+    }
+
+    private fun updateResults(speechBundle: Bundle?) {
+        val userSaid = speechBundle?.getStringArrayList(RESULTS_RECOGNITION)
+        viewState?.value = viewState?.value?.copy(spokenText = userSaid?.get(0) ?: "")
+    }
+
+    private fun initViewState() = ViewState(spokenText = "", isListening = false, error = null)
 
     init {
         Speech.init(
@@ -20,6 +49,12 @@ class GotevViewModel(
             application.packageName
         )
     }
+
+    data class ViewState(
+        var spokenText: String?,
+        val isListening: Boolean?,
+        val error: String?
+    )
 
     fun listen() {
         try {
@@ -47,6 +82,7 @@ class GotevViewModel(
 
                 override fun onSpeechResult(result: String) {
                     Log.i("speech", "result: $result")
+                    viewState?.value?.spokenText = result
                 }
             })
         } catch (exc: SpeechRecognitionNotAvailable) {
