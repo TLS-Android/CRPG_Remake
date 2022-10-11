@@ -9,7 +9,6 @@ import com.tiagosantos.common.ui.base.BaseFragment
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
-import java.util.*
 
 class MealsFragment : BaseFragment<MealsFragmentBinding>(
     layoutId = R.layout.meals_fragment,
@@ -64,7 +63,8 @@ class MealsFragment : BaseFragment<MealsFragmentBinding>(
 
         view.buttonConfirmMeal.setOnClickListener {
             if (mealsVM.selectedOption.value != 0) {
-                view.success.mealChoiceSuccess.visibility = View.VISIBLE.apply { it.bringToFront() }
+                view.success.mealChoiceSuccess.visibility =
+                    View.VISIBLE.apply { it.bringToFront() }
                 view.avisoNenhumaRefeicaoChecked.visibility = View.GONE
                 mealsVM.updateMealChoiceOnLocalStorage(
                     mealsVM.selectedOption,
@@ -87,6 +87,6 @@ class MealsFragment : BaseFragment<MealsFragmentBinding>(
         TODO("Not yet implemented")
     }
 
-    private fun updateFlagMealChosen() {flagMealChosen = !flagMealChosen}
+    private fun updateFlagMealChosen() { flagMealChosen = !flagMealChosen }
 }
 
