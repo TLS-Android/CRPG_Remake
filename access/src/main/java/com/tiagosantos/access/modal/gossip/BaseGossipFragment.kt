@@ -52,5 +52,4 @@ abstract class BaseGossipFragment<B : ViewDataBinding>(
 
     override fun performActionWithVoiceCommand(command: String) {}
 
-
 }
