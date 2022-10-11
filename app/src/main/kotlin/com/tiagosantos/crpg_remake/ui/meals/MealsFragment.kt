@@ -38,9 +38,8 @@ class MealsFragment : BaseFragment<MealsFragmentBinding>(
         )
 
         fun setChecks(cardList: List<MaterialCardView?>, card: MaterialCardView) {
-            if (!card.isChecked) {
-                mealsVM.selectedOption = 1
-            } else mealsVM.selectedOption = 0
+            if (!card.isChecked) mealsVM.updateSelectedOption(1)
+                 else mealsVM.updateSelectedOption(0)
 
             for (s in cardList) {
                 if (s != card) s?.isChecked = false
@@ -64,7 +63,7 @@ class MealsFragment : BaseFragment<MealsFragmentBinding>(
         }.also { updateFlagMealChosen() }
 
         view.buttonConfirmMeal.setOnClickListener {
-            if (mealsVM.selectedOption != 0) {
+            if (mealsVM.selectedOption.value != 0) {
                 view.success.mealChoiceSuccess.visibility = View.VISIBLE.apply { it.bringToFront() }
                 view.avisoNenhumaRefeicaoChecked.visibility = View.GONE
                 mealsVM.updateMealChoiceOnLocalStorage(

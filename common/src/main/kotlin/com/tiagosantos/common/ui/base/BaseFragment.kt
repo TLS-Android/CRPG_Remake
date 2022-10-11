@@ -219,4 +219,6 @@ abstract class BaseFragment<B : ViewDataBinding>(
         }
     }
 
+
+
 }

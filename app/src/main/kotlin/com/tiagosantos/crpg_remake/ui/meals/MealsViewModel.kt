@@ -71,4 +71,7 @@ class MealsViewModel(
     fun updateMealChoiceOnLocalStorage(selectedOption: LiveData<Int?>, lunch: Boolean) {
         //TO DO
     }
+
+    fun updateSelectedOption(i: Int) { _selectedOption.value = i }
+
 }
