@@ -1,4 +1,3 @@
-
 package com.tiagosantos.common.ui.base
 
 import android.content.Context
@@ -18,7 +17,6 @@ import androidx.fragment.app.FragmentTransaction
 import com.tiagosantos.common.ui.extension.getColorCompatible
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.common.ui.utils.Constants.MODALITY
-import com.tiagosantos.crpg_remake.R
 
 abstract class BaseFragment<B : ViewDataBinding>(
     @LayoutRes

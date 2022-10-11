@@ -7,6 +7,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.tiagosantos.common.ui.utils.Constants
+import com.tiagosantos.common.ui.utils.Constants.SR
+import com.tiagosantos.common.ui.utils.Constants.TTS
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -42,25 +44,18 @@ class BoardingActivity : AppCompatActivity() {
         val editor = sharedPreferences.edit()
 
         launchAlertDialog(
-            getString(R.string.lancar_notificacoes_teste),
-            "Para teste de usabilidade apenas",
-            "test",
-            editor
-        )
-
-        launchAlertDialog(
             getString(R.string.permitir_sugestoes_audio),
             "A aplicação possui uma voz virtual que poder dar-lhe indicações de como" +
                 "utilizar a plataforma. Prima o botão \"Permitir\" para ativar esta funcionalidade.",
-            "TTS",
+            TTS,
             editor
         )
 
         launchAlertDialog(
             getString(R.string.permitir_comandos_voz),
-            "A aplicação pode ser usada utilizando " +
+            "Pode utilizar comandos de voz para" +
                 "utilizar a plataforma. Prima o botão \"Permitir\" para ativar esta funcionalidade.",
-            "SR",
+            SR,
             editor
         )
     }

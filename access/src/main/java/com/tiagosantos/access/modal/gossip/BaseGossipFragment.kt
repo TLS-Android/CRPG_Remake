@@ -9,7 +9,6 @@ import com.tiagosantos.access.modal.settings.TTSFragmentSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.common.ui.utils.Constants
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
-import java.util.*
 
 abstract class BaseGossipFragment<B : ViewDataBinding>(
     @LayoutRes
