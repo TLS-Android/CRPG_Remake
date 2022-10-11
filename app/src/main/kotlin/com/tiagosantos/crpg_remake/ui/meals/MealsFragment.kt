@@ -21,14 +21,10 @@ class MealsFragment : BaseFragment<MealsFragmentBinding>(
 
     private lateinit var view: MealsFragmentBinding
     private var flagMealChosen = false
+
     val buttonList = listOf(
         true, true, true
     )
-
-    val button_confirm = view?.findViewById<View>(R.id.button_confirm_meal)
-    val button_ok = view?.findViewById<View>(R.id.button_ok)
-    val mealSuccessView = view?.findViewById<View>(R.id.meal_choice_success)
-    val nothingCheckedWarning = view?.findViewById<View>(R.id.aviso_nenhuma_refeicao_checked)
 
     @SuppressLint("SetTextI18n", "ResourceAsColor")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -77,7 +73,7 @@ class MealsFragment : BaseFragment<MealsFragmentBinding>(
                 )
                 view.success.buttonOk.setOnClickListener {
                     view.success.mealChoiceSuccess.visibility = View.GONE
-                     }
+                }
             } else {
                 view.success.mealChoiceSuccess.visibility = View.VISIBLE
             }
@@ -94,10 +90,4 @@ class MealsFragment : BaseFragment<MealsFragmentBinding>(
 
     private fun updateFlagMealChosen() {flagMealChosen = !flagMealChosen}
 }
-
-//handler.removeCallbacksAndMessages(null)
-//                    if (handler.hasMessages(0)) {
-//                        handler.removeCallbacks(runnable)
-//                    }
-
 
