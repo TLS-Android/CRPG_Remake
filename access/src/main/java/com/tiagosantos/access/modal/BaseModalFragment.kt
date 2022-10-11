@@ -70,14 +70,14 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
        hasRun: Boolean)
     { if (!hasRun) {
             when {
-                ttsFlag && !srFlag ->
-                !ttsFlag && srFlag ->
-                ttsFlag && srFlag ->
+                ttsFlag && !srFlag -> println("ola")
+                !ttsFlag && srFlag -> println("ola")
+                ttsFlag && srFlag -> println("ola")
             }
         } else {
             when {
-                !ttsFlag && srFlag ->
-                ttsFlag && srFlag ->
+                !ttsFlag && srFlag -> println("ola")
+                ttsFlag && srFlag -> println("ola")
             }
         }
     }

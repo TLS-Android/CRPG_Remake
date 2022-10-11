@@ -7,16 +7,18 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.*
 import com.tiagosantos.common.ui.extension.observe
+import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import net.gotev.speech.GoogleVoiceTypingDisabledException
 import net.gotev.speech.Speech
 import net.gotev.speech.SpeechDelegate
 import net.gotev.speech.SpeechRecognitionNotAvailable
 
-class GotevViewModel(application: Application) : AndroidViewModel(application), Lifecyc {
+class GotevViewModel(
+    application: Application
+) : AndroidViewModel(application), DefaultLifecycleObserver {
 
     private var viewState: MutableLiveData<ViewState>? = null
-
-    val isListening get() = viewState?.value?.isListening ?: false
+    private val isListening get() = viewState?.value?.isListening ?: false
 
     fun getViewState(): LiveData<ViewState> {
         if (viewState == null) {
@@ -30,9 +32,9 @@ class GotevViewModel(application: Application) : AndroidViewModel(application), 
         viewState?.value = viewState?.value?.copy(isListening = isRecording)
     }
 
-    override fun observeLifecycleEvents() {
-        observe(viewModel.errorMessage, observer = {
-            Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
+    fun observeLifecycleEvents() {
+        observe(this.isListening, observer = {
+            Toast.makeText(getApplication(), it, Toast.LENGTH_SHORT).show()
         })
     }
 
@@ -41,7 +43,11 @@ class GotevViewModel(application: Application) : AndroidViewModel(application), 
         viewState?.value = viewState?.value?.copy(spokenText = userSaid?.get(0) ?: "")
     }
 
-    private fun initViewState() = ViewState(spokenText = "", isListening = false, error = null)
+    private fun initViewState() = ViewState(
+        spokenText = EMPTY_STRING,
+        isListening = false,
+        error = null
+    )
 
     init {
         Speech.init(
