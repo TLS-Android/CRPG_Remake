@@ -16,7 +16,9 @@
         android:background="@color/white"
         android:backgroundTint="@color/white">
 
-        <include layout="@layout/meal_choice_success"
+        <include
+            layout="@layout/meal_choice_success"
+            android:id="@+id/success"
             android:visibility="gone"/>
 
         <TextView

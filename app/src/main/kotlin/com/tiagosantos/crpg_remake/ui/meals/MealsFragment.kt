@@ -69,24 +69,20 @@ class MealsFragment : BaseFragment<MealsFragmentBinding>(
 
         view.buttonConfirmMeal.setOnClickListener {
             if (mealsVM.selectedOption != 0) {
-                mealSuccessView?.visibility = View.VISIBLE
-                mealSuccessView?.bringToFront()
-                nothingCheckedWarning?.visibility = View.GONE
+                view.success.mealChoiceSuccess.visibility = View.VISIBLE.apply { it.bringToFront() }
+                view.avisoNenhumaRefeicaoChecked.visibility = View.GONE
                 mealsVM.updateMealChoiceOnLocalStorage(
                     mealsVM.selectedOption,
                     isLunch
                 )
-                view.button_ok?.setOnClickListener {
-                    mealSuccessView?.visibility = View.GONE
+                view.success.buttonOk.setOnClickListener {
+                    view.success.mealChoiceSuccess.visibility = View.GONE
                      }
             } else {
-                view.root.
-                    .visibility = View.VISIBLE
+                view.success.mealChoiceSuccess.visibility = View.VISIBLE
             }
         }
     }
-
-
 
     override fun onInitDataBinding() {
         TODO("Not yet implemented")
@@ -97,7 +93,6 @@ class MealsFragment : BaseFragment<MealsFragmentBinding>(
     }
 
     private fun updateFlagMealChosen() {flagMealChosen = !flagMealChosen}
-
 }
 
 //handler.removeCallbacksAndMessages(null)
