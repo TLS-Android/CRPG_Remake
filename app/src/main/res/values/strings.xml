@@ -39,5 +39,6 @@
     <string name="escolha_a_sua_refeicao">Faça a seleção da refeição pretendida:</string>
     <string name="ok">OK</string>
     <string name="refeicao_escolhida_com_sucesso">Refeição escolhida com sucesso!</string>
+    <string name="green_check">check</string>
 
 </resources>
