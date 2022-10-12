@@ -4,9 +4,7 @@ import android.app.Application
 import android.os.Bundle
 import android.speech.SpeechRecognizer.RESULTS_RECOGNITION
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.*
-import com.tiagosantos.common.ui.extension.observe
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import net.gotev.speech.GoogleVoiceTypingDisabledException
 import net.gotev.speech.Speech
@@ -18,7 +16,8 @@ class GotevViewModel(
 ) : AndroidViewModel(application), DefaultLifecycleObserver {
 
     private var viewState: MutableLiveData<ViewState>? = null
-    private val isListening get() = viewState?.value?.isListening ?: false
+    private val isListening
+        get() = viewState?.value?.isListening ?: false
 
     fun getViewState(): LiveData<ViewState> {
         if (viewState == null) {
@@ -50,7 +49,6 @@ class GotevViewModel(
         )
     }
 
-
     fun listen() {
         try {
             // you must have android.permission.RECORD_AUDIO granted at this point
@@ -69,9 +67,7 @@ class GotevViewModel(
 
                 override fun onSpeechPartialResults(results: List<String>) {
                     val str = StringBuilder()
-                    for (res in results) {
-                        str.append(res).append(" ")
-                    }
+                    for (res in results) { str.append(res).append(" ") }
                     Log.i("speech", "partial result: " + str.toString().trim { it <= ' ' })
                 }
 

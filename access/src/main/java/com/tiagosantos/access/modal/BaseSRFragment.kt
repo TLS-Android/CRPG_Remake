@@ -5,16 +5,12 @@ import android.os.Handler
 import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import com.tiagosantos.access.R
 import com.tiagosantos.access.modal.settings.TTSFragmentSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.common.ui.extension.observe
+import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 
 abstract class BaseSRFragment<B : ViewDataBinding>(
     @LayoutRes
@@ -25,20 +21,14 @@ abstract class BaseSRFragment<B : ViewDataBinding>(
     layoutId = layoutId,
     settings = settings,
     ttsSettings = TTSFragmentSettings(
-        "hey"
+        EMPTY_STRING
     )
 ) {
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
     abstract override fun onInitDataBinding()
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 
     override fun onStop() {
         val activity = requireActivity()
@@ -114,6 +104,5 @@ abstract class BaseSRFragment<B : ViewDataBinding>(
     }
 
     override fun performActionWithVoiceCommand(command: String) {}
-
 
 }

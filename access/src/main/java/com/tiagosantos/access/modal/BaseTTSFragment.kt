@@ -10,6 +10,7 @@ import com.tiagosantos.access.modal.gossip.GossipViewModel
 import com.tiagosantos.access.modal.settings.TTSFragmentSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.common.ui.extension.observe
+import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 
 abstract class BaseTTSFragment<B : ViewDataBinding>(
     @LayoutRes
@@ -26,11 +27,9 @@ abstract class BaseTTSFragment<B : ViewDataBinding>(
 
     private val gossipVM: GossipViewModel by viewModels()
 
-    abstract override fun onInitDataBinding()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        gossipVM.setContextualHelp(ttsSettings.contextualHelp ?: "")
+        gossipVM.setContextualHelp(ttsSettings.contextualHelp ?: EMPTY_STRING)
         gossipVM.talk()
     }
 
@@ -38,6 +37,11 @@ abstract class BaseTTSFragment<B : ViewDataBinding>(
         observe(gossipVM.contextualHelp, observer = {
             Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
         })
+    }
+
+    override fun onInitDataBinding() {
+        //viewBinding.model = viewModel
+        lifecycle.addObserver(gossipVM)
     }
 
     override fun onStop() {
