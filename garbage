@@ -208,3 +208,10 @@ cardDieta?.isChecked = false
 
 
     private val MEALS_FILES_DIR = ctx.filesDir.toString()
+
+
+            if (textToSpeech != null) {
+                textToSpeech!!.stop()
+                textToSpeech!!.shutdown()
+                println("shutdown TTS")
+            }

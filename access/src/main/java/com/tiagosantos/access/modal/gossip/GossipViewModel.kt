@@ -23,9 +23,15 @@ class GossipViewModel(
     init {
         gossip.setLanguage(Constants.myLocale)
         talk()
+        gossip.isMuted
     }
 
-    private fun talk() = gossip.talk(contextualHelp.toString())
+    fun talk() { if (gossip.isMuted) gossip.talk(contextualHelp.toString()) }
+
+    fun setContextualHelp(help: String) {
+        _contextualHelp.value = help
+        talk()
+    }
 
     override fun onCleared() {
         super.onCleared()
@@ -44,7 +50,6 @@ class GossipViewModel(
         println("hello world!")
         //do something on stop view if it's needed
     }
-
 
 }
 

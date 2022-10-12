@@ -32,12 +32,6 @@ class GotevViewModel(
         viewState?.value = viewState?.value?.copy(isListening = isRecording)
     }
 
-    fun observeLifecycleEvents() {
-        observe(this.isListening, observer = {
-            Toast.makeText(getApplication(), it, Toast.LENGTH_SHORT).show()
-        })
-    }
-
     private fun updateResults(speechBundle: Bundle?) {
         val userSaid = speechBundle?.getStringArrayList(RESULTS_RECOGNITION)
         viewState?.value = viewState?.value?.copy(spokenText = userSaid?.get(0) ?: "")
@@ -56,11 +50,6 @@ class GotevViewModel(
         )
     }
 
-    data class ViewState(
-        var spokenText: String?,
-        val isListening: Boolean?,
-        val error: String?
-    )
 
     fun listen() {
         try {
@@ -111,10 +100,15 @@ class GotevViewModel(
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     fun onStopView() {
-
         println("hello world!")
         //do something on stop view if it's needed
     }
+
+    data class ViewState(
+        var spokenText: String?,
+        val isListening: Boolean?,
+        val error: String?
+    )
 
 }
 

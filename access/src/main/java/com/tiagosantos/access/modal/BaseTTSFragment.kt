@@ -1,17 +1,15 @@
 package com.tiagosantos.access.modal
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.speech.tts.TextToSpeech
 import android.view.*
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.viewModels
+import com.tiagosantos.access.modal.gossip.GossipViewModel
 import com.tiagosantos.access.modal.settings.TTSFragmentSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.common.ui.extension.observe
-import kotlin.properties.Delegates
 
 abstract class BaseTTSFragment<B : ViewDataBinding>(
     @LayoutRes
@@ -22,44 +20,29 @@ abstract class BaseTTSFragment<B : ViewDataBinding>(
     layoutId = layoutId,
     settings = settings,
     ttsSettings = TTSFragmentSettings(
-        "hey"
+        "Indique qual das opcoes pretende para o seu almoco"
     )
 ) {
 
-    private var handler = Handler(Looper.getMainLooper())
-    private var runnable: Runnable by Delegates.notNull()
-    private var textToSpeech: TextToSpeech? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private val gossipVM: GossipViewModel by viewModels()
 
     abstract override fun onInitDataBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-    }
-
-    override fun onStop() {
-        val activity = requireActivity()
-        super.onStop()
-
-        if (handler.hasMessages(0)) {
-            handler.removeCallbacks(runnable)
-        }
-
-        if (textToSpeech != null) {
-            textToSpeech!!.stop()
-            textToSpeech!!.shutdown()
-            println("shutdown TTS")
-        }
-
+        gossipVM.setContextualHelp(ttsSettings.contextualHelp ?: "")
+        gossipVM.talk()
     }
 
     override fun observeLifecycleEvents() {
-        observe(viewModel.errorMessage, observer = {
+        observe(gossipVM.contextualHelp, observer = {
             Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
         })
+    }
+
+    override fun onStop() {
+        super.onStop()
+        gossipVM.gossip.stop()
     }
 
     override fun performActionWithVoiceCommand(command: String) {}
