@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.card.MaterialCardView
 import com.tiagosantos.common.ui.base.BaseFragment
 import com.tiagosantos.common.ui.base.FragmentSettings
+import com.tiagosantos.common.ui.utils.GeneralUtils
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
 
@@ -76,6 +77,16 @@ class MealsFragment : BaseFragment<MealsFragmentBinding>(
             } else {
                 view.success.mealChoiceSuccess.visibility = View.VISIBLE
             }
+        }
+    }
+
+    private fun performActionWithVoiceCommand(command: String){
+        when {
+            GeneralUtils.mealPickHelper(command,"Carne") -> view.frameOpcaoCarne.performClick()
+            GeneralUtils.mealPickHelper(command,"Peixe")  -> view.frameOpcaoPeixe.performClick()
+            GeneralUtils.mealPickHelper(command,"Dieta") -> view.frameOpcaoDieta .performClick()
+            GeneralUtils.mealPickHelper(command,"Vegetariano")  -> view.frameOpcaoVegetariano.performClick()
+            GeneralUtils.mealPickHelper(command,"Guardar")  -> view.buttonConfirmMeal.performClick()
         }
     }
 

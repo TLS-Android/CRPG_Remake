@@ -7,6 +7,8 @@ import android.view.*
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.viewModels
+import com.tiagosantos.access.modal.gotev.GotevViewModel
 import com.tiagosantos.access.modal.settings.TTSFragmentSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.common.ui.extension.observe
@@ -24,19 +26,18 @@ abstract class BaseSRFragment<B : ViewDataBinding>(
         EMPTY_STRING
     )
 ) {
+
+    private val gotevVM: GotevViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        gotevVM.listen()
     }
 
     abstract override fun onInitDataBinding()
 
-    override fun onStop() {
-        val activity = requireActivity()
-        super.onStop()
-    }
-
     override fun observeLifecycleEvents() {
-        observe(viewModel.errorMessage, observer = {
+        observe(gotevVM.getViewState().spoken observer = {
             Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
         })
     }
@@ -78,7 +79,6 @@ abstract class BaseSRFragment<B : ViewDataBinding>(
                                 handler.postDelayed({
                                     try {
                                         if (isAdded && isVisible) {
-
                                             Speech.init(requireActivity())
                                             Speech.getInstance().startListening(this)
                                         }
