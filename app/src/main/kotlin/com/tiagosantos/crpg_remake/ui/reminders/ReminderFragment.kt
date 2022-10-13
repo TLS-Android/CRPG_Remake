@@ -1,28 +1,19 @@
 package com.tiagosantos.crpg_remake.ui.reminders
 
-
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.speech.tts.TextToSpeech
-import android.speech.tts.UtteranceProgressListener
 import android.text.InputFilter
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageButton
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.plataforma.crpg.R
-import com.plataforma.crpg.TimelineView
-import com.plataforma.crpg.databinding.ReminderActivityBinding
 import com.plataforma.crpg.model.AlarmFrequency
 import com.plataforma.crpg.model.AlarmType
 import com.plataforma.crpg.model.ReminderType
@@ -31,28 +22,19 @@ import com.skydoves.expandablelayout.ExpandableLayout
 import com.tiagosantos.common.ui.base.BaseFragment
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
+import com.tiagosantos.common.ui.utils.InputFilterMinMax
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.ReminderFragmentBinding
-import net.gotev.speech.GoogleVoiceTypingDisabledException
-import net.gotev.speech.Speech
-import net.gotev.speech.SpeechDelegate
-import net.gotev.speech.SpeechRecognitionNotAvailable
 import java.util.*
 
 class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
-    layoutId = R.layout.reminders_fragment,
+    layoutId = R.layout.reminder_fragment,
     FragmentSettings(
         appBarTitle = R.string.title_dashboard,
         sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
     )
 ) {
-
     private lateinit var view: ReminderFragmentBinding
-    private var flagMealChosen = false
-
-    companion object {
-        fun newInstance() = ReminderFragment()
-    }
 
     private var lembrarButtonPressed = 0
     private var alarmTypeButtonPressed = 0
@@ -60,30 +42,18 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private var startTimeString = EMPTY_STRING
     private var hoursMinutesFlag = false
 
-
-    @RequiresApi(Build.VERSION_CODES.KITKAT)
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?,
     ): View {
-        val modalityPreferences = this.requireActivity().getSharedPreferences("MODALITY", Context.MODE_PRIVATE)
-        val ttsFlag = modalityPreferences.getBoolean("TTS", false)
-        val srFlag = modalityPreferences.getBoolean("SR", false)
-        val hasRun = modalityPreferences.getBoolean("remindersHasRun", false)
+        val reminderVM: ReminderViewModel by viewModels()
+        reminderVM.startNewFileAndPopulate()
 
-        val binding = ReminderActivityBinding.inflate(layoutInflater)
-        val view = binding.root
-        val newViewModel = ViewModelProvider(activity as AppCompatActivity).get(ReminderViewModel::class.java)
+        defineModality(ttsFlag, srFlag, hasRun)
 
-        newViewModel.startNewFileAndPopulate()
-
-        defineModality(ttsFlag, srFlag, hasRun, view)
-
-        with(binding){
             root.findViewById<View>(R.id.reminderIntroHintLayout).visibility = View.VISIBLE
             root.findViewById<FloatingActionButton>(R.id.createReminderActionButton).setOnClickListener{
                 root.findViewById<View>(R.id.reminderIntroHintLayout).visibility = View.GONE
-
             }
 
             fun setButtonColorsReminder(pos: Int){
@@ -115,6 +85,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             }
 
             val textEditPersonalizado = root.findViewById<EditText>(R.id.text_edit_personalizado)
+
+
 
             expandableLembrar.parentLayout.setOnClickListener {
                 expandableLembrar.toggleLayout() }
@@ -240,10 +212,9 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 var minsInt = 1
 
                 if (et.text.toString().length == 2 && etMin.text.toString().length == 2) {
-                    println("> Validacao das horas com sucesso")
-                    newViewModel.startTimeHours = et.text.toString()
-                    newViewModel.startTimeMin = etMin.text.toString()
-                    startTimeString = newViewModel.startTimeHours.plus(newViewModel.startTimeMin)
+                    reminderVM.startTimeHours = et.text.toString()
+                    reminderVM.startTimeMin = etMin.text.toString()
+                    startTimeString = reminderVM.startTimeHours.plus(reminderVM.startTimeMin)
                     hoursInt = root.findViewById<EditText>(R.id.edit_minutes).text.toString().toInt()
                     minsInt = root.findViewById<EditText>(R.id.edit_minutes).text.toString().toInt()
                     hoursMinutesFlag = true
@@ -252,26 +223,26 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     avisoCampos.visibility = View.VISIBLE
                 }
 
-                newViewModel.newReminder.start_time = startTimeString
-                newViewModel.newReminder.hours = hoursInt
-                newViewModel.newReminder.mins = minsInt
+                reminderVM.newReminder.start_time = startTimeString
+                reminderVM.newReminder.hours = hoursInt
+                reminderVM.newReminder.mins = minsInt
 
                 when (lembrarButtonPressed) {
-                    1 -> {newViewModel.newReminder.title = "Tomar medicacao"
-                        newViewModel.newReminder.reminder_type = ReminderType.MEDICACAO }
-                    2 -> {newViewModel.newReminder.title = "Apanhar bus do CRPG"
-                        newViewModel.newReminder.reminder_type = ReminderType.TRANSPORTE }
-                    3 -> {newViewModel.newReminder.title = "Lembrar escolha de almoço"
-                        newViewModel.newReminder.reminder_type = ReminderType.REFEICAO }
+                    1 -> {reminderVM.newReminder.title = "Tomar medicacao"
+                        reminderVM.newReminder.reminder_type = ReminderType.MEDICACAO }
+                    2 -> {reminderVM.newReminder.title = "Apanhar bus do CRPG"
+                        reminderVM.newReminder.reminder_type = ReminderType.TRANSPORTE }
+                    3 -> {reminderVM.newReminder.title = "Lembrar escolha de almoço"
+                        reminderVM.newReminder.reminder_type = ReminderType.REFEICAO }
                     //definir titulo personalizado
-                    4 -> {newViewModel.newReminder.title = textEditPersonalizado.text.toString()
-                        newViewModel.newReminder.reminder_type = ReminderType.PERSONALIZADO }
+                    4 -> {reminderVM.newReminder.title = textEditPersonalizado.text.toString()
+                        reminderVM.newReminder.reminder_type = ReminderType.PERSONALIZADO }
                     else -> {
                         println("lembrarButtonPressed is neither one of the values")
                     }
                 }
 
-                //println(">Titulo personalizado do reminder: " + newViewModel.newReminder.title)
+                //println(">Titulo personalizado do reminder: " + reminderVM.newReminder.title)
 
                 val materialButtonToggleGroup =
                         expandableDia.secondLayout.findViewById<MaterialButtonToggleGroup>(R.id.toggleButtonGroup)
@@ -282,31 +253,31 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     val resourceName: String =
                             expandableDia.secondLayout.resources.getResourceName(materialButton.id).takeLast(3)
                     when (resourceName) {
-                        "Seg" -> newViewModel.weekDaysBoolean[0] = true
-                        "Ter" -> newViewModel.weekDaysBoolean[1] = true
-                        "Qua" -> newViewModel.weekDaysBoolean[2] = true
-                        "Qui" -> newViewModel.weekDaysBoolean[3] = true
-                        "Sex" -> newViewModel.weekDaysBoolean[4] = true
-                        "Sab" -> newViewModel.weekDaysBoolean[5] = true
-                        "Dom" -> newViewModel.weekDaysBoolean[6] = true
+                        "Seg" -> reminderVM.weekDaysBoolean[0] = true
+                        "Ter" -> reminderVM.weekDaysBoolean[1] = true
+                        "Qua" -> reminderVM.weekDaysBoolean[2] = true
+                        "Qui" -> reminderVM.weekDaysBoolean[3] = true
+                        "Sex" -> reminderVM.weekDaysBoolean[4] = true
+                        "Sab" -> reminderVM.weekDaysBoolean[5] = true
+                        "Dom" -> reminderVM.weekDaysBoolean[6] = true
                     }
                 }
 
                 println(">alarm type:" + alarmTypeButtonPressed)
                 println(">alarm freq:" + alarmFreqButtonPressed)
                 when (alarmTypeButtonPressed) {
-                    1 -> newViewModel.newReminder.alarm_type = AlarmType.SOM
-                    2 -> newViewModel.newReminder.alarm_type = AlarmType.VIBRAR
-                    3 -> newViewModel.newReminder.alarm_type = AlarmType.AMBOS
+                    1 -> reminderVM.newReminder.alarm_type = AlarmType.SOM
+                    2 -> reminderVM.newReminder.alarm_type = AlarmType.VIBRAR
+                    3 -> reminderVM.newReminder.alarm_type = AlarmType.AMBOS
                     else -> { // Note the block
                         println("alarmTypeButtonPressed is neither one of the values")
                     }
                 }
 
                 when (alarmFreqButtonPressed) {
-                    1 -> newViewModel.newReminder.alarm_freq = AlarmFrequency.HOJE
-                    2 -> newViewModel.newReminder.alarm_freq = AlarmFrequency.TODOS_OS_DIAS
-                    3 -> newViewModel.newReminder.alarm_freq = AlarmFrequency.PERSONALIZADO
+                    1 -> reminderVM.newReminder.alarm_freq = AlarmFrequency.HOJE
+                    2 -> reminderVM.newReminder.alarm_freq = AlarmFrequency.TODOS_OS_DIAS
+                    3 -> reminderVM.newReminder.alarm_freq = AlarmFrequency.PERSONALIZADO
                     else -> { // Note the block
                         println("alarmFreqButtonPressed is neither one of the values")
                     }
@@ -315,15 +286,15 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 if (alarmFreqButtonPressed != 0 && alarmTypeButtonPressed != 0
                         && lembrarButtonPressed != 0 && hoursMinutesFlag) {
                     println(">chega ao add Reminder")
-                    newViewModel.addReminder()
-                    if (newViewModel.flagReminderAdded) {
+                    reminderVM.addReminder()
+                    if (reminderVM.flagReminderAdded) {
                         avisoCampos.visibility = View.GONE
                         root.findViewById<View>(R.id.successLayout).visibility = View.VISIBLE
                         root.findViewById<Button>(R.id.button_ok).setOnClickListener {
                             root.findViewById<View>(R.id.successLayout).visibility = View.GONE
                         }
-                        if (activity?.packageManager?.let { it1 -> newViewModel.alarmIntent.resolveActivity(it1) } != null) {
-                            startActivity(newViewModel.alarmIntent)
+                        if (activity?.packageManager?.let { it1 -> reminderVM.alarmIntent.resolveActivity(it1) } != null) {
+                            startActivity(reminderVM.alarmIntent)
                         }
                     }
                 } else if (hoursInt > 23 || minsInt > 59) {
@@ -344,19 +315,10 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     command.contains("Abrir secção notas", true) -> expandableNotas.parentLayout.performClick()
                 }
             }
-        }
-
 
         return view
     }
 
-    //binding must be done on onCreateView, not on onActivityCreated
-    @RequiresApi(Build.VERSION_CODES.KITKAT)
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        //newViewModel = ViewModelProvider(this).get(ReminderViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
     private fun performActionWithVoiceCommand(command: String, view: LinearLayout){
         checkHoursCommand(command)
@@ -442,14 +404,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
     }
 
-    private fun defineModality(ttsFlag: Boolean, srFlag: Boolean, hasRun: Boolean, view: LinearLayout) {
-
-        println("ttsFlag:  " + ttsFlag)
-        println("srFlag: " + srFlag)
-        println("hasRun: " + hasRun)
-
-        view.findViewById<ExpandableLayout>(R.id.expandable_lembrar).parentLayout.performClick()
-
+    private fun defineModality(ttsFlag: Boolean, srFlag: Boolean, hasRun: Boolean) {
+/*
         if (!hasRun){
             when{
                 ttsFlag && !srFlag -> { startTTS() }
@@ -466,124 +422,9 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         }
 
     }
+    */
 
-    private fun startTTS() {
-        textToSpeech = TextToSpeech(context) { status ->
-            if (status == TextToSpeech.SUCCESS) {
-                val ttsLang = textToSpeech!!.setLanguage(myLocale)
-                if (ttsLang == TextToSpeech.LANG_MISSING_DATA
-                        || ttsLang == TextToSpeech.LANG_NOT_SUPPORTED) {
-                    Log.e("TTS", "Linguagem não suportada!")
-                }
-                val speechStatus = textToSpeech!!.speak("Diga o nome da secção para abrir/fechar essa secção" +
-                        "e depois diga o nome da opção que quer escolher ou da hora para fazer a seleção", TextToSpeech.QUEUE_FLUSH, null, "ID")
-            } else {
-                Toast.makeText(context, "TTS Initialization failed!", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private fun multimodalOption(view: LinearLayout) {
-        textToSpeech = TextToSpeech(context) { status ->
-            if (status == TextToSpeech.SUCCESS) {
-                val ttsLang = textToSpeech!!.setLanguage(myLocale)
-                if (ttsLang == TextToSpeech.LANG_MISSING_DATA
-                        || ttsLang == TextToSpeech.LANG_NOT_SUPPORTED) {
-                    Log.e("TTS", "The Language is not supported!")
-                } else {
-                    Log.i("TTS", "Language Supported.")
-                }
-                Log.i("TTS", "Initialization success.")
-
-                val speechListener = object : UtteranceProgressListener() {
-                    @Override
-                    override fun onStart(p0: String?) {
-                        println("Iniciou TTS")
-                    }
-
-                    override fun onDone(p0: String?) {
-                        println("Encerrou TTS")
-                        if(activity != null && isAdded) {
-                            startVoiceRecognition(view)
-                        }
-                    }
-
-                    override fun onError(p0: String?) {
-                        TODO("Not yet implemented")
-                    }
-                }
-
-                textToSpeech?.setOnUtteranceProgressListener(speechListener)
-
-                val speechStatus = textToSpeech!!.speak("Diga o nome da secção para abrir/fechar essa secção" +
-                        "e depois diga o nome da opção que quer escolher ou da hora para fazer a seleção  ", TextToSpeech.QUEUE_FLUSH, null, "ID")
-
-            } else {
-                Toast.makeText(context, "TTS Initialization failed!", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-    }
-
-    fun startVoiceRecognition(view: LinearLayout) {
-        //MANTER WIFI SEMPRE LIGADO
-        //val handler = Handler(Looper.getMainLooper())
-        if(isAdded && isVisible && getUserVisibleHint()) {
-            runnable = Runnable {
-                handler.sendEmptyMessage(0);
-                Speech.init(requireActivity())
-                //hasInitSR = true
-                try {
-                    Speech.getInstance().startListening(object : SpeechDelegate {
-                        override fun onStartOfSpeech() {
-                            Log.i("speech", "speech recognition is now active")
-                        }
-
-                        override fun onSpeechRmsChanged(value: Float) {
-                            //Log.d("speech", "rms is now: $value")
-                        }
-
-                        override fun onSpeechPartialResults(results: List<String>) {
-                            val str = StringBuilder()
-                            for (res in results) {
-                                str.append(res).append(" ")
-                            }
-                            performActionWithVoiceCommand(results.toString(), view)
-                            Log.i("speech", "partial result: " + str.toString().trim { it <= ' ' })
-                        }
-
-                        override fun onSpeechResult(result: String) {
-                            Log.d(TimelineView.TAG, "onSpeechResult: " + result.toLowerCase())
-                            //Speech.getInstance().stopTextToSpeech()
-                            val handler = Handler()
-                            if (activity != null && isAdded) {
-                                handler.postDelayed({
-                                    try {
-                                        if (isAdded && isVisible && getUserVisibleHint()) {
-                                            Speech.init(requireActivity())
-                                            //hasInitSR = true
-                                            Speech.getInstance().startListening(this)
-                                        }
-                                    } catch (speechRecognitionNotAvailable: SpeechRecognitionNotAvailable) {
-                                        speechRecognitionNotAvailable.printStackTrace()
-                                    } catch (e: GoogleVoiceTypingDisabledException) {
-                                        e.printStackTrace()
-                                    }
-                                }, 100)
-                            }
-                        }
-                    })
-                } catch (exc: SpeechRecognitionNotAvailable) {
-                    Log.e("speech", "Speech recognition is not available on this device!")
-                } catch (exc: GoogleVoiceTypingDisabledException) {
-                    Log.e("speech", "Google voice typing must be enabled!")
-                }
-            }
-
-            handler.post(runnable)
-        }
-
-    }
+}
 
     override fun onInitDataBinding() {
         TODO("Not yet implemented")
@@ -592,6 +433,5 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     override fun observeLifecycleEvents() {
         TODO("Not yet implemented")
     }
-
 
 }
