@@ -1,14 +1,11 @@
 package com.tiagosantos.crpg_remake.ui.reminders
 
-import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
@@ -25,6 +22,7 @@ import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.common.ui.utils.InputFilterMinMax
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.ReminderFragmentBinding
+import com.tiagosantos.crpg_remake.domain.model.ReminderType
 import java.util.*
 
 class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
@@ -131,53 +129,64 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             val cbVib = expandableAlerta.secondLayout.findViewById<ImageView>(R.id.checkbox_vibrar)
             val cbAmbos = expandableAlerta.secondLayout.findViewById<ImageView>(R.id.checkbox_ambos)
 
+        fun setSecondLayout(value: Int, isbuttonVisible: Boolean, isGroupVisible: Boolean ){
+            alarmFreqButtonPressed = value
+            setButtonColorsDays(alarmFreqButtonPressed)
+            root.findViewById<TextView>(R.id.button_selecionar_dias).visibility = when {
+                isbuttonVisible -> View.VISIBLE
+                !isbuttonVisible -> View.INVISIBLE
+            }
+
+            root.findViewById<MaterialButtonToggleGroup>(R.id.toggleButtonGroup).visibility = when {
+                isGroupVisible -> View.VISIBLE
+                !isGroupVisible -> View.INVISIBLE
+            }
+        }
+
+        view.parentLayout.setOnClickListener { view.expandableDia }
+
             expandableDia.parentLayout.setOnClickListener { expandableDia.toggleLayout() }
+
             expandableDia.secondLayout.findViewById<Button>(R.id.button_hoje)
-                    .setOnClickListener {
-                        alarmFreqButtonPressed = 1
-                        setButtonColorsDays(alarmFreqButtonPressed)
-                        root.findViewById<TextView>(R.id.button_selecionar_dias).visibility = View.INVISIBLE
-                        root.findViewById<MaterialButtonToggleGroup>(R.id.toggleButtonGroup).visibility = View.INVISIBLE
-                    }
+                    .setOnClickListener { setSecondLayout(1, false, false) }
+
             expandableDia.secondLayout.findViewById<Button>(R.id.button_todos_dias)
-                    .setOnClickListener {
-                        alarmFreqButtonPressed = 2
-                        setButtonColorsDays(alarmFreqButtonPressed)
-                        root.findViewById<TextView>(R.id.button_selecionar_dias).visibility = View.INVISIBLE
-                        root.findViewById<MaterialButtonToggleGroup>(R.id.toggleButtonGroup).visibility = View.INVISIBLE
-                    }
+                .setOnClickListener { setSecondLayout(2, false, false) }
+
             expandableDia.secondLayout.findViewById<Button>(R.id.button_personalizado)
-                    .setOnClickListener {
-                        alarmFreqButtonPressed = 3
-                        setButtonColorsDays(alarmFreqButtonPressed)
-                        root.findViewById<TextView>(R.id.button_selecionar_dias).visibility = View.VISIBLE
-                        root.findViewById<MaterialButtonToggleGroup>(R.id.toggleButtonGroup).visibility = View.VISIBLE
-                    }
+                .setOnClickListener { setSecondLayout(3, true, true) }
 
-            expandableAlerta.parentLayout.setOnClickListener { expandableAlerta.toggleLayout() }
+        fun setSoundLogosVisible(value: Int, soundVisible: Boolean, vibVisible: Boolean, bothVisible: Boolean ){
+            alarmTypeButtonPressed = value
+            cbSom.visibility = View.VISIBLE
+
+            root.findViewById<TextView>(R.id.button_selecionar_dias).visibility = when {
+                soundVisible -> View.VISIBLE
+                !soundVisible -> View.INVISIBLE
+            }
+            cbVib.visibility = View.INVISIBLE
+
+            root.findViewById<TextView>(R.id.button_selecionar_dias).visibility = when {
+                vibVisible -> View.VISIBLE
+                !vibVisible -> View.INVISIBLE
+            }
+            cbAmbos.visibility = View.INVISIBLE
+
+            root.findViewById<TextView>(R.id.button_selecionar_dias).visibility = when {
+                bothVisible -> View.VISIBLE
+                !bothVisible -> View.INVISIBLE
+            }
+        }
+
+        expandableAlerta.parentLayout.setOnClickListener { expandableAlerta.toggleLayout() }
             expandableAlerta.secondLayout.findViewById<AppCompatImageButton>(R.id.imageButtonSom)
-                    .setOnClickListener {
-                        cbSom.visibility = View.VISIBLE
-                        cbVib.visibility = View.INVISIBLE
-                        cbAmbos.visibility = View.INVISIBLE
-                        alarmTypeButtonPressed = 1
-                    }
+                    .setOnClickListener { setSoundLogosVisible(1,true, false, false)
             expandableAlerta.secondLayout.findViewById<AppCompatImageButton>(R.id.imageButtonVibrar)
-                    .setOnClickListener {
-                        cbSom.visibility = View.INVISIBLE
-                        cbVib.visibility = View.VISIBLE
-                        cbAmbos.visibility = View.INVISIBLE
-                        alarmTypeButtonPressed = 2
-                    }
+                .setOnClickListener { setSoundLogosVisible(2,false, true, false)
             expandableAlerta.secondLayout.findViewById<AppCompatImageButton>(R.id.imageButtonAmbos)
-                    .setOnClickListener {
-                        cbSom.visibility = View.INVISIBLE
-                        cbVib.visibility = View.INVISIBLE
-                        cbAmbos.visibility = View.VISIBLE
-                        alarmTypeButtonPressed = 3
-                    }
+                .setOnClickListener { setSoundLogosVisible(3, false, false, true)
 
-            expandableNotas.parentLayout.setOnClickListener { expandableNotas.toggleLayout() }
+                expandableNotas.parentLayout.setOnClickListener { expandableNotas.toggleLayout() }
 
             //--------------------- CANCELAR ---------------------------------------
             val avisoCampos = root.findViewById<TextView>(R.id.aviso_campos)

@@ -50,3 +50,8 @@ enum class AlarmFrequency {
     @SerializedName("PERSONALIZADO")
     PERSONALIZADO
 }
+
+enum class Visibility{
+    VISIBLE,
+    INVISIBLE
+}
