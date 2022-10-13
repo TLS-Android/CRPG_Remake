@@ -1,4 +1,4 @@
-package com.plataforma.crpg.ui.reminders
+package com.tiagosantos.crpg_remake.ui.reminders
 
 
 import android.content.Context
@@ -16,7 +16,6 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageButton
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
@@ -27,17 +26,13 @@ import com.plataforma.crpg.databinding.ReminderActivityBinding
 import com.plataforma.crpg.model.AlarmFrequency
 import com.plataforma.crpg.model.AlarmType
 import com.plataforma.crpg.model.ReminderType
+import com.plataforma.crpg.ui.reminders.ReminderViewModel
 import com.skydoves.expandablelayout.ExpandableLayout
 import com.tiagosantos.common.ui.base.BaseFragment
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.crpg_remake.R
-import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
-import kotlinx.android.synthetic.main.layout_second_alerta.*
-import kotlinx.android.synthetic.main.layout_second_dia.*
-import kotlinx.android.synthetic.main.layout_second_horas.*
-import kotlinx.android.synthetic.main.layout_second_lembrar.*
-import kotlinx.android.synthetic.main.reminder_activity.*
+import com.tiagosantos.crpg_remake.databinding.ReminderFragmentBinding
 import net.gotev.speech.GoogleVoiceTypingDisabledException
 import net.gotev.speech.Speech
 import net.gotev.speech.SpeechDelegate
@@ -45,7 +40,7 @@ import net.gotev.speech.SpeechRecognitionNotAvailable
 import java.util.*
 
 class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
-    layoutId = R.layout.meals_fragment,
+    layoutId = R.layout.reminders_fragment,
     FragmentSettings(
         appBarTitle = R.string.title_dashboard,
         sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
@@ -588,6 +583,14 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             handler.post(runnable)
         }
 
+    }
+
+    override fun onInitDataBinding() {
+        TODO("Not yet implemented")
+    }
+
+    override fun observeLifecycleEvents() {
+        TODO("Not yet implemented")
     }
 
 
