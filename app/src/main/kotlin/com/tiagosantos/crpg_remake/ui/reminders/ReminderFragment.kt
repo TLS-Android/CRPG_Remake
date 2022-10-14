@@ -20,7 +20,6 @@ import com.tiagosantos.crpg_remake.databinding.ReminderActivitySuccessBinding
 import com.tiagosantos.crpg_remake.databinding.ReminderFragmentBinding
 import com.tiagosantos.crpg_remake.domain.model.AlarmFrequency
 import com.tiagosantos.crpg_remake.domain.model.AlarmType
-import com.tiagosantos.crpg_remake.domain.model.Reminder
 import com.tiagosantos.crpg_remake.domain.model.ReminderType
 import java.util.*
 
@@ -35,7 +34,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private lateinit var viewIntro: ReminderActivityIntroBinding
     private lateinit var viewSuccess: ReminderActivitySuccessBinding
 
-
     private var lembrarButtonPressed = 0
     private var alarmTypeButtonPressed = 0
     private var alarmFreqButtonPressed = 0
@@ -43,32 +41,52 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private var hoursMinutesFlag = false
 
     private val helper = RemindersHelper()
-    private val textEditPersonalizado = root.findViewById<EditText>(R.id.text_edit_personalizado)
+    private val textEditPersonalizado =
+        root.findViewById<EditText>(R.id.text_edit_personalizado)
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?,
     ): View {
         val reminderVM: ReminderViewModel by viewModels()
-        reminderVM.newReminder = Reminder( _,_, startTimeString, 1, 1, _,_,_,_,_)
+        reminderVM.setNewReminder()
+        setupUI(reminderVM)
+        return view
+    }
 
-        reminderVM.newReminder.start_time = startTimeString
-        reminderVM.newReminder.hours = 1
-        reminderVM.newReminder.mins = 1
-
+    private fun setupUI(reminderVM: ReminderViewModel){
         viewIntro.reminderIntroHintLayout.visibility = View.VISIBLE
         viewIntro.createReminderActionButton.setOnClickListener{
             viewIntro.reminderIntroHintLayout.visibility = View.GONE
         }
 
-            expandableLembrar.parentLayout.setOnClickListener { expandableLembrar.toggleLayout() }
+        fun setSecondLayout(value: Int, isVisible: Boolean, isTextVisible: Boolean){
+            lembrarButtonPressed = value
+            setButtonColorsReminder(lembrarButtonPressed)
 
+            when {
+                isVisible -> View.VISIBLE
+                !isVisible -> View.INVISIBLE
+            }
+
+            when {
+                isVisible ->
+                    root.findViewById<TextView>(R.id
+                    .inserir_titulo_lembrete_personalizado).visibility = View.VISIBLE
+                !isVisible ->
+                    root.findViewById<TextView>(R.id.inserir_titulo_lembrete_personalizado).visibility =
+                    View.INVISIBLE
+            }
+
+
+            root.findViewById<TextView>(R.id.inserir_titulo_lembrete_personalizado).visibility = View.INVISIBLE
+            textEditPersonalizado.visibility = View.INVISIBLE
+        }
+
+            expandableLembrar.parentLayout.setOnClickListener { expandableLembrar.toggleLayout() }
             expandableLembrar.secondLayout.findViewById<Button>(R.id.button0)
                     .setOnClickListener {
-                        lembrarButtonPressed = 1
-                        setButtonColorsReminder(lembrarButtonPressed)
-                        root.findViewById<TextView>(R.id.inserir_titulo_lembrete_personalizado).visibility = View.INVISIBLE
-                        textEditPersonalizado.visibility = View.INVISIBLE
+
                     }
             expandableLembrar.secondLayout.findViewById<Button>(R.id.button1)
                     .setOnClickListener {
@@ -116,22 +134,20 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             expandableDia.secondLayout.findViewById<Button>(R.id.button_personalizado)
                 .setOnClickListener { setSecondLayout(3, true, true) }
 
-
         expandableAlerta.parentLayout.setOnClickListener { expandableAlerta.toggleLayout() }
             expandableAlerta.secondLayout.findViewById<AppCompatImageButton>(R.id.imageButtonSom)
-                    .setOnClickListener { setSoundLogosVisible(1,true, false, false)
+                    .setOnClickListener { setSoundLogosVisible(1,true, false, false) }
             expandableAlerta.secondLayout.findViewById<AppCompatImageButton>(R.id.imageButtonVibrar)
-                .setOnClickListener { setSoundLogosVisible(2,false, true, false)
+                .setOnClickListener { setSoundLogosVisible(2,false, true, false) }
             expandableAlerta.secondLayout.findViewById<AppCompatImageButton>(R.id.imageButtonAmbos)
-                .setOnClickListener { setSoundLogosVisible(3, false, false, true)
-
+                .setOnClickListener { setSoundLogosVisible(3, false, false, true) }
                 expandableNotas.parentLayout.setOnClickListener { expandableNotas.toggleLayout() }
+
 
             //--------------------- CANCELAR ---------------------------------------
             val avisoCampos = root.findViewById<TextView>(R.id.aviso_campos)
 
             root.findViewById<Button>(R.id.button_cancel).setOnClickListener {
-
                 avisoCampos.visibility = View.GONE
 
                 lembrarButtonPressed = 0
@@ -153,8 +169,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             //------------------------- CONFIRMAR -------------------------------------------------
 
             root.findViewById<Button>(R.id.button_confirm).setOnClickListener {
-
-
                 if (et.text.toString().length == 2 && etMin.text.toString().length == 2) {
                     reminderVM.startTimeHours = et.text.toString()
                     reminderVM.startTimeMin = etMin.text.toString()
@@ -177,12 +191,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     //definir titulo personalizado
                     4 -> {reminderVM.newReminder.title = textEditPersonalizado.text.toString()
                         reminderVM.newReminder.reminder_type = ReminderType.PERSONALIZADO }
-                    else -> {
-                        println("lembrarButtonPressed is neither one of the values")
-                    }
+                    else -> { println("lembrarButtonPressed is neither one of the values") }
                 }
-
-                //println(">Titulo personalizado do reminder: " + reminderVM.newReminder.title)
 
                 val materialButtonToggleGroup =
                         expandableDia.secondLayout.findViewById<MaterialButtonToggleGroup>(R.id.toggleButtonGroup)
@@ -208,7 +218,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 }
 
                 when (alarmFreqButtonPressed) {
-                    1 -> reminderVM. = AlarmFrequency.HOJE
+                    1 -> reminderVM.newReminder.alarm_freq = AlarmFrequency.HOJE
                     2 -> reminderVM.newReminder.alarm_freq = AlarmFrequency.TODOS_OS_DIAS
                     3 -> reminderVM.newReminder.alarm_freq = AlarmFrequency.PERSONALIZADO
                 }
@@ -236,6 +246,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
     }
 
+}
 
     override fun onInitDataBinding() {
         TODO("Not yet implemented")

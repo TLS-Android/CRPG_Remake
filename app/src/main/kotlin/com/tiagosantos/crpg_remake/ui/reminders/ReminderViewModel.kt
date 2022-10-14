@@ -3,21 +3,14 @@ package com.tiagosantos.crpg_remake.ui.reminders
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Intent
-import android.os.Build
 import android.provider.AlarmClock
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.tiagosantos.crpg_remake.domain.model.AlarmFrequency
 import com.tiagosantos.crpg_remake.domain.model.AlarmType
 import com.tiagosantos.crpg_remake.domain.model.Reminder
 import com.tiagosantos.crpg_remake.domain.model.ReminderType
-import java.io.File
-import java.io.FileReader
 import java.lang.Boolean.FALSE
 import java.lang.Boolean.TRUE
-import java.lang.reflect.Type
 import java.sql.DriverManager.println
 import java.text.SimpleDateFormat
 import java.util.*
@@ -89,8 +82,7 @@ class ReminderViewModel(
     private fun getTomorrowDate(formatDDMMYYYY: SimpleDateFormat): String {
         val c = Calendar.getInstance()
         c.add(Calendar.DATE, 1)
-        val formattedDateTomorrow = formatDDMMYYYY.format(c.time)
-        return formattedDateTomorrow
+        return formatDDMMYYYY.format(c.time)
     }
 
     private fun setDateOnReminder(formattedDateToday: String, formattedDateTomorrow: String){
@@ -102,10 +94,7 @@ class ReminderViewModel(
         }
     }
 
-    fun setAlarmVibrateOnly(fullWeekAlarm: ArrayList<Int>, customWeekAlarm: ArrayList<Int>) {
-        println("Custom week alarm: $customWeekAlarm")
-        println("Full week alarm: $fullWeekAlarm")
-
+    private fun setAlarmVibrateOnly(fullWeekAlarm: ArrayList<Int>, customWeekAlarm: ArrayList<Int>) {
         when (newReminder.alarm_freq) {
             //so vibracao
             AlarmFrequency.HOJE -> this.alarmIntent = Intent(AlarmClock.ACTION_SET_ALARM).apply {
@@ -117,10 +106,6 @@ class ReminderViewModel(
             }
             AlarmFrequency.AMANHA -> this.alarmIntent = Intent(AlarmClock.ACTION_SET_ALARM).apply {
                 putExtra(AlarmClock.EXTRA_MESSAGE, newReminder.title)
-                //putExtra(AlarmClock.EXTRA_HOUR, startTimeHours.toInt())
-                //putExtra(AlarmClock.EXTRA_MINUTES, startTimeMin.toInt())
-                //AlarmClock nao permite definir alarme para dia especifico
-                //Tentar ver se e possivel usando Intents
                 putExtra(AlarmClock.EXTRA_VIBRATE, TRUE)
                 putExtra(AlarmClock.VALUE_RINGTONE_SILENT, TRUE)
             }
@@ -142,11 +127,9 @@ class ReminderViewModel(
                 putExtra(AlarmClock.VALUE_RINGTONE_SILENT, TRUE)
                 putExtra(AlarmClock.EXTRA_DAYS, customWeekAlarm)}
             }
-            else -> println("Não entrou em nenhuma das opcoes")
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.KITKAT)
     fun setAlarmBoth(fullWeekAlarm: ArrayList<Int>, customWeekAlarm: ArrayList<Int>) {
         lateinit var alarmIntent: Intent
         println("Full week alarm: $fullWeekAlarm")
@@ -182,7 +165,6 @@ class ReminderViewModel(
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.KITKAT)
     fun setAlarmSoundOnly(fullWeekAlarm: ArrayList<Int>, customWeekAlarm: ArrayList<Int>) {
         lateinit var alarmIntent: Intent
 
@@ -218,6 +200,13 @@ class ReminderViewModel(
             }
 
         }
+    }
+
+    fun setNewReminder() {
+        reminderVM.newReminder = Reminder(_, _, startTimeString, 1, 1, _, _, _, _, _)
+        reminderVM.newReminder.start_time = startTimeString
+        reminderVM.newReminder.hours = 1
+        reminderVM.newReminder.mins = 1
     }
 }
 

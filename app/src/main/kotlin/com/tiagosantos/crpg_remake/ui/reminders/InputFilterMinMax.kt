@@ -1,4 +1,4 @@
-package com.plataforma.crpg.ui.reminders
+package com.tiagosantos.crpg_remake.ui.reminders
 
 import android.text.InputFilter
 import android.text.Spanned
@@ -21,12 +21,11 @@ class InputFilterMinMax : InputFilter {
         try {
             val input = (dest.toString() + source.toString()).toInt()
             if (isInRange(min, max, input)) return null
-        } catch (nfe: NumberFormatException) {
-        }
+        } catch (_: NumberFormatException) { }
         return ""
     }
 
     private fun isInRange(a: Int, b: Int, c: Int): Boolean {
-        return if (b > a) c >= a && c <= b else c >= b && c <= a
+        return if (b > a) c in a..b else c in b..a
     }
 }
