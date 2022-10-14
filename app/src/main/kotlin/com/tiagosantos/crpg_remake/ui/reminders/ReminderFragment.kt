@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.appcompat.widget.AppCompatImageButton
 import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
@@ -34,6 +33,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
     private lateinit var viewLembrar: LayoutSecondLembrarBinding
     private lateinit var viewAlerta: LayoutSecondAlertaBinding
+    private lateinit var viewDia: LayoutSecondDiaBinding
 
     private var lembrarButtonPressed = 0
     private var alarmTypeButtonPressed = 0
@@ -56,14 +56,23 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     }
 
     private fun setupUI(reminderVM: ReminderViewModel) {
+        with(view){
+            this.parentLayout.setOnClickListener { view.expandableDia.toggle }
+            expandableHoras.parentLayout.setOnClickListener { expandableHoras.toggleLayout() }
+            view.parentLayout.setOnClickListener { view.expandableLembrar.toggleLayout() }
+            view.parentLayout.setOnClickListener { view.expandableDia }
+            this. expandableNotas.parentLayout.setOnClickListener { expandableNotas.toggleLayout() }
+            expandableAlerta.parentLayout.setOnClickListener { expandableAlerta.toggleLayout() }
+            expandableDia.parentLayout.setOnClickListener { expandableDia.toggleLayout() }
+        }
+
+
         with(viewIntro){
             this.reminderIntroHintLayout.visibility = View.VISIBLE
             this.createReminderActionButton.setOnClickListener {
                 this.reminderIntroHintLayout.visibility = View.GONE
             }
         }
-
-        view.parentLayout.setOnClickListener { view.expandableLembrar.toggleLayout() }
 
         with(viewLembrar){
             this.button0.setOnClickListener { helper.setLembrarLayout(
@@ -76,8 +85,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 viewLembrar, 4, true, true, lembrarButtonPressed) }
         }
 
-        expandableHoras.parentLayout.setOnClickListener { expandableHoras.toggleLayout() }
-
         val et = expandableHoras.secondLayout.findViewById(R.id.edit_hours) as EditText
         et.filters = arrayOf(InputFilterMinMax("00", "23"), InputFilter.LengthFilter(2))
 
@@ -86,15 +93,10 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         etMin.filters =
             arrayOf(InputFilterMinMax("00", "59"), InputFilter.LengthFilter(2))
 
-        val cbSom =
-            expandableAlerta.secondLayout.findViewById<ImageView>(R.id.checkbox_som)
-        val cbVib =
-            expandableAlerta.secondLayout.findViewById<ImageView>(R.id.checkbox_vibrar)
-        val cbAmbos =
-            expandableAlerta.secondLayout.findViewById<ImageView>(R.id.checkbox_ambos)
+        with(viewDia){
+            this.
 
-        view.parentLayout.setOnClickListener { view.expandableDia }
-        expandableDia.parentLayout.setOnClickListener { expandableDia.toggleLayout() }
+        }
 
         expandableDia.secondLayout.findViewById<Button>(R.id.button_hoje)
             .setOnClickListener { setSecondLayout(1, false, false) }
@@ -105,9 +107,12 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         expandableDia.secondLayout.findViewById<Button>(R.id.button_personalizado)
             .setOnClickListener { setSecondLayout(3, true, true) }
 
-        expandableAlerta.parentLayout.setOnClickListener { expandableAlerta.toggleLayout() }
 
         with(viewAlerta){
+            val cbSom = this.checkboxSom
+            val cbVib = this.checkboxVibrar
+            val cbAmbos = this.checkboxAmbos
+
             this.imageButtonSom.setOnClickListener{
                 helper.setSoundLogosVisible(this,1, true, false, false) }
             this.imageButtonVibrar.setOnClickListener{
@@ -116,7 +121,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 helper.setSoundLogosVisible(this,3, false, false, true) }
         }
 
-        this. expandableNotas.parentLayout.setOnClickListener { expandableNotas.toggleLayout() }
+
 
 
         //--------------------- CANCELAR ---------------------------------------
