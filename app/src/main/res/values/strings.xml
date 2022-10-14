@@ -33,6 +33,7 @@
     <string name="permitir">Permitir</string>
     <string name="recusar">Recusar</string>
     <string name="mealsHasRun">mealsHasRun</string>
+    <string name="remindersHasRun">remindersHasRun</string>
     <string name="permitir_sugestoes_audio">Permitir Sugestões de Áudio</string>
     <string name="lancar_notificacoes_teste">Lançar notificações para teste</string>
     <string name="permitir_comandos_voz">Permitir Comandos de Voz</string>

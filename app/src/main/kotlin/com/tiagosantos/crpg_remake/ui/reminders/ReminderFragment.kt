@@ -35,12 +35,14 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private lateinit var viewIntro: ReminderActivityIntroBinding
     private lateinit var viewSuccess: ReminderActivitySuccessBinding
 
+
     private var lembrarButtonPressed = 0
     private var alarmTypeButtonPressed = 0
     private var alarmFreqButtonPressed = 0
     private var startTimeString = EMPTY_STRING
     private var hoursMinutesFlag = false
 
+    private val helper = RemindersHelper()
     private val textEditPersonalizado = root.findViewById<EditText>(R.id.text_edit_personalizado)
 
     override fun onCreateView(
@@ -54,43 +56,13 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         reminderVM.newReminder.hours = 1
         reminderVM.newReminder.mins = 1
 
-        defineModality(ttsFlag, srFlag, hasRun)
-
         viewIntro.reminderIntroHintLayout.visibility = View.VISIBLE
         viewIntro.createReminderActionButton.setOnClickListener{
             viewIntro.reminderIntroHintLayout.visibility = View.GONE
         }
 
-        fun setButtonColorsReminder(pos: Int){
-                expandableLembrar.secondLayout.findViewById<Button>(R.id.button0).setBackgroundResource(R.drawable.layout_button_round_top)
-                expandableLembrar.secondLayout.findViewById<Button>(R.id.button1).setBackgroundResource(R.color.md_blue_100)
-                expandableLembrar.secondLayout.findViewById<Button>(R.id.button2).setBackgroundResource(R.color.md_blue_100)
-                expandableLembrar.secondLayout.findViewById<Button>(R.id.button3).setBackgroundResource(R.drawable.layout_button_round_bottom)
+            expandableLembrar.parentLayout.setOnClickListener { expandableLembrar.toggleLayout() }
 
-                when(pos){
-                    1 ->  expandableLembrar.secondLayout.findViewById<Button>(R.id.button0).setBackgroundResource(R.drawable.layout_button_round_top_selected)
-                    2 ->  expandableLembrar.secondLayout.findViewById<Button>(R.id.button1).setBackgroundResource(R.color.md_blue_200)
-                    3 ->  expandableLembrar.secondLayout.findViewById<Button>(R.id.button2).setBackgroundResource(R.color.md_blue_200)
-                    4 ->  expandableLembrar.secondLayout.findViewById<Button>(R.id.button3).setBackgroundResource(R.drawable.layout_button_round_bottom_selected)
-                }
-
-            }
-
-            fun setButtonColorsDays(pos: Int){
-                expandableDia.secondLayout.findViewById<Button>(R.id.button_hoje).setBackgroundResource(R.drawable.layout_button_round_top)
-                expandableDia.secondLayout.findViewById<Button>(R.id.button_todos_dias).setBackgroundResource(R.color.md_blue_100)
-                expandableDia.secondLayout.findViewById<Button>(R.id.button_personalizado).setBackgroundResource(R.drawable.layout_button_round_bottom)
-
-                when(pos){
-                    1 ->  expandableDia.secondLayout.findViewById<Button>(R.id.button_hoje).setBackgroundResource(R.drawable.layout_button_round_top_selected)
-                    2 ->  expandableDia.secondLayout.findViewById<Button>(R.id.button_todos_dias).setBackgroundResource(R.color.md_blue_200)
-                    3 ->  expandableDia.secondLayout.findViewById<Button>(R.id.button_personalizado).setBackgroundResource(R.drawable.layout_button_round_bottom_selected)
-                }
-
-            }
-
-            expandableLembrar.parentLayout.setOnClickListener {
-                expandableLembrar.toggleLayout() }
             expandableLembrar.secondLayout.findViewById<Button>(R.id.button0)
                     .setOnClickListener {
                         lembrarButtonPressed = 1
@@ -132,22 +104,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             val cbVib = expandableAlerta.secondLayout.findViewById<ImageView>(R.id.checkbox_vibrar)
             val cbAmbos = expandableAlerta.secondLayout.findViewById<ImageView>(R.id.checkbox_ambos)
 
-        fun setSecondLayout(value: Int, isbuttonVisible: Boolean, isGroupVisible: Boolean ){
-            alarmFreqButtonPressed = value
-            setButtonColorsDays(alarmFreqButtonPressed)
-            root.findViewById<TextView>(R.id.button_selecionar_dias).visibility = when {
-                isbuttonVisible -> View.VISIBLE
-                !isbuttonVisible -> View.INVISIBLE
-            }
-
-            root.findViewById<MaterialButtonToggleGroup>(R.id.toggleButtonGroup).visibility = when {
-                isGroupVisible -> View.VISIBLE
-                !isGroupVisible -> View.INVISIBLE
-            }
-        }
-
         view.parentLayout.setOnClickListener { view.expandableDia }
-
             expandableDia.parentLayout.setOnClickListener { expandableDia.toggleLayout() }
 
             expandableDia.secondLayout.findViewById<Button>(R.id.button_hoje)
@@ -159,27 +116,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             expandableDia.secondLayout.findViewById<Button>(R.id.button_personalizado)
                 .setOnClickListener { setSecondLayout(3, true, true) }
 
-        fun setSoundLogosVisible(value: Int, soundVisible: Boolean, vibVisible: Boolean, bothVisible: Boolean ){
-            alarmTypeButtonPressed = value
-            cbSom.visibility = View.VISIBLE
-
-            root.findViewById<TextView>(R.id.button_selecionar_dias).visibility = when {
-                soundVisible -> View.VISIBLE
-                !soundVisible -> View.INVISIBLE
-            }
-            cbVib.visibility = View.INVISIBLE
-
-            root.findViewById<TextView>(R.id.button_selecionar_dias).visibility = when {
-                vibVisible -> View.VISIBLE
-                !vibVisible -> View.INVISIBLE
-            }
-            cbAmbos.visibility = View.INVISIBLE
-
-            root.findViewById<TextView>(R.id.button_selecionar_dias).visibility = when {
-                bothVisible -> View.VISIBLE
-                !bothVisible -> View.INVISIBLE
-            }
-        }
 
         expandableAlerta.parentLayout.setOnClickListener { expandableAlerta.toggleLayout() }
             expandableAlerta.secondLayout.findViewById<AppCompatImageButton>(R.id.imageButtonSom)
@@ -298,14 +234,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     avisoCampos.visibility = View.VISIBLE
                 }
 
-
-
-            }
-
-        return view
-
-                }
-
+    }
 
 
     override fun onInitDataBinding() {

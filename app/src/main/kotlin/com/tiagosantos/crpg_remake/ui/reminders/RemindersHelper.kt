@@ -1,9 +1,87 @@
 package com.tiagosantos.crpg_remake.ui.reminders
 
+import android.view.View
+import android.widget.Button
+import android.widget.TextView
+import com.google.android.material.button.MaterialButtonToggleGroup
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.ReminderFragmentBinding
 
 class RemindersHelper {
+
+    fun setButtonColorsReminder(view: ReminderFragmentBinding,pos: Int){
+        expandableLembrar.secondLayout.findViewById<Button>(R.id.button0).setBackgroundResource(R.drawable.layout_button_round_top)
+        expandableLembrar.secondLayout.findViewById<Button>(R.id.button1).setBackgroundResource(R.color.md_blue_100)
+        expandableLembrar.secondLayout.findViewById<Button>(R.id.button2).setBackgroundResource(R.color.md_blue_100)
+        expandableLembrar.secondLayout.findViewById<Button>(R.id.button3).setBackgroundResource(R.drawable.layout_button_round_bottom)
+
+        when(pos){
+            1 ->  expandableLembrar.secondLayout.findViewById<Button>(R.id.button0).setBackgroundResource(R.drawable.layout_button_round_top_selected)
+            2 ->  expandableLembrar.secondLayout.findViewById<Button>(R.id.button1).setBackgroundResource(R.color.md_blue_200)
+            3 ->  expandableLembrar.secondLayout.findViewById<Button>(R.id.button2).setBackgroundResource(R.color.md_blue_200)
+            4 ->  expandableLembrar.secondLayout.findViewById<Button>(R.id.button3).setBackgroundResource(R.drawable.layout_button_round_bottom_selected)
+        }
+
+    }
+
+    fun setButtonColorsDays(view: ReminderFragmentBinding, pos: Int){
+        expandableDia.secondLayout.findViewById<Button>(R.id.button_hoje).setBackgroundResource(R.drawable.layout_button_round_top)
+        expandableDia.secondLayout.findViewById<Button>(R.id.button_todos_dias).setBackgroundResource(R.color.md_blue_100)
+        expandableDia.secondLayout.findViewById<Button>(R.id.button_personalizado).setBackgroundResource(R.drawable.layout_button_round_bottom)
+
+        when(pos){
+            1 ->  expandableDia.secondLayout.findViewById<Button>(R.id.button_hoje).setBackgroundResource(R.drawable.layout_button_round_top_selected)
+            2 ->  expandableDia.secondLayout.findViewById<Button>(R.id.button_todos_dias).setBackgroundResource(R.color.md_blue_200)
+            3 ->  expandableDia.secondLayout.findViewById<Button>(R.id.button_personalizado).setBackgroundResource(R.drawable.layout_button_round_bottom_selected)
+        }
+    }
+
+    fun setSoundLogosVisible(
+        view: ReminderFragmentBinding,
+        value: Int,
+        soundVisible: Boolean,
+        vibVisible: Boolean,
+        bothVisible: Boolean
+    ){
+        alarmTypeButtonPressed = value
+        cbSom.visibility = View.VISIBLE
+
+        root.findViewById<TextView>(R.id.button_selecionar_dias).visibility = when {
+            soundVisible -> View.VISIBLE
+            !soundVisible -> View.INVISIBLE
+        }
+        cbVib.visibility = View.INVISIBLE
+
+        root.findViewById<TextView>(R.id.button_selecionar_dias).visibility = when {
+            vibVisible -> View.VISIBLE
+            !vibVisible -> View.INVISIBLE
+        }
+        cbAmbos.visibility = View.INVISIBLE
+
+        root.findViewById<TextView>(R.id.button_selecionar_dias).visibility = when {
+            bothVisible -> View.VISIBLE
+            !bothVisible -> View.INVISIBLE
+        }
+    }
+
+    fun setSecondLayout(
+        view: ReminderFragmentBinding,
+        value: Int,
+        isbuttonVisible: Boolean,
+        isGroupVisible: Boolean
+    ){
+        alarmFreqButtonPressed = value
+        helper.setButtonColorsDays(alarmFreqButtonPressed)
+        root.findViewById<TextView>(R.id.button_selecionar_dias).visibility = when {
+            isbuttonVisible -> View.VISIBLE
+            !isbuttonVisible -> View.INVISIBLE
+        }
+
+        root.findViewById<MaterialButtonToggleGroup>(R.id.toggleButtonGroup).visibility = when {
+            isGroupVisible -> View.VISIBLE
+            !isGroupVisible -> View.INVISIBLE
+        }
+    }
 
     private fun performActionWithVoiceCommand(
         view: ReminderFragmentBinding,
@@ -164,7 +242,7 @@ class RemindersHelper {
             command.contains("e cinco", true) || command.contains(
                 ":05",
                 true
-            ) -> view. edit_minutes.setText("05")
+            ) -> view.edit_minutes.setText("05")
             command.contains("e um quarto", true) || command.contains(
                 ":15",
                 true
@@ -192,25 +270,6 @@ class RemindersHelper {
         }
     }*/
 
-    private fun defineModality(ttsFlag: Boolean, srFlag: Boolean, hasRun: Boolean) {
-/*
-        if (!hasRun){
-            when{
-                ttsFlag && !srFlag -> { startTTS() }
-                !ttsFlag && srFlag -> { startVoiceRecognition(view) }
-                ttsFlag && srFlag ->{ multimodalOption(view) }
-            }
-        }
 
-        if(hasRun){
-            when{
-                !ttsFlag && srFlag -> { startVoiceRecognition(view) }
-                ttsFlag && srFlag ->{ startVoiceRecognition(view) }
-            }
-        }
-
-    }
-    */
-    }
 
 }
