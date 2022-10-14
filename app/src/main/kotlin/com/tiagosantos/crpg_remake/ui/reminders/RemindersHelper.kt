@@ -24,6 +24,21 @@ class RemindersHelper {
 
     }
 
+    fun setSecondLayout(value: Int, isVisible: Boolean, isTextVisible: Boolean,
+                        lembrarButtonPressed:  ){
+        lembrarButtonPressed = value
+        setButtonColorsReminder(lembrarButtonPressed)
+        when {
+            isVisible -> viewLembrar.inserirTituloLembretePersonalizado.visibility = View.VISIBLE
+            !isVisible -> viewLembrar.inserirTituloLembretePersonalizado.visibility = View.INVISIBLE
+        }
+
+        when {
+            isTextVisible -> viewLembrar.textEditPersonalizado.visibility = View.VISIBLE
+            !isTextVisible -> viewLembrar.textEditPersonalizado.visibility = View.INVISIBLE
+        }
+    }
+
     fun setButtonColorsDays(view: ReminderFragmentBinding, pos: Int){
         expandableDia.secondLayout.findViewById<Button>(R.id.button_hoje).setBackgroundResource(R.drawable.layout_button_round_top)
         expandableDia.secondLayout.findViewById<Button>(R.id.button_todos_dias).setBackgroundResource(R.color.md_blue_100)

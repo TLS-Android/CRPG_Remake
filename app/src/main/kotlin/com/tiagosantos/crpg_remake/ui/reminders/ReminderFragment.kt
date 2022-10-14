@@ -15,6 +15,7 @@ import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.common.ui.utils.InputFilterMinMax
 import com.tiagosantos.crpg_remake.R
+import com.tiagosantos.crpg_remake.databinding.LayoutSecondLembrarBinding
 import com.tiagosantos.crpg_remake.databinding.ReminderActivityIntroBinding
 import com.tiagosantos.crpg_remake.databinding.ReminderActivitySuccessBinding
 import com.tiagosantos.crpg_remake.databinding.ReminderFragmentBinding
@@ -33,6 +34,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private lateinit var view: ReminderFragmentBinding
     private lateinit var viewIntro: ReminderActivityIntroBinding
     private lateinit var viewSuccess: ReminderActivitySuccessBinding
+
+    private lateinit var viewLembrar: LayoutSecondLembrarBinding
 
     private var lembrarButtonPressed = 0
     private var alarmTypeButtonPressed = 0
@@ -54,132 +57,98 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         return view
     }
 
-    private fun setupUI(reminderVM: ReminderViewModel){
+    private fun setupUI(reminderVM: ReminderViewModel) {
         viewIntro.reminderIntroHintLayout.visibility = View.VISIBLE
-        viewIntro.createReminderActionButton.setOnClickListener{
+        viewIntro.createReminderActionButton.setOnClickListener {
             viewIntro.reminderIntroHintLayout.visibility = View.GONE
         }
 
-        fun setSecondLayout(value: Int, isVisible: Boolean, isTextVisible: Boolean){
-            lembrarButtonPressed = value
-            setButtonColorsReminder(lembrarButtonPressed)
+        view.parentLayout.setOnClickListener { view.expandableLembrar.toggleLayout() }
+        viewLembrar.button0.setOnClickListener { helper.setSecondLayout(1, true, true) }
+        viewLembrar.button1.setOnClickListener { helper.setSecondLayout(2, false, false) }
+        viewLembrar.button2.setOnClickListener { helper.setSecondLayout(3, false, false) }
+        viewLembrar.button3.setOnClickListener { helper.setSecondLayout(4, true, true) }
 
-            when {
-                isVisible -> View.VISIBLE
-                !isVisible -> View.INVISIBLE
-            }
+        expandableHoras.parentLayout.setOnClickListener { expandableHoras.toggleLayout() }
 
-            when {
-                isVisible ->
-                    root.findViewById<TextView>(R.id
-                    .inserir_titulo_lembrete_personalizado).visibility = View.VISIBLE
-                !isVisible ->
-                    root.findViewById<TextView>(R.id.inserir_titulo_lembrete_personalizado).visibility =
-                    View.INVISIBLE
-            }
+        val et = expandableHoras.secondLayout.findViewById(R.id.edit_hours) as EditText
+        et.filters = arrayOf(InputFilterMinMax("00", "23"), InputFilter.LengthFilter(2))
 
+        val etMin =
+            expandableHoras.secondLayout.findViewById(R.id.edit_minutes) as EditText
+        etMin.filters =
+            arrayOf(InputFilterMinMax("00", "59"), InputFilter.LengthFilter(2))
 
-            root.findViewById<TextView>(R.id.inserir_titulo_lembrete_personalizado).visibility = View.INVISIBLE
-            textEditPersonalizado.visibility = View.INVISIBLE
-        }
-
-            expandableLembrar.parentLayout.setOnClickListener { expandableLembrar.toggleLayout() }
-            expandableLembrar.secondLayout.findViewById<Button>(R.id.button0)
-                    .setOnClickListener {
-
-                    }
-            expandableLembrar.secondLayout.findViewById<Button>(R.id.button1)
-                    .setOnClickListener {
-                        lembrarButtonPressed = 2
-                        setButtonColorsReminder(lembrarButtonPressed)
-                        root.findViewById<TextView>(R.id.inserir_titulo_lembrete_personalizado).visibility = View.INVISIBLE
-                        textEditPersonalizado.visibility = View.INVISIBLE
-                    }
-            expandableLembrar.secondLayout.findViewById<Button>(R.id.button2)
-                    .setOnClickListener {
-                        lembrarButtonPressed = 3
-                        setButtonColorsReminder(lembrarButtonPressed)
-                        root.findViewById<TextView>(R.id.inserir_titulo_lembrete_personalizado).visibility = View.INVISIBLE
-                        textEditPersonalizado.visibility = View.INVISIBLE
-                    }
-            expandableLembrar.secondLayout.findViewById<Button>(R.id.button3)
-                    .setOnClickListener {
-                        lembrarButtonPressed = 4
-                        setButtonColorsReminder(lembrarButtonPressed)
-                        root.findViewById<TextView>(R.id.inserir_titulo_lembrete_personalizado).visibility = View.VISIBLE
-                        textEditPersonalizado.visibility = View.VISIBLE
-                    }
-
-            expandableHoras.parentLayout.setOnClickListener { expandableHoras.toggleLayout() }
-
-            val et = expandableHoras.secondLayout.findViewById(R.id.edit_hours) as EditText
-            et.filters = arrayOf(InputFilterMinMax("00", "23"), InputFilter.LengthFilter(2))
-
-            val etMin = expandableHoras.secondLayout.findViewById(R.id.edit_minutes) as EditText
-            etMin.filters = arrayOf(InputFilterMinMax("00", "59"),InputFilter.LengthFilter(2))
-
-            val cbSom = expandableAlerta.secondLayout.findViewById<ImageView>(R.id.checkbox_som)
-            val cbVib = expandableAlerta.secondLayout.findViewById<ImageView>(R.id.checkbox_vibrar)
-            val cbAmbos = expandableAlerta.secondLayout.findViewById<ImageView>(R.id.checkbox_ambos)
+        val cbSom =
+            expandableAlerta.secondLayout.findViewById<ImageView>(R.id.checkbox_som)
+        val cbVib =
+            expandableAlerta.secondLayout.findViewById<ImageView>(R.id.checkbox_vibrar)
+        val cbAmbos =
+            expandableAlerta.secondLayout.findViewById<ImageView>(R.id.checkbox_ambos)
 
         view.parentLayout.setOnClickListener { view.expandableDia }
-            expandableDia.parentLayout.setOnClickListener { expandableDia.toggleLayout() }
+        expandableDia.parentLayout.setOnClickListener { expandableDia.toggleLayout() }
 
-            expandableDia.secondLayout.findViewById<Button>(R.id.button_hoje)
-                    .setOnClickListener { setSecondLayout(1, false, false) }
+        expandableDia.secondLayout.findViewById<Button>(R.id.button_hoje)
+            .setOnClickListener { setSecondLayout(1, false, false) }
 
-            expandableDia.secondLayout.findViewById<Button>(R.id.button_todos_dias)
-                .setOnClickListener { setSecondLayout(2, false, false) }
+        expandableDia.secondLayout.findViewById<Button>(R.id.button_todos_dias)
+            .setOnClickListener { setSecondLayout(2, false, false) }
 
-            expandableDia.secondLayout.findViewById<Button>(R.id.button_personalizado)
-                .setOnClickListener { setSecondLayout(3, true, true) }
+        expandableDia.secondLayout.findViewById<Button>(R.id.button_personalizado)
+            .setOnClickListener { setSecondLayout(3, true, true) }
 
         expandableAlerta.parentLayout.setOnClickListener { expandableAlerta.toggleLayout() }
-            expandableAlerta.secondLayout.findViewById<AppCompatImageButton>(R.id.imageButtonSom)
-                    .setOnClickListener { setSoundLogosVisible(1,true, false, false) }
-            expandableAlerta.secondLayout.findViewById<AppCompatImageButton>(R.id.imageButtonVibrar)
-                .setOnClickListener { setSoundLogosVisible(2,false, true, false) }
-            expandableAlerta.secondLayout.findViewById<AppCompatImageButton>(R.id.imageButtonAmbos)
-                .setOnClickListener { setSoundLogosVisible(3, false, false, true) }
-                expandableNotas.parentLayout.setOnClickListener { expandableNotas.toggleLayout() }
+        expandableAlerta.secondLayout.findViewById<AppCompatImageButton>(R.id.imageButtonSom)
+            .setOnClickListener { setSoundLogosVisible(1, true, false, false) }
+        expandableAlerta.secondLayout.findViewById<AppCompatImageButton>(R.id.imageButtonVibrar)
+            .setOnClickListener { setSoundLogosVisible(2, false, true, false) }
+        expandableAlerta.secondLayout.findViewById<AppCompatImageButton>(R.id.imageButtonAmbos)
+            .setOnClickListener { setSoundLogosVisible(3, false, false, true) }
+        expandableNotas.parentLayout.setOnClickListener { expandableNotas.toggleLayout() }
 
 
-            //--------------------- CANCELAR ---------------------------------------
-            val avisoCampos = root.findViewById<TextView>(R.id.aviso_campos)
+        //--------------------- CANCELAR ---------------------------------------
+        val avisoCampos = root.findViewById<TextView>(R.id.aviso_campos)
 
-            root.findViewById<Button>(R.id.button_cancel).setOnClickListener {
-                avisoCampos.visibility = View.GONE
+        root.findViewById<Button>(R.id.button_cancel).setOnClickListener {
+            avisoCampos.visibility = View.GONE
 
-                lembrarButtonPressed = 0
-                alarmTypeButtonPressed = 0
-                alarmFreqButtonPressed = 0
+            lembrarButtonPressed = 0
+            alarmTypeButtonPressed = 0
+            alarmFreqButtonPressed = 0
 
-                //reset set Hours section
-                expandableHoras.secondLayout.findViewById<EditText>(R.id.edit_hours).setText("")
-                expandableHoras.secondLayout.findViewById<EditText>(R.id.edit_minutes).setText("")
+            //reset set Hours section
+            expandableHoras.secondLayout.findViewById<EditText>(R.id.edit_hours)
+                .setText("")
+            expandableHoras.secondLayout.findViewById<EditText>(R.id.edit_minutes)
+                .setText("")
 
-                // reset alarmType section
-                cbSom.visibility = View.INVISIBLE
-                cbVib.visibility = View.INVISIBLE
-                cbAmbos.visibility = View.INVISIBLE
+            // reset alarmType section
+            cbSom.visibility = View.INVISIBLE
+            cbVib.visibility = View.INVISIBLE
+            cbAmbos.visibility = View.INVISIBLE
 
-                expandableNotas.secondLayout.findViewById<EditText>(R.id.editTextNotes).setText("")
+            expandableNotas.secondLayout.findViewById<EditText>(R.id.editTextNotes)
+                .setText("")
+        }
+
+        //------------------------- CONFIRMAR -------------------------------------------------
+
+        root.findViewById<Button>(R.id.button_confirm).setOnClickListener {
+            if (et.text.toString().length == 2 && etMin.text.toString().length == 2) {
+                reminderVM.startTimeHours = et.text.toString()
+                reminderVM.startTimeMin = etMin.text.toString()
+                startTimeString = reminderVM.startTimeHours.plus(reminderVM.startTimeMin)
+                hoursInt =
+                    root.findViewById<EditText>(R.id.edit_minutes).text.toString().toInt()
+                minsInt =
+                    root.findViewById<EditText>(R.id.edit_minutes).text.toString().toInt()
+                hoursMinutesFlag = true
+            } else {
+                avisoCampos.text = getString(R.string.valor_horas_minutos_falta)
+                avisoCampos.visibility = View.VISIBLE
             }
-
-            //------------------------- CONFIRMAR -------------------------------------------------
-
-            root.findViewById<Button>(R.id.button_confirm).setOnClickListener {
-                if (et.text.toString().length == 2 && etMin.text.toString().length == 2) {
-                    reminderVM.startTimeHours = et.text.toString()
-                    reminderVM.startTimeMin = etMin.text.toString()
-                    startTimeString = reminderVM.startTimeHours.plus(reminderVM.startTimeMin)
-                    hoursInt = root.findViewById<EditText>(R.id.edit_minutes).text.toString().toInt()
-                    minsInt = root.findViewById<EditText>(R.id.edit_minutes).text.toString().toInt()
-                    hoursMinutesFlag = true
-                } else {
-                    avisoCampos.text = getString(R.string.valor_horas_minutos_falta)
-                    avisoCampos.visibility = View.VISIBLE
-                }
 
                 when (lembrarButtonPressed) {
                     1 -> {reminderVM.newReminder.title = "Tomar medicacao"
@@ -224,7 +193,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 }
 
                 if (alarmFreqButtonPressed != 0 && alarmTypeButtonPressed != 0
-                        && lembrarButtonPressed != 0 && hoursMinutesFlag) {
+                    && lembrarButtonPressed != 0 && hoursMinutesFlag
+                ) {
                     reminderVM.addReminder()
                     if (reminderVM.flagReminderAdded) {
                         avisoCampos.visibility = View.GONE
@@ -232,7 +202,11 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                         viewSuccess.buttonOk.setOnClickListener {
                             viewSuccess.successLayout.visibility = View.GONE
                         }
-                        if (activity?.packageManager?.let { it1 -> reminderVM.alarmIntent.resolveActivity(it1) } != null) {
+                        if (activity?.packageManager?.let { it1 ->
+                                reminderVM.alarmIntent.resolveActivity(
+                                    it1
+                                )
+                            } != null) {
                             startActivity(reminderVM.alarmIntent)
                         }
                     }
@@ -243,10 +217,9 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     avisoCampos.text = getString(R.string.campos_obrigatorios_falta)
                     avisoCampos.visibility = View.VISIBLE
                 }
+            }
 
     }
-
-}
 
     override fun onInitDataBinding() {
         TODO("Not yet implemented")
