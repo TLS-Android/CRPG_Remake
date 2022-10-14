@@ -65,7 +65,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         val reminderVM: ReminderViewModel by viewModels()
         reminderVM.setNewReminder()
         setupUI(reminderVM)
-        return view
+        return view.root
     }
 
     private fun setupUI(reminderVM: ReminderViewModel) {
