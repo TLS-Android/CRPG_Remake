@@ -17,10 +17,13 @@
     android:orientation="vertical"
     android:weightSum="18">
 
-    <include layout="@layout/reminder_fragment_intro"
+    <include
+        layout="@layout/reminder_fragment_intro"
+        android:id="@+id/reminder_intro"
         android:visibility="gone"/>
 
     <include layout="@layout/reminder_fragment_success"
+        android:id="@+id/reminder_success"
         android:visibility="gone"/>
 
     <ScrollView

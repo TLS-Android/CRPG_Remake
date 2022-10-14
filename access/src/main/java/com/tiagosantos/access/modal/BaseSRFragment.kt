@@ -5,14 +5,16 @@ import android.os.Handler
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.viewModels
-import com.tiagosantos.access.modal.gotev.GotevViewModel
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import com.tiagosantos.access.R
 import com.tiagosantos.access.modal.settings.TTSFragmentSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.common.ui.extension.observe
-import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 
 abstract class BaseSRFragment<B : ViewDataBinding>(
     @LayoutRes
@@ -23,21 +25,28 @@ abstract class BaseSRFragment<B : ViewDataBinding>(
     layoutId = layoutId,
     settings = settings,
     ttsSettings = TTSFragmentSettings(
-        EMPTY_STRING
+        "hey"
     )
 ) {
 
-    private val gotevVM: GotevViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        gotevVM.listen()
     }
 
     abstract override fun onInitDataBinding()
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onStop() {
+        val activity = requireActivity()
+        super.onStop()
+    }
+
     override fun observeLifecycleEvents() {
-        observe(gotevVM.getViewState().spoken observer = {
+        observe(viewModel.errorMessage, observer = {
             Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
         })
     }
@@ -79,6 +88,7 @@ abstract class BaseSRFragment<B : ViewDataBinding>(
                                 handler.postDelayed({
                                     try {
                                         if (isAdded && isVisible) {
+
                                             Speech.init(requireActivity())
                                             Speech.getInstance().startListening(this)
                                         }
@@ -104,5 +114,6 @@ abstract class BaseSRFragment<B : ViewDataBinding>(
     }
 
     override fun performActionWithVoiceCommand(command: String) {}
+
 
 }

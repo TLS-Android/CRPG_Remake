@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/reminderIntroHintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_93"
+    android:orientation="vertical">
+
+  <TextView
+      android:id="@+id/adicione_lembretes_hint"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center_horizontal"
+      android:paddingStart="32dp"
+      android:paddingEnd="32dp"
+      android:text="@string/adicionar_lembrete"
+      android:textAlignment="center"
+      android:textColor="@color/md_blue_200"
+      android:textSize="25sp"
+      app:layout_constraintBottom_toTopOf="@+id/clique_icone_lapis_hint"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.1" />
+
+  <TextView
+        android:id="@+id/clique_icone_lapis_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:gravity="center_horizontal"
+        android:text="@string/clique_icone_lapis"
+        android:textAlignment="center"
+        android:textColor="@color/md_blue_200"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/adicione_lembretes_hint"
+        app:layout_constraintBottom_toTopOf="@+id/createReminderActionButton" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/createReminderActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/PrimaryGreen"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_gravity="center_horizontal"
+        app:fabCustomSize="80dp"
+        app:maxImageSize="60dp"
+        app:backgroundTint="@color/PrimaryGreen"
+        app:cornerRadius="8dp"
+        app:layout_constraintTop_toBottomOf="@id/clique_icone_lapis_hint"
+        android:contentDescription="@string/criar_lembrete"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.1"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,8 +16,7 @@ class GotevViewModel(
 ) : AndroidViewModel(application), DefaultLifecycleObserver {
 
     private var viewState: MutableLiveData<ViewState>? = null
-    private val isListening
-        get() = viewState?.value?.isListening ?: false
+    private val isListening get() = viewState?.value?.isListening ?: false
 
     fun getViewState(): LiveData<ViewState> {
         if (viewState == null) {
@@ -26,8 +25,6 @@ class GotevViewModel(
         }
         return viewState as MutableLiveData<ViewState>
     }
-
-
 
     private fun notifyListening(isRecording: Boolean) {
         viewState?.value = viewState?.value?.copy(isListening = isRecording)
@@ -51,48 +48,47 @@ class GotevViewModel(
         )
     }
 
+
     fun listen() {
-        if (!isListening){
-            try {
-                // you must have android.permission.RECORD_AUDIO granted at this point
-                Speech.getInstance().startListening(object : SpeechDelegate {
-                    override fun onStartOfSpeech() {
-                        Log.i(
-                            "speech",
-                            "speech recognition is now active")
-                    }
+        try {
+            // you must have android.permission.RECORD_AUDIO granted at this point
+            Speech.getInstance().startListening(object : SpeechDelegate {
+                override fun onStartOfSpeech() {
+                    Log.i(
+                        "speech",
+                        "speech recognition is now active")
+                }
 
-                    override fun onSpeechRmsChanged(value: Float) {
-                        Log.d(
-                            "speech",
-                            "rms is now: $value")
-                    }
+                override fun onSpeechRmsChanged(value: Float) {
+                    Log.d(
+                        "speech",
+                        "rms is now: $value")
+                }
 
-                    override fun onSpeechPartialResults(results: List<String>) {
-                        val str = StringBuilder()
-                        for (res in results) { str.append(res).append(" ") }
-                        performActionWithVoiceCommand(results.toString())
-                        Log.i("speech", "partial result: " + str.toString().trim { it <= ' ' })
+                override fun onSpeechPartialResults(results: List<String>) {
+                    val str = StringBuilder()
+                    for (res in results) {
+                        str.append(res).append(" ")
                     }
+                    Log.i("speech", "partial result: " + str.toString().trim { it <= ' ' })
+                }
 
-                    override fun onSpeechResult(result: String) {
-                        Log.i("speech", "result: $result")
-                        viewState?.value?.spokenText = result
-                    }
-                })
-            } catch (exc: SpeechRecognitionNotAvailable) {
-                Log.e("speech", "Speech recognition is not available on this device!")
-            } catch (exc: GoogleVoiceTypingDisabledException) {
-                Log.e("speech", "Google voice typing must be enabled!")
-            }
-
+                override fun onSpeechResult(result: String) {
+                    Log.i("speech", "result: $result")
+                    viewState?.value?.spokenText = result
+                }
+            })
+        } catch (exc: SpeechRecognitionNotAvailable) {
+            Log.e("speech", "Speech recognition is not available on this device!")
+        } catch (exc: GoogleVoiceTypingDisabledException) {
+            Log.e("speech", "Google voice typing must be enabled!")
         }
 
     }
 
     override fun onCleared() {
         super.onCleared()
-        Speech.getInstance().shutdown()
+        Speech.getInstance().shutdown();
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)

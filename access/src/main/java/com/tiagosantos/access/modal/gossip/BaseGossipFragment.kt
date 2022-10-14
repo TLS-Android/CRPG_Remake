@@ -50,5 +50,6 @@ abstract class BaseGossipFragment<B : ViewDataBinding>(
         gossip.shutdown()
     }
 
+    override fun performActionWithVoiceCommand(command: String) {}
 
 }

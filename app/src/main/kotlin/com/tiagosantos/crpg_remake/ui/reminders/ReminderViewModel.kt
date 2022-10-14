@@ -1,4 +1,4 @@
-package com.plataforma.crpg.ui.reminders
+package com.tiagosantos.crpg_remake.ui.reminders
 
 import android.annotation.SuppressLint
 import android.app.Application
@@ -9,7 +9,10 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.plataforma.crpg.model.*
+import com.tiagosantos.crpg_remake.domain.model.AlarmFrequency
+import com.tiagosantos.crpg_remake.domain.model.AlarmType
+import com.tiagosantos.crpg_remake.domain.model.Reminder
+import com.tiagosantos.crpg_remake.domain.model.ReminderType
 import java.io.File
 import java.io.FileReader
 import java.lang.Boolean.FALSE
@@ -20,19 +23,16 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 //Reminders sao eventos criados pelo utilizador e que so sao acedidos pelo proprio
-class ReminderViewModel(application: Application) : AndroidViewModel(application) {
+class ReminderViewModel(
+    application: Application
+) : AndroidViewModel(application) {
 
     @SuppressLint("StaticFieldLeak")
     val context = application.applicationContext!!
-    // a lista de Reminders contem todos os reminders criados pelo utilizador que ainda vao acontecer no futuro
     private var mReminderList = ArrayList<Reminder>()
-    //for each day of the week, a boolean indicates if the alarm is set for that day
     val weekDaysBoolean: BooleanArray = booleanArrayOf(false, false, false,
             false, false, false, false)
     lateinit var alarmIntent: Intent
-
-    var newReminder = Reminder("", "", "", 0, 0, "","",
-            ReminderType.MEDICACAO, AlarmType.SOM, AlarmFrequency.HOJE)
 
     var startTimeHours : String = ""
     var startTimeMin: String = ""
@@ -42,10 +42,7 @@ class ReminderViewModel(application: Application) : AndroidViewModel(application
             Calendar.WEDNESDAY, Calendar.THURSDAY,Calendar.FRIDAY,Calendar.SATURDAY)
 
     @SuppressLint("SimpleDateFormat")
-    @RequiresApi(Build.VERSION_CODES.KITKAT)
-    fun addReminder(){
-
-        println(">add Reminder")
+    fun addReminder(newReminder: Reminder){
 
         newReminder = Reminder("", "", "", 11, 0,
                 "", "", ReminderType.MEDICACAO, AlarmType.SOM, AlarmFrequency.HOJE)
@@ -64,10 +61,6 @@ class ReminderViewModel(application: Application) : AndroidViewModel(application
                 }
             }
         }
-
-        //println("Custom week alarm mutable: $customWeekAlarmMutable")
-
-        println("Full week: $fullWeekAlarm")
 
         val customWeekAlarm = customWeekAlarmMutable.toCollection(ArrayList<Int>())
         for (i in customWeekAlarm) println("> i value: $i")
@@ -101,15 +94,6 @@ class ReminderViewModel(application: Application) : AndroidViewModel(application
 
         // create a new file
         val isNewFileCreated : Boolean = file.createNewFile()
-
-//        var title: String,
-//        val info: String,
-//        var start_time: String,
-//        var date: String,
-//        val notas: String,
-//        var reminder_type: ReminderType,
-//        var alarm_type: AlarmType,
-//        var alarm_freq: AlarmFrequency
 
         if(isNewFileCreated){
             kotlin.io.println("$fullFilename is created successfully.")

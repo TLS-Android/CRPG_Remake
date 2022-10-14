@@ -1,5 +1,6 @@
 package com.tiagosantos.common.ui.utils
 
+import android.content.Context
 
 object GeneralUtils {
 

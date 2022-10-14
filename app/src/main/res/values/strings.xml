@@ -40,5 +40,9 @@
     <string name="ok">OK</string>
     <string name="refeicao_escolhida_com_sucesso">Refeição escolhida com sucesso!</string>
     <string name="green_check">check</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="adicionar_lembrete">Adicionar lembrete</string>
+    <string name="clique_icone_lapis">Clique icone lapis</string>
+    <string name="criar_lembrete">Criar lembrete</string>
 
 </resources>
