@@ -64,7 +64,7 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
 
     open fun performActionWithVoiceCommand(command: String) {}
 
-    private fun defineModality(
+    open fun defineModality(
        ttsFlag: Boolean,
        srFlag: Boolean,
        hasRun: Boolean)
