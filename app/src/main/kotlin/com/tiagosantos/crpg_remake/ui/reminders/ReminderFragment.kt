@@ -1,6 +1,5 @@
 package com.tiagosantos.crpg_remake.ui.reminders
 
-import android.media.Image
 import android.os.Bundle
 import android.text.InputFilter
 import android.view.LayoutInflater
@@ -9,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.button.MaterialButtonToggleGroup
 import com.tiagosantos.common.ui.base.BaseFragment
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
@@ -44,6 +42,9 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private var alarmFreqButtonPressed = 0
     private var startTimeString = EMPTY_STRING
     private var hoursMinutesFlag = false
+
+    private var hoursInt = 0
+    private var minsInt = 0
 
     lateinit var cbSom: ImageView
     lateinit var cbVib: ImageView
@@ -152,9 +153,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
         //------------------------- CONFIRMAR -------------------------------------------------
 
-
-
-
         root.findViewById<Button>(R.id.button_confirm).setOnClickListener {
             if (et.text.toString().length == 2 && etMin.text.toString().length == 2) {
                 reminderVM.startTimeHours = et.text.toString()
@@ -183,27 +181,28 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                         this.reminder_type = ReminderType.REFEICAO
                     }
                     4 -> {
-                        this.title = textEditPersonalizado.text.toString()
+                        this.title = viewLembrar.textEditPersonalizado.text.toString()
                         this.reminder_type = ReminderType.PERSONALIZADO
                     }
                     else -> { println("lembrarButtonPressed is neither one of the values") }
                 }
 
-                val materialButtonToggleGroup =
-                    expandableDia.secondLayout.findViewById<MaterialButtonToggleGroup>(R.id.toggleButtonGroup)
 
-                val ids: List<Int> = materialButtonToggleGroup.checkedButtonIds
-                for (id in ids) {
-                    val materialButton: MaterialButton = materialButtonToggleGroup.findViewById(id)
-                    when (expandableDia.secondLayout.resources.getResourceName(materialButton.id)
-                        .takeLast(3)) {
-                        "Seg" -> reminderVM.weekDaysBoolean[0] = true
-                        "Ter" -> reminderVM.weekDaysBoolean[1] = true
-                        "Qua" -> reminderVM.weekDaysBoolean[2] = true
-                        "Qui" -> reminderVM.weekDaysBoolean[3] = true
-                        "Sex" -> reminderVM.weekDaysBoolean[4] = true
-                        "Sab" -> reminderVM.weekDaysBoolean[5] = true
-                        "Dom" -> reminderVM.weekDaysBoolean[6] = true
+                with(viewDia){
+                    val materialButtonToggleGroup = this.toggleButtonGroup
+                    val ids: List<Int> = materialButtonToggleGroup.checkedButtonIds
+                    for (id in ids) {
+                        val materialButton: MaterialButton = materialButtonToggleGroup.findViewById(id)
+                        when (this.secondLayout.resources.getResourceName(materialButton.id)
+                            .takeLast(3)) {
+                            "Seg" -> reminderVM.weekDaysBoolean[0] = true
+                            "Ter" -> reminderVM.weekDaysBoolean[1] = true
+                            "Qua" -> reminderVM.weekDaysBoolean[2] = true
+                            "Qui" -> reminderVM.weekDaysBoolean[3] = true
+                            "Sex" -> reminderVM.weekDaysBoolean[4] = true
+                            "Sab" -> reminderVM.weekDaysBoolean[5] = true
+                            "Dom" -> reminderVM.weekDaysBoolean[6] = true
+                        }
                     }
                 }
 
@@ -218,35 +217,35 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     2 -> this.alarm_freq = AlarmFrequency.TODOS_OS_DIAS
                     3 -> this.alarm_freq = AlarmFrequency.PERSONALIZADO
                 }
-
             }
 
-                if (alarmFreqButtonPressed != 0 && alarmTypeButtonPressed != 0
-                    && lembrarButtonPressed != 0 && hoursMinutesFlag
-                ) {
-                    reminderVM.addReminder(newReminder)
-                    if (reminderVM.flagReminderAdded) {
-                        avisoCampos.visibility = View.GONE
-                        viewSuccess.successLayout.visibility = View.VISIBLE
-                        viewSuccess.buttonOk.setOnClickListener {
-                            viewSuccess.successLayout.visibility = View.GONE
-                        }
-                        if (activity?.packageManager?.let { it1 ->
-                                reminderVM.alarmIntent.resolveActivity(
-                                    it1
-                                )
-                            } != null) {
-                            startActivity(reminderVM.alarmIntent)
-                        }
+
+            if (alarmFreqButtonPressed != 0 && alarmTypeButtonPressed != 0
+                && lembrarButtonPressed != 0 && hoursMinutesFlag
+            ) {
+                reminderVM.addReminder(newReminder)
+                if (reminderVM.flagReminderAdded) {
+                    avisoCampos.visibility = View.GONE
+                    viewSuccess.successLayout.visibility = View.VISIBLE
+                    viewSuccess.buttonOk.setOnClickListener {
+                        viewSuccess.successLayout.visibility = View.GONE
                     }
-                } else if (hoursInt > 23 || minsInt > 59) {
-                    avisoCampos.text = getString(R.string.hora_minutos_invalido)
-                    avisoCampos.visibility = View.VISIBLE
-                } else {
-                    avisoCampos.text = getString(R.string.campos_obrigatorios_falta)
-                    avisoCampos.visibility = View.VISIBLE
+                    if (activity?.packageManager?.let { it1 ->
+                            reminderVM.alarmIntent.resolveActivity(
+                                it1
+                            )
+                        } != null) {
+                        startActivity(reminderVM.alarmIntent)
+                    }
                 }
+            } else if (hoursInt > 23 || minsInt > 59) {
+                avisoCampos.text = "Horas ou minutos invalidos"
+                avisoCampos.visibility = View.VISIBLE
+            } else {
+                avisoCampos.text = "Campos obrigatorios em falta!"
+                avisoCampos.visibility = View.VISIBLE
             }
+        }
 
     }
 
