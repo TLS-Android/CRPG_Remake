@@ -5,9 +5,7 @@ import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.tiagosantos.crpg_remake.R
-import com.tiagosantos.crpg_remake.databinding.LayoutSecondAlertaBinding
-import com.tiagosantos.crpg_remake.databinding.LayoutSecondLembrarBinding
-import com.tiagosantos.crpg_remake.databinding.ReminderFragmentBinding
+import com.tiagosantos.crpg_remake.databinding.*
 
 class RemindersHelper {
 
@@ -25,8 +23,6 @@ class RemindersHelper {
         }
 
     }
-
-
 
     fun setButtonColorsDays(view: ReminderFragmentBinding, pos: Int){
         expandableDia.secondLayout.findViewById<Button>(R.id.button_hoje).setBackgroundResource(R.drawable.layout_button_round_top)
@@ -90,21 +86,24 @@ class RemindersHelper {
     }
 
     fun setSecondLayout(
-        view: ReminderFragmentBinding,
+        view: LayoutSecondDiaBinding,
         value: Int,
         isbuttonVisible: Boolean,
-        isGroupVisible: Boolean
+        isGroupVisible: Boolean,
+        alarmFreqButtonPressed: Int,
     ){
         alarmFreqButtonPressed = value
-        helper.setButtonColorsDays(alarmFreqButtonPressed)
-        root.findViewById<TextView>(R.id.button_selecionar_dias).visibility = when {
+        setButtonColorsDays(alarmFreqButtonPressed)
+        view.buttonSelecionarDias.visibility = when {
             isbuttonVisible -> View.VISIBLE
             !isbuttonVisible -> View.INVISIBLE
+            else -> { println("hello") }
         }
 
-        root.findViewById<MaterialButtonToggleGroup>(R.id.toggleButtonGroup).visibility = when {
+        view.toggleButtonGroup.visibility = when {
             isGroupVisible -> View.VISIBLE
             !isGroupVisible -> View.INVISIBLE
+            else -> { println("ok") }
         }
     }
 
@@ -112,51 +111,52 @@ class RemindersHelper {
         view: ReminderFragmentBinding,
         command: String,
     ) {
-
         checkHoursCommand(view, command)
         checkMinutesCommand(view, command)
 
-        when {
-            command.contains(
-                "Lembrete",
-                true
-            ) -> view.parentLayout.performClick()
-            command.contains("Horas", true) -> {
-                view.findViewById<ExpandableLayout>(R.id.expandable_horas).parentLayout.performClick()
-                view.findViewById<ExpandableLayout>(R.id.expandable_horas).parentLayout.requestFocus()
-            }
-            command.contains("Dia", true) -> {
-                view.expandableDia.
-                view.findViewById<ExpandableLayout>(R.id.expandable_dia).parentLayout.requestFocus()
-            }
+        with(view){
+            when {
+                command.contains(
+                    "Lembrete",
+                    true
+                ) -> this.parentLayout.performClick()
+                command.contains("Horas", true) -> {
+                    this.parentLayout.performClick()
+                    view.findViewById<ExpandableLayout>(R.id.expandable_horas).parentLayout.requestFocus()
+                }
+                command.contains("Dia", true) -> {
+                    view.expandableDia.
+                    view.findViewById<ExpandableLayout>(R.id.expandable_dia).parentLayout.requestFocus()
+                }
 
-            command.contains("Alerta", true) -> {
-                view.findViewById<ExpandableLayout>(R.id.expandable_alerta).parentLayout.performClick()
-                view.findViewById<ExpandableLayout>(R.id.expandable_alerta).parentLayout.requestFocus()
+                command.contains("Alerta", true) -> {
+                    view.findViewById<ExpandableLayout>(R.id.expandable_alerta).parentLayout.performClick()
+                    view.findViewById<ExpandableLayout>(R.id.expandable_alerta).parentLayout.requestFocus()
+                }
+                command.contains("Notas", true) -> {
+                    view.findViewById<ExpandableLayout>(R.id.expandable_notas).parentLayout.performClick()
+                    view.findViewById<ExpandableLayout>(R.id.expandable_notas).parentLayout.requestFocus()
+                }
+                command.contains("Cancelar", true) -> button_cancel.performClick()
+                command.contains("Guardar", true) -> button_confirm.performClick()
+                command.contains("Todos", true) -> {
+                    view.findViewById<ExpandableLayout>(R.id.expandable_lembrar).parentLayout.performClick()
+                    view.findViewById<ExpandableLayout>(R.id.expandable_horas).parentLayout.performClick()
+                    view.findViewById<ExpandableLayout>(R.id.expandable_dia).parentLayout.performClick()
+                    view.findViewById<ExpandableLayout>(R.id.expandable_alerta).parentLayout.performClick()
+                    view.findViewById<ExpandableLayout>(R.id.expandable_notas).parentLayout.performClick()
+                }
+                command.contains("Tomar Medicação", true) -> button0.performClick()
+                command.contains("Apanhar Transporte", true) -> button1.performClick()
+                command.contains("Escolher Almoço", true) -> button2.performClick()
+                command.contains("O Meu Lembrete", true) -> button3.performClick()
+                command.contains("Som", true) -> imageButtonSom.performClick()
+                command.contains("Vibrar", true) -> imageButtonVibrar.performClick()
+                command.contains("Ambos", true) -> imageButtonAmbos.performClick()
+                command.contains("Hoje", true) -> button_hoje.performClick()
+                command.contains("Sempre", true) -> button_todos_dias.performClick()
+                command.contains("Escolher Dias", true) -> button_personalizado.performClick()
             }
-            command.contains("Notas", true) -> {
-                view.findViewById<ExpandableLayout>(R.id.expandable_notas).parentLayout.performClick()
-                view.findViewById<ExpandableLayout>(R.id.expandable_notas).parentLayout.requestFocus()
-            }
-            command.contains("Cancelar", true) -> button_cancel.performClick()
-            command.contains("Guardar", true) -> button_confirm.performClick()
-            command.contains("Todos", true) -> {
-                view.findViewById<ExpandableLayout>(R.id.expandable_lembrar).parentLayout.performClick()
-                view.findViewById<ExpandableLayout>(R.id.expandable_horas).parentLayout.performClick()
-                view.findViewById<ExpandableLayout>(R.id.expandable_dia).parentLayout.performClick()
-                view.findViewById<ExpandableLayout>(R.id.expandable_alerta).parentLayout.performClick()
-                view.findViewById<ExpandableLayout>(R.id.expandable_notas).parentLayout.performClick()
-            }
-            command.contains("Tomar Medicação", true) -> button0.performClick()
-            command.contains("Apanhar Transporte", true) -> button1.performClick()
-            command.contains("Escolher Almoço", true) -> button2.performClick()
-            command.contains("O Meu Lembrete", true) -> button3.performClick()
-            command.contains("Som", true) -> imageButtonSom.performClick()
-            command.contains("Vibrar", true) -> imageButtonVibrar.performClick()
-            command.contains("Ambos", true) -> imageButtonAmbos.performClick()
-            command.contains("Hoje", true) -> button_hoje.performClick()
-            command.contains("Sempre", true) -> button_todos_dias.performClick()
-            command.contains("Escolher Dias", true) -> button_personalizado.performClick()
         }
     }
 

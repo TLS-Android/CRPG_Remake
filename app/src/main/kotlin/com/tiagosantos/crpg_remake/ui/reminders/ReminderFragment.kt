@@ -93,9 +93,14 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         etMin.filters =
             arrayOf(InputFilterMinMax("00", "59"), InputFilter.LengthFilter(2))
 
-        with(viewDia){
-            this.
 
+        with(viewDia){
+            this.buttonHoje.setOnClickListener {
+                helper.setSecondLayout(this,1, false, false, alarmFreqButtonPressed) }
+            this.buttonTodosDias.setOnClickListener {
+                helper.setSecondLayout(this,2, false, false,alarmFreqButtonPressed) }
+            this.buttonPersonalizado.setOnClickListener {
+                helper.setSecondLayout(this,3, true, true, alarmFreqButtonPressed) }
         }
 
         expandableDia.secondLayout.findViewById<Button>(R.id.button_hoje)
