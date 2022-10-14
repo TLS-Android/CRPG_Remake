@@ -31,6 +31,9 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private lateinit var viewIntro: ReminderActivityIntroBinding
     private lateinit var viewSuccess: ReminderActivitySuccessBinding
 
+
+    private lateinit var viewLembrar1: LayoutParentLembrarBinding
+
     private lateinit var viewLembrar: LayoutSecondLembrarBinding
     private lateinit var viewAlerta: LayoutSecondAlertaBinding
     private lateinit var viewDia: LayoutSecondDiaBinding
@@ -67,13 +70,10 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
     private fun setupUI(reminderVM: ReminderViewModel) {
         with(view){
-
-            this.parentLayout.
-
-            this.parentLayout.setOnClickListener { view.expandableDia.toggle }
+            this.parentLayout.setOnClickListener { view.expandableDia.toggleLayout() }
             expandableHoras.parentLayout.setOnClickListener { expandableHoras.toggleLayout() }
             view.parentLayout.setOnClickListener { view.expandableLembrar.toggleLayout() }
-            view.parentLayout.setOnClickListener { view.expandableDia }
+            view.parentLayout.setOnClickListener { view.expandableDia.toggleLayout() }
             this. expandableNotas.parentLayout.setOnClickListener { expandableNotas.toggleLayout() }
             expandableAlerta.parentLayout.setOnClickListener { expandableAlerta.toggleLayout() }
             expandableDia.parentLayout.setOnClickListener { expandableDia.toggleLayout() }
