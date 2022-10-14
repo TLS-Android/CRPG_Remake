@@ -74,6 +74,10 @@ dependencies {
     //GOTEV
     implementation 'net.gotev:speech:1.6.2'
 
+
+    //EXPANDABLE_LAYOUT
+    implementation "com.github.skydoves:expandablelayout:1.0.7"
+
     //Test
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

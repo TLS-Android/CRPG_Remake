@@ -17,6 +17,8 @@ import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.common.ui.utils.InputFilterMinMax
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.ReminderFragmentBinding
+import com.tiagosantos.crpg_remake.domain.model.AlarmFrequency
+import com.tiagosantos.crpg_remake.domain.model.AlarmType
 import com.tiagosantos.crpg_remake.domain.model.ReminderType
 import java.util.*
 
@@ -79,7 +81,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             }
 
             val textEditPersonalizado = root.findViewById<EditText>(R.id.text_edit_personalizado)
-
 
             expandableLembrar.parentLayout.setOnClickListener {
                 expandableLembrar.toggleLayout() }
@@ -254,9 +255,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 val ids: List<Int> = materialButtonToggleGroup.checkedButtonIds
                 for (id in ids) {
                     val materialButton: MaterialButton = materialButtonToggleGroup.findViewById(id)
-                    val resourceName: String =
-                            expandableDia.secondLayout.resources.getResourceName(materialButton.id).takeLast(3)
-                    when (resourceName) {
+                    when (expandableDia.secondLayout.resources.getResourceName(materialButton.id).takeLast(3)) {
                         "Seg" -> reminderVM.weekDaysBoolean[0] = true
                         "Ter" -> reminderVM.weekDaysBoolean[1] = true
                         "Qua" -> reminderVM.weekDaysBoolean[2] = true
@@ -308,11 +307,16 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
             fun performActionWithVoiceCommand(command: String){
                 when {
-                    command.contains("Abrir secção lembrete", true) -> expandableLembrar.parentLayout.performClick()
-                    command.contains("Abrir secção horas", true) -> expandableHoras.parentLayout.performClick()
-                    command.contains("Abrir secção dia", true) -> expandableDia.parentLayout.performClick()
-                    command.contains("Abrir secção alerta", true) -> expandableAlerta.parentLayout.performClick()
-                    command.contains("Abrir secção notas", true) -> expandableNotas.parentLayout.performClick()
+                    command.contains("Abrir secção lembrete", true) ->
+                        expandableLembrar.parentLayout.performClick()
+                    command.contains("Abrir secção horas", true) ->
+                        expandableHoras.parentLayout.performClick()
+                    command.contains("Abrir secção dia", true) ->
+                        expandableDia.parentLayout.performClick()
+                    command.contains("Abrir secção alerta", true) ->
+                        expandableAlerta.parentLayout.performClick()
+                    command.contains("Abrir secção notas", true) ->
+                        expandableNotas.parentLayout.performClick()
                 }
             }
 

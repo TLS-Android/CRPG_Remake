@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_weight=".70"
+  android:background="@color/white_93"
+  android:orientation="vertical"
+  android:paddingLeft="32dp"
+  android:paddingRight="32dp"
+  android:paddingTop="5dp"
+  android:paddingBottom="5dp">
+
+  <androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/button_hoje"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="@color/white_93"
+    android:textSize="22sp" />
+
+  <View android:id="@+id/dia_separator1"
+      android:background="@color/white_93"
+      android:layout_width = "fill_parent"
+      android:layout_height="1dip" />
+
+  <androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/button_todos_dias"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/md_blue_100"
+    android:textColor="@color/white_93"
+    android:textSize="22sp" />
+
+  <View android:id="@+id/dia_separator2"
+      android:background="@color/white_93"
+      android:layout_width = "fill_parent"
+      android:layout_height="1dip" />
+
+  <androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/button_personalizado"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="@color/white_93"
+    android:textSize="22sp"
+    android:text="@string/escolher_dias" />
+  
+  <TextView
+      android:id="@+id/button_selecionar_dias"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:textAlignment="center"
+      android:text="@string/selecionar_dias"
+      android:textSize="20sp"
+      android:textColor="#00BBF2"
+      android:visibility="invisible"/>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal">
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggleButtonGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_weight="7">
+
+      <com.google.android.material.button.MaterialButton
+          android:id="@+id/buttonSeg"
+          style="?attr/materialButtonOutlinedStyle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="@string/s"
+          android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
+
+      <com.google.android.material.button.MaterialButton
+          android:id="@+id/buttonTer"
+          style="?attr/materialButtonOutlinedStyle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="@string/t"
+          android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
+
+      <com.google.android.material.button.MaterialButton
+          android:id="@+id/buttonQua"
+          style="?attr/materialButtonOutlinedStyle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="@string/q"
+          android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
+
+      <com.google.android.material.button.MaterialButton
+          android:id="@+id/buttonQui"
+          style="?attr/materialButtonOutlinedStyle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="@string/q"
+          android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
+
+      <com.google.android.material.button.MaterialButton
+          android:id="@+id/buttonSex"
+          style="?attr/materialButtonOutlinedStyle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="@string/s"
+          android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
+
+      <com.google.android.material.button.MaterialButton
+          android:id="@+id/buttonSab"
+          style="?attr/materialButtonOutlinedStyle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="@string/s"
+          android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
+
+      <com.google.android.material.button.MaterialButton
+          android:id="@+id/buttonDom"
+          style="?attr/materialButtonOutlinedStyle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="@string/d"
+          android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+  </LinearLayout>
+
+</LinearLayout>
+
+
+

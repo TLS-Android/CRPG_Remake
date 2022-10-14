@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_weight=".70"
+  android:id="@+id/layout_horas"
+  android:background="@color/white_93"
+  android:orientation="vertical"
+  android:paddingLeft="50dp"
+  android:paddingRight="50dp"
+  android:paddingTop="5dp"
+  android:paddingBottom="5dp">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" >
+
+    <EditText
+        android:id="@+id/edit_hours"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginRight="8dp"
+        android:layout_weight="0.5"
+        android:gravity="center"
+        android:maxLength="2"
+        android:textSize="75sp"
+        android:textColor="@color/white_93"
+        android:layout_marginEnd="8dp"
+        android:inputType = "number"
+        android:autofillHints="" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/md_blue_100"
+        android:textSize="40sp" />
+
+    <EditText
+        android:id="@+id/edit_minutes"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="8dp"
+        android:layout_weight="0.5"
+        android:gravity="center"
+        android:maxLength="2"
+        android:textSize="75sp"
+        android:textColor="@color/white_93"
+        android:inputType = "number"
+        android:autofillHints="" />
+
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.016"
+        android:paddingEnd="10dp"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:textColor="@color/md_blue_100"
+        android:labelFor="@id/edit_hours"/>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.009"
+        android:paddingStart="15dp"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:textColor="@color/md_blue_100"
+        android:labelFor="@id/edit_minutes"/>
+  </LinearLayout>
+
+</LinearLayout>

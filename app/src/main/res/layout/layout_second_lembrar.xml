@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_weight=".70"
+  android:background="@color/white_93"
+  android:orientation="vertical"
+  android:paddingTop="5dp"
+  android:paddingBottom="5dp"
+  android:paddingLeft="50dp"
+  android:paddingRight="50dp">
+
+  <androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/button0"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="@color/white_93"
+    android:textSize="22sp"
+    android:text="@string/tomar_medicacao" />
+
+  <View android:id="@+id/lembrar_separator1"
+      android:background="@color/white_93"
+      android:layout_width = "fill_parent"
+      android:layout_height="1dip" />
+
+  <androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/button1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/md_blue_100"
+    android:textSize="22sp"
+    android:textColor="@color/white_93"
+    android:text="@string/apanhar_transporte" />
+
+  <View android:id="@+id/lembrar_separator2"
+      android:background="@color/white_93"
+      android:layout_width = "fill_parent"
+      android:layout_height="1dip" />
+
+  <androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/button2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/md_blue_100"
+    android:textColor="@color/white_93"
+    android:textSize="22sp"
+    android:text="@string/escolher_almoco" />
+
+  <View android:id="@+id/lembrar_separator3"
+      android:background="@color/white_93"
+      android:layout_width = "fill_parent"
+      android:layout_height="1dip" />
+
+  <androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/button3"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="@color/white_93"
+    android:textSize="22sp"
+    android:text="@string/meu_lembrete" />
+
+  <TextView
+      android:id="@+id/inserir_titulo_lembrete_personalizado"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:textAlignment="center"
+      android:text="@string/insira_o_nome_do_seu_lembrete"
+      android:textSize="20sp"
+      android:textColor="#00BBF2"
+      android:visibility="invisible"
+      android:labelFor="@id/text_edit_personalizado"/>
+
+  <LinearLayout
+      android:layout_width="330dp"
+      android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/text_edit_personalizado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:lines="1"
+        android:singleLine="true"
+        android:inputType="text"
+        android:visibility="invisible"
+        android:autofillHints="" />
+  </LinearLayout>
+</LinearLayout>

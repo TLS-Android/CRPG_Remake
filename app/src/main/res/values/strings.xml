@@ -44,5 +44,26 @@
     <string name="adicionar_lembrete">Adicionar lembrete</string>
     <string name="clique_icone_lapis">Clique icone lapis</string>
     <string name="criar_lembrete">Criar lembrete</string>
+    <string name="lembrar_de">Lembrar de</string>
+    <string name="notas_minusculo">Notas minusculo</string>
+    <string name="escolher_dias">Escolher dias</string>
+    <string name="selecionar_dias">Selecionar dias</string>
+
+
+    <string name="selecionar_dia">Selecionar dia</string>
+    <string name="em_que_dia">Em que dia?</string>
+    <string name="a_que_horas">A que horas?</string>
+    <string name="ambos">AMBOS</string>
+    <string name="s">S</string>
+    <string name="t">T</string>
+    <string name="q">Q</string>
+    <string name="d">D</string>
+    <string name="telemovel">telemovel</string>
+    <string name="som_ou_vibracao">som_ou_vibracao</string>
+    <string name="tomar_medicacao">Tomar medicacao</string>
+    <string name="apanhar_transporte">Apanhar transporte</string>
+    <string name="escolher_almoco">Escolher almoço</string>
+    <string name="meu_lembrete">Meu lembrete</string>
+    <string name="insira_o_nome_do_seu_lembrete">Insira o nome do seu lembrete</string>
 
 </resources>
