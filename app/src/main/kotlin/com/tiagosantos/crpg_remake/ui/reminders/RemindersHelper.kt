@@ -176,6 +176,21 @@ class RemindersHelper {
         }
 
     }
+    /*
+    fun performActionWithVoiceCommand(view: ReminderFragmentBinding,command: String){
+        when {
+            command.contains("Abrir secção lembrete", true) ->
+                view.expandableLembrar.parentLayout.performClick()
+            command.contains("Abrir secção horas", true) ->
+                view.expandableHoras.parentLayout.performClick()
+            command.contains("Abrir secção dia", true) ->
+                view.expandableDia.parentLayout.performClick()
+            command.contains("Abrir secção alerta", true) ->
+                view.expandableAlerta.parentLayout.performClick()
+            command.contains("Abrir secção notas", true) ->
+                view.expandableNotas.parentLayout.performClick()
+        }
+    }*/
 
     private fun defineModality(ttsFlag: Boolean, srFlag: Boolean, hasRun: Boolean) {
 /*

@@ -10,15 +10,17 @@ import androidx.appcompat.widget.AppCompatImageButton
 import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.tiagosantos.common.ui.base.BaseFragment
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.common.ui.utils.InputFilterMinMax
 import com.tiagosantos.crpg_remake.R
+import com.tiagosantos.crpg_remake.databinding.ReminderActivityIntroBinding
+import com.tiagosantos.crpg_remake.databinding.ReminderActivitySuccessBinding
 import com.tiagosantos.crpg_remake.databinding.ReminderFragmentBinding
 import com.tiagosantos.crpg_remake.domain.model.AlarmFrequency
 import com.tiagosantos.crpg_remake.domain.model.AlarmType
+import com.tiagosantos.crpg_remake.domain.model.Reminder
 import com.tiagosantos.crpg_remake.domain.model.ReminderType
 import java.util.*
 
@@ -30,6 +32,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     )
 ) {
     private lateinit var view: ReminderFragmentBinding
+    private lateinit var viewIntro: ReminderActivityIntroBinding
+    private lateinit var viewSuccess: ReminderActivitySuccessBinding
 
     private var lembrarButtonPressed = 0
     private var alarmTypeButtonPressed = 0
@@ -37,22 +41,27 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private var startTimeString = EMPTY_STRING
     private var hoursMinutesFlag = false
 
+    private val textEditPersonalizado = root.findViewById<EditText>(R.id.text_edit_personalizado)
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?,
     ): View {
         val reminderVM: ReminderViewModel by viewModels()
+        reminderVM.newReminder = Reminder( _,_, startTimeString, 1, 1, _,_,_,_,_)
 
-        reminderVM.startNewFileAndPopulate()
+        reminderVM.newReminder.start_time = startTimeString
+        reminderVM.newReminder.hours = 1
+        reminderVM.newReminder.mins = 1
 
         defineModality(ttsFlag, srFlag, hasRun)
 
-            root.findViewById<View>(R.id.reminderIntroHintLayout).visibility = View.VISIBLE
-            root.findViewById<FloatingActionButton>(R.id.createReminderActionButton).setOnClickListener{
-                root.findViewById<View>(R.id.reminderIntroHintLayout).visibility = View.GONE
-            }
+        viewIntro.reminderIntroHintLayout.visibility = View.VISIBLE
+        viewIntro.createReminderActionButton.setOnClickListener{
+            viewIntro.reminderIntroHintLayout.visibility = View.GONE
+        }
 
-            fun setButtonColorsReminder(pos: Int){
+        fun setButtonColorsReminder(pos: Int){
                 expandableLembrar.secondLayout.findViewById<Button>(R.id.button0).setBackgroundResource(R.drawable.layout_button_round_top)
                 expandableLembrar.secondLayout.findViewById<Button>(R.id.button1).setBackgroundResource(R.color.md_blue_100)
                 expandableLembrar.secondLayout.findViewById<Button>(R.id.button2).setBackgroundResource(R.color.md_blue_100)
@@ -79,8 +88,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 }
 
             }
-
-            val textEditPersonalizado = root.findViewById<EditText>(R.id.text_edit_personalizado)
 
             expandableLembrar.parentLayout.setOnClickListener {
                 expandableLembrar.toggleLayout() }
@@ -189,8 +196,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
             root.findViewById<Button>(R.id.button_cancel).setOnClickListener {
 
-                //expandableLembrar.parentLayout.performClick()
-
                 avisoCampos.visibility = View.GONE
 
                 lembrarButtonPressed = 0
@@ -213,8 +218,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
             root.findViewById<Button>(R.id.button_confirm).setOnClickListener {
 
-                var hoursInt = 1
-                var minsInt = 1
 
                 if (et.text.toString().length == 2 && etMin.text.toString().length == 2) {
                     reminderVM.startTimeHours = et.text.toString()
@@ -227,10 +230,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     avisoCampos.text = getString(R.string.valor_horas_minutos_falta)
                     avisoCampos.visibility = View.VISIBLE
                 }
-
-                reminderVM.newReminder.start_time = startTimeString
-                reminderVM.newReminder.hours = hoursInt
-                reminderVM.newReminder.mins = minsInt
 
                 when (lembrarButtonPressed) {
                     1 -> {reminderVM.newReminder.title = "Tomar medicacao"
@@ -270,18 +269,12 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     1 -> reminderVM.newReminder.alarm_type = AlarmType.SOM
                     2 -> reminderVM.newReminder.alarm_type = AlarmType.VIBRAR
                     3 -> reminderVM.newReminder.alarm_type = AlarmType.AMBOS
-                    else -> { // Note the block
-                        println("alarmTypeButtonPressed is neither one of the values")
-                    }
                 }
 
                 when (alarmFreqButtonPressed) {
-                    1 -> reminderVM.newReminder.alarm_freq = AlarmFrequency.HOJE
+                    1 -> reminderVM. = AlarmFrequency.HOJE
                     2 -> reminderVM.newReminder.alarm_freq = AlarmFrequency.TODOS_OS_DIAS
                     3 -> reminderVM.newReminder.alarm_freq = AlarmFrequency.PERSONALIZADO
-                    else -> { // Note the block
-                        println("alarmFreqButtonPressed is neither one of the values")
-                    }
                 }
 
                 if (alarmFreqButtonPressed != 0 && alarmTypeButtonPressed != 0
@@ -289,9 +282,9 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     reminderVM.addReminder()
                     if (reminderVM.flagReminderAdded) {
                         avisoCampos.visibility = View.GONE
-                        root.findViewById<View>(R.id.successLayout).visibility = View.VISIBLE
-                        root.findViewById<Button>(R.id.button_ok).setOnClickListener {
-                            root.findViewById<View>(R.id.successLayout).visibility = View.GONE
+                        viewSuccess.successLayout.visibility = View.VISIBLE
+                        viewSuccess.buttonOk.setOnClickListener {
+                            viewSuccess.successLayout.visibility = View.GONE
                         }
                         if (activity?.packageManager?.let { it1 -> reminderVM.alarmIntent.resolveActivity(it1) } != null) {
                             startActivity(reminderVM.alarmIntent)
@@ -305,24 +298,15 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     avisoCampos.visibility = View.VISIBLE
                 }
 
-            fun performActionWithVoiceCommand(command: String){
-                when {
-                    command.contains("Abrir secção lembrete", true) ->
-                        expandableLembrar.parentLayout.performClick()
-                    command.contains("Abrir secção horas", true) ->
-                        expandableHoras.parentLayout.performClick()
-                    command.contains("Abrir secção dia", true) ->
-                        expandableDia.parentLayout.performClick()
-                    command.contains("Abrir secção alerta", true) ->
-                        expandableAlerta.parentLayout.performClick()
-                    command.contains("Abrir secção notas", true) ->
-                        expandableNotas.parentLayout.performClick()
-                }
+
+
             }
 
         return view
 
-    }
+                }
+
+
 
     override fun onInitDataBinding() {
         TODO("Not yet implemented")
@@ -333,5 +317,3 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     }
 
   }
-
-}

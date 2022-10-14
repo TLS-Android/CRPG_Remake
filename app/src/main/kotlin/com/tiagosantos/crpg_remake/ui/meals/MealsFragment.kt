@@ -18,7 +18,6 @@ class MealsFragment : BaseFragment<MealsFragmentBinding>(
         sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
     )
 ) {
-
     private lateinit var view: MealsFragmentBinding
     private var flagMealChosen = false
 

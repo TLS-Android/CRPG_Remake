@@ -1,6 +1,9 @@
 package com.tiagosantos.crpg_remake.data.local
 
+import android.app.Application
 import android.util.Log
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.tiagosantos.common.ui.model.Meal
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.crpg_remake.domain.model.Reminder
@@ -11,9 +14,14 @@ import com.tiagosantos.crpg_remake.domain.model.ReminderType
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import java.io.File
+import java.io.FileReader
+import java.lang.reflect.Type
+import java.sql.DriverManager
 import java.util.*
 
-class ImplReminderPublicLocalSource : RemindersPublicLocalSource {
+class ImplReminderPublicLocalSource(application: Application) :
+    RemindersPublicLocalSource {
 
     var newReminder = Reminder(
         EMPTY_STRING,
@@ -82,5 +90,62 @@ class ImplReminderPublicLocalSource : RemindersPublicLocalSource {
 
     override fun getFakeRemindersList(meal: Meal): Flow<List<Meal>> {
         TODO("Not yet implemented")
+    }
+
+    private fun populateFile() {
+        val filename = "reminder.json"
+        val fullFilename = application .filesDir.toString() + "/" + filename
+        val file = File(fullFilename)
+
+        // create a new file
+        val isNewFileCreated : Boolean = file.createNewFile()
+
+        if(isNewFileCreated){
+            kotlin.io.println("$fullFilename is created successfully.")
+        } else{
+            kotlin.io.println("$fullFilename already exists.")
+        }
+        val fileContent = """[{"title": "Tomar Medicação","info":"benuron","start_time": "1130","hours":11,"minutes":30,"notas":""}]""".trimMargin()
+
+        File(fullFilename).writeText(fileContent)
+    }
+
+    fun startNewFileAndPopulate(){
+        populateFile()
+        getAllRemindersList()
+    }
+
+
+    fun getAllRemindersList(): ArrayList<Reminder> {
+
+        val gson = Gson()
+        val filename = "reminder.json"
+        val fullFilename = context.filesDir.toString() + "/" + filename
+
+        val type: Type = object : TypeToken<ArrayList<Reminder>>() {}.type
+        val reminderList: ArrayList<Reminder> = gson.fromJson(FileReader(fullFilename), type)
+
+        DriverManager.println("> From JSON Meal String Reminder Collection:" + reminderList.toString())
+
+        return reminderList
+
+    }
+
+    private fun updateFileWithReminders(mReminderList: ArrayList<Reminder>) {
+
+        DriverManager.println("Reminder list: $mReminderList")
+
+        val gson = Gson()
+        val filename = "reminders.json"
+        val fullFilename = context.filesDir.toString() + "/" + filename
+
+        val newJSONList = gson.toJson(mReminderList)
+
+        val file = File(fullFilename)
+        val fileExists = file.exists()
+
+        if (fileExists) {
+            File(fullFilename).writeText(newJSONList)
+        }
     }
 }

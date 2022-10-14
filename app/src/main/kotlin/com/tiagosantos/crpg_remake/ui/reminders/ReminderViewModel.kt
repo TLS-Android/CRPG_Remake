@@ -41,13 +41,12 @@ class ReminderViewModel(
     private val fullWeekAlarm: IntArray = intArrayOf(Calendar.SUNDAY, Calendar.MONDAY, Calendar.TUESDAY,
             Calendar.WEDNESDAY, Calendar.THURSDAY,Calendar.FRIDAY,Calendar.SATURDAY)
 
+    var newReminder = Reminder("", "", "", 11, 0,
+    "", "", ReminderType.MEDICACAO, AlarmType.SOM, AlarmFrequency.HOJE)
+
     @SuppressLint("SimpleDateFormat")
     fun addReminder(newReminder: Reminder){
-
-        newReminder = Reminder("", "", "", 11, 0,
-                "", "", ReminderType.MEDICACAO, AlarmType.SOM, AlarmFrequency.HOJE)
         val customWeekAlarmMutable = mutableListOf<Int>()
-
         for ((idx, value) in weekDaysBoolean.withIndex()) {
             if (value) {
                 when (idx) {
@@ -86,64 +85,6 @@ class ReminderViewModel(
         updateFileWithReminders(mReminderList)
     }
 
-
-    private fun populateFile() {
-        val filename = "reminder.json"
-        val fullFilename = context.filesDir.toString() + "/" + filename
-        val file = File(fullFilename)
-
-        // create a new file
-        val isNewFileCreated : Boolean = file.createNewFile()
-
-        if(isNewFileCreated){
-            kotlin.io.println("$fullFilename is created successfully.")
-        } else{
-            kotlin.io.println("$fullFilename already exists.")
-        }
-        val fileContent = """[{"title": "Tomar Medicação","info":"benuron","start_time": "1130","hours":11,"minutes":30,"notas":""}]""".trimMargin()
-
-        File(fullFilename).writeText(fileContent)
-    }
-
-    fun startNewFileAndPopulate(){
-        populateFile()
-        getAllRemindersList()
-    }
-
-
-    fun getAllRemindersList(): ArrayList<Reminder> {
-
-        val gson = Gson()
-        val filename = "reminder.json"
-        val fullFilename = context.filesDir.toString() + "/" + filename
-
-        val type: Type = object : TypeToken<ArrayList<Reminder>>() {}.type
-        val reminderList: ArrayList<Reminder> = gson.fromJson(FileReader(fullFilename), type)
-
-        println("> From JSON Meal String Reminder Collection:" + reminderList.toString())
-
-        return reminderList
-
-    }
-
-    private fun updateFileWithReminders(mReminderList: ArrayList<Reminder>) {
-
-        println("Reminder list: $mReminderList")
-
-        val gson = Gson()
-        val filename = "reminders.json"
-        val fullFilename = context.filesDir.toString() + "/" + filename
-
-        val newJSONList = gson.toJson(mReminderList)
-
-        val file = File(fullFilename)
-        val fileExists = file.exists()
-
-        if (fileExists) {
-            File(fullFilename).writeText(newJSONList)
-        }
-    }
-
     //data do dia de amanha
     private fun getTomorrowDate(formatDDMMYYYY: SimpleDateFormat): String {
         val c = Calendar.getInstance()
@@ -161,7 +102,6 @@ class ReminderViewModel(
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.KITKAT)
     fun setAlarmVibrateOnly(fullWeekAlarm: ArrayList<Int>, customWeekAlarm: ArrayList<Int>) {
         println("Custom week alarm: $customWeekAlarm")
         println("Full week alarm: $fullWeekAlarm")
