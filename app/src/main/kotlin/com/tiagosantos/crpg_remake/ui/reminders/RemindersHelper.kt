@@ -5,6 +5,8 @@ import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.tiagosantos.crpg_remake.R
+import com.tiagosantos.crpg_remake.databinding.LayoutSecondAlertaBinding
+import com.tiagosantos.crpg_remake.databinding.LayoutSecondLembrarBinding
 import com.tiagosantos.crpg_remake.databinding.ReminderFragmentBinding
 
 class RemindersHelper {
@@ -24,20 +26,7 @@ class RemindersHelper {
 
     }
 
-    fun setSecondLayout(value: Int, isVisible: Boolean, isTextVisible: Boolean,
-                        lembrarButtonPressed:  ){
-        lembrarButtonPressed = value
-        setButtonColorsReminder(lembrarButtonPressed)
-        when {
-            isVisible -> viewLembrar.inserirTituloLembretePersonalizado.visibility = View.VISIBLE
-            !isVisible -> viewLembrar.inserirTituloLembretePersonalizado.visibility = View.INVISIBLE
-        }
 
-        when {
-            isTextVisible -> viewLembrar.textEditPersonalizado.visibility = View.VISIBLE
-            !isTextVisible -> viewLembrar.textEditPersonalizado.visibility = View.INVISIBLE
-        }
-    }
 
     fun setButtonColorsDays(view: ReminderFragmentBinding, pos: Int){
         expandableDia.secondLayout.findViewById<Button>(R.id.button_hoje).setBackgroundResource(R.drawable.layout_button_round_top)
@@ -52,7 +41,7 @@ class RemindersHelper {
     }
 
     fun setSoundLogosVisible(
-        view: ReminderFragmentBinding,
+        view: LayoutSecondAlertaBinding,
         value: Int,
         soundVisible: Boolean,
         vibVisible: Boolean,
@@ -76,6 +65,27 @@ class RemindersHelper {
         root.findViewById<TextView>(R.id.button_selecionar_dias).visibility = when {
             bothVisible -> View.VISIBLE
             !bothVisible -> View.INVISIBLE
+        }
+    }
+
+
+    fun setLembrarLayout(
+        viewLembrar: LayoutSecondLembrarBinding,
+        value: Int,
+        isVisible: Boolean,
+        isTextVisible: Boolean,
+        lembrarButtonPressed: Int
+    ){
+        lembrarButtonPressed = value
+        setButtonColorsReminder(lembrarButtonPressed)
+        when {
+            isVisible -> viewLembrar.inserirTituloLembretePersonalizado.visibility = View.VISIBLE
+            !isVisible -> viewLembrar.inserirTituloLembretePersonalizado.visibility = View.INVISIBLE
+        }
+
+        when {
+            isTextVisible -> viewLembrar.textEditPersonalizado.visibility = View.VISIBLE
+            !isTextVisible -> viewLembrar.textEditPersonalizado.visibility = View.INVISIBLE
         }
     }
 

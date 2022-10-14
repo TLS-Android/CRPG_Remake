@@ -15,10 +15,7 @@ import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.common.ui.utils.InputFilterMinMax
 import com.tiagosantos.crpg_remake.R
-import com.tiagosantos.crpg_remake.databinding.LayoutSecondLembrarBinding
-import com.tiagosantos.crpg_remake.databinding.ReminderActivityIntroBinding
-import com.tiagosantos.crpg_remake.databinding.ReminderActivitySuccessBinding
-import com.tiagosantos.crpg_remake.databinding.ReminderFragmentBinding
+import com.tiagosantos.crpg_remake.databinding.*
 import com.tiagosantos.crpg_remake.domain.model.AlarmFrequency
 import com.tiagosantos.crpg_remake.domain.model.AlarmType
 import com.tiagosantos.crpg_remake.domain.model.ReminderType
@@ -36,6 +33,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private lateinit var viewSuccess: ReminderActivitySuccessBinding
 
     private lateinit var viewLembrar: LayoutSecondLembrarBinding
+    private lateinit var viewAlerta: LayoutSecondAlertaBinding
 
     private var lembrarButtonPressed = 0
     private var alarmTypeButtonPressed = 0
@@ -58,16 +56,25 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     }
 
     private fun setupUI(reminderVM: ReminderViewModel) {
-        viewIntro.reminderIntroHintLayout.visibility = View.VISIBLE
-        viewIntro.createReminderActionButton.setOnClickListener {
-            viewIntro.reminderIntroHintLayout.visibility = View.GONE
+        with(viewIntro){
+            this.reminderIntroHintLayout.visibility = View.VISIBLE
+            this.createReminderActionButton.setOnClickListener {
+                this.reminderIntroHintLayout.visibility = View.GONE
+            }
         }
 
         view.parentLayout.setOnClickListener { view.expandableLembrar.toggleLayout() }
-        viewLembrar.button0.setOnClickListener { helper.setSecondLayout(1, true, true) }
-        viewLembrar.button1.setOnClickListener { helper.setSecondLayout(2, false, false) }
-        viewLembrar.button2.setOnClickListener { helper.setSecondLayout(3, false, false) }
-        viewLembrar.button3.setOnClickListener { helper.setSecondLayout(4, true, true) }
+
+        with(viewLembrar){
+            this.button0.setOnClickListener { helper.setLembrarLayout(
+                viewLembrar, 1, true, true, lembrarButtonPressed) }
+            this.button1.setOnClickListener { helper.setLembrarLayout(
+                viewLembrar, 2, false, false, lembrarButtonPressed) }
+            this.button2.setOnClickListener { helper.setLembrarLayout(
+                viewLembrar, 3, false, false, lembrarButtonPressed) }
+            this.button3.setOnClickListener { helper.setLembrarLayout(
+                viewLembrar, 4, true, true, lembrarButtonPressed) }
+        }
 
         expandableHoras.parentLayout.setOnClickListener { expandableHoras.toggleLayout() }
 
@@ -99,13 +106,17 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             .setOnClickListener { setSecondLayout(3, true, true) }
 
         expandableAlerta.parentLayout.setOnClickListener { expandableAlerta.toggleLayout() }
-        expandableAlerta.secondLayout.findViewById<AppCompatImageButton>(R.id.imageButtonSom)
-            .setOnClickListener { setSoundLogosVisible(1, true, false, false) }
-        expandableAlerta.secondLayout.findViewById<AppCompatImageButton>(R.id.imageButtonVibrar)
-            .setOnClickListener { setSoundLogosVisible(2, false, true, false) }
-        expandableAlerta.secondLayout.findViewById<AppCompatImageButton>(R.id.imageButtonAmbos)
-            .setOnClickListener { setSoundLogosVisible(3, false, false, true) }
-        expandableNotas.parentLayout.setOnClickListener { expandableNotas.toggleLayout() }
+
+        with(viewAlerta){
+            this.imageButtonSom.setOnClickListener{
+                helper.setSoundLogosVisible(this,1, true, false, false) }
+            this.imageButtonVibrar.setOnClickListener{
+                helper.setSoundLogosVisible(this,2, false, true, false) }
+            this.imageButtonAmbos.setOnClickListener{
+                helper.setSoundLogosVisible(this,3, false, false, true) }
+        }
+
+        this. expandableNotas.parentLayout.setOnClickListener { expandableNotas.toggleLayout() }
 
 
         //--------------------- CANCELAR ---------------------------------------
@@ -129,8 +140,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             cbVib.visibility = View.INVISIBLE
             cbAmbos.visibility = View.INVISIBLE
 
-            expandableNotas.secondLayout.findViewById<EditText>(R.id.editTextNotes)
-                .setText("")
+            expandableNotas.secondLayout.findViewById<EditText>(R.id.editTextNotes).setText("")
         }
 
         //------------------------- CONFIRMAR -------------------------------------------------
@@ -150,26 +160,36 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 avisoCampos.visibility = View.VISIBLE
             }
 
+            with(reminderVM.newReminder) {
                 when (lembrarButtonPressed) {
-                    1 -> {reminderVM.newReminder.title = "Tomar medicacao"
-                        reminderVM.newReminder.reminder_type = ReminderType.MEDICACAO }
-                    2 -> {reminderVM.newReminder.title = "Apanhar bus do CRPG"
-                        reminderVM.newReminder.reminder_type = ReminderType.TRANSPORTE }
-                    3 -> {reminderVM.newReminder.title = "Lembrar escolha de almoço"
-                        reminderVM.newReminder.reminder_type = ReminderType.REFEICAO }
-                    //definir titulo personalizado
-                    4 -> {reminderVM.newReminder.title = textEditPersonalizado.text.toString()
-                        reminderVM.newReminder.reminder_type = ReminderType.PERSONALIZADO }
+                    1 -> {
+                        this.title = "Tomar medicacao"
+                        this.reminder_type = ReminderType.MEDICACAO
+                    }
+                    2 -> {
+                        this.title = "Apanhar bus do CRPG"
+                        this.reminder_type = ReminderType.TRANSPORTE
+                    }
+                    3 -> {
+                        this.title = "Lembrar escolha de almoço"
+                        this.reminder_type = ReminderType.REFEICAO
+                    }
+                    4 -> {
+                        this.title = textEditPersonalizado.text.toString()
+                        this.reminder_type = ReminderType.PERSONALIZADO
+                    }
                     else -> { println("lembrarButtonPressed is neither one of the values") }
                 }
 
                 val materialButtonToggleGroup =
-                        expandableDia.secondLayout.findViewById<MaterialButtonToggleGroup>(R.id.toggleButtonGroup)
+                    expandableDia.secondLayout.findViewById<MaterialButtonToggleGroup>(R.id.toggleButtonGroup)
+
 
                 val ids: List<Int> = materialButtonToggleGroup.checkedButtonIds
                 for (id in ids) {
                     val materialButton: MaterialButton = materialButtonToggleGroup.findViewById(id)
-                    when (expandableDia.secondLayout.resources.getResourceName(materialButton.id).takeLast(3)) {
+                    when (expandableDia.secondLayout.resources.getResourceName(materialButton.id)
+                        .takeLast(3)) {
                         "Seg" -> reminderVM.weekDaysBoolean[0] = true
                         "Ter" -> reminderVM.weekDaysBoolean[1] = true
                         "Qua" -> reminderVM.weekDaysBoolean[2] = true
@@ -181,16 +201,18 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 }
 
                 when (alarmTypeButtonPressed) {
-                    1 -> reminderVM.newReminder.alarm_type = AlarmType.SOM
-                    2 -> reminderVM.newReminder.alarm_type = AlarmType.VIBRAR
-                    3 -> reminderVM.newReminder.alarm_type = AlarmType.AMBOS
+                    1 -> this.alarm_type = AlarmType.SOM
+                    2 -> this.alarm_type = AlarmType.VIBRAR
+                    3 -> this.alarm_type = AlarmType.AMBOS
                 }
 
                 when (alarmFreqButtonPressed) {
-                    1 -> reminderVM.newReminder.alarm_freq = AlarmFrequency.HOJE
-                    2 -> reminderVM.newReminder.alarm_freq = AlarmFrequency.TODOS_OS_DIAS
-                    3 -> reminderVM.newReminder.alarm_freq = AlarmFrequency.PERSONALIZADO
+                    1 -> this.alarm_freq = AlarmFrequency.HOJE
+                    2 -> this.alarm_freq = AlarmFrequency.TODOS_OS_DIAS
+                    3 -> this.alarm_freq = AlarmFrequency.PERSONALIZADO
                 }
+
+            }
 
                 if (alarmFreqButtonPressed != 0 && alarmTypeButtonPressed != 0
                     && lembrarButtonPressed != 0 && hoursMinutesFlag
