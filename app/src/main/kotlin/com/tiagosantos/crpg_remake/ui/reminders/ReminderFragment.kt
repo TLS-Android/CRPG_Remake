@@ -18,6 +18,7 @@ import com.tiagosantos.crpg_remake.databinding.*
 import com.tiagosantos.crpg_remake.domain.model.AlarmFrequency
 import com.tiagosantos.crpg_remake.domain.model.AlarmType
 import com.tiagosantos.crpg_remake.domain.model.ReminderType
+import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.newReminder
 import java.util.*
 
 class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
@@ -42,8 +43,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private var hoursMinutesFlag = false
 
     private val helper = RemindersHelper()
-    private val textEditPersonalizado =
-        root.findViewById<EditText>(R.id.text_edit_personalizado)
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -57,6 +56,9 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
     private fun setupUI(reminderVM: ReminderViewModel) {
         with(view){
+
+            this.parentLayout.
+
             this.parentLayout.setOnClickListener { view.expandableDia.toggle }
             expandableHoras.parentLayout.setOnClickListener { expandableHoras.toggleLayout() }
             view.parentLayout.setOnClickListener { view.expandableLembrar.toggleLayout() }
@@ -88,8 +90,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         val et = expandableHoras.secondLayout.findViewById(R.id.edit_hours) as EditText
         et.filters = arrayOf(InputFilterMinMax("00", "23"), InputFilter.LengthFilter(2))
 
-        val etMin =
-            expandableHoras.secondLayout.findViewById(R.id.edit_minutes) as EditText
+        val etMin = expandableHoras.secondLayout.findViewById(R.id.edit_minutes) as EditText
         etMin.filters =
             arrayOf(InputFilterMinMax("00", "59"), InputFilter.LengthFilter(2))
 
@@ -103,16 +104,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 helper.setSecondLayout(this,3, true, true, alarmFreqButtonPressed) }
         }
 
-        expandableDia.secondLayout.findViewById<Button>(R.id.button_hoje)
-            .setOnClickListener { setSecondLayout(1, false, false) }
-
-        expandableDia.secondLayout.findViewById<Button>(R.id.button_todos_dias)
-            .setOnClickListener { setSecondLayout(2, false, false) }
-
-        expandableDia.secondLayout.findViewById<Button>(R.id.button_personalizado)
-            .setOnClickListener { setSecondLayout(3, true, true) }
-
-
         with(viewAlerta){
             val cbSom = this.checkboxSom
             val cbVib = this.checkboxVibrar
@@ -125,9 +116,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             this.imageButtonAmbos.setOnClickListener{
                 helper.setSoundLogosVisible(this,3, false, false, true) }
         }
-
-
-
 
         //--------------------- CANCELAR ---------------------------------------
         val avisoCampos = root.findViewById<TextView>(R.id.aviso_campos)
@@ -160,10 +148,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 reminderVM.startTimeHours = et.text.toString()
                 reminderVM.startTimeMin = etMin.text.toString()
                 startTimeString = reminderVM.startTimeHours.plus(reminderVM.startTimeMin)
-                hoursInt =
-                    root.findViewById<EditText>(R.id.edit_minutes).text.toString().toInt()
-                minsInt =
-                    root.findViewById<EditText>(R.id.edit_minutes).text.toString().toInt()
+                hoursInt = root.findViewById<EditText>(R.id.edit_minutes).text.toString().toInt()
+                minsInt = root.findViewById<EditText>(R.id.edit_minutes).text.toString().toInt()
                 hoursMinutesFlag = true
             } else {
                 avisoCampos.text = getString(R.string.valor_horas_minutos_falta)
@@ -193,7 +179,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
                 val materialButtonToggleGroup =
                     expandableDia.secondLayout.findViewById<MaterialButtonToggleGroup>(R.id.toggleButtonGroup)
-
 
                 val ids: List<Int> = materialButtonToggleGroup.checkedButtonIds
                 for (id in ids) {
@@ -227,7 +212,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 if (alarmFreqButtonPressed != 0 && alarmTypeButtonPressed != 0
                     && lembrarButtonPressed != 0 && hoursMinutesFlag
                 ) {
-                    reminderVM.addReminder()
+                    reminderVM.addReminder(newReminder)
                     if (reminderVM.flagReminderAdded) {
                         avisoCampos.visibility = View.GONE
                         viewSuccess.successLayout.visibility = View.VISIBLE
@@ -261,4 +246,4 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         TODO("Not yet implemented")
     }
 
-  }
+}
