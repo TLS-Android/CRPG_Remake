@@ -46,6 +46,9 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private var hoursInt = 0
     private var minsInt = 0
 
+    private lateinit var et: EditText
+    private lateinit var etMin: EditText
+
     lateinit var cbSom: ImageView
     lateinit var cbVib: ImageView
     lateinit var cbAmbos: ImageView
@@ -95,13 +98,13 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 viewLembrar, 4, true, true, lembrarButtonPressed) }
         }
 
-        val et = expandableHoras.secondLayout.findViewById(R.id.edit_hours) as EditText
-        et.filters = arrayOf(InputFilterMinMax("00", "23"), InputFilter.LengthFilter(2))
+        with(viewHoras){
+            val et = this.editHours
+            et.filters = arrayOf(InputFilterMinMax("00", "23"), InputFilter.LengthFilter(2))
 
-        val etMin = expandableHoras.secondLayout.findViewById(R.id.edit_minutes) as EditText
-        etMin.filters =
-            arrayOf(InputFilterMinMax("00", "59"), InputFilter.LengthFilter(2))
-
+            val etMin = this.editMinutes
+            etMin.filters = arrayOf(InputFilterMinMax("00", "59"), InputFilter.LengthFilter(2))
+        }
 
         with(viewDia){
             this.buttonHoje.setOnClickListener {
@@ -153,7 +156,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
         //------------------------- CONFIRMAR -------------------------------------------------
 
-        root.findViewById<Button>(R.id.button_confirm).setOnClickListener {
+        view.buttonConfirm.setOnClickListener {
             if (et.text.toString().length == 2 && etMin.text.toString().length == 2) {
                 reminderVM.startTimeHours = et.text.toString()
                 reminderVM.startTimeMin = etMin.text.toString()
