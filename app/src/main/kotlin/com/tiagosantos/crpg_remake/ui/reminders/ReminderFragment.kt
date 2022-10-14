@@ -1,5 +1,6 @@
 package com.tiagosantos.crpg_remake.ui.reminders
 
+import android.media.Image
 import android.os.Bundle
 import android.text.InputFilter
 import android.view.LayoutInflater
@@ -35,12 +36,18 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private lateinit var viewLembrar: LayoutSecondLembrarBinding
     private lateinit var viewAlerta: LayoutSecondAlertaBinding
     private lateinit var viewDia: LayoutSecondDiaBinding
+    private lateinit var viewHoras: LayoutSecondHorasBinding
+    private lateinit var viewNotas: LayoutSecondNotasBinding
 
     private var lembrarButtonPressed = 0
     private var alarmTypeButtonPressed = 0
     private var alarmFreqButtonPressed = 0
     private var startTimeString = EMPTY_STRING
     private var hoursMinutesFlag = false
+
+    lateinit var cbSom: ImageView
+    lateinit var cbVib: ImageView
+    lateinit var cbAmbos: ImageView
 
     private val helper = RemindersHelper()
 
@@ -105,9 +112,9 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         }
 
         with(viewAlerta){
-            val cbSom = this.checkboxSom
-            val cbVib = this.checkboxVibrar
-            val cbAmbos = this.checkboxAmbos
+            cbSom = this.checkboxSom
+            cbVib = this.checkboxVibrar
+            cbAmbos = this.checkboxAmbos
 
             this.imageButtonSom.setOnClickListener{
                 helper.setSoundLogosVisible(this,1, true, false, false) }
@@ -118,9 +125,11 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         }
 
         //--------------------- CANCELAR ---------------------------------------
-        val avisoCampos = root.findViewById<TextView>(R.id.aviso_campos)
 
-        root.findViewById<Button>(R.id.button_cancel).setOnClickListener {
+        val avisoCampos = view.avisoCampos
+        val buttonCancel = view.buttonCancel
+
+        buttonCancel.setOnClickListener {
             avisoCampos.visibility = View.GONE
 
             lembrarButtonPressed = 0
@@ -128,31 +137,34 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             alarmFreqButtonPressed = 0
 
             //reset set Hours section
-            expandableHoras.secondLayout.findViewById<EditText>(R.id.edit_hours)
-                .setText("")
-            expandableHoras.secondLayout.findViewById<EditText>(R.id.edit_minutes)
-                .setText("")
+            with(viewHoras){
+                this.editHours.setText(EMPTY_STRING)
+                this.editMinutes.setText(EMPTY_STRING)
+            }
 
             // reset alarmType section
             cbSom.visibility = View.INVISIBLE
             cbVib.visibility = View.INVISIBLE
             cbAmbos.visibility = View.INVISIBLE
 
-            expandableNotas.secondLayout.findViewById<EditText>(R.id.editTextNotes).setText("")
+            viewNotas.editTextNotes.setText(EMPTY_STRING)
         }
 
         //------------------------- CONFIRMAR -------------------------------------------------
+
+
+
 
         root.findViewById<Button>(R.id.button_confirm).setOnClickListener {
             if (et.text.toString().length == 2 && etMin.text.toString().length == 2) {
                 reminderVM.startTimeHours = et.text.toString()
                 reminderVM.startTimeMin = etMin.text.toString()
                 startTimeString = reminderVM.startTimeHours.plus(reminderVM.startTimeMin)
-                hoursInt = root.findViewById<EditText>(R.id.edit_minutes).text.toString().toInt()
-                minsInt = root.findViewById<EditText>(R.id.edit_minutes).text.toString().toInt()
+                hoursInt = viewHoras.editHours.text.toString().toInt()
+                minsInt = viewHoras.editMinutes.text.toString().toInt()
                 hoursMinutesFlag = true
             } else {
-                avisoCampos.text = getString(R.string.valor_horas_minutos_falta)
+                avisoCampos.text = "Valor em falta"
                 avisoCampos.visibility = View.VISIBLE
             }
 
