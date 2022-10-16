@@ -16,13 +16,12 @@ import com.tiagosantos.access.modal.settings.TTSFragmentSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationMediaPlayerBinding
-import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
 
 class MeditationMediaPlayerFragment(ttsSettings: TTSFragmentSettings) : BaseModalFragment<FragmentMeditationMediaPlayerBinding>(
-    layoutId = R.layout.meditation_fragment,
+    layoutId = R.layout.fragment_meditation,
     FragmentSettings(
         appBarTitle = R.string.title_dashboard,
-        sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
+        sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
     ),
     ttsSettings
 ) {
