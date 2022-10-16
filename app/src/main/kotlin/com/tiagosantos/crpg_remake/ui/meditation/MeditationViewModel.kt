@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
+import com.tiagosantos.crpg_remake.databinding.FragmentMeditationMediaPlayerBinding
 
 @SuppressLint("StaticFieldLeak")
 class MeditationViewModel(application: Application) : AndroidViewModel(application) {
@@ -14,7 +15,7 @@ class MeditationViewModel(application: Application) : AndroidViewModel(applicati
     private val context = application.applicationContext
     var selectedMood = EMPTY_STRING
 
-    private fun setupPlayer(player: ExoPlayer, view: FragmentMeditationMediaPlayerBinding) {
+    fun setupPlayer(player: ExoPlayer, view: FragmentMeditationMediaPlayerBinding) {
         val uri: Uri = Uri.parse("android.resource://" + context?.packageName.toString()
                 + "/raw/meditation_sound")
 

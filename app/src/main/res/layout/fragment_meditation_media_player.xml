@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="medplayer"
+            type="com.tiagosantos.crpg_remake.ui.meditation.MeditationMediaPlayerFragment" />
+        <import type="android.view.View" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.plataforma.crpg.ui.meditation.MeditationMediaPlayerFragment">
+
+
+        <TextView
+            android:id="@+id/text_selected_mood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center"
+            android:background="@color/md_blue_100"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintVertical_bias="0.05"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+
+        <ImageView
+            android:id="@+id/mood_color"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintTop_toBottomOf="@id/text_selected_mood"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="@string/imagem_associada_estado_selecionado" />
+
+    <FrameLayout
+        android:id="@+id/frame_player_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mood_color"
+        app:layout_constraintBottom_toTopOf="@id/button_return_meditation">
+
+        <com.google.android.exoplayer2.ui.PlayerControlView
+            android:id="@+id/player_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:backgroundTint="@color/md_blue_100"
+            app:buffered_color="@color/md_blue_100"
+            app:controller_layout_id="@layout/custom_player_control_view"
+            app:hide_on_touch="false"
+            app:scrubber_color="@color/white"
+            app:show_buffering="never"
+            app:show_next_button="false"
+            app:show_previous_button="false"
+            app:show_shuffle_button="false"
+            app:show_timeout="0"
+            app:show_vr_button="false"
+            app:surface_type="none" />
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/button_return_meditation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:backgroundTint="@android:color/transparent"
+        android:text="@string/regressar"
+        android:textColor="@color/md_blue_100"
+        android:textSize="25sp"
+        app:cornerRadius="8dp"
+        app:rippleColor="@color/md_blue_100"
+        app:strokeColor="@color/md_blue_100"
+        app:strokeWidth="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/frame_player_view" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

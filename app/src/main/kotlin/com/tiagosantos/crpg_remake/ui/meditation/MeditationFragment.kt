@@ -16,12 +16,12 @@ import androidx.fragment.app.viewModels
 import com.tiagosantos.access.modal.BaseModalFragment
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
-import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
+import com.tiagosantos.crpg_remake.databinding.FragmentMeditationBinding
 import net.gotev.speech.Speech
 import java.util.*
 import kotlin.properties.Delegates
 
-abstract class MeditationFragment : BaseModalFragment<MealsFragmentBinding>(
+abstract class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
     layoutId = R.layout.meals_fragment,
     FragmentSettings(
         appBarTitle = R.string.title_dashboard,
@@ -77,7 +77,6 @@ abstract class MeditationFragment : BaseModalFragment<MealsFragmentBinding>(
 
         button_mood_relaxed.setOnClickListener{
             medViewModel.selectedMood = "RELAXADO"
-            medViewModel.getValue()
             goToMeditationMediaPlayer()
         }
 

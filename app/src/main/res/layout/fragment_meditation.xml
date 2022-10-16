@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="med"
+            type="com.tiagosantos.crpg_remake.ui.meditation.MeditationFragment" />
+        <import type="android.view.View" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.plataforma.crpg.ui.meditation.MeditationFragment">
+
+    <TextView
+        android:id="@+id/como_gostaria_sentir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/como_gostaria_de_se_sentir"
+        android:textAlignment="center"
+        android:textColor="@color/md_blue_100"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.05" />
+
+
+    <FrameLayout
+        android:id="@+id/frame_meditation_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/como_gostaria_sentir"
+        app:layout_constraintVertical_bias="0.1">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_mood_relaxed"
+            android:layout_width="160dp"
+            android:layout_height="100dp"
+            android:contentDescription="@string/selecionar_relaxado"
+            android:gravity="start|center_vertical"
+            android:text="@string/relaxado"
+            android:textAlignment="center"
+            android:textColor="@color/md_blue_100"
+            android:textSize="20sp"
+            app:backgroundTint="@android:color/transparent"
+            app:cornerRadius="8dp"
+            app:rippleColor="@color/md_blue_100"
+            app:strokeColor="@color/md_blue_100"
+            app:strokeWidth="5dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_mood_happy"
+            android:layout_width="160dp"
+            android:layout_height="100dp"
+            android:layout_gravity="end"
+            android:contentDescription="@string/selecionar_feliz"
+            android:text="@string/feliz"
+            android:textAlignment="center"
+            android:textColor="@color/md_blue_100"
+            android:textSize="20sp"
+            app:backgroundTint="@android:color/transparent"
+            app:cornerRadius="8dp"
+            app:rippleColor="@color/md_blue_100"
+            app:strokeColor="@color/md_blue_100"
+            app:strokeWidth="5dp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frame_meditation_center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/frame_meditation_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frame_meditation_top">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_mood_sleepy"
+            android:layout_width="160dp"
+            android:layout_height="100dp"
+            android:contentDescription="@string/selecionar_com_sono"
+            android:gravity="center_vertical"
+            android:text="@string/com_sono"
+            android:textAlignment="center"
+            android:textColor="@color/md_blue_100"
+            android:textSize="20sp"
+            app:backgroundTint="@android:color/transparent"
+            app:cornerRadius="8dp"
+            app:rippleColor="@color/md_blue_100"
+            app:strokeColor="@color/md_blue_100"
+            app:strokeWidth="5dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_mood_confident"
+            android:layout_width="160dp"
+            android:layout_height="100dp"
+            android:layout_gravity="end"
+            android:contentDescription="@string/selecionar_confiante"
+            android:gravity="center_vertical"
+            android:text="@string/confiante"
+            android:textAlignment="center"
+            android:textColor="@color/md_blue_100"
+            android:textSize="20sp"
+            app:backgroundTint="@android:color/transparent"
+            app:cornerRadius="8dp"
+            app:rippleColor="@color/md_blue_100"
+            app:strokeColor="@color/md_blue_100"
+            app:strokeWidth="5dp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frame_meditation_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/frame_meditation_center"
+        app:layout_constraintVertical_bias="0.5">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_mood_loved"
+            android:layout_width="160dp"
+            android:layout_height="100dp"
+            android:contentDescription="@string/selecionar_querido"
+            android:gravity="center_vertical"
+            android:text="@string/querido"
+            android:textAlignment="center"
+            android:textColor="@color/md_blue_100"
+            android:textSize="20sp"
+            app:backgroundTint="@android:color/transparent"
+            app:cornerRadius="8dp"
+            app:rippleColor="@color/md_blue_100"
+            app:strokeColor="@color/md_blue_100"
+            app:strokeWidth="5dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_mood_mindful"
+            android:layout_width="160dp"
+            android:layout_height="100dp"
+            android:layout_gravity="end"
+            android:contentDescription="@string/selecionar_mente_sa"
+            android:gravity="center_vertical"
+            android:text="@string/mente_s"
+            android:textAlignment="center"
+            android:textColor="@color/md_blue_100"
+            android:textSize="20sp"
+            app:backgroundTint="@android:color/transparent"
+            app:cornerRadius="8dp"
+            app:rippleColor="@color/md_blue_100"
+            app:strokeColor="@color/md_blue_100"
+            app:strokeWidth="5dp" />
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/iconEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:barrierDirection="end"
+        app:barrierMargin="10dp"
+        app:constraint_referenced_ids="frame_meditation_center" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="left"
+        app:constraint_referenced_ids="como_gostaria_sentir" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -1,7 +1,6 @@
 package com.tiagosantos.crpg_remake.ui.meditation
 
 import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,13 +10,22 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.SimpleExoPlayer
+import com.tiagosantos.access.modal.BaseModalFragment
+import com.tiagosantos.access.modal.settings.TTSFragmentSettings
+import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
+import com.tiagosantos.crpg_remake.databinding.FragmentMeditationMediaPlayerBinding
+import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
 
-class MeditationMediaPlayerFragment : Fragment(){
+class MeditationMediaPlayerFragment(ttsSettings: TTSFragmentSettings) : BaseModalFragment<FragmentMeditationMediaPlayerBinding>(
+    layoutId = R.layout.meditation_fragment,
+    FragmentSettings(
+        appBarTitle = R.string.title_dashboard,
+        sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
+    ),
+    ttsSettings
+) {
 
     private val medViewModel: MeditationViewModel by viewModels()
     private val player = ExoPlayer.Builder(requireContext()).build()
@@ -30,17 +38,15 @@ class MeditationMediaPlayerFragment : Fragment(){
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?,
     ): View {
-        val binding = FragmentMeditationMediaPlayerBinding.inflate(layoutInflater)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.title = "REPRODUZIR ÁUDIO"
-        medViewModel.getValue()
         text_selected_mood.text = medViewModel.selectedMood
-
-        setupPlayer(player)
+        medViewModel.setupPlayer(player,)
 
         with(mood_color){
             when(medViewModel.selectedMood){
@@ -51,11 +57,9 @@ class MeditationMediaPlayerFragment : Fragment(){
                 "QUERIDO" -> this.setBackgroundColor(android.graphics.Color.parseColor("#AA00FF"))
                 "MENTE SÃ" -> this.setBackgroundColor(android.graphics.Color.parseColor("#57A8D8"))
             }
-
         }
 
         button_return_meditation.setOnClickListener {
-            player.stop()
             val fragment: Fragment = MeditationFragment()
             val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
@@ -68,8 +72,6 @@ class MeditationMediaPlayerFragment : Fragment(){
         showBackButton()
     }
 
-
-
     fun performActionWithVoiceCommand(command: String){
         when {
             command.contains("Tocar", true) -> exo_play?.performClick()
@@ -78,6 +80,30 @@ class MeditationMediaPlayerFragment : Fragment(){
             command.contains("Passar a trás", true) -> exo_rew?.performClick()
             command.contains("Regressar", true) -> button_return_meditation?.performClick()
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        player.stop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        player.stop()
+    }
+
+    override fun onInitDataBinding() {
+        TODO("Not yet implemented")
+    }
+
+    fun experiment(){
+        val numbers = mutableListOf("one", "two", "three")
+        val countEndsWithE = numbers.run {
+            add("four")
+            add("five")
+            count { it.endsWith("e") }
+        }
+        println("There are $countEndsWithE elements that end with e.")
     }
 
 }
