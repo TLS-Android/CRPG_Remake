@@ -9,19 +9,19 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import com.tiagosantos.access.modal.BaseModalFragment
+import com.tiagosantos.access.modal.settings.TTSFragmentSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationBinding
 import java.util.*
 
-abstract class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
+class MeditationFragment(ttsSettings: TTSFragmentSettings) : BaseModalFragment<FragmentMeditationBinding>(
     layoutId = R.layout.meals_fragment,
     FragmentSettings(
         appBarTitle = R.string.title_dashboard,
         sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
-    )
+    ), ttsSettings
 ) {
-
     private var onResumeFlag = false
     private var hasInitSR = false
 
@@ -37,32 +37,18 @@ abstract class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>
         return binding.root
     }
 
-    override fun onPause() {
-        super.onPause()
-        onResumeFlag = true
-    }
-
-    fun exp() {
-        val l = listOf(1, 2, 3)
-        l.forEachIndexed { index, _ -> println(index) }
-
-        Person("Alice", 20, "Amsterdam").let {
-            println(it)
-            it.moveTo("London")
-            it.incrementAge()
-            println(it)
-        }
-
-        val p = Pair(1, 2)
-        val (first, _) = p
-        println(p)
-    }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val medViewModel:MeditationViewModel by viewModels()
 
+        val feelingsMap = mapOf(
+            button_mood_relaxed to "RELAXADO", button_mood_happy to "FELIZ",
+            button_mood_sleepy to 3, button_mood_confident to,
+            button_mood_confident, button_mood_confident to )
+
+        with(medViewModel.selectedMood){
+            this = "RELAXADO"
+        }
         button_mood_relaxed.setOnClickListener{
             medViewModel.selectedMood = "RELAXADO"
             goToMeditationMediaPlayer()
@@ -98,12 +84,18 @@ abstract class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>
 
     override fun performActionWithVoiceCommand(command: String) {
         when {
-            command.contains("Relaxado", true) -> button_mood_relaxed.performClick()
-            command.contains("Feliz", true) -> button_mood_happy.performClick()
-            command.contains("Com Sono", true) -> button_mood_sleepy.performClick()
-            command.contains("Confiante", true) -> button_mood_confident.performClick()
-            command.contains("Querido", true) -> button_mood_loved.performClick()
-            command.contains("Mente Sã", true) -> button_mood_mindful.performClick()
+            command.contains("Relaxado", true) ->
+                button_mood_relaxed.performClick()
+            command.contains("Feliz", true) ->
+                button_mood_happy.performClick()
+            command.contains("Com Sono", true) ->
+                button_mood_sleepy.performClick()
+            command.contains("Confiante", true) ->
+                button_mood_confident.performClick()
+            command.contains("Querido", true) ->
+                button_mood_loved.performClick()
+            command.contains("Mente Sã", true) ->
+                button_mood_mindful.performClick()
         }
     }
 
@@ -115,5 +107,14 @@ abstract class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>
         fragmentManager.popBackStack()
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        onResumeFlag = true
+    }
+
+    override fun onInitDataBinding() {
+        TODO("Not yet implemented")
     }
 }
