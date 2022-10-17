@@ -1,14 +1,9 @@
 package com.tiagosantos.crpg_remake.ui.meditation
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.speech.tts.TextToSpeech
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -17,9 +12,7 @@ import com.tiagosantos.access.modal.BaseModalFragment
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationBinding
-import net.gotev.speech.Speech
 import java.util.*
-import kotlin.properties.Delegates
 
 abstract class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
     layoutId = R.layout.meals_fragment,
@@ -31,11 +24,6 @@ abstract class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>
 
     private var onResumeFlag = false
     private var hasInitSR = false
-
-    private val handler = Handler(Looper.getMainLooper())
-    private var runnable: Runnable by Delegates.notNull()
-
-    private lateinit var speech: Speech
 
     companion object {
         fun newInstance() = MeditationFragment()
@@ -104,28 +92,11 @@ abstract class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>
             medViewModel.selectedMood = "MENTE SÃ"
             goToMeditationMediaPlayer()
         }
-
     }
 
     override fun defineModality(ttsFlag: Boolean, srFlag: Boolean, hasRun: Boolean) {}
 
-    private fun startTTS() {
-        textToSpeech = TextToSpeech(context) { status ->
-            if (status == TextToSpeech.SUCCESS) {
-                val ttsLang = textToSpeech!!.setLanguage(myLocale)
-                if (ttsLang == TextToSpeech.LANG_MISSING_DATA
-                        || ttsLang == TextToSpeech.LANG_NOT_SUPPORTED) {
-                    Log.e("TTS", "Linguagem não suportada!")
-                }
-                val speechStatus = textToSpeech!!.speak("Selecione uma das opções ou diga o estado" +
-                        "em voz alta", TextToSpeech.QUEUE_FLUSH, null, "ID")
-            } else {
-                Toast.makeText(context, "TTS Initialization failed!", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    fun performActionWithVoiceCommand(command: String) {
+    override fun performActionWithVoiceCommand(command: String) {
         when {
             command.contains("Relaxado", true) -> button_mood_relaxed.performClick()
             command.contains("Feliz", true) -> button_mood_happy.performClick()
@@ -146,6 +117,3 @@ abstract class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>
         fragmentTransaction.commit()
     }
 }
-
-//  val speechStatus = textToSpeech!!.speak("Selecione uma das opções ou diga o estado" +
-//                            "em voz alta", TextToSpeech.QUEUE_FLUSH, null, "ID")
