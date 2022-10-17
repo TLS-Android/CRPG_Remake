@@ -21,9 +21,7 @@ class MealsFragment : BaseFragment<MealsFragmentBinding>(
     private lateinit var view: MealsFragmentBinding
     private var flagMealChosen = false
 
-    val buttonList = listOf(
-        true, true, true
-    )
+    val buttonList = listOf(true, true, true)
 
     @SuppressLint("SetTextI18n", "ResourceAsColor")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -81,11 +79,16 @@ class MealsFragment : BaseFragment<MealsFragmentBinding>(
 
     private fun performActionWithVoiceCommand(command: String){
         when {
-            VoiceCommandsProcessingHelper.mealPickHelper(command,"Carne") -> view.frameOpcaoCarne.performClick()
-            VoiceCommandsProcessingHelper.mealPickHelper(command,"Peixe")  -> view.frameOpcaoPeixe.performClick()
-            VoiceCommandsProcessingHelper.mealPickHelper(command,"Dieta") -> view.frameOpcaoDieta .performClick()
-            VoiceCommandsProcessingHelper.mealPickHelper(command,"Vegetariano")  -> view.frameOpcaoVegetariano.performClick()
-            VoiceCommandsProcessingHelper.mealPickHelper(command,"Guardar")  -> view.buttonConfirmMeal.performClick()
+            VoiceCommandsProcessingHelper.mealPickHelper(command,"Carne") ->
+                view.frameOpcaoCarne.performClick()
+            VoiceCommandsProcessingHelper.mealPickHelper(command,"Peixe")  ->
+                view.frameOpcaoPeixe.performClick()
+            VoiceCommandsProcessingHelper.mealPickHelper(command,"Dieta") ->
+                view.frameOpcaoDieta .performClick()
+            VoiceCommandsProcessingHelper.mealPickHelper(command,"Vegetariano")  ->
+                view.frameOpcaoVegetariano.performClick()
+            VoiceCommandsProcessingHelper.mealPickHelper(command,"Guardar")  ->
+                view.buttonConfirmMeal.performClick()
         }
     }
 

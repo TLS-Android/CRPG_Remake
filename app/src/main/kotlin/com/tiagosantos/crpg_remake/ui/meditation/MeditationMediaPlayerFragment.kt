@@ -12,7 +12,6 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import com.google.android.exoplayer2.ExoPlayer
 import com.tiagosantos.access.modal.BaseModalFragment
-import com.tiagosantos.access.modal.modality.TTSPreferences
 import com.tiagosantos.access.modal.settings.TTSFragmentSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
@@ -26,7 +25,7 @@ class MeditationMediaPlayerFragment(ttsSettings: TTSFragmentSettings) :
             sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
         ),
         ttsSettings = TTSFragmentSettings(
-            "ola",
+            "Indique qual o seu estado de espirito atual",
             "Meditacao"
         )
 ) {

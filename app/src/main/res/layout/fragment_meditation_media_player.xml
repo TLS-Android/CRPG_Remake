@@ -16,7 +16,6 @@
     android:background="@color/white"
     tools:context="com.plataforma.crpg.ui.meditation.MeditationMediaPlayerFragment">
 
-
         <TextView
             android:id="@+id/text_selected_mood"
             android:layout_width="match_parent"
