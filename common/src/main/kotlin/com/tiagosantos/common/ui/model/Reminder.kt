@@ -1,4 +1,4 @@
-package com.tiagosantos.crpg_remake.domain.model
+package com.tiagosantos.common.ui.model
 
 import com.google.gson.annotations.SerializedName
 

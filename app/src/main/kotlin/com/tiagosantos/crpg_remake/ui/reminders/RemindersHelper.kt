@@ -3,17 +3,22 @@ package com.tiagosantos.crpg_remake.ui.reminders
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import com.google.android.material.button.MaterialButtonToggleGroup
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.*
 
 class RemindersHelper {
+    private fun setButtonColorsReminder(view: LayoutSecondLembrarBinding, pos: Int){
 
-    fun setButtonColorsReminder(view: ReminderFragmentBinding,pos: Int){
-        expandableLembrar.secondLayout.findViewById<Button>(R.id.button0).setBackgroundResource(R.drawable.layout_button_round_top)
-        expandableLembrar.secondLayout.findViewById<Button>(R.id.button1).setBackgroundResource(R.color.md_blue_100)
-        expandableLembrar.secondLayout.findViewById<Button>(R.id.button2).setBackgroundResource(R.color.md_blue_100)
-        expandableLembrar.secondLayout.findViewById<Button>(R.id.button3).setBackgroundResource(R.drawable.layout_button_round_bottom)
+        with(view){
+            this.button0.setBackgroundResource(R.color.md_blue_100)
+            this.button1.setBackgroundResource(R.color.md_blue_100)
+            this.button2.setBackgroundResource(R.color.md_blue_100)
+            this.button3.setBackgroundResource(R.color.md_blue_100)
+            //        expandableLembrar.secondLayout.findViewById<Button>(R.id.button0).setBackgroundResource(R.drawable.layout_button_round_top)
+            //expandableLembrar.secondLayout.findViewById<Button>(R.id.button3)
+            //.setBackgroundResource(R.drawable.layout_button_round_bottom)
+        }
+
 
         when(pos){
             1 ->  expandableLembrar.secondLayout.findViewById<Button>(R.id.button0).setBackgroundResource(R.drawable.layout_button_round_top_selected)
@@ -21,18 +26,20 @@ class RemindersHelper {
             3 ->  expandableLembrar.secondLayout.findViewById<Button>(R.id.button2).setBackgroundResource(R.color.md_blue_200)
             4 ->  expandableLembrar.secondLayout.findViewById<Button>(R.id.button3).setBackgroundResource(R.drawable.layout_button_round_bottom_selected)
         }
-
     }
 
-    fun setButtonColorsDays(view: ReminderFragmentBinding, pos: Int){
-        expandableDia.secondLayout.findViewById<Button>(R.id.button_hoje).setBackgroundResource(R.drawable.layout_button_round_top)
-        expandableDia.secondLayout.findViewById<Button>(R.id.button_todos_dias).setBackgroundResource(R.color.md_blue_100)
-        expandableDia.secondLayout.findViewById<Button>(R.id.button_personalizado).setBackgroundResource(R.drawable.layout_button_round_bottom)
+    private fun setButtonColorsDays(view: LayoutSecondDiaBinding, pos: Int){
 
-        when(pos){
-            1 ->  expandableDia.secondLayout.findViewById<Button>(R.id.button_hoje).setBackgroundResource(R.drawable.layout_button_round_top_selected)
-            2 ->  expandableDia.secondLayout.findViewById<Button>(R.id.button_todos_dias).setBackgroundResource(R.color.md_blue_200)
-            3 ->  expandableDia.secondLayout.findViewById<Button>(R.id.button_personalizado).setBackgroundResource(R.drawable.layout_button_round_bottom_selected)
+        with(view) {
+            this.buttonHoje.setBackgroundResource(R.drawable.layout_button_round_top)
+            this.buttonTodosDias.setBackgroundResource(R.color.md_blue_100)
+            this.buttonPersonalizado.setBackgroundResource(R.drawable.layout_button_round_bottom)
+
+            when (pos) {
+                1 -> this.buttonHoje.setBackgroundResource(R.drawable.layout_button_round_top)
+                2 -> this.buttonTodosDias.setBackgroundResource(R.color.md_blue_100)
+                3 -> buttonPersonalizado.setBackgroundResource(R.drawable.layout_button_round_bottom)
+            }
         }
     }
 
