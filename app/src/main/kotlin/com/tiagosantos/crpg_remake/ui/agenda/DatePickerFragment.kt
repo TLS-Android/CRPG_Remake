@@ -16,19 +16,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
-import com.michalsvec.singlerowcalendar.calendar.CalendarChangesObserver
 import com.michalsvec.singlerowcalendar.calendar.CalendarViewManager
-import com.tiagosantos.common.ui.singlerowcalendar.calendar.SingleRowCalendar
 import com.michalsvec.singlerowcalendar.calendar.SingleRowCalendarAdapter
 import com.michalsvec.singlerowcalendar.selection.CalendarSelectionManager
+import com.tiagosantos.common.ui.singlerowcalendar.calendar.SingleRowCalendar
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils
 import com.tiagosantos.access.modal.BaseModalFragment
 import com.tiagosantos.access.modal.settings.TTSFragmentSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
-import kotlinx.android.synthetic.main.calendar_item.view.*
-import kotlinx.android.synthetic.main.fragment_date_picker.*
-import kotlinx.android.synthetic.main.reminder_activity.*
 import net.gotev.speech.GoogleVoiceTypingDisabledException
 import net.gotev.speech.Speech
 import net.gotev.speech.SpeechDelegate
@@ -58,7 +54,6 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        // ttsDatePickerHint()
         return inflater.inflate(
             R.layout.fragment_date_picker,
             container,
@@ -100,9 +95,6 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
                             R.layout.calendar_item
                         }
                     }
-
-                // NOTE: if we don't want to do it this way, we can simply change color of background
-                // in bindDataToCalendarView method
             }
 
             override fun bindDataToCalendarView(
@@ -274,105 +266,7 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
         singleRowCalendar.select(literalValue - 1)
     }
 
-    fun startVoiceRecognition(singleRowCalendar: SingleRowCalendar) {
-        if (isAdded && isVisible) {
-            runnable = Runnable {
-                handler.sendEmptyMessage(0)
-                Speech.init(requireActivity())
-                try {
-                    Speech.getInstance().startListening(object : SpeechDelegate {
-                        override fun onStartOfSpeech() {
-                            Log.i("speech", "date picker speech recognition is now active")
-                        }
 
-                        override fun onSpeechRmsChanged(value: Float) {}
-
-                        override fun onSpeechPartialResults(results: List<String>) {
-                            val str = StringBuilder()
-                            for (res in results) {
-                                str.append(res).append(" ")
-                            }
-                            performActionWithVoiceCommand(results.toString(), singleRowCalendar)
-                            Log.i("speech", "partial result: " + str.toString().trim { it <= ' ' })
-                        }
-
-                        override fun onSpeechResult(result: String) {
-                            Log.d(
-                                TimelineView.TAG,
-                                "onSpeechResult: " +
-                                    result.lowercase(Locale.getDefault())
-                            )
-                            // Speech.getInstance().stopTextToSpeech()
-                            val handler = Handler()
-                            if (activity != null && isAdded) {
-                                handler.postDelayed({
-                                    try {
-                                        if (isAdded && isVisible) {
-                                            Speech.init(requireActivity())
-                                            Speech.getInstance().startListening(this)
-                                        }
-                                    } catch (speechRecognitionNotAvailable: SpeechRecognitionNotAvailable) {
-                                        speechRecognitionNotAvailable.printStackTrace()
-                                    } catch (e: GoogleVoiceTypingDisabledException) {
-                                        e.printStackTrace()
-                                    }
-                                }, 100)
-                            }
-                        }
-                    })
-                } catch (exc: SpeechRecognitionNotAvailable) {
-                    Log.e("speech", "Speech recognition is not available on this device!")
-                } catch (exc: GoogleVoiceTypingDisabledException) {
-                    Log.e("speech", "Google voice typing must be enabled!")
-                }
-            }
-
-            handler.post(runnable)
-        }
-    }
-
-    fun ttsDatePickerHint() {
-        if (!firstTimeFlag) {
-            textToSpeech = TextToSpeech(context) { status ->
-                if (status == TextToSpeech.SUCCESS) {
-                    val ttsLang = textToSpeech!!.setLanguage(myLocale)
-                    if (ttsLang == TextToSpeech.LANG_MISSING_DATA ||
-                        ttsLang == TextToSpeech.LANG_NOT_SUPPORTED
-                    ) {
-                        Log.e("TTS", "The Language is not supported!")
-                    } else {
-                        Log.i("TTS", "Language Supported.")
-                    }
-                    Log.i("TTS", "Initialization success.")
-
-                    if (textToSpeech!!.isSpeaking) {
-                        ttsFlag = true
-                    }
-
-                    if (!textToSpeech!!.isSpeaking) {
-                        ttsFlag = false
-                    }
-
-                    firstTimeFlag = true
-                } else {
-                    Toast.makeText(context, "TTS Initialization failed!", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
-
-    private fun shutdownTTS() {
-        handler.removeCallbacksAndMessages(null)
-        if (handler.hasMessages(0)) {
-            handler.removeCallbacks(runnable)
-            println("Shutdown Date Picker SR")
-        }
-
-        if (textToSpeech != null) {
-            textToSpeech!!.stop()
-            textToSpeech!!.shutdown()
-        }
-    }
 
     override fun onInitDataBinding() {
         TODO("Not yet implemented")
