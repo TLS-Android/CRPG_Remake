@@ -1,7 +1,6 @@
 package com.tiagosantos.crpg_remake.ui.agenda
 
 import android.os.Bundle
-import android.os.Handler
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import android.util.Log
@@ -11,11 +10,10 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.michalsvec.singlerowcalendar.calendar.CalendarViewManager
 import com.michalsvec.singlerowcalendar.calendar.SingleRowCalendarAdapter
 import com.michalsvec.singlerowcalendar.selection.CalendarSelectionManager
@@ -25,14 +23,11 @@ import com.tiagosantos.access.modal.BaseModalFragment
 import com.tiagosantos.access.modal.settings.TTSFragmentSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
-import net.gotev.speech.GoogleVoiceTypingDisabledException
-import net.gotev.speech.Speech
-import net.gotev.speech.SpeechDelegate
-import net.gotev.speech.SpeechRecognitionNotAvailable
+import com.tiagosantos.crpg_remake.databinding.FragmentAgendaBinding
 import java.util.*
 
 class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
-    BaseModalFragment<>(
+    BaseModalFragment<FragmentAgendaBinding>(
         layoutId = R.layout.meals_fragment,
         FragmentSettings(
         appBarTitle = "ESCOLHER DATA",
@@ -44,7 +39,6 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
         )
 ) {
 
-    private var currentMonth = 0
     private var selected = false
     private var firstTimeFlag = false
     private val calendar = Calendar.getInstance()
@@ -64,8 +58,7 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sharedViewModel = ViewModelProvider(activity as AppCompatActivity).get(
-            SharedViewModel::class.java)
+        val sharedViewModel: AgendaViewModel by viewModels()
 
         calendar.time = Date()
 
