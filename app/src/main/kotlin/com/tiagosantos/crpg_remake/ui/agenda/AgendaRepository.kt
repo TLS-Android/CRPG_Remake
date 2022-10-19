@@ -1,8 +1,6 @@
 package com.tiagosantos.crpg_remake.ui.agenda
 
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
+import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.common.ui.model.EventType
@@ -13,8 +11,10 @@ import java.lang.reflect.Type
 
 object AgendaRepository {
     private val TAG = "AgendaRepository"
-    private lateinit var database: DatabaseReference
+    //private lateinit var database: DatabaseReference
     // create 2 fixed events for lunch and dinner
+    val gson = Gson()
+
     var lunchEvent = Event(
         "Almoço", "Clicar para escolher refeição", EventType.MEAL,
         "1200", "1300",
