@@ -10,7 +10,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.tiagosantos.common.ui.base.ActivitySettings
 import com.tiagosantos.common.ui.base.BaseActivity
+import com.tiagosantos.common.ui.model.appModule
 import com.tiagosantos.crpg_remake.databinding.ActivityMainBinding
+import org.koin.core.context.GlobalContext.startKoin
 
 class MainActivity : BaseActivity(
     layoutId = R.layout.activity_main,
@@ -36,6 +38,10 @@ class MainActivity : BaseActivity(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        startKoin {
+            modules(appModule) //The modules() function in startKoin load the given list of modules
+        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
