@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
+import com.michalsvec.singlerowcalendar.calendar.CalendarChangesObserver
 import com.michalsvec.singlerowcalendar.calendar.CalendarViewManager
 import com.michalsvec.singlerowcalendar.calendar.SingleRowCalendarAdapter
 import com.michalsvec.singlerowcalendar.selection.CalendarSelectionManager
@@ -40,7 +41,6 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
 ) {
 
     private var selected = false
-    private var firstTimeFlag = false
     private val calendar = Calendar.getInstance()
 
     override fun onCreateView(
@@ -57,9 +57,7 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val sharedViewModel: AgendaViewModel by viewModels()
-
+        val vm: AgendaViewModel by viewModels()
         calendar.time = Date()
 
         // calendar view manager is responsible for our displaying logic
@@ -114,7 +112,8 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
                         DateUtils.getMonthName(date)
                         .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }}"
                 tvDay.text = DateUtils.getDayName(date)
-                sharedViewModel.selectedDate = DateUtils.getDayNumber(date) + DateUtils.getMonthNumber(date) + DateUtils.getYear(date)
+                vm.selectedDate = DateUtils.getDayNumber(date) + DateUtils
+                    .getMonthNumber(date) + DateUtils.getYear(date)
                 super.whenSelectionChanged(isSelected, position, date)
                 selected = isSelected
             }
@@ -157,12 +156,7 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
                 no_date_selected_warning.visibility = VISIBLE
             }
         }
-
-        defineModality(ttsFlag, srFlag, hasRun, singleRowCalendar)
     }
-
-
-
 
     private fun multimodalOption(singleRowCalendar: SingleRowCalendar) {
         textToSpeech = TextToSpeech(context) { status ->
@@ -207,8 +201,10 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
         }
     }
 
-    private fun performActionWithVoiceCommand(command: String, singleRowCalendar: SingleRowCalendar) {
-
+    private fun performActionWithVoiceCommand(
+        command: String,
+        singleRowCalendar: SingleRowCalendar
+    ) {
         val numbersMap = mapOf(
             "um" to 1, "dois" to 2, "três" to 3, "quatro" to 4,
             "cinco" to 5, "seis" to 6, "sete" to 7, "oito" to 8, "nove" to 9, "dez" to 10
@@ -220,8 +216,6 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
         if (literalValue > 5) singleRowCalendar.scrollToPosition(literalValue - 1)
         singleRowCalendar.select(literalValue - 1)
     }
-
-
 
     override fun onInitDataBinding() {
         TODO("Not yet implemented")
