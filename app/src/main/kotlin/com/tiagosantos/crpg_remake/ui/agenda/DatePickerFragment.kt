@@ -1,15 +1,11 @@
 package com.tiagosantos.crpg_remake.ui.agenda
 
 import android.os.Bundle
-import android.speech.tts.TextToSpeech
-import android.speech.tts.UtteranceProgressListener
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -39,7 +35,6 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
                     "e direita e premindo aquele que pretender selecionar"
         )
 ) {
-
     private var selected = false
     private val calendar = Calendar.getInstance()
 
@@ -61,23 +56,19 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
         calendar.time = Date()
 
         // calendar view manager is responsible for our displaying logic
-        val myCalendarViewManager = object :
-            CalendarViewManager {
+        val myCalendarViewManager = object : CalendarViewManager {
             override fun setCalendarViewResourceId(
                 position: Int,
                 date: Date,
                 isSelected: Boolean,
             ): Int {
                 // set date to calendar according to position where we are
-                val cal = Calendar.getInstance()
-                cal.time = date
+                val cal = Calendar.getInstance().apply { time = date }
                 if (!isSelected) tvDate.text = getString(R.string.nenhum_dia_selecionado_msg)
 
                 return if (isSelected)
                     when (cal[Calendar.DAY_OF_WEEK]) {
-                        else -> {
-                            R.layout.selected_calendar_item
-                        }
+                        else -> R.layout.selected_calendar_item
                     }
                 else
                 // here we return items which are not selected
@@ -123,8 +114,7 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
         val mySelectionManager = object : CalendarSelectionManager {
             override fun canBeItemSelected(position: Int, date: Date): Boolean {
                 // set date to calendar according to position
-                val cal = Calendar.getInstance()
-                cal.time = date
+                val cal = Calendar.getInstance().apply { time = date }
                 // saturday and sunday are disabled as CRPG is not open on these days
                 return when (cal[Calendar.DAY_OF_WEEK]) {
                     Calendar.SATURDAY -> false
@@ -145,58 +135,15 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
         button_selecionar.setOnClickListener {
             if (selected) {
                 no_date_selected_warning.visibility = GONE
-                val fragment: Fragment = AgendaFragment()
-                val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
+                val fragment: Fragm: FragmentManager = requireActivity().supportFragmentManager
                 val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.nav_host_fragment, fragment, "Agenda")
+                fragmentTransaction.replace(ent = AgendaFragment()
+                val fragmentManagerR.id.nav_host_fragment, fragment, "Agenda")
                 fragmentTransaction.addToBackStack(null)
                 fragmentTransaction.commit()
                 onDestroy()
             } else {
                 no_date_selected_warning.visibility = VISIBLE
-            }
-        }
-    }
-
-    private fun multimodalOption(singleRowCalendar: SingleRowCalendar) {
-        textToSpeech = TextToSpeech(context) { status ->
-            if (status == TextToSpeech.SUCCESS) {
-                val ttsLang = textToSpeech!!.setLanguage(myLocale)
-                if (ttsLang == TextToSpeech.LANG_MISSING_DATA ||
-                    ttsLang == TextToSpeech.LANG_NOT_SUPPORTED
-                ) {
-                    Log.e("TTS", "The Language is not supported!")
-                } else {
-                    Log.i("TTS", "Language Supported.")
-                }
-                Log.i("TTS", "Initialization success.")
-
-                val speechListener = object : UtteranceProgressListener() {
-                    @Override
-                    override fun onStart(p0: String?) {
-                        // println("Iniciou TTS")
-                    }
-
-                    override fun onDone(p0: String?) {
-                        // ("Encerrou TTS")
-                        if (activity != null && isAdded) {
-                            startVoiceRecognition(singleRowCalendar)
-                        }
-                    }
-
-                    override fun onError(p0: String?) {
-                        TODO("Not yet implemented")
-                    }
-                }
-
-                textToSpeech?.setOnUtteranceProgressListener(speechListener)
-
-                val speechStatus = textToSpeech!!.speak(
-                    "Diga o dia ", TextToSpeech.QUEUE_FLUSH,
-                    null, "ID"
-                )
-            } else {
-                Toast.makeText(context, "TTS Initialization failed!", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -212,9 +159,11 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
         val literalValue = numbersMap.getOrElse(command) {
             println("Número não presente na lista") } as Int
 
-        singleRowCalendar.clearSelection()
-        if (literalValue > 5) singleRowCalendar.scrollToPosition(literalValue - 1)
-        singleRowCalendar.select(literalValue - 1)
+        singleRowCalendar.let {
+            it.clearSelection()
+            if (literalValue > 5)it.scrollToPosition(literalValue - 1)
+            it.select(literalValue - 1)
+        }
     }
 
     override fun onInitDataBinding() {
