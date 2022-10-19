@@ -124,26 +124,25 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
             }
         }
 
-        val singleRowCalendar = main_single_row_calendar.apply {
+        val singleRowCalendar = view.mainSingleRowCalendar.apply {
             calendarViewManager = myCalendarViewManager
             calendarChangesObserver = myCalendarChangesObserver
             calendarSelectionManager = mySelectionManager
-            setDates(getFutureDatesOfCurrentMonth())
+            setDates(vm.getFutureDatesOfCurrentMonth())
             init()
         }
 
         view.buttonSelecionar.setOnClickListener {
             if (selected) {
                 view.noDateSelectedWarning.visibility = GONE
-                val fragment: FragmentManager = requireActivity().supportFragmentManager
+                val fragment: Fragment = AgendaFragment()
+                val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
                 val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-                fragmentTransaction.replace(ent = AgendaFragment()
-                    val fragmentManagerR.id.nav_host_fragment, fragment, "Agenda")
+                fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, fragment, "Agenda")
                 fragmentTransaction.addToBackStack(null)
                 fragmentTransaction.commit()
-                onDestroy()
             } else {
-                no_date_selected_warning.visibility = VISIBLE
+                view.noDateSelectedWarning.visibility = VISIBLE
             }
         }
 

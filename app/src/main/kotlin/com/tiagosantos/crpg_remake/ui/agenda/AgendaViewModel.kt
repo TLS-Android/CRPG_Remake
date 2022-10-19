@@ -45,7 +45,7 @@ class AgendaViewModel(
         return getDates(mutableListOf())
     }
 
-    private fun getDatesOfPreviousMonth(): List<Date> {
+    fun getDatesOfPreviousMonth(): List<Date> {
         _currentMonth.value = currentMonth.value?.minus(1) // - because we want previous
         // month
         if (currentMonth.value == 12) {
@@ -56,13 +56,13 @@ class AgendaViewModel(
         return getDates(mutableListOf())
     }
 
-    private fun getFutureDatesOfCurrentMonth(): List<Date> {
+    fun getFutureDatesOfCurrentMonth(): List<Date> {
         // get all next dates of current month
         _currentMonth.value = calendar[Calendar.MONTH]
         return getDates(mutableListOf())
     }
 
-    private fun getDates(list: MutableList<Date>): List<Date> {
+    fun getDates(list: MutableList<Date>): List<Date> {
         // load dates of whole month
         calendar.set(Calendar.MONTH, currentMonth)
         calendar.set(Calendar.DAY_OF_MONTH, 1)
@@ -75,6 +75,5 @@ class AgendaViewModel(
         calendar.add(Calendar.DATE, -1)
         return list
     }
-
 
 }
