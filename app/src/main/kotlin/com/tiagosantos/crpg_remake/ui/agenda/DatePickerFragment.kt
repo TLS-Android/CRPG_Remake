@@ -20,21 +20,21 @@ import com.tiagosantos.access.modal.BaseModalFragment
 import com.tiagosantos.access.modal.settings.TTSFragmentSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
-import com.tiagosantos.crpg_remake.databinding.FragmentAgendaBinding
+import com.tiagosantos.crpg_remake.databinding.FragmentDatePickerBinding
 import java.util.*
 
 class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
-    BaseModalFragment<FragmentAgendaBinding>(
-        layoutId = R.layout.meals_fragment,
+    BaseModalFragment<FragmentDatePickerBinding>(
+        layoutId = R.layout.fragment_date_picker,
         FragmentSettings(
         appBarTitle = "ESCOLHER DATA",
         sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
-        ),
-        TTSFragmentSettings(
-            "Por favor selecione um dia movendo os quadrados amarelos para a esquerda " +
-                    "e direita e premindo aquele que pretender selecionar"
+        ), TTSFragmentSettings(
+"Por favor selecione um dia movendo os quadrados amarelos para a esquerda " +
+        "e direita e premindo aquele que pretender selecionar"
         )
 ) {
+    private lateinit var view: FragmentDatePickerBinding
     private var selected = false
     private val calendar = Calendar.getInstance()
 
@@ -43,18 +43,6 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return inflater.inflate(
-            R.layout.fragment_date_picker,
-            container,
-            false
-        )
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val vm: AgendaViewModel by viewModels()
-        calendar.time = Date()
-
         // calendar view manager is responsible for our displaying logic
         val myCalendarViewManager = object : CalendarViewManager {
             override fun setCalendarViewResourceId(
@@ -64,7 +52,8 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
             ): Int {
                 // set date to calendar according to position where we are
                 val cal = Calendar.getInstance().apply { time = date }
-                if (!isSelected) tvDate.text = getString(R.string.nenhum_dia_selecionado_msg)
+                if (!isSelected) view. tvDate.text =
+                    getString(R.string.nenhum_dia_selecionado_msg)
 
                 return if (isSelected)
                     when (cal[Calendar.DAY_OF_WEEK]) {
@@ -88,20 +77,31 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
                 // using this method we can bind data to calendar view
                 // good practice is if all views in layout have same IDs in all item views
                 holder.itemView.tv_date_calendar_item.text = DateUtils.getDayNumber(date)
-                holder.itemView.tv_day_calendar_item.text = DateUtils.getDay3LettersName(date)
+                holder.itemView.tv_day_calendar_item.text =
+                    DateUtils.getDay3LettersName(date)
             }
         }
 
         // using calendar changes observer we can track changes in calendar
         val myCalendarChangesObserver = object :
             CalendarChangesObserver {
-            override fun whenSelectionChanged(isSelected: Boolean, position: Int, date: Date) {
-                tvDate.text = "${
+            override fun whenSelectionChanged(
+                isSelected: Boolean,
+                position: Int,
+                date: Date
+            ) {
+                view.tvDate.text = "${
                     DateUtils.getDayName(date)
-                    .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }}," +
-                    " ${DateUtils.getDayNumber(date)} de ${
-                        DateUtils.getMonthName(date)
-                        .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }}"
+                        .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+                }," +
+                        " ${DateUtils.getDayNumber(date)} de ${
+                            DateUtils.getMonthName(date)
+                                .replaceFirstChar {
+                                    if (it.isLowerCase()) it.titlecase(
+                                        Locale.getDefault()
+                                    ) else it.toString()
+                                }
+                        }"
                 tvDay.text = DateUtils.getDayName(date)
                 vm.selectedDate = DateUtils.getDayNumber(date) + DateUtils
                     .getMonthNumber(date) + DateUtils.getYear(date)
@@ -110,7 +110,6 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
             }
         }
 
-        // selection manager is responsible for managing selection
         val mySelectionManager = object : CalendarSelectionManager {
             override fun canBeItemSelected(position: Int, date: Date): Boolean {
                 // set date to calendar according to position
@@ -138,7 +137,7 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
                 val fragment: Fragm: FragmentManager = requireActivity().supportFragmentManager
                 val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
                 fragmentTransaction.replace(ent = AgendaFragment()
-                val fragmentManagerR.id.nav_host_fragment, fragment, "Agenda")
+                    val fragmentManagerR.id.nav_host_fragment, fragment, "Agenda")
                 fragmentTransaction.addToBackStack(null)
                 fragmentTransaction.commit()
                 onDestroy()
@@ -146,18 +145,24 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
                 no_date_selected_warning.visibility = VISIBLE
             }
         }
+
+       return view.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val vm: AgendaViewModel by viewModels()
+        calendar.time = Date()
     }
 
     private fun performActionWithVoiceCommand(
         command: String,
         singleRowCalendar: SingleRowCalendar
     ) {
-        val numbersMap = mapOf(
+        val literalValue = mapOf(
             "um" to 1, "dois" to 2, "três" to 3, "quatro" to 4,
             "cinco" to 5, "seis" to 6, "sete" to 7, "oito" to 8, "nove" to 9, "dez" to 10
-        )
-        val literalValue = numbersMap.getOrElse(command) {
-            println("Número não presente na lista") } as Int
+        ).getOrElse(command) { println("Número não presente na lista") } as Int
 
         singleRowCalendar.let {
             it.clearSelection()

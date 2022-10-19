@@ -33,6 +33,7 @@
     <string name="mealsHasRun">mealsHasRun</string>
     <string name="remindersHasRun">remindersHasRun</string>
     <string name="meditationHasRun">mediationHasRun</string>
+    <string name="datePickerHasRun">datePickerHasRun</string>
 
     //Permissions
     <string name="permitir">Permitir</string>
@@ -69,5 +70,10 @@
     <string name="escolher_almoco">Escolher almoço</string>
     <string name="meu_lembrete">Meu lembrete</string>
     <string name="insira_o_nome_do_seu_lembrete">Insira o nome do seu lembrete</string>
+    <string name="nenhum_dia_selecionado_warning">Nenhum dia selecionado</string>
+    <string name="selecionar">Selecionar</string>
+    <string name="selecionar_data_hint">Selecionar data</string>
+    <string name="selecionar_data">Selecionar data</string>
+    <string name="nenhum_dia_selecionado_msg">Nenhum dia selecionado</string>
 
 </resources>
