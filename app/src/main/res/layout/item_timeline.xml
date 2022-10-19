@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.plataforma.crpg.TimelineView
+        android:id="@+id/timeline"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:endLineColor="@color/md_blue_200"
+        app:lineStyle="dash"
+        app:lineWidth="3dp"
+        app:markerSize="20dp"
+        app:startLineColor="@color/md_blue_200"
+        app:strokeColor="@color/material_amber_600"
+        app:strokeWidth="5dp" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp">
+
+        <TextView
+            android:id="@+id/text_timeline_start_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/md_blue_200"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/text_timeline_end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/md_blue_200"
+            android:textSize="25sp" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card"
+            android:layout_width="245dp"
+            android:layout_height="205dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="15dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardBackgroundColor="@color/colorGrey50"
+            app:cardCornerRadius="40dp"
+            app:cardElevation="5dp"
+            app:contentPadding="0dp"
+            app:strokeColor="#F9B401"
+            app:strokeWidth="3dp">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/card_background_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="95dp"
+                    android:contentDescription="@string/imagem_ilustrativa_do_item_da_agenda" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/card_center_icon"
+                        android:layout_width="80dp"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="65dp"
+                        android:importantForAccessibility="no"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_timeline_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="4dp"
+                        android:paddingEnd="4dp"
+                        android:gravity="center"
+                        android:maxLength="15"
+                        android:textColor="@android:color/black"
+                        android:textSize="22sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_timeline_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="4dp"
+                        android:paddingEnd="4dp"
+                        android:gravity="center"
+                        android:maxLength="40"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+            </FrameLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_timeline_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:maxLength="30"
+                android:textColor="@android:color/transparent"
+                android:textSize="20sp" />
+        </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
+</LinearLayout>

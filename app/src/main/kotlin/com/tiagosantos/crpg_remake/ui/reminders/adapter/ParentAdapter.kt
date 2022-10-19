@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.plataforma.crpg.R
 import com.plataforma.crpg.databinding.ItemSectionBinding
-import com.plataforma.crpg.model.SectionItem
+import com.tiagosantos.common.ui.model.SectionItem
 
 class ParentAdapter :
     RecyclerView.Adapter<ParentAdapter.ParentViewHolder>(), ChildAdapter.Delegate {

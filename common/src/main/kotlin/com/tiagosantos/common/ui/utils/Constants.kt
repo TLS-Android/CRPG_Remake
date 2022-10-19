@@ -29,6 +29,9 @@ object Constants {
     const val PERMITIR = "PERMITIR"
     const val RECUSAR = "RECUSAR"
 
+    //EVENT FILES
+    const val FILES_DIR = context?.filesDir.toString()
+    const val EVENT_FILENAME = "event.json"
 }
 
 
