@@ -27,8 +27,8 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
     BaseModalFragment<FragmentDatePickerBinding>(
         layoutId = R.layout.fragment_date_picker,
         FragmentSettings(
-        appBarTitle = "ESCOLHER DATA",
-        sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
+            appBarTitle = "ESCOLHER DATA",
+            sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
         ), TTSFragmentSettings(
 "Por favor selecione um dia movendo os quadrados amarelos para a esquerda " +
         "e direita e premindo aquele que pretender selecionar"
@@ -42,7 +42,9 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
+        val vm: AgendaViewModel by viewModels()
+        calendar.time = Date()
         // calendar view manager is responsible for our displaying logic
         val myCalendarViewManager = object : CalendarViewManager {
             override fun setCalendarViewResourceId(
@@ -90,19 +92,18 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
                 position: Int,
                 date: Date
             ) {
-                view.tvDate.text = "${
-                    DateUtils.getDayName(date)
-                        .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
-                }," +
-                        " ${DateUtils.getDayNumber(date)} de ${
-                            DateUtils.getMonthName(date)
-                                .replaceFirstChar {
-                                    if (it.isLowerCase()) it.titlecase(
-                                        Locale.getDefault()
-                                    ) else it.toString()
-                                }
-                        }"
-                tvDay.text = DateUtils.getDayName(date)
+                view.tvDate.text = buildString {
+        append("${DateUtils.getDayName(date).replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }},")
+        append(" ${DateUtils.getDayNumber(date)} de ${
+            DateUtils.getMonthName(date)
+                .replaceFirstChar {
+                    if (it.isLowerCase()) it.titlecase(
+                        Locale.getDefault()
+                    ) else it.toString()
+                }
+        }")
+    }
+                view.tvDay.text = DateUtils.getDayName(date)
                 vm.selectedDate = DateUtils.getDayNumber(date) + DateUtils
                     .getMonthNumber(date) + DateUtils.getYear(date)
                 super.whenSelectionChanged(isSelected, position, date)
@@ -131,10 +132,10 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
             init()
         }
 
-        button_selecionar.setOnClickListener {
+        view.buttonSelecionar.setOnClickListener {
             if (selected) {
-                no_date_selected_warning.visibility = GONE
-                val fragment: Fragm: FragmentManager = requireActivity().supportFragmentManager
+                view.noDateSelectedWarning.visibility = GONE
+                val fragment: FragmentManager = requireActivity().supportFragmentManager
                 val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
                 fragmentTransaction.replace(ent = AgendaFragment()
                     val fragmentManagerR.id.nav_host_fragment, fragment, "Agenda")
@@ -147,12 +148,6 @@ class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
         }
 
        return view.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val vm: AgendaViewModel by viewModels()
-        calendar.time = Date()
     }
 
     private fun performActionWithVoiceCommand(
