@@ -6,7 +6,7 @@ import android.speech.SpeechRecognizer.RESULTS_RECOGNITION
 import android.util.Log
 import androidx.constraintlayout.motion.utils.ViewState
 import androidx.lifecycle.*
-import com.tiagosantos.access.modal.settings.SRFragmentSettings
+import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import net.gotev.speech.GoogleVoiceTypingDisabledException
 import net.gotev.speech.Speech
@@ -15,7 +15,7 @@ import net.gotev.speech.SpeechRecognitionNotAvailable
 
 class GotevViewModel(
     application: Application,
-    srSettings: SRFragmentSettings
+    srSettings: SRSettings
 ) : AndroidViewModel(application), DefaultLifecycleObserver {
 
     private var viewState: MutableLiveData<ViewState>? = null

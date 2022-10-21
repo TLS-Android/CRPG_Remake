@@ -1,19 +1,13 @@
 package com.tiagosantos.access.modal
 
-import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import com.tiagosantos.access.R
-import com.tiagosantos.access.modal.settings.SRFragmentSettings
-import com.tiagosantos.access.modal.settings.TTSFragmentSettings
+import com.tiagosantos.access.modal.settings.SRSettings
+import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.common.ui.extension.observe
 
@@ -21,16 +15,16 @@ abstract class BaseSRFragment<B : ViewDataBinding>(
     @LayoutRes
     private val layoutId: Int,
     private val settings: FragmentSettings,
-    private val ttsSettings: TTSFragmentSettings,
-    private val srSettings: SRFragmentSettings,
+    private val ttsSettings: TTSSettings,
+    private val srSettings: SRSettings,
 ) : BaseModalFragment<B>(
     layoutId = layoutId,
     settings = settings,
-    ttsSettings = TTSFragmentSettings(
+    ttsSettings = TTSSettings(
         "hey",
         isMuted = false,
     ),
-    srSettings = SRFragmentSettings(
+    srSettings = SRSettings(
         isListening = true
     )
 ) {

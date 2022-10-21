@@ -9,14 +9,14 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import com.tiagosantos.access.modal.BaseModalFragment
-import com.tiagosantos.access.modal.settings.TTSFragmentSettings
+import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationBinding
 import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
 import java.util.*
 
-class MeditationFragment(ttsSettings: TTSFragmentSettings) :
+class MeditationFragment(ttsSettings: TTSSettings) :
     BaseModalFragment<FragmentMeditationBinding>(
     layoutId = R.layout.fragment_meditation,
     FragmentSettings(

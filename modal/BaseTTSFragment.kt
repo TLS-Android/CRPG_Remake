@@ -7,8 +7,8 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
 import com.tiagosantos.access.modal.gossip.GossipViewModel
-import com.tiagosantos.access.modal.settings.SRFragmentSettings
-import com.tiagosantos.access.modal.settings.TTSFragmentSettings
+import com.tiagosantos.access.modal.settings.SRSettings
+import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.common.ui.extension.observe
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
@@ -17,16 +17,16 @@ abstract class BaseTTSFragment<B : ViewDataBinding>(
     @LayoutRes
     private val layoutId: Int,
     private val settings: FragmentSettings,
-    private val ttsSettings: TTSFragmentSettings,
-    private val srSettings: SRFragmentSettings,
+    private val ttsSettings: TTSSettings,
+    private val srSettings: SRSettings,
 ) : BaseModalFragment<B>(
     layoutId = layoutId,
     settings = settings,
-    ttsSettings = TTSFragmentSettings(
+    ttsSettings = TTSSettings(
         "Indique qual das opcoes pretende para o seu almoco",
         isMuted = false
     ),
-    srSettings = SRFragmentSettings(
+    srSettings = SRSettings(
         isListening = true
     )
 ) {

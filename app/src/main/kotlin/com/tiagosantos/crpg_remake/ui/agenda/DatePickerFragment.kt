@@ -17,19 +17,19 @@ import com.michalsvec.singlerowcalendar.selection.CalendarSelectionManager
 import com.tiagosantos.common.ui.singlerowcalendar.calendar.SingleRowCalendar
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils
 import com.tiagosantos.access.modal.BaseModalFragment
-import com.tiagosantos.access.modal.settings.TTSFragmentSettings
+import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentDatePickerBinding
 import java.util.*
 
-class DatePickerFragment(ttsSettings: TTSFragmentSettings) :
+class DatePickerFragment(ttsSettings: TTSSettings) :
     BaseModalFragment<FragmentDatePickerBinding>(
         layoutId = R.layout.fragment_date_picker,
         FragmentSettings(
             appBarTitle = "ESCOLHER DATA",
             sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
-        ), TTSFragmentSettings(
+        ), TTSSettings(
 "Por favor selecione um dia movendo os quadrados amarelos para a esquerda " +
         "e direita e premindo aquele que pretender selecionar"
         )

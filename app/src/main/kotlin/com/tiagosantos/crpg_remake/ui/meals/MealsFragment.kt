@@ -6,7 +6,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.google.android.material.card.MaterialCardView
 import com.tiagosantos.access.modal.BaseModalFragment
-import com.tiagosantos.access.modal.settings.TTSFragmentSettings
+import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
@@ -16,13 +16,13 @@ import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
 // Afterwards, use onActivityCreated() to do any final initialisations you want to do once
 // everything has completed.
 
-class MealsFragment(ttsSettings: TTSFragmentSettings) : BaseModalFragment<MealsFragmentBinding>(
+class MealsFragment(ttsSettings: TTSSettings) : BaseModalFragment<MealsFragmentBinding>(
     layoutId = R.layout.meals_fragment,
     FragmentSettings(
         appBarTitle = R.string.meal_action_bar_title,
         sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
     ),
-    TTSFragmentSettings(R.string.indique_refeicao.toString())
+    TTSSettings(R.string.indique_refeicao.toString())
 ) {
     private lateinit var view: MealsFragmentBinding
     private var flagMealChosen = false

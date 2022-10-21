@@ -12,19 +12,19 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import com.google.android.exoplayer2.ExoPlayer
 import com.tiagosantos.access.modal.BaseModalFragment
-import com.tiagosantos.access.modal.settings.TTSFragmentSettings
+import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationMediaPlayerBinding
 
-class MeditationMediaPlayerFragment(ttsSettings: TTSFragmentSettings) :
+class MeditationMediaPlayerFragment(ttsSettings: TTSSettings) :
     BaseModalFragment<FragmentMeditationMediaPlayerBinding>(
         layoutId = R.layout.fragment_meditation,
         FragmentSettings(
             appBarTitle = R.string.title_dashboard,
             sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
         ),
-        ttsSettings = TTSFragmentSettings(
+        ttsSettings = TTSSettings(
             "Indique qual o seu estado de espirito atual",
             "Meditacao"
         )

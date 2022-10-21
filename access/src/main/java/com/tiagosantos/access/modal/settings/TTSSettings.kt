@@ -1,8 +1,6 @@
 package com.tiagosantos.access.modal.settings
 
-data class TTSFragmentSettings(
+data class TTSSettings(
     val contextualHelp : String?,
     val isMuted: Boolean?
 )
-
-

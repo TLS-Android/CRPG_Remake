@@ -5,7 +5,7 @@ import android.view.*
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import com.tiagosantos.access.modal.BaseModalFragment
-import com.tiagosantos.access.modal.settings.TTSFragmentSettings
+import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.common.ui.utils.Constants
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
@@ -14,11 +14,11 @@ abstract class BaseGossipFragment<B : ViewDataBinding>(
     @LayoutRes
     private val layoutId: Int,
     private val settings: FragmentSettings,
-    private val ttsSettings: TTSFragmentSettings,
+    private val ttsSettings: TTSSettings,
 ) : BaseModalFragment<B>(
     layoutId = layoutId,
     settings = settings,
-    ttsSettings = TTSFragmentSettings(
+    ttsSettings = TTSSettings(
         EMPTY_STRING
     )
 ) {
