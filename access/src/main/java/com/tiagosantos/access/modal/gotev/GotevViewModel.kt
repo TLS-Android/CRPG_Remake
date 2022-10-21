@@ -30,9 +30,9 @@ class GotevViewModel(
 
     init { Speech.init(application.applicationContext, application.packageName) }
 
-    private fun notifyListening(isRecording: Boolean) {
-        viewState?.value = viewState?.value?.copy(isListening = isRecording)
-    }
+    private fun notifyListening(
+        isRecording: Boolean
+    ) { viewState?.value = viewState?.value?.copy(isListening = isRecording) }
 
     private fun updateResults(speechBundle: Bundle?) {
         val userSaid = speechBundle?.getStringArrayList(RESULTS_RECOGNITION)
@@ -41,9 +41,9 @@ class GotevViewModel(
     }
 
     private fun initViewState() = ViewState(
-        EMPTY_STRING,
-        false,
-        null
+        spokenText = EMPTY_STRING,
+        isListening = false,
+        error = null
     )
 
     fun listen() {
