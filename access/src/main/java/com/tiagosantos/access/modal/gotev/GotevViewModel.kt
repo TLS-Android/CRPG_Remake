@@ -92,5 +92,3 @@ class GotevViewModel(
         val error: String?
     )
 }
-
-
