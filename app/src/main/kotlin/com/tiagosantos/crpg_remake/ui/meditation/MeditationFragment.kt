@@ -13,27 +13,25 @@ import com.tiagosantos.access.modal.settings.TTSFragmentSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationBinding
+import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
 import java.util.*
 
-class MeditationFragment(ttsSettings: TTSFragmentSettings) : BaseModalFragment<FragmentMeditationBinding>(
+class MeditationFragment(ttsSettings: TTSFragmentSettings) :
+    BaseModalFragment<FragmentMeditationBinding>(
     layoutId = R.layout.fragment_meditation,
     FragmentSettings(
         appBarTitle = R.string.title_dashboard,
         sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
     ), ttsSettings
 ) {
+    private lateinit var view: MealsFragmentBinding
     private var onResumeFlag = false
     private var hasInitSR = false
-
-    companion object {
-        fun newInstance() = MeditationFragment()
-    }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?,
     ): View {
-        val view = FragmentMeditationBinding.inflate(layoutInflater)
         return view.root
     }
 
@@ -43,13 +41,9 @@ class MeditationFragment(ttsSettings: TTSFragmentSettings) : BaseModalFragment<F
 
 
         val feelingsMap = mapOf(
-           view. button_mood_relaxed to "RELAXADO", button_mood_happy to "FELIZ",
-            button_mood_sleepy to 3, button_mood_confident to,
-            button_mood_confident, button_mood_confident to )
+           button_mood_relaxed to "RELAXADO", button_mood_happy to "FELIZ",
+            button_mood_sleepy to 3, button_mood_confident to)
 
-        with(medViewModel.selectedMood){
-            this = "RELAXADO"
-        }
         button_mood_relaxed.setOnClickListener{
             medViewModel.selectedMood = "RELAXADO"
             goToMeditationMediaPlayer()
@@ -70,15 +64,6 @@ class MeditationFragment(ttsSettings: TTSFragmentSettings) : BaseModalFragment<F
             goToMeditationMediaPlayer()
         }
 
-        button_mood_loved.setOnClickListener{
-            medViewModel.selectedMood = "QUERIDO"
-            goToMeditationMediaPlayer()
-        }
-
-        button_mood_mindful.setOnClickListener{
-            medViewModel.selectedMood = "MENTE SÃ"
-            goToMeditationMediaPlayer()
-        }
     }
 
     override fun defineModality(ttsFlag: Boolean, srFlag: Boolean, hasRun: Boolean) {}
