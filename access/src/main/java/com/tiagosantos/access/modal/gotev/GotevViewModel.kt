@@ -78,12 +78,12 @@ class GotevViewModel(
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onStartView() { //do something on start view if it's needed }
+    }
 
-        @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-        fun onStopView() {
-            //do something on stop view if it's needed
-        }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    fun onStopView() {
+        //do something on stop view if it's needed
     }
 
     data class ViewState(
@@ -91,7 +91,6 @@ class GotevViewModel(
         val isListening: Boolean?,
         val error: String?
     )
-
 }
 
 
