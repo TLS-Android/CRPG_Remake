@@ -21,9 +21,11 @@ class GossipViewModel(
     var gossip: Gossip = Gossip(context.get()!!)
 
     init {
-        gossip.setLanguage(Constants.myLocale)
+        gossip.run {
+            setLanguage(Constants.myLocale)
+            isMuted
+        }
         talk()
-        gossip.isMuted
     }
 
     fun talk() { if (gossip.isMuted) gossip.talk(contextualHelp.toString()) }
@@ -35,8 +37,10 @@ class GossipViewModel(
 
     override fun onCleared() {
         super.onCleared()
-        gossip.stop()
-        gossip.shutdown()
+        gossip.run {
+            stop()
+            shutdown()
+        }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
