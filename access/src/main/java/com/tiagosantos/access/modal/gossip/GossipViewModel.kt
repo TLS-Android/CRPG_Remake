@@ -12,7 +12,7 @@ import java.lang.ref.WeakReference
 
 class GossipViewModel(
     private val resourcesProvider: ResourcesProvider,
-    private val context: WeakReference<Context>
+    context: WeakReference<Context>
 ) : BaseViewModel() {
 
     private val _contextualHelp = MutableLiveData<String>()
@@ -21,26 +21,16 @@ class GossipViewModel(
     var gossip: Gossip = Gossip(context.get()!!)
 
     init {
-        gossip.run {
-            setLanguage(Constants.myLocale)
-            isMuted
-        }
+        gossip.run { setLanguage(Constants.myLocale); isMuted }
         talk()
     }
 
     fun talk() { if (gossip.isMuted) gossip.talk(contextualHelp.toString()) }
-
-    fun setContextualHelp(help: String) {
-        _contextualHelp.value = help
-        talk()
-    }
+    fun setContextualHelp(help: String) { _contextualHelp.value = help }
 
     override fun onCleared() {
         super.onCleared()
-        gossip.run {
-            stop()
-            shutdown()
-        }
+        gossip.run { stop(); shutdown() }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
