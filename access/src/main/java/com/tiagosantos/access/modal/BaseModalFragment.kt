@@ -2,8 +2,9 @@ package com.tiagosantos.access.modal
 
 import android.content.Context
 import android.os.Bundle
-import android.view.*
-import android.widget.Toast
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -13,7 +14,6 @@ import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.base.BaseFragment
 import com.tiagosantos.common.ui.base.FragmentSettings
-import com.tiagosantos.common.ui.extension.observe
 import com.tiagosantos.common.ui.utils.Constants.MODALITY
 import com.tiagosantos.common.ui.utils.Constants.SR
 import com.tiagosantos.common.ui.utils.Constants.TTS
@@ -80,11 +80,4 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
             }
         }
     }
-
-    override fun observeLifecycleEvents() {
-        observe(viewModel.errorMessage, observer = {
-            Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
-        })
-    }
-
 }

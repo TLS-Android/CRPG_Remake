@@ -4,7 +4,6 @@ import android.app.Application
 import android.os.Bundle
 import android.speech.SpeechRecognizer.RESULTS_RECOGNITION
 import android.util.Log
-import androidx.constraintlayout.motion.utils.ViewState
 import androidx.lifecycle.*
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
@@ -29,12 +28,7 @@ class GotevViewModel(
         return viewState as MutableLiveData<ViewState>
     }
 
-    init {
-        Speech.init(
-            application.applicationContext,
-            application.packageName
-        )
-    }
+    init { Speech.init(application.applicationContext, application.packageName) }
 
     private fun notifyListening(isRecording: Boolean) {
         viewState?.value = viewState?.value?.copy(isListening = isRecording)
@@ -47,33 +41,23 @@ class GotevViewModel(
     }
 
     private fun initViewState() = ViewState(
-        spokenText = EMPTY_STRING,
-        isListening = false,
-        error = null
+        EMPTY_STRING,
+        false,
+        null
     )
-
 
     fun listen() {
         try {
             // you must have android.permission.RECORD_AUDIO granted at this point
             Speech.getInstance().startListening(object : SpeechDelegate {
-                override fun onStartOfSpeech() {
-                    Log.i("speech", "speech recognition is now active")
-                }
+                override fun onStartOfSpeech() { Log.i("speech", "speech recognition is now active") }
 
-                override fun onSpeechRmsChanged(value: Float) {
-                    Log.d("speech", "rms is now: $value")
-                }
+                override fun onSpeechRmsChanged(value: Float) { Log.d("speech", "rms is now: $value") }
 
                 override fun onSpeechPartialResults(results: List<String>) {
                     val str = StringBuilder()
-                    for (res in results) {
-                        str.append(res).append(" ")
-                    }
-                    Log.i(
-                        "speech",
-                        "partial result: " + str.toString().trim { it <= ' ' })
-                }
+                    for (res in results) { str.append(res).append(" ") }
+                    Log.i("speech", "partial result: " + str.toString().trim { it <= ' ' }) }
 
                 override fun onSpeechResult(result: String) {
                     Log.i("speech", "result: $result")
@@ -100,13 +84,13 @@ class GotevViewModel(
             //do something on stop view if it's needed
         }
 
-        data class ViewState(
-            var spokenText: String?,
-            val isListening: Boolean?,
-            val error: String?
-        )
-
     }
+
+    data class ViewState(
+        var spokenText: String?,
+        val isListening: Boolean?,
+        val error: String?
+    )
 
 }
 

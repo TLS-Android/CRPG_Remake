@@ -2,7 +2,6 @@ package com.tiagosantos.access.modal.modality
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.speech.tts.TextToSpeech
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.tiagosantos.common.ui.utils.Constants.MODALITY
 import com.tiagosantos.common.ui.utils.Constants.PERMITIR
@@ -10,14 +9,9 @@ import com.tiagosantos.common.ui.utils.Constants.RECUSAR
 import com.tiagosantos.common.ui.utils.Constants.SR
 import com.tiagosantos.common.ui.utils.Constants.TTS
 
-//import net.gotev.speech.Speech
-//import net.gotev.speech.TextToSpeechCallback
-
 class ModalityPreferencesRepository(
     private val ctx: Context,
 ) {
-    private var textToSpeech: TextToSpeech? = null
-
     fun requestMultiModalityOptions() {
         val sharedPreferences = ctx.getSharedPreferences(MODALITY, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
@@ -55,6 +49,4 @@ class ModalityPreferencesRepository(
                 editor.putBoolean(putBoolean, false)
             }.show()
     }
-
-
 }

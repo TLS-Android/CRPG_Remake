@@ -1,10 +1,11 @@
 package com.tiagosantos.access.modal.gossip
 
 import android.os.Bundle
-import android.view.*
+import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import com.tiagosantos.access.modal.BaseModalFragment
+import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.common.ui.utils.Constants
@@ -19,7 +20,11 @@ abstract class BaseGossipFragment<B : ViewDataBinding>(
     layoutId = layoutId,
     settings = settings,
     ttsSettings = TTSSettings(
-        EMPTY_STRING
+        EMPTY_STRING,
+        isMuted = false
+    ),
+    srSettings = SRSettings(
+        isListening = false
     )
 ) {
 
@@ -29,8 +34,8 @@ abstract class BaseGossipFragment<B : ViewDataBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        gossip = Gossip(requireActivity().applicationContext)
-        gossip.setLanguage(Constants.myLocale)
+        gossip = Gossip(requireActivity().applicationContext).also {
+            it.setLanguage(Constants.myLocale) }
         talk()
     }
 
@@ -45,7 +50,4 @@ abstract class BaseGossipFragment<B : ViewDataBinding>(
         super.onDestroy()
         gossip.shutdown()
     }
-
-    override fun performActionWithVoiceCommand(command: String) {}
-
 }
