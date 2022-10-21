@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.tiagosantos.access.R
+import com.tiagosantos.access.modal.settings.SRFragmentSettings
 import com.tiagosantos.access.modal.settings.TTSFragmentSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.common.ui.extension.observe
@@ -21,14 +22,18 @@ abstract class BaseSRFragment<B : ViewDataBinding>(
     private val layoutId: Int,
     private val settings: FragmentSettings,
     private val ttsSettings: TTSFragmentSettings,
+    private val srSettings: SRFragmentSettings,
 ) : BaseModalFragment<B>(
     layoutId = layoutId,
     settings = settings,
     ttsSettings = TTSFragmentSettings(
-        "hey"
+        "hey",
+        isMuted = false,
+    ),
+    srSettings = SRFragmentSettings(
+        isListening = true
     )
 ) {
-
 
     abstract override fun onInitDataBinding()
 
@@ -104,8 +109,5 @@ abstract class BaseSRFragment<B : ViewDataBinding>(
             handler.post(runnable)
         }
     }
-
-    override fun performActionWithVoiceCommand(command: String) {}
-
 
 }

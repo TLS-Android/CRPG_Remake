@@ -1,12 +1,13 @@
 package com.tiagosantos.access.modal
 
 import android.os.Bundle
-import android.view.*
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
 import com.tiagosantos.access.modal.gossip.GossipViewModel
+import com.tiagosantos.access.modal.settings.SRFragmentSettings
 import com.tiagosantos.access.modal.settings.TTSFragmentSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.common.ui.extension.observe
@@ -16,16 +17,20 @@ abstract class BaseTTSFragment<B : ViewDataBinding>(
     private val layoutId: Int,
     private val settings: FragmentSettings,
     private val ttsSettings: TTSFragmentSettings,
+    private val srSettings: SRFragmentSettings,
 ) : BaseModalFragment<B>(
     layoutId = layoutId,
     settings = settings,
     ttsSettings = TTSFragmentSettings(
-        "Indique qual das opcoes pretende para o seu almoco"
+        "Indique qual das opcoes pretende para o seu almoco",
+        isMuted = false
+    ),
+    srSettings = SRFragmentSettings(
+        isListening = true
     )
 ) {
 
     private val gossipVM: GossipViewModel by viewModels()
-
     abstract override fun onInitDataBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,7 +49,4 @@ abstract class BaseTTSFragment<B : ViewDataBinding>(
         super.onStop()
         gossipVM.gossip.stop()
     }
-
-    override fun performActionWithVoiceCommand(command: String) {}
-
 }

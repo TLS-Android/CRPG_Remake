@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.tiagosantos.access.modal.settings.SRFragmentSettings
 import com.tiagosantos.access.modal.settings.TTSFragmentSettings
 import com.tiagosantos.common.ui.base.BaseFragment
 import com.tiagosantos.common.ui.base.FragmentSettings
@@ -23,6 +24,7 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
     private val layoutId: Int,
     private val settings: FragmentSettings,
     private val ttsSettings: TTSFragmentSettings,
+    private val srSettings: SRFragmentSettings,
 ) : BaseFragment<B>(
     layoutId = layoutId,
     settings = settings,
