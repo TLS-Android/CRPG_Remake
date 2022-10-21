@@ -12,6 +12,11 @@ import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
 
+//The onCreate() is called first, for doing any non-graphical initialisations.
+//// Next, you can assign and declare any View variables you want to use in onCreateView().
+// Afterwards, use onActivityCreated() to do any final initialisations you want to do once
+// everything has completed.
+
 class MealsFragment(ttsSettings: TTSFragmentSettings) : BaseModalFragment<MealsFragmentBinding>(
     layoutId = R.layout.meals_fragment,
     FragmentSettings(
@@ -23,16 +28,23 @@ class MealsFragment(ttsSettings: TTSFragmentSettings) : BaseModalFragment<MealsF
     private lateinit var view: MealsFragmentBinding
     private var flagMealChosen = false
 
+    private var isLunch = false
+    private val mealsVM: MealsViewModel by viewModels()
+    private lateinit var cardList: List<MaterialCardView>
+
+    @SuppressLint("SetTextI18n", "ResourceAsColor")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isLunch = requireArguments().getBoolean("isLunch")
+        cardList = listOf(
+            view.frameOpcaoCarne, view.frameOpcaoPeixe, view.frameOpcaoDieta,
+            view.frameOpcaoVegetariano
+        )
+    }
+
     @SuppressLint("SetTextI18n", "ResourceAsColor")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val isLunch = requireArguments().getBoolean("isLunch")
-        val mealsVM: MealsViewModel by viewModels()
-
-        val cardList = listOf(
-            view.frameOpcaoCarne, view.frameOpcaoPeixe, view.frameOpcaoDieta,
-                view.frameOpcaoVegetariano
-        )
 
         fun setChecks(cardList: List<MaterialCardView?>, card: MaterialCardView) {
             if (!card.isChecked) mealsVM.updateSelectedOption(1)
@@ -102,4 +114,3 @@ class MealsFragment(ttsSettings: TTSFragmentSettings) : BaseModalFragment<MealsF
 
     private fun updateFlagMealChosen() { flagMealChosen = !flagMealChosen }
 }
-
