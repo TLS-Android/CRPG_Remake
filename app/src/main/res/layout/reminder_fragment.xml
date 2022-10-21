@@ -162,7 +162,8 @@
           app:layout_constraintStart_toStartOf="parent"
           app:rippleColor="@color/md_blue_100"
           app:strokeColor="@color/md_blue_100"
-          app:strokeWidth="5dp" />
+          app:strokeWidth="5dp"
+          style="?android:attr/buttonBarButtonStyle" />
 
       <Button
           android:id="@+id/button_confirm"
@@ -172,7 +173,8 @@
           android:text="@string/guardar"
           android:textSize="25sp"
           android:backgroundTint="@color/md_blue_100"
-          app:cornerRadius="8dp" />
+          app:cornerRadius="8dp"
+          style="?android:attr/buttonBarButtonStyle" />
 
     </LinearLayout>
 </LinearLayout>

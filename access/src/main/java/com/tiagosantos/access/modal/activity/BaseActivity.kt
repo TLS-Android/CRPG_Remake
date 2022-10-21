@@ -176,9 +176,7 @@ abstract class BaseActivity(
         wm ?: return
 
         var densityDpiStable = Configuration.DENSITY_DPI_UNDEFINED
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            densityDpiStable = DisplayMetrics.DENSITY_DEVICE_STABLE //480
-        }
+        densityDpiStable = DisplayMetrics.DENSITY_DEVICE_STABLE //480
 
         //Device may has different screen resolution modes.
         //As example, Samsung S8: 422 in FHD+, 562 in WQHD+

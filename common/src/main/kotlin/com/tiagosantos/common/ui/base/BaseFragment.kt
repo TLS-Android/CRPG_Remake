@@ -142,14 +142,13 @@ abstract class BaseFragment<B : ViewDataBinding>(
             )
         }
         //for API 23+
-        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        else
             if (isLight) {
                 var flags = view.systemUiVisibility
                 flags = flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
                 view.systemUiVisibility = flags
             }
             requireActivity().window.statusBarColor = ContextCompat.getColor(requireActivity(), statusBarColor)
-        }
     }
 
     private fun applyResources() {
