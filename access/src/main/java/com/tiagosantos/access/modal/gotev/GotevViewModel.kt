@@ -88,7 +88,7 @@ class GotevViewModel(
 
     override fun onCleared() {
         super.onCleared()
-        Speech.getInstance().shutdown();
+        Speech.getInstance().shutdown()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)

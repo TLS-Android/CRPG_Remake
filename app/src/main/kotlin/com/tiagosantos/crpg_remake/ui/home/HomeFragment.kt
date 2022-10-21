@@ -5,15 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
-import org.koin.core.scope.Scope
-import org.koin.android.scope.getOrCreateScope
 import com.tiagosantos.common.ui.base.BaseFragment
 import com.tiagosantos.common.ui.base.FragmentSettings
-import com.tiagosantos.common.ui.extension.observe
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentHomeBinding
+import org.koin.android.scope.getOrCreateScope
+import org.koin.core.scope.Scope
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
     layoutId = R.layout.fragment_home,

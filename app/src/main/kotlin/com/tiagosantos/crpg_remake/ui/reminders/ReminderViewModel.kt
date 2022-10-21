@@ -130,7 +130,7 @@ class ReminderViewModel(
         }
     }
 
-    fun setAlarmBoth(fullWeekAlarm: ArrayList<Int>, customWeekAlarm: ArrayList<Int>) {
+    private fun setAlarmBoth(fullWeekAlarm: ArrayList<Int>, customWeekAlarm: ArrayList<Int>) {
         lateinit var alarmIntent: Intent
         println("Full week alarm: $fullWeekAlarm")
 
@@ -165,7 +165,7 @@ class ReminderViewModel(
         }
     }
 
-    fun setAlarmSoundOnly(fullWeekAlarm: ArrayList<Int>, customWeekAlarm: ArrayList<Int>) {
+    private fun setAlarmSoundOnly(fullWeekAlarm: ArrayList<Int>, customWeekAlarm: ArrayList<Int>) {
         lateinit var alarmIntent: Intent
 
         println("Full week alarm: $fullWeekAlarm")

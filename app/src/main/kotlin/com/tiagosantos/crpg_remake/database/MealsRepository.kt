@@ -1,16 +1,5 @@
 package com.tiagosantos.crpg_remake.database
 
-import android.content.Context
-import com.google.gson.GsonBuilder
-import com.google.gson.reflect.TypeToken
-import com.tiagosantos.common.ui.utils.Constants
-import com.tiagosantos.crpg_remake.ui.meals.MealsViewModel
-import java.io.File
-import java.io.FileOutputStream
-import java.io.FileReader
-import java.lang.reflect.Type
-import java.util.ArrayList
-
 class MealsRepository {
 /*
     fun convertMealsToJSON() {

@@ -101,9 +101,9 @@ class ImplReminderPublicLocalSource(application: Application) :
         val isNewFileCreated : Boolean = file.createNewFile()
 
         if(isNewFileCreated){
-            kotlin.io.println("$fullFilename is created successfully.")
+            println("$fullFilename is created successfully.")
         } else{
-            kotlin.io.println("$fullFilename already exists.")
+            println("$fullFilename already exists.")
         }
         val fileContent = """[{"title": "Tomar Medicação","info":"benuron","start_time": "1130","hours":11,"minutes":30,"notas":""}]""".trimMargin()
 
@@ -116,7 +116,7 @@ class ImplReminderPublicLocalSource(application: Application) :
     }
 
 
-    fun getAllRemindersList(): ArrayList<Reminder> {
+    private fun getAllRemindersList(): ArrayList<Reminder> {
 
         val gson = Gson()
         val filename = "reminder.json"
@@ -125,7 +125,7 @@ class ImplReminderPublicLocalSource(application: Application) :
         val type: Type = object : TypeToken<ArrayList<Reminder>>() {}.type
         val reminderList: ArrayList<Reminder> = gson.fromJson(FileReader(fullFilename), type)
 
-        DriverManager.println("> From JSON Meal String Reminder Collection:" + reminderList.toString())
+        DriverManager.println("> From JSON Meal String Reminder Collection:$reminderList")
 
         return reminderList
 

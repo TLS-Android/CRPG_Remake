@@ -21,7 +21,7 @@ class MealsViewModel(
     private var repo = MealsMockData()
 
     private val _listMessages = MutableLiveData<List<String>?>()
-    val listMessages: LiveData<List<String>?> = _listMessages
+    private val listMessages: LiveData<List<String>?> = _listMessages
 
     private val _selectedOption = MutableLiveData<Int?>()
     var selectedOption: LiveData<Int?> = _selectedOption

@@ -86,8 +86,6 @@ class MeditationFragment(ttsSettings: TTSFragmentSettings) : BaseModalFragment<F
     override fun performActionWithVoiceCommand(command: String, actionMap: Map<String, Any>) {
 
 
-        //val actionMap = mapOf("Relaxado" to view.)
-
         when {
             command.contains("Relaxado", true) ->
                 button_mood_relaxed.performClick()

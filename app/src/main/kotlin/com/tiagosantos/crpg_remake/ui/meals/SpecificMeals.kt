@@ -1,12 +1,6 @@
 package com.tiagosantos.crpg_remake.ui.meals
 
-import android.os.Handler
-import android.speech.tts.TextToSpeech
-import android.speech.tts.UtteranceProgressListener
-import android.util.Log
-import android.widget.Toast
-
-class SpecificMeals {}
+class SpecificMeals
 /*
     private fun defineModality(ttsFlag: Boolean, srFlag: Boolean, hasRun: Boolean) {
         println("ttsFlag:  $ttsFlag, srFlag: $srFlag, hasRun: $hasRun")

@@ -30,15 +30,7 @@ abstract class BaseSRFragment<B : ViewDataBinding>(
 ) {
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     abstract override fun onInitDataBinding()
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 
     override fun onStop() {
         val activity = requireActivity()

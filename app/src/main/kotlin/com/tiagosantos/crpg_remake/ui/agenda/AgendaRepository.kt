@@ -9,9 +9,6 @@ import java.io.FileReader
 import java.lang.reflect.Type
 
 object AgendaRepository {
-    private val TAG = "AgendaRepository"
-    //private lateinit var database: DatabaseReference
-    // create 2 fixed events for lunch and dinner
     val gson = Gson()
 
     fun initializeDbRef() {

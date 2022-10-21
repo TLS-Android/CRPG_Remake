@@ -52,9 +52,9 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private lateinit var et: EditText
     private lateinit var etMin: EditText
 
-    lateinit var cbSom: ImageView
-    lateinit var cbVib: ImageView
-    lateinit var cbAmbos: ImageView
+    private lateinit var cbSom: ImageView
+    private lateinit var cbVib: ImageView
+    private lateinit var cbAmbos: ImageView
 
     private val helper = RemindersHelper()
 
@@ -89,7 +89,11 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
         with(viewLembrar){
             this.button0.setOnClickListener { helper.setLembrarLayout(
-                viewLembrar, 1, true, true, lembrarButtonPressed) }
+                viewLembrar, 1,
+                isVisible = true,
+                isTextVisible = true,
+                lembrarButtonPressed = lembrarButtonPressed
+            ) }
             this.button1.setOnClickListener { helper.setLembrarLayout(
                 viewLembrar, 2, false, false, lembrarButtonPressed) }
             this.button2.setOnClickListener { helper.setLembrarLayout(

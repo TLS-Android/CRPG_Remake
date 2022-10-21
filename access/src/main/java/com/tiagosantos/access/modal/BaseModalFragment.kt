@@ -27,9 +27,8 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
     layoutId = layoutId,
     settings = settings,
 ) {
-
     private val _flag = MutableLiveData<String?>()
-    val flag: LiveData<String?> = _flag
+    private val flag: LiveData<String?> = _flag
 
     /**
      * Called to Initialize view data binding variables when fragment view is created.

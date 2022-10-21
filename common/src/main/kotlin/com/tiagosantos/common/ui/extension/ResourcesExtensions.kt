@@ -23,6 +23,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
+import kotlin.math.roundToInt
 
 
 /**
@@ -145,17 +146,18 @@ fun Context.getBitmapFromDrawable(@DrawableRes drawableId: Int): Bitmap? {
     else
         ContextCompat.getDrawable(this, drawableId)
 
-    return if (drawable is BitmapDrawable)
-        drawable.bitmap
-    else if (drawable is VectorDrawableCompat || drawable is LayerDrawable) {
-        val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth,
-            drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        drawable.setBounds(0, 0, canvas.width, canvas.height)
-        drawable.draw(canvas)
-        bitmap
-    } else
-        throw IllegalArgumentException("Unsupported drawable type")
+    return when (drawable) {
+        is BitmapDrawable -> drawable.bitmap
+        is VectorDrawableCompat, is LayerDrawable -> {
+            val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth,
+                drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(bitmap)
+            drawable.setBounds(0, 0, canvas.width, canvas.height)
+            drawable.draw(canvas)
+            bitmap
+        }
+        else -> throw IllegalArgumentException("Unsupported drawable type")
+    }
 
 }
 
@@ -180,7 +182,7 @@ fun Context.dpToPx(valueInDp: Float): Float {
  */
 fun Context.pxToDp(valueInPx: Int): Int {
     val displayMetrics = resources.displayMetrics
-    return Math.round(valueInPx / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
+    return (valueInPx / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT)).roundToInt()
 }
 
 /**
@@ -204,7 +206,7 @@ fun Activity.applyStatusBarColor(@ColorRes colorResId: Int) {
  * @param activity Activity
  * @return {width, height}
  */
-fun Activity.getDisplaySize(): IntArray? {
+fun Activity.getDisplaySize(): IntArray {
     val displaySize = Point()
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)

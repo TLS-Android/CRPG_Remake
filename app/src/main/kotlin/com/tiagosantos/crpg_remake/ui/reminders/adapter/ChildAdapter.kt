@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("RedundantWith")
+
 package com.plataforma.crpg.ui.reminders.adapter
 
 import android.content.Context
@@ -22,6 +24,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.plataforma.crpg.databinding.ItemRowBinding
 
+@Suppress("RedundantWith")
 class ChildAdapter(private val delegate: Delegate) : RecyclerView.Adapter<ChildAdapter.ChildViewHolder>() {
 
     private val items: ArrayList<String> = arrayListOf()

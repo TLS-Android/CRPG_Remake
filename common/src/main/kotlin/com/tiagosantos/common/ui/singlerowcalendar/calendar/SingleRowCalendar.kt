@@ -41,11 +41,11 @@ class SingleRowCalendar(context: Context, attrs: AttributeSet) : RecyclerView(co
     lateinit var calendarSelectionManager: CalendarSelectionManager
     var multiSelection: Boolean
     var deselection: Boolean
-    var longPress: Boolean
-    var pastDaysCount: Int
-    var futureDaysCount: Int
-    var includeCurrentDate: Boolean
-    var initialPositionIndex: Int
+    private var longPress: Boolean
+    private var pastDaysCount: Int
+    private var futureDaysCount: Int
+    private var includeCurrentDate: Boolean
+    private var initialPositionIndex: Int
 
 
     init {
@@ -309,7 +309,7 @@ class SingleRowCalendar(context: Context, attrs: AttributeSet) : RecyclerView(co
     /**
      * @return list of selected positions
      */
-    fun getSelectedIndexes(): List<Int> {
+    private fun getSelectedIndexes(): List<Int> {
         val selectionList: MutableList<Int> = mutableListOf()
         selectionTracker.selection.forEach {
             if (it.toInt() != GHOST_ITEM_KEY && it.toInt() < dateList.size)

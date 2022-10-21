@@ -28,7 +28,7 @@ class AgendaViewModel(
     val mDataList: LiveData<List<Event>?> = _mDataList
 
     private val _currentMonth = MutableLiveData<Int?>()
-    val currentMonth: LiveData<Int?> = _currentMonth
+    private val currentMonth: LiveData<Int?> = _currentMonth
 
     private var firstTimeFlag = false
 
@@ -62,7 +62,7 @@ class AgendaViewModel(
         return getDates(mutableListOf())
     }
 
-    fun getDates(list: MutableList<Date>): List<Date> {
+    private fun getDates(list: MutableList<Date>): List<Date> {
         // load dates of whole month
         calendar.set(Calendar.MONTH, currentMonth)
         calendar.set(Calendar.DAY_OF_MONTH, 1)

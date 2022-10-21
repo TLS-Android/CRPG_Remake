@@ -31,7 +31,7 @@ class SingleRowCalendarAdapter(
         fun getItemDetails(): ItemDetailsLookup.ItemDetails<Long> =
             object : ItemDetailsLookup.ItemDetails<Long>() {
                 override fun getPosition(): Int = adapterPosition
-                override fun getSelectionKey(): Long? = itemId
+                override fun getSelectionKey(): Long = itemId
             }
 
     }

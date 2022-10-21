@@ -44,10 +44,6 @@ abstract class BaseFragment<B : ViewDataBinding>(
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     /**
      * Called to Initialize view data binding variables when fragment view is created.
      */

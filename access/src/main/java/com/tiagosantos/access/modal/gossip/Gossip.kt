@@ -16,7 +16,7 @@ import java.util.*
 
 open class Gossip(private val context: Context) : TextToSpeech.OnInitListener {
 
-    val textToSpeech: TextToSpeech = TextToSpeech(context, this)
+    private val textToSpeech: TextToSpeech = TextToSpeech(context, this)
 
     private var activity: Activity? = null
 
@@ -134,7 +134,7 @@ open class Gossip(private val context: Context) : TextToSpeech.OnInitListener {
         am.abandonAudioFocus(audioFocusChangeListener)
     }
 
-    fun enableVolumeControl(activity: Activity?) {
+    private fun enableVolumeControl(activity: Activity?) {
         if (activity != null) {
             activity.volumeControlStream = AudioManager.STREAM_MUSIC
         }
@@ -175,7 +175,7 @@ open class Gossip(private val context: Context) : TextToSpeech.OnInitListener {
      * @param hashMap utteranceIds to runnable map to use
      * @return whether value was found
      */
-    lateinit var job: Job
+    private lateinit var job: Job
 
     @Synchronized
     private fun detectAndRun(
@@ -195,7 +195,7 @@ open class Gossip(private val context: Context) : TextToSpeech.OnInitListener {
         }
     }
 
-    internal var audioFocusChangeListener: AudioManager.OnAudioFocusChangeListener =
+    private var audioFocusChangeListener: AudioManager.OnAudioFocusChangeListener =
         AudioManager.OnAudioFocusChangeListener { focusChange ->
             when (focusChange) {
                 AudioManager.AUDIOFOCUS_GAIN -> textToSpeech.setPitch(FOCUS_PITCH)
@@ -206,7 +206,7 @@ open class Gossip(private val context: Context) : TextToSpeech.OnInitListener {
         }
 
 
-    internal var utteranceProgressListener: UtteranceProgressListener =
+    private var utteranceProgressListener: UtteranceProgressListener =
         object : UtteranceProgressListener() {
             override fun onStart(utteranceId: String) {
                 detectAndRun(utteranceId, onStartJobs)

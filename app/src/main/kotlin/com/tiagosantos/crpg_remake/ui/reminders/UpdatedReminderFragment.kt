@@ -1,7 +1,6 @@
 package com.tiagosantos.crpg_remake.ui.reminders
 
 import android.widget.LinearLayout
-import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.hourHelper
 
 class UpdatedReminderFragment {

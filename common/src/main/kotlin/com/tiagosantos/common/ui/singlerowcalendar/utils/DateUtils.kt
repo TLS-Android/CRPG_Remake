@@ -80,7 +80,7 @@ object DateUtils {
      * @param count - future days count from now which we want to load
      * @return list of future dates with specified length
      */
-    fun getFutureDates(count: Int): MutableList<Date> {
+    private fun getFutureDates(count: Int): MutableList<Date> {
         val futureDateList = mutableListOf<Date>()
         val cal = Calendar.getInstance(Locale.getDefault())
         for (i in 0 until count) {
@@ -94,7 +94,7 @@ object DateUtils {
      * @param count - past days count from now which we want to load
      * @return list of past dates with specified length
      */
-    fun getPastDates(count: Int): MutableList<Date> {
+    private fun getPastDates(count: Int): MutableList<Date> {
         val pastDateList = mutableListOf<Date>()
         val cal = Calendar.getInstance(Locale.getDefault())
         for (i in 0 until count) {

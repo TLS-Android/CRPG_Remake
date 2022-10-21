@@ -9,8 +9,8 @@ object Constants {
 
     // MY LOCALE
     const val EMPTY_STRING = ""
-    const val LANG_PORTUGUESE = "pt_PT"
-    const val REGION_PORTUGAL = "POR"
+    private const val LANG_PORTUGUESE = "pt_PT"
+    private const val REGION_PORTUGAL = "POR"
 
     val myLocale = Locale(LANG_PORTUGUESE, REGION_PORTUGAL)
 
@@ -32,6 +32,9 @@ object Constants {
     //EVENT FILES
     const val FILES_DIR = context?.filesDir.toString()
     const val EVENT_FILENAME = "event.json"
+
+    //TAGS
+    private const val TAG_AGENDA = "AgendaRepository"
 }
 
 

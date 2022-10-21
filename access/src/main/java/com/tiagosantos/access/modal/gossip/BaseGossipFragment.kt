@@ -23,11 +23,7 @@ abstract class BaseGossipFragment<B : ViewDataBinding>(
     )
 ) {
 
-    lateinit var gossip: Gossip
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var gossip: Gossip
 
     abstract override fun onInitDataBinding()
 
