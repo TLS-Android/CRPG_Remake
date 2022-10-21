@@ -4,16 +4,11 @@ import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.tiagosantos.access.R
 import com.tiagosantos.access.modal.settings.TTSFragmentSettings
 import com.tiagosantos.common.ui.base.BaseFragment
 import com.tiagosantos.common.ui.base.FragmentSettings
@@ -21,6 +16,7 @@ import com.tiagosantos.common.ui.extension.observe
 import com.tiagosantos.common.ui.utils.Constants.MODALITY
 import com.tiagosantos.common.ui.utils.Constants.SR
 import com.tiagosantos.common.ui.utils.Constants.TTS
+import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.generalHelper
 
 abstract class BaseModalFragment<B : ViewDataBinding>(
     @LayoutRes
@@ -62,7 +58,9 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
         defineModality(ttsFlag, srFlag, hasRun)
     }
 
-    open fun performActionWithVoiceCommand(command: String) {}
+    open fun performActionWithVoiceCommand(command: String, actionMap: Map<String,Any>) {
+        generalHelper(command, actionMap)
+    }
 
     open fun defineModality(
        ttsFlag: Boolean,
@@ -87,6 +85,5 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
             Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
         })
     }
-
 
 }

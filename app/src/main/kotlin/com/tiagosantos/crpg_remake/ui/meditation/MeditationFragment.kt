@@ -16,7 +16,7 @@ import com.tiagosantos.crpg_remake.databinding.FragmentMeditationBinding
 import java.util.*
 
 class MeditationFragment(ttsSettings: TTSFragmentSettings) : BaseModalFragment<FragmentMeditationBinding>(
-    layoutId = R.layout.meals_fragment,
+    layoutId = R.layout.fragment_meditation,
     FragmentSettings(
         appBarTitle = R.string.title_dashboard,
         sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
@@ -33,16 +33,17 @@ class MeditationFragment(ttsSettings: TTSFragmentSettings) : BaseModalFragment<F
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?,
     ): View {
-        val binding = FragmentMeditationBinding.inflate(layoutInflater)
-        return binding.root
+        val view = FragmentMeditationBinding.inflate(layoutInflater)
+        return view.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val medViewModel:MeditationViewModel by viewModels()
 
+
         val feelingsMap = mapOf(
-            button_mood_relaxed to "RELAXADO", button_mood_happy to "FELIZ",
+           view. button_mood_relaxed to "RELAXADO", button_mood_happy to "FELIZ",
             button_mood_sleepy to 3, button_mood_confident to,
             button_mood_confident, button_mood_confident to )
 
@@ -82,7 +83,11 @@ class MeditationFragment(ttsSettings: TTSFragmentSettings) : BaseModalFragment<F
 
     override fun defineModality(ttsFlag: Boolean, srFlag: Boolean, hasRun: Boolean) {}
 
-    override fun performActionWithVoiceCommand(command: String) {
+    override fun performActionWithVoiceCommand(command: String, actionMap: Map<String, Any>) {
+
+
+        //val actionMap = mapOf("Relaxado" to view.)
+
         when {
             command.contains("Relaxado", true) ->
                 button_mood_relaxed.performClick()

@@ -28,6 +28,13 @@ class MealsFragment(ttsSettings: TTSFragmentSettings) : BaseModalFragment<MealsF
     private lateinit var view: MealsFragmentBinding
     private var flagMealChosen = false
 
+    private val actionMap: Map<String, Any> by lazy {
+        mapOf("Carne" to view.frameOpcaoCarne.performClick(),
+            "Peixe" to view.frameOpcaoPeixe.performClick(),
+            "Dieta" to  view.frameOpcaoDieta.performClick(),
+            "Vegetariano" to view.frameOpcaoVegetariano.performClick(),
+            "Guardar" to view.buttonConfirmMeal.performClick())
+    }
     private var isLunch = false
     private val mealsVM: MealsViewModel by viewModels()
     private lateinit var cardList: List<MaterialCardView>
@@ -45,6 +52,9 @@ class MealsFragment(ttsSettings: TTSFragmentSettings) : BaseModalFragment<MealsF
     @SuppressLint("SetTextI18n", "ResourceAsColor")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        val command = "ispis lorem"
+        performActionWithVoiceCommand(command,actionMap)
 
         fun setChecks(cardList: List<MaterialCardView?>, card: MaterialCardView) {
             if (!card.isChecked) mealsVM.updateSelectedOption(1)
@@ -86,21 +96,6 @@ class MealsFragment(ttsSettings: TTSFragmentSettings) : BaseModalFragment<MealsF
             } else {
                 view.success.mealChoiceSuccess.visibility = View.VISIBLE
             }
-        }
-    }
-
-    override fun performActionWithVoiceCommand(command: String){
-        when {
-            VoiceCommandsProcessingHelper.mealPickHelper(command,"Carne") ->
-                view.frameOpcaoCarne.performClick()
-            VoiceCommandsProcessingHelper.mealPickHelper(command,"Peixe")  ->
-                view.frameOpcaoPeixe.performClick()
-            VoiceCommandsProcessingHelper.mealPickHelper(command,"Dieta") ->
-                view.frameOpcaoDieta .performClick()
-            VoiceCommandsProcessingHelper.mealPickHelper(command,"Vegetariano")  ->
-                view.frameOpcaoVegetariano.performClick()
-            VoiceCommandsProcessingHelper.mealPickHelper(command,"Guardar")  ->
-                view.buttonConfirmMeal.performClick()
         }
     }
 
