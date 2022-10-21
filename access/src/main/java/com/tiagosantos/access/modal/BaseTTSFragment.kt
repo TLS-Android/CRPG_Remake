@@ -11,6 +11,7 @@ import com.tiagosantos.access.modal.settings.SRFragmentSettings
 import com.tiagosantos.access.modal.settings.TTSFragmentSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.common.ui.extension.observe
+import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 
 abstract class BaseTTSFragment<B : ViewDataBinding>(
     @LayoutRes
@@ -35,7 +36,7 @@ abstract class BaseTTSFragment<B : ViewDataBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        gossipVM.setContextualHelp(ttsSettings.contextualHelp ?: "")
+        gossipVM.setContextualHelp(ttsSettings.contextualHelp ?: EMPTY_STRING)
         gossipVM.talk()
     }
 

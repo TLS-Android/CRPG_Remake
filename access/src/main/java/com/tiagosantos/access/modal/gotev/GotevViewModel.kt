@@ -4,7 +4,9 @@ import android.app.Application
 import android.os.Bundle
 import android.speech.SpeechRecognizer.RESULTS_RECOGNITION
 import android.util.Log
+import androidx.constraintlayout.motion.utils.ViewState
 import androidx.lifecycle.*
+import com.tiagosantos.access.modal.settings.SRFragmentSettings
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import net.gotev.speech.GoogleVoiceTypingDisabledException
 import net.gotev.speech.Speech
@@ -12,7 +14,8 @@ import net.gotev.speech.SpeechDelegate
 import net.gotev.speech.SpeechRecognitionNotAvailable
 
 class GotevViewModel(
-    application: Application
+    application: Application,
+    srSettings: SRFragmentSettings
 ) : AndroidViewModel(application), DefaultLifecycleObserver {
 
     private var viewState: MutableLiveData<ViewState>? = null
@@ -26,13 +29,21 @@ class GotevViewModel(
         return viewState as MutableLiveData<ViewState>
     }
 
+    init {
+        Speech.init(
+            application.applicationContext,
+            application.packageName
+        )
+    }
+
     private fun notifyListening(isRecording: Boolean) {
         viewState?.value = viewState?.value?.copy(isListening = isRecording)
     }
 
     private fun updateResults(speechBundle: Bundle?) {
         val userSaid = speechBundle?.getStringArrayList(RESULTS_RECOGNITION)
-        viewState?.value = viewState?.value?.copy(spokenText = userSaid?.get(0) ?: "")
+        viewState?.value =
+            viewState?.value?.copy(spokenText = userSaid?.get(0) ?: EMPTY_STRING)
     }
 
     private fun initViewState() = ViewState(
@@ -41,28 +52,17 @@ class GotevViewModel(
         error = null
     )
 
-    init {
-        Speech.init(
-            application.applicationContext,
-            application.packageName
-        )
-    }
-
 
     fun listen() {
         try {
             // you must have android.permission.RECORD_AUDIO granted at this point
             Speech.getInstance().startListening(object : SpeechDelegate {
                 override fun onStartOfSpeech() {
-                    Log.i(
-                        "speech",
-                        "speech recognition is now active")
+                    Log.i("speech", "speech recognition is now active")
                 }
 
                 override fun onSpeechRmsChanged(value: Float) {
-                    Log.d(
-                        "speech",
-                        "rms is now: $value")
+                    Log.d("speech", "rms is now: $value")
                 }
 
                 override fun onSpeechPartialResults(results: List<String>) {
@@ -70,7 +70,9 @@ class GotevViewModel(
                     for (res in results) {
                         str.append(res).append(" ")
                     }
-                    Log.i("speech", "partial result: " + str.toString().trim { it <= ' ' })
+                    Log.i(
+                        "speech",
+                        "partial result: " + str.toString().trim { it <= ' ' })
                 }
 
                 override fun onSpeechResult(result: String) {
@@ -83,7 +85,6 @@ class GotevViewModel(
         } catch (exc: GoogleVoiceTypingDisabledException) {
             Log.e("speech", "Google voice typing must be enabled!")
         }
-
     }
 
     override fun onCleared() {
@@ -92,21 +93,20 @@ class GotevViewModel(
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    fun onStartView() {
-        //do something on start view if it's needed
-    }
+    fun onStartView() { //do something on start view if it's needed }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    fun onStopView() {
-        println("hello world!")
-        //do something on stop view if it's needed
-    }
+        @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+        fun onStopView() {
+            //do something on stop view if it's needed
+        }
 
-    data class ViewState(
-        var spokenText: String?,
-        val isListening: Boolean?,
-        val error: String?
-    )
+        data class ViewState(
+            var spokenText: String?,
+            val isListening: Boolean?,
+            val error: String?
+        )
+
+    }
 
 }
 

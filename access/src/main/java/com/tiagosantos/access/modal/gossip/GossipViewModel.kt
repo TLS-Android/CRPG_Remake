@@ -46,11 +46,8 @@ class GossipViewModel(
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     fun onStopView() {
-
-        println("hello world!")
         //do something on stop view if it's needed
     }
-
 }
 
 
