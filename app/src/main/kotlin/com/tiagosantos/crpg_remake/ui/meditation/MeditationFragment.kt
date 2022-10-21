@@ -21,7 +21,7 @@ class MeditationFragment(ttsSettings: TTSFragmentSettings) :
     layoutId = R.layout.fragment_meditation,
     FragmentSettings(
         appBarTitle = R.string.title_dashboard,
-        sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
+        sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
     ), ttsSettings
 ) {
     private lateinit var view: MealsFragmentBinding
@@ -38,7 +38,6 @@ class MeditationFragment(ttsSettings: TTSFragmentSettings) :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val medViewModel:MeditationViewModel by viewModels()
-
 
         val feelingsMap = mapOf(
            button_mood_relaxed to "RELAXADO", button_mood_happy to "FELIZ",
@@ -63,13 +62,11 @@ class MeditationFragment(ttsSettings: TTSFragmentSettings) :
             medViewModel.selectedMood = "CONFIANTE"
             goToMeditationMediaPlayer()
         }
-
     }
 
     override fun defineModality(ttsFlag: Boolean, srFlag: Boolean, hasRun: Boolean) {}
 
     override fun performActionWithVoiceCommand(command: String, actionMap: Map<String, Any>) {
-
 
         when {
             command.contains("Relaxado", true) ->
@@ -80,10 +77,6 @@ class MeditationFragment(ttsSettings: TTSFragmentSettings) :
                 button_mood_sleepy.performClick()
             command.contains("Confiante", true) ->
                 button_mood_confident.performClick()
-            command.contains("Querido", true) ->
-                button_mood_loved.performClick()
-            command.contains("Mente Sã", true) ->
-                button_mood_mindful.performClick()
         }
     }
 
