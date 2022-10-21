@@ -5,23 +5,23 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.google.android.material.card.MaterialCardView
-import com.tiagosantos.common.ui.base.BaseFragment
+import com.tiagosantos.access.modal.BaseModalFragment
+import com.tiagosantos.access.modal.settings.TTSFragmentSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
 
-class MealsFragment : BaseFragment<MealsFragmentBinding>(
+class MealsFragment(ttsSettings: TTSFragmentSettings) : BaseModalFragment<MealsFragmentBinding>(
     layoutId = R.layout.meals_fragment,
     FragmentSettings(
-        appBarTitle = R.string.title_dashboard,
+        appBarTitle = R.string.meal_action_bar_title,
         sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
-    )
+    ),
+    TTSFragmentSettings(R.string.indique_refeicao.toString())
 ) {
     private lateinit var view: MealsFragmentBinding
     private var flagMealChosen = false
-
-    val buttonList = listOf(true, true, true)
 
     @SuppressLint("SetTextI18n", "ResourceAsColor")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -77,7 +77,7 @@ class MealsFragment : BaseFragment<MealsFragmentBinding>(
         }
     }
 
-    private fun performActionWithVoiceCommand(command: String){
+    override fun performActionWithVoiceCommand(command: String){
         when {
             VoiceCommandsProcessingHelper.mealPickHelper(command,"Carne") ->
                 view.frameOpcaoCarne.performClick()

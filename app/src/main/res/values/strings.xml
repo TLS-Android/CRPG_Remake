@@ -13,6 +13,8 @@
         Please, check your internet connection and try again.</string>
 
     //MEALS
+    <string name="meal_action_bar_title">Seleção de refeição</string>
+
     <string name="imagem_ilutrativa_de_prato_de_carne">Imagem ilutrativa de prato de carne</string>
     <string name="imagem_ilustrativa_de_prato_de_peixe">Imagem ilustrativa de prato de peixe</string>
     <string name="imagem_ilustrativa_de_prato_de_dieta">Imagem ilustrativa de prato de dieta</string>
@@ -75,5 +77,6 @@
     <string name="selecionar_data_hint">Selecionar data</string>
     <string name="selecionar_data">Selecionar data</string>
     <string name="nenhum_dia_selecionado_msg">Nenhum dia selecionado</string>
+    <string name="indique_refeicao">Por favor selecione indique a refeicao pretendida</string>
 
 </resources>
