@@ -29,9 +29,6 @@ class MainActivity : BaseActivity(
 ) {
     private lateinit var binding: ActivityMainBinding
 
-    val gotev by viewModels<GotevViewModel>()
-    val gossip by viewModels<GossipViewModel>()
-
     override fun initToolbar() {
         TODO("Not yet implemented")
     }
@@ -43,6 +40,9 @@ class MainActivity : BaseActivity(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val gotev by viewModels<GotevViewModel>()
+        val gossip by viewModels<GossipViewModel>()
 
         startKoin {
             modules(appModule) //The modules() function in startKoin load the given list of modules

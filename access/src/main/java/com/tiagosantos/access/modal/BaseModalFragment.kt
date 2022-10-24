@@ -62,28 +62,26 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
         val srFlag = modalityPreferences.getBoolean(SR, false)
         val hasRun = modalityPreferences.getBoolean(flag.toString(), false)
 
-        defineModality(ttsFlag, srFlag, hasRun)
+        setupModality(ttsFlag, srFlag, hasRun)
     }
 
     open fun performActionWithVoiceCommand(command: String, actionMap: Map<String,Any>) {
         generalHelper(command, actionMap)
     }
 
-    open fun defineModality(
+    open fun setupModality(
        ttsFlag: Boolean,
        srFlag: Boolean,
        hasRun: Boolean)
-    { if (!hasRun) {
+    {
+        if (!hasRun) {
             when {
-                ttsFlag && !srFlag -> println("ola")
-                !ttsFlag && srFlag -> println("ola")
-                ttsFlag && srFlag -> println("ola")
+                ttsFlag && !srFlag -> gossip.talk()
+                !ttsFlag && srFlag -> gotev.listen()
+                ttsFlag && srFlag -> { gossip.talk(); gotev.listen(); }
             }
         } else {
-            when {
-                !ttsFlag && srFlag -> println("ola")
-                ttsFlag && srFlag -> println("ola")
-            }
+            when { !ttsFlag && srFlag || ttsFlag && srFlag -> gotev.listen() }
         }
     }
 }
