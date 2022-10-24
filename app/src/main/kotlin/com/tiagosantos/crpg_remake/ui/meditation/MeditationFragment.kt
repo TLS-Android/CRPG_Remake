@@ -64,10 +64,7 @@ class MeditationFragment(ttsSettings: TTSSettings) :
         }
     }
 
-    override fun defineModality(ttsFlag: Boolean, srFlag: Boolean, hasRun: Boolean) {}
-
     override fun performActionWithVoiceCommand(command: String, actionMap: Map<String, Any>) {
-
         when {
             command.contains("Relaxado", true) ->
                 button_mood_relaxed.performClick()

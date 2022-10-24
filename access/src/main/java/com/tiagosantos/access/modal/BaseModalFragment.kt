@@ -8,8 +8,11 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.tiagosantos.access.modal.gossip.GossipViewModel
+import com.tiagosantos.access.modal.gotev.GotevViewModel
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.base.BaseFragment
@@ -22,13 +25,16 @@ import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.generalHelp
 abstract class BaseModalFragment<B : ViewDataBinding>(
     @LayoutRes
     private val layoutId: Int,
-    private val settings: FragmentSettings,
+    settings: FragmentSettings,
     private val ttsSettings: TTSSettings,
     private val srSettings: SRSettings,
 ) : BaseFragment<B>(
     layoutId = layoutId,
     settings = settings,
 ) {
+    val gossip: GossipViewModel by activityViewModels()
+    val gotev: GotevViewModel by activityViewModels()
+
     private val _flag = MutableLiveData<String?>()
     private val flag: LiveData<String?> = _flag
 

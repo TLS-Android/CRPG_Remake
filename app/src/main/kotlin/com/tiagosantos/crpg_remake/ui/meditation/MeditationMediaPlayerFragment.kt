@@ -12,13 +12,15 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import com.google.android.exoplayer2.ExoPlayer
 import com.tiagosantos.access.modal.BaseModalFragment
+import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationMediaPlayerBinding
 
-class MeditationMediaPlayerFragment(ttsSettings: TTSSettings) :
-    BaseModalFragment<FragmentMeditationMediaPlayerBinding>(
+class MeditationMediaPlayerFragment(
+    ttsSettings: TTSSettings
+) : BaseModalFragment<FragmentMeditationMediaPlayerBinding>(
         layoutId = R.layout.fragment_meditation,
         FragmentSettings(
             appBarTitle = R.string.title_dashboard,
@@ -26,7 +28,10 @@ class MeditationMediaPlayerFragment(ttsSettings: TTSSettings) :
         ),
         ttsSettings = TTSSettings(
             "Indique qual o seu estado de espirito atual",
-            "Meditacao"
+            isMuted = false
+        ),
+        srSettings = SRSettings(
+            isListening = false
         )
 ) {
 
@@ -106,6 +111,10 @@ class MeditationMediaPlayerFragment(ttsSettings: TTSSettings) :
             count { it.endsWith("e") }
         }
         println("There are $countEndsWithE elements that end with e.")
+    }
+
+    override fun observeLifecycleEvents() {
+        TODO("Not yet implemented")
     }
 
 }

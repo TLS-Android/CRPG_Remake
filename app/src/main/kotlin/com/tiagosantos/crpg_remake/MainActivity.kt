@@ -3,11 +3,14 @@ package com.tiagosantos.crpg_remake
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.tiagosantos.access.modal.gossip.GossipViewModel
+import com.tiagosantos.access.modal.gotev.GotevViewModel
 import com.tiagosantos.common.ui.base.ActivitySettings
 import com.tiagosantos.common.ui.base.BaseActivity
 import com.tiagosantos.common.ui.model.appModule
@@ -24,8 +27,10 @@ class MainActivity : BaseActivity(
         )
     )
 ) {
-
     private lateinit var binding: ActivityMainBinding
+
+    val gotev by viewModels<GotevViewModel>()
+    val gossip by viewModels<GossipViewModel>()
 
     override fun initToolbar() {
         TODO("Not yet implemented")
@@ -58,6 +63,5 @@ class MainActivity : BaseActivity(
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
     }
 }

@@ -3,9 +3,13 @@ package com.tiagosantos.crpg_remake.ui.meals
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.google.android.material.card.MaterialCardView
 import com.tiagosantos.access.modal.BaseModalFragment
+import com.tiagosantos.access.modal.gossip.GossipViewModel
+import com.tiagosantos.access.modal.gotev.GotevViewModel
+import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
@@ -22,7 +26,13 @@ class MealsFragment(ttsSettings: TTSSettings) : BaseModalFragment<MealsFragmentB
         appBarTitle = R.string.meal_action_bar_title,
         sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
     ),
-    TTSSettings(R.string.indique_refeicao.toString())
+    TTSSettings(
+        R.string.indique_refeicao.toString(),
+        isMuted = false
+    ),
+    SRSettings(
+        isListening = false
+    )
 ) {
     private lateinit var view: MealsFragmentBinding
     private var flagMealChosen = false
@@ -52,17 +62,16 @@ class MealsFragment(ttsSettings: TTSSettings) : BaseModalFragment<MealsFragmentB
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        gossip.contextualHelp
+
+
         val command = "ispis lorem"
         performActionWithVoiceCommand(command,actionMap)
 
         fun setChecks(cardList: List<MaterialCardView?>, card: MaterialCardView) {
             if (!card.isChecked) mealsVM.updateSelectedOption(1)
                  else mealsVM.updateSelectedOption(0)
-
-            for (s in cardList) {
-                if (s != card) s?.isChecked = false
-            }
-        }
+            for (s in cardList) { if (s != card) s?.isChecked = false } }
 
         view.frameOpcaoCarne.setOnClickListener {
             setChecks(cardList,  view.frameOpcaoCarne)

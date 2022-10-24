@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.speech.SpeechRecognizer.RESULTS_RECOGNITION
 import android.util.Log
 import androidx.lifecycle.*
-import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import net.gotev.speech.GoogleVoiceTypingDisabledException
 import net.gotev.speech.Speech
@@ -14,7 +13,6 @@ import net.gotev.speech.SpeechRecognitionNotAvailable
 
 class GotevViewModel(
     application: Application,
-    srSettings: SRSettings
 ) : AndroidViewModel(application), DefaultLifecycleObserver {
 
     private var viewState: MutableLiveData<ViewState>? = null
@@ -50,7 +48,10 @@ class GotevViewModel(
         try {
             // you must have android.permission.RECORD_AUDIO granted at this point
             Speech.getInstance().startListening(object : SpeechDelegate {
-                override fun onStartOfSpeech() { Log.i("speech", "speech recognition is now active") }
+                override fun onStartOfSpeech() {
+                    notifyListening(isRecording = true)
+                    Log.i("speech", "speech recognition is now active")
+                }
 
                 override fun onSpeechRmsChanged(value: Float) { Log.d("speech", "rms is now: $value") }
 
@@ -62,6 +63,7 @@ class GotevViewModel(
                 override fun onSpeechResult(result: String) {
                     Log.i("speech", "result: $result")
                     viewState?.value?.spokenText = result
+                    notifyListening(isRecording = false)
                 }
             })
         } catch (exc: SpeechRecognitionNotAvailable) {

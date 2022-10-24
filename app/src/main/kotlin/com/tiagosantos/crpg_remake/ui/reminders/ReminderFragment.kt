@@ -14,9 +14,6 @@ import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.common.ui.utils.InputFilterMinMax
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.*
-import com.tiagosantos.crpg_remake.domain.model.AlarmFrequency
-import com.tiagosantos.crpg_remake.domain.model.AlarmType
-import com.tiagosantos.crpg_remake.domain.model.ReminderType
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.newReminder
 import java.util.*
 
@@ -30,7 +27,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private lateinit var view: ReminderFragmentBinding
     private lateinit var viewIntro: ReminderActivityIntroBinding
     private lateinit var viewSuccess: ReminderActivitySuccessBinding
-
 
     private lateinit var viewLembrar1: LayoutParentLembrarBinding
 
