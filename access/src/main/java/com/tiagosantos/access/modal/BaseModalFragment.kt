@@ -25,7 +25,7 @@ import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.generalHelp
 abstract class BaseModalFragment<B : ViewDataBinding>(
     @LayoutRes
     private val layoutId: Int,
-    private val settings: FragmentSettings,
+    settings: FragmentSettings,
     private val ttsSettings: TTSSettings,
     private val srSettings: SRSettings,
 ) : BaseFragment<B>(

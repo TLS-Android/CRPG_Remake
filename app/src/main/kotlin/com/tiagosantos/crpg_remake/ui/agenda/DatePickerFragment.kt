@@ -17,23 +17,25 @@ import com.michalsvec.singlerowcalendar.selection.CalendarSelectionManager
 import com.tiagosantos.common.ui.singlerowcalendar.calendar.SingleRowCalendar
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils
 import com.tiagosantos.access.modal.BaseModalFragment
+import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentDatePickerBinding
 import java.util.*
 
-class DatePickerFragment(ttsSettings: TTSSettings) :
+class DatePickerFragment(ttsSettings: TTSSettings, srSettings: SRSettings) :
     BaseModalFragment<FragmentDatePickerBinding>(
         layoutId = R.layout.fragment_date_picker,
         FragmentSettings(
             appBarTitle = "ESCOLHER DATA",
             sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
-        ), TTSSettings(
-"Por favor selecione um dia movendo os quadrados amarelos para a esquerda " +
+        ),
+        ttsSettings = TTSSettings("Por favor selecione um dia movendo os quadrados amarelos para a esquerda " +
         "e direita e premindo aquele que pretender selecionar"
-        )
-) {
+        ),
+        srSettings = srSettings
+    ) {
     private lateinit var view: FragmentDatePickerBinding
     private var selected = false
     private val calendar = Calendar.getInstance()
@@ -166,6 +168,10 @@ class DatePickerFragment(ttsSettings: TTSSettings) :
     }
 
     override fun onInitDataBinding() {
+        TODO("Not yet implemented")
+    }
+
+    override fun observeLifecycleEvents() {
         TODO("Not yet implemented")
     }
 }

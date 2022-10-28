@@ -24,13 +24,8 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
             appBarTitle = R.string.title_dashboard,
             sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
         ),
-        ttsSettings = TTSSettings(
-            "Indique qual o seu estado de espirito atual",
-            isMuted = false
-        ),
-        srSettings = SRSettings(
-            isListening = false
-        )
+        ttsSettings = TTSSettings("Indique qual o seu estado de espirito atual"),
+        srSettings = SRSettings()
 ) {
 
     private lateinit var view: FragmentMeditationMediaPlayerBinding
