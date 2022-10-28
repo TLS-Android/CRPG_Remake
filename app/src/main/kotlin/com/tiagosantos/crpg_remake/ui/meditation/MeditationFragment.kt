@@ -14,8 +14,6 @@ import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationBinding
-import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
-import java.util.*
 
 class MeditationFragment(ttsSettings: TTSSettings, srSettings: SRSettings) :
     BaseModalFragment<FragmentMeditationBinding>(
@@ -28,53 +26,49 @@ class MeditationFragment(ttsSettings: TTSSettings, srSettings: SRSettings) :
     private lateinit var view: FragmentMeditationBinding
     private var onResumeFlag = false
 
+    val feelingsMap = mapOf(
+        view.buttonMoodRelaxed to "RELAXADO", view.buttonMoodHappy to "FELIZ",
+        view.buttonMoodSleepy to "SONOLENTO", view.buttonMoodConfident to "CONFIANTE")
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?,
-    ): View { return view.root }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    ): View {
         val medViewModel:MeditationViewModel by viewModels()
 
-        view
+        with(view){
+            buttonMoodRelaxed.setOnClickListener{
+                medViewModel.selectedMood = "RELAXADO"
+            }.also { goToMeditationMediaPlayer() }
 
+            buttonMoodHappy.setOnClickListener{
+                medViewModel.selectedMood = "FELIZ"
+            }.also { goToMeditationMediaPlayer() }
 
-        val feelingsMap = mapOf(
-           button_mood_relaxed to "RELAXADO", button_mood_happy to "FELIZ",
-            button_mood_sleepy to 3, button_mood_confident to)
+            buttonMoodSleepy.setOnClickListener{
+                medViewModel.selectedMood = "SONOLENTO"
+            }.also { goToMeditationMediaPlayer() }
 
-        button_mood_relaxed.setOnClickListener{
-            medViewModel.selectedMood = "RELAXADO"
-            goToMeditationMediaPlayer()
-        }
-
-        button_mood_happy.setOnClickListener{
-            medViewModel.selectedMood = "FELIZ"
-            goToMeditationMediaPlayer()
-        }
-
-        button_mood_sleepy.setOnClickListener{
-            medViewModel.selectedMood = "SONOLENTO"
-            goToMeditationMediaPlayer()
-        }
-
-        button_mood_confident.setOnClickListener{
-            medViewModel.selectedMood = "CONFIANTE"
-            goToMeditationMediaPlayer()
+            buttonMoodConfident.setOnClickListener{
+                medViewModel.selectedMood = "CONFIANTE"
+            }.also { goToMeditationMediaPlayer() }
+            return root
         }
     }
 
     override fun performActionWithVoiceCommand(command: String, actionMap: Map<String, Any>) {
-        when {
-            command.contains("Relaxado", true) ->
-                button_mood_relaxed.performClick()
-            command.contains("Feliz", true) ->
-                button_mood_happy.performClick()
-            command.contains("Com Sono", true) ->
-                button_mood_sleepy.performClick()
-            command.contains("Confiante", true) ->
-                button_mood_confident.performClick()
+        with(view){
+            when {
+                command.contains("Relaxado", true) ->
+                    buttonMoodRelaxed.performClick()
+                command.contains("Feliz", true) ->
+                    buttonMoodHappy.performClick()
+                command.contains("Com Sono", true) ->
+                    buttonMoodSleepy.performClick()
+                command.contains("Confiante", true) ->
+                    buttonMoodConfident.performClick()
+                else -> { }
+            }
         }
     }
 
