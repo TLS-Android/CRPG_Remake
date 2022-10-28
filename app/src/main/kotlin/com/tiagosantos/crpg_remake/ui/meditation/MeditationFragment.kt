@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import com.tiagosantos.access.modal.BaseModalFragment
+import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
@@ -16,28 +17,28 @@ import com.tiagosantos.crpg_remake.databinding.FragmentMeditationBinding
 import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
 import java.util.*
 
-class MeditationFragment(ttsSettings: TTSSettings) :
+class MeditationFragment(ttsSettings: TTSSettings, srSettings: SRSettings) :
     BaseModalFragment<FragmentMeditationBinding>(
     layoutId = R.layout.fragment_meditation,
     FragmentSettings(
         appBarTitle = R.string.title_dashboard,
         sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
-    ), ttsSettings
-) {
-    private lateinit var view: MealsFragmentBinding
+    ), ttsSettings, srSettings) {
+
+    private lateinit var view: FragmentMeditationBinding
     private var onResumeFlag = false
-    private var hasInitSR = false
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?,
-    ): View {
-        return view.root
-    }
+    ): View { return view.root }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val medViewModel:MeditationViewModel by viewModels()
+
+        view
+
 
         val feelingsMap = mapOf(
            button_mood_relaxed to "RELAXADO", button_mood_happy to "FELIZ",
@@ -93,6 +94,10 @@ class MeditationFragment(ttsSettings: TTSSettings) :
     }
 
     override fun onInitDataBinding() {
+        TODO("Not yet implemented")
+    }
+
+    override fun observeLifecycleEvents() {
         TODO("Not yet implemented")
     }
 }

@@ -20,30 +20,27 @@ import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
 // Afterwards, use onActivityCreated() to do any final initialisations you want to do once
 // everything has completed.
 
-class MealsFragment(ttsSettings: TTSSettings) : BaseModalFragment<MealsFragmentBinding>(
-    layoutId = R.layout.meals_fragment,
-    FragmentSettings(
-        appBarTitle = R.string.meal_action_bar_title,
-        sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
-    ),
-    TTSSettings(
-        R.string.indique_refeicao.toString(),
-        isMuted = false
-    ),
-    SRSettings(
-        isListening = false
-    )
+class MealsFragment(srSettings: SRSettings) :
+    BaseModalFragment<MealsFragmentBinding>(
+        layoutId = R.layout.meals_fragment,
+        FragmentSettings(
+            appBarTitle = R.string.meal_action_bar_title,
+            sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
+        ),
+        TTSSettings(R.string.indique_refeicao.toString()),
+        srSettings,
 ) {
     private lateinit var view: MealsFragmentBinding
     private var flagMealChosen = false
 
     private val actionMap: Map<String, Any> by lazy {
-        mapOf("Carne" to view.frameOpcaoCarne.performClick(),
+        mapOf(
+            "Carne" to view.frameOpcaoCarne.performClick(),
             "Peixe" to view.frameOpcaoPeixe.performClick(),
             "Dieta" to  view.frameOpcaoDieta.performClick(),
             "Vegetariano" to view.frameOpcaoVegetariano.performClick(),
-            "Guardar" to view.buttonConfirmMeal.performClick())
-    }
+            "Guardar" to view.buttonConfirmMeal.performClick()
+        )}
     private var isLunch = false
     private val mealsVM: MealsViewModel by viewModels()
     private lateinit var cardList: List<MaterialCardView>
@@ -63,7 +60,6 @@ class MealsFragment(ttsSettings: TTSSettings) : BaseModalFragment<MealsFragmentB
         super.onActivityCreated(savedInstanceState)
 
         gossip.contextualHelp
-
 
         val command = "ispis lorem"
         performActionWithVoiceCommand(command,actionMap)
