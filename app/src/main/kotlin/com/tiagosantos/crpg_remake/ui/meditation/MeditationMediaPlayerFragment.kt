@@ -18,9 +18,7 @@ import com.tiagosantos.common.ui.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationMediaPlayerBinding
 
-class MeditationMediaPlayerFragment(
-    ttsSettings: TTSSettings
-) : BaseModalFragment<FragmentMeditationMediaPlayerBinding>(
+class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaPlayerBinding>(
         layoutId = R.layout.fragment_meditation,
         FragmentSettings(
             appBarTitle = R.string.title_dashboard,

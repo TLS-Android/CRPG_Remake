@@ -18,10 +18,13 @@ import com.tiagosantos.crpg_remake.databinding.FragmentMeditationBinding
 class MeditationFragment(ttsSettings: TTSSettings, srSettings: SRSettings) :
     BaseModalFragment<FragmentMeditationBinding>(
     layoutId = R.layout.fragment_meditation,
-    FragmentSettings(
+    settings  = FragmentSettings(
         appBarTitle = R.string.title_dashboard,
         sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
-    ), ttsSettings, srSettings) {
+    ),
+    ttsSettings = ttsSettings,
+    srSettings = srSettings
+) {
 
     private lateinit var view: FragmentMeditationBinding
     private var onResumeFlag = false
