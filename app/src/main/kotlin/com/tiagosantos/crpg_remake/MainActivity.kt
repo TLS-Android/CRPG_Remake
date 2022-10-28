@@ -44,9 +44,7 @@ class MainActivity : BaseActivity(
         val gotev by viewModels<GotevViewModel>()
         val gossip by viewModels<GossipViewModel>()
 
-        startKoin {
-            modules(appModule) //The modules() function in startKoin load the given list of modules
-        }
+        startKoin { modules(appModule) //The modules() function in startKoin load the given list of modules }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

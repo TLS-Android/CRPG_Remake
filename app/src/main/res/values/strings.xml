@@ -34,7 +34,7 @@
     //Shared preferences
     <string name="mealsHasRun">mealsHasRun</string>
     <string name="remindersHasRun">remindersHasRun</string>
-    <string name="meditationHasRun">mediationHasRun</string>
+    <string name="meditationHasRun">meditationHasRun</string>
     <string name="datePickerHasRun">datePickerHasRun</string>
 
     //Permissions

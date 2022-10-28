@@ -65,9 +65,11 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
         setupModality(ttsFlag, srFlag, hasRun)
     }
 
-    open fun performActionWithVoiceCommand(command: String, actionMap: Map<String,Any>) {
-        generalHelper(command, actionMap)
-    }
+    open fun performActionWithVoiceCommand(
+        command: String,
+        actionMap: Map<String,Any>
+    ) = generalHelper(command, actionMap)
+
 
     open fun setupModality(
        ttsFlag: Boolean,
@@ -78,7 +80,7 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
             when {
                 ttsFlag && !srFlag -> gossip.talk()
                 !ttsFlag && srFlag -> gotev.listen()
-                ttsFlag && srFlag -> { gossip.talk(); gotev.listen(); }
+                ttsFlag && srFlag -> { gossip.talk(); gotev.listen() }
             }
         } else {
             when { !ttsFlag && srFlag || ttsFlag && srFlag -> gotev.listen() }
