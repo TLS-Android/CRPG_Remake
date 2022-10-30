@@ -1,6 +1,5 @@
 package com.tiagosantos.crpg_remake.ui.meditation
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
