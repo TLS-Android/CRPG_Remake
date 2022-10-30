@@ -5,6 +5,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_meditacao">Meditacao</string>
+    <string name="title_media">Media player</string>
     <string name="home_fragment_appbar_title">Plataforma CRPG</string>
 
     <string name="button_sign_in">Sign In</string>
@@ -35,6 +37,7 @@
     <string name="mealsHasRun">mealsHasRun</string>
     <string name="remindersHasRun">remindersHasRun</string>
     <string name="meditationHasRun">meditationHasRun</string>
+    <string name="mediaHasRun">mediaHasRun</string>
     <string name="datePickerHasRun">datePickerHasRun</string>
 
     //Permissions

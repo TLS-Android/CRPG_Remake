@@ -19,10 +19,11 @@ import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationMediaPlayerBinding
 
 class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaPlayerBinding>(
-        layoutId = R.layout.fragment_meditation,
+        layoutId = R.layout.fragment_meditation_media_player,
         FragmentSettings(
-            appBarTitle = R.string.title_dashboard,
+            appBarTitle = R.string.title_media,
             sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
+            showBackButton = true
         ),
         ttsSettings = TTSSettings("Indique qual o seu estado de espirito atual"),
         srSettings = SRSettings()
@@ -68,8 +69,6 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
-
-        showBackButton()
     }
 
     override fun performActionWithVoiceCommand(command: String){

@@ -70,8 +70,6 @@ class PlaygroundMediaPlayerFragment(ttsSettings: TTSFragmentSettings) :
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
-
-        showBackButton()
     }
 
     override fun performActionWithVoiceCommand(command: String){

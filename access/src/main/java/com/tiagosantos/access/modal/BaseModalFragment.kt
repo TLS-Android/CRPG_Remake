@@ -32,7 +32,7 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
     layoutId = layoutId,
     settings = settings,
 ) {
-    val gossip: GossipViewModel by activityViewModels()
+    open val gossip: GossipViewModel by activityViewModels()
     val gotev: GotevViewModel by activityViewModels()
 
     private val _flag = MutableLiveData<String?>()
