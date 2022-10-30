@@ -15,16 +15,13 @@
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
     android:background="@color/white_56"
-    android:layoutDirection="ltr"
     android:orientation="vertical"
     android:paddingStart="20dp"
-    android:paddingEnd="20dp"
-    tools:targetApi="28">
+    android:paddingEnd="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,7 +37,6 @@
             android:layout_height="60dp"
             android:scaleType="fitXY"
             android:tintMode="src_in"
-            android:contentDescription="@string/retroceder_reproducao"
             app:tint="@color/md_blue_100" />
 
         <ImageButton
@@ -50,7 +46,6 @@
             android:layout_height="60dp"
             android:scaleType="fitXY"
             android:tintMode="src_in"
-            android:contentDescription="@string/reproduzir_faixa"
             app:tint="@color/md_blue_100" />
 
         <ImageButton
@@ -60,7 +55,6 @@
             android:layout_height="60dp"
             android:scaleType="fitXY"
             android:tintMode="src_in"
-            android:contentDescription="@string/pausar_reproducao"
             app:tint="@color/md_blue_100" />
 
         <ImageButton
@@ -70,9 +64,7 @@
             android:layout_height="60dp"
             android:scaleType="fitXY"
             android:tintMode="src_in"
-            android:contentDescription="@string/avancar_reproducao"
             app:tint="@color/md_blue_100" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -114,5 +106,4 @@
             android:textStyle="bold" />
 
     </LinearLayout>
-
 </LinearLayout>

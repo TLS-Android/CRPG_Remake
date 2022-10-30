@@ -41,15 +41,12 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?,
-    ): View { return view.root }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    ): View {
         (activity as AppCompatActivity).supportActionBar?.title = "REPRODUZIR ÁUDIO"
-        text_selected_mood.text = medViewModel.selectedMood
+        view.textSelectedMood.text = medViewModel.selectedMood
         medViewModel.setupPlayer(player,view)
 
-        with(mood_color){
+        with(view.moodColor){
             when(medViewModel.selectedMood){
                 "RELAXADO" -> this.setBackgroundColor(android.graphics.Color.parseColor("#00BBF2"))
                 "FELIZ" -> this.setBackgroundColor(android.graphics.Color.parseColor("#87B700"))
@@ -60,7 +57,7 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
             }
         }
 
-        button_return_meditation.setOnClickListener {
+        view.buttonReturnMeditation.setOnClickListener {
             val fragment: Fragment = MeditationFragment()
             val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
@@ -69,16 +66,26 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
+
+        return view.root }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
     }
 
     override fun performActionWithVoiceCommand(command: String){
-        when {
-            command.contains("Tocar", true) -> exo_play?.performClick()
-            command.contains("Parar", true) -> exo_pause?.performClick()
-            command.contains("Passar à frente", true) -> exo_ffwd?.performClick()
-            command.contains("Passar a trás", true) -> exo_rew?.performClick()
-            command.contains("Regressar", true) -> button_return_meditation?.performClick()
-        }
+
+       with(view){
+           when {
+               command.contains("Tocar", true) -> exo_play?.performClick()
+               command.contains("Parar", true) -> exo_pause?.performClick()
+               command.contains("Passar à frente", true) -> exo_ffwd?.performClick()
+               command.contains("Passar a trás", true) -> exo_rew?.performClick()
+               command.contains("Regressar", true) -> buttonReturnMeditation.performClick()
+           }
+       }
+
     }
 
     override fun onPause() {
