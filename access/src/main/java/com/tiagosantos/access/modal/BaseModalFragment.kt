@@ -55,6 +55,7 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        gossip.setContextualHelp(ttsSettings.contextualHelp!!)
 
         val modalityPreferences =
             this.requireActivity().getSharedPreferences(MODALITY, Context.MODE_PRIVATE)

@@ -66,7 +66,6 @@ class GotevViewModel(
                 override fun onSpeechResult(result: String) {
                     Log.i("speech", "result: $result")
                     viewState?.value?.spokenText = result
-                    _speechResult = result
                     notifyListening(isRecording = false)
                 }
             })
