@@ -14,6 +14,7 @@ import com.tiagosantos.access.modal.BaseModalFragment
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.base.FragmentSettings
+import com.tiagosantos.common.ui.extension.observe
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationMediaPlayerBinding
 
@@ -27,11 +28,12 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
         ttsSettings = TTSSettings("Indique qual o seu estado de espirito atual"),
         srSettings = SRSettings()
 ) {
-
     private lateinit var view: FragmentMeditationMediaPlayerBinding
 
     private val medViewModel: MeditationViewModel by viewModels()
     private val player = ExoPlayer.Builder(requireContext()).build()
+
+    val actionMap = mapOf("ola" to "adeus")
 
     companion object {
         fun newInstance() = MeditationMediaPlayerFragment()
@@ -57,7 +59,7 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
         }
 
         view.buttonReturnMeditation.setOnClickListener {
-            val fragment: Fragment = MeditationFragment()
+            val fragment: Fragment = MeditationFragment(TTSSettings())
             val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, fragment)
@@ -65,16 +67,17 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
-
-        return view.root }
+        return view.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        gotev.speechResult.observe(viewLifecycleOwner){
+            performActionWithVoiceCommand(it, actionMap)
+        }
     }
 
-    override fun performActionWithVoiceCommand(command: String){
-
+    override fun performActionWithVoiceCommand(command: String, actionMap: Map<String,Any>){
        with(view){
            when {
                command.contains("Tocar", true) -> exo_play?.performClick()
@@ -82,9 +85,9 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
                command.contains("Passar à frente", true) -> exo_ffwd?.performClick()
                command.contains("Passar a trás", true) -> exo_rew?.performClick()
                command.contains("Regressar", true) -> buttonReturnMeditation.performClick()
+               else -> { print("ola") }
            }
        }
-
     }
 
     override fun onPause() {

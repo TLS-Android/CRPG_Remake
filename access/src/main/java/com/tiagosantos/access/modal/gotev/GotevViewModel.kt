@@ -18,6 +18,9 @@ class GotevViewModel(
     private var viewState: MutableLiveData<ViewState>? = null
     private val isListening get() = viewState?.value?.isListening ?: false
 
+    private val _speechResult = MutableLiveData<String>()
+    val speechResult: LiveData<String> = _speechResult
+
     fun getViewState(): LiveData<ViewState> {
         if (viewState == null) {
             viewState = MutableLiveData()
@@ -63,6 +66,7 @@ class GotevViewModel(
                 override fun onSpeechResult(result: String) {
                     Log.i("speech", "result: $result")
                     viewState?.value?.spokenText = result
+                    _speechResult = result
                     notifyListening(isRecording = false)
                 }
             })

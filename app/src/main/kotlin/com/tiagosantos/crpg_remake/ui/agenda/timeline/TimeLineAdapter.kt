@@ -221,7 +221,7 @@ class TimeLineAdapter(
                 }
             }
 
-            fun performActionWithVoiceCommand(command: String) {
+            fun performActionWithVoiceCommand(command: String, actionMap: Map<String,Any>) {
                 when {
                     command.contains("Escolher Almoço", true) && id == "Almoço" ||
                         command.contains("Escolher Jantar", true) && id == "Jantar" ->

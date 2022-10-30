@@ -16,8 +16,9 @@ class MeditationFragment(ttsSettings: TTSSettings, srSettings: SRSettings) :
     BaseModalFragment<FragmentMeditationBinding>(
     layoutId = R.layout.fragment_meditation,
     settings  = FragmentSettings(
-        appBarTitle = R.string.title_dashboard,
+        appBarTitle = R.string.title_meditacao,
         sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
+        showBackButton = true
     ),
     ttsSettings = ttsSettings,
     srSettings = srSettings
