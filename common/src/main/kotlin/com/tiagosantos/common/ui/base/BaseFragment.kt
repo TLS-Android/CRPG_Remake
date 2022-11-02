@@ -76,13 +76,6 @@ abstract class BaseFragment<B : ViewDataBinding>(
         observeLifecycleEvents()
         applyResources()
 
-        val modalityPreferences =
-            this.requireActivity().getSharedPreferences(MODALITY, Context.MODE_PRIVATE)
-        val ttsFlag = modalityPreferences.getBoolean("TTS", false)
-        val srFlag = modalityPreferences.getBoolean("SR", false)
-
-        val hasRun = modalityPreferences.getBoolean("mealsHasRun", false)
-
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner,
             onBackPressedCallback
