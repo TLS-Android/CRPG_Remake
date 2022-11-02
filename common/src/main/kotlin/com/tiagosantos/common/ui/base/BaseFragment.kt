@@ -108,7 +108,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == android.R.id.home && settings.homeIconBackPressEnabled) {
+        return if (item.itemId == android.R.id.home) {
             requireActivity().onBackPressed()
             true
         } else super.onOptionsItemSelected(item)
@@ -162,11 +162,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
                     throw UnsupportedOperationException("Your activity should extends from 'BaseActivity' to set AppBar title")
                 if (settings.appBarSubTitle as Int != 0 || (settings.appBarSubTitle as String).isEmpty())
                     throw UnsupportedOperationException("Your activity should extends from 'BaseActivity' to set AppBar sub-title")
-                if (settings.homeIconId != 0)
-                    throw UnsupportedOperationException("Your activity should extends from 'BaseActivity' to set home indicator icon")
-                if (settings.appBarTitleColor != 0)
-                    throw UnsupportedOperationException("Your activity should extends from 'BaseActivity' to set AppBar Title color")
-            }
+                }
 
             (requireActivity() as BaseActivityInterface).apply {
                 setAppBarTitle(
@@ -190,33 +186,15 @@ abstract class BaseFragment<B : ViewDataBinding>(
                 if (settings.appBarColor != 0)
                     setAppBarColor(settings.appBarColor)
 
-                //apply color to status bar
-                if (settings.statusBarColor != 0)
-                    setStatusBarColor(settings.statusBarColor)
-
-                //apply color to appbar title
-                if (settings.appBarTitleColor != 0)
-                    setAppBarTitleColor(settings.appBarTitleColor)
-
-                //apply window background
-                if (settings.appWindowBackground != 0)
-                    setAppWindowBackground(settings.appWindowBackground)
-
-                //enable or disable home icon (0 - disable)
-                setHomeAsUpIndicatorIcon(settings.homeIconId)
             }
         }
 
     }
-
-
 
     private fun showBackButton() {
         if (activity is MainActivity && settings.showBackButton == true) {
             (activity as MainActivity?)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
     }
-
-
 
 }
