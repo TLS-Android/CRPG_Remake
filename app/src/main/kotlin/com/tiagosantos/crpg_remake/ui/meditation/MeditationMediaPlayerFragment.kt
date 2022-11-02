@@ -103,16 +103,6 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
         TODO("Not yet implemented")
     }
 
-    fun experiment(){
-        val numbers = mutableListOf("one", "two", "three")
-        val countEndsWithE = numbers.run {
-            add("four")
-            add("five")
-            count { it.endsWith("e") }
-        }
-        println("There are $countEndsWithE elements that end with e.")
-    }
-
     override fun observeLifecycleEvents() {
         TODO("Not yet implemented")
     }
