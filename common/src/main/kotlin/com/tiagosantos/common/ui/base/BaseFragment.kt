@@ -44,6 +44,12 @@ abstract class BaseFragment<B : ViewDataBinding>(
         }
     }
 
+    private fun showBackButton() {
+        if (activity is MainActivity && settings.showBackButton == true) {
+            (activity as MainActivity?)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
+    }
+
     /**
      * Called to Initialize view data binding variables when fragment view is created.
      */
@@ -81,8 +87,6 @@ abstract class BaseFragment<B : ViewDataBinding>(
             viewLifecycleOwner,
             onBackPressedCallback
         )
-
-        defineModality(ttsFlag, srFlag, hasRun)
     }
 
     override fun onStop() {
@@ -189,12 +193,6 @@ abstract class BaseFragment<B : ViewDataBinding>(
             }
         }
 
-    }
-
-    private fun showBackButton() {
-        if (activity is MainActivity && settings.showBackButton == true) {
-            (activity as MainActivity?)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        }
     }
 
 }
