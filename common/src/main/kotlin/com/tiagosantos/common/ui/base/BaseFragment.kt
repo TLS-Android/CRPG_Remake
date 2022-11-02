@@ -151,8 +151,6 @@ abstract class BaseFragment<B : ViewDataBinding>(
     private fun applyResources() {
         (requireActivity() is BaseActivityInterface).apply {
             if (!this) {
-                if (settings.statusBarColor != 0)
-                    throw UnsupportedOperationException("Your activity should extends from 'BaseActivity' to set StatusBar color")
                 if (settings.appBarColor != 0)
                     throw UnsupportedOperationException("Your activity should extends from 'BaseActivity' to set AppBar color")
                 if (settings.appBarTitle as Int != 0 || (settings.appBarTitle as String).isEmpty())

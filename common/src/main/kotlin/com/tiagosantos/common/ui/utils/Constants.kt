@@ -30,8 +30,8 @@ object Constants {
     const val RECUSAR = "RECUSAR"
 
     //EVENT FILES
-    const val FILES_DIR = context?.filesDir.toString()
     const val EVENT_FILENAME = "event.json"
+    const val REMINDER_FILENAME = "reminder.json"
 
     //TAGS
     private const val TAG_AGENDA = "AgendaRepository"

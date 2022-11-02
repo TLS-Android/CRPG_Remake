@@ -56,7 +56,7 @@ class DatePickerFragment(ttsSettings: TTSSettings, srSettings: SRSettings) :
             ): Int {
                 // set date to calendar according to position where we are
                 val cal = Calendar.getInstance().apply { time = date }
-                if (!isSelected) view. tvDate.text =
+                if (!isSelected) view.tvDate.text =
                     getString(R.string.nenhum_dia_selecionado_msg)
 
                 return if (isSelected)
