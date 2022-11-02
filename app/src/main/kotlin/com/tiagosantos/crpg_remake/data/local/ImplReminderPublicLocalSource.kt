@@ -18,6 +18,19 @@ import java.util.*
 class ImplReminderPublicLocalSource(application: Application) :
     RemindersPublicLocalSource {
 
+    /**
+    The init block will execute immediately after the primary constructor.
+    Initializer blocks effectively become part of the primary constructor.
+
+    The constructor is the secondary constructor. Delegation to the primary constructor happens
+    as the first statement of a secondary constructor, so the code in all initializer blocks
+    is executed before the secondary constructor body.
+
+    The primary constructor cannot contain any code.
+    Initialization code can be placed in initializer blocks, which are prefixed with the init keyword.
+
+    (from https://stackoverflow.com/questions/55356837/what-is-the-difference-between-init-block-and-constructor-in-kotlin)
+    */
     init {
         val ctx = application.applicationContext
         val gson = Gson()
@@ -27,7 +40,6 @@ class ImplReminderPublicLocalSource(application: Application) :
         val fileExists = file.exists()
         val messagesList = ArrayList<Reminder>()
         val isNewFileCreated : Boolean = file.createNewFile()
-
     }
 
     var newReminder = Reminder(
