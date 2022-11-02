@@ -19,20 +19,20 @@ import com.tiagosantos.crpg_remake.databinding.FragmentMeditationMediaPlayerBind
 
 class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaPlayerBinding>(
         layoutId = R.layout.fragment_meditation_media_player,
-        FragmentSettings(
+        settings = FragmentSettings(
             appBarTitle = R.string.title_media,
             sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
             showBackButton = true
         ),
-        ttsSettings = TTSSettings("Indique qual o seu estado de espirito atual"),
-        srSettings = SRSettings()
+        ttsSettings = TTSSettings(
+           contextualHelp =  "Indique qual o seu estado de espirito atual",
+        ),
+        srSettings = SRSettings(actionMap = mapOf("ola" to "adeus"))
 ) {
     private lateinit var view: FragmentMeditationMediaPlayerBinding
 
     private val medViewModel: MeditationViewModel by viewModels()
     private val player = ExoPlayer.Builder(requireContext()).build()
-
-    val actionMap = mapOf("ola" to "adeus")
 
     companion object {
         fun newInstance() = MeditationMediaPlayerFragment()
@@ -58,7 +58,7 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
         }
 
         view.buttonReturnMeditation.setOnClickListener {
-            val fragment: Fragment = MeditationFragment(TTSSettings())
+            val fragment: Fragment = MeditationFragment(ttsSettings, srSettings)
             val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, fragment)

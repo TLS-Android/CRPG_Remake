@@ -17,7 +17,7 @@ object VoiceCommandsProcessingHelper {
         hourEnglish: String,
         hourNumeral: String,
         dayTime: String,
-    ): Boolean {
+    ) {
         (command.contains(hourEnglish, true) || command.contains(hourNumeral, true))
                 && command.contains(dayTime, true)
     }
