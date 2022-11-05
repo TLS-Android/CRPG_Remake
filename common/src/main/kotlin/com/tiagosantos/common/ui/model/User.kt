@@ -1,6 +1,7 @@
 package com.tiagosantos.common.ui.model
 
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.koin.dsl.module
 
 data class User(val name : String)
@@ -21,7 +22,7 @@ class UserRepositoryImpl : UserRepository {
         _users.addAll(users)
     }
 }
-
+/*
 val appModule = module {
     single<UserRepository> { UserRepositoryImpl() }
     single { UserService(get()) } //The get() function allow to ask Koin to resolve the needed dependency.
@@ -38,5 +39,5 @@ class UserApplication : KoinComponent {
         println(message)
     }
 }
-
+*/
 //:: creates a member reference or a class reference.
