@@ -13,8 +13,7 @@ data class Reminder(
     var alarm_freq: AlarmFrequency ?= AlarmFrequency.HOJE,
 ){
     override fun toString(): String {
-        return "title: ${this.title}, info: ${this.info}, start_time: ${this.start_time}, " +
-                " date: ${this.date}"
+        return "title: ${this.title}, info: ${this.info}, start_time: ${this.start_time}"
     }
 }
 

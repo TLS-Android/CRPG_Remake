@@ -1,4 +1,3 @@
-
 package com.tiagosantos.common.ui.base
 
 import android.content.res.Configuration
@@ -206,5 +205,4 @@ abstract class BaseActivity(
         metrics.scaledDensity = configuration.fontScale * densityDefault
         baseContext.resources.updateConfiguration(configuration, metrics)
     }
-
 }

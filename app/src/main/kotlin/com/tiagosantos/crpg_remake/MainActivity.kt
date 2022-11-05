@@ -37,7 +37,6 @@ class MainActivity : BaseActivity(
         TODO("Not yet implemented")
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

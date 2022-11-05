@@ -1,11 +1,11 @@
 package com.tiagosantos.common.ui.model
 
 data class Meal(
-    val data: String,
-    val carne: String,
-    val peixe: String,
-    val dieta: String,
-    val vegetariano: String
+    val data: String? = "data",
+    val carne: String? = "carne",
+    val peixe: String? = "peixe",
+    val dieta: String? = "dieta",
+    val vegetariano: String? = "vegetariano"
 ) {
     override fun toString(): String {
         return "data: ${this.data},carne: ${this.carne}, peixe: ${this.peixe}," +

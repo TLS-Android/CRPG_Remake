@@ -1,8 +1,7 @@
 package com.tiagosantos.common.ui.model
 
+import android.os.Parcel
 import android.os.Parcelable
-import kotlinx.android.parcel.IgnoredOnParcel
-import kotlinx.android.parcel.Parcelize
 import kotlin.properties.Delegates.observable
 
 @Parcelize
@@ -31,6 +30,25 @@ class TimelineAttributes(
     @IgnoredOnParcel
     var onOrientationChanged: ((Orientation, Orientation) -> Unit)? = null
 
+    constructor(parcel: Parcel) : this(
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readByte() != 0.toByte(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt()
+    ) {
+
+    }
+
     fun copy(): TimelineAttributes {
         val attributes = TimelineAttributes(
             markerSize, markerColor, markerInCenter, markerLeftPadding, markerTopPadding,
@@ -46,5 +64,36 @@ class TimelineAttributes(
             "markerTopPadding=$markerTopPadding, markerBottomPadding=$markerBottomPadding, linePadding=$linePadding, " +
             "lineWidth=$lineWidth, startLineColor=$startLineColor, endLineColor=$endLineColor, lineStyle=$lineStyle, " +
             "lineDashWidth=$lineDashWidth, lineDashGap=$lineDashGap, onOrientationChanged=$onOrientationChanged)"
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(markerSize)
+        parcel.writeInt(markerColor)
+        parcel.writeByte(if (markerInCenter) 1 else 0)
+        parcel.writeInt(markerLeftPadding)
+        parcel.writeInt(markerTopPadding)
+        parcel.writeInt(markerRightPadding)
+        parcel.writeInt(markerBottomPadding)
+        parcel.writeInt(linePadding)
+        parcel.writeInt(lineWidth)
+        parcel.writeInt(startLineColor)
+        parcel.writeInt(endLineColor)
+        parcel.writeInt(lineStyle)
+        parcel.writeInt(lineDashWidth)
+        parcel.writeInt(lineDashGap)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<TimelineAttributes> {
+        override fun createFromParcel(parcel: Parcel): TimelineAttributes {
+            return TimelineAttributes(parcel)
+        }
+
+        override fun newArray(size: Int): Array<TimelineAttributes?> {
+            return arrayOfNulls(size)
+        }
     }
 }

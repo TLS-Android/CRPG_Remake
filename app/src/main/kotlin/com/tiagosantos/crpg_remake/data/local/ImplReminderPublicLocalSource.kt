@@ -3,10 +3,12 @@ package com.tiagosantos.crpg_remake.data.local
 import android.app.Application
 import android.util.Log
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.tiagosantos.common.ui.model.*
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.common.ui.utils.Constants.REMINDER_FILENAME
 import com.tiagosantos.common.ui.utils.GeneralUtils.LOG_TAG_DEBUG
+import com.tiagosantos.crpg_remake.ui.meals.MealsViewModel.Companion.gson
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -42,7 +44,7 @@ class ImplReminderPublicLocalSource(application: Application) :
         val isNewFileCreated : Boolean = file.createNewFile()
     }
 
-    var newReminder = Reminder(
+    val newReminder = Reminder(
         EMPTY_STRING,
         EMPTY_STRING,
         EMPTY_STRING,

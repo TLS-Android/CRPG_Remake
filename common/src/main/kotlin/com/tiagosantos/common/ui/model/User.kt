@@ -11,7 +11,6 @@ interface UserRepository {
 }
 
 class UserRepositoryImpl : UserRepository {
-
     private val _users = arrayListOf<User>()
 
     override fun findUser(name: String): User? {

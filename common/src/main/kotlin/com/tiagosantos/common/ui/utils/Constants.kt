@@ -3,7 +3,6 @@ package com.tiagosantos.common.ui.utils
 import java.util.*
 
 object Constants {
-
     const val LOG_TAG_DEBUG = "app.debug"
     const val LOG_TAG_ERROR = "app.error"
 
@@ -36,7 +35,3 @@ object Constants {
     //TAGS
     private const val TAG_AGENDA = "AgendaRepository"
 }
-
-
-
-
