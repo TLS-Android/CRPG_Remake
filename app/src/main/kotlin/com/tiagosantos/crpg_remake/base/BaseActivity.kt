@@ -78,7 +78,7 @@ abstract class BaseActivity(
 
     override fun setAppBarSubTitle(subTitleString: String) {
         actionBar?.apply {
-            val view: View? = findViewById(com.tiagosantos.crpg_remake.R.id.appbar)
+            val view: View? = findViewById(com.tiagosantos.crpg_remake.R.id)
 
             view?.apply {
                 if (!TextUtils.isEmpty(subTitleString))
