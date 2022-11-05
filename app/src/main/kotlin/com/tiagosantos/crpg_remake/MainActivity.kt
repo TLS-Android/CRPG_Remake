@@ -11,8 +11,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.tiagosantos.access.modal.gossip.GossipViewModel
 import com.tiagosantos.access.modal.gotev.GotevViewModel
-import com.tiagosantos.common.ui.base.ActivitySettings
-import com.tiagosantos.common.ui.base.BaseActivity
+import com.tiagosantos.crpg_remake.base.ActivitySettings
+import com.tiagosantos.crpg_remake.base.BaseActivity
 import com.tiagosantos.common.ui.model.appModule
 import com.tiagosantos.crpg_remake.databinding.ActivityMainBinding
 import org.koin.core.context.GlobalContext.startKoin

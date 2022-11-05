@@ -1,4 +1,4 @@
-package com.tiagosantos.common.ui.base
+package com.tiagosantos.crpg_remake.base
 
 import androidx.annotation.ColorRes
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING

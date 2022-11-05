@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.tiagosantos.common.ui.base.BaseFragment
-import com.tiagosantos.common.ui.base.FragmentSettings
+import com.tiagosantos.crpg_remake.base.BaseFragment
+import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentHomeBinding
 import org.koin.android.scope.getOrCreateScope

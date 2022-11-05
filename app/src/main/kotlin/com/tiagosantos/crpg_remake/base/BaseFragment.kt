@@ -1,4 +1,4 @@
-package com.tiagosantos.common.ui.base
+package com.tiagosantos.crpg_remake.base
 
 import android.content.Context
 import android.os.Build

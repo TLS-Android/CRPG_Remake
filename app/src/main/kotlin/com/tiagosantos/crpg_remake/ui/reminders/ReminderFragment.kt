@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
-import com.tiagosantos.common.ui.base.BaseFragment
-import com.tiagosantos.common.ui.base.FragmentSettings
+import com.tiagosantos.crpg_remake.base.BaseFragment
+import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.common.ui.utils.InputFilterMinMax
 import com.tiagosantos.crpg_remake.R

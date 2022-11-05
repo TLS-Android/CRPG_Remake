@@ -13,7 +13,7 @@ import com.google.android.exoplayer2.ExoPlayer
 import com.tiagosantos.access.modal.BaseModalFragment
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
-import com.tiagosantos.common.ui.base.FragmentSettings
+import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationMediaPlayerBinding
 

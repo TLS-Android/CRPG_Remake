@@ -19,7 +19,7 @@ import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils
 import com.tiagosantos.access.modal.BaseModalFragment
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
-import com.tiagosantos.common.ui.base.FragmentSettings
+import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentDatePickerBinding
 import java.util.*

@@ -1,4 +1,4 @@
-package com.tiagosantos.common.ui.base
+package com.tiagosantos.crpg_remake.base
 
 import android.content.res.Configuration
 import android.graphics.drawable.ColorDrawable
@@ -78,7 +78,7 @@ abstract class BaseActivity(
 
     override fun setAppBarSubTitle(subTitleString: String) {
         actionBar?.apply {
-            val view: View? = findViewById(R.id.appbar)
+            val view: View? = findViewById(com.tiagosantos.crpg_remake.R.id.appbar)
 
             view?.apply {
                 if (!TextUtils.isEmpty(subTitleString))

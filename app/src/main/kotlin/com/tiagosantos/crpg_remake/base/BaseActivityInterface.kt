@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.tiagosantos.common.ui.base
+package com.tiagosantos.crpg_remake.base
 
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes

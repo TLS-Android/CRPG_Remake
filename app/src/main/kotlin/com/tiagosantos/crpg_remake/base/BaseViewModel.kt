@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.tiagosantos.common.ui.base
+package com.tiagosantos.crpg_remake.base
 
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
