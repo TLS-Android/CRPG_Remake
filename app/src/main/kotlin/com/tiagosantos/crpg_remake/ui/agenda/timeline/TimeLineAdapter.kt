@@ -31,6 +31,8 @@ import com.plataforma.crpg.ui.meals.MealsFragment
 import com.plataforma.crpg.ui.transports.TransportsSelectionFragment
 import com.plataforma.crpg.utils.Constants.EMPTY_STRING
 import com.plataforma.crpg.utils.Constants.myLocale
+import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
+import com.tiagosantos.crpg_remake.R
 import kotlinx.android.synthetic.main.item_timeline.view.*
 import net.gotev.speech.GoogleVoiceTypingDisabledException
 import net.gotev.speech.Speech
