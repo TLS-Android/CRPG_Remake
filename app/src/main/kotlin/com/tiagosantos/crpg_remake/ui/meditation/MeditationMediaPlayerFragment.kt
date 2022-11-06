@@ -77,7 +77,7 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
     }
 
     override fun performActionWithVoiceCommand(command: String, actionMap: Map<String,Any>){
-       with(view){
+       with(view.framePlayerView.){
            when {
                command.contains("Tocar", true) -> exo_play?.performClick()
                command.contains("Parar", true) -> exo_pause?.performClick()

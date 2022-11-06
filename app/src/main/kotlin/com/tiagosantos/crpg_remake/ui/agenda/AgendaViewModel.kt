@@ -12,7 +12,6 @@ import java.util.*
 
 class AgendaViewModel(
     application: Application,
-    calendar: Calendar
 ) : AndroidViewModel(application), DefaultLifecycleObserver {
 
     @SuppressLint("StaticFieldLeak")
@@ -31,6 +30,11 @@ class AgendaViewModel(
     private val currentMonth: LiveData<Int?> = _currentMonth
 
     private var firstTimeFlag = false
+
+    val calendar : Calendar
+        get() {
+            TODO()
+        }
 
     companion object { private val repo = AgendaRepository }
 
@@ -64,12 +68,12 @@ class AgendaViewModel(
 
     private fun getDates(list: MutableList<Date>): List<Date> {
         // load dates of whole month
-        calendar.set(Calendar.MONTH, currentMonth)
+        calendar.set(Calendar.MONTH, currentMonth.value!!)
         calendar.set(Calendar.DAY_OF_MONTH, 1)
         list.add(calendar.time)
         while (currentMonth.value == calendar[Calendar.MONTH]) {
             calendar.add(Calendar.DATE, +1)
-            if (calendar[Calendar.MONTH] == currentMonth)
+            if (calendar[Calendar.MONTH] == currentMonth.value)
                 list.add(calendar.time)
         }
         calendar.add(Calendar.DATE, -1)
