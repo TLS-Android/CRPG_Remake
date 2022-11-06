@@ -125,7 +125,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
                     this.imageButtonSom.setOnClickListener{
                         setSoundLogosVisible(
-                            this,
+                            view = this,
                             1,
                             soundVisible = true,
                             vibVisible = false,

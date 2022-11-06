@@ -2,20 +2,6 @@ package com.tiagosantos.crpg_remake.database
 
 class MealsRepository {
 /*
-    fun convertMealsToJSON() {
-        MealsViewModel.gson.toJson(repo.m)
-        val file = File(context.filesDir, repo.mealFilename)
-
-        val fos: FileOutputStream = context.openFileOutput(repo.mealFilename, Context.MODE_PRIVATE)
-        fos.write(repo.fileContents.toByteArray())
-
-        context.openFileInput(repo.mealFilename).bufferedReader().useLines { lines ->
-            lines.fold(Constants.EMPTY_STRING) { some, text ->
-                "$some\n$text"
-            }
-        }
-    }
-
     fun fetchMealChoiceOnLocalStorage(): String {
         val isLunch = CustomDateUtils.getIsLunchOrDinner()
         val currentDate = CustomDateUtils.getCurrentDay()
@@ -98,25 +84,6 @@ class MealsRepository {
 
                 return if (eventsList[idx].meal_int < 1 || eventsList[idx].meal_int > 4) 0
                 else eventsList[idx].meal_int
-            }
-        }
-    }
-
-    fun testJSON() {
-        val json = MealsViewModel.gson.toJson(repo.m)
-        val gsonPretty = GsonBuilder().setPrettyPrinting().create()
-        val prettyJson: String = gsonPretty.toJson(json)
-
-        val file = File(context.filesDir, repo.mealFilename)
-        file.writeText(prettyJson)
-    }
-
-    fun getMealsFromJSON() {
-        val file = File(context.filesDir, repo.mealFilename)
-
-        context.openFileInput(repo.mealFilename).bufferedReader().useLines { lines ->
-            lines.fold("") { some, text ->
-                "$some\n$text"
             }
         }
     }
