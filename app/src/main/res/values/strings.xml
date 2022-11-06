@@ -7,6 +7,7 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_meditacao">Meditacao</string>
     <string name="title_media">Media player</string>
+    <string name="title_agenda">Agenda</string>
     <string name="home_fragment_appbar_title">Plataforma CRPG</string>
 
     <string name="button_sign_in">Sign In</string>
@@ -39,6 +40,7 @@
     <string name="meditationHasRun">meditationHasRun</string>
     <string name="mediaHasRun">mediaHasRun</string>
     <string name="datePickerHasRun">datePickerHasRun</string>
+    <string name="agendaHasRun">agendaHasRun</string>
 
     //Permissions
     <string name="permitir">Permitir</string>
@@ -87,5 +89,7 @@
     <string name="com_sono">com sono</string>
     <string name="confiante">confiante</string>
     <string name="criado_c_sucesso">criado c sucesso</string>
+
+    //
 
 </resources>

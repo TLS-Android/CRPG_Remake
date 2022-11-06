@@ -7,30 +7,37 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.internal.ViewUtils.dpToPx
 import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.common.ui.model.TimelineAttributes
-import com.tiagosantos.crpg_remake.MainActivity
 import com.tiagosantos.crpg_remake.R
+import com.tiagosantos.crpg_remake.base.BaseFragment
+import com.tiagosantos.crpg_remake.base.FragmentSettings
+import com.tiagosantos.crpg_remake.databinding.ReminderFragmentBinding
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.TimeLineAdapter
 import java.util.*
 
-class AgendaFragment : Fragment() {
+class AgendaFragment : BaseFragment<ReminderFragmentBinding>(
+    layoutId = R.layout.fragment_agenda,
+    FragmentSettings(
+        appBarTitle = R.string.title_agenda,
+        sharedPreferencesBooleanName = R.string.agendaHasRun.toString(),
+    )
+) {
 
-    private var firstTimeFlag = false
-    private var ttsFlag = false
-    private var mDataList = ArrayList<Event>()
+    private val _mDataList = MutableLiveData<ArrayList<Event>?>()
+    val mDataList: LiveData<ArrayList<Event>?> = _mDataList
+
     private lateinit var mLayoutManager: LinearLayoutManager
     private lateinit var mAttributes: TimelineAttributes
 
     override fun onResume() {
         super.onResume()
-        (activity as AppCompatActivity).supportActionBar?.title = "AGENDA"
-        (activity as MainActivity?)?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         setDataListItemsWithoutPopulate()
         val ctx = context
@@ -114,6 +121,14 @@ class AgendaFragment : Fragment() {
             layoutManager = mLayoutManager
             adapter = TimeLineAdapter(mDataList, mAttributes, ctx)
         }
+    }
+
+    override fun onInitDataBinding() {
+        TODO("Not yet implemented")
+    }
+
+    override fun observeLifecycleEvents() {
+        TODO("Not yet implemented")
     }
 
 }
