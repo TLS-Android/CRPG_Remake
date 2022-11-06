@@ -72,6 +72,10 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
     ) = generalHelper(command, actionMap)
 
 
+    /**
+     * THIS STILL HAS TO BE CORRECTED
+     * THIS SHOULD BE MOVED TO A VIEW MODEL; NOT PART OF THE FRAGMENT
+     */
     open fun setupModality(
        ttsFlag: Boolean,
        srFlag: Boolean,
