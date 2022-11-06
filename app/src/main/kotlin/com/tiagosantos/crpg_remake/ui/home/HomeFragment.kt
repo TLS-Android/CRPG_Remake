@@ -57,18 +57,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     override fun observeLifecycleEvents() {
         TODO("Not yet implemented")
     }
-/*
-    override fun onInitDataBinding() {
-        viewBinding.model = viewModel
-        lifecycle.addObserver(viewModel)
-    }
-
-    override fun observeLifecycleEvents() {
-        observe(viewModel.errorMessage, observer = {
-            Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
-        })
-    }
-    */
 
 }
 

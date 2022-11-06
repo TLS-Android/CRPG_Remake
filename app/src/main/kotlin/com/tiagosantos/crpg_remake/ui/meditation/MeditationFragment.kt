@@ -5,11 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.tiagosantos.access.modal.BaseModalFragment
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
+import com.tiagosantos.crpg_remake.databinding.FragmentDashboardBinding
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationBinding
 
 class MeditationFragment(ttsSettings: TTSSettings, srSettings: SRSettings) :
@@ -23,6 +26,17 @@ class MeditationFragment(ttsSettings: TTSSettings, srSettings: SRSettings) :
     ttsSettings = ttsSettings,
     srSettings = srSettings
 ) {
+
+    private var _binding: FragmentDashboardBinding? = null
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+    private val _text = MutableLiveData<String>().apply {
+        value = "This is dashboard Fragment"
+    }
+    val text: LiveData<String> = _text
+
     private lateinit var view: FragmentMeditationBinding
     private var onResumeFlag = false
 
