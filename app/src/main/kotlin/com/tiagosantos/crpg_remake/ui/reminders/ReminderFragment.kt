@@ -124,13 +124,13 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     cbAmbos = this.checkboxAmbos
 
                     this.imageButtonSom.setOnClickListener{
-                        helper.setSoundLogosVisible(this,1,
+                        setSoundLogosVisible(this,1,
                             true, false, false) }
                     this.imageButtonVibrar.setOnClickListener{
-                        helper.setSoundLogosVisible(this,2,
+                        setSoundLogosVisible(this,2,
                             false, true, false) }
                     this.imageButtonAmbos.setOnClickListener{
-                        helper.setSoundLogosVisible(this,3,
+                        setSoundLogosVisible(this,3,
                             false, false, true) }
             }
 
@@ -252,6 +252,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
 
         fun setSoundLogosVisible(
+            view: LayoutSecondAlertaBinding,
             value: Int,
             soundVisible: Boolean,
             vibVisible: Boolean,
