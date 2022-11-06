@@ -1,4 +1,4 @@
-package com.plataforma.crpg.ui.agenda.timeline
+package com.tiagosantos.crpg_remake.ui.agenda.timeline
 
 import android.content.Context
 import android.os.Bundle
@@ -19,7 +19,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.plataforma.crpg.R
 import com.plataforma.crpg.TimelineView
 import com.plataforma.crpg.extentions.formatDateTime
 import com.plataforma.crpg.extentions.setGone
@@ -29,7 +28,6 @@ import com.tiagosantos.common.ui.model.EventType
 import com.tiagosantos.common.ui.model.TimelineAttributes
 import com.plataforma.crpg.ui.meals.MealsFragment
 import com.plataforma.crpg.ui.transports.TransportsSelectionFragment
-import com.plataforma.crpg.utils.Constants.EMPTY_STRING
 import com.plataforma.crpg.utils.Constants.myLocale
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.crpg_remake.R

@@ -1,19 +1,17 @@
 package com.tiagosantos.access.modal.gossip
 
+import android.app.Application
 import android.content.Context
 import android.content.res.loader.ResourcesProvider
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.OnLifecycleEvent
-import com.tiagosantos.common.ui.base.BaseViewModel
+import androidx.lifecycle.*
 import com.tiagosantos.common.ui.utils.Constants
 import java.lang.ref.WeakReference
 
 class GossipViewModel(
     private val resourcesProvider: ResourcesProvider,
-    context: WeakReference<Context>
-) : BaseViewModel() {
+    context: WeakReference<Context>,
+    application: Application,
+) : AndroidViewModel(application), DefaultLifecycleObserver {
 
     private val _contextualHelp = MutableLiveData<String>()
     val contextualHelp: LiveData<String> = _contextualHelp
