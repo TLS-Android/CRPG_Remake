@@ -5,6 +5,4 @@ import kotlinx.coroutines.flow.Flow
 
 interface MealPublicInteractor {
     suspend fun getMessagesList(): Flow<Result<List<Meal>>>
-
-
 }
