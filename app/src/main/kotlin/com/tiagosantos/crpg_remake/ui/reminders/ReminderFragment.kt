@@ -124,8 +124,12 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     cbAmbos = this.checkboxAmbos
 
                     this.imageButtonSom.setOnClickListener{
-                        setSoundLogosVisible(this,1,
-                            true, false, false) }
+                        setSoundLogosVisible(
+                            this,
+                            1,
+                            soundVisible = true,
+                            vibVisible = false,
+                            bothVisible = false) }
                     this.imageButtonVibrar.setOnClickListener{
                         setSoundLogosVisible(this,2,
                             false, true, false) }
@@ -250,24 +254,24 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
     }
 
+    private fun setSoundLogosVisible(
+        view: LayoutSecondDiaBinding,
+        value: Int,
+        soundVisible: Boolean,
+        vibVisible: Boolean,
+        bothVisible: Boolean
+    ){
+        alarmTypeButtonPressed = value
+        cbSom.visibility = VISIBLE
+        cbVib.visibility = INVISIBLE
 
-        fun setSoundLogosVisible(
-            view: LayoutSecondAlertaBinding,
-            value: Int,
-            soundVisible: Boolean,
-            vibVisible: Boolean,
-            bothVisible: Boolean
-        ){
-            alarmTypeButtonPressed = value
-            cbSom.visibility = VISIBLE
-
-            view.secondDia.buttonSelecionarDias.visibility = when {
-                soundVisible || vibVisible || bothVisible -> VISIBLE
-                !soundVisible || !vibVisible || !bothVisible  -> INVISIBLE
-                else -> { INVISIBLE }
-            }
-            cbVib.visibility = INVISIBLE
+        view.buttonSelecionarDias.visibility = when {
+            soundVisible || vibVisible || bothVisible -> VISIBLE
+            !soundVisible || !vibVisible || !bothVisible  -> INVISIBLE
+            else -> { INVISIBLE }
         }
+
+    }
 
     override fun onInitDataBinding() {
         TODO("Not yet implemented")
