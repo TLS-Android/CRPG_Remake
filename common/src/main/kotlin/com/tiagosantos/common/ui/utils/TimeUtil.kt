@@ -7,6 +7,11 @@ enum class TimeFormat {
     AM_PM
 }
 
+val fullWeekAlarm: IntArray = intArrayOf(
+    Calendar.SUNDAY, Calendar.MONDAY, Calendar.TUESDAY,
+    Calendar.WEDNESDAY, Calendar.THURSDAY, Calendar.FRIDAY, Calendar.SATURDAY
+)
+
 fun Long.getTimeString(format: TimeFormat): String {
     val date = Date(this)
 

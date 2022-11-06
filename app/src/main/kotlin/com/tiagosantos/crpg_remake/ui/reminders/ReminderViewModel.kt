@@ -2,6 +2,7 @@ package com.tiagosantos.crpg_remake.ui.reminders
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.content.Context
 import android.content.Intent
 import android.provider.AlarmClock
 import androidx.lifecycle.AndroidViewModel
@@ -9,6 +10,7 @@ import com.tiagosantos.common.ui.model.AlarmFrequency
 import com.tiagosantos.common.ui.model.AlarmType
 import com.tiagosantos.common.ui.model.Reminder
 import com.tiagosantos.common.ui.model.ReminderType
+import com.tiagosantos.common.ui.utils.fullWeekAlarm
 import java.lang.Boolean.FALSE
 import java.lang.Boolean.TRUE
 import java.sql.DriverManager.println
@@ -21,7 +23,7 @@ class ReminderViewModel(
 ) : AndroidViewModel(application) {
 
     @SuppressLint("StaticFieldLeak")
-    val context = application.applicationContext!!
+    val context: Context = application.applicationContext
     private var mReminderList = ArrayList<Reminder>()
     val weekDaysBoolean: BooleanArray = booleanArrayOf(
         false, false, false,
@@ -32,11 +34,6 @@ class ReminderViewModel(
     var startTimeHours: String = ""
     var startTimeMin: String = ""
     var flagReminderAdded = false
-
-    private val fullWeekAlarm: IntArray = intArrayOf(
-        Calendar.SUNDAY, Calendar.MONDAY, Calendar.TUESDAY,
-        Calendar.WEDNESDAY, Calendar.THURSDAY, Calendar.FRIDAY, Calendar.SATURDAY
-    )
 
     var newReminder = Reminder(
         "", "", "x", 11, 0,
@@ -61,7 +58,6 @@ class ReminderViewModel(
         }
 
         val customWeekAlarm = customWeekAlarmMutable.toCollection(ArrayList<Int>())
-        for (i in customWeekAlarm) println("> i value: $i")
 
         //data do dia de hoje
         val formatDDMMYYYY = SimpleDateFormat("ddMMyyyy")
@@ -170,8 +166,6 @@ class ReminderViewModel(
             }
             AlarmFrequency.AMANHA -> this.alarmIntent = Intent(AlarmClock.ACTION_SET_ALARM).apply {
                 putExtra(AlarmClock.EXTRA_MESSAGE, newReminder.title)
-                //putExtra(AlarmClock.EXTRA_HOUR, startTimeHours.toInt())
-                //putExtra(AlarmClock.EXTRA_MINUTES, startTimeMin.toInt())
                 putExtra(AlarmClock.EXTRA_VIBRATE, TRUE)
             }
             AlarmFrequency.TODOS_OS_DIAS -> this.alarmIntent =
