@@ -26,6 +26,39 @@
         android:id="@+id/reminder_success"
         android:visibility="gone"/>
 
+    <include layout="@layout/layout_parent_alerta"
+        android:id="@+id/parent_alerta"
+        android:visibility="gone"/>
+    <include layout="@layout/layout_parent_dia"
+        android:id="@+id/parent_dia"
+        android:visibility="gone"/>
+    <include layout="@layout/layout_parent_horas"
+        android:id="@+id/parent_horas"
+        android:visibility="gone"/>
+    <include layout="@layout/layout_parent_lembrar"
+        android:id="@+id/parent_lembrar"
+        android:visibility="gone"/>
+    <include layout="@layout/layout_parent_notas"
+        android:id="@+id/parent_notas"
+        android:visibility="gone"/>
+
+
+    <include layout="@layout/layout_second_alerta"
+        android:id="@+id/second_alerta"
+        android:visibility="gone"/>
+    <include layout="@layout/layout_second_dia"
+        android:id="@+id/second_dia"
+        android:visibility="gone"/>
+    <include layout="@layout/layout_second_horas"
+        android:id="@+id/second_horas"
+        android:visibility="gone"/>
+    <include layout="@layout/layout_second_lembrar"
+        android:id="@+id/second_lembrar"
+        android:visibility="gone"/>
+    <include layout="@layout/layout_second_notas"
+        android:id="@+id/second_notas"
+        android:visibility="gone"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
