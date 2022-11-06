@@ -61,10 +61,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
     private fun setupUI(reminderVM: ReminderViewModel) {
 
-        fun updateButton(title: String, reminderType: ReminderType) {
-            this.title = title
-            this.reminderType = reminderType
-        }
 
         with(viewIntro){
             this.reminderIntroHintLayout.visibility = VISIBLE
@@ -179,27 +175,20 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     avisoCampos.run { text = "Valor em falta"; visibility = VISIBLE }
                 }
 
-
                 with(reminderVM.newReminder) {
+                    fun updateButton(title: String, reminderType: ReminderType) {
+                        this.title = title
+                        this.reminder_type = reminderType
+                    }
+
                     when (lembrarButtonPressed) {
-                        1 -> {
-                            updateButton("Tomar medicacao", ReminderType.MEDICACAO)
-                            this.title = "Tomar medicacao"
-                            this.reminder_type = ReminderType.MEDICACAO
-                        }
-                        2 -> {
-                            this.title = "Apanhar bus do CRPG"
-                            this.reminder_type = ReminderType.TRANSPORTE
-                        }
-                        3 -> {
-                            this.title = "Lembrar escolha de almoço"
-                            this.reminder_type = ReminderType.REFEICAO
-                        }
-                        4 -> {
-                            this.title = secondLembrar.textEditPersonalizado.text.toString()
-                            this.reminder_type = ReminderType.PERSONALIZADO
-                        }
-                        else -> { println("lembrarButtonPressed is neither one of the values") }
+                        1 -> { updateButton("Tomar medicacao", ReminderType.MEDICACAO) }
+                        2 -> { updateButton("Apanhar bus do CRPG", ReminderType.TRANSPORTE) }
+                        3 -> { updateButton("Lembrar escolha de almoço", ReminderType.REFEICAO) }
+                        4 -> { updateButton(
+                            secondLembrar.textEditPersonalizado.text.toString(),
+                            ReminderType.PERSONALIZADO)
+                        } else -> { println("lembrarButtonPressed is neither one of the values") }
                     }
 
                     with(secondDia){
@@ -207,8 +196,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                         val ids: List<Int> = materialButtonToggleGroup.checkedButtonIds
                         for (id in ids) {
                             val materialButton: MaterialButton = materialButtonToggleGroup.findViewById(id)
-                            when (this.secondLayout.resources.getResourceName(materialButton.id)
-                                .takeLast(3)) {
+                            when (this.secondLayout.resources.getResourceName(materialButton.id).takeLast(3)) {
                                 "Seg" -> reminderVM.weekDaysBoolean[0] = true
                                 "Ter" -> reminderVM.weekDaysBoolean[1] = true
                                 "Qua" -> reminderVM.weekDaysBoolean[2] = true
@@ -245,9 +233,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                             viewSuccess.successLayout.visibility = GONE
                         }
                         if (activity?.packageManager?.let { it1 ->
-                                reminderVM.alarmIntent.resolveActivity(
-                                    it1
-                                )
+                                reminderVM.alarmIntent.resolveActivity(it1)
                             } != null) {
                             startActivity(reminderVM.alarmIntent)
                         }
