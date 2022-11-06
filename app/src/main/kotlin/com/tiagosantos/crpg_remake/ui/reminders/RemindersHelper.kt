@@ -172,17 +172,22 @@ class RemindersHelper {
                     "5", t) -> editHours.setText("05")
 
                 command.contains("seis") || command.contains(
-                    "6",
-                    t) -> editHours.setText("06")
+                    "6", t) -> editHours.setText("06")
 
                 command.contains("sete") || command.contains(
-                    "7",
-                    t) -> editHours.setText("07")
+                    "7", t) -> editHours.setText("07")
 
-                command.contains("oito",t) || command.contains("8",t)  -> editHours.setText("08")
-                command.contains("nove",t) || command.contains("9",t) -> editHours.setText("09")
-                command.contains("dez",t) || command.contains("10", t) -> editHours.setText("10")
-                command.contains("onze") || command.contains("11", t) -> editHours.setText("11")
+                command.contains("oito",t) || command.contains(
+                    "8",t)  -> editHours.setText("08")
+
+                command.contains("nove",t) || command.contains(
+                    "9",t) -> editHours.setText("09")
+
+                command.contains("dez",t) || command.contains(
+                    "10", t) -> editHours.setText("10")
+
+                command.contains("onze") || command.contains(
+                    "11", t) -> editHours.setText("11")
             }
         }
     }
@@ -193,20 +198,25 @@ class RemindersHelper {
     ) {
         with(view.secondHoras) {
             when {
-                command.contains("uma", t) || command.contains("1", t) -> editHours.setText("13")
-                command.contains("duas") || command.contains("2", t) -> editHours.setText("14")
+                command.contains("uma", t) || command.contains(
+                    "1", t) -> editHours.setText("13")
+
+                command.contains("duas") || command.contains(
+                    "2", t) -> editHours.setText("14")
+
                 command.contains("três") || command.contains(
-                    "3", t
-                ) -> editHours.setText("15")
-                command.contains("quatro") || command.contains("4", t) ->
-                    editHours.setText("16")
-                command.contains("cinco") || command.contains("5", t) ->
-                    editHours.setText("17")
+                    "3", t) -> editHours.setText("15")
+
+                command.contains("quatro") || command.contains(
+                    "4", t) -> editHours.setText("16")
+
+                command.contains("cinco") || command.contains(
+                    "5", t) -> editHours.setText("17")
                 command.contains("seis") || command.contains(
-                    "6", t
-                ) -> editHours.setText("18")
-                command.contains("sete") || command.contains("7", t) ->
-                    editHours.setText("19")
+                    "6", t) -> editHours.setText("18")
+
+                command.contains("sete") || command.contains(
+                    "7", t) -> editHours.setText("19")
             }
 
         }
