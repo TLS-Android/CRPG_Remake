@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.*
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.viewModels
@@ -62,23 +63,21 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
         fun updateButton(title: String, reminderType: ReminderType) {
             this.title = title
-            this.reminder_type = reminderType
+            this.reminderType = reminderType
         }
 
-
         with(viewIntro){
-            this.reminderIntroHintLayout.visibility = View.VISIBLE
+            this.reminderIntroHintLayout.visibility = VISIBLE
             this.createReminderActionButton.setOnClickListener {
-                this.reminderIntroHintLayout.visibility = View.GONE
+                this.reminderIntroHintLayout.visibility = GONE
             }
         }
 
-
         with(view){
 
-            parentLayout.setOnClickListener { view.expandableDia.toggleLayout() }
-            parentLayout.setOnClickListener { view.expandableLembrar.toggleLayout() }
-            parentLayout.setOnClickListener { view.expandableDia.toggleLayout() }
+            parentLayout.setOnClickListener { expandableDia.toggleLayout() }
+            parentLayout.setOnClickListener { expandableLembrar.toggleLayout() }
+            parentLayout.setOnClickListener { expandableDia.toggleLayout() }
 
             expandableHoras.parentLayout.setOnClickListener { expandableHoras.toggleLayout() }
             expandableNotas.parentLayout.setOnClickListener { expandableNotas.toggleLayout() }
@@ -112,13 +111,16 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             with(secondDia){
                 this.buttonHoje.setOnClickListener {
                     helper.setSecondLayout(this,1, false,
-                        false, alarmFreqButtonPressed) }
+                        isGroupVisible =  false,
+                        alarmFreqButtonPressed) }
                 this.buttonTodosDias.setOnClickListener {
                     helper.setSecondLayout(this,2, false,
-                        false,alarmFreqButtonPressed) }
+                        isGroupVisible = false,
+                        alarmFreqButtonPressed) }
                 this.buttonPersonalizado.setOnClickListener {
                     helper.setSecondLayout(this,3, true,
-                        true, alarmFreqButtonPressed) }
+                        isGroupVisible = true,
+                        alarmFreqButtonPressed) }
             }
 
             with(secondAlerta){
@@ -139,11 +141,11 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
             //--------------------- CANCELAR ---------------------------------------
 
-            val avisoCampos = view.avisoCampos
-            val buttonCancel = view.buttonCancel
+            val avisoCampos = avisoCampos
+            val buttonCancel = buttonCancel
 
             buttonCancel.setOnClickListener {
-                avisoCampos.visibility = View.GONE
+                avisoCampos.visibility = GONE
 
                 lembrarButtonPressed = 0
                 alarmTypeButtonPressed = 0
@@ -156,9 +158,9 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 }
 
                 // reset alarmType section
-                cbSom.visibility = View.INVISIBLE
-                cbVib.visibility = View.INVISIBLE
-                cbAmbos.visibility = View.INVISIBLE
+                cbSom.visibility = INVISIBLE
+                cbVib.visibility = INVISIBLE
+                cbAmbos.visibility = INVISIBLE
 
                 secondNotas.editTextNotes.setText(EMPTY_STRING)
             }
@@ -174,7 +176,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     minsInt = secondHoras.editMinutes.text.toString().toInt()
                     hoursMinutesFlag = true
                 } else {
-                    avisoCampos.run { text = "Valor em falta"; visibility = View.VISIBLE }
+                    avisoCampos.run { text = "Valor em falta"; visibility = VISIBLE }
                 }
 
 
@@ -237,10 +239,10 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 ) {
                     reminderVM.addReminder(newReminder)
                     if (reminderVM.flagReminderAdded) {
-                        avisoCampos.visibility = View.GONE
-                        viewSuccess.successLayout.visibility = View.VISIBLE
+                        avisoCampos.visibility = GONE
+                        viewSuccess.successLayout.visibility = VISIBLE
                         viewSuccess.buttonOk.setOnClickListener {
-                            viewSuccess.successLayout.visibility = View.GONE
+                            viewSuccess.successLayout.visibility = GONE
                         }
                         if (activity?.packageManager?.let { it1 ->
                                 reminderVM.alarmIntent.resolveActivity(
@@ -252,10 +254,10 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     }
                 } else if (hoursInt > 23 || minsInt > 59) {
                     avisoCampos.text = "Horas ou minutos invalidos"
-                    avisoCampos.visibility = View.VISIBLE
+                    avisoCampos.visibility = VISIBLE
                 } else {
                     avisoCampos.text = "Campos obrigatorios em falta!"
-                    avisoCampos.visibility = View.VISIBLE
+                    avisoCampos.visibility = VISIBLE
                 }
             }
 
