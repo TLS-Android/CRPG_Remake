@@ -1,4 +1,4 @@
-package com.plataforma.crpg.ui.agenda.timeline
+package com.tiagosantos.crpg_remake.ui.agenda.timeline
 
 import android.os.Bundle
 import android.util.Log
@@ -11,17 +11,8 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.plataforma.crpg.R
-import com.plataforma.crpg.TimelineView
-import com.plataforma.crpg.model.Orientation
 import com.tiagosantos.common.ui.model.TimelineAttributes
-import com.plataforma.crpg.widgets.BorderedCircle
-import com.plataforma.crpg.widgets.RoundedCornerBottomSheet
-import com.thebluealliance.spectrum.SpectrumDialog
-import kotlinx.android.synthetic.main.bottom_sheet_options.*
-import kotlinx.android.synthetic.main.item_bottom_sheet_line.*
-import kotlinx.android.synthetic.main.item_bottom_sheet_marker.*
-import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+import com.tiagosantos.crpg_remake.R
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class TimelineAttributesBottomSheet : RoundedCornerBottomSheet() {
