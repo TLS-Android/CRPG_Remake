@@ -60,6 +60,12 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
     private fun setupUI(reminderVM: ReminderViewModel) {
 
+        fun updateButton(title: String, reminderType: ReminderType) {
+            this.title = title
+            this.reminder_type = reminderType
+        }
+
+
         with(viewIntro){
             this.reminderIntroHintLayout.visibility = View.VISIBLE
             this.createReminderActionButton.setOnClickListener {
@@ -105,11 +111,14 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
             with(secondDia){
                 this.buttonHoje.setOnClickListener {
-                    helper.setSecondLayout(this,1, false, false, alarmFreqButtonPressed) }
+                    helper.setSecondLayout(this,1, false,
+                        false, alarmFreqButtonPressed) }
                 this.buttonTodosDias.setOnClickListener {
-                    helper.setSecondLayout(this,2, false, false,alarmFreqButtonPressed) }
+                    helper.setSecondLayout(this,2, false,
+                        false,alarmFreqButtonPressed) }
                 this.buttonPersonalizado.setOnClickListener {
-                    helper.setSecondLayout(this,3, true, true, alarmFreqButtonPressed) }
+                    helper.setSecondLayout(this,3, true,
+                        true, alarmFreqButtonPressed) }
             }
 
             with(secondAlerta){
@@ -118,11 +127,14 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     cbAmbos = this.checkboxAmbos
 
                     this.imageButtonSom.setOnClickListener{
-                        helper.setSoundLogosVisible(this,1, true, false, false) }
+                        helper.setSoundLogosVisible(this,1,
+                            true, false, false) }
                     this.imageButtonVibrar.setOnClickListener{
-                        helper.setSoundLogosVisible(this,2, false, true, false) }
+                        helper.setSoundLogosVisible(this,2,
+                            false, true, false) }
                     this.imageButtonAmbos.setOnClickListener{
-                        helper.setSoundLogosVisible(this,3, false, false, true) }
+                        helper.setSoundLogosVisible(this,3,
+                            false, false, true) }
             }
 
             //--------------------- CANCELAR ---------------------------------------
@@ -162,13 +174,14 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     minsInt = secondHoras.editMinutes.text.toString().toInt()
                     hoursMinutesFlag = true
                 } else {
-                    avisoCampos.text = "Valor em falta"
-                    avisoCampos.visibility = View.VISIBLE
+                    avisoCampos.run { text = "Valor em falta"; visibility = View.VISIBLE }
                 }
+
 
                 with(reminderVM.newReminder) {
                     when (lembrarButtonPressed) {
                         1 -> {
+                            updateButton("Tomar medicacao", ReminderType.MEDICACAO)
                             this.title = "Tomar medicacao"
                             this.reminder_type = ReminderType.MEDICACAO
                         }
