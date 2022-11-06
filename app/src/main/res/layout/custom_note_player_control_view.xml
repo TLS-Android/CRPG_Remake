@@ -14,7 +14,6 @@
      limitations under the License.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
@@ -36,9 +35,7 @@
             style="@style/ExoMediaButton.Rewind"
             android:layout_width="45dp"
             android:layout_height="35dp"
-            android:contentDescription="@string/retroceder_reproducao"
             android:scaleType="fitXY"
-            android:tint="@color/md_blue_100"
             android:tintMode="src_in" />
 
         <ImageButton
@@ -47,9 +44,7 @@
             android:layout_width="45dp"
             android:layout_height="35dp"
             android:scaleType="fitXY"
-            android:tint="@color/md_blue_100"
-            android:tintMode="src_in"
-            android:contentDescription="@string/reproduzir_faixa" />
+            android:tintMode="src_in" />
 
         <ImageButton
             android:id="@id/exo_pause"
@@ -57,9 +52,7 @@
             android:layout_width="45dp"
             android:layout_height="35dp"
             android:scaleType="fitXY"
-            android:tint="@color/md_blue_100"
-            android:tintMode="src_in"
-            android:contentDescription="@string/pausar_reproducao" />
+            android:tintMode="src_in" />
 
         <ImageButton
             android:id="@id/exo_ffwd"
@@ -67,10 +60,6 @@
             android:layout_width="45dp"
             android:layout_height="35dp"
             android:scaleType="fitXY"
-            android:tint="@color/md_blue_100"
-            android:tintMode="src_in"
-            android:contentDescription="@string/avancar_reproducao" />
-
+            android:tintMode="src_in" />
     </LinearLayout>
-
 </LinearLayout>

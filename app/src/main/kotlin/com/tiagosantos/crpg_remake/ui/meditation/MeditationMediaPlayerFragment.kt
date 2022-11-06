@@ -77,13 +77,13 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
     }
 
     override fun performActionWithVoiceCommand(command: String, actionMap: Map<String,Any>){
-       with(view.framePlayerView.){
+       with(view.custom){
            when {
-               command.contains("Tocar", true) -> exo_play?.performClick()
-               command.contains("Parar", true) -> exo_pause?.performClick()
-               command.contains("Passar à frente", true) -> exo_ffwd?.performClick()
-               command.contains("Passar a trás", true) -> exo_rew?.performClick()
-               command.contains("Regressar", true) -> buttonReturnMeditation.performClick()
+               command.contains("Tocar", true) -> exoPlay.performClick()
+               command.contains("Parar", true) -> exoPause.performClick()
+               command.contains("Passar à frente", true) -> exoFfwd.performClick()
+               command.contains("Passar a trás", true) -> exoRew.performClick()
+               command.contains("Regressar", true) ->  root.rootView.findViewById(R.id.button_return_meditation)
                else -> { print("ola") }
            }
        }
