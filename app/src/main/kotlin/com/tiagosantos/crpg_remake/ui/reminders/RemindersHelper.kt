@@ -46,8 +46,6 @@ class RemindersHelper {
     }
 
 
-
-
     fun setLembrarLayout(
         viewLembrar: LayoutSecondLembrarBinding,
         value: Int,
@@ -104,24 +102,19 @@ class RemindersHelper {
                     true
                 ) -> this.parentLayout.performClick()
                 command.contains("Horas", true) -> {
-                    this.parentLayout.performClick()
-                    view.findViewById<ExpandableLayout>(R.id.expandable_horas).parentLayout.requestFocus()
+                    expandableHoras.run { performClick(); requestFocus() }
                 }
                 command.contains("Dia", true) -> {
-                    view.expandableDia.
-                    view.findViewById<ExpandableLayout>(R.id.expandable_dia).parentLayout.requestFocus()
+                    expandableDia.run { performClick(); requestFocus() }
                 }
-
                 command.contains("Alerta", true) -> {
-                    view.findViewById<ExpandableLayout>(R.id.expandable_alerta).parentLayout.performClick()
-                    view.findViewById<ExpandableLayout>(R.id.expandable_alerta).parentLayout.requestFocus()
+                    view.expandableAlerta.run { performClick(); requestFocus() }
                 }
                 command.contains("Notas", true) -> {
-                    view.findViewById<ExpandableLayout>(R.id.expandable_notas).parentLayout.performClick()
-                    view.findViewById<ExpandableLayout>(R.id.expandable_notas).parentLayout.requestFocus()
+                    view.expandableNotas.run { performClick(); requestFocus() }
                 }
-                command.contains("Cancelar", true) -> button_cancel.performClick()
-                command.contains("Guardar", true) -> button_confirm.performClick()
+                command.contains("Cancelar", true) -> buttonCancel.performClick()
+                command.contains("Guardar", true) -> buttonConfirm.performClick()
                 command.contains("Todos", true) -> {
                     view.expandableLembrar.performClick()
                     view.expandableDia.performClick()
@@ -129,16 +122,16 @@ class RemindersHelper {
                     view.expandableAlerta.performClick()
                     view.expandableNotas.performClick()
                 }
-                command.contains("Tomar Medicação", true) -> button0.performClick()
-                command.contains("Apanhar Transporte", true) -> button1.performClick()
-                command.contains("Escolher Almoço", true) -> button2.performClick()
-                command.contains("O Meu Lembrete", true) -> button3.performClick()
-                command.contains("Som", true) -> imageButtonSom.performClick()
-                command.contains("Vibrar", true) -> imageButtonVibrar.performClick()
-                command.contains("Ambos", true) -> imageButtonAmbos.performClick()
-                command.contains("Hoje", true) -> button_hoje.performClick()
-                command.contains("Sempre", true) -> button_todos_dias.performClick()
-                command.contains("Escolher Dias", true) -> button_personalizado.performClick()
+                command.contains("Tomar Medicação", true) -> secondLembrar.button0.performClick()
+                command.contains("Apanhar Transporte", true) -> secondLembrar.button1.performClick()
+                command.contains("Escolher Almoço", true) -> secondLembrar.button2.performClick()
+                command.contains("O Meu Lembrete", true) -> secondLembrar.button3.performClick()
+                command.contains("Som", true) -> secondAlerta.imageButtonSom.performClick()
+                command.contains("Vibrar", true) -> secondAlerta.imageButtonVibrar.performClick()
+                command.contains("Ambos", true) -> secondAlerta.imageButtonAmbos.performClick()
+                command.contains("Hoje", true) -> secondDia.buttonHoje.performClick()
+                command.contains("Sempre", true) -> secondDia.buttonTodosDias.performClick()
+                command.contains("Escolher Dias", true) -> secondDia.buttonPersonalizado.performClick()
                 else -> {}
             }
         }
@@ -247,24 +240,23 @@ class RemindersHelper {
             }
 
         }
-
-
     }
 
     private fun checkMinutesCommand(view: ReminderFragmentBinding, command: String) {
-        when {
-            command.contains("e cinco", true) || command.contains(
-                ":05",
-                true
-            ) -> view.edit_minutes.setText("05")
-            command.contains("e um quarto", true) || command.contains(
-                ":15",
-                true
-            ) -> edit_minutes.setText("15")
-            command.contains("e meia", true) || command.contains(
-                ":30",
-                true
-            ) -> edit_minutes.setText("30")
+        with(view.secondHoras.editMinutes){
+            when {
+                command.contains("e cinco", true) || command.contains(
+                    ":05",
+                    true) -> setText("05")
+                command.contains("e um quarto", true) || command.contains(
+                    ":15",
+                    true) -> setText("15")
+                command.contains("e meia", true) || command.contains(
+                    ":30",
+                    true) -> setText("30")
+                else -> {}
+            }
+
         }
 
     }
