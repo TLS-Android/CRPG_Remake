@@ -1,31 +1,33 @@
 package com.tiagosantos.crpg_remake.ui.reminders
 
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.widget.Button
 import android.widget.TextView
+import com.skydoves.expandablelayout.ExpandableLayout
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.*
 
 class RemindersHelper {
+
     private fun setButtonColorsReminder(view: LayoutSecondLembrarBinding, pos: Int){
 
         with(view){
+
             this.button0.setBackgroundResource(R.color.md_blue_100)
             this.button1.setBackgroundResource(R.color.md_blue_100)
             this.button2.setBackgroundResource(R.color.md_blue_100)
             this.button3.setBackgroundResource(R.color.md_blue_100)
-            //        expandableLembrar.secondLayout.findViewById<Button>(R.id.button0).setBackgroundResource(R.drawable.layout_button_round_top)
-            //expandableLembrar.secondLayout.findViewById<Button>(R.id.button3)
-            //.setBackgroundResource(R.drawable.layout_button_round_bottom)
+
+            when(pos){
+                1 -> button0.setBackgroundResource(R.color.md_blue_200)
+                2 -> button1.setBackgroundResource(R.color.md_blue_200)
+                3 -> button2.setBackgroundResource(R.color.md_blue_200)
+                4 -> button0.setBackgroundResource(R.color.md_blue_200)
+            }
         }
 
-
-        when(pos){
-            1 ->  expandableLembrar.secondLayout.findViewById<Button>(R.id.button0).setBackgroundResource(R.drawable.layout_button_round_top_selected)
-            2 ->  expandableLembrar.secondLayout.findViewById<Button>(R.id.button1).setBackgroundResource(R.color.md_blue_200)
-            3 ->  expandableLembrar.secondLayout.findViewById<Button>(R.id.button2).setBackgroundResource(R.color.md_blue_200)
-            4 ->  expandableLembrar.secondLayout.findViewById<Button>(R.id.button3).setBackgroundResource(R.drawable.layout_button_round_bottom_selected)
-        }
     }
 
     private fun setButtonColorsDays(view: LayoutSecondDiaBinding, pos: Int){
@@ -43,33 +45,7 @@ class RemindersHelper {
         }
     }
 
-    fun setSoundLogosVisible(
-        view: LayoutSecondAlertaBinding,
-        value: Int,
-        soundVisible: Boolean,
-        vibVisible: Boolean,
-        bothVisible: Boolean
-    ){
-        alarmTypeButtonPressed = value
-        cbSom.visibility = View.VISIBLE
 
-        root.findViewById<TextView>(R.id.button_selecionar_dias).visibility = when {
-            soundVisible -> View.VISIBLE
-            !soundVisible -> View.INVISIBLE
-        }
-        cbVib.visibility = View.INVISIBLE
-
-        root.findViewById<TextView>(R.id.button_selecionar_dias).visibility = when {
-            vibVisible -> View.VISIBLE
-            !vibVisible -> View.INVISIBLE
-        }
-        cbAmbos.visibility = View.INVISIBLE
-
-        root.findViewById<TextView>(R.id.button_selecionar_dias).visibility = when {
-            bothVisible -> View.VISIBLE
-            !bothVisible -> View.INVISIBLE
-        }
-    }
 
 
     fun setLembrarLayout(
@@ -82,13 +58,13 @@ class RemindersHelper {
         lembrarButtonPressed = value
         setButtonColorsReminder(lembrarButtonPressed)
         when {
-            isVisible -> viewLembrar.inserirTituloLembretePersonalizado.visibility = View.VISIBLE
-            !isVisible -> viewLembrar.inserirTituloLembretePersonalizado.visibility = View.INVISIBLE
+            isVisible -> viewLembrar.inserirTituloLembretePersonalizado.visibility = VISIBLE
+            !isVisible -> viewLembrar.inserirTituloLembretePersonalizado.visibility = INVISIBLE
         }
 
         when {
-            isTextVisible -> viewLembrar.textEditPersonalizado.visibility = View.VISIBLE
-            !isTextVisible -> viewLembrar.textEditPersonalizado.visibility = View.INVISIBLE
+            isTextVisible -> viewLembrar.textEditPersonalizado.visibility = VISIBLE
+            !isTextVisible -> viewLembrar.textEditPersonalizado.visibility = INVISIBLE
         }
     }
 
@@ -102,15 +78,15 @@ class RemindersHelper {
         alarmFreqButtonPressed = value
         setButtonColorsDays(alarmFreqButtonPressed)
         view.buttonSelecionarDias.visibility = when {
-            isbuttonVisible -> View.VISIBLE
-            !isbuttonVisible -> View.INVISIBLE
-            else -> { println("hello") }
+            isbuttonVisible -> VISIBLE
+            !isbuttonVisible -> INVISIBLE
+            else -> { INVISIBLE }
         }
 
         view.toggleButtonGroup.visibility = when {
-            isGroupVisible -> View.VISIBLE
-            !isGroupVisible -> View.INVISIBLE
-            else -> { println("ok") }
+            isGroupVisible -> VISIBLE
+            !isGroupVisible -> INVISIBLE
+            else -> { INVISIBLE }
         }
     }
 
@@ -147,11 +123,11 @@ class RemindersHelper {
                 command.contains("Cancelar", true) -> button_cancel.performClick()
                 command.contains("Guardar", true) -> button_confirm.performClick()
                 command.contains("Todos", true) -> {
-                    view.findViewById<ExpandableLayout>(R.id.expandable_lembrar).parentLayout.performClick()
-                    view.findViewById<ExpandableLayout>(R.id.expandable_horas).parentLayout.performClick()
-                    view.findViewById<ExpandableLayout>(R.id.expandable_dia).parentLayout.performClick()
-                    view.findViewById<ExpandableLayout>(R.id.expandable_alerta).parentLayout.performClick()
-                    view.findViewById<ExpandableLayout>(R.id.expandable_notas).parentLayout.performClick()
+                    view.expandableLembrar.performClick()
+                    view.expandableDia.performClick()
+                    view.expandableHoras.performClick()
+                    view.expandableAlerta.performClick()
+                    view.expandableNotas.performClick()
                 }
                 command.contains("Tomar Medicação", true) -> button0.performClick()
                 command.contains("Apanhar Transporte", true) -> button1.performClick()
@@ -163,109 +139,115 @@ class RemindersHelper {
                 command.contains("Hoje", true) -> button_hoje.performClick()
                 command.contains("Sempre", true) -> button_todos_dias.performClick()
                 command.contains("Escolher Dias", true) -> button_personalizado.performClick()
+                else -> {}
             }
         }
     }
 
     private fun checkHoursCommand(view: ReminderFragmentBinding, command: String) {
-        when {
-            (command.contains("oito", true) || command.contains(
-                "8",
-                true
-            )) && command.contains("da manhã", true) -> edit_hours.setText("08")
-            (command.contains("oito", true) || command.contains(
-                "8",
-                true
-            )) && command.contains("da noite", true) -> edit_hours.setText("20")
-            (command.contains("nove", true) || command.contains(
-                "9",
-                true
-            )) && command.contains("da manhã", true) -> edit_hours.setText("09")
-            (command.contains("nove", true) || command.contains(
-                "9",
-                true
-            )) && command.contains("da noite", true) -> edit_hours.setText("21")
-            (command.contains("dez", true) || command.contains(
-                "10",
-                true
-            )) && command.contains("da manhã", true) -> edit_hours.setText("10")
-            (command.contains("dez", true) || command.contains(
-                "10",
-                true
-            )) && command.contains("da noite", true) -> edit_hours.setText("22")
-            (command.contains("onze", true) || command.contains(
-                "11",
-                true
-            )) && command.contains("da manhã", true) -> edit_hours.setText("11")
-            (command.contains("onze", true) || command.contains(
-                "11",
-                true
-            )) && command.contains("da noite", true) -> edit_hours.setText("23")
-            (command.contains("meio-dia", true) || command.contains(
-                "12",
-                true
-            )) -> edit_hours.setText("12")
-            (command.contains("meia-noite", true) || command.contains(
-                "0",
-                true
-            )) -> edit_hours.setText("00")
-            (command.contains("uma", true) || command.contains(
-                "1",
-                true
-            )) && command.contains("da manhã", true) -> edit_hours.setText("01")
-            (command.contains("uma", true) || command.contains(
-                "1",
-                true
-            )) && command.contains("da tarde", true) -> edit_hours.setText("13")
-            (command.contains("duas", true) || command.contains(
-                "2",
-                true
-            )) && command.contains("da manhã", true) -> edit_hours.setText("02")
-            (command.contains("duas", true) || command.contains(
-                "2",
-                true
-            )) && command.contains("da tarde", true) -> edit_hours.setText("14")
-            (command.contains("três", true) || command.contains(
-                "3",
-                true
-            )) && command.contains("da manhã", true) -> edit_hours.setText("03")
-            (command.contains("três", true) || command.contains(
-                "3",
-                true
-            )) && command.contains("da tarde", true) -> edit_hours.setText("15")
-            (command.contains("quatro", true) || command.contains(
-                "4",
-                true
-            )) && command.contains("da manhã", true) -> edit_hours.setText("04")
-            (command.contains("quatro", true) || command.contains(
-                "4",
-                true
-            )) && command.contains("da tarde", true) -> edit_hours.setText("16")
-            (command.contains("cinco", true) || command.contains(
-                "5",
-                true
-            )) && command.contains("da manhã", true) -> edit_hours.setText("05")
-            (command.contains("cinco", true) || command.contains(
-                "5",
-                true
-            )) && command.contains("da tarde", true) -> edit_hours.setText("17")
-            (command.contains("seis", true) || command.contains(
-                "6",
-                true
-            )) && command.contains("da manhã", true) -> edit_hours.setText("06")
-            (command.contains("seis", true) || command.contains(
-                "6",
-                true
-            )) && command.contains("da tarde", true) -> edit_hours.setText("18")
-            (command.contains("sete", true) || command.contains(
-                "7",
-                true
-            )) && command.contains("da manhã", true) -> edit_hours.setText("07")
-            (command.contains("sete", true) || command.contains(
-                "7",
-                true
-            )) && command.contains("da tarde", true) -> edit_hours.setText("19")
+        with(view.secondHoras){
+            when {
+                (command.contains("oito", true) || command.contains(
+                    "8",
+                    true
+                )) && command.contains("da manhã", true) -> editHours.setText("08")
+                (command.contains("oito", true) || command.contains(
+                    "8",
+                    true
+                )) && command.contains("da noite", true) -> editHours.setText("20")
+                (command.contains("nove", true) || command.contains(
+                    "9",
+                    true
+                )) && command.contains("da manhã", true) -> editHours.setText("09")
+                (command.contains("nove", true) || command.contains(
+                    "9",
+                    true
+                )) && command.contains("da noite", true) -> editHours.setText("21")
+                (command.contains("dez", true) || command.contains(
+                    "10",
+                    true
+                )) && command.contains("da manhã", true) -> editHours.setText("10")
+                (command.contains("dez", true) || command.contains(
+                    "10",
+                    true
+                )) && command.contains("da noite", true) -> editHours.setText("22")
+                (command.contains("onze", true) || command.contains(
+                    "11",
+                    true
+                )) && command.contains("da manhã", true) -> editHours.setText("11")
+                (command.contains("onze", true) || command.contains(
+                    "11",
+                    true
+                )) && command.contains("da noite", true) -> editHours.setText("23")
+                (command.contains("meio-dia", true) || command.contains(
+                    "12",
+                    true
+                )) -> editHours.setText("12")
+                (command.contains("meia-noite", true) || command.contains(
+                    "0",
+                    true
+                )) -> editHours.setText("00")
+                (command.contains("uma", true) || command.contains(
+                    "1",
+                    true
+                )) && command.contains("da manhã", true) -> editHours.setText("01")
+                (command.contains("uma", true) || command.contains(
+                    "1",
+                    true
+                )) && command.contains("da tarde", true) -> editHours.setText("13")
+                (command.contains("duas", true) || command.contains(
+                    "2",
+                    true
+                )) && command.contains("da manhã", true) -> editHours.setText("02")
+                (command.contains("duas", true) || command.contains(
+                    "2",
+                    true
+                )) && command.contains("da tarde", true) -> editHours.setText("14")
+                (command.contains("três", true) || command.contains(
+                    "3",
+                    true
+                )) && command.contains("da manhã", true) -> editHours.setText("03")
+                (command.contains("três", true) || command.contains(
+                    "3",
+                    true
+                )) && command.contains("da tarde", true) -> editHours.setText("15")
+                (command.contains("quatro", true) || command.contains(
+                    "4",
+                    true
+                )) && command.contains("da manhã", true) -> editHours.setText("04")
+                (command.contains("quatro", true) || command.contains(
+                    "4",
+                    true
+                )) && command.contains("da tarde", true) -> editHours.setText("16")
+                (command.contains("cinco", true) || command.contains(
+                    "5",
+                    true
+                )) && command.contains("da manhã", true) -> editHours.setText("05")
+                (command.contains("cinco", true) || command.contains(
+                    "5",
+                    true
+                )) && command.contains("da tarde", true) -> editHours.setText("17")
+                (command.contains("seis", true) || command.contains(
+                    "6",
+                    true
+                )) && command.contains("da manhã", true) -> editHours.setText("06")
+                (command.contains("seis", true) || command.contains(
+                    "6",
+                    true
+                )) && command.contains("da tarde", true) -> editHours.setText("18")
+                (command.contains("sete", true) || command.contains(
+                    "7",
+                    true
+                )) && command.contains("da manhã", true) -> editHours.setText("07")
+                (command.contains("sete", true) || command.contains(
+                    "7",
+                    true
+                )) && command.contains("da tarde", true) -> editHours.setText("19")
+                else -> {}
+            }
+
         }
+
 
     }
 
@@ -286,20 +268,5 @@ class RemindersHelper {
         }
 
     }
-    /*
-    fun performActionWithVoiceCommand(view: ReminderFragmentBinding,command: String){
-        when {
-            command.contains("Abrir secção lembrete", true) ->
-                view.expandableLembrar.parentLayout.performClick()
-            command.contains("Abrir secção horas", true) ->
-                view.expandableHoras.parentLayout.performClick()
-            command.contains("Abrir secção dia", true) ->
-                view.expandableDia.parentLayout.performClick()
-            command.contains("Abrir secção alerta", true) ->
-                view.expandableAlerta.parentLayout.performClick()
-            command.contains("Abrir secção notas", true) ->
-                view.expandableNotas.parentLayout.performClick()
-        }
-    }*/
 
 }

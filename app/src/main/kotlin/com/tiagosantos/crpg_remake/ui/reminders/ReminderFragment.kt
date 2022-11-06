@@ -61,7 +61,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
     private fun setupUI(reminderVM: ReminderViewModel) {
 
-
         with(viewIntro){
             this.reminderIntroHintLayout.visibility = VISIBLE
             this.createReminderActionButton.setOnClickListener {
@@ -250,6 +249,24 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         }
 
     }
+
+
+        fun setSoundLogosVisible(
+            value: Int,
+            soundVisible: Boolean,
+            vibVisible: Boolean,
+            bothVisible: Boolean
+        ){
+            alarmTypeButtonPressed = value
+            cbSom.visibility = VISIBLE
+
+            view.secondDia.buttonSelecionarDias.visibility = when {
+                soundVisible || vibVisible || bothVisible -> VISIBLE
+                !soundVisible || !vibVisible || !bothVisible  -> INVISIBLE
+                else -> { INVISIBLE }
+            }
+            cbVib.visibility = INVISIBLE
+        }
 
     override fun onInitDataBinding() {
         TODO("Not yet implemented")
