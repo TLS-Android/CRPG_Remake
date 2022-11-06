@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class Reminder(
     var title: String = "title",
     val info: String = "info",
-    var start_time: String = "startTime",
+    var date: String? = "x",
     var hours: Int,
     var mins: Int,
     var reminder_type: ReminderType ?= ReminderType.REFEICAO,
@@ -13,7 +13,7 @@ data class Reminder(
     var alarm_freq: AlarmFrequency ?= AlarmFrequency.HOJE,
 ){
     override fun toString(): String {
-        return "title: ${this.title}, info: ${this.info}, start_time: ${this.start_time}"
+        return "title: ${this.title}, info: ${this.info}"
     }
 }
 

@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
+import com.tiagosantos.common.ui.model.AlarmFrequency
+import com.tiagosantos.common.ui.model.AlarmType
+import com.tiagosantos.common.ui.model.ReminderType
 import com.tiagosantos.crpg_remake.base.BaseFragment
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
@@ -59,7 +62,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             savedInstanceState: Bundle?,
     ): View {
         val reminderVM: ReminderViewModel by viewModels()
-        reminderVM.setNewReminder()
         setupUI(reminderVM)
         return view.root
     }
@@ -219,6 +221,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     1 -> this.alarm_freq = AlarmFrequency.HOJE
                     2 -> this.alarm_freq = AlarmFrequency.TODOS_OS_DIAS
                     3 -> this.alarm_freq = AlarmFrequency.PERSONALIZADO
+                    else -> {println("hello")}
                 }
             }
 
