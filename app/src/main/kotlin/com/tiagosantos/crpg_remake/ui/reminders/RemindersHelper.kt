@@ -139,58 +139,14 @@ class RemindersHelper {
         view: ReminderFragmentBinding,
         command: String)
     {
-        with(view.secondHoras){
-
-        when{
-            command.contains("da manhã", true) -> checkDaytimeHoursCommand(view, command)
-            command.contains("da tarde", true) -> checkAfternoonHoursCommand(view, command)
-            command.contains("da noite", true) -> checkNighttimeHoursCommand(view, command)
-            command.contains("meio-dia", true) -> editHours.setText("12")
-            command.contains("meia-noite", true) -> editHours.setText("00")
-        }
-
-
+        with(view.secondHoras) {
             when {
-                (command.contains("dez") || command.contains(
-                    "10",
-                    true) -> editHours.setText("22")
-
-                (command.contains("onze") || command.contains(
-                    "11",
-                    true) -> editHours.setText("23")
-
-
-                (command.contains("uma") || command.contains(
-                    "1",
-                    true) -> editHours.setText("01")
-
-
-                (command.contains("duas") || command.contains(
-                    "2",
-                    true) -> editHours.setText("02")
-
-                (command.contains("três") || command.contains(
-                    "3",
-                    true) -> editHours.setText("03")
-
-                (command.contains("quatro") || command.contains(
-                    "4", ) -> editHours.setText("04")
-
-                (command.contains("cinco") || command.contains(
-                    "5",
-                    true) -> editHours.setText("05")
-
-                (command.contains("seis") || command.contains(
-                    "6",
-                    true) -> editHours.setText("06")
-
-                command.contains("sete") || command.contains(
-                    "7",
-                    true) -> editHours.setText("07")
-
-                else -> {}
+                command.contains("da manhã", true) -> checkDaytimeHoursCommand(view, command)
+                command.contains("da tarde", true) -> checkAfternoonHoursCommand(view, command)
+                command.contains("da noite", true) -> checkNighttimeHoursCommand(view, command)
+                command.contains("meio-dia", true) -> editHours.setText("12")
+                command.contains("meia-noite", true) -> editHours.setText("00")
             }
-
         }
     }
 
@@ -200,6 +156,29 @@ class RemindersHelper {
     ) {
         with(view.secondHoras) {
             when {
+                command.contains("uma") || command.contains(
+                    "1",true) -> editHours.setText("01")
+
+                command.contains("duas") || command.contains(
+                    "2", true) -> editHours.setText("02")
+
+                command.contains("três") || command.contains(
+                    "3", true) -> editHours.setText("03")
+
+                command.contains("quatro") || command.contains(
+                    "4", ) -> editHours.setText("04")
+
+                command.contains("cinco") || command.contains(
+                    "5", true) -> editHours.setText("05")
+
+                command.contains("seis") || command.contains(
+                    "6",
+                    true) -> editHours.setText("06")
+
+                command.contains("sete") || command.contains(
+                    "7",
+                    true) -> editHours.setText("07")
+
                 command.contains("oito",t) || command.contains("8",t)  -> editHours.setText("08")
                 command.contains("nove",t) || command.contains("9",t) -> editHours.setText("09")
                 command.contains("dez",t) || command.contains("10", t) -> editHours.setText("10")
@@ -214,7 +193,6 @@ class RemindersHelper {
     ) {
         with(view.secondHoras) {
             when {
-
                 command.contains("uma", t) || command.contains("1", t) -> editHours.setText("13")
                 command.contains("duas") || command.contains("2", t) -> editHours.setText("14")
                 command.contains("três") || command.contains(
@@ -239,16 +217,16 @@ class RemindersHelper {
         view: ReminderFragmentBinding,
         command: String
     ) {
-
-
         with(view.secondHoras) {
             when {
                 command.contains("oito") || command.contains("8",) -> editHours.setText("20")
-                (command.contains("nove") || command.contains("9",
-                    true
-                ) -> editHours.setText("21")
+                command.contains("nove") || command.contains("9",
+                    true) -> editHours.setText("21")
+                command.contains("dez") || command.contains(
+                    "10", true) -> editHours.setText("22")
+                command.contains("onze") || command.contains(
+                    "11", true) -> editHours.setText("23")
             }
-
     }
 
     private fun checkMinutesCommand(view: ReminderFragmentBinding, command: String) {
