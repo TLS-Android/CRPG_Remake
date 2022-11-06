@@ -1,11 +1,7 @@
 package com.tiagosantos.crpg_remake.ui.reminders
 
-import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
-import android.widget.Button
-import android.widget.TextView
-import com.skydoves.expandablelayout.ExpandableLayout
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.*
 
@@ -137,13 +133,18 @@ class RemindersHelper {
         }
     }
 
-    private fun checkHoursCommand(view: ReminderFragmentBinding, command: String) {
+    private fun checkHoursCommand(
+        view: ReminderFragmentBinding,
+        command: String)
+    {
+
         with(view.secondHoras){
             when {
                 (command.contains("oito", true) || command.contains(
                     "8",
                     true
                 )) && command.contains("da manhã", true) -> editHours.setText("08")
+
                 (command.contains("oito", true) || command.contains(
                     "8",
                     true
