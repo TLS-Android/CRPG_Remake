@@ -4,56 +4,7 @@ import com.tiagosantos.crpg_remake.databinding.*
 
 object HoursHelper {
 
-    val t = true
-
-    private fun performActionWithVoiceCommand(
-        view: ReminderFragmentBinding,
-        command: String,
-    ) {
-        checkHoursCommand(view, command)
-        checkMinutesCommand(view, command)
-
-        with(view){
-            when {
-                command.contains(
-                    "Lembrete",
-                    true
-                ) -> this.parentLayout.performClick()
-                command.contains("Horas", true) -> {
-                    expandableHoras.run { performClick(); requestFocus() }
-                }
-                command.contains("Dia", true) -> {
-                    expandableDia.run { performClick(); requestFocus() }
-                }
-                command.contains("Alerta", true) -> {
-                    view.expandableAlerta.run { performClick(); requestFocus() }
-                }
-                command.contains("Notas", true) -> {
-                    view.expandableNotas.run { performClick(); requestFocus() }
-                }
-                command.contains("Cancelar", true) -> buttonCancel.performClick()
-                command.contains("Guardar", true) -> buttonConfirm.performClick()
-                command.contains("Todos", true) -> {
-                    view.expandableLembrar.performClick()
-                    view.expandableDia.performClick()
-                    view.expandableHoras.performClick()
-                    view.expandableAlerta.performClick()
-                    view.expandableNotas.performClick()
-                }
-                command.contains("Tomar Medicação", true) -> secondLembrar.button0.performClick()
-                command.contains("Apanhar Transporte", true) -> secondLembrar.button1.performClick()
-                command.contains("Escolher Almoço", true) -> secondLembrar.button2.performClick()
-                command.contains("O Meu Lembrete", true) -> secondLembrar.button3.performClick()
-                command.contains("Som", true) -> secondAlerta.imageButtonSom.performClick()
-                command.contains("Vibrar", true) -> secondAlerta.imageButtonVibrar.performClick()
-                command.contains("Ambos", true) -> secondAlerta.imageButtonAmbos.performClick()
-                command.contains("Hoje", true) -> secondDia.buttonHoje.performClick()
-                command.contains("Sempre", true) -> secondDia.buttonTodosDias.performClick()
-                command.contains("Escolher Dias", true) -> secondDia.buttonPersonalizado.performClick()
-                else -> {}
-            }
-        }
-    }
+    const val t = true
 
     private fun checkHoursCommand(
         view: ReminderFragmentBinding,
