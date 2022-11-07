@@ -1,90 +1,10 @@
-package com.tiagosantos.crpg_remake.ui.reminders
+package com.tiagosantos.crpg_remake.ui.reminders.helpers
 
-import android.view.View.INVISIBLE
-import android.view.View.VISIBLE
-import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.*
 
-class RemindersHelper {
+object HoursHelper {
 
     val t = true
-
-    private fun setButtonColorsReminder(view: LayoutSecondLembrarBinding, pos: Int){
-
-        with(view){
-
-            this.button0.setBackgroundResource(R.color.md_blue_100)
-            this.button1.setBackgroundResource(R.color.md_blue_100)
-            this.button2.setBackgroundResource(R.color.md_blue_100)
-            this.button3.setBackgroundResource(R.color.md_blue_100)
-
-            when(pos){
-                1 -> button0.setBackgroundResource(R.color.md_blue_200)
-                2 -> button1.setBackgroundResource(R.color.md_blue_200)
-                3 -> button2.setBackgroundResource(R.color.md_blue_200)
-                4 -> button0.setBackgroundResource(R.color.md_blue_200)
-            }
-        }
-
-    }
-
-    private fun setButtonColorsDays(view: LayoutSecondDiaBinding, pos: Int){
-
-        with(view) {
-            this.buttonHoje.setBackgroundResource(R.drawable.layout_button_round_top)
-            this.buttonTodosDias.setBackgroundResource(R.color.md_blue_100)
-            this.buttonPersonalizado.setBackgroundResource(R.drawable.layout_button_round_bottom)
-
-            when (pos) {
-                1 -> this.buttonHoje.setBackgroundResource(R.drawable.layout_button_round_top)
-                2 -> this.buttonTodosDias.setBackgroundResource(R.color.md_blue_100)
-                3 -> buttonPersonalizado.setBackgroundResource(R.drawable.layout_button_round_bottom)
-            }
-        }
-    }
-
-
-    fun setLembrarLayout(
-        viewLembrar: LayoutSecondLembrarBinding,
-        value: Int,
-        isVisible: Boolean,
-        isTextVisible: Boolean,
-        lembrarButtonPressed: Int
-    ){
-        lembrarButtonPressed = value
-        setButtonColorsReminder(lembrarButtonPressed)
-        when {
-            isVisible -> viewLembrar.inserirTituloLembretePersonalizado.visibility = VISIBLE
-            !isVisible -> viewLembrar.inserirTituloLembretePersonalizado.visibility = INVISIBLE
-        }
-
-        when {
-            isTextVisible -> viewLembrar.textEditPersonalizado.visibility = VISIBLE
-            !isTextVisible -> viewLembrar.textEditPersonalizado.visibility = INVISIBLE
-        }
-    }
-
-    fun setSecondLayout(
-        view: LayoutSecondDiaBinding,
-        value: Int,
-        isbuttonVisible: Boolean,
-        isGroupVisible: Boolean,
-        alarmFreqButtonPressed: Int,
-    ){
-        alarmFreqButtonPressed = value
-        setButtonColorsDays(alarmFreqButtonPressed)
-        view.buttonSelecionarDias.visibility = when {
-            isbuttonVisible -> VISIBLE
-            !isbuttonVisible -> INVISIBLE
-            else -> { INVISIBLE }
-        }
-
-        view.toggleButtonGroup.visibility = when {
-            isGroupVisible -> VISIBLE
-            !isGroupVisible -> INVISIBLE
-            else -> { INVISIBLE }
-        }
-    }
 
     private fun performActionWithVoiceCommand(
         view: ReminderFragmentBinding,

@@ -19,6 +19,7 @@ import com.tiagosantos.common.ui.utils.InputFilterMinMax
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.*
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.newReminder
+import com.tiagosantos.crpg_remake.ui.reminders.helpers.RemindersHelper
 import java.util.*
 
 class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
