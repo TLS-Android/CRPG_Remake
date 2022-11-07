@@ -1,4 +1,4 @@
-package com.tiagosantos.crpg_remake.ui.reminders
+package com.tiagosantos.crpg_remake.ui.reminders.helpers
 
 import android.text.InputFilter
 import android.text.Spanned

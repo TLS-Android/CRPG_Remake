@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.plataforma.crpg.ui.reminders
+package com.tiagosantos.crpg_remake.ui.reminders.adapter
 
 data class SectionItem(
   val title: String,
