@@ -1,4 +1,4 @@
-package com.plataforma.crpg.ui.reminders.adapter
+package com.tiagosantos.crpg_remake.ui.reminders.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,9 +7,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.plataforma.crpg.R
-import com.plataforma.crpg.databinding.ItemSectionBinding
 import com.tiagosantos.common.ui.model.SectionItem
+import com.tiagosantos.crpg_remake.R
+import com.tiagosantos.crpg_remake.databinding.ItemSectionBinding
 
 class ParentAdapter :
     RecyclerView.Adapter<ParentAdapter.ParentViewHolder>(), ChildAdapter.Delegate {

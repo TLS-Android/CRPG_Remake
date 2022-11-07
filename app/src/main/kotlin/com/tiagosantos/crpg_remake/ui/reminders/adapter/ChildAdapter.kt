@@ -16,13 +16,13 @@
 
 @file:Suppress("RedundantWith")
 
-package com.plataforma.crpg.ui.reminders.adapter
+package com.tiagosantos.crpg_remake.ui.reminders.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.plataforma.crpg.databinding.ItemRowBinding
+import com.tiagosantos.crpg_remake.databinding.ItemRowBinding
 
 @Suppress("RedundantWith")
 class ChildAdapter(private val delegate: Delegate) : RecyclerView.Adapter<ChildAdapter.ChildViewHolder>() {
