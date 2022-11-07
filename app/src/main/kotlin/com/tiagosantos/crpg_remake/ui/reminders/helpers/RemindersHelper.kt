@@ -5,10 +5,12 @@ import android.view.View.VISIBLE
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.*
 
-class RemindersHelper {
+class RemindersHelper(
+    view: ReminderFragmentBinding,
+    command: String,
+) {
 
-
-    val lateinit helper = HoursHelper()
+    val lateinit helper = HoursHelper(view,command)
 
     private fun setButtonColorsReminder(view: LayoutSecondLembrarBinding, pos: Int){
 
@@ -106,19 +108,19 @@ class RemindersHelper {
                     expandableDia.run { performClick(); requestFocus() }
                 }
                 command.contains("Alerta", true) -> {
-                    view.expandableAlerta.run { performClick(); requestFocus() }
+                    expandableAlerta.run { performClick(); requestFocus() }
                 }
                 command.contains("Notas", true) -> {
-                    view.expandableNotas.run { performClick(); requestFocus() }
+                    expandableNotas.run { performClick(); requestFocus() }
                 }
                 command.contains("Cancelar", true) -> buttonCancel.performClick()
                 command.contains("Guardar", true) -> buttonConfirm.performClick()
                 command.contains("Todos", true) -> {
-                    view.expandableLembrar.performClick()
-                    view.expandableDia.performClick()
-                    view.expandableHoras.performClick()
-                    view.expandableAlerta.performClick()
-                    view.expandableNotas.performClick()
+                    expandableLembrar.performClick()
+                    expandableDia.performClick()
+                    expandableHoras.performClick()
+                    expandableAlerta.performClick()
+                    expandableNotas.performClick()
                 }
                 command.contains("Tomar Medicação", true) -> secondLembrar.button0.performClick()
                 command.contains("Apanhar Transporte", true) -> secondLembrar.button1.performClick()

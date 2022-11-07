@@ -1,5 +1,6 @@
 package com.tiagosantos.crpg_remake.ui.reminders.helpers
 
+import android.annotation.SuppressLint
 import com.tiagosantos.common.ui.utils.Constants.t
 import com.tiagosantos.crpg_remake.databinding.*
 
@@ -22,6 +23,7 @@ class HoursHelper(
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun checkDaytimeHoursCommand(
         view: ReminderFragmentBinding,
         command: String
