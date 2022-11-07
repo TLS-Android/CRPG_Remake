@@ -8,6 +8,7 @@ import com.tiagosantos.crpg_remake.databinding.*
 class RemindersHelper {
 
     val t = true
+    val lateinit helper = HoursHelper()
 
     private fun setButtonColorsReminder(view: LayoutSecondLembrarBinding, pos: Int){
 
@@ -25,7 +26,6 @@ class RemindersHelper {
                 4 -> button0.setBackgroundResource(R.color.md_blue_200)
             }
         }
-
     }
 
     private fun setButtonColorsDays(view: LayoutSecondDiaBinding, pos: Int){
@@ -90,8 +90,8 @@ class RemindersHelper {
         view: ReminderFragmentBinding,
         command: String,
     ) {
-        checkHoursCommand(view, command)
-        checkMinutesCommand(view, command)
+        helper.checkHoursCommand(view, command)
+        helper.checkMinutesCommand(view, command)
 
         with(view){
             when {
@@ -134,7 +134,4 @@ class RemindersHelper {
             }
         }
     }
-
-
-
 }
