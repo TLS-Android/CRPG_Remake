@@ -34,4 +34,8 @@ object Constants {
 
     //TAGS
     private const val TAG_AGENDA = "AgendaRepository"
+
+    //BOOL
+    const val t = true
+    const val f = false
 }

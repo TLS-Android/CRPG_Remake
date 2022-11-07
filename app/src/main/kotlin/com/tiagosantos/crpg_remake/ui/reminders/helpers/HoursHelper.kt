@@ -1,13 +1,12 @@
 package com.tiagosantos.crpg_remake.ui.reminders.helpers
 
+import com.tiagosantos.common.ui.utils.Constants.t
 import com.tiagosantos.crpg_remake.databinding.*
 
 class HoursHelper(
     view: ReminderFragmentBinding,
     command: String,
 ) {
-    val t = true
-
     private fun checkHoursCommand(
         view: ReminderFragmentBinding,
         command: String
@@ -112,7 +111,10 @@ class HoursHelper(
         }
     }
 
-    private fun checkMinutesCommand(view: ReminderFragmentBinding, command: String) {
+    private fun checkMinutesCommand(
+        view: ReminderFragmentBinding,
+        command: String
+    ) {
         with(view.secondHoras.editMinutes) {
             when {
                 command.contains("e cinco", t) || command.contains(
