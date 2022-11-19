@@ -12,14 +12,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.internal.ViewUtils.dpToPx
 import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.common.ui.model.TimelineAttributes
+import com.tiagosantos.common.ui.utils.Constants.MODALITY
+import com.tiagosantos.crpg_remake.MainActivity
 import com.tiagosantos.crpg_remake.R
-import com.tiagosantos.crpg_remake.base.BaseFragment
-import com.tiagosantos.crpg_remake.base.FragmentSettings
-import com.tiagosantos.crpg_remake.databinding.ReminderFragmentBinding
-import com.tiagosantos.crpg_remake.ui.agenda.timeline.TimeLineAdapter
 import java.util.*
 
 class AgendaFragment : BaseFragment<ReminderFragmentBinding>(

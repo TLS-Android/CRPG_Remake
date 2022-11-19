@@ -44,7 +44,9 @@
             android:layout_width="45dp"
             android:layout_height="35dp"
             android:scaleType="fitXY"
-            android:tintMode="src_in" />
+            android:tint="@color/md_blue_100"
+            android:tintMode="src_in"
+            android:contentDescription="@string/reproduzir_faixa" />
 
         <ImageButton
             android:id="@id/exo_pause"
@@ -52,7 +54,9 @@
             android:layout_width="45dp"
             android:layout_height="35dp"
             android:scaleType="fitXY"
-            android:tintMode="src_in" />
+            android:tint="@color/md_blue_100"
+            android:tintMode="src_in"
+            android:contentDescription="@string/pausar_reproducao" />
 
         <ImageButton
             android:id="@id/exo_ffwd"
@@ -60,6 +64,9 @@
             android:layout_width="45dp"
             android:layout_height="35dp"
             android:scaleType="fitXY"
-            android:tintMode="src_in" />
+            android:tint="@color/md_blue_100"
+            android:tintMode="src_in"
+            android:contentDescription="@string/avancar_reproducao" />
+
     </LinearLayout>
 </LinearLayout>
