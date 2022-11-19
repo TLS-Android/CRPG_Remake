@@ -5,7 +5,7 @@ import android.os.Parcelable
 import kotlin.properties.Delegates.observable
 
 @Parcelize
-class TimelineAttributes(
+class TimelineAttributesBackup(
     var markerSize: Int,
     var markerColor: Int,
     var markerInCenter: Boolean,
@@ -49,8 +49,8 @@ class TimelineAttributes(
 
     }
 
-    fun copy(): TimelineAttributes {
-        val attributes = TimelineAttributes(
+    fun copy(): TimelineAttributesBackup {
+        val attributes = TimelineAttributesBackup(
             markerSize, markerColor, markerInCenter, markerLeftPadding, markerTopPadding,
             markerRightPadding, markerBottomPadding, linePadding, lineWidth, startLineColor,
             endLineColor, lineStyle, lineDashWidth, lineDashGap
@@ -87,12 +87,12 @@ class TimelineAttributes(
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<TimelineAttributes> {
-        override fun createFromParcel(parcel: Parcel): TimelineAttributes {
-            return TimelineAttributes(parcel)
+    companion object CREATOR : Parcelable.Creator<TimelineAttributesBackup> {
+        override fun createFromParcel(parcel: Parcel): TimelineAttributesBackup {
+            return TimelineAttributesBackup(parcel)
         }
 
-        override fun newArray(size: Int): Array<TimelineAttributes?> {
+        override fun newArray(size: Int): Array<TimelineAttributesBackup?> {
             return arrayOfNulls(size)
         }
     }

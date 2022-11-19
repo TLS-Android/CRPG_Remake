@@ -11,21 +11,21 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.tiagosantos.common.ui.model.TimelineAttributes
+import com.tiagosantos.common.ui.model.TimelineAttributesBackup
 import com.tiagosantos.crpg_remake.R
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class TimelineAttributesBottomSheet : RoundedCornerBottomSheet() {
 
     interface Callbacks {
-        fun onAttributesChanged(attributes: TimelineAttributes)
+        fun onAttributesChanged(attributes: TimelineAttributesBackup)
     }
 
     companion object {
 
         private const val EXTRA_ATTRIBUTES = "EXTRA_ATTRIBUTES"
 
-        fun showDialog(fragmentManager: FragmentManager, attributes: TimelineAttributes, callbacks: Callbacks) {
+        fun showDialog(fragmentManager: FragmentManager, attributes: TimelineAttributesBackup, callbacks: Callbacks) {
             val dialog = TimelineAttributesBottomSheet()
             dialog.arguments = bundleOf(
                 EXTRA_ATTRIBUTES to attributes
@@ -36,7 +36,7 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet() {
     }
 
     private var mCallbacks: Callbacks? = null
-    private lateinit var mAttributes: TimelineAttributes
+    private lateinit var mAttributes: TimelineAttributesBackup
     private var mBottomSheetBehavior: BottomSheetBehavior<*>? = null
 
     override fun onStart() {
@@ -64,7 +64,7 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val attributes = (requireArguments().getParcelable(EXTRA_ATTRIBUTES) as TimelineAttributes)
+        val attributes = (requireArguments().getParcelable(EXTRA_ATTRIBUTES) as TimelineAttributesBackup)
         mAttributes = attributes.copy()
 
         text_attributes_heading.setOnClickListener { dismiss() }

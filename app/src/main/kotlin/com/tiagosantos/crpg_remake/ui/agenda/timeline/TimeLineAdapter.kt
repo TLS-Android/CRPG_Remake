@@ -12,10 +12,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
+import com.github.vipulasri.timelineview.TimelineView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.common.ui.model.EventType
-import com.tiagosantos.common.ui.model.TimelineAttributes
+import com.tiagosantos.common.ui.model.TimelineAttributesBackup
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.ui.meals.MealsFragment
@@ -27,7 +28,7 @@ import java.util.*
 
 class TimeLineAdapter(
     private val mFeedList: List<Event>,
-    private var mAttributes: TimelineAttributes,
+    private var mAttributes: TimelineAttributesBackup,
     private val ctx: Context,
 ) : RecyclerView.Adapter<TimeLineAdapter.TimeLineViewHolder>() {
 
