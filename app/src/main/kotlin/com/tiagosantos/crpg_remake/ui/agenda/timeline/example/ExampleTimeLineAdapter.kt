@@ -11,9 +11,9 @@ import com.github.vipulasri.timelineview.sample.model.TimeLineModel
 import com.github.vipulasri.timelineview.sample.utils.VectorDrawableUtils
 import com.github.vipulasri.timelineview.TimelineView
 import com.github.vipulasri.timelineview.sample.R
-import com.github.vipulasri.timelineview.sample.extentions.formatDateTime
-import com.github.vipulasri.timelineview.sample.extentions.setGone
-import com.github.vipulasri.timelineview.sample.extentions.setVisible
+import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.formatDateTime
+import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setGone
+import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setVisible
 import kotlinx.android.synthetic.main.item_timeline.view.*
 
 /**

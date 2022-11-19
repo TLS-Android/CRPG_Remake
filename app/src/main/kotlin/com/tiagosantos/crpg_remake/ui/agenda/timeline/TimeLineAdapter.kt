@@ -19,6 +19,7 @@ import com.tiagosantos.common.ui.model.EventType
 import com.tiagosantos.common.ui.model.TimelineAttributesBackup
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.crpg_remake.R
+import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.formatDateTime
 import com.tiagosantos.crpg_remake.ui.meals.MealsFragment
 import java.util.*
 
@@ -77,6 +78,7 @@ class TimeLineAdapter(
             EventType.TRANSPORTS -> {
                 holder.itemView.contentDescription = "Aceder à secção de transportes"
             }
+
         }
 
         concatTime = timeLineModel.start_time + timeLineModel.end_time
@@ -156,7 +158,7 @@ class TimeLineAdapter(
 
         // onClick on a card open pop up or go to Meal or Transport Fragment
         holder.itemView.card.setOnClickListener {
-            id = mFeedList[position].title
+            id = mFeedList[position].title.toString()
             tipo = mFeedList[position].type
 
             when (tipo) {
@@ -171,12 +173,8 @@ class TimeLineAdapter(
                     val bundle = Bundle()
 
                     when (id) {
-                        "ALMOÇO" -> {
-                            bundle.putBoolean("isLunch", true)
-                        }
-                        "JANTAR" -> {
-                            bundle.putBoolean("isLunch", false)
-                        }
+                        "ALMOÇO" -> bundle.putBoolean("isLunch", true)
+                        "JANTAR" -> bundle.putBoolean("isLunch", false)
                     }
 
                     val fragment: Fragment = MealsFragment()
@@ -191,6 +189,7 @@ class TimeLineAdapter(
                     fragmentTransaction.addToBackStack(null)
                     fragmentTransaction.commit()
                 }
+                else -> { println("to do ") }
             }
 
             fun performActionWithVoiceCommand(command: String, actionMap: Map<String, Any>) {

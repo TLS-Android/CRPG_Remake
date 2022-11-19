@@ -1,10 +1,10 @@
-package com.github.vipulasri.timelineview.sample.extentions
+package com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions
 
 import android.content.res.Resources
 import android.util.TypedValue
 import android.view.View
 import androidx.core.content.ContextCompat
-import com.github.vipulasri.timelineview.sample.TimelineApplication
+import com.tiagosantos.crpg_remake.ui.agenda.timeline.TimelineApplication
 
 fun dpToPx(dp: Float): Int {
     return dpToPx(dp, TimelineApplication.instance.resources)

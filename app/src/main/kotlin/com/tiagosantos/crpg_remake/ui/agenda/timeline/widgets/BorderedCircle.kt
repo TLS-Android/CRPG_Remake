@@ -8,6 +8,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
 import androidx.core.content.ContextCompat
+import com.tiagosantos.crpg_remake.R
 
 class BorderedCircle : View {
 

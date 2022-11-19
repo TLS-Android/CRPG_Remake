@@ -1,7 +1,7 @@
-package com.github.vipulasri.timelineview.sample.extentions
+package com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions
 
-import org.threeten.bp.LocalDateTime
-import org.threeten.bp.format.DateTimeFormatter
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 fun String.formatDateTime(originalFormat: String, ouputFormat: String): String {
