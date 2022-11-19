@@ -10,8 +10,6 @@ class RemindersHelper(
     command: String,
 ) {
 
-    val lateinit helper = HoursHelper(view,command)
-
     private fun setButtonColorsReminder(view: LayoutSecondLembrarBinding, pos: Int){
 
         with(view){
@@ -50,8 +48,7 @@ class RemindersHelper(
         viewLembrar: LayoutSecondLembrarBinding,
         value: Int,
         isVisible: Boolean,
-        isTextVisible: Boolean,
-        lembrarButtonPressed: Int
+        isTextVisible: Boolean
     ){
         lembrarButtonPressed = value
         setButtonColorsReminder(lembrarButtonPressed)

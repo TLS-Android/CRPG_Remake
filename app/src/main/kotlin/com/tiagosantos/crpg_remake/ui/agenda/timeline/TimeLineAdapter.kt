@@ -2,16 +2,10 @@ package com.tiagosantos.crpg_remake.ui.agenda.timeline
 
 import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.speech.tts.TextToSpeech
-import android.speech.tts.UtteranceProgressListener
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -23,14 +17,9 @@ import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.common.ui.model.EventType
 import com.tiagosantos.common.ui.model.TimelineAttributes
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
-import com.tiagosantos.common.ui.utils.Constants.myLocale
 import com.tiagosantos.crpg_remake.R
-import net.gotev.speech.GoogleVoiceTypingDisabledException
-import net.gotev.speech.Speech
-import net.gotev.speech.SpeechDelegate
-import net.gotev.speech.SpeechRecognitionNotAvailable
+import com.tiagosantos.crpg_remake.ui.meals.MealsFragment
 import java.util.*
-import kotlin.properties.Delegates
 
 /**
  * Created by Vipul Asri on 05-12-2015.
@@ -45,13 +34,7 @@ class TimeLineAdapter(
     private var overlapArray = mutableListOf(EMPTY_STRING)
     private var concatTime = EMPTY_STRING
 
-    private var textToSpeech: TextToSpeech? = null
-    private var onResumeFlag = false
-    private val handler = Handler(Looper.getMainLooper())
-    private var runnable: Runnable by Delegates.notNull()
-
     private lateinit var mLayoutInflater: LayoutInflater
-    // val Context mContext = getActivity();
 
     override fun getItemViewType(position: Int): Int {
         return TimelineView.getTimeLineViewType(position, itemCount)
@@ -71,9 +54,6 @@ class TimeLineAdapter(
     override fun onBindViewHolder(holder: TimeLineViewHolder, position: Int) {
 
         val timeLineModel = mFeedList[position]
-        // holder.timeline.setMarker(ContextCompat.getDrawable(holder.itemView.context, R.drawable.ic_marker_active), mAttributes.markerColor)
-
-        // holder.bind(timeLineModel)
 
         when (timeLineModel.type) {
             EventType.ACTIVITY -> {
@@ -111,7 +91,6 @@ class TimeLineAdapter(
 
         if (timeLineModel.date.isNotEmpty()) {
             holder.date.setVisible()
-            // holder.date.text = timeLineModel.date.formatDateTime("yyyy-MM-dd HH:mm", "hh:mm a, dd-MMM-yyyy")
             holder.date.text = timeLineModel.date.formatDateTime("yyyy-MM-dd", "dd-MMM-yyyy")
         } else
             holder.date.setGone()
@@ -151,13 +130,13 @@ class TimeLineAdapter(
                 holder.itemView.card_center_icon.setBackgroundResource(R.drawable.meal_icon)
 
                 when (timeLineModel.title) {
-                    "ALMOÇO" -> if (timeLineModel.chosen_meal.isNullOrBlank()) {
+                    "ALMOÇO" -> if (timeLineModel.chosen_meal.isBlank()) {
                         holder.itemView.text_timeline_info.text = "CLIQUE AQUI PARA SELECIONAR ALMOÇO"
                     } else {
                         holder.itemView.text_timeline_info.text = timeLineModel.chosen_meal
                     }
 
-                    "JANTAR" -> if (timeLineModel.chosen_meal.isNullOrBlank()) {
+                    "JANTAR" -> if (timeLineModel.chosen_meal.isBlank()) {
                         holder.itemView.text_timeline_info.text = "CLIQUE AQUI PARA SELECIONAR JANTAR"
                     } else {
                         holder.itemView.text_timeline_info.text = timeLineModel.chosen_meal
@@ -186,160 +165,49 @@ class TimeLineAdapter(
                         .setMessage(mFeedList[position].info)
                         .setNegativeButton("Fechar") { _, _ -> }.show()
                 }
-                EventType.TRANSPORTS -> {
-                    val fragment: Fragment = TransportsSelectionFragment()
-                    val fragmentManager: FragmentManager = (ctx as AppCompatActivity).supportFragmentManager
-                    val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-                    fragmentTransaction.replace(R.id.nav_host_fragment, fragment)
-                    fragmentTransaction.addToBackStack(null)
-                    fragmentTransaction.commit()
-                }
 
                 EventType.MEAL -> {
                     val bundle = Bundle()
 
                     when (id) {
-                        "ALMOÇO" -> { bundle.putBoolean("isLunch", true) }
-                        "JANTAR" -> { bundle.putBoolean("isLunch", false) }
+                        "ALMOÇO" -> {
+                            bundle.putBoolean("isLunch", true)
+                        }
+                        "JANTAR" -> {
+                            bundle.putBoolean("isLunch", false)
+                        }
                     }
 
                     val fragment: Fragment = MealsFragment()
                     fragment.arguments = bundle
-                    val fragmentManager: FragmentManager = (ctx as AppCompatActivity).supportFragmentManager
-                    val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-                    fragmentManager.findFragmentByTag("Agenda")?.let { it1 -> fragmentTransaction.remove(it1) }
-                    fragmentTransaction.replace(R.id.nav_host_fragment, fragment)
+                    val fragmentManager: FragmentManager =
+                        (ctx as AppCompatActivity).supportFragmentManager
+                    val fragmentTransaction: FragmentTransaction =
+                        fragmentManager.beginTransaction()
+                    fragmentManager.findFragmentByTag("Agenda")
+                        ?.let { it1 -> fragmentTransaction.remove(it1) }
+                    fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, fragment)
                     fragmentTransaction.addToBackStack(null)
                     fragmentTransaction.commit()
                 }
             }
 
-            fun performActionWithVoiceCommand(command: String, actionMap: Map<String,Any>) {
+            fun performActionWithVoiceCommand(command: String, actionMap: Map<String, Any>) {
                 when {
                     command.contains("Escolher Almoço", true) && id == "Almoço" ||
-                        command.contains("Escolher Jantar", true) && id == "Jantar" ->
+                            command.contains("Escolher Jantar", true) && id == "Jantar" ->
                         holder.itemView.card.performClick()
                     command.contains(id, true) && tipo == EventType.ACTIVITY ->
                         holder.itemView.card.performClick()
                 }
             }
 
-            fun multimodalOption() {
-                println("First Time flag: $onResumeFlag")
-                if (!onResumeFlag) {
-                    textToSpeech = TextToSpeech(ctx) { status ->
-                        if (status == TextToSpeech.SUCCESS) {
-                            val ttsLang = textToSpeech!!.setLanguage(myLocale)
-                            if (ttsLang == TextToSpeech.LANG_MISSING_DATA ||
-                                ttsLang == TextToSpeech.LANG_NOT_SUPPORTED
-                            ) {
-                                Log.e("TTS", "The Language is not supported!")
-                            } else {
-                                Log.i("TTS", "Language Supported.")
-                            }
-                            Log.i("TTS", "Initialization success.")
-
-                            var handler = Handler(Looper.getMainLooper())
-                            // var runable = Runnable {
-                            val speechListener = object : UtteranceProgressListener() {
-                                @Override
-                                override fun onStart(p0: String?) {
-                                    println("Iniciou TTS")
-                                }
-
-                                override fun onDone(p0: String?) {
-                                    println("Encerrou TTS")
-                                    // startVoiceRecognition()
-                                }
-
-                                override fun onError(p0: String?) {
-                                    TODO("Not yet implemented")
-                                }
-                            }
-
-                            textToSpeech?.setOnUtteranceProgressListener(speechListener)
-                            val speechStatus = textToSpeech!!.speak(
-                                "Selecione uma das opções ou diga o estado" +
-                                    "em voz alta",
-                                TextToSpeech.QUEUE_FLUSH, null, "ID"
-                            )
-                        } else {
-                            Toast.makeText(ctx, "TTS Initialization failed!", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
-            }
-
-            fun startVoiceRecognition() {
-                runnable = Runnable {
-                    handler.sendEmptyMessage(0)
-                    Speech.init(ctx)
-                    try {
-                        Speech.getInstance().startListening(object : SpeechDelegate {
-                            override fun onStartOfSpeech() {
-                                Log.i("speech", "speech recognition is now active")
-                            }
-
-                            override fun onSpeechRmsChanged(value: Float) {
-                                // Log.d("speech", "rms is now: $value")
-                            }
-
-                            override fun onSpeechPartialResults(results: List<String>) {
-                                val str = StringBuilder()
-                                for (res in results) {
-                                    str.append(res).append(" ")
-                                }
-                                performActionWithVoiceCommand(results.toString())
-                                Log.i("speech", "partial result: " + str.toString().trim { it <= ' ' })
-                            }
-
-                            override fun onSpeechResult(result: String) {
-                                Log.d(
-                                    TimelineView.TAG,
-                                    "onSpeechResult: " + result.lowercase(Locale.getDefault())
-                                )
-                                // Speech.getInstance().stopTextToSpeech()
-                                val handler = Handler()
-                                handler.postDelayed({
-                                    try {
-                                        Speech.init(ctx)
-                                        Speech.getInstance().startListening(this)
-                                    } catch (speechRecognitionNotAvailable: SpeechRecognitionNotAvailable) {
-                                        speechRecognitionNotAvailable.printStackTrace()
-                                    } catch (e: GoogleVoiceTypingDisabledException) {
-                                        e.printStackTrace()
-                                    }
-                                }, 100)
-                            }
-                        })
-                    } catch (exc: SpeechRecognitionNotAvailable) {
-                        Log.e("speech", "Speech recognition is not available on this device!")
-                    } catch (exc: GoogleVoiceTypingDisabledException) {
-                        Log.e("speech", "Google voice typing must be enabled!")
-                    }
-                }
-
-                handler.post(runnable)
-            }
-
-            fun onDestroy() {
-                if (handler.hasMessages(0)) {
-                    handler.removeCallbacks(runnable)
-                }
-
-                if (textToSpeech != null) {
-                    textToSpeech!!.stop()
-                    textToSpeech!!.shutdown()
-                    println("shutdown TTS")
-                }
-            }
         }
     }
 
     override fun getItemCount() = mFeedList.size
 
     inner class TimeLineViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
-
         val date = itemView.text_timeline_date!!
         val title = itemView.text_timeline_title!!
         val info = itemView.text_timeline_info!!
@@ -357,7 +225,6 @@ class TimeLineAdapter(
             timeline.markerPaddingRight = mAttributes.markerRightPadding
             timeline.markerPaddingBottom = mAttributes.markerBottomPadding
             timeline.linePadding = mAttributes.linePadding
-
             timeline.lineWidth = mAttributes.lineWidth
             timeline.setStartLineColor(mAttributes.startLineColor, viewType)
             timeline.setEndLineColor(mAttributes.endLineColor, viewType)

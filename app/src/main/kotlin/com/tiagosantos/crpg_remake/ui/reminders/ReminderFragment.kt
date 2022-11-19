@@ -25,7 +25,7 @@ import java.util.*
 class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     layoutId = R.layout.reminder_fragment,
     FragmentSettings(
-        appBarTitle = R.string.title_dashboard,
+        appBarTitle = R.string.title_reminders,
         sharedPreferencesBooleanName = R.string.remindersHasRun.toString(),
     )
 ) {
@@ -33,7 +33,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private lateinit var viewIntro: ReminderActivityIntroBinding
     private lateinit var viewSuccess: ReminderActivitySuccessBinding
 
-    private var lembrarButtonPressed = 0
+    var lembrarButtonPressed = 0
     private var alarmTypeButtonPressed = 0
     private var alarmFreqButtonPressed = 0
     private var startTimeString = EMPTY_STRING
@@ -222,7 +222,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                         1 -> this.alarm_freq = AlarmFrequency.HOJE
                         2 -> this.alarm_freq = AlarmFrequency.TODOS_OS_DIAS
                         3 -> this.alarm_freq = AlarmFrequency.PERSONALIZADO
-                        else -> {println("hello")}
+                        else -> { println("hello") }
                     }
                 }
 

@@ -35,6 +35,8 @@ class ReminderViewModel(
     var startTimeMin: String = ""
     var flagReminderAdded = false
 
+
+
     var newReminder = Reminder(
         "", "", "x", 11, 0,
         ReminderType.MEDICACAO, AlarmType.SOM, AlarmFrequency.HOJE
