@@ -1,18 +1,18 @@
 package com.tiagosantos.crpg_remake.ui.reminders
 
+import com.tiagosantos.common.ui.model.AlarmFrequency
+import com.tiagosantos.common.ui.model.AlarmType
+import com.tiagosantos.common.ui.model.Reminder
+import com.tiagosantos.common.ui.model.ReminderType
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
-import com.tiagosantos.crpg_remake.domain.model.AlarmFrequency
-import com.tiagosantos.crpg_remake.domain.model.AlarmType
-import com.tiagosantos.crpg_remake.domain.model.Reminder
-import com.tiagosantos.crpg_remake.domain.model.ReminderType
+
 import java.util.*
 
 object ReminderRepository {
 
     var newReminder = Reminder(
         EMPTY_STRING, EMPTY_STRING, EMPTY_STRING,
-        0, 0, EMPTY_STRING, EMPTY_STRING,
-        ReminderType.MEDICACAO, AlarmType.SOM, AlarmFrequency.HOJE
+        0, 0, ReminderType.MEDICACAO, AlarmType.SOM, AlarmFrequency.HOJE
     )
 
     val weekDaysBoolean: BooleanArray = booleanArrayOf(
