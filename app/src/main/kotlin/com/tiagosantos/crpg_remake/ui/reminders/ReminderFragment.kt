@@ -19,7 +19,7 @@ import com.tiagosantos.common.ui.utils.InputFilterMinMax
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.*
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.newReminder
-import com.tiagosantos.crpg_remake.ui.reminders.helpers.RemindersHelper
+import com.tiagosantos.crpg_remake.ui.reminders.helpers.HoursHelper
 import java.util.*
 
 class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
@@ -34,8 +34,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private lateinit var viewSuccess: ReminderActivitySuccessBinding
 
     var lembrarButtonPressed = 0
-    private var alarmTypeButtonPressed = 0
-    private var alarmFreqButtonPressed = 0
+    var alarmTypeButtonPressed = 0
+    var alarmFreqButtonPressed = 0
     private var startTimeString = EMPTY_STRING
     private var hoursMinutesFlag = false
 
@@ -45,11 +45,11 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private lateinit var et: EditText
     private lateinit var etMin: EditText
 
-    private lateinit var cbSom: ImageView
-    private lateinit var cbVib: ImageView
-    private lateinit var cbAmbos: ImageView
+    lateinit var cbSom: ImageView
+    lateinit var cbVib: ImageView
+    lateinit var cbAmbos: ImageView
 
-    private val helper = RemindersHelper()
+    lateinit var helper : HoursHelper
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -80,19 +80,20 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             expandableAlerta.parentLayout.setOnClickListener { expandableAlerta.toggleLayout() }
             expandableDia.parentLayout.setOnClickListener { expandableDia.toggleLayout() }
 
+
+            //Kotlin function parameters are read-only values and are not assignable.
             with(secondLembrar){
-                this.button0.setOnClickListener { helper.setLembrarLayout(
+                this.button0.setOnClickListener { setLembrarLayout(
                     secondLembrar, 1,
                     isVisible = true,
                     isTextVisible = true,
-                    lembrarButtonPressed = lembrarButtonPressed
                 ) }
-                this.button1.setOnClickListener { helper.setLembrarLayout(
-                    secondLembrar, 2, false, false, lembrarButtonPressed) }
-                this.button2.setOnClickListener { helper.setLembrarLayout(
-                    secondLembrar, 3, false, false, lembrarButtonPressed) }
-                this.button3.setOnClickListener { helper.setLembrarLayout(
-                    secondLembrar, 4, true, true, lembrarButtonPressed) }
+                this.button1.setOnClickListener { setLembrarLayout(
+                    secondLembrar, 2, false, false) }
+                this.button2.setOnClickListener { setLembrarLayout(
+                    secondLembrar, 3, false, false) }
+                this.button3.setOnClickListener { setLembrarLayout(
+                    secondLembrar, 4, true, true) }
             }
 
             with(secondHoras){
@@ -106,17 +107,14 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
             with(secondDia){
                 this.buttonHoje.setOnClickListener {
-                    helper.setSecondLayout(this,1, false,
-                        isGroupVisible =  false,
-                        alarmFreqButtonPressed) }
+                    setSecondLayout(this,1, false,
+                        isGroupVisible =  false) }
                 this.buttonTodosDias.setOnClickListener {
-                    helper.setSecondLayout(this,2, false,
-                        isGroupVisible = false,
-                        alarmFreqButtonPressed) }
+                    setSecondLayout(this,2, false,
+                        isGroupVisible = false) }
                 this.buttonPersonalizado.setOnClickListener {
-                    helper.setSecondLayout(this,3, true,
-                        isGroupVisible = true,
-                        alarmFreqButtonPressed) }
+                    setSecondLayout(this,3, true,
+                        isGroupVisible = true) }
             }
 
             with(secondAlerta){
@@ -255,6 +253,38 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
     }
 
+    private fun setButtonColorsReminder(view: LayoutSecondLembrarBinding, pos: Int){
+
+        with(view){
+            this.button0.setBackgroundResource(R.color.md_blue_100)
+            this.button1.setBackgroundResource(R.color.md_blue_100)
+            this.button2.setBackgroundResource(R.color.md_blue_100)
+            this.button3.setBackgroundResource(R.color.md_blue_100)
+
+            when(pos){
+                1 -> button0.setBackgroundResource(R.color.md_blue_200)
+                2 -> button1.setBackgroundResource(R.color.md_blue_200)
+                3 -> button2.setBackgroundResource(R.color.md_blue_200)
+                4 -> button0.setBackgroundResource(R.color.md_blue_200)
+            }
+        }
+    }
+
+    private fun setButtonColorsDays(view: LayoutSecondDiaBinding, pos: Int){
+
+        with(view) {
+            this.buttonHoje.setBackgroundResource(R.drawable.layout_button_round_top)
+            this.buttonTodosDias.setBackgroundResource(R.color.md_blue_100)
+            this.buttonPersonalizado.setBackgroundResource(R.drawable.layout_button_round_bottom)
+
+            when (pos) {
+                1 -> this.buttonHoje.setBackgroundResource(R.drawable.layout_button_round_top)
+                2 -> this.buttonTodosDias.setBackgroundResource(R.color.md_blue_100)
+                3 -> buttonPersonalizado.setBackgroundResource(R.drawable.layout_button_round_bottom)
+            }
+        }
+    }
+
     private fun setSoundLogosVisible(
         view: LayoutSecondDiaBinding,
         value: Int,
@@ -272,6 +302,95 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             else -> { INVISIBLE }
         }
 
+    }
+
+    fun setLembrarLayout(
+        viewLembrar: LayoutSecondLembrarBinding,
+        value: Int,
+        isVisible: Boolean,
+        isTextVisible: Boolean,
+    ){
+        lembrarButtonPressed = value
+        setButtonColorsReminder(lembrarButtonPressed)
+        when {
+            isVisible -> viewLembrar.inserirTituloLembretePersonalizado.visibility = VISIBLE
+            !isVisible -> viewLembrar.inserirTituloLembretePersonalizado.visibility = INVISIBLE
+        }
+
+        when {
+            isTextVisible -> viewLembrar.textEditPersonalizado.visibility = VISIBLE
+            !isTextVisible -> viewLembrar.textEditPersonalizado.visibility = INVISIBLE
+        }
+    }
+
+    fun setSecondLayout(
+        view: LayoutSecondDiaBinding,
+        value: Int,
+        isbuttonVisible: Boolean,
+        isGroupVisible: Boolean,
+    ){
+        alarmFreqButtonPressed = value
+        setButtonColorsDays(alarmFreqButtonPressed)
+        view.buttonSelecionarDias.visibility = when {
+            isbuttonVisible -> VISIBLE
+            !isbuttonVisible -> INVISIBLE
+            else -> { INVISIBLE }
+        }
+
+        view.toggleButtonGroup.visibility = when {
+            isGroupVisible -> VISIBLE
+            !isGroupVisible -> INVISIBLE
+            else -> { INVISIBLE }
+        }
+    }
+
+    private fun performActionWithVoiceCommand(
+        view: ReminderFragmentBinding,
+        command: String,
+    ) {
+        helper.checkHoursCommand(view, command)
+        helper.checkMinutesCommand(view, command)
+
+        with(view){
+            when {
+                command.contains(
+                    "Lembrete",
+                    true
+                ) -> this.parentLayout.performClick()
+                command.contains("Horas", true) ->
+                    expandableHoras.run { performClick(); requestFocus() }
+
+                command.contains("Dia", true) -> {
+                    expandableDia.run { performClick(); requestFocus() }
+                }
+                command.contains("Alerta", true) -> {
+                    expandableAlerta.run { performClick(); requestFocus() }
+                }
+                command.contains("Notas", true) -> {
+                    expandableNotas.run { performClick(); requestFocus() }
+                }
+                command.contains("Cancelar", true) -> buttonCancel.performClick()
+                command.contains("Guardar", true) -> buttonConfirm.performClick()
+                command.contains("Todos", true) -> {
+                    expandableLembrar.performClick()
+                    expandableDia.performClick()
+                    expandableHoras.performClick()
+                    expandableAlerta.performClick()
+                    expandableNotas.performClick()
+                }
+                command.contains("Tomar Medicação", true) -> secondLembrar.button0.performClick()
+                command.contains("Apanhar Transporte", true) -> secondLembrar.button1.performClick()
+                command.contains("Escolher Almoço", true) -> secondLembrar.button2.performClick()
+                command.contains("O Meu Lembrete", true) -> secondLembrar.button3.performClick()
+                command.contains("Som", true) -> secondAlerta.imageButtonSom.performClick()
+                command.contains("Vibrar", true) -> secondAlerta.imageButtonVibrar.performClick()
+                command.contains("Ambos", true) -> secondAlerta.imageButtonAmbos.performClick()
+                command.contains("Hoje", true) -> secondDia.buttonHoje.performClick()
+                command.contains("Sempre", true) -> secondDia.buttonTodosDias.performClick()
+                command.contains("Escolher Dias", true) -> secondDia.buttonPersonalizado.performClick()
+                else -> {}
+            }
+        }
     }
 
     override fun onInitDataBinding() {

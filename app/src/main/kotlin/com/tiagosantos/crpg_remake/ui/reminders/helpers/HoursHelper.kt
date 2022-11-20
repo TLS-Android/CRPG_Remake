@@ -8,7 +8,7 @@ class HoursHelper(
     view: ReminderFragmentBinding,
     command: String,
 ) {
-    private fun checkHoursCommand(
+    fun checkHoursCommand(
         view: ReminderFragmentBinding,
         command: String
     ) {
@@ -113,7 +113,7 @@ class HoursHelper(
         }
     }
 
-    private fun checkMinutesCommand(
+    fun checkMinutesCommand(
         view: ReminderFragmentBinding,
         command: String
     ) {
