@@ -142,6 +142,10 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             buttonCancel.setOnClickListener {
                 avisoCampos.visibility = GONE
 
+                val setZero: (Int, Int, Int) -> Unit =
+                    { lembrarButtonPressed: Int, alarmTypeButtonPressed: Int,
+                      alarmFreqButtonPressed -> 0 }
+
                 lembrarButtonPressed = 0
                 alarmTypeButtonPressed = 0
                 alarmFreqButtonPressed = 0
@@ -151,6 +155,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     editHours.setText(EMPTY_STRING)
                     editMinutes.setText(EMPTY_STRING)
                 }
+
+                val a = { i: Int -> i + 1 }
 
                 // reset alarmType section
                 cbSom.visibility = INVISIBLE
@@ -342,6 +348,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         }
     }
 
+    val more : (String, Int) -> String = { str, int -> str + int }
+
     private fun clickAndFocus() = { expandable: ExpandableLayout ->
         expandable.performClick(); expandable.requestFocus() }
 
@@ -394,5 +402,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     override fun observeLifecycleEvents() {
         TODO("Not yet implemented")
     }
+
 
 }
