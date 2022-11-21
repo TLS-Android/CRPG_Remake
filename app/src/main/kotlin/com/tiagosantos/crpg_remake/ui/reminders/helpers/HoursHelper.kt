@@ -111,6 +111,8 @@ object HoursHelper {
         }
     }
 
+    fun simplify(a,b,c) =  command.contains(a, t) || command.contains(":05", t) -> setText("05")
+
     fun checkMinutesCommand(
         view: ReminderFragmentBinding,
         command: String
