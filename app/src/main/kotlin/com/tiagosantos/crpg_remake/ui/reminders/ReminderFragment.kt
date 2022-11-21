@@ -316,7 +316,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         isTextVisible: Boolean,
     ){
         lembrarButtonPressed = value
-        setButtonColorsReminder(lembrarButtonPressed, 1)
+        setButtonColorsReminder(viewLembrar, lembrarButtonPressed)
         when {
             isVisible -> viewLembrar.inserirTituloLembretePersonalizado.visibility = VISIBLE
             !isVisible -> viewLembrar.inserirTituloLembretePersonalizado.visibility = INVISIBLE
@@ -335,7 +335,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         isGroupVisible: Boolean,
     ){
         alarmFreqButtonPressed = value
-        setButtonColorsDays(alarmFreqButtonPressed, 0)
+        setButtonColorsDays(view, alarmFreqButtonPressed)
         view.buttonSelecionarDias.visibility = when {
             isbuttonVisible -> VISIBLE
             !isbuttonVisible -> INVISIBLE
