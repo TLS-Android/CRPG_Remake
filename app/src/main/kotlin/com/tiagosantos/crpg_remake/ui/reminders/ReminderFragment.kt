@@ -64,9 +64,9 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private fun setupUI(reminderVM: ReminderViewModel) {
 
         with(viewIntro){
-            this.reminderIntroHintLayout.visibility = VISIBLE
-            this.createReminderActionButton.setOnClickListener {
-                this.reminderIntroHintLayout.visibility = GONE
+            reminderIntroHintLayout.visibility = VISIBLE
+            createReminderActionButton.setOnClickListener {
+                reminderIntroHintLayout.visibility = GONE
             }
         }
 
@@ -84,56 +84,56 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
             //Kotlin function parameters are read-only values and are not assignable.
             with(secondLembrar){
-                this.button0.setOnClickListener { setLembrarLayout(
+                button0.setOnClickListener { setLembrarLayout(
                     secondLembrar, 1,
                     isVisible = true,
                     isTextVisible = true,
                 ) }
-                this.button1.setOnClickListener { setLembrarLayout(
+                button1.setOnClickListener { setLembrarLayout(
                     secondLembrar, 2, false, false) }
-                this.button2.setOnClickListener { setLembrarLayout(
+                button2.setOnClickListener { setLembrarLayout(
                     secondLembrar, 3, false, false) }
-                this.button3.setOnClickListener { setLembrarLayout(
+                button3.setOnClickListener { setLembrarLayout(
                     secondLembrar, 4, true, true) }
             }
 
             with(secondHoras){
-                val et = this.editHours
+                val et = editHours
                 et.filters = arrayOf(InputFilterMinMax("00", "23"), InputFilter.LengthFilter(2))
 
-                val etMin = this.editMinutes
+                val etMin = editMinutes
                 etMin.filters = arrayOf(InputFilterMinMax("00", "59"), InputFilter.LengthFilter(2))
             }
 
 
             with(secondDia){
-                this.buttonHoje.setOnClickListener {
+                buttonHoje.setOnClickListener {
                     setSecondLayout(this,1, false,
                         isGroupVisible =  false) }
-                this.buttonTodosDias.setOnClickListener {
+                buttonTodosDias.setOnClickListener {
                     setSecondLayout(this,2, false,
                         isGroupVisible = false) }
-                this.buttonPersonalizado.setOnClickListener {
+                buttonPersonalizado.setOnClickListener {
                     setSecondLayout(this,3, true,
                         isGroupVisible = true) }
             }
 
             with(secondAlerta){
-                    cbSom = this.checkboxSom
-                    cbVib = this.checkboxVibrar
-                    cbAmbos = this.checkboxAmbos
+                    cbSom = checkboxSom
+                    cbVib = checkboxVibrar
+                    cbAmbos = checkboxAmbos
 
-                    this.imageButtonSom.setOnClickListener{
+                    imageButtonSom.setOnClickListener{
                         setSoundLogosVisible(
                             view = this,
                             1,
                             soundVisible = true,
                             vibVisible = false,
                             bothVisible = false) }
-                    this.imageButtonVibrar.setOnClickListener{
+                    imageButtonVibrar.setOnClickListener{
                         setSoundLogosVisible(this,2,
                             false, true, false) }
-                    this.imageButtonAmbos.setOnClickListener{
+                    imageButtonAmbos.setOnClickListener{
                         setSoundLogosVisible(this,3,
                             false, false, true) }
             }
@@ -152,8 +152,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
                 //reset set Hours section
                 with(secondHoras){
-                    this.editHours.setText(EMPTY_STRING)
-                    this.editMinutes.setText(EMPTY_STRING)
+                    editHours.setText(EMPTY_STRING)
+                    editMinutes.setText(EMPTY_STRING)
                 }
 
                 // reset alarmType section
@@ -181,7 +181,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 with(reminderVM.newReminder) {
                     fun updateButton(title: String, reminderType: ReminderType) {
                         this.title = title
-                        this.reminder_type = reminderType
+                        reminder_type = reminderType
                     }
 
                     when (lembrarButtonPressed) {
@@ -195,13 +195,13 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     }
 
                     with(secondDia){
-                        val materialButtonToggleGroup = this.toggleButtonGroup
+                        val materialButtonToggleGroup = toggleButtonGroup
                         val ids: List<Int> = materialButtonToggleGroup.checkedButtonIds
                         val resourceName: String =
                             expandableDia.secondLayout.resources.getResourceName(materialButton.id).takeLast(3)
                         for (id in ids) {
                             val materialButton: MaterialButton = materialButtonToggleGroup.findViewById(id)
-                            when (this.secondLayout.resources.getResourceName(materialButton.id).takeLast(3)) {
+                            when (secondLayout.resources.getResourceName(materialButton.id).takeLast(3)) {
                                 "Seg" -> reminderVM.weekDaysBoolean[0] = true
                                 "Ter" -> reminderVM.weekDaysBoolean[1] = true
                                 "Qua" -> reminderVM.weekDaysBoolean[2] = true
@@ -214,15 +214,15 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     }
 
                     when (alarmTypeButtonPressed) {
-                        1 -> this.alarm_type = AlarmType.SOM
-                        2 -> this.alarm_type = AlarmType.VIBRAR
-                        3 -> this.alarm_type = AlarmType.AMBOS
+                        1 -> alarm_type = AlarmType.SOM
+                        2 -> alarm_type = AlarmType.VIBRAR
+                        3 -> alarm_type = AlarmType.AMBOS
                     }
 
                     when (alarmFreqButtonPressed) {
-                        1 -> this.alarm_freq = AlarmFrequency.HOJE
-                        2 -> this.alarm_freq = AlarmFrequency.TODOS_OS_DIAS
-                        3 -> this.alarm_freq = AlarmFrequency.PERSONALIZADO
+                        1 -> alarm_freq = AlarmFrequency.HOJE
+                        2 -> alarm_freq = AlarmFrequency.TODOS_OS_DIAS
+                        3 -> alarm_freq = AlarmFrequency.PERSONALIZADO
                         else -> { println("hello") }
                     }
                 }
@@ -238,8 +238,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                             viewSuccess.successLayout.visibility = GONE
                         }
                         if (activity?.packageManager?.let { it1 ->
-                                reminderVM.alarmIntent.resolveActivity(it1)
-                            } != null) {
+                                reminderVM.alarmIntent.resolveActivity(it1) } != null) {
                             startActivity(reminderVM.alarmIntent)
                         }
                     }
@@ -259,10 +258,10 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private fun setButtonColorsReminder(view: LayoutSecondLembrarBinding, pos: Int){
 
         with(view){
-            this.button0.setBackgroundResource(R.color.md_blue_100)
-            this.button1.setBackgroundResource(R.color.md_blue_100)
-            this.button2.setBackgroundResource(R.color.md_blue_100)
-            this.button3.setBackgroundResource(R.color.md_blue_100)
+            button0.setBackgroundResource(R.color.md_blue_100)
+            button1.setBackgroundResource(R.color.md_blue_100)
+            button2.setBackgroundResource(R.color.md_blue_100)
+            button3.setBackgroundResource(R.color.md_blue_100)
 
             when(pos){
                 1 -> button0.setBackgroundResource(R.color.md_blue_200)
@@ -276,13 +275,13 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private fun setButtonColorsDays(view: LayoutSecondDiaBinding, pos: Int){
 
         with(view) {
-            this.buttonHoje.setBackgroundResource(R.drawable.layout_button_round_top)
-            this.buttonTodosDias.setBackgroundResource(R.color.md_blue_100)
-            this.buttonPersonalizado.setBackgroundResource(R.drawable.layout_button_round_bottom)
+            buttonHoje.setBackgroundResource(R.drawable.layout_button_round_top)
+            buttonTodosDias.setBackgroundResource(R.color.md_blue_100)
+            buttonPersonalizado.setBackgroundResource(R.drawable.layout_button_round_bottom)
 
             when (pos) {
-                1 -> this.buttonHoje.setBackgroundResource(R.drawable.layout_button_round_top)
-                2 -> this.buttonTodosDias.setBackgroundResource(R.color.md_blue_100)
+                1 -> buttonHoje.setBackgroundResource(R.drawable.layout_button_round_top)
+                2 -> buttonTodosDias.setBackgroundResource(R.color.md_blue_100)
                 3 -> buttonPersonalizado.setBackgroundResource(R.drawable.layout_button_round_bottom)
             }
         }
@@ -362,7 +361,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 command.contains(
                     "Lembrete",
                     true
-                ) -> this.parentLayout.performClick()
+                ) -> parentLayout.performClick()
                 command.contains("Horas", true) -> expandableHoras.run { clickAndFocus() }
 
                 command.contains("Dia", true) -> expandableDia.run { clickAndFocus() }
