@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
+import com.skydoves.expandablelayout.ExpandableLayout
 import com.tiagosantos.common.ui.model.AlarmFrequency
 import com.tiagosantos.common.ui.model.AlarmType
 import com.tiagosantos.common.ui.model.ReminderType
@@ -196,6 +197,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     with(secondDia){
                         val materialButtonToggleGroup = this.toggleButtonGroup
                         val ids: List<Int> = materialButtonToggleGroup.checkedButtonIds
+                        val resourceName: String =
+                            expandableDia.secondLayout.resources.getResourceName(materialButton.id).takeLast(3)
                         for (id in ids) {
                             val materialButton: MaterialButton = materialButtonToggleGroup.findViewById(id)
                             when (this.secondLayout.resources.getResourceName(materialButton.id).takeLast(3)) {
@@ -330,7 +333,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         isGroupVisible: Boolean,
     ){
         alarmFreqButtonPressed = value
-        setButtonColorsDays(alarmFreqButtonPressed)
+        setButtonColorsDays(alarmFreqButtonPressed, 0)
         view.buttonSelecionarDias.visibility = when {
             isbuttonVisible -> VISIBLE
             !isbuttonVisible -> INVISIBLE
@@ -343,6 +346,9 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             else -> { INVISIBLE }
         }
     }
+
+    private fun clickAndFocus() = { expandable: ExpandableLayout ->
+        expandable.performClick(); expandable.requestFocus() }
 
     private fun performActionWithVoiceCommand(
         view: ReminderFragmentBinding,
@@ -357,18 +363,11 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     "Lembrete",
                     true
                 ) -> this.parentLayout.performClick()
-                command.contains("Horas", true) ->
-                    expandableHoras.run { performClick(); requestFocus() }
+                command.contains("Horas", true) -> expandableHoras.run { clickAndFocus() }
 
-                command.contains("Dia", true) -> {
-                    expandableDia.run { performClick(); requestFocus() }
-                }
-                command.contains("Alerta", true) -> {
-                    expandableAlerta.run { performClick(); requestFocus() }
-                }
-                command.contains("Notas", true) -> {
-                    expandableNotas.run { performClick(); requestFocus() }
-                }
+                command.contains("Dia", true) -> expandableDia.run { clickAndFocus() }
+                command.contains("Alerta", true) ->  expandableAlerta.run { clickAndFocus() }
+                command.contains("Notas", true) ->  expandableNotas.run { clickAndFocus() }
                 command.contains("Cancelar", true) -> buttonCancel.performClick()
                 command.contains("Guardar", true) -> buttonConfirm.performClick()
                 command.contains("Todos", true) -> {
