@@ -42,7 +42,6 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?,
     ): View {
-        (activity as AppCompatActivity).supportActionBar?.title = "REPRODUZIR ÁUDIO"
         view.textSelectedMood.text = medViewModel.selectedMood
         medViewModel.setupPlayer(player,view)
 

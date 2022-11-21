@@ -64,7 +64,9 @@ class MealsFragment(srSettings: SRSettings) :
         fun setChecks(cardList: List<MaterialCardView?>, card: MaterialCardView) {
             if (!card.isChecked) mealsVM.updateSelectedOption(1)
                  else mealsVM.updateSelectedOption(0)
-            for (s in cardList) { if (s != card) s?.isChecked = false } }
+
+            for (s in cardList) { if (s != card) s?.isChecked = false }
+        }
 
         view.frameOpcaoCarne.setOnClickListener {
             setChecks(cardList,  view.frameOpcaoCarne)
