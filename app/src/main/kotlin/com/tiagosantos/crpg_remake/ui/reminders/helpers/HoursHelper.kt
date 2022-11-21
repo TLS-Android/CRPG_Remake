@@ -4,10 +4,8 @@ import android.annotation.SuppressLint
 import com.tiagosantos.common.ui.utils.Constants.t
 import com.tiagosantos.crpg_remake.databinding.*
 
-class HoursHelper(
-    view: ReminderFragmentBinding,
-    command: String,
-) {
+object HoursHelper {
+
     fun checkHoursCommand(
         view: ReminderFragmentBinding,
         command: String

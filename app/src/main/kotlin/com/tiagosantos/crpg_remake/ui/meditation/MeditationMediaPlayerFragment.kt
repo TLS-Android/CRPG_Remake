@@ -34,6 +34,8 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
     private val medViewModel: MeditationViewModel by viewModels()
     private val player = ExoPlayer.Builder(requireContext()).build()
 
+
+
     companion object {
         fun newInstance() = MeditationMediaPlayerFragment()
     }
@@ -57,7 +59,7 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
         }
 
         view.buttonReturnMeditation.setOnClickListener {
-            val fragment: Fragment = MeditationFragment(ttsSettings, srSettings)
+            val fragment: Fragment = MeditationFragment()
             val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, fragment)

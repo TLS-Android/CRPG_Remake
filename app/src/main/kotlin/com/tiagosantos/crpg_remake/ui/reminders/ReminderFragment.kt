@@ -363,12 +363,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
         with(view){
             when {
-                command.contains(
-                    "Lembrete",
-                    true
-                ) -> parentLayout.performClick()
+                command.contains("Lembrete", true) -> parentLayout.performClick()
                 command.contains("Horas", true) -> expandableHoras.run { clickAndFocus() }
-
                 command.contains("Dia", true) -> expandableDia.run { clickAndFocus() }
                 command.contains("Alerta", true) ->  expandableAlerta.run { clickAndFocus() }
                 command.contains("Notas", true) ->  expandableNotas.run { clickAndFocus() }
