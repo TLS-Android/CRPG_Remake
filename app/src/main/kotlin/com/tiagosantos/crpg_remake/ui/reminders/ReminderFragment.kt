@@ -105,17 +105,13 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 etMin.filters = arrayOf(InputFilterMinMax("00", "59"), InputFilter.LengthFilter(2))
             }
 
-
             with(secondDia){
                 buttonHoje.setOnClickListener {
-                    setSecondLayout(this,1, false,
-                        isGroupVisible =  false) }
+                    setSecondLayout(this,1, false, isGroupVisible =  false) }
                 buttonTodosDias.setOnClickListener {
-                    setSecondLayout(this,2, false,
-                        isGroupVisible = false) }
+                    setSecondLayout(this,2, false, isGroupVisible = false) }
                 buttonPersonalizado.setOnClickListener {
-                    setSecondLayout(this,3, true,
-                        isGroupVisible = true) }
+                    setSecondLayout(this,3, true, isGroupVisible = true) }
             }
 
             with(secondAlerta){
@@ -288,7 +284,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     }
 
     private fun setSoundLogosVisible(
-        view: LayoutSecondDiaBinding,
+        view: LayoutSecondAlertaBinding,
         value: Int,
         soundVisible: Boolean,
         vibVisible: Boolean,
@@ -325,7 +321,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         }
     }
 
-    fun setSecondLayout(
+    private fun setSecondLayout(
         view: LayoutSecondDiaBinding,
         value: Int,
         isbuttonVisible: Boolean,
