@@ -121,7 +121,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
                     imageButtonSom.setOnClickListener{
                         setSoundLogosVisible(
-                            view = this,
+                            view = view.secondDia,
                             1,
                             soundVisible = true,
                             vibVisible = false,
@@ -142,9 +142,9 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             buttonCancel.setOnClickListener {
                 avisoCampos.visibility = GONE
 
-                val setZero: (Int, Int, Int) -> Unit =
+                val setZero: (Int, Int, Int) -> Int =
                     { lembrarButtonPressed: Int, alarmTypeButtonPressed: Int,
-                      alarmFreqButtonPressed -> 0 }
+                      alarmFreqButtonPressed: Int -> 0 }
 
                 lembrarButtonPressed = 0
                 alarmTypeButtonPressed = 0
@@ -159,6 +159,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 val a = { i: Int -> i + 1 }
 
                 // reset alarmType section
+
                 cbSom.visibility = INVISIBLE
                 cbVib.visibility = INVISIBLE
                 cbAmbos.visibility = INVISIBLE
@@ -290,7 +291,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     }
 
     private fun setSoundLogosVisible(
-        view: LayoutSecondAlertaBinding,
+        view: LayoutSecondDiaBinding,
         value: Int,
         soundVisible: Boolean,
         vibVisible: Boolean,
@@ -315,7 +316,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         isTextVisible: Boolean,
     ){
         lembrarButtonPressed = value
-        setButtonColorsReminder(lembrarButtonPressed)
+        setButtonColorsReminder(lembrarButtonPressed, 1)
         when {
             isVisible -> viewLembrar.inserirTituloLembretePersonalizado.visibility = VISIBLE
             !isVisible -> viewLembrar.inserirTituloLembretePersonalizado.visibility = INVISIBLE
