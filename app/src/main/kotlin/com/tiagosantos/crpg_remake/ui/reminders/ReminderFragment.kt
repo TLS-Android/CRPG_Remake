@@ -127,10 +127,10 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                             vibVisible = false,
                             bothVisible = false) }
                     imageButtonVibrar.setOnClickListener{
-                        setSoundLogosVisible(this,2,
+                        setSoundLogosVisible(view.secondDia,2,
                             false, true, false) }
                     imageButtonAmbos.setOnClickListener{
-                        setSoundLogosVisible(this,3,
+                        setSoundLogosVisible(view.secondDia,3,
                             false, false, true) }
             }
 
@@ -200,11 +200,9 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     with(secondDia){
                         val materialButtonToggleGroup = toggleButtonGroup
                         val ids: List<Int> = materialButtonToggleGroup.checkedButtonIds
-                        val resourceName: String =
-                            expandableDia.secondLayout.resources.getResourceName(materialButton.id).takeLast(3)
                         for (id in ids) {
                             val materialButton: MaterialButton = materialButtonToggleGroup.findViewById(id)
-                            when (secondLayout.resources.getResourceName(materialButton.id).takeLast(3)) {
+                            when (resources.getResourceName(materialButton.id).takeLast(3)) {
                                 "Seg" -> reminderVM.weekDaysBoolean[0] = true
                                 "Ter" -> reminderVM.weekDaysBoolean[1] = true
                                 "Qua" -> reminderVM.weekDaysBoolean[2] = true
