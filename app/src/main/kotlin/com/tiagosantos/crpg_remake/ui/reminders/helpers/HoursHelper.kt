@@ -4,6 +4,9 @@ import android.annotation.SuppressLint
 import com.tiagosantos.common.ui.utils.Constants.t
 import com.tiagosantos.crpg_remake.databinding.*
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository
+import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.afternoonHoursMap
+import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.daytimeHoursMap
+import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.nightTimeHoursMap
 
 object HoursHelper {
 
@@ -52,17 +55,17 @@ object HoursHelper {
         private fun checkDaytimeHoursCommand(
             view: ReminderFragmentBinding,
             command: String
-        ) = getTime(command, ReminderRepository.daytimeHoursMap, view)
+        ) = getTime(command, daytimeHoursMap, view)
 
         private fun checkAfternoonHoursCommand(
             view: ReminderFragmentBinding,
             command: String
-        ) = getTime(command, ReminderRepository.afternoonHoursMap, view)
+        ) = getTime(command, afternoonHoursMap, view)
 
         private fun checkNighttimeHoursCommand(
             view: ReminderFragmentBinding,
             command: String
-        ) = getTime(command, ReminderRepository.nightTimeHoursMap, view)
+        ) = getTime(command, nightTimeHoursMap, view)
 
 
         fun checkMinutesCommand(
