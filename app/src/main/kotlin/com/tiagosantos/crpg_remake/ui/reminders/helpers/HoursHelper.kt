@@ -21,13 +21,13 @@ object HoursHelper {
 
     */
 
-    fun getTime(
+    private fun getTime(
         command: String,
         map: Map<String, String>,
         view: ReminderFragmentBinding,
     ) {
         with(view.secondHoras) {
-            val value = map.getOrElse(command, "01")
+            val value = map.getOrElse(command, "ola")
             editHours.setText(value)
         }
     }
@@ -52,93 +52,18 @@ object HoursHelper {
         private fun checkDaytimeHoursCommand(
             view: ReminderFragmentBinding,
             command: String
-        ) {
-            with(view.secondHoras) {
-                when {
-                    command.contains("uma") || command.contains(
-                        "1", t) -> editHours.setText("01")
-
-                    command.contains("duas") || command.contains(
-                        "2", t) -> editHours.setText("")
-
-                    command.contains("") || command.contains(
-                        "3", t) -> editHours.setText("")
-
-                    command.contains("") || command.contains(
-                        "4",) -> editHours.setText("")
-
-                    command.contains("") || command.contains(
-                        "5", t) -> editHours.setText("")
-
-                    command.contains("") || command.contains(
-                        "6", t) -> editHours.setText("")
-
-                    command.contains("") || command.contains(
-                        "7", t) -> editHours.setText("")
-
-                    command.contains("", t) || command.contains(
-                        "8", t) -> editHours.setText("")
-
-                    command.contains("", t) || command.contains(
-                        "9", t) -> editHours.setText("")
-
-                    command.contains("", t) || command.contains(
-                        "10", t) -> editHours.setText("")
-
-                    command.contains("onze") || command.contains(
-                        "11", t) -> editHours.setText("11")
-                }
-            }
-        }
+        ) = getTime(command, ReminderRepository.daytimeHoursMap, view)
 
         private fun checkAfternoonHoursCommand(
             view: ReminderFragmentBinding,
             command: String
-        ) {
-            with(view.secondHoras) {
-                when {
-                    command.contains("", t) || command.contains(
-                        "1", t) -> editHours.setText("")
-
-                    command.contains("") || command.contains(
-                        "2", t) -> editHours.setText("")
-
-                    command.contains("") || command.contains(
-                        "3", t) -> editHours.setText("")
-
-                    command.contains("") || command.contains(
-                        "4", t) -> editHours.setText("")
-
-                    command.contains("") || command.contains(
-                        "5", t) -> editHours.setText("")
-
-                    command.contains("") || command.contains(
-                        "6", t) -> editHours.setText("")
-
-                    command.contains("") || command.contains(
-                        "7", t) -> editHours.setText("")
-                }
-            }
-        }
+        ) = getTime(command, ReminderRepository.afternoonHoursMap, view)
 
         private fun checkNighttimeHoursCommand(
             view: ReminderFragmentBinding,
             command: String
-        ) {
-            with(view.secondHoras) {
+        ) = getTime(command, ReminderRepository.nightTimeHoursMap, view)
 
-                val noReturn : Int -> Unit = { num -> println(num) }
-
-
-                fun getTime(a, b,c) = command.contains("uma") || command.contains("1", t)
-                    -> editHours.setText("01")
-
-
-                when {
-
-                }
-            }
-        }
 
         fun checkMinutesCommand(
             view: ReminderFragmentBinding,
