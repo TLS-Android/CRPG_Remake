@@ -469,3 +469,9 @@ cardDieta?.isChecked = false
                                                                     "11", t) -> editHours.setText("11")
                                                             }
                                                         }
+
+
+
+                                                            EventType.TRANSPORTS -> {
+                                                                        holder.itemView.contentDescription = "Aceder à secção de transportes"
+                                                                    }

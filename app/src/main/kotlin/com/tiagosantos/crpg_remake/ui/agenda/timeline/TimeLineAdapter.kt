@@ -16,6 +16,7 @@ import com.github.vipulasri.timelineview.TimelineView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.common.ui.model.EventType
+import com.tiagosantos.common.ui.model.EventType.*
 import com.tiagosantos.common.ui.model.TimelineAttributesBackup
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.crpg_remake.R
@@ -43,13 +44,8 @@ class TimeLineAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimeLineViewHolder {
-
-        if (!::mLayoutInflater.isInitialized) {
-            mLayoutInflater = LayoutInflater.from(parent.context)
-        }
-
+        if (!::mLayoutInflater.isInitialized) { mLayoutInflater = LayoutInflater.from(parent.context) }
         val view = mLayoutInflater.inflate(R.layout.item_timeline, parent, false)
-
         return TimeLineViewHolder(view, viewType)
     }
 
@@ -57,29 +53,8 @@ class TimeLineAdapter(
 
         val timeLineModel = mFeedList[position]
 
-        when (timeLineModel.type) {
-            EventType.ACTIVITY -> {
-                holder.itemView.contentDescription = "Actividade" +
-                    "com o título ${timeLineModel.title} e tendo como descrição ${timeLineModel.info}," +
-                    " que irá" +
-                    " começar às ${timeLineModel.start_time}. Clique para obter mais informações"
-            }
+        setContentDescription(holder,timeLineModel)
 
-            EventType.MEAL -> {
-                if (timeLineModel.chosen_meal.isNullOrBlank()) {
-                    holder.itemView.contentDescription = "Nenhuma refeição selecionada, clique para selecionar" +
-                        "a sua refeição"
-                } else {
-                    holder.itemView.contentDescription = "Refeição selecionada, o prato escolhido " +
-                        "foi ${timeLineModel.chosen_meal}"
-                }
-            }
-
-            EventType.TRANSPORTS -> {
-                holder.itemView.contentDescription = "Aceder à secção de transportes"
-            }
-
-        }
 
         concatTime = timeLineModel.start_time + timeLineModel.end_time
 
@@ -121,37 +96,41 @@ class TimeLineAdapter(
             holder.info.text = timeLineModel.info
         }
 
-        when (timeLineModel.type) {
-            EventType.ACTIVITY -> {
-                holder.itemView.card_background_image.setBackgroundResource(R.drawable.crpg_background)
-                holder.itemView.card_center_icon.setBackgroundResource(R.drawable.maos)
-                holder.itemView.text_timeline_title.text = "ACTIVIDADE"
-                holder.itemView.text_timeline_info.text = timeLineModel.info.uppercase(Locale.getDefault())
-            }
-            EventType.MEAL -> {
-                holder.itemView.card_background_image.setBackgroundResource(R.drawable.background_dieta)
-                holder.itemView.card_center_icon.setBackgroundResource(R.drawable.meal_icon)
 
-                when (timeLineModel.title) {
-                    "ALMOÇO" -> if (timeLineModel.chosen_meal.isBlank()) {
-                        holder.itemView.text_timeline_info.text = "CLIQUE AQUI PARA SELECIONAR ALMOÇO"
-                    } else {
-                        holder.itemView.text_timeline_info.text = timeLineModel.chosen_meal
-                    }
+        with(holder.itemView){
+            when (timeLineModel.type) {
+                EventType.ACTIVITY -> {
+                    card_background_image.setBackgroundResource(R.drawable.crpg_background)
+                    card_center_icon.setBackgroundResource(R.drawable.maos)
+                    text_timeline_title.text = "ACTIVIDADE"
+                    text_timeline_info.text = timeLineModel.info.uppercase(Locale.getDefault())
+                }
+                EventType.MEAL -> {
+                    card_background_image.setBackgroundResource(R.drawable.background_dieta)
+                    card_center_icon.setBackgroundResource(R.drawable.meal_icon)
 
-                    "JANTAR" -> if (timeLineModel.chosen_meal.isBlank()) {
-                        holder.itemView.text_timeline_info.text = "CLIQUE AQUI PARA SELECIONAR JANTAR"
-                    } else {
-                        holder.itemView.text_timeline_info.text = timeLineModel.chosen_meal
+                    when (timeLineModel.title) {
+                        "ALMOÇO" -> if (timeLineModel.chosen_meal.isBlank()) {
+                            text_timeline_info.text = "CLIQUE AQUI PARA SELECIONAR ALMOÇO"
+                        } else {
+                            text_timeline_info.text = timeLineModel.chosen_meal
+                        }
+
+                        "JANTAR" -> if (timeLineModel.chosen_meal.isBlank()) {
+                            text_timeline_info.text = "CLIQUE AQUI PARA SELECIONAR JANTAR"
+                        } else {
+                            text_timeline_info.text = timeLineModel.chosen_meal
+                        }
                     }
                 }
-            }
-            EventType.TRANSPORTS -> {
-                holder.itemView.text_timeline_info.text = "CLIQUE AQUI PARA MAIS INFORMAÇÕES"
-                holder.itemView.card_background_image.setBackgroundResource(R.drawable.stcp_background)
-                holder.itemView.card_center_icon.setBackgroundResource(R.drawable.bus_icon)
+                EventType.TRANSPORTS -> {
+                    text_timeline_info.text = "CLIQUE AQUI PARA MAIS INFORMAÇÕES"
+                    card_background_image.setBackgroundResource(R.drawable.stcp_background)
+                    card_center_icon.setBackgroundResource(R.drawable.bus_icon)
+                }
             }
         }
+
 
         var id: String
         var tipo: EventType
@@ -203,6 +182,35 @@ class TimeLineAdapter(
             }
 
         }
+    }
+
+    private fun setContentDescription(
+        holder: TimeLineAdapter.TimeLineViewHolder,
+        timeLineModel: Event) {
+
+        with(holder.itemView) {
+            when (timeLineModel.type) {
+                ACTIVITY -> {
+                    contentDescription = "Actividade" +
+                            "com o título ${timeLineModel.title} e tendo como descrição ${timeLineModel.info}," +
+                            " que irá" +
+                            " começar às ${timeLineModel.start_time}. Clique para obter mais informações"
+                }
+
+                MEAL -> {
+                    contentDescription = if (timeLineModel.chosen_meal.isBlank()) {
+                        "Nenhuma refeição selecionada, clique para selecionar" +
+                                "a sua refeição"
+                    } else {
+                        "Refeição selecionada, o prato escolhido " +
+                                "foi ${timeLineModel.chosen_meal}"
+                    }
+                }
+
+                TRANSPORTS -> TODO()
+            }
+        }
+
     }
 
     override fun getItemCount() = mFeedList.size
