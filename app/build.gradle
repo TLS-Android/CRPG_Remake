@@ -90,4 +90,7 @@ dependencies {
 
     //TIMELINE VIEW
     implementation 'com.github.vipulasri:timelineview:1.1.5'
+
+    implementation 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+    implementation 'com.github.dcendents:android-maven-gradle-plugin:2.1'
 }
