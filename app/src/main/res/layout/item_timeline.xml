@@ -14,7 +14,7 @@
         app:lineWidth="3dp"
         app:markerSize="20dp"
         app:startLineColor="@color/md_blue_200"
-        app:strokeColor="@color/material_amber_600"
+        app:strokeColor="@color/GreyedBlue"
         app:strokeWidth="5dp" />
 
     <RelativeLayout
