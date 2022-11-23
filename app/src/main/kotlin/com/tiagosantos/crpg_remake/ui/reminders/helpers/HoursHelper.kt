@@ -3,133 +3,161 @@ package com.tiagosantos.crpg_remake.ui.reminders.helpers
 import android.annotation.SuppressLint
 import com.tiagosantos.common.ui.utils.Constants.t
 import com.tiagosantos.crpg_remake.databinding.*
+import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository
 
 object HoursHelper {
 
-    fun checkHoursCommand(
+    /**
+    val colorMap = mapOf (
+        'A' to R.color.colorBgShade1,
+        'B' to R.color.colorBgShade2,
+        ...
+    ...
+    )
+
+    val char = 'G'
+    val bgColor = colorMap[char] ?: R.color.colorBgShade27
+    background.setTint(ContextCompat.getColor(context, bgColor)
+
+    */
+
+    fun getTime(
+        command: String,
+        map: Map<String, String>,
         view: ReminderFragmentBinding,
-        command: String
     ) {
         with(view.secondHoras) {
-            when {
-                command.contains("da manhã", t) -> checkDaytimeHoursCommand(view, command)
-                command.contains("da tarde", t) -> checkAfternoonHoursCommand(view, command)
-                command.contains("da noite", t) -> checkNighttimeHoursCommand(view, command)
-                command.contains("meio-dia", t) -> editHours.setText("12")
-                command.contains("meia-noite", t) -> editHours.setText("00")
-            }
+            val value = map.getOrElse(command, "01")
+            editHours.setText(value)
         }
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun checkDaytimeHoursCommand(
-        view: ReminderFragmentBinding,
-        command: String
-    ) {
-        with(view.secondHoras) {
-            when {
-                command.contains("uma") || command.contains(
-                    "1", t) -> editHours.setText("01")
+        fun checkHoursCommand(
+            view: ReminderFragmentBinding,
+            command: String
+        ) {
 
-                command.contains("duas") || command.contains(
-                    "2", t) -> editHours.setText("02")
-
-                command.contains("três") || command.contains(
-                    "3", t) -> editHours.setText("03")
-
-                command.contains("quatro") || command.contains(
-                    "4",) -> editHours.setText("04")
-
-                command.contains("cinco") || command.contains(
-                    "5", t) -> editHours.setText("05")
-
-                command.contains("seis") || command.contains(
-                    "6", t) -> editHours.setText("06")
-
-                command.contains("sete") || command.contains(
-                    "7", t) -> editHours.setText("07")
-
-                command.contains("oito", t) || command.contains(
-                    "8", t) -> editHours.setText("08")
-
-                command.contains("nove", t) || command.contains(
-                    "9", t) -> editHours.setText("09")
-
-                command.contains("dez", t) || command.contains(
-                    "10", t) -> editHours.setText("10")
-
-                command.contains("onze") || command.contains(
-                    "11", t) -> editHours.setText("11")
+            with(view.secondHoras) {
+                when {
+                    command.contains("da manhã", t) -> checkDaytimeHoursCommand(view, command)
+                    command.contains("da tarde", t) -> checkAfternoonHoursCommand(view, command)
+                    command.contains("da noite", t) -> checkNighttimeHoursCommand(view, command)
+                    command.contains("meio-dia", t) -> editHours.setText("12")
+                    command.contains("meia-noite", t) -> editHours.setText("00")
+                }
             }
         }
-    }
 
-    private fun checkAfternoonHoursCommand(
-        view: ReminderFragmentBinding,
-        command: String
-    ) {
-        with(view.secondHoras) {
-            when {
-                command.contains("uma", t) || command.contains(
-                    "1", t) -> editHours.setText("13")
+        @SuppressLint("SetTextI18n")
+        private fun checkDaytimeHoursCommand(
+            view: ReminderFragmentBinding,
+            command: String
+        ) {
+            with(view.secondHoras) {
+                when {
+                    command.contains("uma") || command.contains(
+                        "1", t) -> editHours.setText("01")
 
-                command.contains("duas") || command.contains(
-                    "2", t) -> editHours.setText("14")
+                    command.contains("duas") || command.contains(
+                        "2", t) -> editHours.setText("")
 
-                command.contains("três") || command.contains(
-                    "3", t) -> editHours.setText("15")
+                    command.contains("") || command.contains(
+                        "3", t) -> editHours.setText("")
 
-                command.contains("quatro") || command.contains(
-                    "4", t) -> editHours.setText("16")
+                    command.contains("") || command.contains(
+                        "4",) -> editHours.setText("")
 
-                command.contains("cinco") || command.contains(
-                    "5", t) -> editHours.setText("17")
+                    command.contains("") || command.contains(
+                        "5", t) -> editHours.setText("")
 
-                command.contains("seis") || command.contains(
-                    "6", t) -> editHours.setText("18")
+                    command.contains("") || command.contains(
+                        "6", t) -> editHours.setText("")
 
-                command.contains("sete") || command.contains(
-                    "7", t) -> editHours.setText("19")
+                    command.contains("") || command.contains(
+                        "7", t) -> editHours.setText("")
+
+                    command.contains("", t) || command.contains(
+                        "8", t) -> editHours.setText("")
+
+                    command.contains("", t) || command.contains(
+                        "9", t) -> editHours.setText("")
+
+                    command.contains("", t) || command.contains(
+                        "10", t) -> editHours.setText("")
+
+                    command.contains("onze") || command.contains(
+                        "11", t) -> editHours.setText("11")
+                }
             }
         }
-    }
 
-    private fun checkNighttimeHoursCommand(
-        view: ReminderFragmentBinding,
-        command: String
-    ) {
-        with(view.secondHoras) {
-            when {
-                command.contains("oito",t) || command.contains("8",t) -> editHours.setText("20")
-                command.contains("nove") || command.contains(
-                    "9", t) -> editHours.setText("21")
-                command.contains("dez") || command.contains(
-                    "10", t) -> editHours.setText("22")
-                command.contains("onze") || command.contains(
-                    "11", t) -> editHours.setText("23")
+        private fun checkAfternoonHoursCommand(
+            view: ReminderFragmentBinding,
+            command: String
+        ) {
+            with(view.secondHoras) {
+                when {
+                    command.contains("", t) || command.contains(
+                        "1", t) -> editHours.setText("")
+
+                    command.contains("") || command.contains(
+                        "2", t) -> editHours.setText("")
+
+                    command.contains("") || command.contains(
+                        "3", t) -> editHours.setText("")
+
+                    command.contains("") || command.contains(
+                        "4", t) -> editHours.setText("")
+
+                    command.contains("") || command.contains(
+                        "5", t) -> editHours.setText("")
+
+                    command.contains("") || command.contains(
+                        "6", t) -> editHours.setText("")
+
+                    command.contains("") || command.contains(
+                        "7", t) -> editHours.setText("")
+                }
             }
         }
-    }
 
-    fun simplify(a,b,c) =  command.contains(a, t) || command.contains(":05", t) -> setText("05")
+        private fun checkNighttimeHoursCommand(
+            view: ReminderFragmentBinding,
+            command: String
+        ) {
+            with(view.secondHoras) {
 
-    fun checkMinutesCommand(
-        view: ReminderFragmentBinding,
-        command: String
-    ) {
-        with(view.secondHoras.editMinutes) {
-            when {
-                command.contains("e cinco", t) || command.contains(
-                    ":05", t) -> setText("05")
-                command.contains("e um quarto", t) || command.contains(
-                    ":15", t) -> setText("15")
-                command.contains("e meia", t) || command.contains(
-                    ":30", t) -> setText("30")
-                else -> {}
+                val noReturn : Int -> Unit = { num -> println(num) }
+
+
+                fun getTime(a, b,c) = command.contains("uma") || command.contains("1", t)
+                    -> editHours.setText("01")
+
+
+                when {
+
+                }
+            }
+        }
+
+        fun checkMinutesCommand(
+            view: ReminderFragmentBinding,
+            command: String
+        ) {
+            with(view.secondHoras.editMinutes) {
+                when {
+                    command.contains("e cinco", t) || command.contains(
+                        ":05", t) -> setText("05")
+                    command.contains("e um quarto", t) || command.contains(
+                        ":15", t) -> setText("15")
+                    command.contains("e meia", t) || command.contains(
+                        ":30", t) -> setText("30")
+                    else -> {}
+                }
+
             }
 
         }
-
     }
 
 }

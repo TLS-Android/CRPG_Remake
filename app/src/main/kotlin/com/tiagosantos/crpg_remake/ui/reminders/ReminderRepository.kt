@@ -10,6 +10,53 @@ import java.util.*
 
 object ReminderRepository {
 
+    val daytimeHoursMap = mapOf(
+        "uma" to "01",
+        "duas" to "02",
+        "três" to "03",
+        "quatro" to "04",
+        "cinco" to "05",
+        "seis" to "06",
+        "sete" to "07",
+        "oito" to "08",
+        "nove" to "09",
+        "dez" to "10",
+        "onze" to "11",
+    )
+
+    val afternoonHoursMap = mapOf(
+        "uma" to "13",
+        "duas" to "14",
+        "três" to "15",
+        "quatro" to "16",
+        "cinco" to "17",
+        "seis" to "18",
+        "sete" to "19",
+        "sete" to "19",
+    )
+
+    val nightTimeHoursMap = mapOf(
+        "oito" to "20",
+        "nove" to "21",
+        "dez" to "22",
+        "onze" to "23",
+    )
+
+    val internalMap = mapOf(
+        "uma" to "1",
+        "duas" to "2",
+        "três" to "3",
+        "quatro" to "4",
+        "cinco" to "5",
+        "seis" to "6",
+        "sete" to "7",
+        "oito" to "8",
+        "nove" to "9",
+        "dez" to "10",
+        "onze" to "11",
+    )
+
+
     var newReminder = Reminder(
         EMPTY_STRING, EMPTY_STRING, EMPTY_STRING,
         0, 0, ReminderType.MEDICACAO, AlarmType.SOM, AlarmFrequency.HOJE
