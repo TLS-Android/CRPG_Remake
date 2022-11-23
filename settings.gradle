@@ -16,4 +16,3 @@ rootProject.name = "CRPG_Remake"
 include ':app'
 include ':common'
 include ':access'
-include ':timelineview'
