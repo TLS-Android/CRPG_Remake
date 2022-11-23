@@ -29,7 +29,7 @@ object HoursHelper {
         view: ReminderFragmentBinding,
     ) {
         with(view.secondHoras) {
-            val value = map.getOrElse(command)
+            val value = map[command]
             editHours.setText(value)
         }
     }
@@ -51,20 +51,14 @@ object HoursHelper {
         }
 
         @SuppressLint("SetTextI18n")
-        private fun checkDaytimeHoursCommand(
-            view: ReminderFragmentBinding,
-            command: String
-        ) = getTime(command, daytimeHoursMap, view)
+        private fun checkDaytimeHoursCommand(view: ReminderFragmentBinding, command: String)
+                = getTime(command, daytimeHoursMap, view)
 
-        private fun checkAfternoonHoursCommand(
-            view: ReminderFragmentBinding,
-            command: String
-        ) = getTime(command, afternoonHoursMap, view)
+        private fun checkAfternoonHoursCommand(view: ReminderFragmentBinding, command: String)
+                = getTime(command, afternoonHoursMap, view)
 
-        private fun checkNighttimeHoursCommand(
-            view: ReminderFragmentBinding,
-            command: String
-        ) = getTime(command, nightTimeHoursMap, view)
+        private fun checkNighttimeHoursCommand(view: ReminderFragmentBinding, command: String)
+                = getTime(command, nightTimeHoursMap, view)
 
 
         fun checkMinutesCommand(
