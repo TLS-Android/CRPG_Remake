@@ -76,6 +76,8 @@ class GotevViewModel(
         }
     }
 
+    fun stop() { Speech.getInstance().stopListening() }
+
     override fun onCleared() {
         super.onCleared()
         Speech.getInstance().shutdown()

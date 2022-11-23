@@ -24,8 +24,10 @@ import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentDatePickerBinding
 import java.util.*
 
-class DatePickerFragment(ttsSettings: TTSSettings, srSettings: SRSettings) :
-    BaseModalFragment<FragmentDatePickerBinding>(
+class DatePickerFragment(
+    ttsSettings: TTSSettings,
+    srSettings: SRSettings
+) : BaseModalFragment<FragmentDatePickerBinding>(
         layoutId = R.layout.fragment_date_picker,
         FragmentSettings(
             appBarTitle = "ESCOLHER DATA",

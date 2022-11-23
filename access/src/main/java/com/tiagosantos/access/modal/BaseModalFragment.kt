@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -48,7 +49,6 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         viewBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         viewBinding.lifecycleOwner = viewLifecycleOwner
         return viewBinding.root
@@ -65,6 +65,18 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
         val hasRun = modalityPreferences.getBoolean(flag.toString(), false)
 
         setupModality(ttsFlag, srFlag, hasRun)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        gotev.stop()
+        gossip.shutUp()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        gotev.stop()
+        gossip.shutUp()
     }
 
     open fun performActionWithVoiceCommand(

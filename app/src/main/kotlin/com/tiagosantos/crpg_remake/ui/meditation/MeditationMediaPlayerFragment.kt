@@ -34,8 +34,6 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
     private val medViewModel: MeditationViewModel by viewModels()
     private val player = ExoPlayer.Builder(requireContext()).build()
 
-
-
     companion object {
         fun newInstance() = MeditationMediaPlayerFragment()
     }

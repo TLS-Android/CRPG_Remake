@@ -24,6 +24,8 @@ class GossipViewModel(
     }
 
     fun talk() { if (gossip.isMuted) gossip.talk(contextualHelp.toString()) }
+    fun shutUp() { if (!gossip.isMuted) gossip.stop() }
+
     fun setContextualHelp(help: String) { _contextualHelp.value = help }
 
     override fun onCleared() {

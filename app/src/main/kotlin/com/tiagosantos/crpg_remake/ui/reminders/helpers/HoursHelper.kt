@@ -3,7 +3,6 @@ package com.tiagosantos.crpg_remake.ui.reminders.helpers
 import android.annotation.SuppressLint
 import com.tiagosantos.common.ui.utils.Constants.t
 import com.tiagosantos.crpg_remake.databinding.*
-import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.afternoonHoursMap
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.daytimeHoursMap
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.nightTimeHoursMap
@@ -30,7 +29,7 @@ object HoursHelper {
         view: ReminderFragmentBinding,
     ) {
         with(view.secondHoras) {
-            val value = map.getOrElse(command, "ola")
+            val value = map.getOrElse(command)
             editHours.setText(value)
         }
     }
@@ -82,10 +81,7 @@ object HoursHelper {
                         ":30", t) -> setText("30")
                     else -> {}
                 }
-
             }
-
         }
-    }
 
 }
