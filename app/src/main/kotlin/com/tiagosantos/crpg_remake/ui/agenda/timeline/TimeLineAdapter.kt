@@ -6,11 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.plataforma.crpg.TimelineView
@@ -21,7 +17,6 @@ import com.tiagosantos.common.ui.model.TimelineAttributesBackup
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.formatDateTime
-import com.tiagosantos.crpg_remake.ui.meals.MealsFragment
 import java.util.*
 
 /**
@@ -54,6 +49,73 @@ class TimeLineAdapter(
         val timeLineModel = mFeedList[position]
 
         setContentDescription(holder,timeLineModel)
+        setupTimeLine(holder,timeLineModel)
+
+        with(holder.itemView){
+            when (timeLineModel.type) {
+                ACTIVITY -> {
+                    card_background_image.setBackgroundResource(R.drawable.crpg_background)
+                    card_center_icon.setBackgroundResource(R.drawable.maos)
+                    text_timeline_title.text = "ACTIVIDADE"
+                    text_timeline_info.text = timeLineModel.info.uppercase(Locale.getDefault())
+                }
+                MEAL -> {
+                    card_background_image.setBackgroundResource(R.drawable.background_dieta)
+                    card_center_icon.setBackgroundResource(R.drawable.meal_icon)
+
+                    when (timeLineModel.title) {
+                        "ALMOÇO" -> if (timeLineModel.chosen_meal.isBlank()) {
+                            text_timeline_info.text = "CLIQUE AQUI PARA SELECIONAR ALMOÇO"
+                        } else {
+                            text_timeline_info.text = timeLineModel.chosen_meal
+                        }
+
+                        "JANTAR" -> if (timeLineModel.chosen_meal.isBlank()) {
+                            text_timeline_info.text = "CLIQUE AQUI PARA SELECIONAR JANTAR"
+                        } else {
+                            text_timeline_info.text = timeLineModel.chosen_meal
+                        }
+                    }
+                }
+                else -> { println("nothing happens") }
+            }
+        }
+
+        var id: String
+        var tipo: EventType
+
+        // onClick on a card open pop up or go to Meal
+        holder.itemView.card.setOnClickListener {
+            id = mFeedList[position].title.toString()
+            tipo = mFeedList[position].type
+
+            when (tipo) {
+                ACTIVITY -> {
+                    MaterialAlertDialogBuilder(ctx, android.R.style.Theme_Material_Dialog_Alert)
+                        .setTitle(mFeedList[position].title)
+                        .setMessage(mFeedList[position].info)
+                        .setNegativeButton("Fechar") { _, _ -> }.show()
+                }
+
+                MEAL -> {
+                    val bundle = Bundle().apply {
+                        when (id) {
+                            "ALMOÇO" -> putBoolean("isLunch", true)
+                            "JANTAR" -> putBoolean("isLunch", false)
+                        }
+                    }
+
+                }
+            }
+
+
+
+        }
+    }
+
+    private fun setupTimeLine(
+        holder: TimeLineAdapter.TimeLineViewHolder,
+        timeLineModel: Event) {
 
         concatTime = timeLineModel.start_time + timeLineModel.end_time
 
@@ -85,82 +147,10 @@ class TimeLineAdapter(
             } else startTime.setGone()
 
             if (timeLineModel.title!!.isNotEmpty()) title.text = timeLineModel.title
-
             if (timeLineModel.info.isNotEmpty()) info.text = timeLineModel.info
 
         }
 
-        with(holder.itemView){
-            when (timeLineModel.type) {
-                ACTIVITY -> {
-                    card_background_image.setBackgroundResource(R.drawable.crpg_background)
-                    card_center_icon.setBackgroundResource(R.drawable.maos)
-                    text_timeline_title.text = "ACTIVIDADE"
-                    text_timeline_info.text = timeLineModel.info.uppercase(Locale.getDefault())
-                }
-                MEAL -> {
-                    card_background_image.setBackgroundResource(R.drawable.background_dieta)
-                    card_center_icon.setBackgroundResource(R.drawable.meal_icon)
-
-                    when (timeLineModel.title) {
-                        "ALMOÇO" -> if (timeLineModel.chosen_meal.isBlank()) {
-                            text_timeline_info.text = "CLIQUE AQUI PARA SELECIONAR ALMOÇO"
-                        } else {
-                            text_timeline_info.text = timeLineModel.chosen_meal
-                        }
-
-                        "JANTAR" -> if (timeLineModel.chosen_meal.isBlank()) {
-                            text_timeline_info.text = "CLIQUE AQUI PARA SELECIONAR JANTAR"
-                        } else {
-                            text_timeline_info.text = timeLineModel.chosen_meal
-                        }
-                    }
-                }
-
-                else -> { println("nothing happens") }
-            }
-        }
-
-        var id: String
-        var tipo: EventType
-
-        // onClick on a card open pop up or go to Meal or Transport Fragment
-        holder.itemView.card.setOnClickListener {
-            id = mFeedList[position].title.toString()
-            tipo = mFeedList[position].type
-
-            when (tipo) {
-                ACTIVITY -> {
-                    MaterialAlertDialogBuilder(ctx, android.R.style.Theme_Material_Dialog_Alert)
-                        .setTitle(mFeedList[position].title)
-                        .setMessage(mFeedList[position].info)
-                        .setNegativeButton("Fechar") { _, _ -> }.show()
-                }
-
-                MEAL -> {
-                    val bundle = Bundle()
-
-                    when (id) {
-                        "ALMOÇO" -> bundle.putBoolean("isLunch", true)
-                        "JANTAR" -> bundle.putBoolean("isLunch", false)
-                    }
-
-
-                }
-                else -> { println("to do ") }
-            }
-
-            fun performActionWithVoiceCommand(command: String, actionMap: Map<String, Any>) {
-                when {
-                    command.contains("Escolher Almoço", true) && id == "Almoço" ||
-                            command.contains("Escolher Jantar", true) && id == "Jantar" ->
-                        holder.itemView.card.performClick()
-                    command.contains(id, true) && tipo == ACTIVITY ->
-                        holder.itemView.card.performClick()
-                }
-            }
-
-        }
     }
 
     private fun setContentDescription(
@@ -216,6 +206,20 @@ class TimeLineAdapter(
             timeline.lineStyle = mAttributes.lineStyle
             timeline.lineStyleDashLength = mAttributes.lineDashWidth
             timeline.lineStyleDashGap = mAttributes.lineDashGap
+        }
+    }
+
+    fun performActionWithVoiceCommand(
+        holder: TimeLineViewHolder,
+        command: String,
+        actionMap: Map<String, Any>
+    ) {
+        when {
+            command.contains("Escolher Almoço", true) && id == "Almoço" ||
+                    command.contains("Escolher Jantar", true) && id == "Jantar" ->
+                holder.itemView.card.performClick()
+            command.contains(id, true) && tipo == ACTIVITY ->
+                holder.itemView.card.performClick()
         }
     }
 }
