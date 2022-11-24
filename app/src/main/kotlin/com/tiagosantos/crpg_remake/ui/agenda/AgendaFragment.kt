@@ -12,13 +12,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.vipulasri.timelineview.TimelineView
+import com.github.vipulasri.timelineview.sample.model.Orientation
+import com.github.vipulasri.timelineview.sample.model.TimelineAttributes
 import com.tiagosantos.access.modal.BaseModalFragment
 import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.FragmentSettings
+import com.tiagosantos.crpg_remake.databinding.FragmentAgendaBinding
+import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.dpToPx
+import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.getColorCompat
+
 import java.util.*
 
-class AgendaFragment : BaseModalFragment<>(
+class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
     layoutId = R.layout.fragment_agenda,
     FragmentSettings(
         appBarTitle = R.string.title_agenda,
@@ -44,7 +51,7 @@ class AgendaFragment : BaseModalFragment<>(
         mAttributes.onOrientationChanged = { oldValue, newValue ->
             if (oldValue != newValue) initRecyclerView(ctx!!)
         }
-        mAttributes.orientation = RecyclerView.Orientation.VERTICAL
+        mAttributes.orientation = Orientation.VERTICAL
     }
 
     override fun onCreateView(

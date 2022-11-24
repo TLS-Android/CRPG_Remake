@@ -11,7 +11,6 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.tiagosantos.common.ui.model.TimelineAttributesBackup
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.widgets.RoundedCornerBottomSheet
 

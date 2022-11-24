@@ -13,8 +13,9 @@ import com.plataforma.crpg.TimelineView
 import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.common.ui.model.EventType
 import com.tiagosantos.common.ui.model.EventType.*
-import com.tiagosantos.common.ui.model.TimelineAttributesBackup
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
+import com.tiagosantos.common.ui.utils.Constants.selectLunchText
+import com.tiagosantos.common.ui.utils.Constants.selectDinnerText
 import com.tiagosantos.common.ui.utils.Constants.chosenMealisBlankText
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.formatDateTime
@@ -93,13 +94,13 @@ class TimeLineAdapter(
 
                     when (timeLineModel.title) {
                         "ALMOÇO" -> if (timeLineModel.chosen_meal.isBlank()) {
-                            text_timeline_info.text = "CLIQUE AQUI PARA SELECIONAR ALMOÇO"
+                            text_timeline_info.text = selectLunchText
                         } else {
                             text_timeline_info.text = timeLineModel.chosen_meal
                         }
 
                         "JANTAR" -> if (timeLineModel.chosen_meal.isBlank()) {
-                            text_timeline_info.text = "CLIQUE AQUI PARA SELECIONAR JANTAR"
+                            text_timeline_info.text = selectDinnerText
                         } else {
                             text_timeline_info.text = timeLineModel.chosen_meal
                         }
@@ -113,9 +114,7 @@ class TimeLineAdapter(
 
     }
 
-    private fun onCardClicked(
-        holder: TimeLineAdapter.TimeLineViewHolder,
-    ) {
+    private fun onCardClicked(holder: TimeLineAdapter.TimeLineViewHolder) {
 
         var id: String
         var tipo: EventType
@@ -175,7 +174,7 @@ class TimeLineAdapter(
 
             if (timeLineModel.end_time.isNotEmpty()) {
                 var newEndTime = timeLineModel.end_time.apply { "${substring(0, 2)} : ${substring(2, 4)}" }
-                timeLineModel.end_time.apply { setVisi; this.text = newEndTime }
+                timeLineModel.end_time.apply { setVisible(); this.text = newEndTime }
                 end_time.text = newEndTime
             } else startTime.setGone()
 
@@ -188,7 +187,8 @@ class TimeLineAdapter(
 
     private fun setContentDescription(
         holder: TimeLineAdapter.TimeLineViewHolder,
-        timeLineModel: Event) {
+        timeLineModel: Event
+    ) {
 
         with(holder.itemView) {
             when (timeLineModel.type) {
@@ -200,10 +200,12 @@ class TimeLineAdapter(
                 }
 
                 MEAL -> {
-                    contentDescription = if (timeLineModel.chosen_meal.isBlank()) chosenMealisBlankText
-                    else {   "Refeição selecionada, o prato escolhido " +
-                            "foi ${timeLineModel.chosen_meal}"
-                    }
+                    contentDescription =
+                        if (timeLineModel.chosen_meal.isBlank()) chosenMealisBlankText
+                        else {
+                            "Refeição selecionada, o prato escolhido " +
+                                    "foi ${timeLineModel.chosen_meal}"
+                        }
 
                 }
             }
@@ -222,6 +224,7 @@ class TimeLineAdapter(
             command.contains("Escolher Almoço", true) && id == "Almoço" ||
                     command.contains("Escolher Jantar", true) && id == "Jantar" ->
                 holder.itemView.card.performClick()
+
             command.contains(id, true) && tipo == ACTIVITY ->
                 holder.itemView.card.performClick()
         }

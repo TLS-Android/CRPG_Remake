@@ -41,4 +41,6 @@ object Constants {
 
     //TIMELINE
     const val chosenMealisBlankText = "Nenhuma refeição selecionada, clique para selecionar a sua refeição"
+    const val selectLunchText = "CLIQUE AQUI PARA SELECIONAR ALMOÇO"
+    const val selectDinnerText = "CLIQUE AQUI PARA SELECIONAR JANTAR"
 }
