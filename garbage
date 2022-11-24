@@ -475,3 +475,13 @@ cardDieta?.isChecked = false
                                                             EventType.TRANSPORTS -> {
                                                                         holder.itemView.contentDescription = "Aceder à secção de transportes"
                                                                     }
+
+                                                                                    EventType.TRANSPORTS -> {
+                                                                                        text_timeline_info.text = "CLIQUE AQUI PARA MAIS INFORMAÇÕES"
+                                                                                        card_background_image.setBackgroundResource(R.drawable.stcp_background)
+                                                                                        card_center_icon.setBackgroundResource(R.drawable.bus_icon)
+                                                                                    }\
+
+
+                                                                                                    //newStartTime = "${newStartTime.substring(0, 2)} : ${newStartTime.substring(2, 4)}"
+

@@ -57,54 +57,48 @@ class TimeLineAdapter(
 
         concatTime = timeLineModel.start_time + timeLineModel.end_time
 
-        if (overlapArray.contains(concatTime)) {
-            holder.timeline.marker.setVisible(false, false)
-            holder.itemView.text_timeline_start_time.visibility = INVISIBLE
-            holder.itemView.text_timeline_end_time.visibility = INVISIBLE
-        } else {
-            overlapArray.add(concatTime)
-            holder.timeline.setMarker(ContextCompat.getDrawable(holder.itemView.context, R.drawable.ic_marker_active), mAttributes.markerColor)
+        with(holder){
+            if (overlapArray.contains(concatTime)) {
+                timeline.marker.setVisible(false, false)
+                itemView.text_timeline_start_time.visibility = INVISIBLE
+                itemView.text_timeline_end_time.visibility = INVISIBLE
+            } else {
+                overlapArray.add(concatTime)
+                timeline.setMarker(ContextCompat.getDrawable(itemView.context, R.drawable.ic_marker_active), mAttributes.markerColor)
+            }
+
+            if (timeLineModel.date.isNotEmpty()) {
+                date.setVisible()
+                date.text = timeLineModel.date.formatDateTime("yyyy-MM-dd", "dd-MMM-yyyy")
+            } else date.setGone()
+
+            if (timeLineModel.start_time.isNotEmpty()) {
+                startTime.setVisible()
+                var newStartTime = timeLineModel.start_time.apply { "${substring(0, 2)} : ${substring(2, 4)}" }
+                startTime.text = newStartTime
+            } else startTime.setGone()
+
+            if (timeLineModel.end_time.isNotEmpty()) {
+                var newEndTime = timeLineModel.end_time.apply { "${substring(0, 2)} : ${substring(2, 4)}" }
+                timeLineModel.end_time.run { setVisible(); this.text = newEndTime }
+                end_time.text = newEndTime
+            } else startTime.setGone()
+
+            if (timeLineModel.title!!.isNotEmpty()) title.text = timeLineModel.title
+
+            if (timeLineModel.info.isNotEmpty()) info.text = timeLineModel.info
+
         }
-
-        if (timeLineModel.date.isNotEmpty()) {
-            holder.date.setVisible()
-            holder.date.text = timeLineModel.date.formatDateTime("yyyy-MM-dd", "dd-MMM-yyyy")
-        } else
-            holder.date.setGone()
-
-        if (timeLineModel.start_time.isNotEmpty()) {
-            holder.startTime.setVisible()
-            var newStartTime: String = timeLineModel.start_time
-            newStartTime = "${newStartTime.substring(0, 2)} : ${newStartTime.substring(2, 4)}"
-            holder.startTime.text = newStartTime
-        } else
-            holder.startTime.setGone()
-
-        if (timeLineModel.end_time.isNotEmpty()) {
-            holder.end_time.setVisible()
-            var newEndTime: String = timeLineModel.end_time
-            newEndTime = "${newEndTime.substring(0, 2)} : ${newEndTime.substring(2, 4)}"
-            holder.end_time.text = newEndTime
-        } else holder.startTime.setGone()
-
-        if (timeLineModel.title.isNotEmpty()) {
-            holder.title.text = timeLineModel.title
-        }
-
-        if (timeLineModel.info.isNotEmpty()) {
-            holder.info.text = timeLineModel.info
-        }
-
 
         with(holder.itemView){
             when (timeLineModel.type) {
-                EventType.ACTIVITY -> {
+                ACTIVITY -> {
                     card_background_image.setBackgroundResource(R.drawable.crpg_background)
                     card_center_icon.setBackgroundResource(R.drawable.maos)
                     text_timeline_title.text = "ACTIVIDADE"
                     text_timeline_info.text = timeLineModel.info.uppercase(Locale.getDefault())
                 }
-                EventType.MEAL -> {
+                MEAL -> {
                     card_background_image.setBackgroundResource(R.drawable.background_dieta)
                     card_center_icon.setBackgroundResource(R.drawable.meal_icon)
 
@@ -122,14 +116,10 @@ class TimeLineAdapter(
                         }
                     }
                 }
-                EventType.TRANSPORTS -> {
-                    text_timeline_info.text = "CLIQUE AQUI PARA MAIS INFORMAÇÕES"
-                    card_background_image.setBackgroundResource(R.drawable.stcp_background)
-                    card_center_icon.setBackgroundResource(R.drawable.bus_icon)
-                }
+
+                else -> { println("nothing happens") }
             }
         }
-
 
         var id: String
         var tipo: EventType
@@ -140,14 +130,14 @@ class TimeLineAdapter(
             tipo = mFeedList[position].type
 
             when (tipo) {
-                EventType.ACTIVITY -> {
+                ACTIVITY -> {
                     MaterialAlertDialogBuilder(ctx, android.R.style.Theme_Material_Dialog_Alert)
                         .setTitle(mFeedList[position].title)
                         .setMessage(mFeedList[position].info)
                         .setNegativeButton("Fechar") { _, _ -> }.show()
                 }
 
-                EventType.MEAL -> {
+                MEAL -> {
                     val bundle = Bundle()
 
                     when (id) {
@@ -175,7 +165,7 @@ class TimeLineAdapter(
                     command.contains("Escolher Almoço", true) && id == "Almoço" ||
                             command.contains("Escolher Jantar", true) && id == "Jantar" ->
                         holder.itemView.card.performClick()
-                    command.contains(id, true) && tipo == EventType.ACTIVITY ->
+                    command.contains(id, true) && tipo == ACTIVITY ->
                         holder.itemView.card.performClick()
                 }
             }
