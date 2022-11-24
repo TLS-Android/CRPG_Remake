@@ -488,3 +488,9 @@ cardDieta?.isChecked = false
     // val sharedPreferences = ctx.getSharedPreferences(MODALITY, Context.MODE_PRIVATE).apply {
 
 
+    }
+
+
+    //REMOVED FRAGMENT TRANSITION LOGIC FROM ADAPTER
+
+

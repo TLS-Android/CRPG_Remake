@@ -145,17 +145,7 @@ class TimeLineAdapter(
                         "JANTAR" -> bundle.putBoolean("isLunch", false)
                     }
 
-                    val fragment: Fragment = MealsFragment()
-                    fragment.arguments = bundle
-                    val fragmentManager: FragmentManager =
-                        (ctx as AppCompatActivity).supportFragmentManager
-                    val fragmentTransaction: FragmentTransaction =
-                        fragmentManager.beginTransaction()
-                    fragmentManager.findFragmentByTag("Agenda")
-                        ?.let { it1 -> fragmentTransaction.remove(it1) }
-                    fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, fragment)
-                    fragmentTransaction.addToBackStack(null)
-                    fragmentTransaction.commit()
+
                 }
                 else -> { println("to do ") }
             }
@@ -195,8 +185,6 @@ class TimeLineAdapter(
                                 "foi ${timeLineModel.chosen_meal}"
                     }
                 }
-
-                TRANSPORTS -> TODO()
             }
         }
 
