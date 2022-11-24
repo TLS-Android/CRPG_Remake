@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.Orientation
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.TimelineAttributes
 import com.tiagosantos.access.modal.BaseModalFragment
+import com.tiagosantos.access.modal.settings.SRSettings
+import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.FragmentSettings
@@ -24,12 +26,13 @@ import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.getColorCompat
 
 import java.util.*
 
-class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
+class AgendaFragment(ttsSettings: TTSSettings, srSettings: SRSettings)
+    : BaseModalFragment<FragmentAgendaBinding>(
     layoutId = R.layout.fragment_agenda,
     FragmentSettings(
         appBarTitle = R.string.title_agenda,
         sharedPreferencesBooleanName = R.string.agendaHasRun.toString(),
-    )
+    ), ttsSettings, srSettings
 ) {
 
     private val _mDataList = MutableLiveData<ArrayList<Event>?>()

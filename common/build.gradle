@@ -49,7 +49,6 @@ dependencies {
     // Koin Core features
     implementation "io.insert-koin:koin-core:3.2.2"
     implementation 'androidx.recyclerview:recyclerview-selection:1.1.0'
-    implementation project(path: ':app')
 
     // Koin Test features
     testImplementation "io.insert-koin:koin-test:3.2.2"
