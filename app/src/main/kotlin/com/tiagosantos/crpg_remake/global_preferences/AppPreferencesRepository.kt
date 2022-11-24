@@ -10,8 +10,8 @@ class AppPreferencesRepository(
     private lateinit var appPreferences: AppPreferencesStorage
     private fun saveAppPreferences(appPreferences: AppPreferences) {}
 
-    private val literalValue = listOf("meditationHasRun", "notesHasRun", "notesTextHasRun",
-        "selectionHasRun", "remindersHasRun", "agendaHasRun"
+    private val literalValue = listOf("meditationHasRun", "selectionHasRun",
+        "remindersHasRun", "agendaHasRun"
     )
 
     private val sharedPreferences: SharedPreferences? = ctx.getSharedPreferences(

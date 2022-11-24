@@ -1,4 +1,4 @@
-package com.michalsvec.singlerowcalendar.calendar
+package com.tiagosantos.common.ui.singlerowcalendar.calendar
 
 import android.view.LayoutInflater
 import android.view.View

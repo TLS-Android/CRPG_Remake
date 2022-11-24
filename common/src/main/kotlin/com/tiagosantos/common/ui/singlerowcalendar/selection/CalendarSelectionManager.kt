@@ -1,4 +1,4 @@
-package com.michalsvec.singlerowcalendar.selection
+package com.tiagosantos.common.ui.singlerowcalendar.selection
 
 import java.util.*
 

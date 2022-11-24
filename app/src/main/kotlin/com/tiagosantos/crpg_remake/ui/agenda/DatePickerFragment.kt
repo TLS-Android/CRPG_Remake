@@ -10,10 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
-import com.michalsvec.singlerowcalendar.calendar.CalendarChangesObserver
-import com.michalsvec.singlerowcalendar.calendar.CalendarViewManager
-import com.michalsvec.singlerowcalendar.calendar.SingleRowCalendarAdapter
-import com.michalsvec.singlerowcalendar.selection.CalendarSelectionManager
+import com.tiagosantos.common.ui.singlerowcalendar.calendar.CalendarChangesObserver
+import com.tiagosantos.common.ui.singlerowcalendar.calendar.CalendarViewManager
+import com.tiagosantos.common.ui.singlerowcalendar.calendar.SingleRowCalendarAdapter
+import com.tiagosantos.common.ui.singlerowcalendar.selection.CalendarSelectionManager
 import com.tiagosantos.common.ui.singlerowcalendar.calendar.SingleRowCalendar
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils
 import com.tiagosantos.access.modal.BaseModalFragment

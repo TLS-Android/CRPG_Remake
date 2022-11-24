@@ -7,12 +7,9 @@ import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.selection.StorageStrategy
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.michalsvec.singlerowcalendar.calendar.CalendarChangesObserver
-import com.michalsvec.singlerowcalendar.calendar.CalendarViewManager
-import com.michalsvec.singlerowcalendar.calendar.SingleRowCalendarAdapter
 import com.michalsvec.singlerowcalendar.selection.CalendarDetailsLookup
-import com.michalsvec.singlerowcalendar.selection.CalendarKeyProvider
-import com.michalsvec.singlerowcalendar.selection.CalendarSelectionManager
+import com.tiagosantos.common.ui.singlerowcalendar.selection.CalendarKeyProvider
+import com.tiagosantos.common.ui.singlerowcalendar.selection.CalendarSelectionManager
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils
 import com.tiagosantos.crpg_remake.R
 import java.util.*

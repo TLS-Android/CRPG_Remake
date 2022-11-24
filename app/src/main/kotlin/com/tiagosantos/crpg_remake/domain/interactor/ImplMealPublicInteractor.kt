@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
  * Created on Dec 15, 2020.
  *
  */
-class ImplChatPublicInteractor(
+class ImplMealPublicInteractor(
     private val GetMealsUseCase: GetMealsUseCase,
     private val getCurrentUserUseCase: GetCurrentUserUseCase
 ) : MealPublicInteractor {
