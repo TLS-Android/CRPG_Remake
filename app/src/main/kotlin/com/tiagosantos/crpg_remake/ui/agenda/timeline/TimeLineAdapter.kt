@@ -34,6 +34,33 @@ class TimeLineAdapter(
 
     private lateinit var mLayoutInflater: LayoutInflater
 
+    inner class TimeLineViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
+        val date = itemView.text_timeline_date!!
+        val title = itemView.text_timeline_title!!
+        val info = itemView.text_timeline_info!!
+        val startTime = itemView.text_timeline_start_time!!
+        val end_time = itemView.text_timeline_end_time!!
+        val timeline = itemView.timeline!!
+
+        init {
+            timeline.initLine(viewType)
+            timeline.markerSize = mAttributes.markerSize
+            timeline.setMarkerColor(mAttributes.markerColor)
+            timeline.isMarkerInCenter = mAttributes.markerInCenter
+            timeline.markerPaddingLeft = mAttributes.markerLeftPadding
+            timeline.markerPaddingTop = mAttributes.markerTopPadding
+            timeline.markerPaddingRight = mAttributes.markerRightPadding
+            timeline.markerPaddingBottom = mAttributes.markerBottomPadding
+            timeline.linePadding = mAttributes.linePadding
+            timeline.lineWidth = mAttributes.lineWidth
+            timeline.setStartLineColor(mAttributes.startLineColor, viewType)
+            timeline.setEndLineColor(mAttributes.endLineColor, viewType)
+            timeline.lineStyle = mAttributes.lineStyle
+            timeline.lineStyleDashLength = mAttributes.lineDashWidth
+            timeline.lineStyleDashGap = mAttributes.lineDashGap
+        }
+    }
+
     override fun getItemViewType(position: Int): Int {
         return TimelineView.getTimeLineViewType(position, itemCount)
     }
@@ -81,6 +108,14 @@ class TimeLineAdapter(
             }
         }
 
+        onCardClicked(holder)
+
+    }
+
+    private fun onCardClicked(
+        holder: TimeLineAdapter.TimeLineViewHolder,
+    ) {
+
         var id: String
         var tipo: EventType
 
@@ -108,14 +143,15 @@ class TimeLineAdapter(
                 }
             }
 
-
-
         }
     }
 
+
+
     private fun setupTimeLine(
         holder: TimeLineAdapter.TimeLineViewHolder,
-        timeLineModel: Event) {
+        timeLineModel: Event
+    ) {
 
         concatTime = timeLineModel.start_time + timeLineModel.end_time
 
@@ -142,7 +178,7 @@ class TimeLineAdapter(
 
             if (timeLineModel.end_time.isNotEmpty()) {
                 var newEndTime = timeLineModel.end_time.apply { "${substring(0, 2)} : ${substring(2, 4)}" }
-                timeLineModel.end_time.run { setVisible(); this.text = newEndTime }
+                timeLineModel.end_time.apply { setVisi; this.text = newEndTime }
                 end_time.text = newEndTime
             } else startTime.setGone()
 
@@ -181,33 +217,6 @@ class TimeLineAdapter(
     }
 
     override fun getItemCount() = mFeedList.size
-
-    inner class TimeLineViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
-        val date = itemView.text_timeline_date!!
-        val title = itemView.text_timeline_title!!
-        val info = itemView.text_timeline_info!!
-        val startTime = itemView.text_timeline_start_time!!
-        val end_time = itemView.text_timeline_end_time!!
-        val timeline = itemView.timeline!!
-
-        init {
-            timeline.initLine(viewType)
-            timeline.markerSize = mAttributes.markerSize
-            timeline.setMarkerColor(mAttributes.markerColor)
-            timeline.isMarkerInCenter = mAttributes.markerInCenter
-            timeline.markerPaddingLeft = mAttributes.markerLeftPadding
-            timeline.markerPaddingTop = mAttributes.markerTopPadding
-            timeline.markerPaddingRight = mAttributes.markerRightPadding
-            timeline.markerPaddingBottom = mAttributes.markerBottomPadding
-            timeline.linePadding = mAttributes.linePadding
-            timeline.lineWidth = mAttributes.lineWidth
-            timeline.setStartLineColor(mAttributes.startLineColor, viewType)
-            timeline.setEndLineColor(mAttributes.endLineColor, viewType)
-            timeline.lineStyle = mAttributes.lineStyle
-            timeline.lineStyleDashLength = mAttributes.lineDashWidth
-            timeline.lineStyleDashGap = mAttributes.lineDashGap
-        }
-    }
 
     fun performActionWithVoiceCommand(
         holder: TimeLineViewHolder,
