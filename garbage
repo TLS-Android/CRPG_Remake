@@ -485,6 +485,6 @@ cardDieta?.isChecked = false
 
                                                         //newStartTime = "${newStartTime.substring(0, 2)} : ${newStartTime.substring(2, 4)}"
 
-
+    // val sharedPreferences = ctx.getSharedPreferences(MODALITY, Context.MODE_PRIVATE).apply {
 
 
