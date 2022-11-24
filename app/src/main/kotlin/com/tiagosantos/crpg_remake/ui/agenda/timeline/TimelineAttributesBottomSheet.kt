@@ -12,20 +12,21 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tiagosantos.crpg_remake.R
+import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.TimelineAttributes
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.widgets.RoundedCornerBottomSheet
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class TimelineAttributesBottomSheet : RoundedCornerBottomSheet() {
 
     interface Callbacks {
-        fun onAttributesChanged(attributes: TimelineAttributesBackup)
+        fun onAttributesChanged(attributes: TimelineAttributes)
     }
 
     companion object {
 
         private const val EXTRA_ATTRIBUTES = "EXTRA_ATTRIBUTES"
 
-        fun showDialog(fragmentManager: FragmentManager, attributes: TimelineAttributesBackup, callbacks: Callbacks) {
+        fun showDialog(fragmentManager: FragmentManager, attributes: TimelineAttributes, callbacks: Callbacks) {
             val dialog = TimelineAttributesBottomSheet()
             dialog.arguments = bundleOf(
                 EXTRA_ATTRIBUTES to attributes
@@ -36,7 +37,7 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet() {
     }
 
     private var mCallbacks: Callbacks? = null
-    private lateinit var mAttributes: TimelineAttributesBackup
+    private lateinit var mAttributes: TimelineAttributes
     private var mBottomSheetBehavior: BottomSheetBehavior<*>? = null
 
     override fun onStart() {
@@ -64,7 +65,7 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val attributes = (requireArguments().getParcelable(EXTRA_ATTRIBUTES) as TimelineAttributesBackup)
+        val attributes = (requireArguments().getParcelable(EXTRA_ATTRIBUTES)!! as TimelineAttributes)
         mAttributes = attributes.copy()
 
         text_attributes_heading.setOnClickListener { dismiss() }

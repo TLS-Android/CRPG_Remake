@@ -46,7 +46,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/image_marker_color" />
 
-    <com.plataforma.crpg.widgets.BorderedCircle
+    <com.tiagosantos.crpg_remake.ui.agenda.timeline.widgets.BorderedCircle
         android:id="@+id/image_marker_color"
         style="@style/BorderImageView"
         android:layout_marginLeft="5dp"
