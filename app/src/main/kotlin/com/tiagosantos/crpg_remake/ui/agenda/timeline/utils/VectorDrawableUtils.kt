@@ -1,4 +1,4 @@
-package com.github.vipulasri.timelineview.sample.utils
+package com.tiagosantos.crpg_remake.ui.agenda.timeline.utils
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -6,7 +6,6 @@ import android.graphics.Canvas
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
-import androidx.core.content.ContextCompat
 
 /**
  * Created by Vipul Asri on 28/12/16.

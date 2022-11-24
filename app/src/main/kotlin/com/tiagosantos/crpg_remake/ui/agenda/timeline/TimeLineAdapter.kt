@@ -19,6 +19,7 @@ import com.tiagosantos.common.ui.utils.Constants.selectDinnerText
 import com.tiagosantos.common.ui.utils.Constants.chosenMealisBlankText
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.formatDateTime
+import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.TimelineAttributes
 import java.util.*
 
 /**
@@ -27,7 +28,7 @@ import java.util.*
 
 class TimeLineAdapter(
     private val mFeedList: List<Event>,
-    private var mAttributes: TimelineAttributesBackup,
+    private var mAttributes: TimelineAttributes,
     private val ctx: Context,
 ) : RecyclerView.Adapter<TimeLineAdapter.TimeLineViewHolder>() {
 

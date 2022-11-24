@@ -1,4 +1,4 @@
-package com.github.vipulasri.timelineview.sample.model
+package com.tiagosantos.crpg_remake.ui.agenda.timeline.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.IgnoredOnParcel

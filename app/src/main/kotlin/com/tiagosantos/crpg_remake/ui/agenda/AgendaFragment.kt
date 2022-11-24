@@ -13,8 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.vipulasri.timelineview.TimelineView
-import com.github.vipulasri.timelineview.sample.model.Orientation
-import com.github.vipulasri.timelineview.sample.model.TimelineAttributes
+import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.Orientation
+import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.TimelineAttributes
 import com.tiagosantos.access.modal.BaseModalFragment
 import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.crpg_remake.R
