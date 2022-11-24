@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
-import com.github.vipulasri.timelineview.TimelineView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.plataforma.crpg.TimelineView
 import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.common.ui.model.EventType
 import com.tiagosantos.common.ui.model.EventType.*
@@ -54,7 +54,6 @@ class TimeLineAdapter(
         val timeLineModel = mFeedList[position]
 
         setContentDescription(holder,timeLineModel)
-
 
         concatTime = timeLineModel.start_time + timeLineModel.end_time
 
