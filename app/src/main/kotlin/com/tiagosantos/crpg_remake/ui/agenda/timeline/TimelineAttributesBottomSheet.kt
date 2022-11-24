@@ -44,7 +44,7 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet() {
         super.onStart()
 
         if (dialog != null) {
-            val bottomSheet = dialog!!.findViewById<View>(R.id.design_bottom_sheet)
+            val bottomSheet = dialog!!.findViewById<View>()
             bottomSheet.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
         }
 
