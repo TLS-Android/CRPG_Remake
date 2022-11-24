@@ -8,8 +8,8 @@ import com.google.android.material.card.MaterialCardView
 import com.tiagosantos.access.modal.BaseModalFragment
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
-import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
+import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
 
 //The onCreate() is called first, for doing any non-graphical initialisations.

@@ -10,20 +10,15 @@ class AppPreferencesRepository(
     private lateinit var appPreferences: AppPreferencesStorage
     private fun saveAppPreferences(appPreferences: AppPreferences) {}
 
+    private val literalValue = listOf(
+        "meditationHasRun", "notesHasRun", "notesTextHasRun",
+        "selectionHasRun", "remindersHasRun", "agendaHasRun"
+    )
+
     fun resetAppPreferences() {
-        val sharedPreferences = ctx.getSharedPreferences(
-            MODALITY,
-            Context.MODE_PRIVATE
-        )
-        val editor = sharedPreferences.edit()
-        editor.putBoolean("meditationHasRun", false).apply()
-        editor.putBoolean("notesHasRun", false).apply()
-        editor.putBoolean("notesTextHasRun", false).apply()
-        editor.putBoolean("selectionHasRun", false).apply()
-        editor.putBoolean("transportsHasRun", false).apply()
-        editor.putBoolean("publicTransportTimetableHasRun", false).apply()
-        editor.putBoolean("remindersHasRun", false).apply()
-        editor.putBoolean("agendaHasRun", false).apply()
+        val sharedPreferences = ctx.getSharedPreferences(MODALITY, Context.MODE_PRIVATE).apply {
+            for (i in 1..literalValue.size)  edit().putBoolean(literalValue[i], false).apply()
+        }
     }
 
     val sharedPreferences: SharedPreferences? = ctx.getSharedPreferences(

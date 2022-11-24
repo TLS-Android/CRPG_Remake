@@ -28,6 +28,4 @@ enum class EventType {
     ACTIVITY,
     @SerializedName("MEAL")
     MEAL,
-    @SerializedName("TRANSPORT")
-    TRANSPORTS
 }
