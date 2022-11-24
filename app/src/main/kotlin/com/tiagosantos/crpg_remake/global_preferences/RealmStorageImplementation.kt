@@ -9,4 +9,8 @@ object RealmStorageImplementation : AppPreferencesStorage {
     override suspend fun saveAppPreferences(appPreferencesRealm: AppPreferencesRealm) {
         TODO("Not yet implemented")
     }
+
+    override suspend fun resetAppPreferences(appPreferencesRealm: AppPreferencesRealm) {
+        TODO("Not yet implemented")
+    }
 }
