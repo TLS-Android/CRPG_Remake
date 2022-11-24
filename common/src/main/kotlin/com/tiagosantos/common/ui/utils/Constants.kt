@@ -38,4 +38,7 @@ object Constants {
     //BOOL
     const val t = true
     const val f = false
+
+    //TIMELINE
+    const val chosenMealisBlankText = "Nenhuma refeição selecionada, clique para selecionar a sua refeição"
 }

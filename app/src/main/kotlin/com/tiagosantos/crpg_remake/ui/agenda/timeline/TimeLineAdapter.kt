@@ -15,6 +15,7 @@ import com.tiagosantos.common.ui.model.EventType
 import com.tiagosantos.common.ui.model.EventType.*
 import com.tiagosantos.common.ui.model.TimelineAttributesBackup
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
+import com.tiagosantos.common.ui.utils.Constants.chosenMealisBlankText
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.formatDateTime
 import java.util.*
@@ -139,14 +140,10 @@ class TimeLineAdapter(
                             "JANTAR" -> putBoolean("isLunch", false)
                         }
                     }
-
                 }
             }
-
         }
     }
-
-
 
     private fun setupTimeLine(
         holder: TimeLineAdapter.TimeLineViewHolder,
@@ -203,13 +200,11 @@ class TimeLineAdapter(
                 }
 
                 MEAL -> {
-                    contentDescription = if (timeLineModel.chosen_meal.isBlank()) {
-                        "Nenhuma refeição selecionada, clique para selecionar" +
-                                "a sua refeição"
-                    } else {
-                        "Refeição selecionada, o prato escolhido " +
-                                "foi ${timeLineModel.chosen_meal}"
+                    contentDescription = if (timeLineModel.chosen_meal.isBlank()) chosenMealisBlankText
+                    else {   "Refeição selecionada, o prato escolhido " +
+                            "foi ${timeLineModel.chosen_meal}"
                     }
+
                 }
             }
         }
