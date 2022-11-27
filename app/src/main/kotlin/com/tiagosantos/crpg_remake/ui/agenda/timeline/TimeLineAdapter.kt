@@ -73,6 +73,15 @@ class TimeLineAdapter(
                     cardBackgroundImage.setBackgroundResource(R.drawable.background_dieta)
                     cardCenterIcon.setBackgroundResource(R.drawable.meal_icon)
 
+
+                    if (timeLineModel.chosen_meal.isBlank()) {
+                        textTimelineInfo.text = when (timeLineModel.title){
+                            "ALMOÇO" -> selectLunchText
+                            "JANTAR" -> selectDinnerText
+                            else -> {}
+                        }.toString()
+                    }
+
                     when (timeLineModel.title) {
                         "ALMOÇO" -> if (timeLineModel.chosen_meal.isBlank()) {
                             textTimelineInfo.text = selectLunchText
@@ -123,7 +132,7 @@ class TimeLineAdapter(
         with(_binding!!){
             card.setOnClickListener {
                 id = mFeedList.value!![position].title.toString()
-                tipo = mFeedList[position].type
+                tipo = mFeedList.value!![position].type
 
                 when (tipo) {
                     ACTIVITY -> {
@@ -158,11 +167,14 @@ class TimeLineAdapter(
         with(_binding!!){
             if (overlapArray.contains(concatTime)) {
                 timeline.marker.setVisible(false, false)
-               textTimelineStartTime.visibility = INVISIBLE
+                textTimelineStartTime.visibility = INVISIBLE
                 textTimelineEndTime.visibility = INVISIBLE
             } else {
                 overlapArray.add(concatTime)
-                timeline.setMarker(ContextCompat.getDrawable(itemView.context, R.drawable.ic_marker_active), mAttributes.markerColor)
+                timeline.setMarker(ContextCompat.getDrawable(
+                    itemView.context,
+                    R.drawable.ic_marker_active
+                ), mAttributes.markerColor)
             }
 
             if (timeLineModel.date.isNotEmpty()) {
