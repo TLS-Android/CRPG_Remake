@@ -18,6 +18,7 @@ import com.tiagosantos.common.ui.utils.Constants.selectLunchText
 import com.tiagosantos.common.ui.utils.Constants.selectDinnerText
 import com.tiagosantos.common.ui.utils.Constants.chosenMealisBlankText
 import com.tiagosantos.crpg_remake.R
+import com.tiagosantos.crpg_remake.databinding.FragmentHomeBinding
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.formatDateTime
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.TimelineAttributes
 import java.util.*
@@ -37,32 +38,7 @@ class TimeLineAdapter(
 
     private lateinit var mLayoutInflater: LayoutInflater
 
-    inner class TimeLineViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
-        val date = itemView.text_timeline_date!!
-        val title = itemView.text_timeline_title!!
-        val info = itemView.text_timeline_info!!
-        val startTime = itemView.text_timeline_start_time!!
-        val end_time = itemView.text_timeline_end_time!!
-        val timeline = itemView.timeline!!
-
-        init {
-            timeline.initLine(viewType)
-            timeline.markerSize = mAttributes.markerSize
-            timeline.setMarkerColor(mAttributes.markerColor)
-            timeline.isMarkerInCenter = mAttributes.markerInCenter
-            timeline.markerPaddingLeft = mAttributes.markerLeftPadding
-            timeline.markerPaddingTop = mAttributes.markerTopPadding
-            timeline.markerPaddingRight = mAttributes.markerRightPadding
-            timeline.markerPaddingBottom = mAttributes.markerBottomPadding
-            timeline.linePadding = mAttributes.linePadding
-            timeline.lineWidth = mAttributes.lineWidth
-            timeline.setStartLineColor(mAttributes.startLineColor, viewType)
-            timeline.setEndLineColor(mAttributes.endLineColor, viewType)
-            timeline.lineStyle = mAttributes.lineStyle
-            timeline.lineStyleDashLength = mAttributes.lineDashWidth
-            timeline.lineStyleDashGap = mAttributes.lineDashGap
-        }
-    }
+    private var _binding: FragmentHomeBinding? = null
 
     override fun getItemViewType(position: Int): Int {
         return TimelineView.getTimeLineViewType(position, itemCount)
@@ -215,6 +191,33 @@ class TimeLineAdapter(
     }
 
     override fun getItemCount() = mFeedList.size
+
+    inner class TimeLineViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
+        val date = itemView.text_timeline_date!!
+        val title = itemView.text_timeline_title!!
+        val info = itemView.text_timeline_info!!
+        val startTime = itemView.text_timeline_start_time!!
+        val end_time = itemView.text_timeline_end_time!!
+        val timeline = itemView.timeline!!
+
+        init {
+            timeline.initLine(viewType)
+            timeline.markerSize = mAttributes.markerSize
+            timeline.setMarkerColor(mAttributes.markerColor)
+            timeline.isMarkerInCenter = mAttributes.markerInCenter
+            timeline.markerPaddingLeft = mAttributes.markerLeftPadding
+            timeline.markerPaddingTop = mAttributes.markerTopPadding
+            timeline.markerPaddingRight = mAttributes.markerRightPadding
+            timeline.markerPaddingBottom = mAttributes.markerBottomPadding
+            timeline.linePadding = mAttributes.linePadding
+            timeline.lineWidth = mAttributes.lineWidth
+            timeline.setStartLineColor(mAttributes.startLineColor, viewType)
+            timeline.setEndLineColor(mAttributes.endLineColor, viewType)
+            timeline.lineStyle = mAttributes.lineStyle
+            timeline.lineStyleDashLength = mAttributes.lineDashWidth
+            timeline.lineStyleDashGap = mAttributes.lineDashGap
+        }
+    }
 
     fun performActionWithVoiceCommand(
         holder: TimeLineViewHolder,
