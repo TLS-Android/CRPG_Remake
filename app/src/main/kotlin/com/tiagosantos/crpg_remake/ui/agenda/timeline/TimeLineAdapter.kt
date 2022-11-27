@@ -19,7 +19,6 @@ import com.tiagosantos.common.ui.utils.Constants.selectLunchText
 import com.tiagosantos.common.ui.utils.Constants.selectDinnerText
 import com.tiagosantos.common.ui.utils.Constants.chosenMealisBlankText
 import com.tiagosantos.crpg_remake.R
-import com.tiagosantos.crpg_remake.databinding.FragmentHomeBinding
 import com.tiagosantos.crpg_remake.databinding.ItemTimelineBinding
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.formatDateTime
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setGone
@@ -40,6 +39,9 @@ class TimeLineAdapter(
     private var overlapArray = mutableListOf(EMPTY_STRING)
     private var concatTime = EMPTY_STRING
 
+    private lateinit var id: String
+    private lateinit var tipo: EventType
+
     private lateinit var mLayoutInflater: LayoutInflater
 
     private var _binding: ItemTimelineBinding? = null
@@ -51,6 +53,7 @@ class TimeLineAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimeLineViewHolder {
         if (!::mLayoutInflater.isInitialized) { mLayoutInflater = LayoutInflater.from(parent.context) }
         val view = mLayoutInflater.inflate(R.layout.item_timeline, parent, false)
+        //_binding = ItemTimelineBinding.inflate(inflater, container, false)
         return TimeLineViewHolder(view, viewType)
     }
 
@@ -58,8 +61,8 @@ class TimeLineAdapter(
 
         val timeLineModel = mFeedList.value!![position]
 
-        setContentDescription(holder,timeLineModel)
-        setupTimeLine(holder,timeLineModel)
+        setContentDescription(holder,timeLineModel, position)
+        setupTimeLine(holder,timeLineModel, position)
 
         with(_binding!!){
             when (timeLineModel.type) {
@@ -78,7 +81,7 @@ class TimeLineAdapter(
                         textTimelineInfo.text = when (timeLineModel.title){
                             "ALMOÇO" -> selectLunchText
                             "JANTAR" -> selectDinnerText
-                            else -> {}
+                            else -> { println("sup")}
                         }.toString()
                     }
 
@@ -100,13 +103,9 @@ class TimeLineAdapter(
             }
         }
 
-        onCardClicked(holder)
+        onCardClicked(holder, position)
 
-        fun performActionWithVoiceCommand(
-            holder: TimeLineViewHolder,
-            command: String,
-            actionMap: Map<String, Any>
-        ) {
+        fun performActionWithVoiceCommand(command: String) {
             with(_binding!!){
                 when {
                     command.contains("Escolher Almoço", true) && id == "Almoço" ||
@@ -123,10 +122,7 @@ class TimeLineAdapter(
 
     }
 
-    private fun onCardClicked(holder: TimeLineAdapter.TimeLineViewHolder) {
-
-        var id: String
-        var tipo: EventType
+    private fun onCardClicked(holder: TimeLineViewHolder, position: Int) {
 
         // onClick on a card open pop up or go to Meal
         with(_binding!!){
@@ -138,7 +134,7 @@ class TimeLineAdapter(
                     ACTIVITY -> {
                         MaterialAlertDialogBuilder(ctx, android.R.style.Theme_Material_Dialog_Alert)
                             .setTitle(mFeedList.value!![position].title)
-                            .setMessage(mFeedList[position].info)
+                            .setMessage(mFeedList.value!![position].info)
                             .setNegativeButton("Fechar") { _, _ -> }.show()
                     }
 
@@ -158,8 +154,9 @@ class TimeLineAdapter(
     }
 
     private fun setupTimeLine(
-        holder: TimeLineAdapter.TimeLineViewHolder,
-        timeLineModel: Event
+        holder: TimeLineViewHolder,
+        timeLineModel: Event,
+        position: Int
     ) {
 
         concatTime = timeLineModel.start_time + timeLineModel.end_time
@@ -172,7 +169,7 @@ class TimeLineAdapter(
             } else {
                 overlapArray.add(concatTime)
                 timeline.setMarker(ContextCompat.getDrawable(
-                    itemView.context,
+                    ctx,
                     R.drawable.ic_marker_active
                 ), mAttributes.markerColor)
             }
@@ -183,12 +180,12 @@ class TimeLineAdapter(
             } else textTimelineDate.setGone()
 
             if (timeLineModel.start_time.isNotEmpty()) {
-                var newStartTime = timeLineModel.start_time.apply { "${substring(0, 2)} : ${substring(2, 4)}" }
+                val newStartTime = timeLineModel.start_time.apply { "${substring(0, 2)} : ${substring(2, 4)}" }
                 textTimelineStartTime.apply { setVisible(); text = newStartTime }
             } else textTimelineStartTime.setGone()
 
             if (timeLineModel.end_time.isNotEmpty()) {
-                var newEndTime = timeLineModel.end_time.apply { "${substring(0, 2)} : ${substring(2, 4)}" }
+                val newEndTime = timeLineModel.end_time.apply { "${substring(0, 2)} : ${substring(2, 4)}" }
                 textTimelineEndTime.apply { setVisible(); text = newEndTime }
             } else textTimelineEndTime.setGone()
 
@@ -200,21 +197,21 @@ class TimeLineAdapter(
     }
 
     private fun setContentDescription(
-        holder: TimeLineAdapter.TimeLineViewHolder,
-        timeLineModel: Event
+        holder: TimeLineViewHolder,
+        timeLineModel: Event,
+        position: Int
     ) {
 
         with(holder.itemView) {
-            when (timeLineModel.type) {
+            contentDescription = when (timeLineModel.type) {
                 ACTIVITY -> {
-                    contentDescription = "Actividade" +
+                     "Actividade" +
                             "com o título ${timeLineModel.title} e tendo como descrição ${timeLineModel.info}," +
                             " que irá" +
                             " começar às ${timeLineModel.start_time}. Clique para obter mais informações"
                 }
 
                 MEAL -> {
-                    contentDescription =
                         if (timeLineModel.chosen_meal.isBlank()) chosenMealisBlankText
                         else {
                             "Refeição selecionada, o prato escolhido " +
@@ -231,7 +228,7 @@ class TimeLineAdapter(
 
     inner class TimeLineViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
 
-        val date = itemView.
+        val date =
         val title = itemView.text_timeline_title!!
         val info = itemView.text_timeline_info!!
         val startTime = itemView.text_timeline_start_time!!
@@ -256,6 +253,5 @@ class TimeLineAdapter(
             timeline.lineStyleDashGap = mAttributes.lineDashGap
         }
     }
-
 
 }
