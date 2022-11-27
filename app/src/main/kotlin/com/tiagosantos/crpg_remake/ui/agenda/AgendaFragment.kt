@@ -92,10 +92,6 @@ class AgendaFragment(ttsSettings: TTSSettings, srSettings: SRSettings)
         updateMAttributes()
     }
 
-    private fun setDataListItemsWithoutPopulate() {
-        agendaVM.mDataList = agendaVM.
-        agendaVM.mDataList.sortBy { it.start_time }
-    }
 
     private fun initRecyclerView(ctx: Context) {
         initAdapter(ctx)
@@ -104,7 +100,8 @@ class AgendaFragment(ttsSettings: TTSSettings, srSettings: SRSettings)
                 @SuppressLint("LongLogTag")
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
-                    if (recyclerView.getChildAt(0).top < 0) dropshadow.setVisible() else dropshadow.setGone()
+                    if (recyclerView.getChildAt(0).top < 0)
+                        dropshadow.setVisible() else dropshadow.setGone()
                 }
             })
         }
@@ -131,5 +128,7 @@ class AgendaFragment(ttsSettings: TTSSettings, srSettings: SRSettings)
     override fun observeLifecycleEvents() {
         TODO("Not yet implemented")
     }
+
+    private fun setDataListItemsWithoutPopulate() = agendaVM.getEventCollectionFromJSON()
 
 }

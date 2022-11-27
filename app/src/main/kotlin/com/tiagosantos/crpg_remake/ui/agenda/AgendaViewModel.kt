@@ -19,6 +19,12 @@ import java.io.FileReader
 import java.lang.reflect.Type
 import java.util.*
 
+/**
+ *
+ * To summarize, the key difference would be:
+ * setValue() method must be called from the main thread.
+ * But if you need set a value from a background thread, postValue() should be used.
+ */
 class AgendaViewModel(
     application: Application,
 ) : AndroidViewModel(application), DefaultLifecycleObserver {
@@ -94,13 +100,13 @@ class AgendaViewModel(
     private fun populateFile() = newFile.apply { createNewFile(); writeText(fileContent) }
 
     val type: Type = object : TypeToken<ArrayList<Event>>() {}.type
-    private val privateList: LiveData<MutableList<Event>?> =
+    private val _privateList: MutableLiveData<MutableList<Event>?> =
         gson.fromJson(FileReader(newFile.absoluteFile), type)
 
-    fun getEventCollectionFromJSON(): LiveData<MutableList<Event>?> {
+    fun getEventCollectionFromJSON() {
         populateFile()
         concatenatePublicPrivateEvents()
-        return privateList
+        _privateList.value!!.sortBy { it.start_time }
     }
 
     private fun concatenatePublicPrivateEvents(): LiveData<MutableList<Event>?> {
