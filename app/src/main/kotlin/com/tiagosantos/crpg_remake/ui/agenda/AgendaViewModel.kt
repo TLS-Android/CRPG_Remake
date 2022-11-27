@@ -9,6 +9,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.reflect.TypeToken
 import com.tiagosantos.common.ui.model.Event
+import com.tiagosantos.common.ui.utils.Constants.eventFilename
+import com.tiagosantos.common.ui.utils.Constants.fileContent
+import com.tiagosantos.crpg_remake.ui.agenda.AgendaRepository.dinnerEvent
+import com.tiagosantos.crpg_remake.ui.agenda.AgendaRepository.lunchEvent
+import com.tiagosantos.crpg_remake.ui.meals.MealsViewModel.Companion.gson
 import java.io.File
 import java.io.FileReader
 import java.lang.reflect.Type
@@ -21,14 +26,14 @@ class AgendaViewModel(
     @SuppressLint("StaticFieldLeak")
     val context: Context? = application.applicationContext
 
-    private var _publicEventList = MutableLiveData<List<Event>?>()
-    val publicEventList: LiveData<List<Event>?> = _publicEventList
+    private val _publicEventList = MutableLiveData<MutableList<Event>?>()
+    val publicEventList: MutableLiveData<MutableList<Event>?> = _publicEventList
 
-    private var _privateEventList = MutableLiveData<List<Event>?>()
-    val privateEventList: LiveData<List<Event>?> = _privateEventList
+    private val _privateEventList = MutableLiveData<MutableList<Event>?>()
+    val privateEventList: LiveData<MutableList<Event>?> = _privateEventList
 
-    private var _mDataList = MutableLiveData<List<Event>?>()
-    var mDataList: LiveData<List<Event>?> = _mDataList
+    private val _mDataList = MutableLiveData<MutableList<Event>?>()
+    var mDataList: LiveData<MutableList<Event>?> = _mDataList
 
     private val _currentMonth = MutableLiveData<Int?>()
     private val currentMonth: LiveData<Int?> = _currentMonth
@@ -83,40 +88,44 @@ class AgendaViewModel(
     }
 
     private fun newFile(): File {
-        val filename = "event.json"
-        val fullFilename = context?.filesDir.toString() + "/" + filename
+        val fullFilename = context?.filesDir.toString() + "/" + eventFilename
         return File(fullFilename)
     }
 
     fun getEventCollectionFromJSON(): ArrayList<Event> {
-        val file = new()
+        val file = newFile()
         populateFile()
 
         val type: Type = object : TypeToken<ArrayList<Event>>() {}.type
-        val privateList: ArrayList<Event> = gson.fromJson(FileReader(fullFilename), type)
+        val privateList: ArrayList<Event> = gson.fromJson(FileReader(file.absoluteFile), type)
 
         concatenatePublicPrivateEvents()
         return privateList
     }
 
-    private fun concatenatePublicPrivateEvents(): ArrayList<Event> {
-        addMealsToPrivateEvents()
-        addMealsToPublicEvents()
-        mDataList.plusAssign((privateEventList + publicEventList) as ArrayList<Event>)
-        println("Size mDataList: " + mDataList.size)
-        return mDataList
-    }
-
     private fun populateFile() {
         // create a new file
-        val file = newFile()
-        val isNewFileCreated : Boolean = file.createNewFile()
-
-        val fileContent = """[{"title": "ALMOÇO","info":"test","type": "MEAL", 
-            |"start_time": "1130","end_time": "1230","date": "2021-03-17"},
-            |{"title": "JANTAR","info":"test","type":"MEAL", "start_time": "2000","end_time": "2100","date": "2021-03-17"},{"title": "TRANSPORTE","info":"test","type": "TRANSPORT", "start_time": "0830","end_time": "1330","date": "2021-03-17"},{"title": "Actividade","info":"Sala 12","type": "ACTIVITY", "start_time": "0830","end_time": "1330","date": "2021-03-17"}]""".trimMargin()
-
+        val file = newFile().apply { createNewFile() }
         File(fullFilename).writeText(fileContent)
+    }
+
+    private fun concatenatePublicPrivateEvents(): LiveData<MutableList<Event>?> {
+        addMealsToPrivateEvents()
+        addMealsToPublicEvents()
+        _mDataList.value?.plusAssign((privateEventList + publicEventList) as ArrayList<Event>)
+        return _mDataList
+    }
+
+    private fun addMealsToPrivateEvents(): LiveData<MutableList<Event>?> {
+        _privateEventList.value?.add(lunchEvent)
+        _privateEventList.value?.add(dinnerEvent)
+        return privateEventList
+    }
+
+    private fun addMealsToPublicEvents(): LiveData<MutableList<Event>?> {
+        _publicEventList.value?.add(lunchEvent)
+        _publicEventList.value?.add(dinnerEvent)
+        return publicEventList
     }
 
 }

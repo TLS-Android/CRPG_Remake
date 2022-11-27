@@ -93,7 +93,7 @@ class AgendaFragment(ttsSettings: TTSSettings, srSettings: SRSettings)
     }
 
     private fun setDataListItemsWithoutPopulate() {
-        agendaVM.mDataList = agendaVM.()
+        agendaVM.mDataList = agendaVM.
         agendaVM.mDataList.sortBy { it.start_time }
     }
 
@@ -120,7 +120,7 @@ class AgendaFragment(ttsSettings: TTSSettings, srSettings: SRSettings)
 
         view.recyclerView.apply {
             layoutManager = mLayoutManager
-            adapter = TimeLineAdapter(mDataList, mAttributes, ctx)
+            adapter = TimeLineAdapter(agendaVM.mDataList, mAttributes, ctx)
         }
     }
 

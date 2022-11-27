@@ -7,6 +7,7 @@ import android.view.View
 import android.view.View.INVISIBLE
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.plataforma.crpg.TimelineView
@@ -28,7 +29,7 @@ import java.util.*
  */
 
 class TimeLineAdapter(
-    private val mFeedList: List<Event>,
+    private val mFeedList: LiveData<List<Event>?>,
     private var mAttributes: TimelineAttributes,
     private val ctx: Context,
 ) : RecyclerView.Adapter<TimeLineAdapter.TimeLineViewHolder>() {
