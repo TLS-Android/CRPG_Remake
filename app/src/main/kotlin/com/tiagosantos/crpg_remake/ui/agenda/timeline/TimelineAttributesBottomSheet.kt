@@ -11,8 +11,11 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.thebluealliance.spectrum.SpectrumDialog
 import com.tiagosantos.crpg_remake.R
+import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.Orientation
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.TimelineAttributes
+import com.tiagosantos.crpg_remake.ui.agenda.timeline.widgets.BorderedCircle
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.widgets.RoundedCornerBottomSheet
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
 
@@ -40,6 +43,8 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet() {
     private var mCallbacks: Callbacks? = null
     private lateinit var mAttributes: TimelineAttributes
     private var mBottomSheetBehavior: BottomSheetBehavior<*>? = null
+
+
 
     override fun onStart() {
         super.onStart()
