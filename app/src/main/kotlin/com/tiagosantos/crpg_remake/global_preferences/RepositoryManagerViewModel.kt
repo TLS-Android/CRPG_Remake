@@ -14,7 +14,7 @@ class RepositoryManagerViewModel(
 
     private val context = getApplication<Application>().applicationContext
 
-    private var _ttsFlag = MutableLiveData<Boolean>()
+    private val _ttsFlag = MutableLiveData<Boolean>()
     private val ttsFlag
         get() = _ttsFlag
 

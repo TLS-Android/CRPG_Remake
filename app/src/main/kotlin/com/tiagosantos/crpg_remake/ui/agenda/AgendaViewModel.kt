@@ -26,8 +26,9 @@ class AgendaViewModel(
     @SuppressLint("StaticFieldLeak")
     val context: Context? = application.applicationContext
 
+    //MutableLiveData should always be val; only the contents can be updated
     private val _publicEventList = MutableLiveData<MutableList<Event>?>()
-    val publicEventList: MutableLiveData<MutableList<Event>?> = _publicEventList
+    val publicEventList: LiveData<MutableList<Event>?> = _publicEventList
 
     private val _privateEventList = MutableLiveData<MutableList<Event>?>()
     val privateEventList: LiveData<MutableList<Event>?> = _privateEventList
@@ -110,14 +111,12 @@ class AgendaViewModel(
     }
 
     private fun addMealsToPrivateEvents(): LiveData<MutableList<Event>?> {
-        _privateEventList.value?.add(lunchEvent)
-        _privateEventList.value?.add(dinnerEvent)
+        _privateEventList.value?.apply { add(lunchEvent); add(dinnerEvent) }
         return privateEventList
     }
 
     private fun addMealsToPublicEvents(): LiveData<MutableList<Event>?> {
-        _publicEventList.value?.add(lunchEvent)
-        _publicEventList.value?.add(dinnerEvent)
+        _publicEventList.value?.apply { add(lunchEvent); add(dinnerEvent) }
         return publicEventList
     }
 
