@@ -18,8 +18,11 @@ import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.databinding.FragmentAgendaBinding
+import com.tiagosantos.crpg_remake.ui.agenda.timeline.TimeLineAdapter
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.dpToPx
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.getColorCompat
+import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setGone
+import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setVisible
 
 import java.util.*
 
@@ -32,6 +35,8 @@ class AgendaFragment(ttsSettings: TTSSettings, srSettings: SRSettings)
     ), ttsSettings, srSettings
 ) {
 
+    private lateinit var view: FragmentAgendaBinding
+
     private lateinit var mLayoutManager: LinearLayoutManager
     private lateinit var mAttributes: TimelineAttributes
 
@@ -43,8 +48,9 @@ class AgendaFragment(ttsSettings: TTSSettings, srSettings: SRSettings)
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? { return view?.rootView }
-
+    ): View {
+        return view.root
+    }
 
     override fun onResume() {
         super.onResume()
@@ -87,19 +93,22 @@ class AgendaFragment(ttsSettings: TTSSettings, srSettings: SRSettings)
     }
 
     private fun setDataListItemsWithoutPopulate() {
-        agendaVM.mDataList = agendaVM.getEventCollectionFromJSONWithoutPopulate()
+        agendaVM.mDataList = agendaVM.()
         agendaVM.mDataList.sortBy { it.start_time }
     }
 
     private fun initRecyclerView(ctx: Context) {
         initAdapter(ctx)
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            @SuppressLint("LongLogTag")
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                if (recyclerView.getChildAt(0).top < 0) dropshadow.setVisible() else dropshadow.setGone()
-            }
-        })
+        with(view){
+            recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                @SuppressLint("LongLogTag")
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    if (recyclerView.getChildAt(0).top < 0) dropshadow.setVisible() else dropshadow.setGone()
+                }
+            })
+        }
+
     }
 
     private fun initAdapter(ctx: Context) {
@@ -109,7 +118,7 @@ class AgendaFragment(ttsSettings: TTSSettings, srSettings: SRSettings)
             LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         }
 
-        recyclerView.apply {
+        view.recyclerView.apply {
             layoutManager = mLayoutManager
             adapter = TimeLineAdapter(mDataList, mAttributes, ctx)
         }

@@ -7,7 +7,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.reflect.TypeToken
 import com.tiagosantos.common.ui.model.Event
+import java.io.File
+import java.io.FileReader
+import java.lang.reflect.Type
 import java.util.*
 
 class AgendaViewModel(
@@ -76,6 +80,43 @@ class AgendaViewModel(
         }
         calendar.add(Calendar.DATE, -1)
         return list
+    }
+
+    private fun newFile(): File {
+        val filename = "event.json"
+        val fullFilename = context?.filesDir.toString() + "/" + filename
+        return File(fullFilename)
+    }
+
+    fun getEventCollectionFromJSON(): ArrayList<Event> {
+        val file = new()
+        populateFile()
+
+        val type: Type = object : TypeToken<ArrayList<Event>>() {}.type
+        val privateList: ArrayList<Event> = gson.fromJson(FileReader(fullFilename), type)
+
+        concatenatePublicPrivateEvents()
+        return privateList
+    }
+
+    private fun concatenatePublicPrivateEvents(): ArrayList<Event> {
+        addMealsToPrivateEvents()
+        addMealsToPublicEvents()
+        mDataList.plusAssign((privateEventList + publicEventList) as ArrayList<Event>)
+        println("Size mDataList: " + mDataList.size)
+        return mDataList
+    }
+
+    private fun populateFile() {
+        // create a new file
+        val file = newFile()
+        val isNewFileCreated : Boolean = file.createNewFile()
+
+        val fileContent = """[{"title": "ALMOÇO","info":"test","type": "MEAL", 
+            |"start_time": "1130","end_time": "1230","date": "2021-03-17"},
+            |{"title": "JANTAR","info":"test","type":"MEAL", "start_time": "2000","end_time": "2100","date": "2021-03-17"},{"title": "TRANSPORTE","info":"test","type": "TRANSPORT", "start_time": "0830","end_time": "1330","date": "2021-03-17"},{"title": "Actividade","info":"Sala 12","type": "ACTIVITY", "start_time": "0830","end_time": "1330","date": "2021-03-17"}]""".trimMargin()
+
+        File(fullFilename).writeText(fileContent)
     }
 
 }
