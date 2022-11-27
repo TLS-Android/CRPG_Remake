@@ -6,12 +6,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.plataforma.crpg.TimelineView
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.Orientation
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.TimelineAttributes
 import com.tiagosantos.access.modal.BaseModalFragment
@@ -35,43 +35,42 @@ class AgendaFragment(ttsSettings: TTSSettings, srSettings: SRSettings)
     ), ttsSettings, srSettings
 ) {
 
-    private val _mDataList = MutableLiveData<ArrayList<Event>?>()
-    val mDataList: LiveData<ArrayList<Event>?> = _mDataList
+    private var _mDataList = MutableLiveData<ArrayList<Event>?>()
+    var mDataList: LiveData<ArrayList<Event>?> = _mDataList
 
     private lateinit var mLayoutManager: LinearLayoutManager
     private lateinit var mAttributes: TimelineAttributes
 
-    override fun onResume() {
-        super.onResume()
-
-        setDataListItemsWithoutPopulate()
-        val ctx = context
-        if (ctx != null) {
-            initRecyclerView(ctx)
-        }
-
-        mAttributes.onOrientationChanged = { oldValue, newValue ->
-            if (oldValue != newValue) initRecyclerView(ctx!!)
-        }
-        mAttributes.orientation = Orientation.VERTICAL
-    }
+    var ctx = context
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_agenda, container, false)
+        val agendaVM: AgendaViewModel by viewModels()
+        return view?.rootView
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        setDataListItemsWithoutPopulate()
+        ctx?.let { initRecyclerView(it) }
+        updateMAttributes()
+    }
+
+    private fun updateMAttributes() =  mAttributes.let { it.onOrientationChanged =  { oldValue, newValue ->
+        if (oldValue != newValue) initRecyclerView(ctx!!) }
+        it.orientation = Orientation.VERTICAL
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as AppCompatActivity).supportActionBar?.title = "AGENDA"
         mAttributes = TimelineAttributes(
             markerSize = dpToPx(20f),
-            markerColor = getColorCompat(R.color.material_grey_500),
+            markerColor = getColorCompat(R.color.GreyedBlue),
             markerInCenter = true,
             markerLeftPadding = dpToPx(0f),
             markerTopPadding = dpToPx(0f),
@@ -91,16 +90,11 @@ class AgendaFragment(ttsSettings: TTSSettings, srSettings: SRSettings)
             initRecyclerView(ctx)
         }
 
-        mAttributes.onOrientationChanged = { oldValue, newValue ->
-            if (oldValue != newValue) initRecyclerView(ctx!!)
-        }
-
-        mAttributes.orientation = Orientation.VERTICAL
+        updateMAttributes()
     }
 
     private fun setDataListItemsWithoutPopulate() {
-        val eventViewModel = ViewModelProvider(this).get(AgendaViewModel::class.java)
-        mDataList = eventViewModel.getEventCollectionFromJSONWithoutPopulate()
+        mDataList = agendaVM.getEventCollectionFromJSONWithoutPopulate()
         mDataList.sortBy { it.start_time }
     }
 

@@ -21,7 +21,6 @@ import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.*
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.newReminder
 import com.tiagosantos.crpg_remake.ui.reminders.helpers.HoursHelper
-import java.util.*
 
 class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     layoutId = R.layout.reminder_fragment,

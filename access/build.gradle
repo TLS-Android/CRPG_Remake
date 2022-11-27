@@ -56,6 +56,7 @@ dependencies {
 
     //GOTEV
     implementation 'net.gotev:speech:1.6.2'
+    implementation project(path: ':app')
 
     //Test
     testImplementation 'junit:junit:4.13.2'

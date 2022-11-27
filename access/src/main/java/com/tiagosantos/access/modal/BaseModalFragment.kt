@@ -19,6 +19,8 @@ import com.tiagosantos.common.ui.utils.Constants.MODALITY
 import com.tiagosantos.common.ui.utils.Constants.SR
 import com.tiagosantos.common.ui.utils.Constants.TTS
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.generalHelper
+import com.tiagosantos.crpg_remake.base.BaseFragment
+import com.tiagosantos.crpg_remake.base.FragmentSettings
 
 abstract class BaseModalFragment<B : ViewDataBinding>(
     @LayoutRes

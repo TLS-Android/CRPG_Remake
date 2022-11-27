@@ -29,9 +29,7 @@ class AgendaViewModel(
     private val _currentMonth = MutableLiveData<Int?>()
     private val currentMonth: LiveData<Int?> = _currentMonth
 
-    private var firstTimeFlag = false
-
-    val calendar : Calendar
+    private val calendar : Calendar
         get() {
             TODO()
         }
