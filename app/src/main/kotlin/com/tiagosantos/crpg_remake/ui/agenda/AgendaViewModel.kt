@@ -24,7 +24,7 @@ class AgendaViewModel(
     val privateEventList: LiveData<List<Event>?> = _privateEventList
 
     private var _mDataList = MutableLiveData<List<Event>?>()
-    val mDataList: LiveData<List<Event>?> = _mDataList
+    var mDataList: LiveData<List<Event>?> = _mDataList
 
     private val _currentMonth = MutableLiveData<Int?>()
     private val currentMonth: LiveData<Int?> = _currentMonth

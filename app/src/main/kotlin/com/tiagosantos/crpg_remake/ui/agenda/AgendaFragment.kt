@@ -7,8 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.plataforma.crpg.TimelineView
@@ -17,7 +15,6 @@ import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.TimelineAttributes
 import com.tiagosantos.access.modal.BaseModalFragment
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
-import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.databinding.FragmentAgendaBinding
@@ -35,11 +32,10 @@ class AgendaFragment(ttsSettings: TTSSettings, srSettings: SRSettings)
     ), ttsSettings, srSettings
 ) {
 
-    private var _mDataList = MutableLiveData<ArrayList<Event>?>()
-    var mDataList: LiveData<ArrayList<Event>?> = _mDataList
-
     private lateinit var mLayoutManager: LinearLayoutManager
     private lateinit var mAttributes: TimelineAttributes
+
+    private val agendaVM: AgendaViewModel by viewModels()
 
     var ctx = context
 
@@ -47,10 +43,7 @@ class AgendaFragment(ttsSettings: TTSSettings, srSettings: SRSettings)
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val agendaVM: AgendaViewModel by viewModels()
-        return view?.rootView
-    }
+    ): View? { return view?.rootView }
 
 
     override fun onResume() {
@@ -94,8 +87,8 @@ class AgendaFragment(ttsSettings: TTSSettings, srSettings: SRSettings)
     }
 
     private fun setDataListItemsWithoutPopulate() {
-        mDataList = agendaVM.getEventCollectionFromJSONWithoutPopulate()
-        mDataList.sortBy { it.start_time }
+        agendaVM.mDataList = agendaVM.getEventCollectionFromJSONWithoutPopulate()
+        agendaVM.mDataList.sortBy { it.start_time }
     }
 
     private fun initRecyclerView(ctx: Context) {
