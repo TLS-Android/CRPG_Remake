@@ -24,8 +24,6 @@ import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.getColorCompat
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setGone
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setVisible
 
-import java.util.*
-
 class AgendaFragment(ttsSettings: TTSSettings, srSettings: SRSettings)
     : BaseModalFragment<FragmentAgendaBinding>(
     layoutId = R.layout.fragment_agenda,
@@ -42,7 +40,7 @@ class AgendaFragment(ttsSettings: TTSSettings, srSettings: SRSettings)
 
     private val agendaVM: AgendaViewModel by viewModels()
 
-    var ctx = context
+    private var ctx = context
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -112,7 +112,7 @@ class AgendaViewModel(
     private fun concatenatePublicPrivateEvents(): LiveData<MutableList<Event>?> {
         addMealsToPrivateEvents()
         addMealsToPublicEvents()
-        _mDataList.value?.plusAssign((privateEventList + publicEventList) as Collection<Event>)
+        _mDataList.value?.plusAssign(privateEventList.value + publicEventList.value)
         return _mDataList
     }
 
@@ -127,3 +127,8 @@ class AgendaViewModel(
     }
 
 }
+
+private operator fun <E> MutableList<E>?.plus(value: MutableList<E>?): List<E> {
+
+}
+
