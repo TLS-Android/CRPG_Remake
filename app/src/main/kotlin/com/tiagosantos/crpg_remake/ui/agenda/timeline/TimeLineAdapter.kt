@@ -61,8 +61,8 @@ class TimeLineAdapter(
 
         val timeLineModel = mFeedList.value!![position]
 
-        setContentDescription(holder,timeLineModel, position)
-        setupTimeLine(holder,timeLineModel, position)
+        setContentDescription(holder,timeLineModel)
+        setupTimeLine(holder,timeLineModel)
 
         with(_binding!!){
             when (timeLineModel.type) {
@@ -81,7 +81,7 @@ class TimeLineAdapter(
                         textTimelineInfo.text = when (timeLineModel.title){
                             "ALMOÇO" -> selectLunchText
                             "JANTAR" -> selectDinnerText
-                            else -> { println("sup")}
+                            else -> { "ola" }
                         }.toString()
                     }
 
@@ -156,7 +156,6 @@ class TimeLineAdapter(
     private fun setupTimeLine(
         holder: TimeLineViewHolder,
         timeLineModel: Event,
-        position: Int
     ) {
 
         concatTime = timeLineModel.start_time + timeLineModel.end_time
@@ -199,7 +198,6 @@ class TimeLineAdapter(
     private fun setContentDescription(
         holder: TimeLineViewHolder,
         timeLineModel: Event,
-        position: Int
     ) {
 
         with(holder.itemView) {
