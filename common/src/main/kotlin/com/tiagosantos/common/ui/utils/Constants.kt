@@ -54,6 +54,6 @@ object Constants {
             |{"title": "Actividade","info":"Sala 12","type": "ACTIVITY", 
             |"start_time": "0830","end_time": "1330","date": "2021-03-17"}]""".trimMargin()
 
-    val eventFilename = "event.json"
+    const val eventFilename = "event.json"
 
 }

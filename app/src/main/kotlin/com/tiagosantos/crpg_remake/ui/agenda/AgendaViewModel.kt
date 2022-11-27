@@ -92,12 +92,12 @@ class AgendaViewModel(
     private val newFile: File = File(fullFilename)
     private fun populateFile() = newFile.apply { createNewFile(); writeText(fileContent) }
 
-    fun getEventCollectionFromJSON(): ArrayList<Event> {
+    val type: Type = object : TypeToken<ArrayList<Event>>() {}.type
+    private val privateList: LiveData<MutableList<Event>?> =
+        gson.fromJson(FileReader(newFile.absoluteFile), type)
+
+    fun getEventCollectionFromJSON(): LiveData<MutableList<Event>?> {
         populateFile()
-
-        val type: Type = object : TypeToken<ArrayList<Event>>() {}.type
-        val privateList: ArrayList<Event> = gson.fromJson(FileReader(newFile.absoluteFile), type)
-
         concatenatePublicPrivateEvents()
         return privateList
     }
@@ -105,7 +105,7 @@ class AgendaViewModel(
     private fun concatenatePublicPrivateEvents(): LiveData<MutableList<Event>?> {
         addMealsToPrivateEvents()
         addMealsToPublicEvents()
-        _mDataList.value?.plusAssign((privateEventList + publicEventList) as MutableList<Event>)
+        _mDataList.value?.plusAssign((privateEventList + publicEventList) as Collection<Event>)
         return _mDataList
     }
 
