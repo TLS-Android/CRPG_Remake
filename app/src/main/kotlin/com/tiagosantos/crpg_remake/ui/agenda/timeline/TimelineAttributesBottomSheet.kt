@@ -95,9 +95,6 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet() {
 
             rgOrientation.check(if (mAttributes.orientation == Orientation.VERTICAL) R.id.rb_vertical else R.id.rb_horizontal)
 
-
-
-
         }
 
         with(optionsView.layoutMarker){
@@ -116,7 +113,7 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet() {
                 mAttributes.markerInCenter = isChecked
             }
 
-            imageMarkerColor.setOnClickListener { showColorPicker(mAttributes.markerColor, image_marker_color) }
+            imageMarkerColor.setOnClickListener { showColorPicker(mAttributes.markerColor, imageMarkerColor) }
 
             seekMarkerSize.setOnProgressChangeListener(progressChangeListener)
             seekMarkerLeftPadding.setOnProgressChangeListener(progressChangeListener)
@@ -131,46 +128,67 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet() {
         // line
         Log.e(" mAttributes.lineWidth", "${ mAttributes.lineWidth}")
 
-        optionsView.
+        with(optionsView.layoutLine) {
 
-        seek_line_width.progress = mAttributes.lineWidth
-        image_start_line_color.mFillColor = mAttributes.startLineColor
-        image_end_line_color.mFillColor = mAttributes.endLineColor
+            seekLineWidth.progress = mAttributes.lineWidth
+            imageStartLineColor.mFillColor = mAttributes.startLineColor
+            imageEndLineColor.mFillColor = mAttributes.endLineColor
 
-        image_start_line_color.setOnClickListener { showColorPicker(mAttributes.startLineColor, image_start_line_color) }
-        image_end_line_color.setOnClickListener { showColorPicker(mAttributes.endLineColor, image_end_line_color) }
+            imageStartLineColor.setOnClickListener {
+                showColorPicker(
+                    mAttributes.startLineColor,
+                    imageStartLineColor
+                )
+            }
+            imageEndLineColor.setOnClickListener {
+                showColorPicker(
+                    mAttributes.endLineColor,
+                    imageEndLineColor
+                )
+            }
 
-        when (mAttributes.lineStyle) {
-            TimelineView.LineStyle.NORMAL -> spinner_line_type.setSelection(0)
-            TimelineView.LineStyle.DASHED -> spinner_line_type.setSelection(1)
-        }
+            when (mAttributes.lineStyle) {
+                TimelineView.LineStyle.NORMAL -> spinnerLineType.setSelection(0)
+                TimelineView.LineStyle.DASHED -> spinnerLineType.setSelection(1)
+            }
 
-        spinner_line_type.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                when (parent.getItemAtPosition(position).toString()) {
-                    "Normal" -> mAttributes.lineStyle = TimelineView.LineStyle.NORMAL
-                    "Dashed" -> mAttributes.lineStyle = TimelineView.LineStyle.DASHED
-                    else -> {
-                        mAttributes.lineStyle = TimelineView.LineStyle.NORMAL
+            spinnerLineType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
+                ) {
+                    when (parent.getItemAtPosition(position).toString()) {
+                        "Normal" -> mAttributes.lineStyle = TimelineView.LineStyle.NORMAL
+                        "Dashed" -> mAttributes.lineStyle = TimelineView.LineStyle.DASHED
+                        else -> {
+                            mAttributes.lineStyle = TimelineView.LineStyle.NORMAL
+                        }
                     }
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
                 }
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
-            }
-        }
 
-        seek_line_dash_width.progress = mAttributes.lineDashWidth
-        seek_line_dash_gap.progress = mAttributes.lineDashGap
 
-        seek_line_width.setOnProgressChangeListener(progressChangeListener)
-        seek_line_dash_width.setOnProgressChangeListener(progressChangeListener)
-        seek_line_dash_gap.setOnProgressChangeListener(progressChangeListener)
 
-        button_apply.setOnClickListener {
-            mCallbacks?.onAttributesChanged(mAttributes)
-            dismiss()
-        }
+        seekLineDashWidth.progress = mAttributes.lineDashWidth
+        seekLineDashGap.progress = mAttributes.lineDashGap
+
+        seekLineWidth.setOnProgressChangeListener(progressChangeListener)
+        seekLineDashWidth.setOnProgressChangeListener(progressChangeListener)
+        seekLineDashGap.setOnProgressChangeListener(progressChangeListener)
+
+    }
+
+    optionsView.buttonApply.setOnClickListener {
+        mCallbacks?.onAttributesChanged(mAttributes)
+        dismiss()
+    }
+
     }
 
     private fun showColorPicker(selectedColor: Int, colorView: BorderedCircle) {
