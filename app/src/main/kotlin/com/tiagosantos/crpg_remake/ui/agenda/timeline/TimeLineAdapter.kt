@@ -20,7 +20,10 @@ import com.tiagosantos.common.ui.utils.Constants.selectDinnerText
 import com.tiagosantos.common.ui.utils.Constants.chosenMealisBlankText
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentHomeBinding
+import com.tiagosantos.crpg_remake.databinding.ItemTimelineBinding
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.formatDateTime
+import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setGone
+import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setVisible
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.TimelineAttributes
 import java.util.*
 
@@ -29,7 +32,7 @@ import java.util.*
  */
 
 class TimeLineAdapter(
-    private val mFeedList: LiveData<List<Event>?>,
+    private val mFeedList: LiveData<MutableList<Event>?>,
     private var mAttributes: TimelineAttributes,
     private val ctx: Context,
 ) : RecyclerView.Adapter<TimeLineAdapter.TimeLineViewHolder>() {
@@ -39,7 +42,7 @@ class TimeLineAdapter(
 
     private lateinit var mLayoutInflater: LayoutInflater
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: ItemTimelineBinding? = null
 
     override fun getItemViewType(position: Int): Int {
         return TimelineView.getTimeLineViewType(position, itemCount)
@@ -53,34 +56,34 @@ class TimeLineAdapter(
 
     override fun onBindViewHolder(holder: TimeLineViewHolder, position: Int) {
 
-        val timeLineModel = mFeedList[position]
+        val timeLineModel = mFeedList.value!![position]
 
         setContentDescription(holder,timeLineModel)
         setupTimeLine(holder,timeLineModel)
 
-        with(holder.itemView){
+        with(_binding!!){
             when (timeLineModel.type) {
                 ACTIVITY -> {
-                    card_background_image.setBackgroundResource(R.drawable.crpg_background)
-                    card_center_icon.setBackgroundResource(R.drawable.maos)
-                    text_timeline_title.text = "ACTIVIDADE"
-                    text_timeline_info.text = timeLineModel.info.uppercase(Locale.getDefault())
+                    cardBackgroundImage.setBackgroundResource(R.drawable.crpg_background)
+                    cardCenterIcon.setBackgroundResource(R.drawable.maos)
+                    textTimelineTitle.text = "ACTIVIDADE"
+                    textTimelineInfo.text = timeLineModel.info.uppercase(Locale.getDefault())
                 }
                 MEAL -> {
-                    card_background_image.setBackgroundResource(R.drawable.background_dieta)
-                    card_center_icon.setBackgroundResource(R.drawable.meal_icon)
+                    cardBackgroundImage.setBackgroundResource(R.drawable.background_dieta)
+                    cardCenterIcon.setBackgroundResource(R.drawable.meal_icon)
 
                     when (timeLineModel.title) {
                         "ALMOÇO" -> if (timeLineModel.chosen_meal.isBlank()) {
-                            text_timeline_info.text = selectLunchText
+                            textTimelineInfo.text = selectLunchText
                         } else {
-                            text_timeline_info.text = timeLineModel.chosen_meal
+                            textTimelineInfo.text = timeLineModel.chosen_meal
                         }
 
                         "JANTAR" -> if (timeLineModel.chosen_meal.isBlank()) {
-                            text_timeline_info.text = selectDinnerText
+                            textTimelineInfo.text = selectDinnerText
                         } else {
-                            text_timeline_info.text = timeLineModel.chosen_meal
+                            textTimelineInfo.text = timeLineModel.chosen_meal
                         }
                     }
                 }
@@ -90,6 +93,25 @@ class TimeLineAdapter(
 
         onCardClicked(holder)
 
+        fun performActionWithVoiceCommand(
+            holder: TimeLineViewHolder,
+            command: String,
+            actionMap: Map<String, Any>
+        ) {
+            with(_binding!!){
+                when {
+                    command.contains("Escolher Almoço", true) && id == "Almoço" ||
+                            command.contains("Escolher Jantar", true) && id == "Jantar" ->
+                        card.performClick()
+
+                    command.contains(id, true) && tipo == ACTIVITY ->
+                        card.performClick()
+                    else -> { println ("yo")}
+                }
+            }
+
+        }
+
     }
 
     private fun onCardClicked(holder: TimeLineAdapter.TimeLineViewHolder) {
@@ -98,28 +120,32 @@ class TimeLineAdapter(
         var tipo: EventType
 
         // onClick on a card open pop up or go to Meal
-        holder.itemView.card.setOnClickListener {
-            id = mFeedList[position].title.toString()
-            tipo = mFeedList[position].type
+        with(_binding!!){
+            card.setOnClickListener {
+                id = mFeedList.value!![position].title.toString()
+                tipo = mFeedList[position].type
 
-            when (tipo) {
-                ACTIVITY -> {
-                    MaterialAlertDialogBuilder(ctx, android.R.style.Theme_Material_Dialog_Alert)
-                        .setTitle(mFeedList[position].title)
-                        .setMessage(mFeedList[position].info)
-                        .setNegativeButton("Fechar") { _, _ -> }.show()
-                }
+                when (tipo) {
+                    ACTIVITY -> {
+                        MaterialAlertDialogBuilder(ctx, android.R.style.Theme_Material_Dialog_Alert)
+                            .setTitle(mFeedList.value!![position].title)
+                            .setMessage(mFeedList[position].info)
+                            .setNegativeButton("Fechar") { _, _ -> }.show()
+                    }
 
-                MEAL -> {
-                    val bundle = Bundle().apply {
-                        when (id) {
-                            "ALMOÇO" -> putBoolean("isLunch", true)
-                            "JANTAR" -> putBoolean("isLunch", false)
+                    MEAL -> {
+                        val bundle = Bundle().apply {
+                            when (id) {
+                                "ALMOÇO" -> putBoolean("isLunch", true)
+                                "JANTAR" -> putBoolean("isLunch", false)
+                            }
                         }
                     }
                 }
             }
+
         }
+
     }
 
     private fun setupTimeLine(
@@ -129,35 +155,33 @@ class TimeLineAdapter(
 
         concatTime = timeLineModel.start_time + timeLineModel.end_time
 
-        with(holder){
+        with(_binding!!){
             if (overlapArray.contains(concatTime)) {
                 timeline.marker.setVisible(false, false)
-                itemView.text_timeline_start_time.visibility = INVISIBLE
-                itemView.text_timeline_end_time.visibility = INVISIBLE
+               textTimelineStartTime.visibility = INVISIBLE
+                textTimelineEndTime.visibility = INVISIBLE
             } else {
                 overlapArray.add(concatTime)
                 timeline.setMarker(ContextCompat.getDrawable(itemView.context, R.drawable.ic_marker_active), mAttributes.markerColor)
             }
 
             if (timeLineModel.date.isNotEmpty()) {
-                date.setVisible()
-                date.text = timeLineModel.date.formatDateTime("yyyy-MM-dd", "dd-MMM-yyyy")
-            } else date.setGone()
+                textTimelineDate.setVisible()
+                textTimelineDate.text = timeLineModel.date.formatDateTime("yyyy-MM-dd", "dd-MMM-yyyy")
+            } else textTimelineDate.setGone()
 
             if (timeLineModel.start_time.isNotEmpty()) {
-                startTime.setVisible()
                 var newStartTime = timeLineModel.start_time.apply { "${substring(0, 2)} : ${substring(2, 4)}" }
-                startTime.text = newStartTime
-            } else startTime.setGone()
+                textTimelineStartTime.apply { setVisible(); text = newStartTime }
+            } else textTimelineStartTime.setGone()
 
             if (timeLineModel.end_time.isNotEmpty()) {
                 var newEndTime = timeLineModel.end_time.apply { "${substring(0, 2)} : ${substring(2, 4)}" }
-                timeLineModel.end_time.apply { setVisible(); this.text = newEndTime }
-                end_time.text = newEndTime
-            } else startTime.setGone()
+                textTimelineEndTime.apply { setVisible(); text = newEndTime }
+            } else textTimelineEndTime.setGone()
 
-            if (timeLineModel.title!!.isNotEmpty()) title.text = timeLineModel.title
-            if (timeLineModel.info.isNotEmpty()) info.text = timeLineModel.info
+            if (timeLineModel.title!!.isNotEmpty()) textTimelineTitle.text = timeLineModel.title
+            if (timeLineModel.info.isNotEmpty()) textTimelineInfo.text = timeLineModel.info
 
         }
 
@@ -191,10 +215,11 @@ class TimeLineAdapter(
 
     }
 
-    override fun getItemCount() = mFeedList.size
+    override fun getItemCount() = mFeedList.value!!.size
 
     inner class TimeLineViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
-        val date = itemView.text_timeline_date!!
+
+        val date = itemView.
         val title = itemView.text_timeline_title!!
         val info = itemView.text_timeline_info!!
         val startTime = itemView.text_timeline_start_time!!
@@ -220,18 +245,5 @@ class TimeLineAdapter(
         }
     }
 
-    fun performActionWithVoiceCommand(
-        holder: TimeLineViewHolder,
-        command: String,
-        actionMap: Map<String, Any>
-    ) {
-        when {
-            command.contains("Escolher Almoço", true) && id == "Almoço" ||
-                    command.contains("Escolher Jantar", true) && id == "Jantar" ->
-                holder.itemView.card.performClick()
 
-            command.contains(id, true) && tipo == ACTIVITY ->
-                holder.itemView.card.performClick()
-        }
-    }
 }
