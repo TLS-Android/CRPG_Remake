@@ -38,6 +38,8 @@ class AgendaViewModel(
     private val _currentMonth = MutableLiveData<Int?>()
     private val currentMonth: LiveData<Int?> = _currentMonth
 
+    private val fullFilename = context?.filesDir.toString() + "/" + eventFilename
+
     private val calendar : Calendar
         get() {
             TODO()
@@ -87,32 +89,23 @@ class AgendaViewModel(
         return list
     }
 
-    private fun newFile(): File {
-        val fullFilename = context?.filesDir.toString() + "/" + eventFilename
-        return File(fullFilename)
-    }
+    private val newFile: File = File(fullFilename)
+    private fun populateFile() = newFile.apply { createNewFile(); writeText(fileContent) }
 
     fun getEventCollectionFromJSON(): ArrayList<Event> {
-        val file = newFile()
         populateFile()
 
         val type: Type = object : TypeToken<ArrayList<Event>>() {}.type
-        val privateList: ArrayList<Event> = gson.fromJson(FileReader(file.absoluteFile), type)
+        val privateList: ArrayList<Event> = gson.fromJson(FileReader(newFile.absoluteFile), type)
 
         concatenatePublicPrivateEvents()
         return privateList
     }
 
-    private fun populateFile() {
-        // create a new file
-        val file = newFile().apply { createNewFile() }
-        File(fullFilename).writeText(fileContent)
-    }
-
     private fun concatenatePublicPrivateEvents(): LiveData<MutableList<Event>?> {
         addMealsToPrivateEvents()
         addMealsToPublicEvents()
-        _mDataList.value?.plusAssign((privateEventList + publicEventList) as ArrayList<Event>)
+        _mDataList.value?.plusAssign((privateEventList + publicEventList) as MutableList<Event>)
         return _mDataList
     }
 
