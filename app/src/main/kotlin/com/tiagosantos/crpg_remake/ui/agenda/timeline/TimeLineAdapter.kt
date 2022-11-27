@@ -228,12 +228,12 @@ class TimeLineAdapter(
 
     inner class TimeLineViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
 
-        val date =
-        val title = itemView.text_timeline_title!!
-        val info = itemView.text_timeline_info!!
-        val startTime = itemView.text_timeline_start_time!!
-        val end_time = itemView.text_timeline_end_time!!
-        val timeline = itemView.timeline!!
+        val date = _binding!!.textTimelineDate
+        val title = _binding!!.textTimelineTitle
+        val info = _binding!!.textTimelineInfo
+        val startTime = _binding!!.textTimelineStartTime
+        val end_time = _binding!!.textTimelineEndTime
+        val timeline = _binding!!.timeline
 
         init {
             timeline.initLine(viewType)
