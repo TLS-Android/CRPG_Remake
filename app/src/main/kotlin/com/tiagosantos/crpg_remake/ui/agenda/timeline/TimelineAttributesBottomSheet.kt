@@ -11,8 +11,10 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.plataforma.crpg.TimelineView
 import com.thebluealliance.spectrum.SpectrumDialog
 import com.tiagosantos.crpg_remake.R
+import com.tiagosantos.crpg_remake.databinding.BottomSheetOptionsBinding
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.Orientation
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.TimelineAttributes
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.widgets.BorderedCircle
@@ -44,6 +46,7 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet() {
     private lateinit var mAttributes: TimelineAttributes
     private var mBottomSheetBehavior: BottomSheetBehavior<*>? = null
 
+    private lateinit var optionsView: BottomSheetOptionsBinding
 
 
     override fun onStart() {
@@ -74,46 +77,61 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet() {
         val attributes = (requireArguments().getParcelable(EXTRA_ATTRIBUTES)!! as TimelineAttributes)
         mAttributes = attributes.copy()
 
-        text_attributes_heading.setOnClickListener { dismiss() }
+        with(optionsView){
 
-        // orientation
-        rg_orientation.setOnCheckedChangeListener { _, checkedId ->
-            when (checkedId) {
-                R.id.rb_horizontal -> {
-                    mAttributes.orientation = Orientation.HORIZONTAL
-                }
-                R.id.rb_vertical -> {
-                    mAttributes.orientation = Orientation.VERTICAL
+            textAttributesHeading.setOnClickListener { dismiss() }
+
+            // orientation
+            rgOrientation.setOnCheckedChangeListener { _, checkedId ->
+                when (checkedId) {
+                    R.id.rb_horizontal -> {
+                        mAttributes.orientation = Orientation.HORIZONTAL
+                    }
+                    R.id.rb_vertical -> {
+                        mAttributes.orientation = Orientation.VERTICAL
+                    }
                 }
             }
-        }
-        rg_orientation.check(if (mAttributes.orientation == Orientation.VERTICAL) R.id.rb_vertical else R.id.rb_horizontal)
 
-        // marker
-        seek_marker_size.progress = mAttributes.markerSize
-        image_marker_color.mFillColor = mAttributes.markerColor
-        checkbox_marker_in_center.isChecked = mAttributes.markerInCenter
-        seek_marker_left_padding.progress = mAttributes.markerLeftPadding
-        seek_marker_top_padding.progress = mAttributes.markerTopPadding
-        seek_marker_right_padding.progress = mAttributes.markerRightPadding
-        seek_marker_bottom_padding.progress = mAttributes.markerBottomPadding
-        seek_marker_line_padding.progress = mAttributes.linePadding
+            rgOrientation.check(if (mAttributes.orientation == Orientation.VERTICAL) R.id.rb_vertical else R.id.rb_horizontal)
 
-        checkbox_marker_in_center.setOnCheckedChangeListener { _, isChecked ->
-            mAttributes.markerInCenter = isChecked
+
+
+
         }
 
-        image_marker_color.setOnClickListener { showColorPicker(mAttributes.markerColor, image_marker_color) }
+        with(optionsView.layoutMarker){
 
-        seek_marker_size.setOnProgressChangeListener(progressChangeListener)
-        seek_marker_left_padding.setOnProgressChangeListener(progressChangeListener)
-        seek_marker_top_padding.setOnProgressChangeListener(progressChangeListener)
-        seek_marker_right_padding.setOnProgressChangeListener(progressChangeListener)
-        seek_marker_bottom_padding.setOnProgressChangeListener(progressChangeListener)
-        seek_marker_line_padding.setOnProgressChangeListener(progressChangeListener)
+            // marker
+            seekMarkerSize.progress = mAttributes.markerSize
+            imageMarkerColor.mFillColor = mAttributes.markerColor
+            checkboxMarkerInCenter.isChecked = mAttributes.markerInCenter
+            seekMarkerLeftPadding.progress = mAttributes.markerLeftPadding
+            seekMarkerTopPadding.progress = mAttributes.markerTopPadding
+            seekMarkerRightPadding.progress = mAttributes.markerRightPadding
+            seekMarkerBottomPadding.progress = mAttributes.markerBottomPadding
+            seekMarkerLinePadding.progress = mAttributes.linePadding
+
+            checkboxMarkerInCenter.setOnCheckedChangeListener { _, isChecked ->
+                mAttributes.markerInCenter = isChecked
+            }
+
+            imageMarkerColor.setOnClickListener { showColorPicker(mAttributes.markerColor, image_marker_color) }
+
+            seekMarkerSize.setOnProgressChangeListener(progressChangeListener)
+            seekMarkerLeftPadding.setOnProgressChangeListener(progressChangeListener)
+            seekMarkerTopPadding.setOnProgressChangeListener(progressChangeListener)
+            seekMarkerRightPadding.setOnProgressChangeListener(progressChangeListener)
+            seekMarkerBottomPadding.setOnProgressChangeListener(progressChangeListener)
+            seekMarkerLinePadding.setOnProgressChangeListener(progressChangeListener)
+
+        }
+
 
         // line
         Log.e(" mAttributes.lineWidth", "${ mAttributes.lineWidth}")
+
+        optionsView.
 
         seek_line_width.progress = mAttributes.lineWidth
         image_start_line_color.mFillColor = mAttributes.startLineColor
