@@ -156,7 +156,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     editMinutes.setText(EMPTY_STRING)
                 }
 
-
                 cbSom.visibility = INVISIBLE
                 cbVib.visibility = INVISIBLE
                 cbAmbos.visibility = INVISIBLE
@@ -215,7 +214,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                         1 -> SOM
                         2 -> VIBRAR
                         3 -> AMBOS
-                        else -> {}
+                        else -> { SOM }
                     }
 
                     alarm_freq = when (alarmFreqButtonPressed) {
@@ -223,9 +222,16 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                         2 -> TODOS_OS_DIAS
                         3 -> PERSONALIZADO
                         4 -> AMANHA
-                        else -> {}
+                        else -> { HOJE }
                     }
                 }
+
+
+                with(viewSuccess){
+
+
+                }
+
 
                 if (alarmFreqButtonPressed != 0 && alarmTypeButtonPressed != 0
                     && lembrarButtonPressed != 0 && hoursMinutesFlag
