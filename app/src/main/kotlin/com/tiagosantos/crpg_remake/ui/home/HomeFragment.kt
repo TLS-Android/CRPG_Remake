@@ -45,6 +45,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         return root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.textHome
+
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

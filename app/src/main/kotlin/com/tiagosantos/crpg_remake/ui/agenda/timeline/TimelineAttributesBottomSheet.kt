@@ -54,7 +54,7 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet() {
         super.onStart()
 
         if (dialog != null) {
-            optionsView.
+            optionsView.viewBottomSheetAttributes
             val bottomSheet = dialog!!.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
             bottomSheet.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
         }
@@ -125,7 +125,6 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet() {
             seekMarkerLinePadding.setOnProgressChangeListener(progressChangeListener)
 
         }
-
 
         // line
         Log.e(" mAttributes.lineWidth", "${ mAttributes.lineWidth}")

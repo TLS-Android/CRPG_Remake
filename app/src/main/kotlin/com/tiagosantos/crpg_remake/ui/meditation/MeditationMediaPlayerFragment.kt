@@ -15,6 +15,7 @@ import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.FragmentSettings
+import com.tiagosantos.crpg_remake.databinding.FragmentHomeBinding
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationMediaPlayerBinding
 
 class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaPlayerBinding>(
@@ -29,7 +30,8 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
         ),
         srSettings = SRSettings(actionMap = mapOf("ola" to "adeus"))
 ) {
-    private lateinit var view: FragmentMeditationMediaPlayerBinding
+    private var _view: FragmentMeditationMediaPlayerBinding? = null
+    private val view get() = _view!!
 
     private val medViewModel: MeditationViewModel by viewModels()
     private val player = ExoPlayer.Builder(requireContext()).build()
@@ -39,13 +41,21 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
+            inflater: LayoutInflater,
+            container: ViewGroup?,
             savedInstanceState: Bundle?,
     ): View {
-        view.textSelectedMood.text = medViewModel.selectedMood
-        medViewModel.setupPlayer(player,view)
+        _view = FragmentMeditationMediaPlayerBinding.inflate(inflater, container, false)
+        return view.root
+    }
 
-        with(view.moodColor){
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        _view!!.textSelectedMood.text = medViewModel.selectedMood
+        medViewModel.setupPlayer(player,_view!!)
+
+        with(_view!!.moodColor){
             when(medViewModel.selectedMood){
                 "RELAXADO" -> this.setBackgroundColor(android.graphics.Color.parseColor("#00BBF2"))
                 "FELIZ" -> this.setBackgroundColor(android.graphics.Color.parseColor("#87B700"))
@@ -56,7 +66,7 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
             }
         }
 
-        view.buttonReturnMeditation.setOnClickListener {
+        _view!!.buttonReturnMeditation.setOnClickListener {
             val fragment: Fragment = MeditationFragment()
             val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
@@ -65,11 +75,8 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
-        return view.root
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+
         gotev.speechResult.observe(viewLifecycleOwner){
             performActionWithVoiceCommand(it, actionMap)
         }
@@ -82,7 +89,8 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
                command.contains("Parar", true) -> exoPause.performClick()
                command.contains("Passar à frente", true) -> exoFfwd.performClick()
                command.contains("Passar a trás", true) -> exoRew.performClick()
-               command.contains("Regressar", true) ->  root.rootView.findViewById(R.id.button_return_meditation)
+               command.contains("Regressar", true) ->
+                   root.rootView.findViewById(R.id.button_return_meditation)
                else -> { print("ola") }
            }
        }
