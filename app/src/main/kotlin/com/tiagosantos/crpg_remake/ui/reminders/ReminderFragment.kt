@@ -10,9 +10,14 @@ import android.widget.*
 import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
 import com.skydoves.expandablelayout.ExpandableLayout
-import com.tiagosantos.common.ui.model.AlarmFrequency
-import com.tiagosantos.common.ui.model.AlarmType
+import com.tiagosantos.common.ui.model.AlarmFrequency.*
+import com.tiagosantos.common.ui.model.AlarmType.SOM
+import com.tiagosantos.common.ui.model.AlarmType.VIBRAR
+import com.tiagosantos.common.ui.model.AlarmType.AMBOS
 import com.tiagosantos.common.ui.model.ReminderType
+import com.tiagosantos.common.ui.model.ReminderType.MEDICACAO
+import com.tiagosantos.common.ui.model.ReminderType.TRANSPORTE
+import com.tiagosantos.common.ui.model.ReminderType.REFEICAO
 import com.tiagosantos.crpg_remake.base.BaseFragment
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
@@ -180,9 +185,9 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     }
 
                     when (lembrarButtonPressed) {
-                        1 -> { updateButton("Tomar medicacao", ReminderType.MEDICACAO) }
-                        2 -> { updateButton("Apanhar bus do CRPG", ReminderType.TRANSPORTE) }
-                        3 -> { updateButton("Lembrar escolha de almoço", ReminderType.REFEICAO) }
+                        1 -> { updateButton("Tomar medicacao", MEDICACAO) }
+                        2 -> { updateButton("Apanhar bus do CRPG", TRANSPORTE) }
+                        3 -> { updateButton("Lembrar escolha de almoço", REFEICAO) }
                         4 -> { updateButton(
                             secondLembrar.textEditPersonalizado.text.toString(),
                             ReminderType.PERSONALIZADO)
@@ -206,17 +211,19 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                         }
                     }
 
-                    when (alarmTypeButtonPressed) {
-                        1 -> alarm_type = AlarmType.SOM
-                        2 -> alarm_type = AlarmType.VIBRAR
-                        3 -> alarm_type = AlarmType.AMBOS
+                    alarm_type = when (alarmTypeButtonPressed) {
+                        1 -> SOM
+                        2 -> VIBRAR
+                        3 -> AMBOS
+                        else -> {}
                     }
 
-                    when (alarmFreqButtonPressed) {
-                        1 -> alarm_freq = AlarmFrequency.HOJE
-                        2 -> alarm_freq = AlarmFrequency.TODOS_OS_DIAS
-                        3 -> alarm_freq = AlarmFrequency.PERSONALIZADO
-                        else -> { println("hello") }
+                    alarm_freq = when (alarmFreqButtonPressed) {
+                        1 -> HOJE
+                        2 -> TODOS_OS_DIAS
+                        3 -> PERSONALIZADO
+                        4 -> AMANHA
+                        else -> {}
                     }
                 }
 
