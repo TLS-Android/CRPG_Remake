@@ -47,8 +47,8 @@ class MealsFragment(srSettings: SRSettings) :
         super.onCreate(savedInstanceState)
         isLunch = requireArguments().getBoolean("isLunch")
         cardList = listOf(
-            view.frameOpcaoCarne, view.frameOpcaoPeixe, view.frameOpcaoDieta,
-            view.frameOpcaoVegetariano
+            view.frameOpcaoCarne, view.frameOpcaoPeixe,
+                view.frameOpcaoDieta, view.frameOpcaoVegetariano
         )
     }
 
