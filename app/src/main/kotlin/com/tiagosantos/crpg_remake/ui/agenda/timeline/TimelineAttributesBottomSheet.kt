@@ -19,6 +19,7 @@ import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.Orientation
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.TimelineAttributes
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.widgets.BorderedCircle
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.widgets.RoundedCornerBottomSheet
+import kotlinx.parcelize.Parcelize
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
@@ -53,7 +54,8 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet() {
         super.onStart()
 
         if (dialog != null) {
-            val bottomSheet = dialog!!.findViewById<View>(R.id.design_bottom_sheet)
+            optionsView.
+            val bottomSheet = dialog!!.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
             bottomSheet.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
         }
 
