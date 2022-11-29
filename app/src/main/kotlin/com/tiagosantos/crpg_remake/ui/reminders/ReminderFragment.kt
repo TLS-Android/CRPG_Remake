@@ -228,33 +228,31 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
 
                 with(viewSuccess){
-
-
-                }
-
-
-                if (alarmFreqButtonPressed != 0 && alarmTypeButtonPressed != 0
-                    && lembrarButtonPressed != 0 && hoursMinutesFlag
-                ) {
-                    reminderVM.addReminder(newReminder)
-                    if (reminderVM.flagReminderAdded) {
-                        avisoCampos.visibility = GONE
-                        viewSuccess.successLayout.visibility = VISIBLE
-                        viewSuccess.buttonOk.setOnClickListener {
-                            viewSuccess.successLayout.visibility = GONE
+                    if (alarmFreqButtonPressed != 0 && alarmTypeButtonPressed != 0
+                        && lembrarButtonPressed != 0 && hoursMinutesFlag
+                    ) {
+                        reminderVM.addReminder(newReminder)
+                        if (reminderVM.flagReminderAdded) {
+                            avisoCampos.visibility = GONE
+                            successLayout.visibility = VISIBLE
+                            buttonOk.setOnClickListener {
+                                successLayout.visibility = GONE
+                            }
+                            if (activity?.packageManager?.let { it1 ->
+                                    reminderVM.alarmIntent.resolveActivity(it1) } != null) {
+                                startActivity(reminderVM.alarmIntent)
+                            }
                         }
-                        if (activity?.packageManager?.let { it1 ->
-                                reminderVM.alarmIntent.resolveActivity(it1) } != null) {
-                            startActivity(reminderVM.alarmIntent)
-                        }
+                    } else if (hoursInt > 23 || minsInt > 59) {
+                        avisoCampos.text = "Horas ou minutos invalidos"
+                        avisoCampos.visibility = VISIBLE
+                    } else {
+                        avisoCampos.text = "Campos obrigatorios em falta!"
+                        avisoCampos.visibility = VISIBLE
                     }
-                } else if (hoursInt > 23 || minsInt > 59) {
-                    avisoCampos.text = "Horas ou minutos invalidos"
-                    avisoCampos.visibility = VISIBLE
-                } else {
-                    avisoCampos.text = "Campos obrigatorios em falta!"
-                    avisoCampos.visibility = VISIBLE
+
                 }
+
             }
 
         }
