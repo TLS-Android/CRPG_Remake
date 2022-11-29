@@ -33,7 +33,8 @@ class AgendaFragment(ttsSettings: TTSSettings, srSettings: SRSettings)
     ), ttsSettings, srSettings
 ) {
 
-    private lateinit var view: FragmentAgendaBinding
+    private var _view: FragmentAgendaBinding? = null
+    private val view get() = _view!!
 
     private lateinit var mLayoutManager: LinearLayoutManager
     private lateinit var mAttributes: TimelineAttributes
@@ -47,6 +48,7 @@ class AgendaFragment(ttsSettings: TTSSettings, srSettings: SRSettings)
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        _view = FragmentAgendaBinding.inflate(inflater, container, false)
         return view.root
     }
 

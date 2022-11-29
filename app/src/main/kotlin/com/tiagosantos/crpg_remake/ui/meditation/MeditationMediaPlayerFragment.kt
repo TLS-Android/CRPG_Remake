@@ -48,7 +48,7 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
         return view.root
     }
 
-    fun setBackgroundColor(img: ImageView, str: String) = img.setBackgroundColor(android.graphics.Color.parseColor(str))
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -116,5 +116,8 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
     override fun observeLifecycleEvents() {
         TODO("Not yet implemented")
     }
+
+    private fun setBackgroundColor(img: ImageView, str: String) =
+        img.setBackgroundColor(android.graphics.Color.parseColor(str))
 
 }
