@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -15,7 +14,6 @@ import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.FragmentSettings
-import com.tiagosantos.crpg_remake.databinding.FragmentHomeBinding
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationMediaPlayerBinding
 
 class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaPlayerBinding>(
@@ -52,21 +50,22 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        _view!!.textSelectedMood.text = medViewModel.selectedMood
-        medViewModel.setupPlayer(player,_view!!)
+        with(_view!!){
+            textSelectedMood.text = medViewModel.selectedMood
+            medViewModel.setupPlayer(player,this)
 
-        with(_view!!.moodColor){
+        with(moodColor){
             when(medViewModel.selectedMood){
-                "RELAXADO" -> this.setBackgroundColor(android.graphics.Color.parseColor("#00BBF2"))
-                "FELIZ" -> this.setBackgroundColor(android.graphics.Color.parseColor("#87B700"))
-                "SONOLENTO" -> this.setBackgroundColor(android.graphics.Color.parseColor("#FBC02D"))
-                "CONFIANTE" -> this.setBackgroundColor(android.graphics.Color.parseColor("#57A8D8"))
-                "QUERIDO" -> this.setBackgroundColor(android.graphics.Color.parseColor("#AA00FF"))
-                "MENTE SÃ" -> this.setBackgroundColor(android.graphics.Color.parseColor("#57A8D8"))
+                "RELAXADO" -> setBackgroundColor(android.graphics.Color.parseColor("#00BBF2"))
+                "FELIZ" -> setBackgroundColor(android.graphics.Color.parseColor("#87B700"))
+                "SONOLENTO" -> setBackgroundColor(android.graphics.Color.parseColor("#FBC02D"))
+                "CONFIANTE" -> setBackgroundColor(android.graphics.Color.parseColor("#57A8D8"))
+                "QUERIDO" -> setBackgroundColor(android.graphics.Color.parseColor("#AA00FF"))
+                "MENTE SÃ" -> setBackgroundColor(android.graphics.Color.parseColor("#57A8D8"))
             }
         }
 
-        _view!!.buttonReturnMeditation.setOnClickListener {
+        buttonReturnMeditation.setOnClickListener {
             val fragment: Fragment = MeditationFragment()
             val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
@@ -76,9 +75,9 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
             fragmentTransaction.commit()
         }
 
-
         gotev.speechResult.observe(viewLifecycleOwner){
-            performActionWithVoiceCommand(it, actionMap)
+            updateColorWithVoiceCommand(it)
+        }
         }
     }
 
