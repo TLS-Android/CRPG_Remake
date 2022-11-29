@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -47,6 +48,8 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
         return view.root
     }
 
+    fun setBackgroundColor(img: ImageView, str: String) = img.setBackgroundColor(android.graphics.Color.parseColor(str))
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -54,30 +57,31 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
             textSelectedMood.text = medViewModel.selectedMood
             medViewModel.setupPlayer(player,this)
 
-        with(moodColor){
-            when(medViewModel.selectedMood){
-                "RELAXADO" -> setBackgroundColor(android.graphics.Color.parseColor("#00BBF2"))
-                "FELIZ" -> setBackgroundColor(android.graphics.Color.parseColor("#87B700"))
-                "SONOLENTO" -> setBackgroundColor(android.graphics.Color.parseColor("#FBC02D"))
-                "CONFIANTE" -> setBackgroundColor(android.graphics.Color.parseColor("#57A8D8"))
-                "QUERIDO" -> setBackgroundColor(android.graphics.Color.parseColor("#AA00FF"))
-                "MENTE SÃ" -> setBackgroundColor(android.graphics.Color.parseColor("#57A8D8"))
+            with(moodColor){
+                when(medViewModel.selectedMood){
+                    "RELAXADO" -> setBackgroundColor(this,"")
+                    "FELIZ" -> setBackgroundColor(this,"#87B700")
+                    "SONOLENTO" -> setBackgroundColor(this,"#FBC02D")
+                    "CONFIANTE" -> setBackgroundColor(this,"#57A8D8")
+                    "QUERIDO" -> setBackgroundColor(this,"#AA00FF")
+                    "MENTE SÃ" -> setBackgroundColor(this,"#57A8D8")
+                }
             }
-        }
 
-        buttonReturnMeditation.setOnClickListener {
-            val fragment: Fragment = MeditationFragment()
-            val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
-            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, fragment)
-            fragmentManager.popBackStack()
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
-        }
+            buttonReturnMeditation.setOnClickListener {
+                val fragment: Fragment = MeditationFragment()
+                val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
+                val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, fragment)
+                fragmentManager.popBackStack()
+                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.commit()
+            }
 
-        gotev.speechResult.observe(viewLifecycleOwner){
-            updateColorWithVoiceCommand(it)
-        }
+            gotev.speechResult.observe(viewLifecycleOwner){
+                updateColorWithVoiceCommand(it)
+            }
+
         }
     }
 
