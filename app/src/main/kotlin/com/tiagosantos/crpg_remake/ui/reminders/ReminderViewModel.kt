@@ -12,6 +12,9 @@ import com.tiagosantos.common.ui.model.AlarmFrequency.AMANHA
 import com.tiagosantos.common.ui.model.AlarmFrequency.TODOS_OS_DIAS
 import com.tiagosantos.common.ui.model.AlarmFrequency.PERSONALIZADO
 import com.tiagosantos.common.ui.model.AlarmType
+import com.tiagosantos.common.ui.model.AlarmType.SOM
+import com.tiagosantos.common.ui.model.AlarmType.VIBRAR
+import com.tiagosantos.common.ui.model.AlarmType.AMBOS
 import com.tiagosantos.common.ui.model.Reminder
 import com.tiagosantos.common.ui.model.ReminderType
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
@@ -40,7 +43,7 @@ class ReminderViewModel(
 
     var mockReminder = Reminder(
         "", "", "x", 11, 0,
-        ReminderType.MEDICACAO, AlarmType.SOM, AlarmFrequency.HOJE
+        ReminderType.MEDICACAO, SOM, HOJE
     )
 
     @SuppressLint("SimpleDateFormat")
@@ -69,27 +72,36 @@ class ReminderViewModel(
 
         //data do dia de amanha
         val formattedDateTomorrow = getTomorrowDate(formatDDMMYYYY)
-
         setDateOnReminder(formattedDateToday, formattedDateTomorrow)
-
-        when (newReminder.alarm_type) {
-            AlarmType.SOM -> setAlarmSoundOnly(
-                fullWeekAlarm.toCollection(ArrayList()),
-                customWeekAlarm
-            )
-            AlarmType.VIBRAR -> setAlarmVibrateOnly(
-                fullWeekAlarm.toCollection(ArrayList()),
-                customWeekAlarm
-            )
-            AlarmType.AMBOS -> setAlarmBoth(
-                fullWeekAlarm.toCollection(ArrayList()),
-                customWeekAlarm
-            )
-            else -> { setAlarmSoundOnly(fullWeekAlarm.toCollection(ArrayList()), customWeekAlarm) }
-        }
 
         flagReminderAdded = true
         mReminderList.add(newReminder)
+
+        setAlarm(fullWeekAlarm.toCollection(ArrayList()), customWeekAlarm, newReminder.alarm_type)
+
+    }
+
+    private fun setAlarm(
+        fullWeekAlarm: ArrayList<Int>,
+        customWeekAlarm: ArrayList<Int>,
+        alarmType: AlarmType?
+    ) {
+        this.alarmIntent = Intent(ACTION_SET_ALARM).apply {
+            putExtra(EXTRA_MESSAGE, mockReminder.title)
+            putExtra(EXTRA_HOUR, startTimeHours.toInt())
+            putExtra(EXTRA_MINUTES, startTimeMin.toInt())
+            when(mockReminder.alarm_freq){
+                TODOS_OS_DIAS -> putExtra(EXTRA_DAYS, fullWeekAlarm)
+                PERSONALIZADO -> putExtra(EXTRA_DAYS, customWeekAlarm)
+                else -> { println("No valid frequency was found") }
+            }
+            when(alarmType){
+                VIBRAR, AMBOS -> putExtra(EXTRA_VIBRATE, TRUE)
+                VIBRAR -> putExtra(VALUE_RINGTONE_SILENT, TRUE)
+                SOM -> putExtra(EXTRA_VIBRATE, FALSE)
+                else -> { println("setAlarm") }
+            }
+        }
     }
 
     //data do dia de amanha
@@ -111,78 +123,9 @@ class ReminderViewModel(
         }
     }
 
-    private fun setAlarmVibrateOnly(
-        fullWeekAlarm: ArrayList<Int>,
-        customWeekAlarm: ArrayList<Int>
-    ) {
-        this.alarmIntent = when (mockReminder.alarm_freq) {
-            HOJE -> Intent(ACTION_SET_ALARM).apply {
-                putExtra(EXTRA_MESSAGE, mockReminder.title)
-                putExtra(EXTRA_HOUR, startTimeHours.toInt())
-                putExtra(EXTRA_MINUTES, startTimeMin.toInt())
-                putExtra(EXTRA_VIBRATE, TRUE)
-                putExtra(VALUE_RINGTONE_SILENT, TRUE)
-            }
-            AMANHA -> Intent(ACTION_SET_ALARM).apply {
-                putExtra(EXTRA_MESSAGE, mockReminder.title)
-                putExtra(EXTRA_VIBRATE, TRUE)
-                putExtra(VALUE_RINGTONE_SILENT, TRUE)
-            }
-            TODOS_OS_DIAS -> Intent(ACTION_SET_ALARM).apply {
-                    putExtra(EXTRA_MESSAGE, mockReminder.title)
-                    putExtra(EXTRA_HOUR, startTimeHours.toInt())
-                    putExtra(EXTRA_MINUTES, startTimeMin.toInt())
-                    putExtra(EXTRA_VIBRATE, TRUE)
-                    putExtra(VALUE_RINGTONE_SILENT, TRUE)
-                    putExtra(EXTRA_DAYS, fullWeekAlarm)
-                }
-            PERSONALIZADO -> Intent(ACTION_SET_ALARM).apply {
-                    putExtra(EXTRA_MESSAGE, mockReminder.title)
-                    putExtra(EXTRA_HOUR, startTimeHours.toInt())
-                    putExtra(EXTRA_MINUTES, startTimeMin.toInt())
-                    putExtra(EXTRA_VIBRATE, TRUE)
-                    putExtra(VALUE_RINGTONE_SILENT, TRUE)
-                    putExtra(EXTRA_DAYS, customWeekAlarm)
-                }
-            else -> { return }
-        }
 
-    }
-
-    private fun setAlarmBoth(fullWeekAlarm: ArrayList<Int>, customWeekAlarm: ArrayList<Int>) {
-        this.alarmIntent = when (mockReminder.alarm_freq) {
-            HOJE -> Intent(ACTION_SET_ALARM).apply {
-                putExtra(EXTRA_MESSAGE, mockReminder.title)
-                putExtra(EXTRA_HOUR, startTimeHours.toInt())
-                putExtra(EXTRA_MINUTES, startTimeMin.toInt())
-                putExtra(EXTRA_VIBRATE, TRUE)
-            }
-            AMANHA ->Intent(ACTION_SET_ALARM).apply {
-                putExtra(EXTRA_MESSAGE, mockReminder.title)
-                putExtra(EXTRA_VIBRATE, TRUE)
-            }
-           TODOS_OS_DIAS ->
-                Intent(ACTION_SET_ALARM).apply {
-                    putExtra(EXTRA_MESSAGE, mockReminder.title)
-                    putExtra(EXTRA_HOUR, startTimeHours.toInt())
-                    putExtra(EXTRA_MINUTES, startTimeMin.toInt())
-                    putExtra(EXTRA_VIBRATE, TRUE)
-                    putExtra(EXTRA_DAYS, fullWeekAlarm)
-                }
-            PERSONALIZADO ->
-                Intent(ACTION_SET_ALARM).apply {
-                    putExtra(EXTRA_MESSAGE, mockReminder.title)
-                    putExtra(EXTRA_HOUR, startTimeHours.toInt())
-                    putExtra(EXTRA_MINUTES, startTimeMin.toInt())
-                    putExtra(EXTRA_VIBRATE, TRUE)
-                    putExtra(EXTRA_DAYS, customWeekAlarm)
-                }
-            else -> { return }
-        }
-    }
 
     private fun setAlarmSoundOnly(fullWeekAlarm: ArrayList<Int>, customWeekAlarm: ArrayList<Int>) {
-
         this.alarmIntent = Intent(ACTION_SET_ALARM).apply {
             putExtra(EXTRA_MESSAGE, mockReminder.title)
             putExtra(EXTRA_HOUR, startTimeHours.toInt())
