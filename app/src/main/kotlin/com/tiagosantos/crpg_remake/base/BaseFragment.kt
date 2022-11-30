@@ -52,7 +52,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
         }
     }
 
-    private fun goToFragment(destination: Fragment){
+    protected fun goToFragment(destination: Fragment){
             val fragment: Fragment = destination
             val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()

@@ -78,13 +78,7 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
             }
 
             buttonReturnMeditation.setOnClickListener {
-                val fragment: Fragment = MeditationFragment()
-                val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
-                val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, fragment)
-                fragmentManager.popBackStack()
-                fragmentTransaction.addToBackStack(null)
-                fragmentTransaction.commit()
+                goToFragment(MeditationFragment())
             }
 
         }
