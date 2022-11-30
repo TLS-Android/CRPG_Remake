@@ -55,10 +55,7 @@ class ReminderViewModel(
     @SuppressLint("SimpleDateFormat")
     fun addReminder(newReminder: Reminder) {
 
-
-
         weekDaysBoolean.associateWith {  }
-
 
         val customWeekAlarm = mutableListOf<Int>().apply {
             for ((idx, value) in weekDaysBoolean.withIndex()) {
