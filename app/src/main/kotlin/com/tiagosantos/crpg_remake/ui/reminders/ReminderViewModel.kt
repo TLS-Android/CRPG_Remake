@@ -47,22 +47,21 @@ class ReminderViewModel(
 
     @SuppressLint("SimpleDateFormat")
     fun addReminder(newReminder: Reminder) {
-        val customWeekAlarmMutable = mutableListOf<Int>()
-        for ((idx, value) in weekDaysBoolean.withIndex()) {
-            if (value) {
-                when (idx) {
-                    0 -> customWeekAlarmMutable.add(MONDAY)
-                    1 -> customWeekAlarmMutable.add(TUESDAY)
-                    2 -> customWeekAlarmMutable.add(WEDNESDAY)
-                    3 -> customWeekAlarmMutable.add(THURSDAY)
-                    4 -> customWeekAlarmMutable.add(FRIDAY)
-                    5 -> customWeekAlarmMutable.add(SATURDAY)
-                    6 -> customWeekAlarmMutable.add(SUNDAY)
+        val customWeekAlarm = mutableListOf<Int>().apply {
+            for ((idx, value) in weekDaysBoolean.withIndex()) {
+                if (value) {
+                    when (idx) {
+                        0 -> add(MONDAY)
+                        1 -> add(TUESDAY)
+                        2 -> add(WEDNESDAY)
+                        3 -> add(THURSDAY)
+                        4 -> add(FRIDAY)
+                        5 -> add(SATURDAY)
+                        6 -> add(SUNDAY)
+                    }
                 }
             }
         }
-
-        val customWeekAlarm = customWeekAlarmMutable.toCollection(ArrayList<Int>())
 
         //data do dia de hoje
         val formatDDMMYYYY = SimpleDateFormat("ddMMyyyy")
@@ -76,8 +75,8 @@ class ReminderViewModel(
         flagReminderAdded = true
         mReminderList.add(newReminder)
 
-        setAlarm(fullWeekAlarm.toCollection(ArrayList()), customWeekAlarm, newReminder.alarm_type)
-
+        setAlarm(fullWeekAlarm.toCollection(ArrayList()),
+            customWeekAlarm.toCollection(ArrayList<Int>()), newReminder.alarm_type)
     }
 
     private fun setAlarm(
@@ -122,17 +121,5 @@ class ReminderViewModel(
         }
     }
 
-    private fun setAlarmSoundOnly(fullWeekAlarm: ArrayList<Int>, customWeekAlarm: ArrayList<Int>) {
-        this.alarmIntent = Intent(ACTION_SET_ALARM).apply {
-            putExtra(EXTRA_MESSAGE, mockReminder.title)
-            putExtra(EXTRA_HOUR, startTimeHours.toInt())
-            putExtra(EXTRA_MINUTES, startTimeMin.toInt())
-            putExtra(EXTRA_VIBRATE, FALSE)
-            when(mockReminder.alarm_freq){
-                TODOS_OS_DIAS -> putExtra(EXTRA_DAYS, fullWeekAlarm)
-                PERSONALIZADO -> putExtra(EXTRA_DAYS, customWeekAlarm)
-                else -> { println("No valid frequency was found") }
-            }
-        }
-    }
+
 }
