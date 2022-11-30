@@ -34,9 +34,14 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         sharedPreferencesBooleanName = R.string.remindersHasRun.toString(),
     )
 ) {
-    private lateinit var view: ReminderFragmentBinding
-    private lateinit var viewIntro: ReminderActivityIntroBinding
-    private lateinit var viewSuccess: ReminderActivitySuccessBinding
+    private var _view: ReminderFragmentBinding? = null
+    private val view get() = _view!!
+
+    private var _viewIntro: ReminderActivityIntroBinding? = null
+    private val viewIntro get() = _viewIntro!!
+
+    private var _viewSuccess: ReminderActivitySuccessBinding? = null
+    private val viewSuccess get() = _viewSuccess!!
 
     private var startTimeString = EMPTY_STRING
     private var hoursMinutesFlag = false
@@ -65,6 +70,11 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     ): View {
         val reminderVM: ReminderViewModel by viewModels()
         setupUI(reminderVM)
+
+        _view = ReminderFragmentBinding.inflate(inflater, container, false)
+        _viewIntro = ReminderActivityIntroBinding.inflate(inflater, container, false)
+        _viewSuccess = ReminderActivitySuccessBinding.inflate(inflater, container, false)
+
         return view.root
     }
 
