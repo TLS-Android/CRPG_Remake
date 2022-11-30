@@ -59,13 +59,17 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
         super.onViewCreated(view, savedInstanceState)
         gossip.setContextualHelp(ttsSettings.contextualHelp!!)
 
-        val modalityPreferences =
-            this.requireActivity().getSharedPreferences(MODALITY, Context.MODE_PRIVATE)
+        val modalityPreferences = this.requireActivity().getSharedPreferences(MODALITY, Context.MODE_PRIVATE)
         val ttsFlag = modalityPreferences.getBoolean(TTS, false)
         val srFlag = modalityPreferences.getBoolean(SR, false)
         val hasRun = modalityPreferences.getBoolean(flag.toString(), false)
 
         setupModality(ttsFlag, srFlag, hasRun)
+        listenToUser()
+    }
+
+    private fun listenToUser() =  gotev.speechResult.observe(viewLifecycleOwner){
+        performActionWithVoiceCommand(it, srSettings.actionMap)
     }
 
     override fun onStop() {
@@ -85,10 +89,8 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
         actionMap: Map<String,Any>
     ) = generalHelper(command, actionMap)
 
-
     /**
-     * THIS STILL HAS TO BE CORRECTED
-     * THIS SHOULD BE MOVED TO A VIEW MODEL; NOT PART OF THE FRAGMENT
+     * SHOULD BE MOVED TO A VIEW MODEL; NOT PART OF THE FRAGMENT
      */
     open fun setupModality(
        ttsFlag: Boolean,

@@ -79,10 +79,6 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
                 fragmentTransaction.commit()
             }
 
-            gotev.speechResult.observe(viewLifecycleOwner){
-                performActionWithVoiceCommand(it, srSettings.actionMap)
-            }
-
         }
     }
 
