@@ -12,7 +12,6 @@ import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
-import com.tiagosantos.crpg_remake.databinding.FragmentDashboardBinding
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationBinding
 
 class MeditationFragment(ttsSettings: TTSSettings, srSettings: SRSettings) :
@@ -27,17 +26,18 @@ class MeditationFragment(ttsSettings: TTSSettings, srSettings: SRSettings) :
     srSettings = srSettings
 ) {
 
-    private var _binding: FragmentDashboardBinding? = null
+    private var _view: FragmentMeditationBinding? = null
+    private val view get() = _view!!
+
+    private val medViewModel: MeditationViewModel by viewModels()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
+
     private val _text = MutableLiveData<String>().apply {
         value = "This is dashboard Fragment"
     }
     val text: LiveData<String> = _text
-
-    private lateinit var view: FragmentMeditationBinding
     private var onResumeFlag = false
 
     val feelingsMap = mapOf(
@@ -48,26 +48,31 @@ class MeditationFragment(ttsSettings: TTSSettings, srSettings: SRSettings) :
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?,
     ): View {
-        val medViewModel:MeditationViewModel by viewModels()
+        _view = FragmentMeditationBinding.inflate(inflater, container, false)
+        return view.root
+    }
 
-        with(view){
-            buttonMoodRelaxed.setOnClickListener{
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        with(_view!!) {
+            buttonMoodRelaxed.setOnClickListener {
                 medViewModel.selectedMood = "RELAXADO"
             }.also { goToMeditationMediaPlayer() }
 
-            buttonMoodHappy.setOnClickListener{
+            buttonMoodHappy.setOnClickListener {
                 medViewModel.selectedMood = "FELIZ"
             }.also { goToMeditationMediaPlayer() }
 
-            buttonMoodSleepy.setOnClickListener{
+            buttonMoodSleepy.setOnClickListener {
                 medViewModel.selectedMood = "SONOLENTO"
             }.also { goToMeditationMediaPlayer() }
 
-            buttonMoodConfident.setOnClickListener{
+            buttonMoodConfident.setOnClickListener {
                 medViewModel.selectedMood = "CONFIANTE"
             }.also { goToMeditationMediaPlayer() }
-            return root
         }
+
     }
 
     override fun performActionWithVoiceCommand(command: String, actionMap: Map<String, Any>) {
