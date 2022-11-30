@@ -21,8 +21,7 @@ import com.tiagosantos.common.ui.utils.Constants.MODALITY
 import com.tiagosantos.crpg_remake.MainActivity
 
 abstract class BaseFragment<B : ViewDataBinding>(
-    @LayoutRes
-    private val layoutId: Int,
+    @LayoutRes val layoutId: Int,
     protected val settings: FragmentSettings,
 ) : Fragment() {
 

@@ -24,10 +24,10 @@ import com.tiagosantos.crpg_remake.base.FragmentSettings
 
 abstract class BaseModalFragment<B : ViewDataBinding>(
     @LayoutRes
-    private val layoutId: Int,
+    layoutId: Int,
     settings: FragmentSettings,
     /**
-     * Member has the same visibility as one marked as private , but that it is also visible in subclasses. **/
+     * Member has the same visibility as one marked as private, but that it is also visible in subclasses. **/
     protected val ttsSettings: TTSSettings,
     protected val srSettings: SRSettings,
 ) : BaseFragment<B>(
@@ -35,7 +35,7 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
     settings = settings,
 ) {
     open val gossip: GossipViewModel by activityViewModels()
-    val gotev: GotevViewModel by activityViewModels()
+    private val gotev: GotevViewModel by activityViewModels()
 
     private val _flag = MutableLiveData<String?>()
     private val flag: LiveData<String?> = _flag
