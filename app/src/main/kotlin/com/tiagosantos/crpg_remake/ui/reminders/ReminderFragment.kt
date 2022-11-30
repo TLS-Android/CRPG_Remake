@@ -61,6 +61,11 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     lateinit var helper : HoursHelper
 
     companion object{
+        val weekMap = mapOf(
+            "Seg" to 1, "Ter" to 2, "Qua" to 3,
+            "Qui" to 4, "Sex" to 5, "Sab" to 6, "Dom" to 7
+        )
+
         var lembrarButtonPressed = 0
         var alarmTypeButtonPressed = 0
         var alarmFreqButtonPressed = 0
@@ -185,7 +190,9 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
             buttonCancel.setOnClickListener {
                 avisoCampos.visibility = GONE
-
+                cbSom.visibility = INVISIBLE
+                cbVib.visibility = INVISIBLE
+                cbAmbos.visibility = INVISIBLE
                 lembrarButtonPressed = 0
                 alarmTypeButtonPressed = 0
                 alarmFreqButtonPressed = 0
@@ -194,10 +201,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     editHours.setText(EMPTY_STRING)
                     editMinutes.setText(EMPTY_STRING)
                 }
-
-                cbSom.visibility = INVISIBLE
-                cbVib.visibility = INVISIBLE
-                cbAmbos.visibility = INVISIBLE
 
                 secondNotas.editTextNotes.setText(EMPTY_STRING)
             }
@@ -216,7 +219,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     avisoCampos.run { text = "Valor em falta"; visibility = VISIBLE }
                 }
 
-                with(reminderVM.newReminder) {
+                with(reminderVM.mockReminder) {
                     fun updateButton(title: String, reminderType: ReminderType) {
                         this.title = title
                         reminder_type = reminderType
@@ -233,19 +236,9 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     }
 
                     with(secondDia){
-                        val materialButtonToggleGroup = toggleButtonGroup
-                        val ids: List<Int> = materialButtonToggleGroup.checkedButtonIds
-                        for (id in ids) {
-                            val materialButton: MaterialButton = materialButtonToggleGroup.findViewById(id)
-                            when (resources.getResourceName(materialButton.id).takeLast(3)) {
-                                "Seg" -> reminderVM.weekDaysBoolean[0] = true
-                                "Ter" -> reminderVM.weekDaysBoolean[1] = true
-                                "Qua" -> reminderVM.weekDaysBoolean[2] = true
-                                "Qui" -> reminderVM.weekDaysBoolean[3] = true
-                                "Sex" -> reminderVM.weekDaysBoolean[4] = true
-                                "Sab" -> reminderVM.weekDaysBoolean[5] = true
-                                "Dom" -> reminderVM.weekDaysBoolean[6] = true
-                            }
+                        for (id in toggleButtonGroup.checkedButtonIds) {
+                            val materialButton: MaterialButton = toggleButtonGroup.findViewById(id)
+                            weekMap[resources.getResourceName(materialButton.id).takeLast(3)]
                         }
                     }
 

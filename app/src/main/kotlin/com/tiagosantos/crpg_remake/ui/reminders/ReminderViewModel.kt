@@ -13,11 +13,9 @@ import com.tiagosantos.common.ui.model.ReminderType
 import com.tiagosantos.common.ui.utils.fullWeekAlarm
 import java.lang.Boolean.FALSE
 import java.lang.Boolean.TRUE
-import java.sql.DriverManager.println
 import java.text.SimpleDateFormat
 import java.util.*
 
-//Reminders sao eventos criados pelo utilizador e que so sao acedidos pelo proprio
 class ReminderViewModel(
     application: Application
 ) : AndroidViewModel(application) {
@@ -25,7 +23,7 @@ class ReminderViewModel(
     @SuppressLint("StaticFieldLeak")
     val context: Context = application.applicationContext
     private var mReminderList = ArrayList<Reminder>()
-    val weekDaysBoolean: BooleanArray = booleanArrayOf(
+    private val weekDaysBoolean: BooleanArray = booleanArrayOf(
         false, false, false,
         false, false, false, false
     )
@@ -35,9 +33,7 @@ class ReminderViewModel(
     var startTimeMin: String = ""
     var flagReminderAdded = false
 
-
-
-    var newReminder = Reminder(
+    var mockReminder = Reminder(
         "", "", "x", 11, 0,
         ReminderType.MEDICACAO, AlarmType.SOM, AlarmFrequency.HOJE
     )
@@ -84,9 +80,7 @@ class ReminderViewModel(
                 fullWeekAlarm.toCollection(ArrayList()),
                 customWeekAlarm
             )
-            else -> {
-                setAlarmSoundOnly(fullWeekAlarm.toCollection(ArrayList()), customWeekAlarm)
-            }
+            else -> { setAlarmSoundOnly(fullWeekAlarm.toCollection(ArrayList()), customWeekAlarm) }
         }
 
         flagReminderAdded = true
@@ -101,13 +95,13 @@ class ReminderViewModel(
     }
 
     private fun setDateOnReminder(formattedDateToday: String, formattedDateTomorrow: String) {
-        when (newReminder.alarm_freq) {
-            AlarmFrequency.HOJE -> newReminder.date = formattedDateToday
-            AlarmFrequency.AMANHA -> newReminder.date = formattedDateTomorrow
-            AlarmFrequency.TODOS_OS_DIAS -> newReminder.date = "x"
-            AlarmFrequency.PERSONALIZADO -> newReminder.date = "custom"
+        when (mockReminder.alarm_freq) {
+            AlarmFrequency.HOJE -> mockReminder.date = formattedDateToday
+            AlarmFrequency.AMANHA -> mockReminder.date = formattedDateTomorrow
+            AlarmFrequency.TODOS_OS_DIAS -> mockReminder.date = null
+            AlarmFrequency.PERSONALIZADO -> mockReminder.date = null
             else -> {
-                newReminder.date = "x"
+                mockReminder.date = "x"
             }
         }
     }
@@ -116,121 +110,102 @@ class ReminderViewModel(
         fullWeekAlarm: ArrayList<Int>,
         customWeekAlarm: ArrayList<Int>
     ) {
-        when (newReminder.alarm_freq) {
-            //so vibracao
-            AlarmFrequency.HOJE -> this.alarmIntent = Intent(AlarmClock.ACTION_SET_ALARM).apply {
-                putExtra(AlarmClock.EXTRA_MESSAGE, newReminder.title)
+        this.alarmIntent = when (mockReminder.alarm_freq) {
+            AlarmFrequency.HOJE -> Intent(AlarmClock.ACTION_SET_ALARM).apply {
+                putExtra(AlarmClock.EXTRA_MESSAGE, mockReminder.title)
                 putExtra(AlarmClock.EXTRA_HOUR, startTimeHours.toInt())
                 putExtra(AlarmClock.EXTRA_MINUTES, startTimeMin.toInt())
                 putExtra(AlarmClock.EXTRA_VIBRATE, TRUE)
                 putExtra(AlarmClock.VALUE_RINGTONE_SILENT, TRUE)
             }
-            AlarmFrequency.AMANHA -> this.alarmIntent = Intent(AlarmClock.ACTION_SET_ALARM).apply {
-                putExtra(AlarmClock.EXTRA_MESSAGE, newReminder.title)
+            AlarmFrequency.AMANHA -> Intent(AlarmClock.ACTION_SET_ALARM).apply {
+                putExtra(AlarmClock.EXTRA_MESSAGE, mockReminder.title)
                 putExtra(AlarmClock.EXTRA_VIBRATE, TRUE)
                 putExtra(AlarmClock.VALUE_RINGTONE_SILENT, TRUE)
             }
-            AlarmFrequency.TODOS_OS_DIAS -> this.alarmIntent =
-                Intent(AlarmClock.ACTION_SET_ALARM).apply {
-                    putExtra(AlarmClock.EXTRA_MESSAGE, newReminder.title)
+            AlarmFrequency.TODOS_OS_DIAS -> Intent(AlarmClock.ACTION_SET_ALARM).apply {
+                    putExtra(AlarmClock.EXTRA_MESSAGE, mockReminder.title)
                     putExtra(AlarmClock.EXTRA_HOUR, startTimeHours.toInt())
                     putExtra(AlarmClock.EXTRA_MINUTES, startTimeMin.toInt())
                     putExtra(AlarmClock.EXTRA_VIBRATE, TRUE)
                     putExtra(AlarmClock.VALUE_RINGTONE_SILENT, TRUE)
                     putExtra(AlarmClock.EXTRA_DAYS, fullWeekAlarm)
                 }
-            AlarmFrequency.PERSONALIZADO -> {
-                println("Custom week alarm: $customWeekAlarm")
-                this.alarmIntent = Intent(AlarmClock.ACTION_SET_ALARM).apply {
-                    putExtra(AlarmClock.EXTRA_MESSAGE, newReminder.title)
+            AlarmFrequency.PERSONALIZADO -> Intent(AlarmClock.ACTION_SET_ALARM).apply {
+                    putExtra(AlarmClock.EXTRA_MESSAGE, mockReminder.title)
                     putExtra(AlarmClock.EXTRA_HOUR, startTimeHours.toInt())
                     putExtra(AlarmClock.EXTRA_MINUTES, startTimeMin.toInt())
                     putExtra(AlarmClock.EXTRA_VIBRATE, TRUE)
                     putExtra(AlarmClock.VALUE_RINGTONE_SILENT, TRUE)
                     putExtra(AlarmClock.EXTRA_DAYS, customWeekAlarm)
                 }
-            }
-            else -> {}
+            else -> { return }
         }
+
     }
 
     private fun setAlarmBoth(fullWeekAlarm: ArrayList<Int>, customWeekAlarm: ArrayList<Int>) {
-        lateinit var alarmIntent: Intent
-        println("Full week alarm: $fullWeekAlarm")
-
-        when (newReminder.alarm_freq) {
-            //c/ vibracao e som
-            AlarmFrequency.HOJE -> this.alarmIntent = Intent(AlarmClock.ACTION_SET_ALARM).apply {
-                putExtra(AlarmClock.EXTRA_MESSAGE, newReminder.title)
+        this.alarmIntent = when (mockReminder.alarm_freq) {
+            AlarmFrequency.HOJE -> Intent(AlarmClock.ACTION_SET_ALARM).apply {
+                putExtra(AlarmClock.EXTRA_MESSAGE, mockReminder.title)
                 putExtra(AlarmClock.EXTRA_HOUR, startTimeHours.toInt())
                 putExtra(AlarmClock.EXTRA_MINUTES, startTimeMin.toInt())
                 putExtra(AlarmClock.EXTRA_VIBRATE, TRUE)
             }
-            AlarmFrequency.AMANHA -> this.alarmIntent = Intent(AlarmClock.ACTION_SET_ALARM).apply {
-                putExtra(AlarmClock.EXTRA_MESSAGE, newReminder.title)
+            AlarmFrequency.AMANHA ->Intent(AlarmClock.ACTION_SET_ALARM).apply {
+                putExtra(AlarmClock.EXTRA_MESSAGE, mockReminder.title)
                 putExtra(AlarmClock.EXTRA_VIBRATE, TRUE)
             }
-            AlarmFrequency.TODOS_OS_DIAS -> this.alarmIntent =
+            AlarmFrequency.TODOS_OS_DIAS ->
                 Intent(AlarmClock.ACTION_SET_ALARM).apply {
-                    putExtra(AlarmClock.EXTRA_MESSAGE, newReminder.title)
+                    putExtra(AlarmClock.EXTRA_MESSAGE, mockReminder.title)
                     putExtra(AlarmClock.EXTRA_HOUR, startTimeHours.toInt())
                     putExtra(AlarmClock.EXTRA_MINUTES, startTimeMin.toInt())
                     putExtra(AlarmClock.EXTRA_VIBRATE, TRUE)
                     putExtra(AlarmClock.EXTRA_DAYS, fullWeekAlarm)
                 }
-            AlarmFrequency.PERSONALIZADO -> this.alarmIntent =
+            AlarmFrequency.PERSONALIZADO ->
                 Intent(AlarmClock.ACTION_SET_ALARM).apply {
-                    putExtra(AlarmClock.EXTRA_MESSAGE, newReminder.title)
+                    putExtra(AlarmClock.EXTRA_MESSAGE, mockReminder.title)
                     putExtra(AlarmClock.EXTRA_HOUR, startTimeHours.toInt())
                     putExtra(AlarmClock.EXTRA_MINUTES, startTimeMin.toInt())
                     putExtra(AlarmClock.EXTRA_VIBRATE, TRUE)
                     putExtra(AlarmClock.EXTRA_DAYS, customWeekAlarm)
                 }
-            else -> {}
+            else -> { return }
         }
     }
 
     private fun setAlarmSoundOnly(fullWeekAlarm: ArrayList<Int>, customWeekAlarm: ArrayList<Int>) {
-        lateinit var alarmIntent: Intent
-
-        println("Full week alarm: $fullWeekAlarm")
-
-        when (newReminder.alarm_freq) {
+        this.alarmIntent =when (mockReminder.alarm_freq) {
             //sem vibracao
-            AlarmFrequency.HOJE -> this.alarmIntent = Intent(AlarmClock.ACTION_SET_ALARM).apply {
-                putExtra(AlarmClock.EXTRA_MESSAGE, newReminder.title)
-                putExtra(AlarmClock.EXTRA_HOUR, startTimeHours.toInt())
-                putExtra(AlarmClock.EXTRA_MINUTES, startTimeMin.toInt())
-                putExtra(
-                    AlarmClock.EXTRA_VIBRATE,
-                    FALSE
-                ); println("startTimeHours: $startTimeHours, startTimeMins:$startTimeMin")
-            }
-            AlarmFrequency.AMANHA -> this.alarmIntent = Intent(AlarmClock.ACTION_SET_ALARM).apply {
-                putExtra(AlarmClock.EXTRA_MESSAGE, newReminder.title)
+            AlarmFrequency.HOJE ->  Intent(AlarmClock.ACTION_SET_ALARM).apply {
+                putExtra(AlarmClock.EXTRA_MESSAGE, mockReminder.title)
                 putExtra(AlarmClock.EXTRA_HOUR, startTimeHours.toInt())
                 putExtra(AlarmClock.EXTRA_MINUTES, startTimeMin.toInt())
                 putExtra(AlarmClock.EXTRA_VIBRATE, FALSE)
             }
-            AlarmFrequency.TODOS_OS_DIAS -> this.alarmIntent =
-                Intent(AlarmClock.ACTION_SET_ALARM).apply {
-                    putExtra(AlarmClock.EXTRA_MESSAGE, newReminder.title)
+            AlarmFrequency.AMANHA -> Intent(AlarmClock.ACTION_SET_ALARM).apply {
+                putExtra(AlarmClock.EXTRA_MESSAGE, mockReminder.title)
+                putExtra(AlarmClock.EXTRA_HOUR, startTimeHours.toInt())
+                putExtra(AlarmClock.EXTRA_MINUTES, startTimeMin.toInt())
+                putExtra(AlarmClock.EXTRA_VIBRATE, FALSE)
+            }
+            AlarmFrequency.TODOS_OS_DIAS -> Intent(AlarmClock.ACTION_SET_ALARM).apply {
+                    putExtra(AlarmClock.EXTRA_MESSAGE, mockReminder.title)
                     putExtra(AlarmClock.EXTRA_HOUR, startTimeHours.toInt())
                     putExtra(AlarmClock.EXTRA_MINUTES, startTimeMin.toInt())
                     putExtra(AlarmClock.EXTRA_VIBRATE, FALSE)
                     putExtra(AlarmClock.EXTRA_DAYS, fullWeekAlarm)
                 }
-            AlarmFrequency.PERSONALIZADO -> this.alarmIntent =
-                Intent(AlarmClock.ACTION_SET_ALARM).apply {
-                    putExtra(AlarmClock.EXTRA_MESSAGE, newReminder.title)
+            AlarmFrequency.PERSONALIZADO -> Intent(AlarmClock.ACTION_SET_ALARM).apply {
+                    putExtra(AlarmClock.EXTRA_MESSAGE, mockReminder.title)
                     putExtra(AlarmClock.EXTRA_HOUR, startTimeHours.toInt())
                     putExtra(AlarmClock.EXTRA_MINUTES, startTimeMin.toInt())
                     putExtra(AlarmClock.EXTRA_VIBRATE, FALSE)
                     putExtra(AlarmClock.EXTRA_DAYS, customWeekAlarm)
                 }
-
-            else -> { //TODO }
-            }
+            else -> { return }
         }
     }
 }
