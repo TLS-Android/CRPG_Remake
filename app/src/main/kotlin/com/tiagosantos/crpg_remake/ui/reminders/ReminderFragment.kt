@@ -183,9 +183,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
             /**----- CANCELAR  ------**/
 
-            val avisoCampos = avisoCampos
-            val buttonCancel = buttonCancel
-
             buttonCancel.setOnClickListener {
                 avisoCampos.visibility = GONE
 
@@ -193,7 +190,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 alarmTypeButtonPressed = 0
                 alarmFreqButtonPressed = 0
 
-                //reset set Hours section
                 with(secondHoras){
                     editHours.setText(EMPTY_STRING)
                     editMinutes.setText(EMPTY_STRING)
