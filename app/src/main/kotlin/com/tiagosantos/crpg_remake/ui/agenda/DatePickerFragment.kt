@@ -46,12 +46,20 @@ class DatePickerFragment(
     private var selected = false
     private val calendar = Calendar.getInstance()
 
+    val vm: AgendaViewModel by viewModels()
+
+    companion object{
+        val map = mapOf(
+            "um" to 1, "dois" to 2, "três" to 3, "quatro" to 4,
+            "cinco" to 5, "seis" to 6, "sete" to 7, "oito" to 8, "nove" to 9, "dez" to 10
+        )
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        val vm: AgendaViewModel by viewModels()
         _view = FragmentDatePickerBinding.inflate(inflater, container, false)
         return view.root
     }
@@ -60,7 +68,6 @@ class DatePickerFragment(
         super.onViewCreated(view, savedInstanceState)
 
         with(_view!!) {
-
             calendar.time = Date()
             // calendar view manager is responsible for our displaying logic
             val myCalendarViewManager = object : CalendarViewManager {
@@ -95,7 +102,7 @@ class DatePickerFragment(
                 ) {
                     // using this method we can bind data to calendar view
                     // good practice is if all views in layout have same IDs in all item views
-                    holder.itemView.tv_date_calendar_item.text = DateUtils.getDayNumber(date)
+                    tv_date_calendar_item.text = DateUtils.getDayNumber(date)
                     holder.itemView.tv_day_calendar_item.text =
                         DateUtils.getDay3LettersName(date)
                 }
@@ -178,17 +185,13 @@ class DatePickerFragment(
 
         }
 
-
     }
 
     private fun performActionWithVoiceCommand(
         command: String,
         singleRowCalendar: SingleRowCalendar
     ) {
-        val literalValue = mapOf(
-            "um" to 1, "dois" to 2, "três" to 3, "quatro" to 4,
-            "cinco" to 5, "seis" to 6, "sete" to 7, "oito" to 8, "nove" to 9, "dez" to 10
-        ).getOrElse(command) { println("Número não presente na lista") } as Int
+        val literalValue = map.getOrElse(command) { println("Número não presente na lista") } as Int
 
         singleRowCalendar.let {
             it.clearSelection()
