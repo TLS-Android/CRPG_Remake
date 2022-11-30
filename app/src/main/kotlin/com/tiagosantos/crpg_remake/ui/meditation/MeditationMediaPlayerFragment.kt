@@ -27,7 +27,10 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
         ttsSettings = TTSSettings(
            contextualHelp =  "Indique qual o seu estado de espirito atual",
         ),
-        srSettings = SRSettings(actionMap = mapOf("ola" to "adeus"))
+        srSettings = SRSettings(
+            isListening = false,
+            actionMap = mapOf("ola" to "adeus")
+        )
 ) {
     private var _view: FragmentMeditationMediaPlayerBinding? = null
     private val view get() = _view!!
@@ -47,8 +50,6 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
         _view = FragmentMeditationMediaPlayerBinding.inflate(inflater, container, false)
         return view.root
     }
-
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -79,7 +80,7 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
             }
 
             gotev.speechResult.observe(viewLifecycleOwner){
-                updateColorWithVoiceCommand(it)
+                performActionWithVoiceCommand(it, actionMap)
             }
 
         }

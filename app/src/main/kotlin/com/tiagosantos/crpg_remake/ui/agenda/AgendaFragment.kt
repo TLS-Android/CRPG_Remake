@@ -57,7 +57,7 @@ class AgendaFragment(ttsSettings: TTSSettings, srSettings: SRSettings)
         super.onViewCreated(view, savedInstanceState)
 
         val textView: TextView = view.
-        viewModel.text.observe(viewLifecycleOwner) {
+        agendaVM.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
 
