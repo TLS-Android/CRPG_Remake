@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.content.Intent
-
 import android.provider.AlarmClock.*
 import androidx.lifecycle.AndroidViewModel
 import com.tiagosantos.common.ui.model.AlarmFrequency.HOJE
@@ -67,7 +66,7 @@ class ReminderViewModel(
 
         //data do dia de hoje
         val formatDDMMYYYY = SimpleDateFormat("ddMMyyyy")
-        val date = Calendar.getInstance().time
+        val date = getInstance().time
         val formattedDateToday = formatDDMMYYYY.format(date)
 
         //data do dia de amanha
@@ -122,8 +121,6 @@ class ReminderViewModel(
             }
         }
     }
-
-
 
     private fun setAlarmSoundOnly(fullWeekAlarm: ArrayList<Int>, customWeekAlarm: ArrayList<Int>) {
         this.alarmIntent = Intent(ACTION_SET_ALARM).apply {
