@@ -25,13 +25,19 @@ import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.getColorCompat
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setGone
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setVisible
 
-class AgendaFragment(ttsSettings: TTSSettings, srSettings: SRSettings)
-    : BaseModalFragment<FragmentAgendaBinding>(
+class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
     layoutId = R.layout.fragment_agenda,
     FragmentSettings(
         appBarTitle = R.string.title_agenda,
         sharedPreferencesBooleanName = R.string.agendaHasRun.toString(),
-    ), ttsSettings, srSettings
+    ),
+    ttsSettings = TTSSettings(
+        "Selecione a janela que pretender para obter mais informaçoes",
+        true
+    ),
+    srSettings = SRSettings(
+
+    )
 ) {
 
     private var _view: FragmentAgendaBinding? = null

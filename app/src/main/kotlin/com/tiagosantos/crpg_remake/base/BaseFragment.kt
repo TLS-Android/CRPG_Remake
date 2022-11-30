@@ -19,6 +19,8 @@ import com.tiagosantos.common.ui.extension.getColorCompatible
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.common.ui.utils.Constants.MODALITY
 import com.tiagosantos.crpg_remake.MainActivity
+import com.tiagosantos.crpg_remake.R
+import com.tiagosantos.crpg_remake.ui.meditation.MeditationFragment
 
 abstract class BaseFragment<B : ViewDataBinding>(
     @LayoutRes val layoutId: Int,
@@ -48,6 +50,16 @@ abstract class BaseFragment<B : ViewDataBinding>(
         if (activity is MainActivity && settings.showBackButton == true) {
             (activity as MainActivity?)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
+    }
+
+    private fun goToFragment(destination: Fragment){
+            val fragment: Fragment = destination
+            val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, fragment)
+            fragmentManager.popBackStack()
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
     }
 
     /**

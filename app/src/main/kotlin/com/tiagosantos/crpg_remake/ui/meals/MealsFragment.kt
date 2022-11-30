@@ -6,19 +6,19 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.google.android.material.card.MaterialCardView
 import com.tiagosantos.access.modal.BaseModalFragment
-import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
 
-//The onCreate() is called first, for doing any non-graphical initialisations.
-//// Next, you can assign and declare any View variables you want to use in onCreateView().
-// Afterwards, use onActivityCreated() to do any final initialisations you want to do once
-// everything has completed.
+/**
+ * The onCreate() is called first, for doing any non-graphical initialisations.
+ * Next, you can assign and declare any View variables you want to use in onCreateView().
+ * Afterwards, use onActivityCreated() to do any final initialisations you want to do once
+ * everything has completed.
+ */
 
-class MealsFragment(srSettings: SRSettings) :
-    BaseModalFragment<MealsFragmentBinding>(
+class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
         layoutId = R.layout.meals_fragment,
         FragmentSettings(
             appBarTitle = R.string.meal_action_bar_title,

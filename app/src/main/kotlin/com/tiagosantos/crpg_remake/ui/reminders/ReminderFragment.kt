@@ -77,6 +77,9 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         return view.root
     }
 
+    var successFlag = alarmFreqButtonPressed != 0 && alarmTypeButtonPressed != 0
+            && lembrarButtonPressed != 0 && hoursMinutesFlag
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -96,25 +99,40 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             expandableNotas.parentLayout.setOnClickListener { expandableNotas.toggleLayout() }
             expandableAlerta.parentLayout.setOnClickListener { expandableAlerta.toggleLayout() }
             expandableDia.parentLayout.setOnClickListener { expandableDia.toggleLayout() }
+
+            with(viewSuccess){
+                if (successFlag) {
+                    reminderVM.addReminder(newReminder)
+                    if (reminderVM.flagReminderAdded) {
+                        avisoCampos.visibility = GONE
+                        successLayout.visibility = VISIBLE
+                        buttonOk.setOnClickListener {
+                            successLayout.visibility = GONE
+                        }
+                        if (activity?.packageManager?.let { it1 ->
+                                reminderVM.alarmIntent.resolveActivity(it1) } != null) {
+                            startActivity(reminderVM.alarmIntent)
+                        }
+                    }
+                } else if (hoursInt > 23 || minsInt > 59) {
+                    avisoCampos.text = "Horas ou minutos invalidos"
+                    avisoCampos.visibility = VISIBLE
+                } else {
+                    avisoCampos.text = "Campos obrigatorios em falta!"
+                    avisoCampos.visibility = VISIBLE
+                }
+
+            }
         }
 
-
         setupUI(reminderVM)
+
     }
 
     private fun setupUI(reminderVM: ReminderViewModel) {
         with(view){
-            parentLayout.setOnClickListener { expandableDia.toggleLayout() }
-            parentLayout.setOnClickListener { expandableLembrar.toggleLayout() }
-            parentLayout.setOnClickListener { expandableDia.toggleLayout() }
 
-            expandableHoras.parentLayout.setOnClickListener { expandableHoras.toggleLayout() }
-            expandableNotas.parentLayout.setOnClickListener { expandableNotas.toggleLayout() }
-            expandableAlerta.parentLayout.setOnClickListener { expandableAlerta.toggleLayout() }
-            expandableDia.parentLayout.setOnClickListener { expandableDia.toggleLayout() }
-
-
-            //Kotlin function parameters are read-only values and are not assignable.
+            /** Kotlin function parameters are read-only values and are not assignable. **/
             with(secondLembrar){
                 button0.setOnClickListener { setLembrarLayout(
                     secondLembrar, 1,
@@ -166,7 +184,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                             false, false, true) }
             }
 
-            //--------------------- CANCELAR ---------------------------------------
+            /**----- CANCELAR  ------**/
 
             val avisoCampos = avisoCampos
             val buttonCancel = buttonCancel
@@ -191,7 +209,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 secondNotas.editTextNotes.setText(EMPTY_STRING)
             }
 
-            //------------------------- CONFIRMAR -------------------------------------------------
+            /** ----- CONFIRMAR ------ **/
 
             buttonConfirm.setOnClickListener {
                 if (et.text.toString().length == 2 && etMin.text.toString().length == 2) {
@@ -252,33 +270,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                         4 -> AMANHA
                         else -> { HOJE }
                     }
-                }
-
-
-                with(viewSuccess){
-                    if (alarmFreqButtonPressed != 0 && alarmTypeButtonPressed != 0
-                        && lembrarButtonPressed != 0 && hoursMinutesFlag
-                    ) {
-                        reminderVM.addReminder(newReminder)
-                        if (reminderVM.flagReminderAdded) {
-                            avisoCampos.visibility = GONE
-                            successLayout.visibility = VISIBLE
-                            buttonOk.setOnClickListener {
-                                successLayout.visibility = GONE
-                            }
-                            if (activity?.packageManager?.let { it1 ->
-                                    reminderVM.alarmIntent.resolveActivity(it1) } != null) {
-                                startActivity(reminderVM.alarmIntent)
-                            }
-                        }
-                    } else if (hoursInt > 23 || minsInt > 59) {
-                        avisoCampos.text = "Horas ou minutos invalidos"
-                        avisoCampos.visibility = VISIBLE
-                    } else {
-                        avisoCampos.text = "Campos obrigatorios em falta!"
-                        avisoCampos.visibility = VISIBLE
-                    }
-
                 }
 
             }

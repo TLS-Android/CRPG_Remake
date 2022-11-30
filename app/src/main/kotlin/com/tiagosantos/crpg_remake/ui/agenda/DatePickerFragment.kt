@@ -24,10 +24,7 @@ import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentDatePickerBinding
 import java.util.*
 
-class DatePickerFragment(
-    ttsSettings: TTSSettings,
-    srSettings: SRSettings
-) : BaseModalFragment<FragmentDatePickerBinding>(
+class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
     layoutId = R.layout.fragment_date_picker,
     FragmentSettings(
         appBarTitle = "ESCOLHER DATA",
@@ -37,7 +34,9 @@ class DatePickerFragment(
         "Por favor selecione um dia movendo os quadrados amarelos para a esquerda " +
                 "e direita e premindo aquele que pretender selecionar"
     ),
-    srSettings = srSettings
+    srSettings = SRSettings(
+        isListening = false,
+    )
 ) {
 
     private var _view: FragmentDatePickerBinding? = null
