@@ -26,8 +26,10 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
     @LayoutRes
     private val layoutId: Int,
     settings: FragmentSettings,
-    private val ttsSettings: TTSSettings,
-    private val srSettings: SRSettings,
+    /**
+     * Member has the same visibility as one marked as private , but that it is also visible in subclasses. **/
+    protected val ttsSettings: TTSSettings,
+    protected val srSettings: SRSettings,
 ) : BaseFragment<B>(
     layoutId = layoutId,
     settings = settings,

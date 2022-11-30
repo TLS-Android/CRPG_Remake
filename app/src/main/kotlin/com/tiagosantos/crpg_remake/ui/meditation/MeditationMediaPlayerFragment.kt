@@ -80,7 +80,7 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
             }
 
             gotev.speechResult.observe(viewLifecycleOwner){
-                performActionWithVoiceCommand(it, actionMap)
+                performActionWithVoiceCommand(it, srSettings.actionMap)
             }
 
         }

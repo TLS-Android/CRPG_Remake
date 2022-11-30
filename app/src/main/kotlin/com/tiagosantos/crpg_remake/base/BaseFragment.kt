@@ -23,7 +23,7 @@ import com.tiagosantos.crpg_remake.MainActivity
 abstract class BaseFragment<B : ViewDataBinding>(
     @LayoutRes
     private val layoutId: Int,
-    private val settings: FragmentSettings,
+    protected val settings: FragmentSettings,
 ) : Fragment() {
 
     open lateinit var viewBinding: B
