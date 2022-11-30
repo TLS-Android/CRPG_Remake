@@ -73,7 +73,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         _view = ReminderFragmentBinding.inflate(inflater, container, false)
         _viewIntro = ReminderActivityIntroBinding.inflate(inflater, container, false)
         _viewSuccess = ReminderActivitySuccessBinding.inflate(inflater, container, false)
-
         return view.root
     }
 
@@ -126,12 +125,10 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         }
 
         setupUI(reminderVM)
-
     }
 
     private fun setupUI(reminderVM: ReminderViewModel) {
         with(view){
-
             /** Kotlin function parameters are read-only values and are not assignable. **/
             with(secondLembrar){
                 button0.setOnClickListener { setLembrarLayout(
@@ -209,7 +206,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 secondNotas.editTextNotes.setText(EMPTY_STRING)
             }
 
-            /** ----- CONFIRMAR ------ **/
+            /** ----- CONFIRMAR ------**/
 
             buttonConfirm.setOnClickListener {
                 if (et.text.toString().length == 2 && etMin.text.toString().length == 2) {

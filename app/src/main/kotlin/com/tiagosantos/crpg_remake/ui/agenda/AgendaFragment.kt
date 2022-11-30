@@ -33,10 +33,11 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
     ),
     ttsSettings = TTSSettings(
         "Selecione a janela que pretender para obter mais informaçoes",
-        true
+        isSpeaking = true
     ),
     srSettings = SRSettings(
-
+        isListening = false,
+        actionMap = null
     )
 ) {
 

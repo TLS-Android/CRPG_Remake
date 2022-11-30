@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.google.android.material.card.MaterialCardView
 import com.tiagosantos.access.modal.BaseModalFragment
+import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.FragmentSettings
@@ -24,8 +25,14 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
             appBarTitle = R.string.meal_action_bar_title,
             sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
         ),
-        TTSSettings(R.string.indique_refeicao.toString()),
-        srSettings,
+        TTSSettings(
+            R.string.indique_refeicao.toString(),
+            isSpeaking = false
+        ),
+        srSettings = SRSettings(
+            isListening = false,
+            actionMap = null
+        )
 ) {
     private lateinit var view: MealsFragmentBinding
     private var flagMealChosen = false

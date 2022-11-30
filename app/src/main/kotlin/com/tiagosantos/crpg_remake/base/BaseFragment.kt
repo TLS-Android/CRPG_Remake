@@ -20,7 +20,6 @@ import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.common.ui.utils.Constants.MODALITY
 import com.tiagosantos.crpg_remake.MainActivity
 import com.tiagosantos.crpg_remake.R
-import com.tiagosantos.crpg_remake.ui.meditation.MeditationFragment
 
 abstract class BaseFragment<B : ViewDataBinding>(
     @LayoutRes val layoutId: Int,

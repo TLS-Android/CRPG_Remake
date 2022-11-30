@@ -5,9 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import com.google.android.exoplayer2.ExoPlayer
 import com.tiagosantos.access.modal.BaseModalFragment
@@ -84,18 +81,19 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
         }
     }
 
-    override fun performActionWithVoiceCommand(command: String, actionMap: Map<String,Any>){
-       with(view.custom){
-           when {
-               command.contains("Tocar", true) -> exoPlay.performClick()
-               command.contains("Parar", true) -> exoPause.performClick()
-               command.contains("Passar à frente", true) -> exoFfwd.performClick()
-               command.contains("Passar a trás", true) -> exoRew.performClick()
-               command.contains("Regressar", true) ->
-                   root.rootView.findViewById(R.id.button_return_meditation)
-               else -> { print("ola") }
-           }
-       }
+    override fun performActionWithVoiceCommand(command: String, actionMap: Map<String,Any>) {
+        with(view.custom) {
+            when {
+                command.contains("Tocar", true) -> exoPlay.performClick()
+                command.contains("Parar", true) -> exoPause.performClick()
+                command.contains("Passar à frente", true) -> exoFfwd.performClick()
+                command.contains("Passar a trás", true) -> exoRew.performClick()
+                command.contains("Regressar", true) ->
+                    root.rootView.findViewById(R.id.button_return_meditation)
+                else -> { //TODO }
+                }
+            }
+        }
     }
 
     override fun onPause() {
