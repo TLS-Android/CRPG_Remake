@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -52,20 +53,13 @@ class AgendaFragment(ttsSettings: TTSSettings, srSettings: SRSettings)
         return view.root
     }
 
-    override fun onResume() {
-        super.onResume()
-        setDataListItemsWithoutPopulate()
-        ctx?.let { initRecyclerView(it) }
-        updateMAttributes()
-    }
-
-    private fun updateMAttributes() =  mAttributes.let { it.onOrientationChanged =  { oldValue, newValue ->
-        if (oldValue != newValue) initRecyclerView(ctx!!) }
-        it.orientation = Orientation.VERTICAL
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val textView: TextView = view.
+        viewModel.text.observe(viewLifecycleOwner) {
+            textView.text = it
+        }
 
         mAttributes = TimelineAttributes(
             markerSize = dpToPx(20f),
@@ -119,6 +113,18 @@ class AgendaFragment(ttsSettings: TTSSettings, srSettings: SRSettings)
             layoutManager = mLayoutManager
             adapter = TimeLineAdapter(agendaVM.mDataList, mAttributes, ctx)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setDataListItemsWithoutPopulate()
+        ctx?.let { initRecyclerView(it) }
+        updateMAttributes()
+    }
+
+    private fun updateMAttributes() =  mAttributes.let { it.onOrientationChanged =  { oldValue, newValue ->
+        if (oldValue != newValue) initRecyclerView(ctx!!) }
+        it.orientation = Orientation.VERTICAL
     }
 
     override fun onInitDataBinding() {
