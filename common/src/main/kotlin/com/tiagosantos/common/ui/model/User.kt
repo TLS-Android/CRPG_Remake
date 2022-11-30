@@ -4,7 +4,11 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.dsl.module
 
-data class User(val name : String)
+data class User(
+    val name : String,
+    val id: Int,
+    val isPrimary: Boolean
+    )
 
 interface UserRepository {
     fun findUser(name : String): User?
