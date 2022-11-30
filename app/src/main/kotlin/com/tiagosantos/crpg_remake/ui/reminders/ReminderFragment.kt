@@ -46,6 +46,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private var startTimeString = EMPTY_STRING
     private var hoursMinutesFlag = false
 
+    private val reminderVM: ReminderViewModel by viewModels()
+
     private var hoursInt = 0
     private var minsInt = 0
 
@@ -68,9 +70,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?,
     ): View {
-        val reminderVM: ReminderViewModel by viewModels()
-        setupUI(reminderVM)
-
         _view = ReminderFragmentBinding.inflate(inflater, container, false)
         _viewIntro = ReminderActivityIntroBinding.inflate(inflater, container, false)
         _viewSuccess = ReminderActivitySuccessBinding.inflate(inflater, container, false)
@@ -78,7 +77,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         return view.root
     }
 
-    private fun setupUI(reminderVM: ReminderViewModel) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         with(viewIntro){
             reminderIntroHintLayout.visibility = VISIBLE
@@ -87,8 +87,23 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             }
         }
 
-        with(view){
+        with(_view!!) {
+            parentLayout.setOnClickListener { expandableDia.toggleLayout() }
+            parentLayout.setOnClickListener { expandableLembrar.toggleLayout() }
+            parentLayout.setOnClickListener { expandableDia.toggleLayout() }
 
+            expandableHoras.parentLayout.setOnClickListener { expandableHoras.toggleLayout() }
+            expandableNotas.parentLayout.setOnClickListener { expandableNotas.toggleLayout() }
+            expandableAlerta.parentLayout.setOnClickListener { expandableAlerta.toggleLayout() }
+            expandableDia.parentLayout.setOnClickListener { expandableDia.toggleLayout() }
+        }
+
+
+        setupUI(reminderVM)
+    }
+
+    private fun setupUI(reminderVM: ReminderViewModel) {
+        with(view){
             parentLayout.setOnClickListener { expandableDia.toggleLayout() }
             parentLayout.setOnClickListener { expandableLembrar.toggleLayout() }
             parentLayout.setOnClickListener { expandableDia.toggleLayout() }
@@ -107,11 +122,11 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     isTextVisible = true,
                 ) }
                 button1.setOnClickListener { setLembrarLayout(
-                    secondLembrar, 2, false, false) }
+                    secondLembrar, 2, isVisible = false, isTextVisible = false) }
                 button2.setOnClickListener { setLembrarLayout(
-                    secondLembrar, 3, false, false) }
+                    secondLembrar, 3,  isVisible = false, isTextVisible = false) }
                 button3.setOnClickListener { setLembrarLayout(
-                    secondLembrar, 4, true, true) }
+                    secondLembrar, 4, isVisible = true, isTextVisible = true) }
             }
 
             with(secondHoras){
@@ -410,6 +425,4 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     override fun observeLifecycleEvents() {
         TODO("Not yet implemented")
     }
-
-
 }
