@@ -45,38 +45,41 @@ class ReminderViewModel(
         ReminderType.MEDICACAO, SOM, HOJE
     )
 
+    companion object{
+        val weekMap = mapOf(
+            0 to MONDAY, 1 to TUESDAY, 2 to WEDNESDAY, 3 to THURSDAY,
+            4 to FRIDAY, 5 to SATURDAY, 6 to SUNDAY
+        )
+    }
+
     @SuppressLint("SimpleDateFormat")
     fun addReminder(newReminder: Reminder) {
+
+
+
+        weekDaysBoolean.associateWith {  }
+
+
         val customWeekAlarm = mutableListOf<Int>().apply {
             for ((idx, value) in weekDaysBoolean.withIndex()) {
-                if (value) {
-                    when (idx) {
-                        0 -> add(MONDAY)
-                        1 -> add(TUESDAY)
-                        2 -> add(WEDNESDAY)
-                        3 -> add(THURSDAY)
-                        4 -> add(FRIDAY)
-                        5 -> add(SATURDAY)
-                        6 -> add(SUNDAY)
-                    }
-                }
+                if(value) add(weekMap.getOrDefault(idx, null)!!)
             }
+
+            //data do dia de hoje
+            val formatDDMMYYYY = SimpleDateFormat("ddMMyyyy")
+            val date = getInstance().time
+            val formattedDateToday = formatDDMMYYYY.format(date)
+
+            //data do dia de amanha
+            val formattedDateTomorrow = getTomorrowDate(formatDDMMYYYY)
+            setDateOnReminder(formattedDateToday, formattedDateTomorrow)
+
+            flagReminderAdded = true
+            mReminderList.add(newReminder)
+
+            setAlarm(fullWeekAlarm.toCollection(ArrayList()),
+                customWeekAlarm.toCollection(ArrayList<Int>()), newReminder.alarm_type)
         }
-
-        //data do dia de hoje
-        val formatDDMMYYYY = SimpleDateFormat("ddMMyyyy")
-        val date = getInstance().time
-        val formattedDateToday = formatDDMMYYYY.format(date)
-
-        //data do dia de amanha
-        val formattedDateTomorrow = getTomorrowDate(formatDDMMYYYY)
-        setDateOnReminder(formattedDateToday, formattedDateTomorrow)
-
-        flagReminderAdded = true
-        mReminderList.add(newReminder)
-
-        setAlarm(fullWeekAlarm.toCollection(ArrayList()),
-            customWeekAlarm.toCollection(ArrayList<Int>()), newReminder.alarm_type)
     }
 
     private fun setAlarm(
@@ -120,6 +123,4 @@ class ReminderViewModel(
             }
         }
     }
-
-
 }
