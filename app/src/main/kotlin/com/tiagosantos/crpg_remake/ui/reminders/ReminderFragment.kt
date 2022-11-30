@@ -38,9 +38,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private lateinit var viewIntro: ReminderActivityIntroBinding
     private lateinit var viewSuccess: ReminderActivitySuccessBinding
 
-    var lembrarButtonPressed = 0
-    var alarmTypeButtonPressed = 0
-    var alarmFreqButtonPressed = 0
     private var startTimeString = EMPTY_STRING
     private var hoursMinutesFlag = false
 
@@ -55,6 +52,12 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     lateinit var cbAmbos: ImageView
 
     lateinit var helper : HoursHelper
+
+    companion object{
+        var lembrarButtonPressed = 0
+        var alarmTypeButtonPressed = 0
+        var alarmFreqButtonPressed = 0
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -372,11 +375,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 command.contains("Cancelar", true) -> buttonCancel.performClick()
                 command.contains("Guardar", true) -> buttonConfirm.performClick()
                 command.contains("Todos", true) -> {
-                    expandableLembrar.performClick()
-                    expandableDia.performClick()
-                    expandableHoras.performClick()
-                    expandableAlerta.performClick()
-                    expandableNotas.performClick()
+                    expandableLembrar.performClick(); expandableDia.performClick(); expandableHoras.performClick()
+                    expandableAlerta.performClick(); expandableNotas.performClick()
                 }
                 command.contains("Tomar Medicação", true) -> secondLembrar.button0.performClick()
                 command.contains("Apanhar Transporte", true) -> secondLembrar.button1.performClick()
