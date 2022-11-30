@@ -1,6 +1,7 @@
 package com.tiagosantos.crpg_remake.ui.agenda.timeline
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -22,15 +23,15 @@ import com.tiagosantos.crpg_remake.ui.agenda.timeline.widgets.RoundedCornerBotto
 import kotlinx.parcelize.Parcelize
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
 
+@Parcelize
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class TimelineAttributesBottomSheet : RoundedCornerBottomSheet() {
+class TimelineAttributesBottomSheet : RoundedCornerBottomSheet(), Parcelable {
 
     interface Callbacks {
         fun onAttributesChanged(attributes: TimelineAttributes)
     }
 
     companion object {
-
         private const val EXTRA_ATTRIBUTES = "EXTRA_ATTRIBUTES"
 
         fun showDialog(fragmentManager: FragmentManager, attributes: TimelineAttributes, callbacks: Callbacks) {
@@ -54,7 +55,6 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet() {
         super.onStart()
 
         if (dialog != null) {
-            optionsView.viewBottomSheetAttributes
             val bottomSheet = dialog!!.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
             bottomSheet.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
         }
@@ -75,6 +75,8 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val attributes = (requireArguments().readFromParcel(EXTRA_ATTRIBUTES) as TimelineAttributes
 
         val attributes = (requireArguments().getParcelable(EXTRA_ATTRIBUTES)!! as TimelineAttributes)
         mAttributes = attributes.copy()
