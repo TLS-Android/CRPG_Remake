@@ -17,6 +17,14 @@ import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationMediaPlayerBinding
 
+/**
+If Android decides to recreate your Fragment later,
+it's going to call the no-argument constructor of your fragment.
+So overloading the constructor is not a solution.
+With that being said, the way to pass stuff to your Fragment so that they are available after a
+Fragment is recreated by Android is to pass a bundle to the setArguments method
+ **/
+
 class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaPlayerBinding>(
         layoutId = R.layout.fragment_meditation_media_player,
         settings = FragmentSettings(

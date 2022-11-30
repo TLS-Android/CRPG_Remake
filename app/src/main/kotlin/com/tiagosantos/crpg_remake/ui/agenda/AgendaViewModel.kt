@@ -127,8 +127,3 @@ class AgendaViewModel(
     }
 
 }
-
-private operator fun <E> MutableList<E>?.plus(value: MutableList<E>?): List<E> {
-
-}
-

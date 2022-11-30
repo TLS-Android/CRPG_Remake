@@ -76,7 +76,7 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet(), Parcelable {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val attributes = (requireArguments().readFromParcel(EXTRA_ATTRIBUTES) as TimelineAttributes
+        //val attributes = (requireArguments().readFromParcel(EXTRA_ATTRIBUTES) as TimelineAttributes
 
         val attributes = (requireArguments().getParcelable(EXTRA_ATTRIBUTES)!! as TimelineAttributes)
         mAttributes = attributes.copy()

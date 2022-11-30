@@ -14,16 +14,19 @@ import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationBinding
 
-class MeditationFragment(ttsSettings: TTSSettings, srSettings: SRSettings) :
-    BaseModalFragment<FragmentMeditationBinding>(
+class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
     layoutId = R.layout.fragment_meditation,
-    settings  = FragmentSettings(
+    settings = FragmentSettings(
         appBarTitle = R.string.title_meditacao,
         sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
         showBackButton = true
     ),
-    ttsSettings = ttsSettings,
-    srSettings = srSettings
+        ttsSettings = TTSSettings(
+            contextualHelp =  "Indique qual o seu estado de espirito atual",
+        ),
+        srSettings = SRSettings(
+            isListening = false,
+        )
 ) {
 
     private var _view: FragmentMeditationBinding? = null
@@ -43,6 +46,10 @@ class MeditationFragment(ttsSettings: TTSSettings, srSettings: SRSettings) :
     val feelingsMap = mapOf(
         view.buttonMoodRelaxed to "RELAXADO", view.buttonMoodHappy to "FELIZ",
         view.buttonMoodSleepy to "SONOLENTO", view.buttonMoodConfident to "CONFIANTE")
+
+    companion object {
+        fun newInstance() = MeditationFragment()
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
