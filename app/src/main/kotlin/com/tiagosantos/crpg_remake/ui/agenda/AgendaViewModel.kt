@@ -1,3 +1,5 @@
+@file:Suppress("MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate")
+
 package com.tiagosantos.crpg_remake.ui.agenda
 
 import android.annotation.SuppressLint

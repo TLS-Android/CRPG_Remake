@@ -144,11 +144,15 @@ public class TimelineView extends View {
 
         int markSize = Math.min(mMarkerSize, Math.min(cWidth, cHeight));
 
+        int left;
+        int top;
+        int right;
+        int bottom;
         if(mMarkerInCenter) { //Marker in center is true
-            int left = (width/2) - (markSize/2);
-            int top = (height/2) - (markSize/2);
-            int right = (width/2) + (markSize/2);
-            int bottom = (height/2) + (markSize/2);
+            left = (width / 2) - (markSize / 2);
+            top = (height / 2) - (markSize / 2);
+            right = (width / 2) + (markSize / 2);
+            bottom = (height / 2) + (markSize / 2);
 
             switch (mLineOrientation) {
                 case LineOrientation.HORIZONTAL: {
@@ -163,17 +167,12 @@ public class TimelineView extends View {
                 }
             }
 
-            if(mMarker != null) {
-                mMarker.setBounds(left, top, right, bottom);
-                mBounds = mMarker.getBounds();
-            }
-
         } else { //Marker in center is false
 
-            int left = pLeft;
-            int top = pTop;
-            int right = pLeft + markSize;
-            int bottom = pTop;
+            left = pLeft;
+            top = pTop;
+            right = pLeft + markSize;
+            bottom = pTop;
 
             switch (mLineOrientation) {
                 case LineOrientation.HORIZONTAL: {
@@ -190,10 +189,10 @@ public class TimelineView extends View {
                 }
             }
 
-            if(mMarker != null) {
-                mMarker.setBounds(left, top, right, bottom);
-                mBounds = mMarker.getBounds();
-            }
+        }
+        if(mMarker != null) {
+            mMarker.setBounds(left, top, right, bottom);
+            mBounds = mMarker.getBounds();
         }
 
         if (mLineOrientation == LineOrientation.HORIZONTAL) {
@@ -210,13 +209,12 @@ public class TimelineView extends View {
                     mEndLineStartX = getWidth() - mLineStyleDashGap;
                     mEndLineStartY = mBounds.centerY();
                     mEndLineStopX = mBounds.right + mLinePadding;
-                    mEndLineStopY = mBounds.centerY();
                 } else {
                     mEndLineStartX = mBounds.right + mLinePadding;
                     mEndLineStartY = mBounds.centerY();
                     mEndLineStopX = getWidth();
-                    mEndLineStopY = mBounds.centerY();
                 }
+                mEndLineStopY = mBounds.centerY();
             }
         } else {
 

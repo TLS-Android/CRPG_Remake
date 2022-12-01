@@ -7,7 +7,7 @@ import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.selection.StorageStrategy
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.michalsvec.singlerowcalendar.selection.CalendarDetailsLookup
+import com.tiagosantos.common.ui.singlerowcalendar.selection.CalendarDetailsLookup
 import com.tiagosantos.common.ui.singlerowcalendar.selection.CalendarKeyProvider
 import com.tiagosantos.common.ui.singlerowcalendar.selection.CalendarSelectionManager
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils
