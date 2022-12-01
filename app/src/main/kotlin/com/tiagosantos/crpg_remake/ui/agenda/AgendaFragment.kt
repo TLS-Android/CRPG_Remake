@@ -41,24 +41,12 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
     )
 ) {
 
-    private var _view: FragmentAgendaBinding? = null
-    private val view get() = _view!!
-
     private lateinit var mLayoutManager: LinearLayoutManager
     private lateinit var mAttributes: TimelineAttributes
 
     private val agendaVM: AgendaViewModel by viewModels()
 
     private var ctx = context
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _view = FragmentAgendaBinding.inflate(inflater, container, false)
-        return view.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -34,8 +34,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         sharedPreferencesBooleanName = R.string.remindersHasRun.toString(),
     )
 ) {
-    private var _view: ReminderFragmentBinding? = null
-    private val view get() = _view!!
 
     private var _viewIntro: ReminderActivityIntroBinding? = null
     private val viewIntro get() = _viewIntro!!
@@ -75,7 +73,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?,
     ): View {
-        _view = ReminderFragmentBinding.inflate(inflater, container, false)
         _viewIntro = ReminderActivityIntroBinding.inflate(inflater, container, false)
         _viewSuccess = ReminderActivitySuccessBinding.inflate(inflater, container, false)
         return view.root
@@ -94,7 +91,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             }
         }
 
-        with(_view!!) {
+        with(requireView()) {
             parentLayout.setOnClickListener { expandableDia.toggleLayout() }
             parentLayout.setOnClickListener { expandableLembrar.toggleLayout() }
             parentLayout.setOnClickListener { expandableDia.toggleLayout() }

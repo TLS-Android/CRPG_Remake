@@ -39,9 +39,6 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
     )
 ) {
 
-    private var _view: FragmentDatePickerBinding? = null
-    private val view get() = _view!!
-
     private var selected = false
     private val calendar = Calendar.getInstance()
 
@@ -59,14 +56,14 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _view = FragmentDatePickerBinding.inflate(inflater, container, false)
+        view = FragmentDatePickerBinding.inflate(inflater, container, false)
         return view.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(_view!!) {
+        with(view) {
             calendar.time = Date()
             // calendar view manager is responsible for our displaying logic
             val myCalendarViewManager = object : CalendarViewManager {

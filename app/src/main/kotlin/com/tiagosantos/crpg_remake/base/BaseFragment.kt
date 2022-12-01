@@ -20,6 +20,7 @@ import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.common.ui.utils.Constants.MODALITY
 import com.tiagosantos.crpg_remake.MainActivity
 import com.tiagosantos.crpg_remake.R
+import com.tiagosantos.crpg_remake.databinding.ReminderFragmentBinding
 
 abstract class BaseFragment<B : ViewDataBinding>(
     @LayoutRes val layoutId: Int,
@@ -27,6 +28,9 @@ abstract class BaseFragment<B : ViewDataBinding>(
 ) : Fragment() {
 
     open lateinit var viewBinding: B
+
+    private var _view: B? = null
+    val view get() = _view!!
 
     val fragment: Fragment
         get() {
@@ -73,12 +77,14 @@ abstract class BaseFragment<B : ViewDataBinding>(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+        //viewBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+        _view = DataBindingUtil.inflate(inflater, layoutId, container, false)
         viewBinding.lifecycleOwner = viewLifecycleOwner
         (activity as AppCompatActivity).supportActionBar?.title = settings.appBarTitle.toString()
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
         showBackButton()
-        return viewBinding.root
+        //return viewBinding.root
+        return view.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -27,7 +27,8 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
     layoutId: Int,
     settings: FragmentSettings,
     /**
-     * Member has the same visibility as one marked as private, but that it is also visible in subclasses. **/
+     * Member has the same visibility as one marked as private, but that it is also visible in subclasses.
+     * **/
     protected val ttsSettings: TTSSettings,
     protected val srSettings: SRSettings,
 ) : BaseFragment<B>(
@@ -69,7 +70,7 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
     }
 
     private fun listenToUser() =  gotev.speechResult.observe(viewLifecycleOwner){
-        performActionWithVoiceCommand(it, srSettings.actionMap)
+        performActionWithVoiceCommand(it, srSettings.actionMap!!)
     }
 
     override fun onStop() {

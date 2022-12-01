@@ -34,7 +34,7 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
             actionMap = null
         )
 ) {
-    private lateinit var view: MealsFragmentBinding
+
     private var flagMealChosen = false
 
     private val actionMap: Map<String, Any> by lazy {
