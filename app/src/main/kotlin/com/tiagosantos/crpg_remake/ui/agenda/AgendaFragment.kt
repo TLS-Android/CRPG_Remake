@@ -49,11 +49,6 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val textView: TextView = view.
-        agendaVM.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-
         mAttributes = TimelineAttributes(
             markerSize = dpToPx(20f),
             markerColor = getColorCompat(R.color.GreyedBlue),
@@ -82,7 +77,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
 
     private fun initRecyclerView(ctx: Context) {
         initAdapter(ctx)
-        with(view){
+        with(viewB){
             recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 @SuppressLint("LongLogTag")
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -102,7 +97,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
             LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         }
 
-        view.recyclerView.apply {
+        viewB.recyclerView.apply {
             layoutManager = mLayoutManager
             adapter = TimeLineAdapter(agendaVM.mDataList, mAttributes, ctx)
         }
