@@ -1,11 +1,9 @@
 package com.tiagosantos.crpg_remake.ui.agenda
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -49,15 +47,6 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
             "um" to 1, "dois" to 2, "três" to 3, "quatro" to 4,
             "cinco" to 5, "seis" to 6, "sete" to 7, "oito" to 8, "nove" to 9, "dez" to 10
         )
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        view = FragmentDatePickerBinding.inflate(inflater, container, false)
-        return view.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

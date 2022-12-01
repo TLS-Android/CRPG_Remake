@@ -51,8 +51,6 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        viewBinding.lifecycleOwner = viewLifecycleOwner
         return viewBinding.root
     }
 

@@ -37,8 +37,6 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
             actionMap = mapOf("ola" to "adeus")
         )
 ) {
-    private var _view: FragmentMeditationMediaPlayerBinding? = null
-    private val view get() = _view!!
 
     private val medViewModel: MeditationViewModel by viewModels()
     private val player = ExoPlayer.Builder(requireContext()).build()
@@ -47,19 +45,12 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
         fun newInstance() = MeditationMediaPlayerFragment()
     }
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?,
-    ): View {
-        _view = FragmentMeditationMediaPlayerBinding.inflate(inflater, container, false)
-        return view.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(_view!!){
+        _view.buttonReturnMeditation
+
+        with(view){
             textSelectedMood.text = medViewModel.selectedMood
             medViewModel.setupPlayer(player,this)
 

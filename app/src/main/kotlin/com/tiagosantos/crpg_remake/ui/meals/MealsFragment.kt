@@ -45,18 +45,18 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
             "Vegetariano" to view.frameOpcaoVegetariano.performClick(),
             "Guardar" to view.buttonConfirmMeal.performClick()
         )}
+    private var cardList = listOf(
+        view.frameOpcaoCarne, view.frameOpcaoPeixe,
+        view.frameOpcaoDieta, view.frameOpcaoVegetariano
+    )
+
     private var isLunch = false
     private val mealsVM: MealsViewModel by viewModels()
-    private lateinit var cardList: List<MaterialCardView>
 
     @SuppressLint("SetTextI18n", "ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         isLunch = requireArguments().getBoolean("isLunch")
-        cardList = listOf(
-            view.frameOpcaoCarne, view.frameOpcaoPeixe,
-                view.frameOpcaoDieta, view.frameOpcaoVegetariano
-        )
     }
 
     @SuppressLint("SetTextI18n", "ResourceAsColor")

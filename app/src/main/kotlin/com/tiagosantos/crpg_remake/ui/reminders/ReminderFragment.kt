@@ -56,7 +56,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     lateinit var cbVib: ImageView
     lateinit var cbAmbos: ImageView
 
-    lateinit var helper : HoursHelper
+    private lateinit var helper : HoursHelper
 
     companion object{
         val weekMap = mapOf(
@@ -73,6 +73,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?,
     ): View {
+        super.onCreateView(inflater, container, savedInstanceState)
         _viewIntro = ReminderActivityIntroBinding.inflate(inflater, container, false)
         _viewSuccess = ReminderActivitySuccessBinding.inflate(inflater, container, false)
         return view.root
@@ -91,7 +92,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             }
         }
 
-        with(requireView()) {
+        with(view) {
             parentLayout.setOnClickListener { expandableDia.toggleLayout() }
             parentLayout.setOnClickListener { expandableLembrar.toggleLayout() }
             parentLayout.setOnClickListener { expandableDia.toggleLayout() }

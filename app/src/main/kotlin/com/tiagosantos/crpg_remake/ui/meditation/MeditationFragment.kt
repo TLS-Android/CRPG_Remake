@@ -29,8 +29,7 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
         )
 ) {
 
-    private var _view: FragmentMeditationBinding? = null
-    private val view get() = _view!!
+
 
     private val medViewModel: MeditationViewModel by viewModels()
 
