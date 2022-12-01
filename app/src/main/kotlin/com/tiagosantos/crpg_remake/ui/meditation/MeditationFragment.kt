@@ -1,9 +1,7 @@
 package com.tiagosantos.crpg_remake.ui.meditation
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.*
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -29,13 +27,9 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
         )
 ) {
 
-
-
     private val medViewModel: MeditationViewModel by viewModels()
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-
+    /** This property is only valid between onCreateView and onDestroyView. **/
     private val _text = MutableLiveData<String>().apply {
         value = "This is dashboard Fragment"
     }
@@ -43,25 +37,19 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
     private var onResumeFlag = false
 
     val feelingsMap = mapOf(
-        view.buttonMoodRelaxed to "RELAXADO", view.buttonMoodHappy to "FELIZ",
-        view.buttonMoodSleepy to "SONOLENTO", view.buttonMoodConfident to "CONFIANTE")
+        viewB.buttonMoodRelaxed to "RELAXADO", viewB.buttonMoodHappy to "FELIZ",
+        viewB.buttonMoodSleepy to "SONOLENTO", viewB.buttonMoodConfident to "CONFIANTE")
 
     companion object {
         fun newInstance() = MeditationFragment()
     }
 
-    override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?,
-    ): View {
-        _view = FragmentMeditationBinding.inflate(inflater, container, false)
-        return view.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(_view!!) {
+
+        with(viewB) {
+
             buttonMoodRelaxed.setOnClickListener {
                 medViewModel.selectedMood = "RELAXADO"
             }.also { goToMeditationMediaPlayer() }
@@ -82,7 +70,7 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
     }
 
     override fun performActionWithVoiceCommand(command: String, actionMap: Map<String, Any>) {
-        with(view){
+        with(viewB){
             when {
                 command.contains("Relaxado", true) ->
                     buttonMoodRelaxed.performClick()

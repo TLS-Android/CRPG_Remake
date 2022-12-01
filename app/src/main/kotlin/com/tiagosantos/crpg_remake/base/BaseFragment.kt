@@ -28,8 +28,8 @@ abstract class BaseFragment<B : ViewDataBinding>(
 
     open lateinit var viewBinding: B
 
-    private var _view: B? = null
-    val view get() = _view!!
+    private var _viewB: B? = null
+    val viewB get() = _viewB!!
 
     val fragment: Fragment
         get() {
@@ -76,10 +76,10 @@ abstract class BaseFragment<B : ViewDataBinding>(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _view = DataBindingUtil.inflate(inflater, layoutId, container, false)
+        _viewB = DataBindingUtil.inflate(inflater, layoutId, container, false)
         viewBinding.lifecycleOwner = viewLifecycleOwner
         showBackButton()
-        return view.root
+        return viewB.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

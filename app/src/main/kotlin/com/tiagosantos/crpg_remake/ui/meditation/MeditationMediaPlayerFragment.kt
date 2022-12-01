@@ -48,9 +48,7 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        _view.buttonReturnMeditation
-
-        with(view){
+        with(viewB){
             textSelectedMood.text = medViewModel.selectedMood
             medViewModel.setupPlayer(player,this)
 
@@ -73,7 +71,7 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
     }
 
     override fun performActionWithVoiceCommand(command: String, actionMap: Map<String,Any>) {
-        with(view.custom) {
+        with(viewB.custom) {
             when {
                 command.contains("Tocar", true) -> exoPlay.performClick()
                 command.contains("Parar", true) -> exoPause.performClick()

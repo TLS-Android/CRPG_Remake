@@ -39,15 +39,17 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
 
     private val actionMap: Map<String, Any> by lazy {
         mapOf(
-            "Carne" to view.frameOpcaoCarne.performClick(),
-            "Peixe" to view.frameOpcaoPeixe.performClick(),
-            "Dieta" to  view.frameOpcaoDieta.performClick(),
-            "Vegetariano" to view.frameOpcaoVegetariano.performClick(),
-            "Guardar" to view.buttonConfirmMeal.performClick()
-        )}
+            "Carne" to viewB.frameOpcaoCarne.performClick(),
+            "Peixe" to viewB.frameOpcaoPeixe.performClick(),
+            "Dieta" to  viewB.frameOpcaoDieta.performClick(),
+            "Vegetariano" to viewB.frameOpcaoVegetariano.performClick(),
+            "Guardar" to viewB.buttonConfirmMeal.performClick()
+        )
+    }
+
     private var cardList = listOf(
-        view.frameOpcaoCarne, view.frameOpcaoPeixe,
-        view.frameOpcaoDieta, view.frameOpcaoVegetariano
+        viewB.frameOpcaoCarne, viewB.frameOpcaoPeixe,
+        viewB.frameOpcaoDieta, viewB.frameOpcaoVegetariano
     )
 
     private var isLunch = false
@@ -75,37 +77,40 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
             for (s in cardList) { if (s != card) s?.isChecked = false }
         }
 
-        view.frameOpcaoCarne.setOnClickListener {
-            setChecks(cardList,  view.frameOpcaoCarne)
-        }.also { updateFlagMealChosen() }
+        with(viewB){
+            frameOpcaoCarne.setOnClickListener {
+                setChecks(cardList,  frameOpcaoCarne)
+            }.also { updateFlagMealChosen() }
 
-        view.frameOpcaoPeixe.setOnClickListener {
-            setChecks(cardList,  view.frameOpcaoPeixe)
-        }.also { updateFlagMealChosen() }
+            frameOpcaoPeixe.setOnClickListener {
+                setChecks(cardList,  frameOpcaoPeixe)
+            }.also { updateFlagMealChosen() }
 
-        view.frameOpcaoDieta.setOnClickListener {
-            setChecks(cardList,  view.frameOpcaoPeixe)
-        }.also { updateFlagMealChosen() }
+            frameOpcaoDieta.setOnClickListener {
+                setChecks(cardList,  frameOpcaoPeixe)
+            }.also { updateFlagMealChosen() }
 
-        view.frameOpcaoVegetariano.setOnClickListener {
-            setChecks(cardList, view.frameOpcaoVegetariano )
-        }.also { updateFlagMealChosen() }
+            frameOpcaoVegetariano.setOnClickListener {
+                setChecks(cardList, frameOpcaoVegetariano )
+            }.also { updateFlagMealChosen() }
 
-        view.buttonConfirmMeal.setOnClickListener {
-            if (mealsVM.selectedOption.value != 0) {
-                view.success.mealChoiceSuccess.visibility =
-                    View.VISIBLE.apply { it.bringToFront() }
-                view.avisoNenhumaRefeicaoChecked.visibility = View.GONE
-                mealsVM.updateMealChoiceOnLocalStorage(
-                    mealsVM.selectedOption,
-                    isLunch
-                )
-                view.success.buttonOk.setOnClickListener {
-                    view.success.mealChoiceSuccess.visibility = View.GONE
+            buttonConfirmMeal.setOnClickListener {
+                if (mealsVM.selectedOption.value != 0) {
+                    success.mealChoiceSuccess.visibility =
+                        View.VISIBLE.apply { it.bringToFront() }
+                    avisoNenhumaRefeicaoChecked.visibility = View.GONE
+                    mealsVM.updateMealChoiceOnLocalStorage(
+                        mealsVM.selectedOption,
+                        isLunch
+                    )
+                    success.buttonOk.setOnClickListener {
+                        success.mealChoiceSuccess.visibility = View.GONE
+                    }
+                } else {
+                    success.mealChoiceSuccess.visibility = View.VISIBLE
                 }
-            } else {
-                view.success.mealChoiceSuccess.visibility = View.VISIBLE
             }
+
         }
     }
 

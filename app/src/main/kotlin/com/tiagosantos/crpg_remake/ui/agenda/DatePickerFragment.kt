@@ -52,7 +52,7 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(view) {
+        with(viewB) {
             calendar.time = Date()
             // calendar view manager is responsible for our displaying logic
             val myCalendarViewManager = object : CalendarViewManager {

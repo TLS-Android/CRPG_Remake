@@ -76,7 +76,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         super.onCreateView(inflater, container, savedInstanceState)
         _viewIntro = ReminderActivityIntroBinding.inflate(inflater, container, false)
         _viewSuccess = ReminderActivitySuccessBinding.inflate(inflater, container, false)
-        return view.root
+        return viewB.root
     }
 
     var successFlag = alarmFreqButtonPressed != 0 && alarmTypeButtonPressed != 0
@@ -92,7 +92,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             }
         }
 
-        with(view) {
+        with(viewB) {
             parentLayout.setOnClickListener { expandableDia.toggleLayout() }
             parentLayout.setOnClickListener { expandableLembrar.toggleLayout() }
             parentLayout.setOnClickListener { expandableDia.toggleLayout() }
@@ -131,7 +131,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     }
 
     private fun setupUI(reminderVM: ReminderViewModel) {
-        with(view){
+        with(viewB){
             /** Kotlin function parameters are read-only values and are not assignable. **/
             with(secondLembrar){
                 button0.setOnClickListener { setLembrarLayout(
@@ -171,16 +171,16 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
                     imageButtonSom.setOnClickListener{
                         setSoundLogosVisible(
-                            view = view.secondDia,
+                            view = secondDia,
                             1,
                             soundVisible = true,
                             vibVisible = false,
                             bothVisible = false) }
                     imageButtonVibrar.setOnClickListener{
-                        setSoundLogosVisible(view.secondDia,2,
+                        setSoundLogosVisible(secondDia,2,
                             false, true, false) }
                     imageButtonAmbos.setOnClickListener{
-                        setSoundLogosVisible(view.secondDia,3,
+                        setSoundLogosVisible(secondDia,3,
                             false, false, true) }
             }
 
