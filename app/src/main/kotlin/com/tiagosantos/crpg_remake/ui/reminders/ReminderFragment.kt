@@ -224,7 +224,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                         4 -> { updateButton(
                             secondLembrar.textEditPersonalizado.text.toString(),
                             ReminderType.PERSONALIZADO)
-                        } else -> { println("lembrarButtonPressed is neither one of the values") }
+                        } else -> { println("lembrarButtonPressed is neither!") }
                     }
 
                     with(secondDia){
@@ -256,11 +256,15 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
     }
 
-    fun setAlarmType() { alarm_type = when (alarmTypeButtonPressed) {
-        1 -> SOM
-        2 -> VIBRAR
-        3 -> AMBOS
-        else -> { SOM }
+    fun setAlarmType() {
+        alarm_type = when (alarmTypeButtonPressed) {
+            1 -> SOM
+            2 -> VIBRAR
+            3 -> AMBOS
+            else -> {
+                SOM
+            }
+        }
     }
 
     private fun setButtonColorsReminder(view: LayoutSecondLembrarBinding, pos: Int){

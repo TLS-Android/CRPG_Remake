@@ -136,6 +136,6 @@ class ReminderViewModel(
     fun setTime(et: EditText, etMin: EditText) {
         _startTimeHours.value = et.text.toString()
         _startTimeMin.value = etMin.text.toString()
-        startTimeString = reminderVM.startTimeHours.plus(reminderVM.startTimeMin)
+        _startTimeString.value = _startTimeHours.value.plus(startTimeMin)
     }
 }
