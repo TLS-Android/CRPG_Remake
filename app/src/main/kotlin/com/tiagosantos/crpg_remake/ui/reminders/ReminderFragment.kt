@@ -41,7 +41,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private var _viewSuccess: ReminderActivitySuccessBinding? = null
     private val viewSuccess get() = _viewSuccess!!
 
-    private var startTimeString = EMPTY_STRING
     private var hoursMinutesFlag = false
 
     private val reminderVM: ReminderViewModel by viewModels()
@@ -207,9 +206,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
             buttonConfirm.setOnClickListener {
                 if (et.text.toString().length == 2 && etMin.text.toString().length == 2) {
-                    reminderVM.startTimeHours = et.text.toString()
-                    reminderVM.startTimeMin = etMin.text.toString()
-                    startTimeString = reminderVM.startTimeHours.plus(reminderVM.startTimeMin)
+                    reminderVM.setTime(et, etMin)
+
                     hoursInt = secondHoras.editHours.text.toString().toInt()
                     minsInt = secondHoras.editMinutes.text.toString().toInt()
                     hoursMinutesFlag = true

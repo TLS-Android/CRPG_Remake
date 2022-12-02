@@ -5,7 +5,10 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.provider.AlarmClock.*
+import android.widget.EditText
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.tiagosantos.common.ui.model.AlarmFrequency.HOJE
 import com.tiagosantos.common.ui.model.AlarmFrequency.AMANHA
 import com.tiagosantos.common.ui.model.AlarmFrequency.TODOS_OS_DIAS
@@ -14,6 +17,7 @@ import com.tiagosantos.common.ui.model.AlarmType
 import com.tiagosantos.common.ui.model.AlarmType.SOM
 import com.tiagosantos.common.ui.model.AlarmType.VIBRAR
 import com.tiagosantos.common.ui.model.AlarmType.AMBOS
+import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.common.ui.model.Reminder
 import com.tiagosantos.common.ui.model.ReminderType
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
@@ -36,8 +40,16 @@ class ReminderViewModel(
     )
     lateinit var alarmIntent: Intent
 
-    var startTimeHours: String = EMPTY_STRING
-    var startTimeMin: String = EMPTY_STRING
+    //MutableLiveData should always be val; only the contents can be updated
+    private val _startTimeHours = MutableLiveData<String?>()
+    val startTimeHours: LiveData<String?> = _startTimeHours
+
+    private val _startTimeMin = MutableLiveData<String?>()
+    val startTimeMin: LiveData<String?> = _startTimeMin
+
+    private val _startTimeString = MutableLiveData<String?>()
+    val startTimeString: LiveData<String?> = _startTimeString
+
     var flagReminderAdded = false
 
     var mockReminder = Reminder(
@@ -119,5 +131,11 @@ class ReminderViewModel(
                 mockReminder.date = "x"
             }
         }
+    }
+
+    fun setTime(et: EditText, etMin: EditText) {
+        _startTimeHours.value = et.text.toString()
+        _startTimeMin.value = etMin.text.toString()
+        startTimeString = reminderVM.startTimeHours.plus(reminderVM.startTimeMin)
     }
 }
