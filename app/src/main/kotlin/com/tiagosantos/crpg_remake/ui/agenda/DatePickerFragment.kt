@@ -27,11 +27,10 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
     layoutId = R.layout.fragment_date_picker,
     FragmentSettings(
         appBarTitle = "ESCOLHER DATA",
-        sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
+        sharedPreferencesBooleanName = R.string.datePickerHasRun.toString(),
     ),
     ttsSettings = TTSSettings(
-        "Por favor selecione um dia movendo os quadrados amarelos para a esquerda " +
-                "e direita e premindo aquele que pretender selecionar"
+        "Selecione um dia premindo item que pretender"
     ),
     srSettings = SRSettings(
         isListening = false,
