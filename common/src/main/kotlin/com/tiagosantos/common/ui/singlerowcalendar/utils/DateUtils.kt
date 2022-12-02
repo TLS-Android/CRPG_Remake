@@ -123,6 +123,12 @@ object DateUtils {
         return if (includeCurrentDate) pastList + cal.time + futureList else pastList + futureList
     }
 
+
+    /**
+     * Simple way to build string date
+     * @param date - which we want week number from
+     * @return list of dates
+     */
     fun buildDateString(date: Date) = buildString {
         append(
             "${getDayName(date).replaceFirstChar {

@@ -44,7 +44,7 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
 ) {
 
     private var selected = false
-    private val calendar = Calendar.getInstance()
+    private val calendar = getInstance()
 
     val vm: AgendaViewModel by viewModels()
 
@@ -84,10 +84,10 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
                     date: Date,
                     position: Int,
                     isSelected: Boolean,
-                ) = with(calendarItem){
-                        tvDateCalendarItem.text = getDayNumber(date)
-                        tvDayCalendarItem.text = getDay3LettersName(date)
-                    }
+                ) = with(calendarItem) {
+                    tvDateCalendarItem.text = getDayNumber(date)
+                    tvDayCalendarItem.text = getDay3LettersName(date)
+                }
             }
 
             val myCalendarChangesObserver = object :
@@ -109,8 +109,8 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
 
             val mySelectionManager = object : CalendarSelectionManager {
                 override fun canBeItemSelected(position: Int, date: Date): Boolean {
-                    val cal = Calendar.getInstance().apply { time = date }
-                    return when (cal[Calendar.DAY_OF_WEEK]) {
+                    val cal = getInstance().apply { time = date }
+                    return when (cal[DAY_OF_WEEK]) {
                         SATURDAY, SUNDAY -> false
                         else -> true
                     }
@@ -126,19 +126,8 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
             }
 
             buttonSelecionar.setOnClickListener {
-                if (selected) {
-                    noDateSelectedWarning.visibility = GONE
-                    val fragment: Fragment = AgendaFragment()
-                    val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
-                    val fragmentTransaction: FragmentTransaction =
-                        fragmentManager.beginTransaction()
-                    fragmentTransaction.replace(
-                        R.id.nav_host_fragment_activity_main,
-                        fragment,
-                        "Agenda"
-                    )
-                    fragmentTransaction.addToBackStack(null)
-                    fragmentTransaction.commit()
+                if (selected) { noDateSelectedWarning.visibility = GONE;
+                    goToFragment(AgendaFragment())
                 } else {
                     noDateSelectedWarning.visibility = VISIBLE
                 }
@@ -152,7 +141,9 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
         command: String,
         singleRowCalendar: SingleRowCalendar
     ) {
-        val literalValue = map.getOrElse(command) { println("Número não presente na lista") } as Int
+        val literalValue = map.getOrElse(command) {
+            println("Número não presente na lista")
+        } as Int
 
         singleRowCalendar.let {
             it.clearSelection()
