@@ -147,11 +147,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             }
 
             with(secondHoras){
-                val et = editHours
-                et.filters = arrayOf(InputFilterMinMax("00", "23"), InputFilter.LengthFilter(2))
-
-                val etMin = editMinutes
-                etMin.filters = arrayOf(InputFilterMinMax("00", "59"), InputFilter.LengthFilter(2))
+                val et = editHours.apply { filters = arrayOf(InputFilterMinMax("00", "23"), InputFilter.LengthFilter(2)) }
+                val etMin = editMinutes.apply { filters = arrayOf(InputFilterMinMax("00", "59"), InputFilter.LengthFilter(2)) }
             }
 
             with(secondDia){
@@ -207,7 +204,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             buttonConfirm.setOnClickListener {
                 if (et.text.toString().length == 2 && etMin.text.toString().length == 2) {
                     reminderVM.setTime(et, etMin)
-
                     hoursInt = secondHoras.editHours.text.toString().toInt()
                     minsInt = secondHoras.editMinutes.text.toString().toInt()
                     hoursMinutesFlag = true
@@ -258,6 +254,13 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
         }
 
+    }
+
+    fun setAlarmType() { alarm_type = when (alarmTypeButtonPressed) {
+        1 -> SOM
+        2 -> VIBRAR
+        3 -> AMBOS
+        else -> { SOM }
     }
 
     private fun setButtonColorsReminder(view: LayoutSecondLembrarBinding, pos: Int){
