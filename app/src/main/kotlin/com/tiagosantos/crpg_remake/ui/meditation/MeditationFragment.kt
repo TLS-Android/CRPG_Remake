@@ -37,8 +37,8 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
     private var onResumeFlag = false
 
     val feelingsMap = mapOf(
-        viewB.buttonMoodRelaxed to "RELAXADO", viewB.buttonMoodHappy to "FELIZ",
-        viewB.buttonMoodSleepy to "SONOLENTO", viewB.buttonMoodConfident to "CONFIANTE")
+        "RELAXADO" to viewB.buttonMoodRelaxed ,  "FELIZ" to viewB.buttonMoodHappy,
+        "SONOLENTO" to viewB.buttonMoodSleepy, "CONFIANTE" to viewB.buttonMoodConfident)
 
     companion object {
         fun newInstance() = MeditationFragment()
@@ -46,54 +46,18 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-        with(viewB) {
-
-            buttonMoodRelaxed.setOnClickListener {
-                medViewModel.selectedMood = "RELAXADO"
-            }.also { goToMeditationMediaPlayer() }
-
-            buttonMoodHappy.setOnClickListener {
-                medViewModel.selectedMood = "FELIZ"
-            }.also { goToMeditationMediaPlayer() }
-
-            buttonMoodSleepy.setOnClickListener {
-                medViewModel.selectedMood = "SONOLENTO"
-            }.also { goToMeditationMediaPlayer() }
-
-            buttonMoodConfident.setOnClickListener {
-                medViewModel.selectedMood = "CONFIANTE"
-            }.also { goToMeditationMediaPlayer() }
-        }
-
+        setupButtons()
     }
 
-    override fun performActionWithVoiceCommand(command: String, actionMap: Map<String, Any>) {
-        with(viewB){
-            when {
-                command.contains("Relaxado", true) ->
-                    buttonMoodRelaxed.performClick()
-                command.contains("Feliz", true) ->
-                    buttonMoodHappy.performClick()
-                command.contains("Com Sono", true) ->
-                    buttonMoodSleepy.performClick()
-                command.contains("Confiante", true) ->
-                    buttonMoodConfident.performClick()
-                else -> { }
-            }
+    private fun setupButtons() {
+        for((mood, value) in feelingsMap) {
+            value.setOnClickListener { medViewModel.selectedMood = mood }.also {
+                goToFragment(MeditationMediaPlayerFragment()) }
         }
     }
 
-    private fun goToMeditationMediaPlayer(){
-        val fragment: Fragment = MeditationMediaPlayerFragment()
-        val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
-        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, fragment)
-        fragmentManager.popBackStack()
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
-    }
+    override fun performActionWithVoiceCommand(command: String, actionMap: Map<String, Any>) =
+            feelingsMap.getOrDefault(command) { println("do nothing") }
 
     override fun onPause() {
         super.onPause()
