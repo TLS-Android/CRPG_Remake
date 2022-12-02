@@ -11,6 +11,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.reflect.TypeToken
 import com.tiagosantos.common.ui.model.Event
+import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils
 import com.tiagosantos.common.ui.utils.Constants.eventFilename
 import com.tiagosantos.common.ui.utils.Constants.fileContent
 import com.tiagosantos.crpg_remake.ui.agenda.AgendaRepository.dinnerEvent
@@ -130,5 +131,10 @@ class AgendaViewModel(
         _publicEventList.value?.apply { add(lunchEvent); add(dinnerEvent) }
         return publicEventList
     }
+
+    fun setSelectedDate(date: Date) {
+        _selectedDate.value =  DateUtils.getDayNumber(date) + DateUtils.getMonthNumber(date) + DateUtils.getYear(date)
+    }
+
 
 }

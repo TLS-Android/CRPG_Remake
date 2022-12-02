@@ -4,9 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import com.tiagosantos.access.modal.BaseModalFragment
 import com.tiagosantos.access.modal.settings.SRSettings
@@ -23,8 +20,6 @@ import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.buildDateStri
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getDay3LettersName
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getDayName
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getDayNumber
-import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getMonthNumber
-import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getYear
 import java.util.*
 import java.util.Calendar.*
 
@@ -101,11 +96,10 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
 
                     tvDate.text = buildDateString(date)
                     tvDay.text = getDayName(date)
-                    vm._selectedDate.value = getDayNumber(date) + getMonthNumber(date) + getYear(date)
+                    vm.setSelectedDate(date)
                     selected = isSelected
                 }
             }
-
 
             val mySelectionManager = object : CalendarSelectionManager {
                 override fun canBeItemSelected(position: Int, date: Date): Boolean {
@@ -132,9 +126,7 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
                     noDateSelectedWarning.visibility = VISIBLE
                 }
             }
-
         }
-
     }
 
     private fun performActionWithVoiceCommand(
