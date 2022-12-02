@@ -7,123 +7,129 @@
                 <variable
                     name="datepicker"
                     type="com.tiagosantos.crpg_remake.ui.agenda.DatePickerFragment" />
+
                 <import type="android.view.View" />
         </data>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context="com.plataforma.crpg.ui.agenda.DatePickerFragment">
-
-        <TextView
-            android:id="@+id/title_selecionar_data"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/selecionar_data"
-            android:textColor="@color/SecondaryBlue"
-            android:textSize="25sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.05"/>
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            tools:context="com.plataforma.crpg.ui.agenda.DatePickerFragment">
 
-        <TextView
-            android:id="@+id/tvDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@+id/tvDate"
-            android:textColor="@color/SecondaryBlue"
-            android:textSize="20sp"
-            app:layout_constraintVertical_bias="0.01"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title_selecionar_data"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+                <include layout="@layout/selected_calendar_item"
+                    android:id="@+id/selected_item"/>
 
-        <TextView
-            android:id="@+id/tvDay"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tvDate"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+                <include layout="@layout/calendar_item"
+                    android:id="@+id/calendar_item"/>
 
-        <com.tiagosantos.common.ui.singlerowcalendar.calendar.SingleRowCalendar
-            android:id="@+id/main_single_row_calendar"
-            android:layout_width="match_parent"
-            android:layout_height="170dp"
-            app:deselection="false"
-            app:layout_constraintVertical_bias="0.2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/selecionar_dia_hint"
-            app:layout_constraintTop_toBottomOf="@+id/tvDate"
-            app:longPress="false"
-            app:multiSelection="false" />
+                <TextView
+                    android:id="@+id/title_selecionar_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="@string/selecionar_data"
+                    android:textColor="@color/SecondaryBlue"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.05" />
 
-        <TextView
-            android:id="@+id/selecionar_dia_hint"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:textColor="@color/md_blue_100"
-            android:textSize="20sp"
-            android:text="@string/selecionar_data_hint"
-            app:layout_constraintVertical_bias="0.3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/main_single_row_calendar"
-            app:layout_constraintBottom_toBottomOf="@+id/button_selecionar"/>
+                <TextView
+                    android:id="@+id/tvDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="@+id/tvDate"
+                    android:textColor="@color/SecondaryBlue"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/title_selecionar_data"
+                    app:layout_constraintVertical_bias="0.01" />
+
+                <TextView
+                    android:id="@+id/tvDay"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvDate"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.tiagosantos.common.ui.singlerowcalendar.calendar.SingleRowCalendar
+                    android:id="@+id/main_single_row_calendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="170dp"
+                    app:deselection="false"
+                    app:layout_constraintBottom_toBottomOf="@id/selecionar_dia_hint"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDate"
+                    app:layout_constraintVertical_bias="0.2"
+                    app:longPress="false"
+                    app:multiSelection="false" />
+
+                <TextView
+                    android:id="@+id/selecionar_dia_hint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="@string/selecionar_data_hint"
+                    android:textColor="@color/md_blue_100"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/button_selecionar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/main_single_row_calendar"
+                    app:layout_constraintVertical_bias="0.3" />
 
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_selecionar"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/selecionar_dia_hint"
-            android:layout_centerHorizontal="true"
-            android:contentDescription="@string/selecionar_dia"
-            android:elevation="10dp"
-            android:gravity="center_horizontal"
-            android:text="@string/selecionar"
-            android:textAlignment="center"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            app:backgroundTint="@color/md_blue_100"
-            app:cornerRadius="32dp"
-            app:iconPadding="8dp"
-            app:iconSize="18dp"
-            app:iconTint="@android:color/white"
-            app:rippleColor="@color/tertiaryText"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="0.1"
-            app:layout_constraintTop_toBottomOf="@+id/selecionar_dia_hint"
-            app:layout_constraintBottom_toBottomOf="parent" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_selecionar"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/selecionar_dia_hint"
+                    android:layout_centerHorizontal="true"
+                    android:contentDescription="@string/selecionar_dia"
+                    android:elevation="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/selecionar"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    app:backgroundTint="@color/md_blue_100"
+                    app:cornerRadius="32dp"
+                    app:iconPadding="8dp"
+                    app:iconSize="18dp"
+                    app:iconTint="@android:color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/selecionar_dia_hint"
+                    app:layout_constraintVertical_bias="0.1"
+                    app:rippleColor="@color/tertiaryText" />
 
-        <TextView
-            android:id="@+id/no_date_selected_warning"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/button_selecionar"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:text="@string/nenhum_dia_selecionado_warning"
-            android:textAlignment="center"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="16sp"
-            android:visibility="gone"
-            app:layout_constraintVertical_bias="0.2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_selecionar"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+                <TextView
+                    android:id="@+id/no_date_selected_warning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/button_selecionar"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:text="@string/nenhum_dia_selecionado_warning"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/button_selecionar"
+                    app:layout_constraintVertical_bias="0.2" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

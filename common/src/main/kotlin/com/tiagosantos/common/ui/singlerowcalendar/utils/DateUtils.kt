@@ -123,4 +123,19 @@ object DateUtils {
         return if (includeCurrentDate) pastList + cal.time + futureList else pastList + futureList
     }
 
+    fun buildDateString(date: Date) = buildString {
+        append(
+            "${getDayName(date).replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(Locale.getDefault())
+                else it.toString()
+            }
+            },"
+        )
+        append(" ${getDayNumber(date)} de ${getMonthName(date)
+            .replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+            }
+        }")
+    }
+
 }

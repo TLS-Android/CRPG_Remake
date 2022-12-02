@@ -34,6 +34,9 @@ class AgendaViewModel(
     @SuppressLint("StaticFieldLeak")
     val context: Context? = application.applicationContext
 
+    private val _selectedDate = MutableLiveData<String?>()
+    val selectedDate: LiveData<String?> = _selectedDate
+
     //MutableLiveData should always be val; only the contents can be updated
     private val _publicEventList = MutableLiveData<MutableList<Event>?>()
     val publicEventList: LiveData<MutableList<Event>?> = _publicEventList

@@ -8,19 +8,25 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
-import com.tiagosantos.common.ui.singlerowcalendar.calendar.CalendarChangesObserver
-import com.tiagosantos.common.ui.singlerowcalendar.calendar.CalendarViewManager
-import com.tiagosantos.common.ui.singlerowcalendar.calendar.SingleRowCalendarAdapter
-import com.tiagosantos.common.ui.singlerowcalendar.selection.CalendarSelectionManager
-import com.tiagosantos.common.ui.singlerowcalendar.calendar.SingleRowCalendar
-import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils
 import com.tiagosantos.access.modal.BaseModalFragment
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentDatePickerBinding
+import com.tiagosantos.common.ui.singlerowcalendar.calendar.CalendarChangesObserver
+import com.tiagosantos.common.ui.singlerowcalendar.calendar.CalendarViewManager
+import com.tiagosantos.common.ui.singlerowcalendar.calendar.SingleRowCalendarAdapter
+import com.tiagosantos.common.ui.singlerowcalendar.selection.CalendarSelectionManager
+import com.tiagosantos.common.ui.singlerowcalendar.calendar.SingleRowCalendar
+import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.buildDateString
+import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getDay3LettersName
+import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getDayName
+import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getDayNumber
+import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getMonthNumber
+import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getYear
 import java.util.*
+import java.util.Calendar.*
 
 class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
     layoutId = R.layout.fragment_date_picker,
@@ -54,28 +60,22 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
 
         with(viewB) {
             calendar.time = Date()
-            // calendar view manager is responsible for our displaying logic
             val myCalendarViewManager = object : CalendarViewManager {
                 override fun setCalendarViewResourceId(
                     position: Int,
                     date: Date,
                     isSelected: Boolean,
                 ): Int {
-                    // set date to calendar according to position where we are
-                    val cal = Calendar.getInstance().apply { time = date }
-                    if (!isSelected) tvDate.text =
-                        getString(R.string.nenhum_dia_selecionado_msg)
+                    val cal = getInstance().apply { time = date }
+                    if (!isSelected) tvDate.text = getString(R.string.nenhum_dia_selecionado_msg)
 
                     return if (isSelected)
-                        when (cal[Calendar.DAY_OF_WEEK]) {
+                        when (cal[DAY_OF_WEEK]) {
                             else -> R.layout.selected_calendar_item
                         }
                     else
-                    // here we return items which are not selected
-                        when (cal[Calendar.DAY_OF_WEEK]) {
-                            else -> {
-                                R.layout.calendar_item
-                            }
+                        when (cal[DAY_OF_WEEK]) {
+                            else -> R.layout.calendar_item
                         }
                 }
 
@@ -84,16 +84,12 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
                     date: Date,
                     position: Int,
                     isSelected: Boolean,
-                ) {
-                    // using this method we can bind data to calendar view
-                    // good practice is if all views in layout have same IDs in all item views
-                    tv_date_calendar_item.text = DateUtils.getDayNumber(date)
-                    holder.itemView.tv_day_calendar_item.text =
-                        DateUtils.getDay3LettersName(date)
-                }
+                ) = with(calendarItem){
+                        tvDateCalendarItem.text = getDayNumber(date)
+                        tvDayCalendarItem.text = getDay3LettersName(date)
+                    }
             }
 
-            // using calendar changes observer we can track changes in calendar
             val myCalendarChangesObserver = object :
                 CalendarChangesObserver {
                 override fun whenSelectionChanged(
@@ -101,28 +97,11 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
                     position: Int,
                     date: Date
                 ) {
-                    tvDate.text = buildString {
-                        append(
-                            "${
-                                DateUtils.getDayName(date).replaceFirstChar {
-                                    if (it.isLowerCase()) it.titlecase(Locale.getDefault())
-                                    else it.toString()
-                                }
-                            },"
-                        )
-                        append(" ${DateUtils.getDayNumber(date)} de ${
-                            DateUtils.getMonthName(date)
-                                .replaceFirstChar {
-                                    if (it.isLowerCase()) it.titlecase(
-                                        Locale.getDefault()
-                                    ) else it.toString()
-                                }
-                        }")
-                    }
-                    tvDay.text = DateUtils.getDayName(date)
-                    vm.selectedDate = DateUtils.getDayNumber(date) + DateUtils
-                        .getMonthNumber(date) + DateUtils.getYear(date)
                     super.whenSelectionChanged(isSelected, position, date)
+
+                    tvDate.text = buildDateString(date)
+                    tvDay.text = getDayName(date)
+                    vm._selectedDate.value = getDayNumber(date) + getMonthNumber(date) + getYear(date)
                     selected = isSelected
                 }
             }
@@ -130,18 +109,15 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
 
             val mySelectionManager = object : CalendarSelectionManager {
                 override fun canBeItemSelected(position: Int, date: Date): Boolean {
-                    // set date to calendar according to position
                     val cal = Calendar.getInstance().apply { time = date }
-                    // saturday and sunday are disabled as CRPG is not open on these days
                     return when (cal[Calendar.DAY_OF_WEEK]) {
-                        Calendar.SATURDAY -> false
-                        Calendar.SUNDAY -> false
+                        SATURDAY, SUNDAY -> false
                         else -> true
                     }
                 }
             }
 
-            val singleRowCalendar = mainSingleRowCalendar.apply {
+            mainSingleRowCalendar.apply {
                 calendarViewManager = myCalendarViewManager
                 calendarChangesObserver = myCalendarChangesObserver
                 calendarSelectionManager = mySelectionManager
