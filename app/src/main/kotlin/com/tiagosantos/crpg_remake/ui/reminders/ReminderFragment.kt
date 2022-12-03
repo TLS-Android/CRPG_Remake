@@ -359,8 +359,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     ) {
         helper.run { checkHoursCommand(view, command); checkMinutesCommand(view, command)  }
 
-
-
         with(view){
 
             val clickAndFocusMap = mapOf(
@@ -369,6 +367,15 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             )
 
             clickAndFocusMap.getOrElse(command) { println("No command found.") }
+
+            val lembrarMap = with(secondLembrar) {
+                mapOf(
+                    "Tomar Medicação" to button0.performClick(), "Apanhar Transporte" to button1.performClick(),
+                    "Escolher Almoço" to button2.performClick(), "O Meu Lembrete" to button3.performClick(),
+                )
+            }
+
+            lembrarMap.getOrElse(command) { println("No command found.") }
 
 
 
@@ -381,10 +388,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     expandableLembrar.performClick(); expandableDia.performClick(); expandableHoras.performClick()
                     expandableAlerta.performClick(); expandableNotas.performClick()
                 }
-                command.contains("Tomar Medicação", true) -> secondLembrar.button0.performClick()
-                command.contains("Apanhar Transporte", true) -> secondLembrar.button1.performClick()
-                command.contains("Escolher Almoço", true) -> secondLembrar.button2.performClick()
-                command.contains("O Meu Lembrete", true) -> secondLembrar.button3.performClick()
+
                 command.contains("Som", true) -> secondAlerta.imageButtonSom.performClick()
                 command.contains("Vibrar", true) -> secondAlerta.imageButtonVibrar.performClick()
                 command.contains("Ambos", true) -> secondAlerta.imageButtonAmbos.performClick()
@@ -403,4 +407,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     override fun observeLifecycleEvents() {
         TODO("Not yet implemented")
     }
+
+    data class
 }
