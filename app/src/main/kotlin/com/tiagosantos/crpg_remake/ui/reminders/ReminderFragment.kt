@@ -24,6 +24,7 @@ import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.common.ui.utils.InputFilterMinMax
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.*
+import com.tiagosantos.crpg_remake.ui.agenda.DatePickerFragment
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.newReminder
 import com.tiagosantos.crpg_remake.ui.reminders.helpers.HoursHelper
 
@@ -358,13 +359,22 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     ) {
         helper.run { checkHoursCommand(view, command); checkMinutesCommand(view, command)  }
 
+
+
         with(view){
+
+            val clickAndFocusMap = mapOf(
+                "Horas" to expandableHoras.run { clickAndFocus() }, "Dia" to expandableDia.run { clickAndFocus() },
+                "Alerta" to expandableAlerta.run { clickAndFocus() } , "Notas" to expandableNotas.run { clickAndFocus() },
+            )
+
+            clickAndFocusMap.getOrElse(command) { println("No command found.") }
+
+
+
             when {
                 command.contains("Lembrete", true) -> parentLayout.performClick()
-                command.contains("Horas", true) -> expandableHoras.run { clickAndFocus() }
-                command.contains("Dia", true) -> expandableDia.run { clickAndFocus() }
-                command.contains("Alerta", true) ->  expandableAlerta.run { clickAndFocus() }
-                command.contains("Notas", true) ->  expandableNotas.run { clickAndFocus() }
+
                 command.contains("Cancelar", true) -> buttonCancel.performClick()
                 command.contains("Guardar", true) -> buttonConfirm.performClick()
                 command.contains("Todos", true) -> {
