@@ -113,7 +113,7 @@ class ReminderViewModel(
     private fun setDateOnReminder(formattedDateToday: String) {
         when (newReminder.alarm_freq) {
             HOJE -> newReminder.date = formattedDateToday
-            TODOS_OS_DIAS -> newReminder.date = fullWeekAlarm
+            TODOS_OS_DIAS -> newReminder.date = null
             PERSONALIZADO -> newReminder.date = null
             else -> {
                 newReminder.date = null
