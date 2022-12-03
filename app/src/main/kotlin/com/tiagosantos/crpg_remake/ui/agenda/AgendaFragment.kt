@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.plataforma.crpg.TimelineView
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.Orientation
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.TimelineAttributes
-import com.tiagosantos.access.modal.BaseModalFragment
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.crpg_remake.R
+import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.databinding.FragmentAgendaBinding
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.TimeLineAdapter

@@ -1,13 +1,10 @@
 package com.tiagosantos.crpg_remake.ui.meditation
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.viewModels
 import com.google.android.exoplayer2.ExoPlayer
-import com.tiagosantos.access.modal.BaseModalFragment
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.crpg_remake.R

@@ -1,4 +1,4 @@
-package com.tiagosantos.access.modal
+package com.tiagosantos.crpg_remake.base
 
 import android.content.Context
 import android.os.Bundle
@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
@@ -19,8 +18,6 @@ import com.tiagosantos.common.ui.utils.Constants.MODALITY
 import com.tiagosantos.common.ui.utils.Constants.SR
 import com.tiagosantos.common.ui.utils.Constants.TTS
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.generalHelper
-import com.tiagosantos.crpg_remake.base.BaseFragment
-import com.tiagosantos.crpg_remake.base.FragmentSettings
 
 abstract class BaseModalFragment<B : ViewDataBinding>(
     @LayoutRes

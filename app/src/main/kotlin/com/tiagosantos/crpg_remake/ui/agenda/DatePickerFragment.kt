@@ -5,7 +5,6 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.fragment.app.viewModels
-import com.tiagosantos.access.modal.BaseModalFragment
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.crpg_remake.base.FragmentSettings
@@ -20,6 +19,7 @@ import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.buildDateStri
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getDay3LettersName
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getDayName
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getDayNumber
+import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import java.util.*
 import java.util.Calendar.*
 
