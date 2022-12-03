@@ -91,8 +91,8 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
     open fun setupModality(
        ttsFlag: Boolean,
        srFlag: Boolean,
-       hasRun: Boolean)
-    {
+       hasRun: Boolean
+    ){
         if (!hasRun) {
             when {
                 ttsFlag && !srFlag -> gossip.talk()
