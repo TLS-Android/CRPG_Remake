@@ -21,6 +21,7 @@ import java.io.File
 import java.io.FileReader
 import java.lang.reflect.Type
 import java.util.*
+import java.util.Calendar.*
 
 /**
  *
@@ -38,7 +39,7 @@ class AgendaViewModel(
     private val _selectedDate = MutableLiveData<String?>()
     val selectedDate: LiveData<String?> = _selectedDate
 
-    //MutableLiveData should always be val; only the contents can be updated
+    /** MutableLiveData should always be val; only the contents can be updated **/
     private val _publicEventList = MutableLiveData<MutableList<Event>?>()
     val publicEventList: LiveData<MutableList<Event>?> = _publicEventList
 
@@ -64,7 +65,7 @@ class AgendaViewModel(
         _currentMonth.value = currentMonth.value?.plus(1) // + because we want next month
         if (currentMonth.value == 12) {
             // we will switch to january of next year, when we reach last month of year
-            calendar.set(Calendar.YEAR, calendar[Calendar.YEAR] + 1)
+            calendar.set(YEAR, calendar[YEAR] + 1)
             _currentMonth.value = 0 // 0 == january
         }
 
@@ -72,33 +73,30 @@ class AgendaViewModel(
     }
 
     fun getDatesOfPreviousMonth(): List<Date> {
-        _currentMonth.value = currentMonth.value?.minus(1) // - because we want previous
-        // month
+        _currentMonth.value = currentMonth.value?.minus(1)
         if (currentMonth.value == 12) {
             // we will switch to december of previous year, when we reach first month of year
-            calendar.set(Calendar.YEAR, calendar[Calendar.YEAR] - 1)
+            calendar.set(YEAR, calendar[YEAR] - 1)
             _currentMonth.value = 11 // 11 == december
         }
         return getDates(mutableListOf())
     }
 
     fun getFutureDatesOfCurrentMonth(): List<Date> {
-        // get all next dates of current month
-        _currentMonth.value = calendar[Calendar.MONTH]
+        _currentMonth.value = calendar[MONTH]
         return getDates(mutableListOf())
     }
 
     private fun getDates(list: MutableList<Date>): List<Date> {
-        // load dates of whole month
-        calendar.set(Calendar.MONTH, currentMonth.value!!)
-        calendar.set(Calendar.DAY_OF_MONTH, 1)
+        calendar.set(MONTH, currentMonth.value!!)
+        calendar.set(DAY_OF_MONTH, 1)
         list.add(calendar.time)
-        while (currentMonth.value == calendar[Calendar.MONTH]) {
-            calendar.add(Calendar.DATE, +1)
-            if (calendar[Calendar.MONTH] == currentMonth.value)
+        while (currentMonth.value == calendar[MONTH]) {
+            calendar.add(DATE, +1)
+            if (calendar[MONTH] == currentMonth.value)
                 list.add(calendar.time)
         }
-        calendar.add(Calendar.DATE, -1)
+        calendar.add(DATE, -1)
         return list
     }
 
@@ -135,6 +133,5 @@ class AgendaViewModel(
     fun setSelectedDate(date: Date) {
         _selectedDate.value =  DateUtils.getDayNumber(date) + DateUtils.getMonthNumber(date) + DateUtils.getYear(date)
     }
-
 
 }
