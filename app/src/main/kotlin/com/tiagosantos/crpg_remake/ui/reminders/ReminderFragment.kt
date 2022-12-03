@@ -406,5 +406,4 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         TODO("Not yet implemented")
     }
 
-    data class
 }
