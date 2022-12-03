@@ -356,8 +356,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         view: ReminderFragmentBinding,
         command: String,
     ) {
-        helper.checkHoursCommand(view, command)
-        helper.checkMinutesCommand(view, command)
+        helper.run { checkHoursCommand(view, command); checkMinutesCommand(view, command)  }
 
         with(view){
             when {
