@@ -360,43 +360,41 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         helper.run { checkHoursCommand(view, command); checkMinutesCommand(view, command)  }
 
         with(view){
-
-            val clickAndFocusMap = mapOf(
+            mapOf(
                 "Horas" to expandableHoras.run { clickAndFocus() }, "Dia" to expandableDia.run { clickAndFocus() },
                 "Alerta" to expandableAlerta.run { clickAndFocus() } , "Notas" to expandableNotas.run { clickAndFocus() },
-            )
+                "Lembrete" to parentLayout.performClick(),  "Cancelar" to buttonCancel.performClick(),
+                "Guardar" to buttonConfirm.performClick(),
+            ).getOrElse(command) { println("No command found.") }
 
-            clickAndFocusMap.getOrElse(command) { println("No command found.") }
-
-            val lembrarMap = with(secondLembrar) {
+            with(secondLembrar) {
                 mapOf(
                     "Tomar Medicação" to button0.performClick(), "Apanhar Transporte" to button1.performClick(),
                     "Escolher Almoço" to button2.performClick(), "O Meu Lembrete" to button3.performClick(),
                 )
+            }.getOrElse(command) { println("No command found.") }
+
+            with(secondAlerta) {
+                mapOf(
+                    "Som" to imageButtonSom.performClick(),
+                    "Vibrar" to imageButtonVibrar.performClick(),
+                    "Ambos" to imageButtonAmbos.performClick(),
+                )
+            }.getOrElse(command) { println("No command found.") }
+
+            with(secondDia) {
+                mapOf(
+                    "Hoje" to buttonHoje.performClick(),
+                    "Sempre" to buttonTodosDias.performClick(),
+                    "Escolher Dias" to buttonPersonalizado.performClick(),
+                )
+            }.getOrElse(command) { println("No command found.") }
+
+            if (command.contains("Todos", true)) {
+                expandableLembrar.performClick(); expandableDia.performClick(); expandableHoras.performClick()
+                expandableAlerta.performClick(); expandableNotas.performClick()
             }
 
-            lembrarMap.getOrElse(command) { println("No command found.") }
-
-
-
-            when {
-                command.contains("Lembrete", true) -> parentLayout.performClick()
-
-                command.contains("Cancelar", true) -> buttonCancel.performClick()
-                command.contains("Guardar", true) -> buttonConfirm.performClick()
-                command.contains("Todos", true) -> {
-                    expandableLembrar.performClick(); expandableDia.performClick(); expandableHoras.performClick()
-                    expandableAlerta.performClick(); expandableNotas.performClick()
-                }
-
-                command.contains("Som", true) -> secondAlerta.imageButtonSom.performClick()
-                command.contains("Vibrar", true) -> secondAlerta.imageButtonVibrar.performClick()
-                command.contains("Ambos", true) -> secondAlerta.imageButtonAmbos.performClick()
-                command.contains("Hoje", true) -> secondDia.buttonHoje.performClick()
-                command.contains("Sempre", true) -> secondDia.buttonTodosDias.performClick()
-                command.contains("Escolher Dias", true) -> secondDia.buttonPersonalizado.performClick()
-                else -> {}
-            }
         }
     }
 
