@@ -8,6 +8,7 @@ import com.google.android.exoplayer2.ExoPlayer
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.crpg_remake.R
+import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationMediaPlayerBinding
 
@@ -69,16 +70,11 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
 
     override fun performActionWithVoiceCommand(command: String, actionMap: Map<String,Any>) {
         with(viewB.custom) {
-            when {
-                command.contains("Tocar", true) -> exoPlay.performClick()
-                command.contains("Parar", true) -> exoPause.performClick()
-                command.contains("Passar à frente", true) -> exoFfwd.performClick()
-                command.contains("Passar a trás", true) -> exoRew.performClick()
-                command.contains("Regressar", true) ->
-                    root.rootView.findViewById(R.id.button_return_meditation)
-                else -> { //TODO }
-                }
-            }
+            mapOf(
+                "Tocar" to exoPlay.performClick(), "Parar" to exoPause.performClick(),
+                "Passar à frente" to exoFfwd.performClick(), "Passar a trás" to exoRew.performClick(),
+                "Regressar" to viewB.buttonReturnMeditation.performClick(),
+            ).getOrElse(command) { println("No command found.") }
         }
     }
 
