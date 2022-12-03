@@ -211,7 +211,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     avisoCampos.run { text = "Valor em falta"; visibility = VISIBLE }
                 }
 
-                with(reminderVM.mockReminder) {
+                with(reminderVM.newReminder) {
                     fun updateButton(title: String, reminderType: ReminderType) {
                         this.title = title
                         reminder_type = reminderType
@@ -245,7 +245,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                         1 -> HOJE
                         2 -> TODOS_OS_DIAS
                         3 -> PERSONALIZADO
-                        4 -> AMANHA
                         else -> { HOJE }
                     }
                 }
@@ -256,16 +255,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
     }
 
-    fun setAlarmType() {
-        alarm_type = when (alarmTypeButtonPressed) {
-            1 -> SOM
-            2 -> VIBRAR
-            3 -> AMBOS
-            else -> {
-                SOM
-            }
-        }
-    }
 
     private fun setButtonColorsReminder(view: LayoutSecondLembrarBinding, pos: Int){
 

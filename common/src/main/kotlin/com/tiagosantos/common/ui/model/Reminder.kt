@@ -40,8 +40,6 @@ enum class AlarmType {
 enum class AlarmFrequency {
     @SerializedName("HOJE")
     HOJE,
-    @SerializedName("AMANHA")
-    AMANHA,
     @SerializedName("TODOS_OS_DIAS")
     TODOS_OS_DIAS,
     @SerializedName("PERSONALIZADO")
