@@ -147,8 +147,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             }
 
             with(secondHoras){
-                val et = editHours.apply { filters = arrayOf(InputFilterMinMax("00", "23"), InputFilter.LengthFilter(2)) }
-                val etMin = editMinutes.apply { filters = arrayOf(InputFilterMinMax("00", "59"), InputFilter.LengthFilter(2)) }
+                et = editHours.apply { filters = arrayOf(InputFilterMinMax("00", "23"), InputFilter.LengthFilter(2)) }
+                etMin = editMinutes.apply { filters = arrayOf(InputFilterMinMax("00", "59"), InputFilter.LengthFilter(2)) }
             }
 
             with(secondDia){
@@ -199,7 +199,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 secondNotas.editTextNotes.setText(EMPTY_STRING)
             }
 
-            /** ----- CONFIRMAR ------**/
+            /** ----- CONFIRMAR ------ **/
 
             buttonConfirm.setOnClickListener {
                 if (et.text.toString().length == 2 && etMin.text.toString().length == 2) {
