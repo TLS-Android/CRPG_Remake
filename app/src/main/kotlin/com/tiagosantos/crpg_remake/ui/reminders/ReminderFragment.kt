@@ -84,13 +84,11 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         return viewB.root
     }
 
-    private fun toggleLayout(list: List<ExpandableLayout>) = viewB.parentLayout.setOnClickListener{
-        list.forEach { it.performClick() }
-    }
+    private fun setLayoutClickListeners(list: List<ExpandableLayout>) =
+        viewB.parentLayout.setOnClickListener{ list.forEach { it.performClick() } }
 
-    private fun toggleExpandables(list: List<ExpandableLayout>) {
-        list.forEach { it -> it.parentLayout.setOnClickListener { it.performClick()} }
-    }
+    private fun setExpandablesClickListeners(list: List<ExpandableLayout>) {
+        list.forEach { it -> it.parentLayout.setOnClickListener { it.performClick()} } }
 
     private var successFlag = alarmFreqButtonPressed != 0 && alarmTypeButtonPressed != 0
             && lembrarButtonPressed != 0 && hoursMinutesFlag
@@ -106,10 +104,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         }
 
         with(viewB) {
-
-        toggleLayout(listOf(expandableDia, expandableLembrar, expandableDia))
-        toggleExpandables(listOf(expandableHoras,expandableNotas,expandableAlerta,expandableDia))
-
+        setLayoutClickListeners(listOf(expandableDia, expandableLembrar, expandableDia))
+        setExpandablesClickListeners(listOf(expandableHoras,expandableNotas,expandableAlerta,expandableDia))
 
             with(viewSuccess){
                 if (successFlag) {
@@ -194,9 +190,9 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
             buttonCancel.setOnClickListener {
                 avisoCampos.visibility = GONE
-                cbSom.visibility = INVISIBLE
-                cbVib.visibility = INVISIBLE
-                cbAmbos.visibility = INVISIBLE
+
+                listOf(cbSom,cbVib,cbAmbos).forEach { it.visibility = INVISIBLE }
+                listOf(lembrarButtonPressed,alarmTypeButtonPressed,alarmFreqButtonPressed).forEach { it = 0 }
                 lembrarButtonPressed = 0
                 alarmTypeButtonPressed = 0
                 alarmFreqButtonPressed = 0
