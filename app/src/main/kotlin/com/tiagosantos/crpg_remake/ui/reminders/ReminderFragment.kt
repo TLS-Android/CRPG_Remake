@@ -356,13 +356,16 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         view: ReminderFragmentBinding,
         command: String,
     ) {
-        helper.run { checkHoursCommand(view, command); checkMinutesCommand(view, command)  }
+        helper.run { checkHoursCommand(view, command); checkMinutesCommand(view, command) }
 
-        with(view){
+        with(view) {
             mapOf(
-                "Horas" to expandableHoras.run { clickAndFocus() }, "Dia" to expandableDia.run { clickAndFocus() },
-                "Alerta" to expandableAlerta.run { clickAndFocus() } , "Notas" to expandableNotas.run { clickAndFocus() },
-                "Lembrete" to parentLayout.performClick(),  "Cancelar" to buttonCancel.performClick(),
+                "Horas" to expandableHoras.run { clickAndFocus() },
+                "Dia" to expandableDia.run { clickAndFocus() },
+                "Alerta" to expandableAlerta.run { clickAndFocus() },
+                "Notas" to expandableNotas.run { clickAndFocus() },
+                "Lembrete" to parentLayout.performClick(),
+                "Cancelar" to buttonCancel.performClick(),
                 "Guardar" to buttonConfirm.performClick(),
             ).getOrElse(command) { println("No command found.") }
 
@@ -395,20 +398,26 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     "Hoje" to buttonHoje.performClick(),
                     "Sempre" to buttonTodosDias.performClick(),
                     "Escolher Dias" to buttonPersonalizado.performClick(),
-                ) }.getOrElse(command) { println("No command found.") }
+                )
+            }.getOrElse(command) { println("No command found.") }
 
             if (command.contains("Todos", true)) {
                 expandableLembrar.performClick(); expandableDia.performClick(); expandableHoras.performClick()
                 expandableAlerta.performClick(); expandableNotas.performClick()
             }
 
-        listOf(expandableLembrar, expandableDia, expandableHoras,
-            expandableAlerta, expandableNotas).forEach { _ -> clickAndFocus()
+            listOf(
+                expandableLembrar, expandableDia, expandableHoras,
+                expandableAlerta, expandableNotas
+            ).forEach { _ ->
+                clickAndFocus()
+            }
+
         }
 
     }
 
-    fun toggleLayout(list: List<ExpandableLayout>) = view.parentLayout.setOnClickListener{
+    fun toggleLayout(list: List<ExpandableLayout>) = viewB.parentLayout.setOnClickListener{
         list.forEach { it.performClick() }
     }
 
@@ -419,9 +428,5 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     override fun observeLifecycleEvents() {
         TODO("Not yet implemented")
     }
-
-}
-
-private fun <K, V> Map<K, V>.getOrElse(key: K): V {
 
 }
