@@ -1,13 +1,14 @@
 plugins {
-    id 'com.android.library'
+    id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 }
 
 android {
-    namespace 'com.tiagosantos.access'
+    namespace 'com.tiagosantos.crpg_remake'
     compileSdk 33
 
     defaultConfig {
+        applicationId "com.tiagosantos.crpg_remake"
         minSdk 28
         targetSdk 33
 
