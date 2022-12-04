@@ -98,8 +98,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         }
 
         with(viewB) {
-        setLayoutClickListeners(listOf(expandableDia, expandableLembrar, expandableDia))
-        setExpandablesClickListeners(listOf(expandableHoras,expandableNotas,expandableAlerta,expandableDia))
+            setLayoutClickListeners(listOf(expandableDia, expandableLembrar, expandableDia))
+            setExpandablesClickListeners(listOf(expandableHoras,expandableNotas,expandableAlerta,expandableDia))
 
             with(viewSuccess){
                 if (successFlag) {
