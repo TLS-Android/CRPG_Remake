@@ -215,7 +215,6 @@ class TimeLineAdapter(
                             "Refeição selecionada, o prato escolhido " +
                                     "foi ${timeLineModel.chosen_meal}"
                         }
-
                 }
             }
         }

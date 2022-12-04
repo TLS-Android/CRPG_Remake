@@ -1,6 +1,5 @@
 package com.tiagosantos.crpg_remake.ui.meals
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -55,13 +54,11 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
     private var isLunch = false
     private val mealsVM: MealsViewModel by viewModels()
 
-    @SuppressLint("SetTextI18n", "ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         isLunch = requireArguments().getBoolean("isLunch")
     }
 
-    @SuppressLint("SetTextI18n", "ResourceAsColor")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 

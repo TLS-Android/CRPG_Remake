@@ -349,7 +349,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
     val more : (String, Int) -> String = { str, int -> str + int }
 
-    private fun clickAndFocus() = { expandable: ExpandableLayout ->
+    private fun clickAndFocus() { expandable: ExpandableLayout ->
         expandable.performClick(); expandable.requestFocus() }
 
     private fun performActionWithVoiceCommand(
@@ -368,33 +368,44 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
             with(secondLembrar) {
                 mapOf(
-                    "Tomar Medicação" to button0.performClick(), "Apanhar Transporte" to button1.performClick(),
-                    "Escolher Almoço" to button2.performClick(), "O Meu Lembrete" to button3.performClick(),
+                    "Tomar Medicação" to button0, "Apanhar Transporte" to button1,
+                    "Escolher Almoço" to button2, "O Meu Lembrete" to button3,
                 )
-            }.getOrElse(command) { println("No command found.") }
+            }[command]?.performClick() ?: println("hello")
+
+            with(secondLembrar) {
+                mapOf(
+                    "Tomar Medicação" to button0, "Apanhar Transporte" to button1,
+                    "Escolher Almoço" to button2, "O Meu Lembrete" to button3,
+                )
+            }[command]?.performClick() ?: println("hello")
+
+            //[command]!!.performClick()
 
             with(secondAlerta) {
                 mapOf(
-                    "Som" to imageButtonSom.performClick(),
-                    "Vibrar" to imageButtonVibrar.performClick(),
-                    "Ambos" to imageButtonAmbos.performClick(),
+                    "Som" to imageButtonSom,
+                    "Vibrar" to imageButtonVibrar,
+                    "Ambos" to imageButtonAmbos,
                 )
-            }.getOrElse(command) { println("No command found.") }
+            }[command]?.performClick() ?: println("hello")
 
             with(secondDia) {
                 mapOf(
                     "Hoje" to buttonHoje.performClick(),
                     "Sempre" to buttonTodosDias.performClick(),
                     "Escolher Dias" to buttonPersonalizado.performClick(),
-                )
-            }.getOrElse(command) { println("No command found.") }
+                ) }.getOrElse(command) { println("No command found.") }
 
             if (command.contains("Todos", true)) {
                 expandableLembrar.performClick(); expandableDia.performClick(); expandableHoras.performClick()
                 expandableAlerta.performClick(); expandableNotas.performClick()
             }
 
+        listOf( expandableLembrar, expandableDia, expandableHoras,
+            expandableAlerta, expandableNotas).forEach { _ -> clickAndFocus()
         }
+
     }
 
     override fun onInitDataBinding() {
@@ -404,5 +415,9 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     override fun observeLifecycleEvents() {
         TODO("Not yet implemented")
     }
+
+}
+
+private fun <K, V> Map<K, V>.getOrElse(key: K): V {
 
 }

@@ -19,7 +19,6 @@ import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.common.ui.utils.Constants.MODALITY
 import com.tiagosantos.crpg_remake.MainActivity
 import com.tiagosantos.crpg_remake.R
-import com.tiagosantos.crpg_remake.databinding.ReminderFragmentBinding
 
 abstract class BaseFragment<B : ViewDataBinding>(
     @LayoutRes val layoutId: Int,
