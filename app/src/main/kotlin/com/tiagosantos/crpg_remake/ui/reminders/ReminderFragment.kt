@@ -88,6 +88,10 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         list.forEach { it.performClick() }
     }
 
+    private fun toggleExpandables(list: List<ExpandableLayout>) {
+        list.forEach { it -> it.parentLayout.setOnClickListener { it.performClick()} }
+    }
+
     private var successFlag = alarmFreqButtonPressed != 0 && alarmTypeButtonPressed != 0
             && lembrarButtonPressed != 0 && hoursMinutesFlag
 
@@ -104,13 +108,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         with(viewB) {
 
         toggleLayout(listOf(expandableDia, expandableLembrar, expandableDia))
+        toggleExpandables(listOf(expandableHoras,expandableNotas,expandableAlerta,expandableDia))
 
-
-
-            expandableHoras.parentLayout.setOnClickListener { expandableHoras.toggleLayout() }
-            expandableNotas.parentLayout.setOnClickListener { expandableNotas.toggleLayout() }
-            expandableAlerta.parentLayout.setOnClickListener { expandableAlerta.toggleLayout() }
-            expandableDia.parentLayout.setOnClickListener { expandableDia.toggleLayout() }
 
             with(viewSuccess){
                 if (successFlag) {
