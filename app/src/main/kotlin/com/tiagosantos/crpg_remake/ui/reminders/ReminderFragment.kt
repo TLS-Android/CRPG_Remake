@@ -68,6 +68,12 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         var alarmFreqButtonPressed = 0
     }
 
+    val layoutMap = mapOf(
+        "Seg" to 1, "Ter" to 2, "Qua" to 3,
+        "Qui" to 4, "Sex" to 5, "Sab" to 6, "Dom" to 7
+    )
+
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?,
@@ -78,7 +84,11 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         return viewB.root
     }
 
-    var successFlag = alarmFreqButtonPressed != 0 && alarmTypeButtonPressed != 0
+    private fun toggleLayout(list: List<ExpandableLayout>) = viewB.parentLayout.setOnClickListener{
+        list.forEach { it.performClick() }
+    }
+
+    private var successFlag = alarmFreqButtonPressed != 0 && alarmTypeButtonPressed != 0
             && lembrarButtonPressed != 0 && hoursMinutesFlag
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -92,9 +102,10 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         }
 
         with(viewB) {
-            parentLayout.setOnClickListener { expandableDia.toggleLayout() }
-            parentLayout.setOnClickListener { expandableLembrar.toggleLayout() }
-            parentLayout.setOnClickListener { expandableDia.toggleLayout() }
+
+        toggleLayout(listOf(expandableDia, expandableLembrar, expandableDia))
+
+
 
             expandableHoras.parentLayout.setOnClickListener { expandableHoras.toggleLayout() }
             expandableNotas.parentLayout.setOnClickListener { expandableNotas.toggleLayout() }
@@ -402,10 +413,14 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 expandableAlerta.performClick(); expandableNotas.performClick()
             }
 
-        listOf( expandableLembrar, expandableDia, expandableHoras,
+        listOf(expandableLembrar, expandableDia, expandableHoras,
             expandableAlerta, expandableNotas).forEach { _ -> clickAndFocus()
         }
 
+    }
+
+    fun toggleLayout(list: List<ExpandableLayout>) = view.parentLayout.setOnClickListener{
+        list.forEach { it.performClick() }
     }
 
     override fun onInitDataBinding() {
