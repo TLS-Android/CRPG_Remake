@@ -7,7 +7,6 @@ import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
 import com.skydoves.expandablelayout.ExpandableLayout
@@ -191,7 +190,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 avisoCampos.visibility = GONE
 
                 listOf(cbSom,cbVib,cbAmbos).forEach { it.visibility = INVISIBLE }
-                listOf(lembrarButtonPressed,alarmTypeButtonPressed,alarmFreqButtonPressed).forEach { it = 0 }
                 lembrarButtonPressed = 0
                 alarmTypeButtonPressed = 0
                 alarmFreqButtonPressed = 0
@@ -240,7 +238,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     }
 
                     setTypeAndFrequency(newReminder)
-
                 }
 
             }
@@ -266,7 +263,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             }
         }
     }
-
 
     private fun setButtonColorsReminder(view: LayoutSecondLembrarBinding, pos: Int){
 
@@ -394,8 +390,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     "Escolher Almoço" to button2, "O Meu Lembrete" to button3,
                 )
             }[command]?.performClick() ?: println("hello")
-
-            //[command]!!.performClick()
 
             with(secondAlerta) {
                 mapOf(
