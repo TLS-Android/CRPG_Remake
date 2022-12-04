@@ -68,12 +68,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         var alarmFreqButtonPressed = 0
     }
 
-    val layoutMap = mapOf(
-        "Seg" to 1, "Ter" to 2, "Qua" to 3,
-        "Qui" to 4, "Sex" to 5, "Sab" to 6, "Dom" to 7
-    )
-
-
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?,
