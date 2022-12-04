@@ -7,6 +7,7 @@ import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
 import com.skydoves.expandablelayout.ExpandableLayout
@@ -14,6 +15,7 @@ import com.tiagosantos.common.ui.model.AlarmFrequency.*
 import com.tiagosantos.common.ui.model.AlarmType.SOM
 import com.tiagosantos.common.ui.model.AlarmType.VIBRAR
 import com.tiagosantos.common.ui.model.AlarmType.AMBOS
+import com.tiagosantos.common.ui.model.Reminder
 import com.tiagosantos.common.ui.model.ReminderType
 import com.tiagosantos.common.ui.model.ReminderType.MEDICACAO
 import com.tiagosantos.common.ui.model.ReminderType.TRANSPORTE
@@ -87,6 +89,14 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private var successFlag = alarmFreqButtonPressed != 0 && alarmTypeButtonPressed != 0
             && lembrarButtonPressed != 0 && hoursMinutesFlag
 
+    private fun launchIntent() {
+        if (activity?.packageManager?.let { it1 ->
+            reminderVM.alarmIntent.resolveActivity(it1)
+        } != null) {
+            startActivity(reminderVM.alarmIntent)
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -107,13 +117,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     if (reminderVM.flagReminderAdded) {
                         avisoCampos.visibility = GONE
                         successLayout.visibility = VISIBLE
-                        buttonOk.setOnClickListener {
-                            successLayout.visibility = GONE
-                        }
-                        if (activity?.packageManager?.let { it1 ->
-                                reminderVM.alarmIntent.resolveActivity(it1) } != null) {
-                            startActivity(reminderVM.alarmIntent)
-                        }
+                        buttonOk.setOnClickListener { successLayout.visibility = GONE }
+                        launchIntent()
                     }
                 } else if (hoursInt > 23 || minsInt > 59) {
                     avisoCampos.text = "Horas ou minutos invalidos"
@@ -234,25 +239,32 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                         }
                     }
 
-                    alarm_type = when (alarmTypeButtonPressed) {
-                        1 -> SOM
-                        2 -> VIBRAR
-                        3 -> AMBOS
-                        else -> { SOM }
-                    }
+                    setTypeAndFrequency(newReminder)
 
-                    alarm_freq = when (alarmFreqButtonPressed) {
-                        1 -> HOJE
-                        2 -> TODOS_OS_DIAS
-                        3 -> PERSONALIZADO
-                        else -> { HOJE }
-                    }
                 }
 
             }
 
         }
 
+    }
+
+    private fun setTypeAndFrequency(newReminder: Reminder){
+        with(newReminder){
+            alarm_type = when (alarmTypeButtonPressed) {
+                1 -> SOM
+                2 -> VIBRAR
+                3 -> AMBOS
+                else -> { SOM }
+            }
+
+            alarm_freq = when (alarmFreqButtonPressed) {
+                1 -> HOJE
+                2 -> TODOS_OS_DIAS
+                3 -> PERSONALIZADO
+                else -> { HOJE }
+            }
+        }
     }
 
 
@@ -412,9 +424,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             ).forEach { _ ->
                 clickAndFocus()
             }
-
         }
-
     }
 
     fun toggleLayout(list: List<ExpandableLayout>) = viewB.parentLayout.setOnClickListener{
