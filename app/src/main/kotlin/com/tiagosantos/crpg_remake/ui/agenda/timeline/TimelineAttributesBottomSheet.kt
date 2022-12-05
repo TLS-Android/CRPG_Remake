@@ -1,5 +1,8 @@
 package com.tiagosantos.crpg_remake.ui.agenda.timeline
 
+import android.content.Intent
+import android.os.Build
+import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
@@ -7,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.os.bundleOf
@@ -73,12 +77,11 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet(), Parcelable {
         return inflater.cloneInContext(contextThemeWrapper).inflate(R.layout.bottom_sheet_options, container, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //val attributes = (requireArguments().readFromParcel(EXTRA_ATTRIBUTES) as TimelineAttributes
-
-        val attributes = (requireArguments().getParcelable(EXTRA_ATTRIBUTES)!! as TimelineAttributes)
+        val attributes = (requireArguments().getParcelable(EXTRA_ATTRIBUTES, TimelineAttributes::class.java)!!)
         mAttributes = attributes.copy()
 
         with(optionsView){
@@ -244,4 +247,15 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet(), Parcelable {
     private fun setCallback(callbacks: Callbacks) {
         mCallbacks = callbacks
     }
+
+    inline fun <reified T : Parcelable> Intent.parcelable(key: String): T? = when {
+        SDK_INT >= 33 -> getParcelableExtra(key, T::class.java)
+        else -> @Suppress("DEPRECATION") getParcelableExtra(key) as? T
+    }
+
+    inline fun <reified T : Parcelable> Bundle.parcelable(key: String): T? = when {
+        SDK_INT >= 33 -> getParcelable(key, T::class.java)
+        else -> @Suppress("DEPRECATION") getParcelable(key) as? T
+    }
+
 }

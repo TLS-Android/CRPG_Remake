@@ -407,15 +407,10 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             }.getOrElse(command) { println("No command found.") }
 
             if (command.contains("Todos", true)) {
-                expandableLembrar.performClick(); expandableDia.performClick(); expandableHoras.performClick()
-                expandableAlerta.performClick(); expandableNotas.performClick()
-            }
-
-            listOf(
-                expandableLembrar, expandableDia, expandableHoras,
-                expandableAlerta, expandableNotas
-            ).forEach { _ ->
-                clickAndFocus()
+                listOf(
+                    expandableLembrar, expandableDia, expandableHoras,
+                    expandableAlerta, expandableNotas
+                ).forEach { _ -> clickAndFocus() }
             }
         }
     }
