@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import com.tiagosantos.access.modal.modality.ModalityPreferencesRepository
 
 @SuppressLint("StaticFieldLeak")
@@ -12,21 +11,23 @@ class RepositoryManagerViewModel(
     application: Application,
 ) : AndroidViewModel(application) {
 
-    private val context = getApplication<Application>().applicationContext
+    private val context = application.applicationContext
 
     private val _ttsFlag = MutableLiveData<Boolean>()
-    private val ttsFlag
-        get() = _ttsFlag
+    val ttsFlag get() = _ttsFlag
 
     private var appPreferencesRepository = AppPreferencesRepository(context)
     private var modalityPreferencesRepository = ModalityPreferencesRepository(context)
 
+    /** ViewModel shouldn't hold any reference related to View (Activity, Context etc)
+     * due to increased difficulty to test. **/
+    override fun onCleared() {
+        super.onCleared()
+        _ttsFlag.value = false
+    }
+
     fun initRepositories() {
         appPreferencesRepository.resetAppPreferences()
         modalityPreferencesRepository.requestMultiModalityOptions()
-
-        ttsFlag.observe(this, Observer {
-            if (it) println("true") else println("false")
-        })
     }
 }

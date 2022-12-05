@@ -131,7 +131,8 @@ class AgendaViewModel(
     }
 
     fun setSelectedDate(date: Date) {
-        _selectedDate.value =  DateUtils.getDayNumber(date) + DateUtils.getMonthNumber(date) + DateUtils.getYear(date)
+        _selectedDate.value =
+            DateUtils.getDayNumber(date) + DateUtils.getMonthNumber(date) + DateUtils.getYear(date)
     }
 
 }
