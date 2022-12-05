@@ -19,7 +19,7 @@ class AppPreferencesRepository(
         Context.MODE_PRIVATE
     )
 
-    fun resetAppPreferences(appPreferences: AppPreferences) = sharedPreferences!!.apply {
+    fun resetAppPreferences() = sharedPreferences!!.apply {
         for (i in 1..literalValue.size)  edit().putBoolean(literalValue[i], false).apply()
     }
 

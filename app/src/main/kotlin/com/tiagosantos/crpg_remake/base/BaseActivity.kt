@@ -23,11 +23,13 @@ import com.tiagosantos.common.ui.extension.applyStatusBarColor
 import com.tiagosantos.common.ui.extension.dpToPx
 import com.tiagosantos.common.ui.extension.getColorCompatible
 import com.tiagosantos.crpg_remake.R
+import com.tiagosantos.crpg_remake.global_preferences.AppPreferencesRepository
 
 abstract class BaseActivity(
     @LayoutRes
     private val layoutId: Int,
-    private val settings: ActivitySettings
+    private val settings: ActivitySettings,
+    private val appPreferences: AppPreferencesRepository
 ) : AppCompatActivity(), BaseActivityInterface {
     init {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
@@ -70,6 +72,7 @@ abstract class BaseActivity(
         //finish activity animation
         if (settings.closeEnterAnimation != 0 || settings.closeExitAnimation != 0)
             overridePendingTransition(settings.closeEnterAnimation, settings.closeExitAnimation)
+        appPreferences.resetAppPreferences()
     }
 
     override fun setAppBarTitle(titleString: String) {
