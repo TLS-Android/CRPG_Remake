@@ -54,14 +54,17 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         gossip.setContextualHelp(ttsSettings.contextualHelp!!)
+        fetchPreferences()
+        listenToUser()
+    }
 
+    private fun fetchPreferences() {
         val modalityPreferences = this.requireActivity().getSharedPreferences(MODALITY, Context.MODE_PRIVATE)
         val ttsFlag = modalityPreferences.getBoolean(TTS, false)
         val srFlag = modalityPreferences.getBoolean(SR, false)
         val hasRun = modalityPreferences.getBoolean(flag.toString(), false)
 
         setupModality(ttsFlag, srFlag, hasRun)
-        listenToUser()
     }
 
     private fun listenToUser() =  gotev.speechResult.observe(viewLifecycleOwner){

@@ -37,13 +37,12 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
         actionMap = null
     )
 ) {
-
-    private lateinit var mLayoutManager: LinearLayoutManager
-    private lateinit var mAttributes: TimelineAttributes
-
     private val agendaVM: AgendaViewModel by viewModels()
 
     private var ctx = context
+
+    private lateinit var mAttributes: TimelineAttributes
+    private lateinit var mLayoutManager: LinearLayoutManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

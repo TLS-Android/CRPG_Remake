@@ -126,7 +126,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     avisoCampos.text = "Campos obrigatorios em falta!"
                     avisoCampos.visibility = VISIBLE
                 }
-
             }
         }
 

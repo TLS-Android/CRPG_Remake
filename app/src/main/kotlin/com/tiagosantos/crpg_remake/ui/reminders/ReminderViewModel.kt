@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.provider.AlarmClock.*
 import android.widget.EditText
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

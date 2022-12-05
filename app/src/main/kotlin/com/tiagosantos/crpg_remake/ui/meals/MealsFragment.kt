@@ -34,7 +34,7 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
         )
 ) {
 
-    private var flagMealChosen = false
+    private val mealsVM: MealsViewModel by viewModels()
 
     private val actionMap: Map<String, Any> by lazy {
         mapOf(
@@ -51,8 +51,9 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
         viewB.frameOpcaoDieta, viewB.frameOpcaoVegetariano
     )
 
+    private var flagMealChosen = false
     private var isLunch = false
-    private val mealsVM: MealsViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
