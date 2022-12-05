@@ -133,9 +133,9 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         setupUI(reminderVM)
     }
 
+    /** Kotlin function parameters are read-only values and are not assignable. **/
     private fun setupUI(reminderVM: ReminderViewModel) {
         with(viewB){
-            /** Kotlin function parameters are read-only values and are not assignable. **/
             with(secondLembrar){
                 button0.setOnClickListener { setLembrarLayout(
                     secondLembrar, 1,
@@ -184,7 +184,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                             false, false, true) }
             }
 
-            /**----- CANCELAR  ------**/
+            /** ----- CANCELAR  ------ **/
 
             buttonCancel.setOnClickListener {
                 avisoCampos.visibility = GONE

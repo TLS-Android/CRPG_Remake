@@ -50,7 +50,7 @@ class AgendaViewModel(
     var mDataList: LiveData<MutableList<Event>?> = _mDataList
 
     private val _currentMonth = MutableLiveData<Int?>()
-    private val currentMonth: LiveData<Int?> = _currentMonth
+    val currentMonth: LiveData<Int?> = _currentMonth
 
     private val fullFilename = context?.filesDir.toString() + "/" + eventFilename
 
@@ -116,7 +116,7 @@ class AgendaViewModel(
     private fun concatenatePublicPrivateEvents(): LiveData<MutableList<Event>?> {
         addMealsToPrivateEvents()
         addMealsToPublicEvents()
-        _mDataList.value?.plusAssign(privateEventList.value + publicEventList.value)
+        _mDataList.value?.plusAssign(privateEventList.value!! + publicEventList.value!!)
         return _mDataList
     }
 
