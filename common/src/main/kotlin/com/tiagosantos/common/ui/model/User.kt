@@ -26,22 +26,3 @@ class UserRepositoryImpl : UserRepository {
         _users.addAll(users)
     }
 }
-/*
-val appModule = module {
-    single<UserRepository> { UserRepositoryImpl() }
-    single { UserService(get()) } //The get() function allow to ask Koin to resolve the needed dependency.
-}
-
-class UserApplication : KoinComponent {
-
-    private val userService : UserService by inject()
-
-    // display our data
-    fun sayHello(){
-        val user = userService.getDefaultUser()
-        val message = "Hello '$user'!"
-        println(message)
-    }
-}
-*/
-//:: creates a member reference or a class reference.

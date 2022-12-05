@@ -3,11 +3,11 @@ package com.tiagosantos.common.ui.model
 import com.google.gson.annotations.SerializedName
 
 data class Reminder(
-    var title: String = "title",
-    val info: String = "info",
-    var date: String? = "x",
-    var hours: Int,
-    var mins: Int,
+    var title: String = "ipsis",
+    val info: String = "lorem",
+    var date: String? = "01/01/2000",
+    var hours: Int? = 23,
+    var mins: Int? = 59,
     var reminder_type: ReminderType ?= ReminderType.REFEICAO,
     var alarm_type: AlarmType ?= AlarmType.AMBOS,
     var alarm_freq: AlarmFrequency ?= AlarmFrequency.HOJE,

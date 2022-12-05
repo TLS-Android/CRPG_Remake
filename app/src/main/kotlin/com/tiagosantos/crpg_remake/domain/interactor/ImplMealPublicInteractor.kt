@@ -1,10 +1,11 @@
 package com.tiagosantos.crpg_remake.domain.interactor
 
 import com.tiagosantos.common.ui.coroutines.andThenFlow
-import com.tiagosantos.crpg_remake.domain.usecase.GetCurrentUserUseCase
 import com.tiagosantos.crpg_remake.domain.usecase.GetMealsUseCase
 import com.tiagosantos.common.ui.model.Meal
+import com.tiagosantos.crpg_remake.domain.usecase.GetCurrentMealUseCase
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.scheduling.DefaultIoScheduler.execute
 
 /**
  * Interactor uses in Public chat View Model
@@ -14,10 +15,10 @@ import kotlinx.coroutines.flow.Flow
  */
 class ImplMealPublicInteractor(
     private val GetMealsUseCase: GetMealsUseCase,
-    private val getCurrentUserUseCase: GetCurrentUserUseCase
+    private val getCurrentUserUseCase: GetCurrentMealUseCase
 ) : MealPublicInteractor {
 
     override suspend fun getMessagesList(): Flow<Result<List<Meal>>> =
         getCurrentUserUseCase.execute()
-            .andThenFlow(getPublicChatMessagesUseCase::execute)
+            .andThenFlow(getMessagesList()::execute)
 }
