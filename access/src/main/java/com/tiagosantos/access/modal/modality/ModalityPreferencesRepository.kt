@@ -13,8 +13,10 @@ class ModalityPreferencesRepository(
     private val ctx: Context,
 ) {
     fun requestMultiModalityOptions() {
-        val sharedPreferences = ctx.getSharedPreferences(MODALITY, Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
+        val editor = ctx.getSharedPreferences(
+            MODALITY,
+            Context.MODE_PRIVATE
+        ).edit()
 
         launchAlertDialog(
             "Permitir Sugestões de Áudio",

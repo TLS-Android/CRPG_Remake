@@ -36,6 +36,7 @@ class MainActivity : BaseActivity(
         TODO("Not yet implemented")
     }
 
+    /** /The modules() function in startKoin load the given list of modules } **/
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,8 +44,7 @@ class MainActivity : BaseActivity(
         val gossip by viewModels<GossipViewModel>()
 
         startKoin {
-            modules(appModule) //The modules() function in startKoin load the given list of modules }
-
+            modules(appModule)
             binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(binding.root)
 
