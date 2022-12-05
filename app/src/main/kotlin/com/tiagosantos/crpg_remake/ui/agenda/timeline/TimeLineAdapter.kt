@@ -53,7 +53,6 @@ class TimeLineAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimeLineViewHolder {
         if (!::mLayoutInflater.isInitialized) { mLayoutInflater = LayoutInflater.from(parent.context) }
         val view = mLayoutInflater.inflate(R.layout.item_timeline, parent, false)
-        //_binding = ItemTimelineBinding.inflate(inflater, container, false)
         return TimeLineViewHolder(view, viewType)
     }
 
