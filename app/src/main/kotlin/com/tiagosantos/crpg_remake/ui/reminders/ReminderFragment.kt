@@ -313,8 +313,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         bothVisible: Boolean
     ){
         alarmTypeButtonPressed = value
-        cbSom.visibility = VISIBLE
-        cbVib.visibility = INVISIBLE
+        cbSom.show()
+        cbVib.invisible()
 
         view.buttonSelecionarDias.visibility = when {
             soundVisible || vibVisible || bothVisible -> VISIBLE
@@ -330,17 +330,21 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         isVisible: Boolean,
         isTextVisible: Boolean,
     ){
-        lembrarButtonPressed = value
-        setButtonColorsReminder(viewLembrar, lembrarButtonPressed)
-        when {
-            isVisible -> viewLembrar.inserirTituloLembretePersonalizado.show()
-            !isVisible -> viewLembrar.inserirTituloLembretePersonalizado.invisible()
+        with(viewLembrar){
+            lembrarButtonPressed = value
+            setButtonColorsReminder(this, lembrarButtonPressed)
+            when {
+                isVisible -> inserirTituloLembretePersonalizado.show()
+                !isVisible -> inserirTituloLembretePersonalizado.invisible()
+            }
+
+            when {
+                isTextVisible -> textEditPersonalizado.show()
+                !isTextVisible -> textEditPersonalizado.invisible()
+            }
+
         }
 
-        when {
-            isTextVisible -> viewLembrar.textEditPersonalizado.show()
-            !isTextVisible -> viewLembrar.textEditPersonalizado.invisible()
-        }
     }
 
     private fun setSecondLayout(
@@ -363,8 +367,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             else -> { INVISIBLE }
         }
     }
-
-    val more : (String, Int) -> String = { str, int -> str + int }
 
     private fun clickAndFocus() { expandable: ExpandableLayout ->
         expandable.performClick(); expandable.requestFocus() }

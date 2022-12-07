@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.annotation.DimenRes
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 
-
 fun View.showWhenClicked() {
     setOnClickListener { this.visibility = View.VISIBLE }
 }
@@ -69,7 +68,6 @@ fun ViewGroup.getLastChildOrNull(): View? {
     if (childCount == 0) return null
     return getChildAt(childCount - 1)
 }
-
 
 /**
  * Get views by tag for ViewGroup.
@@ -149,3 +147,5 @@ inline fun ViewGroup.eachChild(func: (view: View) -> Unit) {
         func(getChildAt(i))
     }
 }
+
+val more : (String, Int) -> String = { str, int -> str + int }
