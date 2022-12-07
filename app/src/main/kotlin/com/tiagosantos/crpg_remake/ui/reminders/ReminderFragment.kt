@@ -45,19 +45,14 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
     private var _viewSuccess: ReminderActivitySuccessBinding? = null
     private val viewSuccess get() = _viewSuccess!!
 
-    private var hoursMinutesFlag = false
-
     private val reminderVM: ReminderViewModel by viewModels()
 
     private var hoursInt = 0
     private var minsInt = 0
+    private var hoursMinutesFlag = false
 
     private lateinit var et: EditText
     private lateinit var etMin: EditText
-
-    lateinit var cbSom: ImageView
-    lateinit var cbVib: ImageView
-    lateinit var cbAmbos: ImageView
 
     private lateinit var helper : HoursHelper
 
@@ -104,9 +99,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
 
         with(viewIntro){
             reminderIntroHintLayout.show()
-            createReminderActionButton.setOnClickListener {
-                reminderIntroHintLayout.hide()
-            }
+            createReminderActionButton.setOnClickListener { reminderIntroHintLayout.hide() }
         }
 
         with(viewB) {
@@ -127,8 +120,8 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                         buttonOk.setOnClickListener { successLayout.hide() }
                         launchIntent()
                     }
-                } else if (hoursInt > 23 || minsInt > 59) {
-                    avisoCampos.run { text = "Horas ou minutos invalidos"; show() }
+                } else if (hoursInt in 0..23 || minsInt in 0.. 59) {
+                    avisoCampos.run { text = context.getString(R.string.horas_invalidas); show() }
                 } else {
                     avisoCampos.run { text = "Campos obrigatorios em falta!"; show() }
                 }
@@ -174,10 +167,6 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             }
 
             with(secondAlerta){
-                    cbSom = checkboxSom
-                    cbVib = checkboxVibrar
-                    cbAmbos = checkboxAmbos
-
                     imageButtonSom.setOnClickListener{
                         setSoundLogosVisible(
                             view = secondDia,
@@ -191,26 +180,28 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     imageButtonAmbos.setOnClickListener{
                         setSoundLogosVisible(secondDia,3,
                             false, false, true) }
-            }
 
-            /** ----- CANCELAR  ------ **/
 
-            buttonCancel.setOnClickListener {
-                avisoCampos.hide()
+                /** ----- CANCELAR  ------ **/
 
-                listOf(cbSom,cbVib,cbAmbos).forEach { it.hide() }
-                lembrarButtonPressed = 0
-                alarmTypeButtonPressed = 0
-                alarmFreqButtonPressed = 0
+                buttonCancel.setOnClickListener {
+                    avisoCampos.hide()
 
-                with(secondHoras){
-                    editHours.setEmptyText()
-                    editMinutes.setEmptyText()
+                    listOf(checkboxSom,checkboxVibrar,checkboxAmbos).forEach { it.hide() }
+                    lembrarButtonPressed = 0
+                    alarmTypeButtonPressed = 0
+                    alarmFreqButtonPressed = 0
+
+                    with(secondHoras){
+                        editHours.setEmptyText()
+                        editMinutes.setEmptyText()
+                    }
+
+                    secondNotas.editTextNotes.setEmptyText()
                 }
 
-                secondNotas.editTextNotes.setEmptyText()
             }
-
+            
             /** ----- CONFIRMAR ------ **/
 
             buttonConfirm.setOnClickListener {
