@@ -31,6 +31,10 @@ fun View.invisible() {
     setOnClickListener { this.visibility = View.INVISIBLE }
 }
 
+fun View.showAndBringToFront() {
+    this.visibility = View.VISIBLE.apply { bringToFront() }
+}
+
 fun EditText.setEmptyText() {
     this.setText(EMPTY_STRING)
 }

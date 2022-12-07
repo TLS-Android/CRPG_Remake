@@ -6,6 +6,9 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.card.MaterialCardView
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
+import com.tiagosantos.common.ui.extension.hide
+import com.tiagosantos.common.ui.extension.show
+import com.tiagosantos.common.ui.extension.showAndBringToFront
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.base.FragmentSettings
@@ -60,6 +63,8 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
         isLunch = requireArguments().getBoolean("isLunch")
     }
 
+
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -75,39 +80,37 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
             for (s in cardList) { if (s != card) s?.isChecked = false }
         }
 
+        fun MaterialCardView.setFrameOnClick() {
+            this.setOnClickListener {
+                setChecks(cardList,  this)
+            }.also { updateFlagMealChosen() }
+        }
+
         with(viewB){
-            frameOpcaoCarne.setOnClickListener {
-                setChecks(cardList,  frameOpcaoCarne)
-            }.also { updateFlagMealChosen() }
+            frameOpcaoCarne.setFrameOnClick()
+            frameOpcaoPeixe.setFrameOnClick()
+            frameOpcaoDieta.setFrameOnClick()
+            frameOpcaoVegetariano.setFrameOnClick()
 
-            frameOpcaoPeixe.setOnClickListener {
-                setChecks(cardList,  frameOpcaoPeixe)
-            }.also { updateFlagMealChosen() }
-
-            frameOpcaoDieta.setOnClickListener {
-                setChecks(cardList,  frameOpcaoPeixe)
-            }.also { updateFlagMealChosen() }
-
-            frameOpcaoVegetariano.setOnClickListener {
-                setChecks(cardList, frameOpcaoVegetariano )
-            }.also { updateFlagMealChosen() }
-
-            buttonConfirmMeal.setOnClickListener {
-                if (mealsVM.selectedOption.value != 0) {
-                    success.mealChoiceSuccess.visibility =
-                        View.VISIBLE.apply { it.bringToFront() }
-                    avisoNenhumaRefeicaoChecked.visibility = View.GONE
-                    mealsVM.updateMealChoiceOnLocalStorage(
-                        mealsVM.selectedOption,
-                        isLunch
-                    )
-                    success.buttonOk.setOnClickListener {
-                        success.mealChoiceSuccess.visibility = View.GONE
+            with(success){
+                buttonConfirmMeal.setOnClickListener {
+                    if (mealsVM.selectedOption.value != 0) {
+                        mealChoiceSuccess.showAndBringToFront()
+                        avisoNenhumaRefeicaoChecked.hide()
+                        mealsVM.updateMealChoiceOnLocalStorage(
+                            mealsVM.selectedOption,
+                            isLunch
+                        )
+                        buttonOk.setOnClickListener {
+                            mealChoiceSuccess.hide()
+                        }
+                    } else {
+                        mealChoiceSuccess.show()
                     }
-                } else {
-                    success.mealChoiceSuccess.visibility = View.VISIBLE
                 }
+
             }
+
 
         }
     }
