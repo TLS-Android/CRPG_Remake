@@ -1,7 +1,6 @@
 package com.tiagosantos.crpg_remake.ui.meals
 
 import android.os.Bundle
-import android.view.View
 import androidx.fragment.app.viewModels
 import com.google.android.material.card.MaterialCardView
 import com.tiagosantos.access.modal.settings.SRSettings
