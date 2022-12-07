@@ -56,26 +56,17 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
     private var flagMealChosen = false
     private var isLunch = false
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         isLunch = requireArguments().getBoolean("isLunch")
     }
 
-
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        gossip.contextualHelp
-
-        val command = "ispis lorem"
-        performActionWithVoiceCommand(command,actionMap)
 
         fun setChecks(cardList: List<MaterialCardView?>, card: MaterialCardView) {
             if (!card.isChecked) mealsVM.updateSelectedOption(1)
                  else mealsVM.updateSelectedOption(0)
-
             for (s in cardList) { if (s != card) s?.isChecked = false }
         }
 
@@ -96,21 +87,11 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
                     if (mealsVM.selectedOption.value != 0) {
                         mealChoiceSuccess.showAndBringToFront()
                         avisoNenhumaRefeicaoChecked.hide()
-                        mealsVM.updateMealChoiceOnLocalStorage(
-                            mealsVM.selectedOption,
-                            isLunch
-                        )
-                        buttonOk.setOnClickListener {
-                            mealChoiceSuccess.hide()
-                        }
-                    } else {
-                        mealChoiceSuccess.show()
-                    }
+                        mealsVM.updateMealChoiceOnLocalStorage(mealsVM.selectedOption, isLunch)
+                        buttonOk.setOnClickListener { mealChoiceSuccess.hide() }
+                    } else { mealChoiceSuccess.show() }
                 }
-
             }
-
-
         }
     }
 
