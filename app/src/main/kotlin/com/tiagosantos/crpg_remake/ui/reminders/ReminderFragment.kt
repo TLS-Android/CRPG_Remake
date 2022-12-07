@@ -10,6 +10,10 @@ import android.widget.*
 import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
 import com.skydoves.expandablelayout.ExpandableLayout
+import com.tiagosantos.common.ui.extension.hide
+import com.tiagosantos.common.ui.extension.invisible
+import com.tiagosantos.common.ui.extension.setEmptyText
+import com.tiagosantos.common.ui.extension.show
 import com.tiagosantos.common.ui.model.AlarmFrequency.*
 import com.tiagosantos.common.ui.model.AlarmType.SOM
 import com.tiagosantos.common.ui.model.AlarmType.VIBRAR
@@ -100,35 +104,37 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         super.onViewCreated(view, savedInstanceState)
 
         with(viewIntro){
-            reminderIntroHintLayout.visibility = VISIBLE
+            reminderIntroHintLayout.show()
             createReminderActionButton.setOnClickListener {
-                reminderIntroHintLayout.visibility = GONE
+                reminderIntroHintLayout.hide()
             }
         }
 
         with(viewB) {
             setLayoutClickListeners(listOf(expandableDia, expandableLembrar, expandableDia))
-            setExpandablesClickListeners(listOf(expandableHoras,expandableNotas,expandableAlerta,expandableDia))
+            setExpandablesClickListeners(listOf(
+                expandableHoras,
+                expandableNotas,
+                expandableAlerta,
+                expandableDia
+            ))
 
             with(viewSuccess){
                 if (successFlag) {
                     reminderVM.addReminder(newReminder)
                     if (reminderVM.flagReminderAdded) {
-                        avisoCampos.visibility = GONE
-                        successLayout.visibility = VISIBLE
-                        buttonOk.setOnClickListener { successLayout.visibility = GONE }
+                        avisoCampos.hide()
+                        successLayout.show()
+                        buttonOk.setOnClickListener { successLayout.hide() }
                         launchIntent()
                     }
                 } else if (hoursInt > 23 || minsInt > 59) {
-                    avisoCampos.text = "Horas ou minutos invalidos"
-                    avisoCampos.visibility = VISIBLE
+                    avisoCampos.run { text = "Horas ou minutos invalidos"; show() }
                 } else {
-                    avisoCampos.text = "Campos obrigatorios em falta!"
-                    avisoCampos.visibility = VISIBLE
+                    avisoCampos.run { text = "Campos obrigatorios em falta!"; show() }
                 }
             }
         }
-
         setupUI(reminderVM)
     }
 
@@ -137,21 +143,26 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         with(viewB){
             with(secondLembrar){
                 button0.setOnClickListener { setLembrarLayout(
-                    secondLembrar, 1,
+                    this,
+                    1,
                     isVisible = true,
                     isTextVisible = true,
                 ) }
                 button1.setOnClickListener { setLembrarLayout(
-                    secondLembrar, 2, isVisible = false, isTextVisible = false) }
+                    this, 2, isVisible = false, isTextVisible = false) }
                 button2.setOnClickListener { setLembrarLayout(
-                    secondLembrar, 3,  isVisible = false, isTextVisible = false) }
+                    this, 3,  isVisible = false, isTextVisible = false) }
                 button3.setOnClickListener { setLembrarLayout(
-                    secondLembrar, 4, isVisible = true, isTextVisible = true) }
+                    this, 4, isVisible = true, isTextVisible = true) }
             }
 
             with(secondHoras){
-                et = editHours.apply { filters = arrayOf(InputFilterMinMax("00", "23"), InputFilter.LengthFilter(2)) }
-                etMin = editMinutes.apply { filters = arrayOf(InputFilterMinMax("00", "59"), InputFilter.LengthFilter(2)) }
+                et = editHours.apply {
+                    filters = arrayOf(InputFilterMinMax("00", "23"), InputFilter.LengthFilter(2))
+                }
+                etMin = editMinutes.apply {
+                    filters = arrayOf(InputFilterMinMax("00", "59"), InputFilter.LengthFilter(2))
+                }
             }
 
             with(secondDia){
@@ -188,17 +199,17 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             buttonCancel.setOnClickListener {
                 avisoCampos.visibility = GONE
 
-                listOf(cbSom,cbVib,cbAmbos).forEach { it.visibility = INVISIBLE }
+                listOf(cbSom,cbVib,cbAmbos).forEach { it.hide() }
                 lembrarButtonPressed = 0
                 alarmTypeButtonPressed = 0
                 alarmFreqButtonPressed = 0
 
                 with(secondHoras){
-                    editHours.setText(EMPTY_STRING)
-                    editMinutes.setText(EMPTY_STRING)
+                    editHours.setEmptyText()
+                    editMinutes.setEmptyText()
                 }
 
-                secondNotas.editTextNotes.setText(EMPTY_STRING)
+                secondNotas.editTextNotes.setEmptyText()
             }
 
             /** ----- CONFIRMAR ------ **/
@@ -323,13 +334,13 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
         lembrarButtonPressed = value
         setButtonColorsReminder(viewLembrar, lembrarButtonPressed)
         when {
-            isVisible -> viewLembrar.inserirTituloLembretePersonalizado.visibility = VISIBLE
-            !isVisible -> viewLembrar.inserirTituloLembretePersonalizado.visibility = INVISIBLE
+            isVisible -> viewLembrar.inserirTituloLembretePersonalizado.show()
+            !isVisible -> viewLembrar.inserirTituloLembretePersonalizado.invisible()
         }
 
         when {
-            isTextVisible -> viewLembrar.textEditPersonalizado.visibility = VISIBLE
-            !isTextVisible -> viewLembrar.textEditPersonalizado.visibility = INVISIBLE
+            isTextVisible -> viewLembrar.textEditPersonalizado.show()
+            !isTextVisible -> viewLembrar.textEditPersonalizado.invisible()
         }
     }
 
