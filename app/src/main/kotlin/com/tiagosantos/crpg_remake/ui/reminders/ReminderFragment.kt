@@ -25,7 +25,6 @@ import com.tiagosantos.common.ui.model.ReminderType.TRANSPORTE
 import com.tiagosantos.common.ui.model.ReminderType.REFEICAO
 import com.tiagosantos.crpg_remake.base.BaseFragment
 import com.tiagosantos.crpg_remake.base.FragmentSettings
-import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.common.ui.utils.InputFilterMinMax
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.*
@@ -197,7 +196,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
             /** ----- CANCELAR  ------ **/
 
             buttonCancel.setOnClickListener {
-                avisoCampos.visibility = GONE
+                avisoCampos.hide()
 
                 listOf(cbSom,cbVib,cbAmbos).forEach { it.hide() }
                 lembrarButtonPressed = 0
@@ -221,7 +220,7 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                     minsInt = secondHoras.editMinutes.text.toString().toInt()
                     hoursMinutesFlag = true
                 } else {
-                    avisoCampos.run { text = "Valor em falta"; visibility = VISIBLE }
+                    avisoCampos.run { text = "Valor em falta"; show() }
                 }
 
                 with(reminderVM.newReminder) {

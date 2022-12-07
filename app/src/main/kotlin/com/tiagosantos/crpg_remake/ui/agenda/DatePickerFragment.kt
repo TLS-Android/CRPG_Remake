@@ -7,6 +7,8 @@ import android.view.View.VISIBLE
 import androidx.fragment.app.viewModels
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
+import com.tiagosantos.common.ui.extension.hide
+import com.tiagosantos.common.ui.extension.show
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentDatePickerBinding
@@ -119,10 +121,10 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
             }
 
             buttonSelecionar.setOnClickListener {
-                if (selected) { noDateSelectedWarning.visibility = GONE;
+                if (selected) { noDateSelectedWarning.hide()
                     goToFragment(AgendaFragment())
                 } else {
-                    noDateSelectedWarning.visibility = VISIBLE
+                    noDateSelectedWarning.show()
                 }
             }
         }

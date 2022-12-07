@@ -11,6 +11,7 @@ import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.plataforma.crpg.TimelineView
+import com.tiagosantos.common.ui.extension.invisible
 import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.common.ui.model.EventType
 import com.tiagosantos.common.ui.model.EventType.*
@@ -162,8 +163,8 @@ class TimeLineAdapter(
         with(_binding!!){
             if (overlapArray.contains(concatTime)) {
                 timeline.marker.setVisible(false, false)
-                textTimelineStartTime.visibility = INVISIBLE
-                textTimelineEndTime.visibility = INVISIBLE
+                textTimelineStartTime.invisible()
+                textTimelineEndTime.invisible()
             } else {
                 overlapArray.add(concatTime)
                 timeline.setMarker(ContextCompat.getDrawable(

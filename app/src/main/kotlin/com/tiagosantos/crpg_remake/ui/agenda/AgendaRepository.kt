@@ -7,7 +7,6 @@ import com.tiagosantos.common.ui.model.EventType
 object AgendaRepository {
     val gson = Gson()
 
-    //create 2 fixed events for lunch and dinner
     var lunchEvent = Event("Almoço", "Clicar para escolher refeição", EventType.MEAL, "1200", "1300",
         "","","", false, 0)
     var dinnerEvent = Event("Jantar", "Clicar para escolher refeição", EventType.MEAL, "2000", "2100",
