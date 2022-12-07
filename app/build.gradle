@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
 }
@@ -9,7 +9,6 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.tiagosantos.crpg_remake"
         minSdk 28
         targetSdk 33
         versionCode 1
