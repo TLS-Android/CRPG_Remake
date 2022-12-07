@@ -111,6 +111,11 @@ class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
                 expandableDia
             ))
 
+            when{
+                successFlag || hoursInt in 0..23 -> println("Hello")
+
+            }
+
             with(viewSuccess){
                 if (successFlag) {
                     reminderVM.addReminder(newReminder)
