@@ -6,6 +6,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.tiagosantos.common.ui.utils.NetworkConnectionThrowable
 import com.tiagosantos.crpg_remake.R
+/*
 
 @RequiresApi(Build.VERSION_CODES.R)
 class ImplResourcesProvider(
@@ -27,4 +28,4 @@ class ImplResourcesProvider(
 
     override fun getFormattedString(resId: Int, vararg args: Any): String =
         resources.getString(resId, *args)
-}
+}*/

@@ -33,7 +33,7 @@ class MealsViewModel(
     }
 
     private fun observeMessagesList() {
-        viewModelScope.launch {
+     /*   viewModelScope.launch {
             interactor.getMessagesList()
                 .collect {
                     it.onSuccess { messagesList ->
@@ -65,7 +65,7 @@ class MealsViewModel(
                     return isVisible
                 }
             }
-        }
+        }*/
     }
 
     fun updateMealChoiceOnLocalStorage(selectedOption: LiveData<Int?>, lunch: Boolean) {

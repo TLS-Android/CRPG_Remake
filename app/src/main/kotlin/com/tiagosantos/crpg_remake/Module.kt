@@ -2,9 +2,9 @@ package com.tiagosantos.crpg_remake
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.tiagosantos.crpg_remake.helper.ImplResourcesProvider
-import com.tiagosantos.crpg_remake.helper.ResourcesProvider
-import org.koin.android.ext.koin.androidApplication
+//import com.tiagosantos.crpg_remake.helper.ImplResourcesProvider
+//import com.tiagosantos.crpg_remake.helper.ResourcesProvider
+//import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
 
@@ -19,8 +19,8 @@ fun getModules() = listOf(
 
 @RequiresApi(Build.VERSION_CODES.R)
 val presentationCommonModule = module {
-    single<ResourcesProvider> {
-        ImplResourcesProvider(androidApplication().resources)
-    }
+    //single<ResourcesProvider> {
+       // ImplResourcesProvider(androidApplication().resources)
+    //}
 }
 

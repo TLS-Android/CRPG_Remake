@@ -1,6 +1,9 @@
 package com.tiagosantos.crpg_remake.ui.meals
 
 import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.fragment.app.viewModels
 import com.google.android.material.card.MaterialCardView
 import com.tiagosantos.access.modal.settings.SRSettings
@@ -74,6 +77,12 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
             }.also { updateFlagMealChosen() }
         }
 
+        fun ViewGroup.eachChild(func: (view: View) -> Unit) {
+            for (i in 0 until childCount) {
+                func(getChildAt(i))
+            }
+        }
+
         with(viewB){
             frameOpcaoCarne.setFrameOnClick()
             frameOpcaoPeixe.setFrameOnClick()
@@ -91,6 +100,10 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
                 }
             }
         }
+    }
+
+    private fun setFrameOnClick() {
+        TODO("Not yet implemented")
     }
 
     override fun onInitDataBinding() {

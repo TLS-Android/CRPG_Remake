@@ -19,12 +19,12 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
         sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
         showBackButton = true
     ),
-        ttsSettings = TTSSettings(
-            contextualHelp =  "Indique qual o seu estado de espirito atual",
-        ),
-        srSettings = SRSettings(
-            isListening = false,
-        )
+    ttsSettings = TTSSettings(
+        contextualHelp =  "Indique qual o seu estado de espirito atual",
+    ),
+    srSettings = SRSettings(
+        isListening = false,
+    )
 ) {
 
     private val medViewModel: MeditationViewModel by viewModels()
@@ -56,8 +56,10 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
         }
     }
 
-    override fun performActionWithVoiceCommand(command: String, actionMap: Map<String, Any>) =
-            feelingsMap.getOrDefault(command) { println("do nothing") }
+    override fun performActionWithVoiceCommand(
+        command: String,
+        actionMap: Map<String, Any>
+    ) = feelingsMap.getOrDefault(command) { println("do nothing") }
 
     override fun onPause() {
         super.onPause()

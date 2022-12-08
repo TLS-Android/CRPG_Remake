@@ -149,11 +149,4 @@ inline fun ViewGroup.eachChild(func: (view: View) -> Unit) {
     }
 }
 
-fun FrameLayout.eachFrame() {
-    for (i in 0 until childCount) {
-        getChildAt(i).setFrameOnClick()
-    }
-
-}
-
 val more : (String, Int) -> String = { str, int -> str + int }

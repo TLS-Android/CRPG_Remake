@@ -10,6 +10,8 @@ import android.widget.*
 import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
 import com.skydoves.expandablelayout.ExpandableLayout
+import com.tiagosantos.access.modal.settings.SRSettings
+import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.extension.hide
 import com.tiagosantos.common.ui.extension.invisible
 import com.tiagosantos.common.ui.extension.setEmptyText
@@ -23,19 +25,25 @@ import com.tiagosantos.common.ui.model.ReminderType
 import com.tiagosantos.common.ui.model.ReminderType.MEDICACAO
 import com.tiagosantos.common.ui.model.ReminderType.TRANSPORTE
 import com.tiagosantos.common.ui.model.ReminderType.REFEICAO
-import com.tiagosantos.crpg_remake.base.BaseFragment
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.common.ui.utils.InputFilterMinMax
 import com.tiagosantos.crpg_remake.R
+import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.databinding.*
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.newReminder
 import com.tiagosantos.crpg_remake.ui.reminders.helpers.HoursHelper
 
-class ReminderFragment : BaseFragment<ReminderFragmentBinding>(
+class ReminderFragment() : BaseModalFragment<ReminderFragmentBinding>(
     layoutId = R.layout.reminder_fragment,
     FragmentSettings(
         appBarTitle = R.string.title_reminders,
         sharedPreferencesBooleanName = R.string.remindersHasRun.toString(),
+    ),
+    ttsSettings = TTSSettings(
+        contextualHelp =  "Crie um novo lembrete",
+    ),
+    srSettings = SRSettings(
+        isListening = false,
     )
 ) {
 

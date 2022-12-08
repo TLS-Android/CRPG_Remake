@@ -14,9 +14,10 @@ import com.tiagosantos.access.modal.gotev.GotevViewModel
 import com.tiagosantos.crpg_remake.base.ActivitySettings
 import com.tiagosantos.crpg_remake.base.BaseActivity
 import com.tiagosantos.crpg_remake.databinding.ActivityMainBinding
+import com.tiagosantos.crpg_remake.global_preferences.AppPreferencesRepository
 import org.koin.core.context.GlobalContext.startKoin
 
-class MainActivity : BaseActivity(
+class MainActivity(appPreferences: AppPreferencesRepository) : BaseActivity(
     layoutId = R.layout.activity_main,
     ActivitySettings(
         isAdjustFontScaleToNormal = true,
@@ -24,7 +25,7 @@ class MainActivity : BaseActivity(
             WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION,
             WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
         )
-    )
+    ), appPreferences
 ) {
     private lateinit var binding: ActivityMainBinding
 
@@ -44,7 +45,7 @@ class MainActivity : BaseActivity(
         val gossip by viewModels<GossipViewModel>()
 
         startKoin {
-            modules(appModule)
+            //modules(appModule)
             binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(binding.root)
 
