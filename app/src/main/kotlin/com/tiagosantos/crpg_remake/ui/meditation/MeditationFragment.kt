@@ -56,10 +56,11 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
         }
     }
 
+    /*
     override fun performActionWithVoiceCommand(
         command: String,
         actionMap: Map<String, Any>
-    ) = feelingsMap.getOrDefault(command) { println("do nothing") }
+    ) = feelingsMap.getOrDefault(command) { println("do nothing") } */
 
     override fun onPause() {
         super.onPause()

@@ -19,10 +19,9 @@ class MeditationViewModel(application: Application) : AndroidViewModel(applicati
         val uri: Uri = Uri.parse("android.resource://" + context?.packageName.toString()
                 + "/raw/meditation_sound")
 
-        player_view.player = player
+        view.playerView.player = player
         val mediaItem: MediaItem = MediaItem.fromUri(uri)
         player.setMediaItem(mediaItem)
-
         player.prepare()
         player.play()
     }
