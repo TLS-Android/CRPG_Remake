@@ -92,6 +92,28 @@
     <string name="criado_c_sucesso">criado c sucesso</string>
     <string name="horas_invalidas">Horas ou minutos invalidos</string>
 
-    //
+    //TIMELINE ITEM
+    <string name="horizontal">Horizontal</string>
+    <string name="vertical">Vertical</string>
+    <string name="marker">Marker</string>
+    <string name="elevation">Size</string>
+    <string name="size">Size</string>
+    <string name="color">Color</string>
+    <string name="marker_drawable_message">You can also change the marker drawable in attributes.</string>
+    <string name="marker_in_center">In center</string>
+    <string name="line">Line</string>
+    <string name="start_line_color">Start Line Color</string>
+    <string name="end_line_color">End Line Color</string>
+    <string name="width">Width</string>
+    <string name="type">Type</string>
+    <string name="dash_length">Dash Length</string>
+    <string name="dash_gap">Dash Gap</string>
+    <string name="line_padding">Line Padding</string>
+    <string name="top_padding">Top Padding</string>
+    <string name="bottom_padding">Bottom Padding</string>
+    <string name="left_padding">Left Padding</string>
+    <string name="right_padding">Right Padding</string>
+    <string name="marker_padding_message">When orientation is vertical then only top and bottom
+        padding is applied, orientation is horizontal then only left and right padding is applied.</string>
 
 </resources>
