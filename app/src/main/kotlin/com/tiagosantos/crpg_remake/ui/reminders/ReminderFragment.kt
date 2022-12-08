@@ -186,13 +186,18 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                             1,
                             soundVisible = true,
                             vibVisible = false,
-                            bothVisible = false) }
+                            bothVisible = false,
+                            checkboxAmbos,
+                            checkboxSom
+                        ) }
                     imageButtonVibrar.setOnClickListener{
-                        setSoundLogosVisible(secondDia,2,
-                            false, true, false) }
+                        setSoundLogosVisible(secondDia,2, false,
+                            true, false, checkboxVibrar, checkboxSom) }
                     imageButtonAmbos.setOnClickListener{
-                        setSoundLogosVisible(secondDia,3,
-                            false, false, true) }
+                        setSoundLogosVisible(
+                            secondDia, 3, false,
+                            false, true, checkboxVibrar, checkboxSom
+                        ) }
 
 
                 /** ----- CANCELAR  ------ **/
@@ -314,18 +319,19 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
         value: Int,
         soundVisible: Boolean,
         vibVisible: Boolean,
-        bothVisible: Boolean
+        bothVisible: Boolean,
+        checkboxVib: ImageView,
+        checkboxSom: ImageView
     ){
         alarmTypeButtonPressed = value
-        cbSom.show()
-        cbVib.invisible()
+        checkboxSom.show()
+        checkboxVib.invisible()
 
         view.buttonSelecionarDias.visibility = when {
             soundVisible || vibVisible || bothVisible -> VISIBLE
             !soundVisible || !vibVisible || !bothVisible  -> INVISIBLE
             else -> { INVISIBLE }
         }
-
     }
 
     private fun setLembrarLayout(
@@ -346,9 +352,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                 isTextVisible -> textEditPersonalizado.show()
                 !isTextVisible -> textEditPersonalizado.invisible()
             }
-
         }
-
     }
 
     private fun setSecondLayout(
