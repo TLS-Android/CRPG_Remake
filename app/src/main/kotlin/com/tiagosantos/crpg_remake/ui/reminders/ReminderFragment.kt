@@ -376,8 +376,12 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
         }
     }
 
-    private fun clickAndFocus() { expandable: ExpandableLayout ->
-        expandable.performClick(); expandable.requestFocus() }
+    /*private fun clickAndFocus() { expandable: ExpandableLayout ->
+        expandable.performClick(); expandable.requestFocus() }*/
+
+    private fun clickAndFocus() { //
+        // TODO
+         }
 
     private fun performActionWithVoiceCommand(
         view: ReminderFragmentBinding,
