@@ -33,7 +33,7 @@ import com.tiagosantos.crpg_remake.databinding.*
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.newReminder
 import com.tiagosantos.crpg_remake.ui.reminders.helpers.HoursHelper
 
-class ReminderFragment() : BaseModalFragment<ReminderFragmentBinding>(
+class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
     layoutId = R.layout.reminder_fragment,
     FragmentSettings(
         appBarTitle = R.string.title_reminders,
