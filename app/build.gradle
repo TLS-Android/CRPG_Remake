@@ -89,7 +89,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
     //THREE TEN
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.4.3'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.4.4'
 
     //SEEKBAR
     implementation ('org.adw.library:discrete-seekbar:1.0.1') {
