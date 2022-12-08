@@ -5,9 +5,7 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.card.MaterialCardView
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
-import com.tiagosantos.common.ui.extension.hide
-import com.tiagosantos.common.ui.extension.show
-import com.tiagosantos.common.ui.extension.showAndBringToFront
+import com.tiagosantos.common.ui.extension.*
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.base.FragmentSettings

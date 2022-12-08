@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.annotation.DimenRes
@@ -146,6 +147,13 @@ inline fun ViewGroup.eachChild(func: (view: View) -> Unit) {
     for (i in 0 until childCount) {
         func(getChildAt(i))
     }
+}
+
+fun FrameLayout.eachFrame() {
+    for (i in 0 until childCount) {
+        getChildAt(i).setFrameOnClick()
+    }
+
 }
 
 val more : (String, Int) -> String = { str, int -> str + int }
