@@ -14,8 +14,6 @@ import android.view.View;
 
 import androidx.annotation.IntDef;
 
-import com.tiagosantos.crpg_remake.R;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 

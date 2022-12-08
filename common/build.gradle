@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.tiagosantos.crpg_remake'
+    namespace 'com.tiagosantos.common'
     compileSdk 33
 
     defaultConfig {

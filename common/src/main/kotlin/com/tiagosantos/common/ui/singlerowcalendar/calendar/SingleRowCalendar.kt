@@ -11,7 +11,7 @@ import com.tiagosantos.common.ui.singlerowcalendar.selection.CalendarDetailsLook
 import com.tiagosantos.common.ui.singlerowcalendar.selection.CalendarKeyProvider
 import com.tiagosantos.common.ui.singlerowcalendar.selection.CalendarSelectionManager
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils
-import com.tiagosantos.crpg_remake.R
+import com.tiagosantos.common.R
 import java.util.*
 
 

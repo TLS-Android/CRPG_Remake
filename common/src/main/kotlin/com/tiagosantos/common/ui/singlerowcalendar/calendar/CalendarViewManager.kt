@@ -1,6 +1,5 @@
 package com.tiagosantos.common.ui.singlerowcalendar.calendar
 
-import com.tiagosantos.common.ui.singlerowcalendar.calendar.SingleRowCalendarAdapter
 import java.util.*
 
 /**
