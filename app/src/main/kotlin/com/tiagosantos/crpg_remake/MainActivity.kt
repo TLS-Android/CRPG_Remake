@@ -54,9 +54,7 @@ class MainActivity(appPreferences: AppPreferencesRepository) : BaseActivity(
             val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
             val appBarConfiguration = AppBarConfiguration(
-                setOf(
-                    R.id.navigation_agenda
-                )
+                setOf(R.id.navigation_agenda)
             )
             setupActionBarWithNavController(navController, appBarConfiguration)
             navView.setupWithNavController(navController)

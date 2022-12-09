@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
-            tools:context="com.plataforma.crpg.ui.agenda.DatePickerFragment">
+            tools:context="com.tiagosantos.crpg_remake.ui.agenda.DatePickerFragment">
 
                 <include layout="@layout/selected_calendar_item"
                     android:id="@+id/selected_item"/>

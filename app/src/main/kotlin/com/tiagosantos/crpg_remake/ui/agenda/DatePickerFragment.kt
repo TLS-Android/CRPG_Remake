@@ -2,8 +2,6 @@ package com.tiagosantos.crpg_remake.ui.agenda
 
 import android.os.Bundle
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import androidx.fragment.app.viewModels
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
@@ -80,7 +78,7 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
                     date: Date,
                     position: Int,
                     isSelected: Boolean,
-                ) = with(calendarItem) {
+                ) = with(viewB.calendarItem) {
                     tvDateCalendarItem.text = getDayNumber(date)
                     tvDayCalendarItem.text = getDay3LettersName(date)
                 }

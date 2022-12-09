@@ -8,6 +8,7 @@ import com.tiagosantos.crpg_remake.R
 fun Fragment.launch(navigation: Navigation) {
     val commonNavOptionsBuilder = NavOptions.Builder()
 
+    /*
     val navResId = when (navigation.to) {
         NavigateTo.MEALS -> R.id.actionNavToMeals
         NavigateTo.PROFILE_SETTINGS -> R.id.actionNavToProfileSettings
@@ -27,5 +28,8 @@ fun Fragment.launch(navigation: Navigation) {
                 requireActivity().onBackPressed()
             else -> {}
         }
+
+
+     */
 
 }
