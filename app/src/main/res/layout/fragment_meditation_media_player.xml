@@ -14,7 +14,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="com.plataforma.crpg.ui.meditation.MeditationMediaPlayerFragment">
+    tools:context="com.tiagosantos.crpg_remake.ui.meditation.MeditationMediaPlayerFragment">
 
     <include layout="@layout/custom_player_control_view"
         android:id="@+id/custom"/>
