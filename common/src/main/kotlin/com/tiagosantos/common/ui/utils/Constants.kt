@@ -8,6 +8,7 @@ object Constants {
 
     // MY LOCALE
     const val EMPTY_STRING = ""
+    const val SLASH = "/"
     private const val LANG_PORTUGUESE = "pt_PT"
     private const val REGION_PORTUGAL = "POR"
 

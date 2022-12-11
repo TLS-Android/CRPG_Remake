@@ -49,7 +49,9 @@ class GotevViewModel(
 
     fun listen() {
         try {
-            // you must have android.permission.RECORD_AUDIO granted at this point
+             /**
+             * android.permission.RECORD_AUDIO should be granted at this point
+             */
             Speech.getInstance().startListening(object : SpeechDelegate {
                 override fun onStartOfSpeech() {
                     notifyListening(isRecording = true)

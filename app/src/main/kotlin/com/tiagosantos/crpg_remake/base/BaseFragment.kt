@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -129,6 +130,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
         sharedPreferences.edit().apply { putBoolean(settings.sharedPreferencesBooleanName, true).apply() }
     }
 
+    @RequiresApi(Build.VERSION_CODES.R)
     private fun setLightOrDarkStatusBarContent(@ColorRes statusBarColor: Int, view: View) {
 
         val rgb: Int = requireContext().getColorCompatible(statusBarColor) // 0xAARRGGBB
@@ -152,6 +154,10 @@ abstract class BaseFragment<B : ViewDataBinding>(
         //for API 23+
         else
             if (isLight) {
+                /**
+                 * Migrar view para window.insetsController
+                 *
+                 * var flags = requireActivity().window.insetsController **/
                 var flags = view.systemUiVisibility
                 flags = flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
                 view.systemUiVisibility = flags

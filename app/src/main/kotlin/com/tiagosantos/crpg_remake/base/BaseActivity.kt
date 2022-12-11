@@ -138,7 +138,7 @@ abstract class BaseActivity(
      * Use Window Insets to apply system paddings to this activity
      */
     private fun applyWindowInsets(view: View) {
-        ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInsets ->
+        ViewCompat.setOnApplyWindowInsetsListener(view) { _, windowInsets ->
 
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
             // Apply the insets as a margin to the view. Here the system is setting
@@ -178,8 +178,8 @@ abstract class BaseActivity(
         val wm = getSystemService(WINDOW_SERVICE) as WindowManager?
         wm ?: return
 
-        var densityDpiStable = Configuration.DENSITY_DPI_UNDEFINED
-        densityDpiStable = DisplayMetrics.DENSITY_DEVICE_STABLE //480
+
+        var densityDpiStable = DisplayMetrics.DENSITY_DEVICE_STABLE //480
 
         //Device may has different screen resolution modes.
         //As example, Samsung S8: 422 in FHD+, 562 in WQHD+

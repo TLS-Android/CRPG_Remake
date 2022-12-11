@@ -12,6 +12,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.gson.reflect.TypeToken
 import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils
+import com.tiagosantos.common.ui.utils.Constants.SLASH
 import com.tiagosantos.common.ui.utils.Constants.eventFilename
 import com.tiagosantos.common.ui.utils.Constants.fileContent
 import com.tiagosantos.crpg_remake.ui.agenda.AgendaRepository.dinnerEvent
@@ -52,7 +53,7 @@ class AgendaViewModel(
     private val _currentMonth = MutableLiveData<Int?>()
     val currentMonth: LiveData<Int?> = _currentMonth
 
-    private val fullFilename = context?.filesDir.toString() + "/" + eventFilename
+    private val fullFilename = context?.filesDir.toString() + SLASH + eventFilename
 
     private val calendar : Calendar
         get() {

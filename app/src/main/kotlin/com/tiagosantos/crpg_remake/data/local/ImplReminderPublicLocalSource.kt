@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.tiagosantos.common.ui.model.*
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.common.ui.utils.Constants.REMINDER_FILENAME
+import com.tiagosantos.common.ui.utils.Constants.SLASH
 import kotlinx.coroutines.flow.Flow
 import java.io.File
 import java.util.*
@@ -28,7 +29,7 @@ class ImplReminderPublicLocalSource(application: Application) : RemindersPublicL
         val ctx = application.applicationContext
         val gson = Gson()
         val filename = REMINDER_FILENAME
-        val fullFilename = ctx.filesDir.toString() + "/" + filename
+        val fullFilename = ctx.filesDir.toString() + SLASH + filename
         val file = File(fullFilename)
         val fileExists = file.exists()
         val messagesList = ArrayList<Reminder>()
