@@ -28,9 +28,6 @@ class MainActivity(appPreferences: AppPreferencesRepository) : BaseActivity(
     ),
     appPreferences
 ) {
-
-
-
     private lateinit var binding: ActivityMainBinding
 
     override fun initToolbar() {

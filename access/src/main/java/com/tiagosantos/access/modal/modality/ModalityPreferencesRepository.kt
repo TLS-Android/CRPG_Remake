@@ -1,5 +1,7 @@
 package com.tiagosantos.access.modal.modality
 
+import android.app.Activity
+import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -41,6 +43,7 @@ class ModalityPreferencesRepository(
         putBoolean: String,
         editor: SharedPreferences.Editor
     ) {
+        /**
         MaterialAlertDialogBuilder(ctx, android.R.style.Theme_Material_Dialog_Alert)
             .setTitle(title)
             .setMessage(message)
@@ -50,5 +53,6 @@ class ModalityPreferencesRepository(
             .setNegativeButton(RECUSAR) { _, _ ->
                 editor.putBoolean(putBoolean, false)
             }.show()
+        **/
     }
 }
