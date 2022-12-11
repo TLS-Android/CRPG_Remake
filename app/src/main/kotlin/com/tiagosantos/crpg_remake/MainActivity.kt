@@ -17,7 +17,7 @@ import com.tiagosantos.crpg_remake.databinding.ActivityMainBinding
 import com.tiagosantos.crpg_remake.global_preferences.AppPreferencesRepository
 import org.koin.core.context.GlobalContext.startKoin
 
-class MainActivity(appPreferences: AppPreferencesRepository) : BaseActivity(
+class MainActivity : BaseActivity(
     layoutId = R.layout.activity_main,
     ActivitySettings(
         isAdjustFontScaleToNormal = true,
@@ -26,7 +26,6 @@ class MainActivity(appPreferences: AppPreferencesRepository) : BaseActivity(
             WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
         )
     ),
-    appPreferences
 ) {
     private lateinit var binding: ActivityMainBinding
 
@@ -38,12 +37,27 @@ class MainActivity(appPreferences: AppPreferencesRepository) : BaseActivity(
         TODO("Not yet implemented")
     }
 
-    /** /The modules() function in startKoin load the given list of modules } **/
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private fun setupParams() {
+        this.layoutId = R.layout.activity_main
+        this.settings = ActivitySettings(
+            isAdjustFontScaleToNormal = true,
+            windowFlags = listOf(
+                WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION,
+                WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+            )
+        )
+        this.appPreferences = AppPreferencesRepository(
+            applicationContext
+        )
+    }
 
+    /** The modules() function in startKoin load the given list of modules  **/
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setupParams()
         val gotev by viewModels<GotevViewModel>()
         val gossip by viewModels<GossipViewModel>()
+
+        super.onCreate(savedInstanceState)
 
         startKoin {
             //modules(appModule)
@@ -51,7 +65,6 @@ class MainActivity(appPreferences: AppPreferencesRepository) : BaseActivity(
             setContentView(binding.root)
 
             val navView: BottomNavigationView = binding.navView
-
             val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
             val appBarConfiguration = AppBarConfiguration(
@@ -61,4 +74,5 @@ class MainActivity(appPreferences: AppPreferencesRepository) : BaseActivity(
             navView.setupWithNavController(navController)
         }
     }
+
 }

@@ -27,9 +27,9 @@ import com.tiagosantos.crpg_remake.global_preferences.AppPreferencesRepository
 
 abstract class BaseActivity(
     @LayoutRes
-    private val layoutId: Int,
-    private val settings: ActivitySettings,
-    private val appPreferences: AppPreferencesRepository
+    protected var layoutId: Int ?= null,
+    protected var settings: ActivitySettings ?= null,
+    protected var appPreferences: AppPreferencesRepository ?= null,
 ) : AppCompatActivity(), BaseActivityInterface {
     init {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
@@ -41,24 +41,23 @@ abstract class BaseActivity(
     abstract fun initViews(layoutView: View)
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (settings.isAdjustFontScaleToNormal)
+        if (settings!!.isAdjustFontScaleToNormal)
             adjustFontScaleToNormal(resources.configuration)
 
         //window feature flags
-        settings.windowFlags.forEach {
+        settings!!.windowFlags.forEach {
             window.addFlags(it)
         }
 
         super.onCreate(savedInstanceState)
 
         //set start activity animation
-        if (settings.openEnterAnimation != 0 || settings.openExitAnimation != 0)
-            overridePendingTransition(settings.openEnterAnimation, settings.openExitAnimation)
+        if (settings!!.openEnterAnimation != 0 || settings!!.openExitAnimation != 0)
+            overridePendingTransition(settings!!.openEnterAnimation, settings!!.openExitAnimation)
 
-        setContentView(layoutId)
+        setContentView(layoutId!!)
         initToolbar()
         actionBar = supportActionBar
-
 
         //populate view
         val layoutView = (findViewById<View>(android.R.id.content) as ViewGroup).getChildAt(0)
@@ -70,9 +69,9 @@ abstract class BaseActivity(
     override fun finish() {
         super.finish()
         //finish activity animation
-        if (settings.closeEnterAnimation != 0 || settings.closeExitAnimation != 0)
-            overridePendingTransition(settings.closeEnterAnimation, settings.closeExitAnimation)
-        appPreferences.resetAppPreferences()
+        if (settings!!.closeEnterAnimation != 0 || settings!!.closeExitAnimation != 0)
+            overridePendingTransition(settings!!.closeEnterAnimation, settings!!.closeExitAnimation)
+        appPreferences!!.resetAppPreferences()
     }
 
     override fun setAppBarTitle(titleString: String) {
