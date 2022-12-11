@@ -12,9 +12,10 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 @SuppressLint("StaticFieldLeak")
+@Suppress("UNUSED_PARAMETER")
 class MealsViewModel(
-    application: Application,
-    private val resourcesProvider: ResourcesProvider,
+    //application: Application,
+    //private val resourcesProvider: ResourcesProvider,
     private val ctx: Context,
 ) : ViewModel(), DefaultLifecycleObserver {
 
@@ -68,9 +69,7 @@ class MealsViewModel(
         }*/
     }
 
-    fun updateMealChoiceOnLocalStorage(selectedOption: LiveData<Int?>, lunch: Boolean) {
-        //TO DO
-    }
+    fun updateMealChoiceOnLocalStorage(selectedOption: LiveData<Int?>, lunch: Boolean) { }
 
     fun updateSelectedOption(i: Int) { _selectedOption.value = i }
 

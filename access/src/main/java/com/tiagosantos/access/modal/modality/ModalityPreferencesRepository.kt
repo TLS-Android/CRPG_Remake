@@ -3,7 +3,6 @@ package com.tiagosantos.access.modal.modality
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.tiagosantos.access.R
 import com.tiagosantos.common.ui.utils.Constants.MODALITY
 import com.tiagosantos.common.ui.utils.Constants.PERMITIR
 import com.tiagosantos.common.ui.utils.Constants.RECUSAR

@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Calendar.*
 
+@Suppress("DUPLICATE_LABEL_IN_WHEN")
 class ReminderViewModel(
     application: Application,
     context: Context

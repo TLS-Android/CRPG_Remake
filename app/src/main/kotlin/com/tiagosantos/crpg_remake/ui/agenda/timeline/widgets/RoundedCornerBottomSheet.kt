@@ -12,7 +12,7 @@ open class RoundedCornerBottomSheet: BottomSheetDialogFragment() {
 
         view?.post {
             val parent = view?.parent as View
-            parent.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.bg_bottom_sheet))
+            parent.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_bottom_sheet)
         }
 
     }
