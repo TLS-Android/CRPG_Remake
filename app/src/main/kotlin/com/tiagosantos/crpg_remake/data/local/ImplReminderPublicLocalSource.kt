@@ -10,7 +10,9 @@ import kotlinx.coroutines.flow.Flow
 import java.io.File
 import java.util.*
 
-class ImplReminderPublicLocalSource(application: Application) : RemindersPublicLocalSource {
+class ImplReminderPublicLocalSource(
+    application: Application
+) : RemindersPublicLocalSource {
 
     /**
     The init block will execute immediately after the primary constructor.
