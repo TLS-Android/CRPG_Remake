@@ -181,7 +181,9 @@ open class Gossip(private val context: Context) : TextToSpeech.OnInitListener {
         utteranceId: String,
         hashMap: HashMap<String, suspend () -> Unit>
     ): Boolean {
-        return if (hashMap.containsKey(utteranceId)) {
+        return if (!hashMap.containsKey(utteranceId)) {
+            false
+        } else {
             job = Job()
             val call = hashMap[utteranceId]
             val scope = CoroutineScope(Dispatchers.Main + job)
@@ -189,8 +191,6 @@ open class Gossip(private val context: Context) : TextToSpeech.OnInitListener {
                 call?.invoke()
             }
             true
-        } else {
-            false
         }
     }
 

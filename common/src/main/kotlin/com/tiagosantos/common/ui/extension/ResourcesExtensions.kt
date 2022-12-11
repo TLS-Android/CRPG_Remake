@@ -66,10 +66,7 @@ fun Context.getColorCompatible(@ColorRes id: Int): Int {
     if (id == 0)
         throw RuntimeException("Color Resource ID can not be 0")
 
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        ContextCompat.getColor(this, id)
-    else
-        resources.getColor(id)
+    return ContextCompat.getColor(this, id)
 }
 
 @ColorInt
@@ -129,7 +126,7 @@ fun Context.getBitmapFromDrawable(@DrawableRes drawableId: Int): Bitmap? {
         throw RuntimeException("Drawable Resource ID can not be 0")
 
     val drawable: Drawable?
-    val d: VectorDrawableCompat? = if (Build.VERSION.SDK_INT >= 21) {
+    val d: VectorDrawableCompat? =
         try {
             VectorDrawableCompat.create(
                 resources,
@@ -138,8 +135,6 @@ fun Context.getBitmapFromDrawable(@DrawableRes drawableId: Int): Bitmap? {
         } catch (e: NotFoundException) {
             null
         }
-    } else
-        null
 
     drawable = if (d != null)
         DrawableCompat.wrap(d)
@@ -192,12 +187,11 @@ fun Context.pxToDp(valueInPx: Int): Int {
  * @param colorResId Color Resource Id
  */
 fun Activity.applyStatusBarColor(@ColorRes colorResId: Int) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-        window.apply {
-            this.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-            this.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            this.statusBarColor = getColorCompatible(colorResId)
-        }
+    window.apply {
+        this.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        this.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        this.statusBarColor = getColorCompatible(colorResId)
+    }
 }
 
 /**

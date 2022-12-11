@@ -76,7 +76,7 @@ class SingleRowCalendar(context: Context, attrs: AttributeSet) : RecyclerView(co
         this.apply {
 
             // if user haven't specified list of custom dates, we can fetch them using DateUtils.getDates function
-            if (dateList.isNullOrEmpty()) {
+            if (dateList.isEmpty()) {
                 dateList.apply {
                     clear()
                     addAll(
@@ -111,7 +111,7 @@ class SingleRowCalendar(context: Context, attrs: AttributeSet) : RecyclerView(co
             SingleRowCalendarAdapter.selectionTracker = selectionTracker
 
 
-            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            addOnScrollListener(object : OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
 
                     calendarChangesObserver.whenCalendarScrolled(dx, dy)

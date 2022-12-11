@@ -36,7 +36,7 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
     val text: LiveData<String> = _text
     private var onResumeFlag = false
 
-    val feelingsMap = mapOf(
+    private val feelingsMap = mapOf(
         "RELAXADO" to viewB.buttonMoodRelaxed ,  "FELIZ" to viewB.buttonMoodHappy,
         "SONOLENTO" to viewB.buttonMoodSleepy, "CONFIANTE" to viewB.buttonMoodConfident)
 
