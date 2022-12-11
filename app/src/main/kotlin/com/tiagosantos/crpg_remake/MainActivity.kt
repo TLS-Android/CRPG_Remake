@@ -17,6 +17,14 @@ import com.tiagosantos.crpg_remake.databinding.ActivityMainBinding
 import com.tiagosantos.crpg_remake.global_preferences.AppPreferencesRepository
 import org.koin.core.context.GlobalContext.startKoin
 
+/**
+Android framework will try to instantiate an object of your activity.
+And it calls the default constructor (without parameters) when it does that.
+It fails when your class does not have a constructor without parameters.
+
+So as there is no way you can pass your parameters to default constructor,
+you cannot employ it to work for you.
+*/
 class MainActivity : BaseActivity(
     layoutId = R.layout.activity_main,
     ActivitySettings(
