@@ -1,14 +1,13 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light">
-        <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/sourcesanspro_semibold</item>
         <item name="fontFamily">@font/sourcesanspro_semibold</item>
         <item name="colorPrimary">@color/PrimaryOrange</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightStatusBar">true</item>
         <item name="actionBarStyle">@style/myActionBarStyle</item>
         <item name="materialCardViewStyle">@style/Widget.App.CardView</item>
 

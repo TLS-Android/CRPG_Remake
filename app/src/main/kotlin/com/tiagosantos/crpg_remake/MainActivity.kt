@@ -25,8 +25,12 @@ class MainActivity(appPreferences: AppPreferencesRepository) : BaseActivity(
             WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION,
             WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
         )
-    ), appPreferences
+    ),
+    appPreferences
 ) {
+
+
+
     private lateinit var binding: ActivityMainBinding
 
     override fun initToolbar() {
