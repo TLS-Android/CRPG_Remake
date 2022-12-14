@@ -37,8 +37,8 @@ abstract class BaseActivity(
 
     private var actionBar: ActionBar? = null
 
-    abstract fun initToolbar()
-    abstract fun initViews(layoutView: View)
+    //abstract fun initToolbar()
+    //abstract fun initViews(layoutView: View)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if (settings!!.isAdjustFontScaleToNormal)
@@ -56,12 +56,12 @@ abstract class BaseActivity(
             overridePendingTransition(settings!!.openEnterAnimation, settings!!.openExitAnimation)
 
         setContentView(layoutId!!)
-        initToolbar()
+        //initToolbar()
         actionBar = supportActionBar
 
         //populate view
         val layoutView = (findViewById<View>(android.R.id.content) as ViewGroup).getChildAt(0)
-        initViews(layoutView)
+        //initViews(layoutView)
 
         applyWindowInsets(findViewById(android.R.id.content))
     }

@@ -41,15 +41,7 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
     /**
      * Called to Initialize view data binding variables when fragment view is created.
      */
-    abstract override fun onInitDataBinding()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return viewBinding.root
-    }
+    //abstract override fun onInitDataBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -77,15 +77,15 @@ abstract class BaseFragment<B : ViewDataBinding>(
         savedInstanceState: Bundle?
     ): View? {
         _viewB = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        viewBinding.lifecycleOwner = viewLifecycleOwner
+        viewB.lifecycleOwner = viewLifecycleOwner
         showBackButton()
         return viewB.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        onInitDataBinding()
-        observeLifecycleEvents()
+        //onInitDataBinding()
+        //observeLifecycleEvents()
         applyResources()
 
         requireActivity().onBackPressedDispatcher.addCallback(
