@@ -8,7 +8,7 @@ import com.tiagosantos.common.ui.utils.Constants
 import java.lang.ref.WeakReference
 
 class GossipViewModel(
-    private val resourcesProvider: ResourcesProvider,
+    //private val resourcesProvider: ResourcesProvider,
     context: WeakReference<Context>,
     application: Application,
 ) : AndroidViewModel(application), DefaultLifecycleObserver {
@@ -43,5 +43,3 @@ class GossipViewModel(
         //do something on stop view if it's needed
     }
 }
-
-
