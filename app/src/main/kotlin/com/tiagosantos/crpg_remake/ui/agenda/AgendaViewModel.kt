@@ -55,10 +55,7 @@ class AgendaViewModel(
 
     private val fullFilename = context?.filesDir.toString() + SLASH + eventFilename
 
-    private val calendar : Calendar
-        get() {
-            TODO()
-        }
+    private val calendar = getInstance()
 
     companion object { private val repo = AgendaRepository }
 
@@ -105,13 +102,13 @@ class AgendaViewModel(
     private fun populateFile() = newFile.apply { createNewFile(); writeText(fileContent) }
 
     val type: Type = object : TypeToken<ArrayList<Event>>() {}.type
-    private val _privateList: MutableLiveData<MutableList<Event>?> =
-        gson.fromJson(FileReader(newFile.absoluteFile), type)
+    //private val _privateList: MutableLiveData<MutableList<Event>?> =
+    //    gson.fromJson(FileReader(newFile.absoluteFile), type)
 
     fun getEventCollectionFromJSON() {
         populateFile()
         concatenatePublicPrivateEvents()
-        _privateList.value!!.sortBy { it.start_time }
+        //_privateList.value!!.sortBy { it.start_time }
     }
 
     private fun concatenatePublicPrivateEvents(): LiveData<MutableList<Event>?> {

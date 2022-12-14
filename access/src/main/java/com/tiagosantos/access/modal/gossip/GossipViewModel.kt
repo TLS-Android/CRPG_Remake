@@ -1,5 +1,6 @@
 package com.tiagosantos.access.modal.gossip
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.content.res.loader.ResourcesProvider
@@ -9,14 +10,17 @@ import java.lang.ref.WeakReference
 
 class GossipViewModel(
     //private val resourcesProvider: ResourcesProvider,
-    context: WeakReference<Context>,
+    //context: WeakReference<Context>,
     application: Application,
 ) : AndroidViewModel(application), DefaultLifecycleObserver {
 
     private val _contextualHelp = MutableLiveData<String>()
     val contextualHelp: LiveData<String> = _contextualHelp
 
-    var gossip: Gossip = Gossip(context.get()!!)
+    @SuppressLint("StaticFieldLeak")
+    val context = application.applicationContext
+
+    var gossip: Gossip = Gossip(context)
 
     init {
         gossip.run { setLanguage(Constants.myLocale); isMuted }
