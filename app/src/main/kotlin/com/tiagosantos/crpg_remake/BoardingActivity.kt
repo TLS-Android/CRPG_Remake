@@ -19,10 +19,13 @@ class BoardingActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_screen)
 
-        prefRepo = ModalityPreferencesRepository(applicationContext).apply {
+        println("BoardingActivity")
+
+        prefRepo = ModalityPreferencesRepository(this).apply {
             requestMultiModalityOptions()
         }
 
+        /*
         activityScope.launch {
             delay(3000)
 
@@ -33,5 +36,7 @@ class BoardingActivity : Activity() {
             startActivity(intent)
             finish()
         }
+        */
+
     }
 }

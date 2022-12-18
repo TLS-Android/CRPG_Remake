@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.tiagosantos.common.ui.utils.Constants.MODALITY
 import com.tiagosantos.common.ui.utils.Constants.PERMITIR
@@ -15,6 +16,9 @@ class ModalityPreferencesRepository(
     private val ctx: Context,
 ) {
     fun requestMultiModalityOptions() {
+
+        println("requestMultiModalityOptions")
+
         val editor = ctx.getSharedPreferences(
             MODALITY,
             Context.MODE_PRIVATE
@@ -43,7 +47,6 @@ class ModalityPreferencesRepository(
         putBoolean: String,
         editor: SharedPreferences.Editor
     ) {
-        /**
         MaterialAlertDialogBuilder(ctx, android.R.style.Theme_Material_Dialog_Alert)
             .setTitle(title)
             .setMessage(message)
@@ -53,6 +56,5 @@ class ModalityPreferencesRepository(
             .setNegativeButton(RECUSAR) { _, _ ->
                 editor.putBoolean(putBoolean, false)
             }.show()
-        **/
     }
 }

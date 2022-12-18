@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.INVISIBLE
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
@@ -76,7 +75,6 @@ class TimeLineAdapter(
                     cardBackgroundImage.setBackgroundResource(R.drawable.background_dieta)
                     cardCenterIcon.setBackgroundResource(R.drawable.meal_icon)
 
-
                     if (timeLineModel.chosen_meal.isBlank()) {
                         textTimelineInfo.text = when (timeLineModel.title){
                             "ALMOÇO" -> selectLunchText
@@ -123,8 +121,6 @@ class TimeLineAdapter(
     }
 
     private fun onCardClicked(holder: TimeLineViewHolder, position: Int) {
-
-        // onClick on a card open pop up or go to Meal
         with(_binding!!){
             card.setOnClickListener {
                 id = mFeedList.value!![position].title.toString()

@@ -1,11 +1,9 @@
 package com.tiagosantos.crpg_remake
 
 import android.os.Bundle
-import android.view.View
 import android.view.WindowManager
 import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -16,7 +14,6 @@ import com.tiagosantos.crpg_remake.base.ActivitySettings
 import com.tiagosantos.crpg_remake.base.BaseActivity
 import com.tiagosantos.crpg_remake.databinding.ActivityMainBinding
 import com.tiagosantos.crpg_remake.global_preferences.AppPreferencesRepository
-import org.koin.core.context.GlobalContext.startKoin
 
 /**
 Android framework will try to instantiate an object of your activity.
@@ -67,6 +64,8 @@ class MainActivity : BaseActivity(
         setupParams()
         val gotev by viewModels<GotevViewModel>()
         val gossip by viewModels<GossipViewModel>()
+
+        println("MainActivity")
 
         super.onCreate(savedInstanceState)
 
