@@ -20,4 +20,11 @@
         <item name="colorPrimaryDark">@color/yellow</item>
         <item name="colorAccent">@color/yellow</item>
     </style>
+
+    <style name="There.CRPG_Remake.SplashScreen" parent="Theme.SplashScreen">
+        <item name="android:windowSplashScreenBackground">@color/colorPrimaryDark</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/crpg_logo</item>
+        <item name="postSplash">@color/yellow</item>
+    </style>
+
 </resources>
