@@ -36,7 +36,6 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
         isListening = false,
     )
 ) {
-
     private var selected = false
     private val calendar = getInstance()
 
@@ -117,6 +116,9 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
                 setDates(vm.getFutureDatesOfCurrentMonth())
                 init()
             }
+
+            println("View manager: " + mainSingleRowCalendar.calendarViewManager.toString())
+            println("dates ${mainSingleRowCalendar.getDates()}")
 
             buttonSelecionar.setOnClickListener {
                 if (selected) { noDateSelectedWarning.hide()

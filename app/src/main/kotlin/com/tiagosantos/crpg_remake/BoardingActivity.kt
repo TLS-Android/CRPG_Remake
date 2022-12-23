@@ -41,6 +41,5 @@ class BoardingActivity : Activity() {
             finish()
         }
 
-
     }
 }
