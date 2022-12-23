@@ -37,33 +37,28 @@ class ModalityPreferencesRepository(
         putBoolean: String,
         editor: SharedPreferences.Editor
     ) {
+
+        fun launchSRDialog() {
+            launchAlertDialog(
+                "Permitir Comandos de Voz",
+                "A aplicação pode ser usada utilizando " +
+                        "utilizar a plataforma. Prima o botão \"Permitir\" para ativar esta funcionalidade.",
+                SR,
+                editor
+            )
+        }
+
         MaterialAlertDialogBuilder(ctx, android.R.style.Theme_Material_Dialog_Alert)
             .setTitle(title)
             .setMessage(message)
             .setPositiveButton(PERMITIR) { _, _ ->
                 editor.putBoolean(putBoolean, true)
-                if (alert == 0) {
-                    launchAlertDialog(
-                        "Permitir Comandos de Voz",
-                        "A aplicação pode ser usada utilizando " +
-                                "utilizar a plataforma. Prima o botão \"Permitir\" para ativar esta funcionalidade.",
-                        SR,
-                        editor
-                    )
-                }
+                if (alert == 0) { launchSRDialog() }
                 alert = 1
             }
             .setNegativeButton(RECUSAR) { _, _ ->
                 editor.putBoolean(putBoolean, false)
-                if (alert == 0) {
-                    launchAlertDialog(
-                        "Permitir Comandos de Voz",
-                        "A aplicação pode ser usada utilizando " +
-                                "utilizar a plataforma. Prima o botão \"Permitir\" para ativar esta funcionalidade.",
-                        SR,
-                        editor
-                    )
-                }
+                if (alert == 0) { launchSRDialog() }
                 alert = 1
             }.show()
     }

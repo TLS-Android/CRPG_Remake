@@ -19,10 +19,12 @@ class BoardingActivity : Activity() {
     private var isRequestingSettings = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.splash_screen)
+        /** Call installSplashScreen in the starting activity before calling super.onCreate(). **/
         val splashScreen = installSplashScreen()
         splashScreen.setKeepOnScreenCondition { isRequestingSettings }
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.splash_screen)
+
 
         prefRepo = ModalityPreferencesRepository(this).apply {
             requestMultiModalityOptions()
