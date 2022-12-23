@@ -19,21 +19,20 @@ class BoardingActivity : Activity() {
     private var isRequestingSettings = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        /** Call installSplashScreen in the starting activity before calling super.onCreate(). **/
-        val splashScreen = installSplashScreen()
-        splashScreen.setKeepOnScreenCondition { isRequestingSettings }
+        /** Call installSplashScreen in the starting activity before calling super.onCreate().
+         * Removed theme from manifest because it was causing issues
+         * **/
+        //val splashScreen = installSplashScreen()
+        //splashScreen.setKeepOnScreenCondition { isRequestingSettings }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_screen)
-
 
         prefRepo = ModalityPreferencesRepository(this).apply {
             requestMultiModalityOptions()
         }.also { isRequestingSettings = false }
 
-        /*
         activityScope.launch {
-            delay(3000)
-
+            delay(1000)
             val intent = Intent(
                 this@BoardingActivity,
                 MainActivity::class.java
@@ -41,7 +40,7 @@ class BoardingActivity : Activity() {
             startActivity(intent)
             finish()
         }
-        */
+
 
     }
 }
