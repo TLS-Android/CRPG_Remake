@@ -28,6 +28,7 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
     FragmentSettings(
         appBarTitle = "ESCOLHER DATA",
         sharedPreferencesBooleanName = R.string.datePickerHasRun.toString(),
+        showBackButton = false,
     ),
     ttsSettings = TTSSettings(
         "Selecione um dia premindo item que pretender"
@@ -77,7 +78,7 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
                     date: Date,
                     position: Int,
                     isSelected: Boolean,
-                ) = with(viewB.calendarItem) {
+                ) = with(calendarItem) {
                     tvDateCalendarItem.text = getDayNumber(date)
                     tvDayCalendarItem.text = getDay3LettersName(date)
                 }
@@ -91,7 +92,6 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
                     date: Date
                 ) {
                     super.whenSelectionChanged(isSelected, position, date)
-
                     tvDate.text = buildDateString(date)
                     tvDay.text = getDayName(date)
                     vm.setSelectedDate(date)
@@ -121,7 +121,8 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
             println("dates ${mainSingleRowCalendar.getDates()}")
 
             buttonSelecionar.setOnClickListener {
-                if (selected) { noDateSelectedWarning.hide()
+                if (selected) {
+                    noDateSelectedWarning.hide()
                     goToFragment(AgendaFragment())
                 } else {
                     noDateSelectedWarning.show()

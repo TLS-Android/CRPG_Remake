@@ -51,6 +51,8 @@ abstract class BaseFragment<B : ViewDataBinding>(
     private fun showBackButton() {
         if (activity is MainActivity && settings.showBackButton == true) {
             (activity as MainActivity?)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        } else {
+            (activity as MainActivity?)?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
         }
     }
 

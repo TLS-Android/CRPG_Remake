@@ -33,4 +33,6 @@ interface BaseActivityInterface {
     fun setAppWindowBackground(@DrawableRes backgroundResId: Int)
 
     fun setHomeAsUpIndicatorIcon(@DrawableRes drawable: Int)
+
+    fun setAppBarBackButton(isShown: Boolean)
 }

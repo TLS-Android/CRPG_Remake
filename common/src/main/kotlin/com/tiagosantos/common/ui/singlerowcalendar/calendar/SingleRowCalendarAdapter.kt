@@ -69,7 +69,6 @@ class SingleRowCalendarAdapter(
         return CalendarViewHolder(itemView)
     }
 
-
     override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) =
         calendarViewManager.bindDataToCalendarView(
             holder,

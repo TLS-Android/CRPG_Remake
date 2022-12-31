@@ -100,16 +100,13 @@ class SingleRowCalendar(context: Context, attrs: AttributeSet) : RecyclerView(co
 
             setHasFixedSize(true)
 
-            adapter =
-                SingleRowCalendarAdapter(
+            adapter = SingleRowCalendarAdapter(
                     dateList,
                     calendarViewManager
                 )
 
             initSelection()
-
             SingleRowCalendarAdapter.selectionTracker = selectionTracker
-
 
             addOnScrollListener(object : OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {

@@ -27,12 +27,14 @@ class BoardingActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_screen)
 
+        /*
         prefRepo = ModalityPreferencesRepository(this).apply {
             requestMultiModalityOptions()
-        }.also { isRequestingSettings = false }
+        }.also { isRequestingSettings = false }*/
 
         activityScope.launch {
             delay(1000)
+
             val intent = Intent(
                 this@BoardingActivity,
                 MainActivity::class.java

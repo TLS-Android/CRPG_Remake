@@ -9,5 +9,5 @@ data class FragmentSettings(
     @ColorRes
     val appBarColor: Int = 0,
     val sharedPreferencesBooleanName: String? = EMPTY_STRING,
-    val showBackButton: Boolean? = false
+    val showBackButton: Boolean? = true
 )
