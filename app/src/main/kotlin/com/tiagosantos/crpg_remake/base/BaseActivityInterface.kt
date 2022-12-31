@@ -34,5 +34,4 @@ interface BaseActivityInterface {
 
     fun setHomeAsUpIndicatorIcon(@DrawableRes drawable: Int)
 
-    fun setAppBarBackButton(isShown: Boolean)
 }

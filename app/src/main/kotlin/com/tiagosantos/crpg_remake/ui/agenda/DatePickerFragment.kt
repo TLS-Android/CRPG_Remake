@@ -80,7 +80,9 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
                     isSelected: Boolean,
                 ) = with(calendarItem) {
                     tvDateCalendarItem.text = getDayNumber(date)
+                    println("tvDateCalendarItem: ${tvDateCalendarItem.text}")
                     tvDayCalendarItem.text = getDay3LettersName(date)
+                    println("tvDayCalendarItem: ${tvDayCalendarItem.text}")
                 }
             }
 
@@ -135,14 +137,12 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
         command: String,
         singleRowCalendar: SingleRowCalendar
     ) {
-        val literalValue = map.getOrElse(command) {
-            println("Número não presente na lista")
-        } as Int
+        val literalValue = map.getOrElse(command) { println("Número não presente na lista") } as Int
 
-        singleRowCalendar.let {
-            it.clearSelection()
-            if (literalValue > 5) it.scrollToPosition(literalValue - 1)
-            it.select(literalValue - 1)
+        singleRowCalendar.apply {
+            clearSelection()
+            if (literalValue > 5) scrollToPosition(literalValue - 1)
+            select(literalValue - 1)
         }
     }
 

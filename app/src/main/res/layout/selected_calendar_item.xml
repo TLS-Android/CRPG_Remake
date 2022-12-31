@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/cl_calendar_item"
+    android:id="@+id/cl_calendar_item_selected"
     android:layout_width="130dp"
     android:layout_height="160dp"
     android:layout_marginStart="4dp"

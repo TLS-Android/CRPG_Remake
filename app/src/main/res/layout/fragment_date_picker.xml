@@ -6,7 +6,7 @@
         <data>
                 <variable
                     name="datepicker"
-                    type="com.tiagosantos.crpg_remake.ui.agenda.DatePickerFragment" />
+                    type="com.tiagosantos.crpg_remake.ui.agenda.DatePickerFragment"/>
 
                 <import type="android.view.View" />
         </data>
@@ -18,10 +18,12 @@
             tools:context="com.tiagosantos.crpg_remake.ui.agenda.DatePickerFragment">
 
                 <include layout="@layout/selected_calendar_item"
-                    android:id="@+id/selected_item"/>
+                    android:id="@+id/selected_item"
+                    android:visibility="invisible" />
 
                 <include layout="@layout/calendar_item"
-                    android:id="@+id/calendar_item"/>
+                    android:id="@+id/calendar_item"
+                    android:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/title_selecionar_data"
