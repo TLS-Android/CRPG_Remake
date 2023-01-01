@@ -75,7 +75,7 @@ class TimeLineAdapter(
                     cardBackgroundImage.setBackgroundResource(R.drawable.background_dieta)
                     cardCenterIcon.setBackgroundResource(R.drawable.meal_icon)
 
-                    if (timeLineModel.mealChoice.chosen_meal!!.isBlank()) {
+                    if (timeLineModel.mealChoice.mealType != null) {
                         textTimelineInfo.text = when (timeLineModel.title){
                             "ALMOÇO" -> selectLunchText
                             "JANTAR" -> selectDinnerText
@@ -83,19 +83,15 @@ class TimeLineAdapter(
                         }.toString()
                     }
 
-                    when (timeLineModel.title) {
-                        "ALMOÇO" -> if (timeLineModel.mealChoice.chosen_meal!!.isBlank()) {
-                            textTimelineInfo.text = selectLunchText
-                        } else {
-                            textTimelineInfo.text = timeLineModel.mealChoice.chosen_meal
+                    textTimelineInfo.text = if (timeLineModel.mealChoice.chosenMealType != null) {
+                        when (timeLineModel.title) {
+                            "ALMOÇO" -> selectLunchText
+                            "JANTAR" -> selectDinnerText
+                            else -> { EMPTY_STRING}
                         }
+                    } else { timeLineModel.mealChoice.chosenMealType.toString() }
 
-                        "JANTAR" -> if (timeLineModel.mealChoice.chosen_meal!!.isBlank()) {
-                            textTimelineInfo.text = selectDinnerText
-                        } else {
-                            textTimelineInfo.text = timeLineModel.mealChoice.chosen_meal
-                        }
-                    }
+
                 }
                 else -> { println("nothing happens") }
             }
