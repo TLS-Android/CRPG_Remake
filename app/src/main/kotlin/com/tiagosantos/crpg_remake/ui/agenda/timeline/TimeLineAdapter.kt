@@ -202,10 +202,10 @@ class TimeLineAdapter(
                 }
 
                 MEAL -> {
-                        if (timeLineModel.mealChoice.chosen_meal!!.isBlank()) chosenMealisBlankText
+                        if (timeLineModel.mealChoice.chosenMealType != null) chosenMealisBlankText
                         else {
                             "Refeição selecionada, o prato escolhido " +
-                                    "foi ${timeLineModel.mealChoice.chosen_meal}"
+                                    "foi ${timeLineModel.mealChoice.chosenMealType}"
                         }
                 }
             }
