@@ -169,10 +169,10 @@ abstract class BaseFragment<B : ViewDataBinding>(
 
     private fun applyResources() {
         (requireActivity() is MainActivityInterface).apply {
-            if (!this){
-                if (settings.hideBottomNavigationView == true) {
-                    showBackButton()
-                }
+            if (settings.hideBottomNavigationView == true) {
+                (activity as MainActivity).hideNavBar()
+            } else {
+                (activity as MainActivity).showNavBar()
             }
         }
 
