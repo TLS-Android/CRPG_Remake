@@ -9,14 +9,11 @@ data class Event(
     val notes: String? = EMPTY_STRING,
     var type: EventType,
     val mealChoice: MealChoice,
-    var startTime: String,
-    val endTime: String,
-    var date: String,
+    val timestampData: TimestampData,
 ) {
     override fun toString(): String {
-        return "EVENT: title: ${this.title}, info: ${this.info}, type: ${this.type},  " +
-            "start_time: ${this.startTime}, " + "end_time: ${this.endTime}, date: ${this.date}, " +
-            "meal_Int: ${this.mealChoice} \\n "
+        return "EVENT: title: ${this.title}, info: ${this.info}, " +
+                "type: ${this.type}, meal_Int: ${this.mealChoice} \\n "
     }
 }
 

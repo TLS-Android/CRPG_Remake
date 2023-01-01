@@ -154,7 +154,7 @@ class TimeLineAdapter(
         timeLineModel: Event,
     ) {
 
-        concatTime = timeLineModel.startTime + timeLineModel.endTime
+        concatTime = timeLineModel.timestampData.startTime + timeLineModel.timestampData.endTime
 
         with(_binding!!){
             if (overlapArray.contains(concatTime)) {
@@ -169,18 +169,18 @@ class TimeLineAdapter(
                 ), mAttributes.markerColor)
             }
 
-            if (timeLineModel.date.isNotEmpty()) {
+            if (timeLineModel.timestampData.date.isNotEmpty()) {
                 textTimelineDate.setVisible()
-                textTimelineDate.text = timeLineModel.date.formatDateTime("yyyy-MM-dd", "dd-MMM-yyyy")
+                textTimelineDate.text = timeLineModel.timestampData.date.formatDateTime("yyyy-MM-dd", "dd-MMM-yyyy")
             } else textTimelineDate.setGone()
 
-            if (timeLineModel.startTime.isNotEmpty()) {
-                val newStartTime = timeLineModel.startTime.apply { "${substring(0, 2)} : ${substring(2, 4)}" }
+            if (timeLineModel.timestampData.startTime.isNotEmpty()) {
+                val newStartTime = timeLineModel.timestampData.startTime.apply { "${substring(0, 2)} : ${substring(2, 4)}" }
                 textTimelineStartTime.apply { setVisible(); text = newStartTime }
             } else textTimelineStartTime.setGone()
 
-            if (timeLineModel.endTime.isNotEmpty()) {
-                val newEndTime = timeLineModel.endTime.apply { "${substring(0, 2)} : ${substring(2, 4)}" }
+            if (timeLineModel.timestampData.endTime.isNotEmpty()) {
+                val newEndTime = timeLineModel.timestampData.endTime.apply { "${substring(0, 2)} : ${substring(2, 4)}" }
                 textTimelineEndTime.apply { setVisible(); text = newEndTime }
             } else textTimelineEndTime.setGone()
 
@@ -202,7 +202,7 @@ class TimeLineAdapter(
                      "Actividade" +
                             "com o título ${timeLineModel.title} e tendo como descrição ${timeLineModel.info}," +
                             " que irá" +
-                            " começar às ${timeLineModel.startTime}. Clique para obter mais informações"
+                            " começar às ${timeLineModel.timestampData.startTime}. Clique para obter mais informações"
                 }
 
                 MEAL -> {
