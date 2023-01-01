@@ -29,6 +29,7 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
         appBarTitle = "ESCOLHER DATA",
         sharedPreferencesBooleanName = R.string.datePickerHasRun.toString(),
         showBackButton = false,
+        hideBottomNavigationView = true,
     ),
     ttsSettings = TTSSettings(
         "Selecione um dia premindo item que pretender"

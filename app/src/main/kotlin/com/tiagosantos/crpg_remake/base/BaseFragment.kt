@@ -168,6 +168,14 @@ abstract class BaseFragment<B : ViewDataBinding>(
     }
 
     private fun applyResources() {
+        (requireActivity() is MainActivityInterface).apply {
+            if (!this){
+                if (settings.hideBottomNavigationView == true) {
+                    showBackButton()
+                }
+            }
+        }
+
         (requireActivity() is BaseActivityInterface).apply {
             if (!this) {
                 if (settings.appBarColor != 0)
