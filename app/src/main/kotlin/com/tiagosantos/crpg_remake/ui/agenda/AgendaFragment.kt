@@ -122,5 +122,4 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
     }
 
     private fun setDataListItemsWithoutPopulate() = agendaVM.getEventCollectionFromJSON()
-
 }

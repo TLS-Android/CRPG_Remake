@@ -1,25 +1,22 @@
 package com.tiagosantos.common.ui.model
 
 import com.google.gson.annotations.SerializedName
+import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 
 data class Event(
-    var title: String ?= "",
-    val info: String,
+    var title: String? = EMPTY_STRING,
+    val info: String? = EMPTY_STRING,
+    val notes: String? = EMPTY_STRING,
     var type: EventType,
-    var start_time: String,
-    val end_time: String,
+    val mealChoice: MealChoice,
+    var startTime: String,
+    val endTime: String,
     var date: String,
-    val notes: String,
-    var chosen_meal: String,
-    var isLunch: Boolean,
-    var meal_int: Int
 ) {
     override fun toString(): String {
         return "EVENT: title: ${this.title}, info: ${this.info}, type: ${this.type},  " +
-            "start_time: ${this.start_time}, " +
-            "end_time: ${this.end_time}, date: ${this.date}, " +
-            "chosen_meal: ${this.chosen_meal}, isLunch: ${this.isLunch}," +
-            "meal_Int: ${this.meal_int} \\n "
+            "start_time: ${this.startTime}, " + "end_time: ${this.endTime}, date: ${this.date}, " +
+            "meal_Int: ${this.mealChoice} \\n "
     }
 }
 

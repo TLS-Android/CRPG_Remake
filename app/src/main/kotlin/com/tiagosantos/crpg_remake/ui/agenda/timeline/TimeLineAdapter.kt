@@ -69,31 +69,31 @@ class TimeLineAdapter(
                     cardBackgroundImage.setBackgroundResource(R.drawable.crpg_background)
                     cardCenterIcon.setBackgroundResource(R.drawable.maos)
                     textTimelineTitle.text = "ACTIVIDADE"
-                    textTimelineInfo.text = timeLineModel.info.uppercase(Locale.getDefault())
+                    textTimelineInfo.text = timeLineModel.info!!.uppercase(Locale.getDefault())
                 }
                 MEAL -> {
                     cardBackgroundImage.setBackgroundResource(R.drawable.background_dieta)
                     cardCenterIcon.setBackgroundResource(R.drawable.meal_icon)
 
-                    if (timeLineModel.chosen_meal.isBlank()) {
+                    if (timeLineModel.mealChoice.chosen_meal!!.isBlank()) {
                         textTimelineInfo.text = when (timeLineModel.title){
                             "ALMOÇO" -> selectLunchText
                             "JANTAR" -> selectDinnerText
-                            else -> { "ola" }
+                            else -> { EMPTY_STRING }
                         }.toString()
                     }
 
                     when (timeLineModel.title) {
-                        "ALMOÇO" -> if (timeLineModel.chosen_meal.isBlank()) {
+                        "ALMOÇO" -> if (timeLineModel.mealChoice.chosen_meal!!.isBlank()) {
                             textTimelineInfo.text = selectLunchText
                         } else {
-                            textTimelineInfo.text = timeLineModel.chosen_meal
+                            textTimelineInfo.text = timeLineModel.mealChoice.chosen_meal
                         }
 
-                        "JANTAR" -> if (timeLineModel.chosen_meal.isBlank()) {
+                        "JANTAR" -> if (timeLineModel.mealChoice.chosen_meal!!.isBlank()) {
                             textTimelineInfo.text = selectDinnerText
                         } else {
-                            textTimelineInfo.text = timeLineModel.chosen_meal
+                            textTimelineInfo.text = timeLineModel.mealChoice.chosen_meal
                         }
                     }
                 }
@@ -154,7 +154,7 @@ class TimeLineAdapter(
         timeLineModel: Event,
     ) {
 
-        concatTime = timeLineModel.start_time + timeLineModel.end_time
+        concatTime = timeLineModel.startTime + timeLineModel.endTime
 
         with(_binding!!){
             if (overlapArray.contains(concatTime)) {
@@ -174,18 +174,18 @@ class TimeLineAdapter(
                 textTimelineDate.text = timeLineModel.date.formatDateTime("yyyy-MM-dd", "dd-MMM-yyyy")
             } else textTimelineDate.setGone()
 
-            if (timeLineModel.start_time.isNotEmpty()) {
-                val newStartTime = timeLineModel.start_time.apply { "${substring(0, 2)} : ${substring(2, 4)}" }
+            if (timeLineModel.startTime.isNotEmpty()) {
+                val newStartTime = timeLineModel.startTime.apply { "${substring(0, 2)} : ${substring(2, 4)}" }
                 textTimelineStartTime.apply { setVisible(); text = newStartTime }
             } else textTimelineStartTime.setGone()
 
-            if (timeLineModel.end_time.isNotEmpty()) {
-                val newEndTime = timeLineModel.end_time.apply { "${substring(0, 2)} : ${substring(2, 4)}" }
+            if (timeLineModel.endTime.isNotEmpty()) {
+                val newEndTime = timeLineModel.endTime.apply { "${substring(0, 2)} : ${substring(2, 4)}" }
                 textTimelineEndTime.apply { setVisible(); text = newEndTime }
             } else textTimelineEndTime.setGone()
 
             if (timeLineModel.title!!.isNotEmpty()) textTimelineTitle.text = timeLineModel.title
-            if (timeLineModel.info.isNotEmpty()) textTimelineInfo.text = timeLineModel.info
+            if (timeLineModel.info!!.isNotEmpty()) textTimelineInfo.text = timeLineModel.info
 
         }
 
@@ -202,14 +202,14 @@ class TimeLineAdapter(
                      "Actividade" +
                             "com o título ${timeLineModel.title} e tendo como descrição ${timeLineModel.info}," +
                             " que irá" +
-                            " começar às ${timeLineModel.start_time}. Clique para obter mais informações"
+                            " começar às ${timeLineModel.startTime}. Clique para obter mais informações"
                 }
 
                 MEAL -> {
-                        if (timeLineModel.chosen_meal.isBlank()) chosenMealisBlankText
+                        if (timeLineModel.mealChoice.chosen_meal!!.isBlank()) chosenMealisBlankText
                         else {
                             "Refeição selecionada, o prato escolhido " +
-                                    "foi ${timeLineModel.chosen_meal}"
+                                    "foi ${timeLineModel.mealChoice.chosen_meal}"
                         }
                 }
             }

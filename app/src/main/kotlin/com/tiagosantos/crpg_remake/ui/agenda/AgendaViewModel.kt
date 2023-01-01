@@ -108,13 +108,14 @@ class AgendaViewModel(
     fun getEventCollectionFromJSON() {
         populateFile()
         concatenatePublicPrivateEvents()
-        //_privateList.value!!.sortBy { it.start_time }
     }
 
     private fun concatenatePublicPrivateEvents(): LiveData<MutableList<Event>?> {
         addMealsToPrivateEvents()
         addMealsToPublicEvents()
         _mDataList.value?.plusAssign(privateEventList.value!! + publicEventList.value!!)
+        _mDataList.value!!.sortBy { it.start_time }
+        println("Data List: ${_mDataList.value!!}")
         return _mDataList
     }
 
