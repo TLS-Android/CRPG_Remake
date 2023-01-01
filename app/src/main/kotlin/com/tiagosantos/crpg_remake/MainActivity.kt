@@ -1,6 +1,8 @@
 package com.tiagosantos.crpg_remake
 
 import android.os.Bundle
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.WindowManager
 import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -12,6 +14,7 @@ import com.tiagosantos.access.modal.gossip.GossipViewModel
 import com.tiagosantos.access.modal.gotev.GotevViewModel
 import com.tiagosantos.crpg_remake.base.ActivitySettings
 import com.tiagosantos.crpg_remake.base.BaseActivity
+import com.tiagosantos.crpg_remake.base.MainActivityInterface
 import com.tiagosantos.crpg_remake.databinding.ActivityMainBinding
 import com.tiagosantos.crpg_remake.global_preferences.AppPreferencesRepository
 
@@ -23,7 +26,7 @@ It fails when your class does not have a constructor without parameters.
 So as there is no way you can pass your parameters to default constructor,
 you cannot employ it to work for you.
 */
-class MainActivity : BaseActivity(
+class MainActivity : MainActivityInterface, BaseActivity(
     layoutId = R.layout.activity_main,
     ActivitySettings(
         isAdjustFontScaleToNormal = true,
@@ -34,6 +37,7 @@ class MainActivity : BaseActivity(
     ),
 ) {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navView: BottomNavigationView
 
     /**
     override fun initToolbar() {
@@ -74,7 +78,8 @@ class MainActivity : BaseActivity(
             binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(binding.root)
 
-            val navView: BottomNavigationView = binding.navView
+            //val navView: BottomNavigationView = binding.navView
+            navView = binding.navView
             //val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
             val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
@@ -87,5 +92,8 @@ class MainActivity : BaseActivity(
             navView.setupWithNavController(navController)
         //}
     }
+
+    override fun showNavBar() { navView.visibility = VISIBLE }
+    override fun hideNavBar() { navView.visibility = INVISIBLE }
 
 }
