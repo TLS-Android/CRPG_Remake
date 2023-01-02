@@ -59,24 +59,23 @@ class TimeLineAdapter(
     override fun onBindViewHolder(holder: TimeLineViewHolder, position: Int) {
 
         val timeLineModel = mFeedList.value!![position]
-
         setContentDescription(holder,timeLineModel)
         setupTimeLine(holder,timeLineModel)
 
         with(_binding!!){
-            when (timeLineModel.type) {
+            when (timeLineModel.eventType) {
                 ACTIVITY -> {
                     cardBackgroundImage.setBackgroundResource(R.drawable.crpg_background)
                     cardCenterIcon.setBackgroundResource(R.drawable.maos)
                     textTimelineTitle.text = "ACTIVIDADE"
-                    textTimelineInfo.text = timeLineModel.info!!.uppercase(Locale.getDefault())
+                    textTimelineInfo.text = timeLineModel.eventInfo!!.uppercase(Locale.getDefault())
                 }
                 MEAL -> {
                     cardBackgroundImage.setBackgroundResource(R.drawable.background_dieta)
                     cardCenterIcon.setBackgroundResource(R.drawable.meal_icon)
 
                     if (timeLineModel.mealChoice.mealType != null) {
-                        textTimelineInfo.text = when (timeLineModel.title){
+                        textTimelineInfo.text = when (timeLineModel.eventTitle){
                             "ALMOÇO" -> selectLunchText
                             "JANTAR" -> selectDinnerText
                             else -> { EMPTY_STRING }
@@ -84,14 +83,12 @@ class TimeLineAdapter(
                     }
 
                     textTimelineInfo.text = if (timeLineModel.mealChoice.chosenMealType != null) {
-                        when (timeLineModel.title) {
+                        when (timeLineModel.eventTitle) {
                             "ALMOÇO" -> selectLunchText
                             "JANTAR" -> selectDinnerText
                             else -> { EMPTY_STRING}
                         }
                     } else { timeLineModel.mealChoice.chosenMealType.toString() }
-
-
                 }
                 else -> { println("nothing happens") }
             }
@@ -108,7 +105,7 @@ class TimeLineAdapter(
 
                     command.contains(id, true) && tipo == ACTIVITY ->
                         card.performClick()
-                    else -> { println ("yo")}
+                    else -> { EMPTY_STRING }
                 }
             }
 
@@ -119,14 +116,14 @@ class TimeLineAdapter(
     private fun onCardClicked(holder: TimeLineViewHolder, position: Int) {
         with(_binding!!){
             card.setOnClickListener {
-                id = mFeedList.value!![position].title.toString()
-                tipo = mFeedList.value!![position].type
+                id = mFeedList.value!![position].eventTitle.toString()
+                tipo = mFeedList.value!![position].eventType
 
                 when (tipo) {
                     ACTIVITY -> {
                         MaterialAlertDialogBuilder(ctx, android.R.style.Theme_Material_Dialog_Alert)
-                            .setTitle(mFeedList.value!![position].title)
-                            .setMessage(mFeedList.value!![position].info)
+                            .setTitle(mFeedList.value!![position].eventTitle)
+                            .setMessage(mFeedList.value!![position].eventInfo)
                             .setNegativeButton("Fechar") { _, _ -> }.show()
                     }
 
@@ -149,7 +146,6 @@ class TimeLineAdapter(
         holder: TimeLineViewHolder,
         timeLineModel: Event,
     ) {
-
         concatTime = timeLineModel.timestampData.startTime + timeLineModel.timestampData.endTime
 
         with(_binding!!){
@@ -180,8 +176,8 @@ class TimeLineAdapter(
                 textTimelineEndTime.apply { setVisible(); text = newEndTime }
             } else textTimelineEndTime.setGone()
 
-            if (timeLineModel.title!!.isNotEmpty()) textTimelineTitle.text = timeLineModel.title
-            if (timeLineModel.info!!.isNotEmpty()) textTimelineInfo.text = timeLineModel.info
+            if (timeLineModel.eventTitle!!.isNotEmpty()) textTimelineTitle.text = timeLineModel.eventTitle
+            if (timeLineModel.eventInfo!!.isNotEmpty()) textTimelineInfo.text = timeLineModel.eventInfo
 
         }
 
@@ -191,12 +187,11 @@ class TimeLineAdapter(
         holder: TimeLineViewHolder,
         timeLineModel: Event,
     ) {
-
         with(holder.itemView) {
-            contentDescription = when (timeLineModel.type) {
+            contentDescription = when (timeLineModel.eventType) {
                 ACTIVITY -> {
                      "Actividade" +
-                            "com o título ${timeLineModel.title} e tendo como descrição ${timeLineModel.info}," +
+                            "com o título ${timeLineModel.eventTitle} e tendo como descrição ${timeLineModel.eventInfo}," +
                             " que irá" +
                             " começar às ${timeLineModel.timestampData.startTime}. Clique para obter mais informações"
                 }
@@ -221,7 +216,7 @@ class TimeLineAdapter(
         val title = _binding!!.textTimelineTitle
         val info = _binding!!.textTimelineInfo
         val startTime = _binding!!.textTimelineStartTime
-        val end_time = _binding!!.textTimelineEndTime
+        val endTime = _binding!!.textTimelineEndTime
         val timeline = _binding!!.timeline
 
         init {

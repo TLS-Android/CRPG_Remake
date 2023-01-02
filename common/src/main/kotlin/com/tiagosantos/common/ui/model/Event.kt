@@ -4,16 +4,16 @@ import com.google.gson.annotations.SerializedName
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 
 data class Event(
-    var title: String? = EMPTY_STRING,
-    val info: String? = EMPTY_STRING,
-    val notes: String? = EMPTY_STRING,
-    var type: EventType,
+    var eventTitle: String? = EMPTY_STRING,
+    val eventInfo: String? = EMPTY_STRING,
+    val eventDescription: String? = EMPTY_STRING,
+    var eventType: EventType,
     val mealChoice: MealChoice,
     val timestampData: TimestampData,
 ) {
     override fun toString(): String {
-        return "EVENT: title: ${this.title}, info: ${this.info}, " +
-                "type: ${this.type}, meal_Int: ${this.mealChoice} \\n "
+        return "EVENT: title: ${this.eventTitle}, info: ${this.eventInfo}, " +
+                "description: ${this.eventDescription} \\n "
     }
 }
 
