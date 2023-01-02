@@ -12,7 +12,6 @@ import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.Orientation
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.TimelineAttributes
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
-import com.tiagosantos.common.ui.extension.observe
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.base.FragmentSettings
@@ -45,6 +44,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
     private lateinit var mAttributes: TimelineAttributes
     private lateinit var mLayoutManager: LinearLayoutManager
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -68,10 +68,9 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
 
         agendaVM.mDataList.observe(viewLifecycleOwner) {
             setDataListItemsWithoutPopulate()
-            if (ctx != null) {
-                initRecyclerView(ctx)
-            }
+            if (ctx != null) { initRecyclerView(ctx) }
             updateMAttributes()
+            viewB.recyclerView.adapter?.notifyDataSetChanged()
         }
     }
 
