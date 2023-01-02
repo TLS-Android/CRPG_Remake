@@ -30,6 +30,9 @@ import com.tiagosantos.common.ui.utils.InputFilterMinMax
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.databinding.*
+import com.tiagosantos.crpg_remake.ui.reminders.ReminderFragment.Companion.alarmFreqButtonPressed
+import com.tiagosantos.crpg_remake.ui.reminders.ReminderFragment.Companion.alarmTypeButtonPressed
+import com.tiagosantos.crpg_remake.ui.reminders.ReminderFragment.Companion.lembrarButtonPressed
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.newReminder
 import com.tiagosantos.crpg_remake.ui.reminders.helpers.HoursHelper
 
@@ -119,10 +122,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                 expandableDia
             ))
 
-            when{
-                successFlag || hoursInt in 0..23 -> println("Hello")
-
-            }
+            when{ successFlag || hoursInt in 0..23 -> println("Hello") }
 
             with(viewSuccess){
                 if (successFlag) {
@@ -235,7 +235,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                 with(reminderVM.newReminder) {
                     fun updateButton(title: String, reminderType: ReminderType) {
                         this.title = title
-                        reminder_type = reminderType
+                        this.reminderType = reminderType
                     }
 
                     when (lembrarButtonPressed) {
@@ -264,23 +264,29 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
 
     }
 
-    private fun setTypeAndFrequency(newReminder: Reminder){
-        with(newReminder){
-            alarm_type = when (alarmTypeButtonPressed) {
+    private fun setTypeAndFrequency(newReminder: Reminder) {
+        newReminder.apply {
+            alarmType = when (alarmTypeButtonPressed) {
                 1 -> SOM
                 2 -> VIBRAR
                 3 -> AMBOS
-                else -> { SOM }
+                else -> {
+                    SOM
+                }
             }
 
-            alarm_freq = when (alarmFreqButtonPressed) {
+            alarmFreq = when (alarmFreqButtonPressed) {
                 1 -> HOJE
                 2 -> TODOS_OS_DIAS
                 3 -> PERSONALIZADO
-                else -> { HOJE }
+                else -> {
+                    HOJE
+                }
             }
         }
+
     }
+}
 
     private fun setButtonColorsReminder(view: LayoutSecondLembrarBinding, pos: Int){
 
@@ -379,7 +385,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
     /*private fun clickAndFocus() { expandable: ExpandableLayout ->
         expandable.performClick(); expandable.requestFocus() }*/
 
-    private fun clickAndFocus() { //
+    private fun clickAndFocus() {
         // TODO
          }
 

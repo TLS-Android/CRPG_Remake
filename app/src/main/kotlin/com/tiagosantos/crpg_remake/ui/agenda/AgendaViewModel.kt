@@ -86,15 +86,17 @@ class AgendaViewModel(
     }
 
     private fun getDates(list: MutableList<Date>): List<Date> {
-        calendar.set(MONTH, currentMonth.value!!)
-        calendar.set(DAY_OF_MONTH, 1)
-        list.add(calendar.time)
-        while (currentMonth.value == calendar[MONTH]) {
-            calendar.add(DATE, +1)
-            if (calendar[MONTH] == currentMonth.value)
-                list.add(calendar.time)
+        with(calendar){
+            set(MONTH, currentMonth.value!!)
+            set(DAY_OF_MONTH, 1)
+            list.add(time)
+            while (currentMonth.value == calendar[MONTH]) {
+                add(DATE, +1)
+                if (calendar[MONTH] == currentMonth.value) list.add(time)
+            }
+            add(DATE, -1)
         }
-        calendar.add(DATE, -1)
+
         return list
     }
 

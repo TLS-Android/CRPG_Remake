@@ -8,9 +8,9 @@ data class Reminder(
     var date: String? = "01/01/2000",
     var hours: Int? = 23,
     var mins: Int? = 59,
-    var reminder_type: ReminderType ?= ReminderType.REFEICAO,
-    var alarm_type: AlarmType ?= AlarmType.AMBOS,
-    var alarm_freq: AlarmFrequency ?= AlarmFrequency.HOJE,
+    var reminderType: ReminderType ?= ReminderType.REFEICAO,
+    var alarmType: AlarmType ?= AlarmType.AMBOS,
+    var alarmFreq: AlarmFrequency ?= AlarmFrequency.HOJE,
 ){
     override fun toString(): String {
         return "title: ${this.title}, info: ${this.info}"

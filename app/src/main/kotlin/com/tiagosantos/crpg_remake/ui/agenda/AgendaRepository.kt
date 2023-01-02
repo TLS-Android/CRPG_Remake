@@ -14,6 +14,7 @@ object AgendaRepository {
         MealChoice(ChosenMealDish.MEAT, MealType.LUNCH),
         TimestampData(startTime = "12:00", endTime = "13:00", date = "21")
     )
+
     var dinnerEvent = Event(
         "Jantar",
         "Clicar para escolher refeição",
