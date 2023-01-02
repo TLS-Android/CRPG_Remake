@@ -52,6 +52,7 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
 
     private var cardList = with(viewB) {
         listOf(frameOpcaoCarne, frameOpcaoPeixe, frameOpcaoDieta, frameOpcaoVegetariano)
+        /** listOf(frameMeals.forEach{ }) **/
     }
 
     private var flagMealChosen = false
@@ -84,10 +85,7 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
         }
 
         with(viewB){
-            frameOpcaoCarne.setFrameOnClick()
-            frameOpcaoPeixe.setFrameOnClick()
-            frameOpcaoDieta.setFrameOnClick()
-            frameOpcaoVegetariano.setFrameOnClick()
+            frameMeals.eachChild { (it as MaterialCardView).setFrameOnClick() }
 
             with(success){
                 buttonConfirmMeal.setOnClickListener {
@@ -100,10 +98,6 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
                 }
             }
         }
-    }
-
-    private fun setFrameOnClick() {
-        TODO("Not yet implemented")
     }
 
     override fun onInitDataBinding() {
