@@ -30,11 +30,10 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
     ),
     ttsSettings = TTSSettings(
         "Selecione a janela que pretender para obter mais informaçoes",
-        isSpeaking = true
+        isSpeaking = true,
     ),
     srSettings = SRSettings(
         isListening = false,
-        actionMap = null
     )
 ) {
     private val agendaVM: AgendaViewModel by viewModels()

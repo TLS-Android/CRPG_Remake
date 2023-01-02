@@ -32,7 +32,6 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
         ),
         srSettings = SRSettings(
             isListening = false,
-            actionMap = null
         )
 ) {
 
