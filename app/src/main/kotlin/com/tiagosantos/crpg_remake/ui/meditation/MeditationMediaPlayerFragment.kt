@@ -32,7 +32,6 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
         ),
         srSettings = SRSettings(
             isListening = false,
-            actionMap = mapOf("ola" to "adeus")
         )
 ) {
 
