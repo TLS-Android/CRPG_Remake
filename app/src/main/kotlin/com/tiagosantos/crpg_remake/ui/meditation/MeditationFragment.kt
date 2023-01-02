@@ -34,11 +34,11 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
         value = "This is dashboard Fragment"
     }
     val text: LiveData<String> = _text
-    private var onResumeFlag = false
 
-    private val feelingsMap = mapOf(
-        "RELAXADO" to viewB.buttonMoodRelaxed ,  "FELIZ" to viewB.buttonMoodHappy,
-        "SONOLENTO" to viewB.buttonMoodSleepy, "CONFIANTE" to viewB.buttonMoodConfident)
+    private val feelingsMap = with(viewB){
+        mapOf("RELAXADO" to buttonMoodRelaxed , "FELIZ" to buttonMoodHappy,
+        "SONOLENTO" to buttonMoodSleepy, "CONFIANTE" to buttonMoodConfident)
+    }
 
     companion object {
         fun newInstance() = MeditationFragment()
@@ -61,11 +61,6 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
         command: String,
         actionMap: Map<String, Any>
     ) = feelingsMap.getOrDefault(command) { println("do nothing") } */
-
-    override fun onPause() {
-        super.onPause()
-        onResumeFlag = true
-    }
 
     override fun onInitDataBinding() {
         TODO("Not yet implemented")
