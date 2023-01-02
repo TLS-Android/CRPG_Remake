@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.plataforma.crpg.TimelineView
 import com.tiagosantos.common.ui.extension.invisible
+import com.tiagosantos.common.ui.model.ChosenMealDish
 import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.common.ui.model.EventType
 import com.tiagosantos.common.ui.model.EventType.*
@@ -74,18 +75,18 @@ class TimeLineAdapter(
                     cardBackgroundImage.setBackgroundResource(R.drawable.background_dieta)
                     cardCenterIcon.setBackgroundResource(R.drawable.meal_icon)
 
-                    if (timeLineModel.mealChoice.mealType != null) {
-                        textTimelineInfo.text = when (timeLineModel.eventTitle){
+                    textTimelineTitle.text = if (timeLineModel.mealChoice.mealType != null) {
+                        when (timeLineModel.eventTitle){
                             "ALMOÇO" -> selectLunchText
                             "JANTAR" -> selectDinnerText
                             else -> { EMPTY_STRING }
-                        }.toString()
-                    }
+                        }
+                    } else { timeLineModel.mealChoice.mealType.toString() }
 
                     textTimelineInfo.text = if (timeLineModel.mealChoice.chosenMealDish != null) {
-                        when (timeLineModel.eventTitle) {
-                            "ALMOÇO" -> selectLunchText
-                            "JANTAR" -> selectDinnerText
+                        when (timeLineModel.mealChoice.chosenMealDish) {
+                            ChosenMealDish.MEAT -> selectLunchText
+                            ChosenMealDish.FISH -> selectDinnerText
                             else -> { EMPTY_STRING}
                         }
                     } else { timeLineModel.mealChoice.chosenMealDish.toString() }
@@ -114,18 +115,18 @@ class TimeLineAdapter(
     }
 
     private fun onCardClicked(holder: TimeLineViewHolder, position: Int) {
-        with(_binding!!){
+        with(_binding!!) {
             card.setOnClickListener {
                 id = mFeedList.value!![position].eventTitle.toString()
                 tipo = mFeedList.value!![position].eventType
 
                 when (tipo) {
-                    ACTIVITY -> {
-                        MaterialAlertDialogBuilder(ctx, android.R.style.Theme_Material_Dialog_Alert)
-                            .setTitle(mFeedList.value!![position].eventTitle)
-                            .setMessage(mFeedList.value!![position].eventInfo)
-                            .setNegativeButton("Fechar") { _, _ -> }.show()
-                    }
+                    ACTIVITY -> MaterialAlertDialogBuilder(
+                        ctx,
+                        android.R.style.Theme_Material_Dialog_Alert
+                    ).setTitle(mFeedList.value!![position].eventTitle)
+                    .setMessage(mFeedList.value!![position].eventInfo)
+                    .setNegativeButton("Fechar") { _, _ -> }.show()
 
                     MEAL -> {
                         val bundle = Bundle().apply {

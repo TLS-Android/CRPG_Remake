@@ -3,7 +3,7 @@ package com.tiagosantos.common.ui.model
 import com.google.gson.annotations.SerializedName
 
 data class MealChoice(
-    var chosenMealDish: ChosenMealType? = ChosenMealType.MEAT,
+    var chosenMealDish: ChosenMealDish? = ChosenMealDish.MEAT,
     var mealType: MealType? = MealType.LUNCH,
 ) {
     override fun toString(): String {
@@ -18,7 +18,7 @@ enum class MealType {
     DINNER,
 }
 
-enum class ChosenMealType {
+enum class ChosenMealDish {
     @SerializedName("Meat")
     MEAT,
     @SerializedName("Fish")
