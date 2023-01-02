@@ -12,6 +12,7 @@ import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.Orientation
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.TimelineAttributes
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
+import com.tiagosantos.common.ui.extension.observe
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.base.FragmentSettings
@@ -64,12 +65,14 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
             lineDashGap = dpToPx(2f)
         )
         val ctx = context
-        setDataListItemsWithoutPopulate()
-        if (ctx != null) {
-            initRecyclerView(ctx)
-        }
 
-        updateMAttributes()
+        agendaVM.mDataList.observe(viewLifecycleOwner) {
+            setDataListItemsWithoutPopulate()
+            if (ctx != null) {
+                initRecyclerView(ctx)
+            }
+            updateMAttributes()
+        }
     }
 
 
