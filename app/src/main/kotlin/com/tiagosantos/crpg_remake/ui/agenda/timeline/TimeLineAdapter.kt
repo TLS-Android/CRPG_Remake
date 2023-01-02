@@ -82,13 +82,13 @@ class TimeLineAdapter(
                         }.toString()
                     }
 
-                    textTimelineInfo.text = if (timeLineModel.mealChoice.chosenMealType != null) {
+                    textTimelineInfo.text = if (timeLineModel.mealChoice.chosenMealDish != null) {
                         when (timeLineModel.eventTitle) {
                             "ALMOÇO" -> selectLunchText
                             "JANTAR" -> selectDinnerText
                             else -> { EMPTY_STRING}
                         }
-                    } else { timeLineModel.mealChoice.chosenMealType.toString() }
+                    } else { timeLineModel.mealChoice.chosenMealDish.toString() }
                 }
                 else -> { println("nothing happens") }
             }
@@ -197,10 +197,10 @@ class TimeLineAdapter(
                 }
 
                 MEAL -> {
-                        if (timeLineModel.mealChoice.chosenMealType != null) chosenMealisBlankText
+                        if (timeLineModel.mealChoice.chosenMealDish != null) chosenMealisBlankText
                         else {
                             "Refeição selecionada, o prato escolhido " +
-                                    "foi ${timeLineModel.mealChoice.chosenMealType}"
+                                    "foi ${timeLineModel.mealChoice.chosenMealDish}"
                         }
                 }
             }
