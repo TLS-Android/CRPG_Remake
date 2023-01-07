@@ -37,6 +37,7 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
     private val gotev: GotevViewModel by activityViewModels()
 
     protected var actionList = mutableListOf<Any>()
+    protected var actionMap = mapOf<String,Any>()
 
     private val _flag = MutableLiveData<String?>()
     private val flag: LiveData<String?> = _flag
@@ -63,7 +64,7 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
     }
 
     private fun listenToUser() =  gotev.speechResult.observe(viewLifecycleOwner){
-        performActionWithVoiceCommand(it, srSettings.actionMap!!)
+        performActionWithVoiceCommand(it, actionMap)
     }
 
     override fun onStop() {
@@ -87,9 +88,8 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
     and the two supertypes, we’ll get true as well
      **/
     private fun createActionMap() {
-        actionList.replaceAll {
-            if(it is View) it.performClick()
-        }
+        actionList.replaceAll { if(it is View) it.performClick() }
+        actionMap = srSettings.commandList.zip(actionList).toMap()
     }
 
     open fun handleVoiceToActionController() {
