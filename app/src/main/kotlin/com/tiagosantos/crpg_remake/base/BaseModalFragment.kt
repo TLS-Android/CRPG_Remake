@@ -12,6 +12,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tiagosantos.access.modal.gossip.GossipViewModel
 import com.tiagosantos.access.modal.gotev.GotevViewModel
+import com.tiagosantos.access.modal.settings.ActionType
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.utils.Constants.MODALITY
@@ -32,8 +33,10 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
     layoutId = layoutId,
     settings = settings,
 ) {
-    open val gossip: GossipViewModel by activityViewModels()
+    private val gossip: GossipViewModel by activityViewModels()
     private val gotev: GotevViewModel by activityViewModels()
+
+    protected var actionList = mutableListOf<Any>()
 
     private val _flag = MutableLiveData<String?>()
     private val flag: LiveData<String?> = _flag
@@ -47,7 +50,7 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
         super.onViewCreated(view, savedInstanceState)
         gossip.setContextualHelp(ttsSettings.contextualHelp!!)
         fetchPreferences()
-        listenToUser()
+        handleVoiceToActionController()
     }
 
     private fun fetchPreferences() {
@@ -73,6 +76,19 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
         super.onPause()
         gotev.stop()
         gossip.shutUp()
+    }
+
+    open fun handleVoiceToActionController() {
+        when(srSettings.actionType) {
+            ActionType.GENERAL_VIEW -> { createActionMap(); listenToUser() }
+            ActionType.DATE_PICKER -> println("date_picker")
+            ActionType.REMINDER -> println("reminder")
+            else -> {}
+        }
+    }
+
+    private fun createActionMap() {
+
     }
 
     open fun performActionWithVoiceCommand(

@@ -393,7 +393,8 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
         view: ReminderFragmentBinding,
         command: String,
     ) {
-        helper.run { checkHoursCommand(view, command); checkMinutesCommand(view, command) }
+        helper.run { checkHoursCommand(view, command); checkMinutesCommand(view, command)
+    }
 
         with(view) {
             mapOf(
