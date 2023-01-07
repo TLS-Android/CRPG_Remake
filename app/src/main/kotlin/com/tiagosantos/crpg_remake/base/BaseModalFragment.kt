@@ -19,6 +19,7 @@ import com.tiagosantos.common.ui.utils.Constants.MODALITY
 import com.tiagosantos.common.ui.utils.Constants.SR
 import com.tiagosantos.common.ui.utils.Constants.TTS
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.generalHelper
+import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.numberList
 
 abstract class BaseModalFragment<B : ViewDataBinding>(
     @LayoutRes
@@ -88,8 +89,16 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
     and the two supertypes, we’ll get true as well
      **/
     private fun createActionMap() {
-        actionList.replaceAll { if(it is View) it.performClick() }
-        actionMap = srSettings.commandList.zip(actionList).toMap()
+        actionMap = when(srSettings.actionType) {
+            ActionType.GENERAL_VIEW -> {
+                actionList.replaceAll { if (it is View) it.performClick() }
+                srSettings.commandList.zip(actionList).toMap()
+            }
+            ActionType.DATE_PICKER ->  srSettings.commandList.zip(numberList).toMap()
+            ActionType.REMINDER -> srSettings.commandList.zip(numberList).toMap()
+            else -> actionMap
+        }
+
     }
 
     open fun handleVoiceToActionController() {

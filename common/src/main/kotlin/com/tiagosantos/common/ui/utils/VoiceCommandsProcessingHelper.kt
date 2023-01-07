@@ -7,10 +7,7 @@ object VoiceCommandsProcessingHelper {
         "cinco" to 5, "seis" to 6, "sete" to 7, "oito" to 8, "nove" to 9, "dez" to 10
     )
 
-    fun generalHelper(command: String, actionMap: Map<String, Any>){
-        val idx = actionMap.getOrDefault(command, "empty")
-        actionMap[idx]
-    }
+    val numberList = (1..10).toList()
 
     fun generalHelper(command: String, actionMap: Map<String, Any>){
         val idx = actionMap.getOrDefault(command, "empty")
