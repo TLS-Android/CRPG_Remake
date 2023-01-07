@@ -35,6 +35,7 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
         "Selecione um dia premindo item que pretender"
     ),
     srSettings = SRSettings(
+        commandList = listOf("um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez"),
         isListening = false,
     )
 ) {
