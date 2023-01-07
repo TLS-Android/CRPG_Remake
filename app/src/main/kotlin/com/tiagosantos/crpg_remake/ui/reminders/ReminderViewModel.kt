@@ -79,7 +79,7 @@ class ReminderViewModel(
         mReminderList.add(newReminder)
 
         setAlarm(fullWeekAlarm.toCollection(ArrayList()),
-                customWeekAlarm.toCollection(ArrayList<Int>()), newReminder.alarm_type)
+                customWeekAlarm.toCollection(ArrayList<Int>()), newReminder.alarmType)
     }
 
     private fun setAlarm(
@@ -91,7 +91,7 @@ class ReminderViewModel(
             putExtra(EXTRA_MESSAGE, newReminder.title)
             putExtra(EXTRA_HOUR, startTimeHours.value!!.toInt())
             putExtra(EXTRA_MINUTES, startTimeMin.value!!.toInt())
-            when(newReminder.alarm_freq){
+            when(newReminder.alarmFreq){
                 TODOS_OS_DIAS -> putExtra(EXTRA_DAYS, fullWeekAlarm)
                 PERSONALIZADO -> putExtra(EXTRA_DAYS, customWeekAlarm)
                 else -> { println("No valid frequency was found") }
@@ -111,7 +111,7 @@ class ReminderViewModel(
     }
 
     private fun setDateOnReminder(formattedDateToday: String) {
-        when (newReminder.alarm_freq) {
+        when (newReminder.alarmFreq) {
             HOJE -> newReminder.date = formattedDateToday
             TODOS_OS_DIAS -> newReminder.date = null
             PERSONALIZADO -> newReminder.date = null
