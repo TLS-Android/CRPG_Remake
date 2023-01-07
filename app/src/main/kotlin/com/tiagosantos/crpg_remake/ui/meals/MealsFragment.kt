@@ -58,30 +58,14 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
     private var isLunch = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         isLunch = requireArguments().getBoolean("isLunch")
         viewB.apply {
             actionList = mutableListOf(frameOpcaoCarne, frameOpcaoPeixe,
-                frameOpcaoDieta, frameOpcaoVegetariano)
+                frameOpcaoDieta, frameOpcaoVegetariano, buttonConfirmMeal)
         }
-
-        createActionMap()
+        super.onCreate(savedInstanceState)
     }
 
-
-    /**
-        isinstance caters for inheritance (an instance of a derived class is an instance of a base class, too),
-        while checking for equality of type does not
-        (it demands identity of types and rejects instancees of subtypes, AKA subclasses).
-
-        our A class is a subtype of X and Y, if we apply the is operator on the A instance
-        and the two supertypes, we’ll get true as well
-    **/
-    private fun createActionMap() {
-        actionList.replaceAll {
-            if(it is View) it.performClick()
-        }
-    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

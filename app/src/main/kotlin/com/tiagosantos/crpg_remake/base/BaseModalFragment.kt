@@ -78,6 +78,20 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
         gossip.shutUp()
     }
 
+    /**
+    isinstance caters for inheritance (an instance of a derived class is an instance of a base class, too),
+    while checking for equality of type does not
+    (it demands identity of types and rejects instancees of subtypes, AKA subclasses).
+
+    our A class is a subtype of X and Y, if we apply the is operator on the A instance
+    and the two supertypes, we’ll get true as well
+     **/
+    private fun createActionMap() {
+        actionList.replaceAll {
+            if(it is View) it.performClick()
+        }
+    }
+
     open fun handleVoiceToActionController() {
         when(srSettings.actionType) {
             ActionType.GENERAL_VIEW -> { createActionMap(); listenToUser() }
@@ -85,10 +99,6 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
             ActionType.REMINDER -> println("reminder")
             else -> {}
         }
-    }
-
-    private fun createActionMap() {
-
     }
 
     open fun performActionWithVoiceCommand(
