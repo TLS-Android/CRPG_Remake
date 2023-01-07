@@ -31,6 +31,7 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
            contextualHelp =  "Indique qual o seu estado de espirito atual",
         ),
         srSettings = SRSettings(
+            commandList = listOf("Tocar", "Parar", "Passar à frente", "Passar a trás", "Regressar"),
             isListening = false,
         )
 ) {
@@ -40,6 +41,13 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
 
     companion object {
         fun newInstance() = MeditationMediaPlayerFragment()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        viewB.custom.apply {
+            actionList = mutableListOf(exoPlay, exoPause, exoFfwd, exoRew, viewB.buttonReturnMeditation)
+        }
+        super.onCreate(savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -64,16 +72,6 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
                 goToFragment(MeditationFragment())
             }
 
-        }
-    }
-
-    override fun performActionWithVoiceCommand(command: String, actionMap: Map<String,Any>) {
-        with(viewB.custom) {
-            mapOf(
-                "Tocar" to exoPlay.performClick(), "Parar" to exoPause.performClick(),
-                "Passar à frente" to exoFfwd.performClick(), "Passar a trás" to exoRew.performClick(),
-                "Regressar" to viewB.buttonReturnMeditation.performClick(),
-            ).getOrElse(command) { println("No command found.") }
         }
     }
 

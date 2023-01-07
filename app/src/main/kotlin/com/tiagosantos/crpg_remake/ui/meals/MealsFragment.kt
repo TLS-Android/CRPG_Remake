@@ -38,18 +38,6 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
 
     private val mealsVM: MealsViewModel by viewModels()
 
-    private val actionMap: Map<String, Any> by lazy {
-        with(viewB){
-            mapOf(
-                "Carne" to frameOpcaoCarne.performClick(),
-                "Peixe" to frameOpcaoPeixe.performClick(),
-                "Dieta" to  frameOpcaoDieta.performClick(),
-                "Vegetariano" to frameOpcaoVegetariano.performClick(),
-                "Guardar" to buttonConfirmMeal.performClick()
-            )
-        }
-    }
-
     private var cardList = with(viewB) {
         listOf(frameOpcaoCarne, frameOpcaoPeixe, frameOpcaoDieta, frameOpcaoVegetariano)
     }
