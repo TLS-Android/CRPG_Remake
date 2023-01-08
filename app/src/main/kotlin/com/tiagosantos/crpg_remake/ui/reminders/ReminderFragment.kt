@@ -35,6 +35,8 @@ import com.tiagosantos.crpg_remake.ui.reminders.ReminderFragment.Companion.alarm
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderFragment.Companion.lembrarButtonPressed
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.newReminder
 import com.tiagosantos.crpg_remake.ui.reminders.helpers.HoursHelper
+import com.tiagosantos.crpg_remake.ui.reminders.helpers.HoursHelper.checkHoursCommand
+import com.tiagosantos.crpg_remake.ui.reminders.helpers.HoursHelper.checkMinutesCommand
 
 class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
     layoutId = R.layout.reminder_fragment,
@@ -64,8 +66,6 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
 
     private lateinit var et: EditText
     private lateinit var etMin: EditText
-
-    private lateinit var helper : HoursHelper
 
     companion object{
         val weekMap = mapOf(
@@ -146,6 +146,11 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
     /** Kotlin function parameters are read-only values and are not assignable. **/
     private fun setupUI(reminderVM: ReminderViewModel) {
         with(viewB){
+
+            fun toggleLayout(list: List<ExpandableLayout>) = viewB.parentLayout.setOnClickListener{
+                list.forEach { it.performClick() }
+            }
+
             with(secondLembrar){
                 button0.setOnClickListener { setLembrarLayout(
                     this,
@@ -286,6 +291,14 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
         }
 
     }
+
+    override fun onInitDataBinding() {
+        TODO("Not yet implemented")
+    }
+
+    override fun observeLifecycleEvents() {
+        TODO("Not yet implemented")
+    }
 }
 
     private fun setButtonColorsReminder(view: LayoutSecondLembrarBinding, pos: Int){
@@ -393,8 +406,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
         view: ReminderFragmentBinding,
         command: String,
     ) {
-        helper.run { checkHoursCommand(view, command); checkMinutesCommand(view, command)
-    }
+        HoursHelper.run { checkHoursCommand(view, command); checkMinutesCommand(view, command) }
 
         with(view) {
             mapOf(
@@ -406,13 +418,6 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                 "Cancelar" to buttonCancel.performClick(),
                 "Guardar" to buttonConfirm.performClick(),
             ).getOrElse(command) { println("No command found.") }
-
-            with(secondLembrar) {
-                mapOf(
-                    "Tomar Medicação" to button0, "Apanhar Transporte" to button1,
-                    "Escolher Almoço" to button2, "O Meu Lembrete" to button3,
-                )
-            }[command]?.performClick() ?: println("hello")
 
             with(secondLembrar) {
                 mapOf(
@@ -445,17 +450,3 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
             }
         }
     }
-
-    fun toggleLayout(list: List<ExpandableLayout>) = viewB.parentLayout.setOnClickListener{
-        list.forEach { it.performClick() }
-    }
-
-    override fun onInitDataBinding() {
-        TODO("Not yet implemented")
-    }
-
-    override fun observeLifecycleEvents() {
-        TODO("Not yet implemented")
-    }
-
-}

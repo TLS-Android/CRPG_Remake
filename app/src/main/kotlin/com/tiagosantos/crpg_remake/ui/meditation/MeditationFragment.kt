@@ -23,6 +23,7 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
         contextualHelp =  "Indique qual o seu estado de espirito atual",
     ),
     srSettings = SRSettings(
+        commandList = listOf("RELAXADO", "FELIZ", "SONOLENTO", "CONFIANTE"),
         isListening = false,
     )
 ) {
@@ -44,6 +45,14 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
         fun newInstance() = MeditationFragment()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        viewB.apply {
+            actionList = mutableListOf(buttonMoodRelaxed, buttonMoodHappy,
+                buttonMoodSleepy, buttonMoodConfident)
+        }
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupButtons()
@@ -55,12 +64,6 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
                 goToFragment(MeditationMediaPlayerFragment()) }
         }
     }
-
-    /*
-    override fun performActionWithVoiceCommand(
-        command: String,
-        actionMap: Map<String, Any>
-    ) = feelingsMap.getOrDefault(command) { println("do nothing") } */
 
     override fun onInitDataBinding() {
         TODO("Not yet implemented")
