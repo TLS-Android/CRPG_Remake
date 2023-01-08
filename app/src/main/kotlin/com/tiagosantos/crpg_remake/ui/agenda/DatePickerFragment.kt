@@ -19,6 +19,7 @@ import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.buildDateStri
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getDay3LettersName
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getDayName
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getDayNumber
+import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.numberMap
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import java.util.*
 import java.util.Calendar.*
@@ -43,13 +44,6 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
     private val calendar = getInstance()
 
     val vm: AgendaViewModel by viewModels()
-
-    companion object{
-        val map = mapOf(
-            "um" to 1, "dois" to 2, "três" to 3, "quatro" to 4,
-            "cinco" to 5, "seis" to 6, "sete" to 7, "oito" to 8, "nove" to 9, "dez" to 10
-        )
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -135,11 +129,15 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
         }
     }
 
+    private fun updateSelection() =  gotev.speechResult.observe(viewLifecycleOwner){
+        performActionWithVoiceCommand(it, actionMap)
+    }
+
     private fun performActionWithVoiceCommand(
         command: String,
         singleRowCalendar: SingleRowCalendar
     ) {
-        val literalValue = map.getOrElse(command) { println("Número não presente na lista") } as Int
+        val literalValue = numberMap.getOrElse(command) { println("Número não presente na lista") } as Int
 
         singleRowCalendar.apply {
             clearSelection()

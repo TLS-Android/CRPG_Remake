@@ -2,7 +2,7 @@ package com.tiagosantos.common.ui.utils
 
 object VoiceCommandsProcessingHelper {
 
-    val map = mapOf(
+    val numberMap = mapOf(
         "um" to 1, "dois" to 2, "três" to 3, "quatro" to 4,
         "cinco" to 5, "seis" to 6, "sete" to 7, "oito" to 8, "nove" to 9, "dez" to 10
     )

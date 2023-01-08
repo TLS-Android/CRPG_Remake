@@ -56,7 +56,6 @@ object ReminderRepository {
         "onze" to "11",
     )
 
-
     var newReminder = Reminder(
         EMPTY_STRING, EMPTY_STRING, EMPTY_STRING,
         0, 0, ReminderType.MEDICACAO, AlarmType.SOM, AlarmFrequency.HOJE

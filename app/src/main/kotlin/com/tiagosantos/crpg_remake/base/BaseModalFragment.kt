@@ -18,6 +18,7 @@ import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.utils.Constants.MODALITY
 import com.tiagosantos.common.ui.utils.Constants.SR
 import com.tiagosantos.common.ui.utils.Constants.TTS
+import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.generalHelper
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.numberList
 
@@ -104,7 +105,9 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
     open fun handleVoiceToActionController() {
         when(srSettings.actionType) {
             ActionType.GENERAL_VIEW -> { createActionMap(); listenToUser() }
-            ActionType.DATE_PICKER -> println("date_picker")
+            ActionType.DATE_PICKER -> {
+                val literalValue = VoiceCommandsProcessingHelper.numberMap.getOrElse(command) { println("Número não presente na lista") } as Int
+            }
             ActionType.REMINDER -> println("reminder")
             else -> {}
         }

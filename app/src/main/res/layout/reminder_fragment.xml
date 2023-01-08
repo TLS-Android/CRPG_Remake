@@ -41,8 +41,6 @@
     <include layout="@layout/layout_parent_notas"
         android:id="@+id/parent_notas"
         android:visibility="gone"/>
-
-
     <include layout="@layout/layout_second_alerta"
         android:id="@+id/second_alerta"
         android:visibility="gone"/>
