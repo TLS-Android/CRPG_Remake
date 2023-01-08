@@ -37,7 +37,6 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
     )
 ) {
     private val agendaVM: AgendaViewModel by viewModels()
-
     private var ctx = context
 
     private lateinit var mAttributes: TimelineAttributes
@@ -47,22 +46,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mAttributes = TimelineAttributes(
-            markerSize = dpToPx(20f),
-            markerColor = getColorCompat(R.color.GreyedBlue),
-            markerInCenter = true,
-            markerLeftPadding = dpToPx(0f),
-            markerTopPadding = dpToPx(0f),
-            markerRightPadding = dpToPx(0f),
-            markerBottomPadding = dpToPx(0f),
-            linePadding = dpToPx(2f),
-            startLineColor = getColorCompat(R.color.colorAccent),
-            endLineColor = getColorCompat(R.color.colorAccent),
-            lineStyle = TimelineView.LineStyle.NORMAL,
-            lineWidth = dpToPx(2f),
-            lineDashWidth = dpToPx(4f),
-            lineDashGap = dpToPx(2f)
-        )
+        setAttributes()
         val ctx = context
 
         agendaVM.mDataList.observe(viewLifecycleOwner) {
@@ -71,6 +55,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
             updateMAttributes()
             viewB.recyclerView.adapter?.notifyDataSetChanged()
         }
+
     }
 
 
@@ -123,4 +108,23 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
     }
 
     private fun setDataListItemsWithoutPopulate() = agendaVM.getEventCollectionFromJSON()
+
+    private fun setAttributes() {
+        mAttributes = TimelineAttributes(
+            markerSize = dpToPx(20f),
+            markerColor = getColorCompat(R.color.GreyedBlue),
+            markerInCenter = true,
+            markerLeftPadding = dpToPx(0f),
+            markerTopPadding = dpToPx(0f),
+            markerRightPadding = dpToPx(0f),
+            markerBottomPadding = dpToPx(0f),
+            linePadding = dpToPx(2f),
+            startLineColor = getColorCompat(R.color.colorAccent),
+            endLineColor = getColorCompat(R.color.colorAccent),
+            lineStyle = TimelineView.LineStyle.NORMAL,
+            lineWidth = dpToPx(2f),
+            lineDashWidth = dpToPx(4f),
+            lineDashGap = dpToPx(2f)
+        )
+    }
 }

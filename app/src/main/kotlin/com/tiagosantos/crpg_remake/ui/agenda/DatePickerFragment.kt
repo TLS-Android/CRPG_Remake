@@ -129,20 +129,21 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
         }
     }
 
-    private fun updateSelection() =  gotev.speechResult.observe(viewLifecycleOwner){
-        performActionWithVoiceCommand(it, actionMap)
+    override fun performActionWithVoiceCommand(
+        command: String,
+        actionMap: Map<String,Any>
+    ) {
+        val literalValue = numberMap.getOrElse(command) { println("Unknown number") } as Int
+        selectItemOnCalendar(literalValue)
     }
 
-    private fun performActionWithVoiceCommand(
-        command: String,
-        singleRowCalendar: SingleRowCalendar
-    ) {
-        val literalValue = numberMap.getOrElse(command) { println("Número não presente na lista") } as Int
-
-        singleRowCalendar.apply {
-            clearSelection()
-            if (literalValue > 5) scrollToPosition(literalValue - 1)
-            select(literalValue - 1)
+    private fun selectItemOnCalendar(literalValue: Int) {
+        with(viewB) {
+            mainSingleRowCalendar.apply {
+                clearSelection()
+                if (literalValue > 5) scrollToPosition(literalValue - 1)
+                select(literalValue - 1)
+            }
         }
     }
 

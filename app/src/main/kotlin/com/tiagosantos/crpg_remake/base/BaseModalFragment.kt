@@ -21,6 +21,7 @@ import com.tiagosantos.common.ui.utils.Constants.TTS
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.generalHelper
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.numberList
+import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.numberMap
 
 abstract class BaseModalFragment<B : ViewDataBinding>(
     @LayoutRes
@@ -43,6 +44,8 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
 
     private val _flag = MutableLiveData<String?>()
     private val flag: LiveData<String?> = _flag
+
+    protected var literalValue: Int? = null
 
     /**
      * Called to Initialize view data binding variables when fragment view is created.
@@ -105,9 +108,7 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
     open fun handleVoiceToActionController() {
         when(srSettings.actionType) {
             ActionType.GENERAL_VIEW -> { createActionMap(); listenToUser() }
-            ActionType.DATE_PICKER -> {
-                val literalValue = VoiceCommandsProcessingHelper.numberMap.getOrElse(command) { println("Número não presente na lista") } as Int
-            }
+            ActionType.DATE_PICKER -> { listenToUser() }
             ActionType.REMINDER -> println("reminder")
             else -> {}
         }
