@@ -94,12 +94,11 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
      **/
     private fun createActionMap() {
         actionMap = when(srSettings.actionType) {
-            ActionType.GENERAL_VIEW -> {
+            ActionType.GENERAL_VIEW, ActionType.REMINDER  -> {
                 actionList.replaceAll { if (it is View) it.performClick() }
                 srSettings.commandList.zip(actionList).toMap()
             }
             ActionType.DATE_PICKER ->  srSettings.commandList.zip(numberList).toMap()
-            ActionType.REMINDER -> srSettings.commandList.zip(numberList).toMap()
             else -> actionMap
         }
 

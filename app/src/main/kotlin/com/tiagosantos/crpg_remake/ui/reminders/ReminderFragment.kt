@@ -44,7 +44,12 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
         contextualHelp =  "Crie um novo lembrete",
     ),
     srSettings = SRSettings(
-        commandList = listOf("Horas", "Dia", "Alerta", "Notas", "Lembrete", "Cancelar", "Guardar"),
+        commandList = listOf(
+            "Horas", "Dia", "Alerta", "Notas", "Lembrete", "Cancelar", "Guardar",
+            "Tomar Medicação", "Apanhar Transporte",
+            "Escolher Almoço", "O Meu Lembrete",
+            "Som","Vibrar","Ambos","Hoje","Sempre","Escolher Dias"
+        ),
         isListening = false,
     )
 ) {
@@ -73,6 +78,18 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
         var lembrarButtonPressed = 0
         var alarmTypeButtonPressed = 0
         var alarmFreqButtonPressed = 0
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        viewB.apply {
+            actionList = mutableListOf(
+                expandableHoras, expandableDia, expandableAlerta, expandableNotas, parentLayout,
+                buttonCancel, buttonConfirm, secondLembrar.button0, secondLembrar.button1, secondLembrar.button2,
+                secondLembrar.button3, secondAlerta.imageButtonSom, secondAlerta.imageButtonVibrar,
+                secondAlerta.imageButtonAmbos, secondDia.buttonHoje, secondDia.buttonTodosDias, secondDia.buttonPersonalizado,
+            )
+        }
+        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
