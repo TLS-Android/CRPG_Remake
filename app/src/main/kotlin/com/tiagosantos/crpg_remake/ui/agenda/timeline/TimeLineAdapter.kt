@@ -97,21 +97,6 @@ class TimeLineAdapter(
 
         onCardClicked(holder, position)
 
-        fun performActionWithVoiceCommand(command: String) {
-            with(_binding!!){
-                when {
-                    command.contains("Escolher Almoço", true) && id == "Almoço" ||
-                            command.contains("Escolher Jantar", true) && id == "Jantar" ->
-                        card.performClick()
-
-                    command.contains(id, true) && tipo == ACTIVITY ->
-                        card.performClick()
-                    else -> { EMPTY_STRING }
-                }
-            }
-
-        }
-
     }
 
     private fun onCardClicked(holder: TimeLineViewHolder, position: Int) {

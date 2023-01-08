@@ -33,6 +33,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
         isSpeaking = true,
     ),
     srSettings = SRSettings(
+        commandList = listOf("Almoço", "Jantar"),
         isListening = false,
     )
 ) {
@@ -51,13 +52,14 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
 
         agendaVM.mDataList.observe(viewLifecycleOwner) {
             setDataListItemsWithoutPopulate()
-            if (ctx != null) { initRecyclerView(ctx) }
+            if (ctx != null) {
+                initRecyclerView(ctx)
+            }
             updateMAttributes()
             viewB.recyclerView.adapter?.notifyDataSetChanged()
         }
 
     }
-
 
     private fun initRecyclerView(ctx: Context) {
         initAdapter(ctx)
@@ -71,7 +73,6 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
                 }
             })
         }
-
     }
 
     private fun initAdapter(ctx: Context) {
