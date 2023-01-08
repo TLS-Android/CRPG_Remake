@@ -7,6 +7,7 @@ import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.view.forEach
 import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
 import com.skydoves.expandablelayout.ExpandableLayout
@@ -43,6 +44,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
         contextualHelp =  "Crie um novo lembrete",
     ),
     srSettings = SRSettings(
+        commandList = listOf("Horas", "Dia", "Alerta", "Notas", "Lembrete", "Cancelar", "Guardar"),
         isListening = false,
     )
 ) {
@@ -62,7 +64,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
     private lateinit var et: EditText
     private lateinit var etMin: EditText
 
-    companion object{
+    companion object {
         val weekMap = mapOf(
             "Seg" to 1, "Ter" to 2, "Qua" to 3,
             "Qui" to 4, "Sex" to 5, "Sab" to 6, "Dom" to 7
@@ -74,8 +76,8 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?,
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         _viewIntro = ReminderActivityIntroBinding.inflate(inflater, container, false)
@@ -84,18 +86,19 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
     }
 
     private fun setLayoutClickListeners(list: List<ExpandableLayout>) =
-        viewB.parentLayout.setOnClickListener{ list.forEach { it.performClick() } }
+        viewB.parentLayout.setOnClickListener { list.forEach { it.performClick() } }
 
     private fun setExpandablesClickListeners(list: List<ExpandableLayout>) {
-        list.forEach { it -> it.parentLayout.setOnClickListener { it.performClick()} } }
+        list.forEach { it -> it.parentLayout.setOnClickListener { it.performClick() } }
+    }
 
     private var successFlag = alarmFreqButtonPressed != 0 && alarmTypeButtonPressed != 0
             && lembrarButtonPressed != 0 && hoursMinutesFlag
 
     private fun launchIntent() {
         if (activity?.packageManager?.let { it1 ->
-            reminderVM.alarmIntent.resolveActivity(it1)
-        } != null) {
+                reminderVM.alarmIntent.resolveActivity(it1)
+            } != null) {
             startActivity(reminderVM.alarmIntent)
         }
     }
@@ -103,23 +106,27 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(viewIntro){
+        with(viewIntro) {
             reminderIntroHintLayout.show()
             createReminderActionButton.setOnClickListener { reminderIntroHintLayout.hide() }
         }
 
         with(viewB) {
             setLayoutClickListeners(listOf(expandableDia, expandableLembrar, expandableDia))
-            setExpandablesClickListeners(listOf(
-                expandableHoras,
-                expandableNotas,
-                expandableAlerta,
-                expandableDia
-            ))
+            setExpandablesClickListeners(
+                listOf(
+                    expandableHoras,
+                    expandableNotas,
+                    expandableAlerta,
+                    expandableDia
+                )
+            )
 
-            when{ successFlag || hoursInt in 0..23 -> println("Hello") }
+            when {
+                successFlag || hoursInt in 0..23 -> println("Hello")
+            }
 
-            with(viewSuccess){
+            with(viewSuccess) {
                 if (successFlag) {
                     reminderVM.addReminder(newReminder)
                     if (reminderVM.flagReminderAdded) {
@@ -128,7 +135,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                         buttonOk.setOnClickListener { successLayout.hide() }
                         launchIntent()
                     }
-                } else if (hoursInt in 0..23 || minsInt in 0.. 59) {
+                } else if (hoursInt in 0..23 || minsInt in 0..59) {
                     avisoCampos.run { text = context.getString(R.string.horas_invalidas); show() }
                 } else {
                     avisoCampos.run { text = "Campos obrigatorios em falta!"; show() }
@@ -140,28 +147,39 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
 
     /** Kotlin function parameters are read-only values and are not assignable. **/
     private fun setupUI(reminderVM: ReminderViewModel) {
-        with(viewB){
+        with(viewB) {
 
-            fun toggleLayout(list: List<ExpandableLayout>) = viewB.parentLayout.setOnClickListener{
+            fun toggleLayout(list: List<ExpandableLayout>) = viewB.parentLayout.setOnClickListener {
                 list.forEach { it.performClick() }
             }
 
-            with(secondLembrar){
-                button0.setOnClickListener { setLembrarLayout(
-                    this,
-                    1,
-                    isVisible = true,
-                    isTextVisible = true,
-                ) }
-                button1.setOnClickListener { setLembrarLayout(
-                    this, 2, isVisible = false, isTextVisible = false) }
-                button2.setOnClickListener { setLembrarLayout(
-                    this, 3,  isVisible = false, isTextVisible = false) }
-                button3.setOnClickListener { setLembrarLayout(
-                    this, 4, isVisible = true, isTextVisible = true) }
+            with(secondLembrar) {
+                button0.setOnClickListener {
+                    setLembrarLayout(
+                        this,
+                        1,
+                        isVisible = true,
+                        isTextVisible = true,
+                    )
+                }
+                button1.setOnClickListener {
+                    setLembrarLayout(
+                        this, 2, isVisible = false, isTextVisible = false
+                    )
+                }
+                button2.setOnClickListener {
+                    setLembrarLayout(
+                        this, 3, isVisible = false, isTextVisible = false
+                    )
+                }
+                button3.setOnClickListener {
+                    setLembrarLayout(
+                        this, 4, isVisible = true, isTextVisible = true
+                    )
+                }
             }
 
-            with(secondHoras){
+            with(secondHoras) {
                 et = editHours.apply {
                     filters = arrayOf(InputFilterMinMax("00", "23"), InputFilter.LengthFilter(2))
                 }
@@ -170,34 +188,42 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                 }
             }
 
-            with(secondDia){
+            with(secondDia) {
                 buttonHoje.setOnClickListener {
-                    setSecondLayout(this,1, false, isGroupVisible =  false) }
+                    setSecondLayout(this, 1, false, isGroupVisible = false)
+                }
                 buttonTodosDias.setOnClickListener {
-                    setSecondLayout(this,2, false, isGroupVisible = false) }
+                    setSecondLayout(this, 2, false, isGroupVisible = false)
+                }
                 buttonPersonalizado.setOnClickListener {
-                    setSecondLayout(this,3, true, isGroupVisible = true) }
+                    setSecondLayout(this, 3, true, isGroupVisible = true)
+                }
             }
 
-            with(secondAlerta){
-                    imageButtonSom.setOnClickListener{
-                        setSoundLogosVisible(
-                            view = secondDia,
-                            1,
-                            soundVisible = true,
-                            vibVisible = false,
-                            bothVisible = false,
-                            checkboxAmbos,
-                            checkboxSom
-                        ) }
-                    imageButtonVibrar.setOnClickListener{
-                        setSoundLogosVisible(secondDia,2, false,
-                            true, false, checkboxVibrar, checkboxSom) }
-                    imageButtonAmbos.setOnClickListener{
-                        setSoundLogosVisible(
-                            secondDia, 3, false,
-                            false, true, checkboxVibrar, checkboxSom
-                        ) }
+            with(secondAlerta) {
+                imageButtonSom.setOnClickListener {
+                    setSoundLogosVisible(
+                        view = secondDia,
+                        1,
+                        soundVisible = true,
+                        vibVisible = false,
+                        bothVisible = false,
+                        checkboxAmbos,
+                        checkboxSom
+                    )
+                }
+                imageButtonVibrar.setOnClickListener {
+                    setSoundLogosVisible(
+                        secondDia, 2, false,
+                        true, false, checkboxVibrar, checkboxSom
+                    )
+                }
+                imageButtonAmbos.setOnClickListener {
+                    setSoundLogosVisible(
+                        secondDia, 3, false,
+                        false, true, checkboxVibrar, checkboxSom
+                    )
+                }
 
 
                 /** ----- CANCELAR  ------ **/
@@ -205,12 +231,12 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                 buttonCancel.setOnClickListener {
                     avisoCampos.hide()
 
-                    listOf(checkboxSom,checkboxVibrar,checkboxAmbos).forEach { it.hide() }
+                    listOf(checkboxSom, checkboxVibrar, checkboxAmbos).forEach { it.hide() }
                     lembrarButtonPressed = 0
                     alarmTypeButtonPressed = 0
                     alarmFreqButtonPressed = 0
 
-                    with(secondHoras){
+                    with(secondHoras) {
                         editHours.setEmptyText()
                         editMinutes.setEmptyText()
                     }
@@ -219,7 +245,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                 }
 
             }
-            
+
             /** ----- CONFIRMAR ------ **/
 
             buttonConfirm.setOnClickListener {
@@ -239,16 +265,27 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                     }
 
                     when (lembrarButtonPressed) {
-                        1 -> { updateButton("Tomar medicacao", MEDICACAO) }
-                        2 -> { updateButton("Apanhar bus do CRPG", TRANSPORTE) }
-                        3 -> { updateButton("Lembrar escolha de almoço", REFEICAO) }
-                        4 -> { updateButton(
-                            secondLembrar.textEditPersonalizado.text.toString(),
-                            ReminderType.PERSONALIZADO)
-                        } else -> { println("lembrarButtonPressed is neither!") }
+                        1 -> {
+                            updateButton("Tomar medicacao", MEDICACAO)
+                        }
+                        2 -> {
+                            updateButton("Apanhar bus do CRPG", TRANSPORTE)
+                        }
+                        3 -> {
+                            updateButton("Lembrar escolha de almoço", REFEICAO)
+                        }
+                        4 -> {
+                            updateButton(
+                                secondLembrar.textEditPersonalizado.text.toString(),
+                                ReminderType.PERSONALIZADO
+                            )
+                        }
+                        else -> {
+                            println("lembrarButtonPressed is neither!")
+                        }
                     }
 
-                    with(secondDia){
+                    with(secondDia) {
                         for (id in toggleButtonGroup.checkedButtonIds) {
                             val materialButton: MaterialButton = toggleButtonGroup.findViewById(id)
                             weekMap[resources.getResourceName(materialButton.id).takeLast(3)]
@@ -293,17 +330,16 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
     override fun observeLifecycleEvents() {
         TODO("Not yet implemented")
     }
-}
 
-    private fun setButtonColorsReminder(view: LayoutSecondLembrarBinding, pos: Int){
+    private fun setButtonColorsReminder(view: LayoutSecondLembrarBinding, pos: Int) {
 
-        with(view){
+        with(view) {
             button0.setBackgroundResource(R.color.md_blue_100)
             button1.setBackgroundResource(R.color.md_blue_100)
             button2.setBackgroundResource(R.color.md_blue_100)
             button3.setBackgroundResource(R.color.md_blue_100)
 
-            when(pos){
+            when (pos) {
                 1 -> button0.setBackgroundResource(R.color.md_blue_200)
                 2 -> button1.setBackgroundResource(R.color.md_blue_200)
                 3 -> button2.setBackgroundResource(R.color.md_blue_200)
@@ -312,7 +348,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
         }
     }
 
-    private fun setButtonColorsDays(view: LayoutSecondDiaBinding, pos: Int){
+    private fun setButtonColorsDays(view: LayoutSecondDiaBinding, pos: Int) {
 
         with(view) {
             buttonHoje.setBackgroundResource(R.drawable.layout_button_round_top)
@@ -335,15 +371,17 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
         bothVisible: Boolean,
         checkboxVib: ImageView,
         checkboxSom: ImageView
-    ){
+    ) {
         alarmTypeButtonPressed = value
         checkboxSom.show()
         checkboxVib.invisible()
 
         view.buttonSelecionarDias.visibility = when {
             soundVisible || vibVisible || bothVisible -> VISIBLE
-            !soundVisible || !vibVisible || !bothVisible  -> INVISIBLE
-            else -> { INVISIBLE }
+            !soundVisible || !vibVisible || !bothVisible -> INVISIBLE
+            else -> {
+                INVISIBLE
+            }
         }
     }
 
@@ -352,8 +390,8 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
         value: Int,
         isVisible: Boolean,
         isTextVisible: Boolean,
-    ){
-        with(viewLembrar){
+    ) {
+        with(viewLembrar) {
             lembrarButtonPressed = value
             setButtonColorsReminder(this, lembrarButtonPressed)
             when {
@@ -373,29 +411,33 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
         value: Int,
         isbuttonVisible: Boolean,
         isGroupVisible: Boolean,
-    ){
+    ) {
         alarmFreqButtonPressed = value
         setButtonColorsDays(view, alarmFreqButtonPressed)
         view.buttonSelecionarDias.visibility = when {
             isbuttonVisible -> VISIBLE
             !isbuttonVisible -> INVISIBLE
-            else -> { INVISIBLE }
+            else -> {
+                INVISIBLE
+            }
         }
 
         view.toggleButtonGroup.visibility = when {
             isGroupVisible -> VISIBLE
             !isGroupVisible -> INVISIBLE
-            else -> { INVISIBLE }
+            else -> {
+                INVISIBLE
+            }
         }
     }
 
-    private fun performActionWithVoiceCommand(
-        view: ReminderFragmentBinding,
+    override fun performActionWithVoiceCommand(
         command: String,
+        actionMap: Map<String, Any>
     ) {
-        HoursHelper.run { checkHoursCommand(view, command); checkMinutesCommand(view, command) }
+        HoursHelper.run { checkHoursCommand(viewB, command); checkMinutesCommand(viewB, command) }
 
-        with(view) {
+        with(viewB) {
             mapOf(
                 "Horas" to expandableHoras.clickAndFocus(),
                 "Dia" to expandableDia.clickAndFocus(),
@@ -411,7 +453,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                     "Tomar Medicação" to button0, "Apanhar Transporte" to button1,
                     "Escolher Almoço" to button2, "O Meu Lembrete" to button3,
                 )
-            }[command]?.performClick() ?: println("hello")
+            }[command]?.performClick() ?: {}
 
             with(secondAlerta) {
                 mapOf(
@@ -419,21 +461,19 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                     "Vibrar" to imageButtonVibrar,
                     "Ambos" to imageButtonAmbos,
                 )
-            }[command]?.performClick() ?: println("hello")
+            }[command]?.performClick() ?: {}
 
             with(secondDia) {
                 mapOf(
-                    "Hoje" to buttonHoje.performClick(),
-                    "Sempre" to buttonTodosDias.performClick(),
-                    "Escolher Dias" to buttonPersonalizado.performClick(),
+                    "Hoje" to buttonHoje,
+                    "Sempre" to buttonTodosDias,
+                    "Escolher Dias" to buttonPersonalizado,
                 )
-            }.getOrElse(command) { println("No command found.") }
+            }[command]?.performClick() ?: {}
 
             if (command.contains("Todos", true)) {
-                listOf(
-                    expandableLembrar, expandableDia, expandableHoras,
-                    expandableAlerta, expandableNotas
-                ).forEach { it.clickAndFocus() }
+                expandableGroup.forEach { it.clickAndFocus() }
             }
         }
     }
+}

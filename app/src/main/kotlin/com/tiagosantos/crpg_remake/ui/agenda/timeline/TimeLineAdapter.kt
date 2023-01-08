@@ -123,9 +123,7 @@ class TimeLineAdapter(
                     }
                 }
             }
-
         }
-
     }
 
     private fun setupTimeLine(
