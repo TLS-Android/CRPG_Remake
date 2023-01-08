@@ -452,43 +452,13 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
         command: String,
         actionMap: Map<String, Any>
     ) {
-        HoursHelper.run { checkHoursCommand(viewB, command); checkMinutesCommand(viewB, command) }
+        HoursHelper.run {
+            checkHoursCommand(viewB, command); checkMinutesCommand(viewB, command)
+        }
 
-        with(viewB) {
-            mapOf(
-                "Horas" to expandableHoras.clickAndFocus(),
-                "Dia" to expandableDia.clickAndFocus(),
-                "Alerta" to expandableAlerta.clickAndFocus(),
-                "Notas" to expandableNotas.clickAndFocus(),
-                "Lembrete" to parentLayout.performClick(),
-                "Cancelar" to buttonCancel.performClick(),
-                "Guardar" to buttonConfirm.performClick(),
-            ).getOrElse(command) { println("No command found.") }
+        super.performActionWithVoiceCommand(command, actionMap)
 
-            with(secondLembrar) {
-                mapOf(
-                    "Tomar Medicação" to button0, "Apanhar Transporte" to button1,
-                    "Escolher Almoço" to button2, "O Meu Lembrete" to button3,
-                )
-            }[command]?.performClick() ?: {}
-
-            with(secondAlerta) {
-                mapOf(
-                    "Som" to imageButtonSom,
-                    "Vibrar" to imageButtonVibrar,
-                    "Ambos" to imageButtonAmbos,
-                )
-            }[command]?.performClick() ?: {}
-
-            with(secondDia) {
-                mapOf(
-                    "Hoje" to buttonHoje,
-                    "Sempre" to buttonTodosDias,
-                    "Escolher Dias" to buttonPersonalizado,
-                )
-            }[command]?.performClick() ?: {}
-
-            if (command.contains("Todos", true)) {
+        viewB.apply { if (command.contains("Todos", true)) {
                 expandableGroup.forEach { it.clickAndFocus() }
             }
         }
