@@ -106,9 +106,8 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
 
     open fun handleVoiceToActionController() {
         when(srSettings.actionType) {
-            ActionType.GENERAL_VIEW -> { createActionMap(); listenToUser() }
+            ActionType.GENERAL_VIEW, ActionType.REMINDER -> { createActionMap(); listenToUser() }
             ActionType.DATE_PICKER -> { listenToUser() }
-            ActionType.REMINDER -> println("reminder")
             else -> {}
         }
     }
