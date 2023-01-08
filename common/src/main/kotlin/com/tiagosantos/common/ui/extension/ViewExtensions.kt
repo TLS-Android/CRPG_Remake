@@ -26,6 +26,10 @@ fun View.hide() {
     this.visibility = View.GONE
 }
 
+fun View.clickAndFocus() {
+    performClick(); requestFocus()
+}
+
 fun View.invisible() {
     setOnClickListener { this.visibility = View.INVISIBLE }
 }
@@ -47,7 +51,6 @@ fun TextView.setTextSizeRes(@DimenRes rid: Int) {
 fun View.px(@DimenRes rid: Int): Int {
     return this.context.resources.getDimensionPixelOffset(rid)
 }
-
 
 val SearchView?.getEditTextSearchView get() =
     this?.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)

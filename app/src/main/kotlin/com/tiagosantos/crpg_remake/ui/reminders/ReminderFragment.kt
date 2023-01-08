@@ -12,10 +12,7 @@ import com.google.android.material.button.MaterialButton
 import com.skydoves.expandablelayout.ExpandableLayout
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
-import com.tiagosantos.common.ui.extension.hide
-import com.tiagosantos.common.ui.extension.invisible
-import com.tiagosantos.common.ui.extension.setEmptyText
-import com.tiagosantos.common.ui.extension.show
+import com.tiagosantos.common.ui.extension.*
 import com.tiagosantos.common.ui.model.AlarmFrequency.*
 import com.tiagosantos.common.ui.model.AlarmType.SOM
 import com.tiagosantos.common.ui.model.AlarmType.VIBRAR
@@ -35,8 +32,6 @@ import com.tiagosantos.crpg_remake.ui.reminders.ReminderFragment.Companion.alarm
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderFragment.Companion.lembrarButtonPressed
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.newReminder
 import com.tiagosantos.crpg_remake.ui.reminders.helpers.HoursHelper
-import com.tiagosantos.crpg_remake.ui.reminders.helpers.HoursHelper.checkHoursCommand
-import com.tiagosantos.crpg_remake.ui.reminders.helpers.HoursHelper.checkMinutesCommand
 
 class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
     layoutId = R.layout.reminder_fragment,
@@ -289,7 +284,6 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                 }
             }
         }
-
     }
 
     override fun onInitDataBinding() {
@@ -395,13 +389,6 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
         }
     }
 
-    /*private fun clickAndFocus() { expandable: ExpandableLayout ->
-        expandable.performClick(); expandable.requestFocus() }*/
-
-    private fun clickAndFocus() {
-        // TODO
-         }
-
     private fun performActionWithVoiceCommand(
         view: ReminderFragmentBinding,
         command: String,
@@ -410,10 +397,10 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
 
         with(view) {
             mapOf(
-                "Horas" to expandableHoras.run { clickAndFocus() },
-                "Dia" to expandableDia.run { clickAndFocus() },
-                "Alerta" to expandableAlerta.run { clickAndFocus() },
-                "Notas" to expandableNotas.run { clickAndFocus() },
+                "Horas" to expandableHoras.clickAndFocus(),
+                "Dia" to expandableDia.clickAndFocus(),
+                "Alerta" to expandableAlerta.clickAndFocus(),
+                "Notas" to expandableNotas.clickAndFocus(),
                 "Lembrete" to parentLayout.performClick(),
                 "Cancelar" to buttonCancel.performClick(),
                 "Guardar" to buttonConfirm.performClick(),
@@ -446,7 +433,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                 listOf(
                     expandableLembrar, expandableDia, expandableHoras,
                     expandableAlerta, expandableNotas
-                ).forEach { _ -> clickAndFocus() }
+                ).forEach { it.clickAndFocus() }
             }
         }
     }
