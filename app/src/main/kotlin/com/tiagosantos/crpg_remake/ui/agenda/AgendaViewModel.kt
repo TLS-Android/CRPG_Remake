@@ -44,6 +44,7 @@ class AgendaViewModel(
     private val _mDataList = MutableLiveData<MutableList<Event>?>()
     val mDataList: LiveData<MutableList<Event>?> = _mDataList
 
+    /** MediatorLiveData allows us to merge multiple LiveData sources into one single LiveData which we then can observe.**/
     private val liveDataList = MediatorLiveData<MutableList<Event>?>()
 
     private val _currentMonth = MutableLiveData<Int?>()
@@ -56,20 +57,11 @@ class AgendaViewModel(
     companion object { private val repo = AgendaRepository }
 
     init {
-        liveDataList.addSource(_publicEventList, object : Observer<MutableList<Event>?> {
-            var invocationCount: Int = 0
-
-            override fun onChanged(updatedValue: MutableList<Event>?) {
-                ++invocationCount
-
-                liveDataList.value = updatedValue + 10
-
-                if (invocationCount > 10) {
-                    liveDataList.removeSource(_publicEventList)
-                }
-            }
-        })
-        liveDataList.addSource(_privateEventList) { updatedValue -> updatedValue + 10 }
+        liveDataList.apply{
+            addSource(_publicEventList, value -> liveDataMerger.setValue(value))
+            addSource(_privateEventList) { updatedValue -> updatedValue }
+            value?.sortBy { it.timestampData.startTime }
+        }
     }
 
     private fun getDatesOfNextMonth(): List<Date> {
