@@ -50,7 +50,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
         setAttributes()
         val ctx = context
 
-        agendaVM.mDataList.observe(viewLifecycleOwner) {
+        agendaVM.liveDataList.observe(viewLifecycleOwner) {
             setDataListItemsWithoutPopulate()
             if (ctx != null) {
                 initRecyclerView(ctx)
@@ -84,7 +84,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
 
         viewB.recyclerView.apply {
             layoutManager = mLayoutManager
-            adapter = TimeLineAdapter(agendaVM.mDataList, mAttributes, ctx)
+            adapter = TimeLineAdapter(agendaVM.liveDataList, mAttributes, ctx)
         }
     }
 
