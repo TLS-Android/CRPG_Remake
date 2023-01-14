@@ -108,7 +108,7 @@ class AgendaViewModel(
         populateFile()
         addMealsToPrivateEvents()
         addMealsToPublicEvents()
-        println("Data List: ${_mDataList.value!!}")
+        println("Data List: ${liveDataList.value!!}")
     }
 
     private fun addMealsToPrivateEvents(): LiveData<MutableList<Event>?> {
