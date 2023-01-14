@@ -7,7 +7,6 @@ import android.app.Application
 import android.content.Context
 import androidx.lifecycle.*
 import androidx.lifecycle.Observer
-import com.google.gson.reflect.TypeToken
 import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils
 import com.tiagosantos.common.ui.utils.Constants.SLASH
@@ -16,7 +15,6 @@ import com.tiagosantos.common.ui.utils.Constants.fileContent
 import com.tiagosantos.crpg_remake.ui.agenda.AgendaRepository.dinnerEvent
 import com.tiagosantos.crpg_remake.ui.agenda.AgendaRepository.lunchEvent
 import java.io.File
-import java.lang.reflect.Type
 import java.util.*
 import java.util.Calendar.*
 
@@ -117,10 +115,6 @@ class AgendaViewModel(
 
     private val newFile: File = File(fullFilename)
     private fun populateFile() = newFile.apply { createNewFile(); writeText(fileContent) }
-
-    val type: Type = object : TypeToken<ArrayList<Event>>() {}.type
-    //private val _privateList: MutableLiveData<MutableList<Event>?> =
-    //    gson.fromJson(FileReader(newFile.absoluteFile), type)
 
     fun getEventCollectionFromJSON() {
         populateFile()

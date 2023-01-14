@@ -627,7 +627,7 @@ class NotificationsViewModel : ViewModel() {
 
 
 
-            command.contains("Tomar Medicação", true) -> secondLembrar.button0.performClick()
-            command.contains("", true) -> secondLembrar.button1.performClick()
-            command.contains("", true) -> secondLembrar.button2.performClick()
-            command.contains("", true) -> secondLembrar.button3.performClick()
+        command.contains("Tomar Medicação", true) -> secondLembrar.button0.performClick()
+        command.contains("", true) -> secondLembrar.button1.performClick()
+        command.contains("", true) -> secondLembrar.button2.performClick()
+        command.contains("", true) -> secondLembrar.button3.performClick()
