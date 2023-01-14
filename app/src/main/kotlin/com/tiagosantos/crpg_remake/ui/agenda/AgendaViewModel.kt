@@ -58,10 +58,10 @@ class AgendaViewModel(
     companion object { private val repo = AgendaRepository }
 
     init {
-        liveDataList.addSource(_publicEventList, object : Observer<Int> {
+        liveDataList.addSource(_publicEventList, object : Observer<MutableList<Event>?> {
             var invocationCount: Int = 0
 
-            override fun onChanged(updatedValue: Int) {
+            override fun onChanged(updatedValue: MutableList<Event>?) {
                 ++invocationCount
 
                 liveDataList.value = updatedValue + 10
@@ -124,16 +124,9 @@ class AgendaViewModel(
 
     fun getEventCollectionFromJSON() {
         populateFile()
-        concatenatePublicPrivateEvents()
-    }
-
-    private fun concatenatePublicPrivateEvents(): LiveData<MutableList<Event>?> {
         addMealsToPrivateEvents()
         addMealsToPublicEvents()
-        _mDataList.value?.plusAssign(privateEventList.value!! + publicEventList.value!!)
-        _mDataList.value!!.sortBy { it.timestampData.startTime }
         println("Data List: ${_mDataList.value!!}")
-        return _mDataList
     }
 
     private fun addMealsToPrivateEvents(): LiveData<MutableList<Event>?> {
