@@ -6,7 +6,6 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.*
-import androidx.lifecycle.Observer
 import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils
 import com.tiagosantos.common.ui.utils.Constants.SLASH
@@ -41,9 +40,6 @@ class AgendaViewModel(
     private val _privateEventList = MutableLiveData<MutableList<Event>?>()
     val privateEventList: LiveData<MutableList<Event>?> = _privateEventList
 
-    private val _mDataList = MutableLiveData<MutableList<Event>?>()
-    val mDataList: LiveData<MutableList<Event>?> = _mDataList
-
     /** MediatorLiveData allows us to merge multiple LiveData sources into one single LiveData which we then can observe.**/
     private val liveDataList = MediatorLiveData<MutableList<Event>?>()
 
@@ -58,8 +54,8 @@ class AgendaViewModel(
 
     init {
         liveDataList.apply{
-            addSource(_publicEventList, value -> liveDataMerger.setValue(value))
-            addSource(_privateEventList) { updatedValue -> updatedValue }
+            addSource(_publicEventList) { value -> setValue(value) }
+            addSource(_privateEventList) { value -> setValue(value) }
             value?.sortBy { it.timestampData.startTime }
         }
     }
