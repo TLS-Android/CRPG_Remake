@@ -60,27 +60,6 @@ class AgendaViewModel(
         }
     }
 
-    private fun getDatesOfNextMonth(): List<Date> {
-        _currentMonth.value = currentMonth.value?.plus(1) // + because we want next month
-        if (currentMonth.value == 12) {
-            // we will switch to january of next year, when we reach last month of year
-            calendar.set(YEAR, calendar[YEAR] + 1)
-            _currentMonth.value = 0 // 0 == january
-        }
-
-        return getDates(mutableListOf())
-    }
-
-    fun getDatesOfPreviousMonth(): List<Date> {
-        _currentMonth.value = currentMonth.value?.minus(1)
-        if (currentMonth.value == 12) {
-            // we will switch to december of previous year, when we reach first month of year
-            calendar.set(YEAR, calendar[YEAR] - 1)
-            _currentMonth.value = 11 // 11 == december
-        }
-        return getDates(mutableListOf())
-    }
-
     fun getFutureDatesOfCurrentMonth(): List<Date> {
         _currentMonth.value = calendar[MONTH]
         return getDates(mutableListOf())
@@ -124,6 +103,27 @@ class AgendaViewModel(
     fun setSelectedDate(date: Date) {
         _selectedDate.value =
             DateUtils.getDayNumber(date) + DateUtils.getMonthNumber(date) + DateUtils.getYear(date)
+    }
+
+    private fun getDatesOfNextMonth(): List<Date> {
+        _currentMonth.value = currentMonth.value?.plus(1) // + because we want next month
+        if (currentMonth.value == 12) {
+            // we will switch to january of next year, when we reach last month of year
+            calendar.set(YEAR, calendar[YEAR] + 1)
+            _currentMonth.value = 0 // 0 == january
+        }
+
+        return getDates(mutableListOf())
+    }
+
+    fun getDatesOfPreviousMonth(): List<Date> {
+        _currentMonth.value = currentMonth.value?.minus(1)
+        if (currentMonth.value == 12) {
+            // we will switch to december of previous year, when we reach first month of year
+            calendar.set(YEAR, calendar[YEAR] - 1)
+            _currentMonth.value = 11 // 11 == december
+        }
+        return getDates(mutableListOf())
     }
 
 }
