@@ -5,10 +5,8 @@ package com.tiagosantos.crpg_remake.ui.agenda
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.*
+import androidx.lifecycle.Observer
 import com.google.gson.reflect.TypeToken
 import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils
@@ -17,9 +15,7 @@ import com.tiagosantos.common.ui.utils.Constants.eventFilename
 import com.tiagosantos.common.ui.utils.Constants.fileContent
 import com.tiagosantos.crpg_remake.ui.agenda.AgendaRepository.dinnerEvent
 import com.tiagosantos.crpg_remake.ui.agenda.AgendaRepository.lunchEvent
-import com.tiagosantos.crpg_remake.ui.meals.MealsViewModel.Companion.gson
 import java.io.File
-import java.io.FileReader
 import java.lang.reflect.Type
 import java.util.*
 import java.util.Calendar.*
@@ -48,7 +44,9 @@ class AgendaViewModel(
     val privateEventList: LiveData<MutableList<Event>?> = _privateEventList
 
     private val _mDataList = MutableLiveData<MutableList<Event>?>()
-    var mDataList: LiveData<MutableList<Event>?> = _mDataList
+    val mDataList: LiveData<MutableList<Event>?> = _mDataList
+
+    private val liveDataList = MediatorLiveData<MutableList<Event>?>()
 
     private val _currentMonth = MutableLiveData<Int?>()
     val currentMonth: LiveData<Int?> = _currentMonth
@@ -58,6 +56,23 @@ class AgendaViewModel(
     private val calendar = getInstance()
 
     companion object { private val repo = AgendaRepository }
+
+    init {
+        liveDataList.addSource(_publicEventList, object : Observer<Int> {
+            var invocationCount: Int = 0
+
+            override fun onChanged(updatedValue: Int) {
+                ++invocationCount
+
+                liveDataList.value = updatedValue + 10
+
+                if (invocationCount > 10) {
+                    liveDataList.removeSource(_publicEventList)
+                }
+            }
+        })
+        liveDataList.addSource(_privateEventList) { updatedValue -> updatedValue + 10 }
+    }
 
     private fun getDatesOfNextMonth(): List<Date> {
         _currentMonth.value = currentMonth.value?.plus(1) // + because we want next month
