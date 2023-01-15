@@ -56,22 +56,27 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
         with(viewB){
             textSelectedMood.text = medViewModel.selectedMood
             medViewModel.setupPlayer(player,this)
-
-            with(moodColor){
-                when(medViewModel.selectedMood){
-                    "RELAXADO" -> setBackgroundColor(this,"")
-                    "FELIZ" -> setBackgroundColor(this,"#87B700")
-                    "SONOLENTO" -> setBackgroundColor(this,"#FBC02D")
-                    "CONFIANTE" -> setBackgroundColor(this,"#57A8D8")
-                    "QUERIDO" -> setBackgroundColor(this,"#AA00FF")
-                    "MENTE SÃ" -> setBackgroundColor(this,"#57A8D8")
-                }
-            }
+            setBackgroundColor(viewB)
 
             buttonReturnMeditation.setOnClickListener {
                 goToFragment(MeditationFragment())
             }
 
+        }
+    }
+
+    private fun setBackgroundColor(
+        binding: FragmentMeditationMediaPlayerBinding,
+    ) {
+        with(binding.moodColor) {
+            when (medViewModel.selectedMood) {
+                "RELAXADO" -> setBackgroundColor(this, "")
+                "FELIZ" -> setBackgroundColor(this, "#87B700")
+                "SONOLENTO" -> setBackgroundColor(this, "#FBC02D")
+                "CONFIANTE" -> setBackgroundColor(this, "#57A8D8")
+                "QUERIDO" -> setBackgroundColor(this, "#AA00FF")
+                "MENTE SÃ" -> setBackgroundColor(this, "#57A8D8")
+            }
         }
     }
 

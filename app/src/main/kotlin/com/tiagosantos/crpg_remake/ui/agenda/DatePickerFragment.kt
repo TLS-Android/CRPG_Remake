@@ -14,7 +14,6 @@ import com.tiagosantos.common.ui.singlerowcalendar.calendar.CalendarChangesObser
 import com.tiagosantos.common.ui.singlerowcalendar.calendar.CalendarViewManager
 import com.tiagosantos.common.ui.singlerowcalendar.calendar.SingleRowCalendarAdapter
 import com.tiagosantos.common.ui.singlerowcalendar.selection.CalendarSelectionManager
-import com.tiagosantos.common.ui.singlerowcalendar.calendar.SingleRowCalendar
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.buildDateString
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getDay3LettersName
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getDayName

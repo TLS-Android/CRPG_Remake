@@ -46,19 +46,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setAttributes()
-        val ctx = context
-
-        agendaVM.liveDataList.observe(viewLifecycleOwner) {
-            setDataListItemsWithoutPopulate()
-            if (ctx != null) {
-                initRecyclerView(ctx)
-            }
-            updateMAttributes()
-            viewB.recyclerView.adapter?.notifyDataSetChanged()
-        }
-
     }
 
     private fun initRecyclerView(ctx: Context) {
@@ -105,7 +93,15 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
     }
 
     override fun observeLifecycleEvents() {
-        TODO("Not yet implemented")
+        val ctx = context
+        agendaVM.liveDataList.observe(viewLifecycleOwner) {
+            setDataListItemsWithoutPopulate()
+            if (ctx != null) {
+                initRecyclerView(ctx)
+            }
+            updateMAttributes()
+            viewB.recyclerView.adapter?.notifyDataSetChanged()
+        }
     }
 
     private fun setDataListItemsWithoutPopulate() = agendaVM.getEventCollectionFromJSON()
