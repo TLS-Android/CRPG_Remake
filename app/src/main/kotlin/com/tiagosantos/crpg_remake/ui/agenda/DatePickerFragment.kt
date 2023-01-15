@@ -25,7 +25,7 @@ import java.util.Calendar.*
 
 class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
     layoutId = R.layout.fragment_date_picker,
-    FragmentSettings(
+    settings = FragmentSettings(
         appBarTitle = "ESCOLHER DATA",
         sharedPreferencesBooleanName = R.string.datePickerHasRun.toString(),
         showBackButton = false,

@@ -9,7 +9,7 @@ import com.tiagosantos.common.ui.utils.Constants.RECUSAR
 import com.tiagosantos.common.ui.utils.Constants.SR
 import com.tiagosantos.common.ui.utils.Constants.TTS
 
-class ModalityPreferencesRepository(
+class ModalityPreferencesRequestManager(
     private val ctx: Context,
 ) {
     var alert = 0

@@ -3,8 +3,7 @@ package com.tiagosantos.crpg_remake
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.tiagosantos.access.modal.modality.ModalityPreferencesRepository
+import com.tiagosantos.access.modal.modality.ModalityPreferencesRequestManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -14,7 +13,7 @@ class BoardingActivity : Activity() {
 
     private val activityScope = CoroutineScope(Dispatchers.Main)
 
-    private lateinit var prefRepo: ModalityPreferencesRepository
+    private lateinit var prefRepo: ModalityPreferencesRequestManager
 
     private var isRequestingSettings = true
 

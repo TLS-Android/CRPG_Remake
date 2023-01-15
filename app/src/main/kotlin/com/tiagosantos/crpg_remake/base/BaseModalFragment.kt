@@ -2,9 +2,7 @@ package com.tiagosantos.crpg_remake.base
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.activityViewModels
@@ -18,10 +16,8 @@ import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.utils.Constants.MODALITY
 import com.tiagosantos.common.ui.utils.Constants.SR
 import com.tiagosantos.common.ui.utils.Constants.TTS
-import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.generalHelper
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.numberList
-import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.numberMap
 
 abstract class BaseModalFragment<B : ViewDataBinding>(
     @LayoutRes
@@ -65,7 +61,7 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
         val srFlag = modalityPreferences.getBoolean(SR, false)
         val hasRun = modalityPreferences.getBoolean(flag.toString(), false)
 
-        setupModality(ttsFlag, srFlag, hasRun)
+        //setupModality(ttsFlag, srFlag, hasRun)
     }
 
     private fun listenToUser() =  gotev.speechResult.observe(viewLifecycleOwner){
@@ -117,22 +113,4 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
         actionMap: Map<String,Any>
     ) = generalHelper(command, actionMap)
 
-    /**
-     * SHOULD BE MOVED TO A VIEW MODEL; NOT PART OF THE FRAGMENT
-     */
-    open fun setupModality(
-       ttsFlag: Boolean,
-       srFlag: Boolean,
-       hasRun: Boolean
-    ){
-        if (!hasRun) {
-            when {
-                ttsFlag && !srFlag -> gossip.talk()
-                !ttsFlag && srFlag -> gotev.listen()
-                ttsFlag && srFlag -> { gossip.talk(); gotev.listen() }
-            }
-        } else {
-            when { !ttsFlag && srFlag || ttsFlag && srFlag -> gotev.listen() }
-        }
-    }
 }

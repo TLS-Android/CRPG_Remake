@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.tiagosantos.access.modal.modality.ModalityPreferencesRepository
+import com.tiagosantos.access.modal.modality.ModalityPreferencesRequestManager
 
 @SuppressLint("StaticFieldLeak")
 class RepositoryManagerViewModel(
@@ -17,7 +17,7 @@ class RepositoryManagerViewModel(
     val ttsFlag get() = _ttsFlag
 
     private var appPreferencesRepository = AppPreferencesRepository(context)
-    private var modalityPreferencesRepository = ModalityPreferencesRepository(context)
+    private var modalityPreferencesRepository = ModalityPreferencesRequestManager(context)
 
     /** ViewModel shouldn't hold any reference related to View (Activity, Context etc)
      * due to increased difficulty to test. **/
