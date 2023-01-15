@@ -1,8 +1,8 @@
 package com.tiagosantos.crpg_remake.ui.agenda.timeline.model
 
 import android.os.Parcelable
-import kotlinx.android.parcel.IgnoredOnParcel
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.IgnoredOnParcel
+import kotlinx.parcelize.Parcelize
 import kotlin.properties.Delegates.observable
 
 @Parcelize

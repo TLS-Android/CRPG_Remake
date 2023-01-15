@@ -23,9 +23,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 
 /**
  *  Observer to request and handle Runtime permissions
@@ -35,7 +34,7 @@ import androidx.lifecycle.OnLifecycleEvent
  */
 class RuntimePermissionObserver(
     private val activity: FragmentActivity
-) : LifecycleObserver {
+) : DefaultLifecycleObserver {
 
     private var onGranted: () -> Unit = {}
     private var onDenied: () -> Unit = {}
@@ -43,8 +42,8 @@ class RuntimePermissionObserver(
 
     private lateinit var launcher: ActivityResultLauncher<Array<String>>
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun onCreate() {
+    override fun onCreate(owner: LifecycleOwner) {
+        super.onCreate(owner)
         launcher = activity
             .activityResultRegistry
             .register(this.javaClass.name, ActivityResultContracts.RequestMultiplePermissions()) {
