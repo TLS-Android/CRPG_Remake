@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.annotation.DimenRes
+import com.google.android.material.card.MaterialCardView
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 
 fun View.showWhenClicked() {
@@ -148,6 +149,15 @@ fun ViewGroup.hideAll() {
 inline fun ViewGroup.eachChild(func: (view: View) -> Unit) {
     for (i in 0 until childCount) {
         func(getChildAt(i))
+    }
+}
+
+fun MaterialCardView.setFrameOnClick(
+    cardList: List<MaterialCardView>,
+    setChecks: (List<MaterialCardView>, MaterialCardView) -> Unit
+) {
+    this.setOnClickListener {
+        setChecks(cardList,this)
     }
 }
 
