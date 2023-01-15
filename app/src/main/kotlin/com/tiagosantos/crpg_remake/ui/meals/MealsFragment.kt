@@ -26,7 +26,7 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
             sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
         ),
         TTSSettings(
-            R.string.indique_refeicao.toString(),
+            contextualHelp = R.string.indique_refeicao.toString(),
             isSpeaking = false
         ),
         srSettings = SRSettings(
