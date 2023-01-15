@@ -85,13 +85,13 @@ class GotevViewModel(
         Speech.getInstance().shutdown()
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    fun onStartView() { //do something on start view if it's needed }
+    fun onStartView(owner: LifecycleOwner) {
+        super.onCreate(owner)
+        //do something on start view if it's needed
     }
 
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    fun onStopView() {
+    fun onStopView(owner: LifecycleOwner) {
+        super.onCreate(owner)
         //do something on stop view if it's needed
     }
 
