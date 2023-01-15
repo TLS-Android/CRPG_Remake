@@ -5,6 +5,8 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 
 /**
@@ -19,7 +21,7 @@ object VectorDrawableUtils {
 
     fun getDrawable(context: Context, drawableResId: Int, colorFilter: Int): Drawable {
         val drawable = getDrawable(context, drawableResId)
-        drawable!!.setColorFilter(colorFilter, PorterDuff.Mode.SRC_IN)
+        drawable!!.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(colorFilter, BlendModeCompat.SRC_ATOP)
         return drawable
     }
 

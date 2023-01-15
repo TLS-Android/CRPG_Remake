@@ -64,6 +64,7 @@ class MainActivity : MainActivityInterface, BaseActivity(
     }
 
     /** The modules() function in startKoin load the given list of modules  **/
+    @Suppress("UNUSED_PARAMETER")
     override fun onCreate(savedInstanceState: Bundle?) {
         setupParams()
         val gotev by viewModels<GotevViewModel>()

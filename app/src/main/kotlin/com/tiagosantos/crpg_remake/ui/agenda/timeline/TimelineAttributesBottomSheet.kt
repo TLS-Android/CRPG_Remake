@@ -24,6 +24,7 @@ import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.Orientation
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.TimelineAttributes
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.widgets.BorderedCircle
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.widgets.RoundedCornerBottomSheet
+import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
 

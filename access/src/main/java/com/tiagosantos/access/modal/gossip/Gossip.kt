@@ -219,6 +219,7 @@ open class Gossip(private val context: Context) : TextToSpeech.OnInitListener {
                 }
             }
 
+            @Deprecated("Old stuff")
             override fun onError(utteranceId: String) {
                 if (detectAndRun(utteranceId, onErrorJobs)) {
                     if (onDoneJobs.containsKey(utteranceId)) {
