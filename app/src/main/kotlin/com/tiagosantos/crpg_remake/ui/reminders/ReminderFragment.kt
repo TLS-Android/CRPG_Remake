@@ -141,13 +141,15 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                         launchIntent()
                     }
                 } else if (hoursInt in 0..23 || minsInt in 0..59) {
-                    avisoCampos.run { text = context.getString(R.string.horas_invalidas); show() }
+                    avisoCampos.run { text = getString(R.string.horas_invalidas); show() }
                 } else {
-                    avisoCampos.run { text = context.getString(R.string.campos_obrigatorios); show() }
+                    avisoCampos.run { text = getString(R.string.campos_obrigatorios); show() }
                 }
             }
         }
+
         setupUI()
+
     }
 
     /** Kotlin function parameters are read-only values and are not assignable. **/
@@ -238,7 +240,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                     minsInt = secondHoras.editMinutes.text.toString().toInt()
                     hoursMinutesFlag = true
                 } else {
-                    avisoCampos.run { text = context.getString(R.string.valor_em_falta); show() }
+                    avisoCampos.run { text = getString(R.string.valor_em_falta); show() }
                 }
 
                 with(reminderVM.newReminder) {
@@ -248,9 +250,9 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                     }
 
                     when (lembrarButtonPressed) {
-                        1 -> updateButton("Tomar medicacao", MEDICACAO)
-                        2 -> updateButton("Apanhar bus do CRPG", TRANSPORTE)
-                        3 -> updateButton("Lembrar escolha de almoço", REFEICAO)
+                        1 -> updateButton(getString(R.string.tomar_medicacao), MEDICACAO)
+                        2 -> updateButton(getString(R.string.apanhar_bus), TRANSPORTE)
+                        3 -> updateButton(getString(R.string.lembrar_escolha_almoco), REFEICAO)
                         4 -> {
                             updateButton(
                                 secondLembrar.textEditPersonalizado.text.toString(),

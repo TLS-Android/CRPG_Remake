@@ -70,8 +70,6 @@ class MainActivity : MainActivityInterface, BaseActivity(
         val gotev by viewModels<GotevViewModel>()
         val gossip by viewModels<GossipViewModel>()
 
-        println("MainActivity")
-
         super.onCreate(savedInstanceState)
 
         //startKoin {

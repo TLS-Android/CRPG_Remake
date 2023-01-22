@@ -139,6 +139,8 @@
 
     <string name="imagem_ilustrativa_do_item_da_agenda">Imagem ilustrativa do item da agenda</string>
     <string name="valor_em_falta">Valor em falta</string>
+    <string name="apanhar_bus">Apanhar bus do CRPG</string>
+    <string name="lembrar_escolha_almoco">Lembrar escolha de almoço</string>
 
     <string-array name="line_type">
         <item>Normal</item>
