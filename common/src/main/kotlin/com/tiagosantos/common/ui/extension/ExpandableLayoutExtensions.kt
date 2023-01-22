@@ -11,3 +11,7 @@ fun List<ExpandableLayout>.setExpandablesClickListeners() {
     forEach { it -> it.parentLayout.setOnClickListener { it.performClick() } }
 }
 
+fun List<ExpandableLayout>.toggleLayout(parentLayout: LinearLayout) = parentLayout.setOnClickListener {
+    forEach { it.performClick() }
+}
+

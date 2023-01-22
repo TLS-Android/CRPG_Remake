@@ -1,5 +1,6 @@
 package com.tiagosantos.crpg_remake.ui.reminders
 
+import android.app.ProgressDialog.show
 import android.os.Bundle
 import android.text.InputFilter
 import android.view.LayoutInflater
@@ -10,7 +11,6 @@ import android.widget.*
 import androidx.core.view.forEach
 import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
-import com.skydoves.expandablelayout.ExpandableLayout
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.extension.*
@@ -103,9 +103,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
             && lembrarButtonPressed != 0 && hoursMinutesFlag
 
     private fun launchIntent() {
-        if (activity?.packageManager?.let { it1 ->
-                reminderVM.alarmIntent.resolveActivity(it1)
-            } != null) {
+        if (activity?.packageManager?.let { it -> reminderVM.alarmIntent.resolveActivity(it) } != null) {
             startActivity(reminderVM.alarmIntent)
         }
     }
@@ -131,9 +129,8 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                 expandableAlerta,
                 expandableDia
             ).setExpandablesClickListeners()
-            when {
-                successFlag || hoursInt in 0..23 -> println("Hello")
-            }
+
+            when {successFlag || hoursInt in 0..23 -> println("Hello") }
 
             with(viewSuccess) {
                 if (successFlag) {
@@ -151,17 +148,12 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                 }
             }
         }
-        setupUI(reminderVM)
+        setupUI()
     }
 
     /** Kotlin function parameters are read-only values and are not assignable. **/
-    private fun setupUI(reminderVM: ReminderViewModel) {
+    private fun setupUI() {
         with(viewB) {
-
-            fun toggleLayout(list: List<ExpandableLayout>) = viewB.parentLayout.setOnClickListener {
-                list.forEach { it.performClick() }
-            }
-
             with(secondLembrar) {
                 button0.setOnClickListener {
                     setLembrarLayout(
@@ -188,14 +180,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                 }
             }
 
-            with(secondHoras) {
-                et = editHours.apply {
-                    filters = arrayOf(InputFilterMinMax("00", "23"), InputFilter.LengthFilter(2))
-                }
-                etMin = editMinutes.apply {
-                    filters = arrayOf(InputFilterMinMax("00", "59"), InputFilter.LengthFilter(2))
-                }
-            }
+            restrictTimeInput(this, this@ReminderFragment)
 
             with(secondDia) {
                 buttonHoje.setOnClickListener {
@@ -233,30 +218,19 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                         false, true, checkboxVibrar, checkboxSom
                     )
                 }
-
-
-                /** ----- CANCELAR  ------ **/
-
-                buttonCancel.setOnClickListener {
-                    avisoCampos.hide()
-
-                    listOf(checkboxSom, checkboxVibrar, checkboxAmbos).forEach { it.hide() }
-                    lembrarButtonPressed = 0
-                    alarmTypeButtonPressed = 0
-                    alarmFreqButtonPressed = 0
-
-                    with(secondHoras) {
-                        editHours.setEmptyText()
-                        editMinutes.setEmptyText()
-                    }
-
-                    secondNotas.editTextNotes.setEmptyText()
-                }
-
             }
 
-            /** ----- CONFIRMAR ------ **/
+            /** ----- CANCELAR  ------ **/
+            setupCancelButton()
 
+            /** ----- CONFIRMAR ------ **/
+            confirmButtonSetup()
+        }
+
+    }
+
+    private fun confirmButtonSetup() =
+        with(viewB) {
             buttonConfirm.setOnClickListener {
                 if (et.text.toString().length == 2 && etMin.text.toString().length == 2) {
                     reminderVM.setTime(et, etMin)
@@ -291,7 +265,8 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                     with(secondDia) {
                         for (id in toggleButtonGroup.checkedButtonIds) {
                             val materialButton: MaterialButton = toggleButtonGroup.findViewById(id)
-                            weekMap[resources.getResourceName(materialButton.id).takeLast(3)]
+                            weekMap[resources.getResourceName(materialButton.id)
+                                .takeLast(3)]
                         }
                     }
 
@@ -299,9 +274,48 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                 }
 
             }
-
         }
 
+
+    private fun setupCancelButton() =
+        with(viewB) {
+            with(secondAlerta) {
+                buttonCancel.setOnClickListener {
+                    avisoCampos.hide()
+
+                    listOf(
+                        checkboxSom,
+                        checkboxVibrar,
+                        checkboxAmbos
+                    ).forEach { it.hide() }
+
+                    lembrarButtonPressed = 0
+                    alarmTypeButtonPressed = 0
+                    alarmFreqButtonPressed = 0
+
+                    with(secondHoras) {
+                        editHours.setEmptyText()
+                        editMinutes.setEmptyText()
+                    }
+
+                    secondNotas.editTextNotes.setEmptyText()
+                }
+            }
+        }
+
+
+    private fun restrictTimeInput(
+        reminderFragmentBinding: ReminderFragmentBinding,
+        reminderFragment: ReminderFragment
+    ) {
+        with(reminderFragmentBinding.secondHoras) {
+            reminderFragment.et = editHours.apply {
+                filters = arrayOf(InputFilterMinMax("00", "23"), InputFilter.LengthFilter(2))
+            }
+            reminderFragment.etMin = editMinutes.apply {
+                filters = arrayOf(InputFilterMinMax("00", "59"), InputFilter.LengthFilter(2))
+            }
+        }
     }
 
     private fun setTypeAndFrequency(newReminder: Reminder) {
