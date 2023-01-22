@@ -91,6 +91,8 @@
     <string name="confiante">confiante</string>
     <string name="criado_c_sucesso">criado c sucesso</string>
     <string name="horas_invalidas">Horas ou minutos invalidos</string>
+    <string name="campos_obrigatorios">Campos obrigatorios em falta!</string>
+
 
     //TIMELINE ITEM
     <string name="horizontal">Horizontal</string>
@@ -136,6 +138,7 @@
     <string name="style">Style</string>
 
     <string name="imagem_ilustrativa_do_item_da_agenda">Imagem ilustrativa do item da agenda</string>
+    <string name="valor_em_falta">Valor em falta</string>
 
     <string-array name="line_type">
         <item>Normal</item>

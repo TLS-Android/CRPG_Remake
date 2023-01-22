@@ -188,6 +188,7 @@ fun Context.pxToDp(valueInPx: Int): Int {
  */
 fun Activity.applyStatusBarColor(@ColorRes colorResId: Int) {
     window.apply {
+        //this.statusBarColor = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
         this.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         this.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         this.statusBarColor = getColorCompatible(colorResId)

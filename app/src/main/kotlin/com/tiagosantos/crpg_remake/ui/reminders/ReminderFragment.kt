@@ -1,6 +1,5 @@
 package com.tiagosantos.crpg_remake.ui.reminders
 
-import android.app.ProgressDialog.show
 import android.os.Bundle
 import android.text.InputFilter
 import android.view.LayoutInflater
@@ -144,7 +143,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                 } else if (hoursInt in 0..23 || minsInt in 0..59) {
                     avisoCampos.run { text = context.getString(R.string.horas_invalidas); show() }
                 } else {
-                    avisoCampos.run { text = "Campos obrigatorios em falta!"; show() }
+                    avisoCampos.run { text = context.getString(R.string.campos_obrigatorios); show() }
                 }
             }
         }
@@ -238,7 +237,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                     minsInt = secondHoras.editMinutes.text.toString().toInt()
                     hoursMinutesFlag = true
                 } else {
-                    avisoCampos.run { text = "Valor em falta"; show() }
+                    avisoCampos.run { text = context.getString(R.string.valor_em_falta); show() }
                 }
 
                 with(reminderVM.newReminder) {
