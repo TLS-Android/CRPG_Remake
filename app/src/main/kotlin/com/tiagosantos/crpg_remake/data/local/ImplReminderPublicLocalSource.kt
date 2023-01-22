@@ -1,7 +1,6 @@
 package com.tiagosantos.crpg_remake.data.local
 
 import android.app.Application
-import com.google.gson.Gson
 import com.tiagosantos.common.ui.model.*
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.common.ui.utils.Constants.REMINDER_FILENAME
@@ -30,12 +29,11 @@ class ImplReminderPublicLocalSource(
     */
     init {
         val ctx = application.applicationContext
-        val gson = Gson()
         val filename = REMINDER_FILENAME
         val fullFilename = ctx.filesDir.toString() + SLASH + filename
         val file = File(fullFilename)
         val fileExists = file.exists()
-        val messagesList = ArrayList<Reminder>()
+        val reminderList = ArrayList<Reminder>()
         val isNewFileCreated : Boolean = file.createNewFile()
     }
 

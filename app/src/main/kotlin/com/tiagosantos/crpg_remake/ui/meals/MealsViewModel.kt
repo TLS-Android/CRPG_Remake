@@ -1,14 +1,8 @@
 package com.tiagosantos.crpg_remake.ui.meals
 
 import android.annotation.SuppressLint
-import android.app.Application
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.*
-import com.google.gson.Gson
-import com.tiagosantos.common.ui.utils.GeneralUtils.LOG_TAG_DEBUG
-import com.tiagosantos.crpg_remake.helper.ResourcesProvider
-import kotlinx.coroutines.launch
 import java.util.*
 
 @SuppressLint("StaticFieldLeak")
@@ -30,7 +24,6 @@ class MealsViewModel(
 
     companion object {
         private const val EVENT_FILENAME = "event.json"
-        val gson = Gson()
     }
 
     private fun observeMessagesList() {

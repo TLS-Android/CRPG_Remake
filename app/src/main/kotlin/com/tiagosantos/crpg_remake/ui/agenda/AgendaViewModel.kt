@@ -11,8 +11,8 @@ import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils
 import com.tiagosantos.common.ui.utils.Constants.SLASH
 import com.tiagosantos.common.ui.utils.Constants.eventFilename
 import com.tiagosantos.common.ui.utils.Constants.fileContent
-import com.tiagosantos.crpg_remake.ui.agenda.AgendaRepository.dinnerEvent
-import com.tiagosantos.crpg_remake.ui.agenda.AgendaRepository.lunchEvent
+import com.tiagosantos.crpg_remake.ui.agenda.AgendaRepository.mockDinnerEvent
+import com.tiagosantos.crpg_remake.ui.agenda.AgendaRepository.mockLunchEvent
 import java.io.File
 import java.util.*
 import java.util.Calendar.*
@@ -91,12 +91,12 @@ class AgendaViewModel(
     }
 
     private fun addMealsToPrivateEvents(): LiveData<MutableList<Event>?> {
-        _privateEventList.value?.apply { add(lunchEvent); add(dinnerEvent) }
+        _privateEventList.value?.apply { add(mockLunchEvent); add(mockDinnerEvent) }
         return privateEventList
     }
 
     private fun addMealsToPublicEvents(): LiveData<MutableList<Event>?> {
-        _publicEventList.value?.apply { add(lunchEvent); add(dinnerEvent) }
+        _publicEventList.value?.apply { add(mockLunchEvent); add(mockDinnerEvent) }
         return publicEventList
     }
 

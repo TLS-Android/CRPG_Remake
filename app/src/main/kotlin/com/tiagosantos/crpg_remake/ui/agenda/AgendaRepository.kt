@@ -1,12 +1,10 @@
 package com.tiagosantos.crpg_remake.ui.agenda
 
-import com.google.gson.Gson
 import com.tiagosantos.common.ui.model.*
 
 object AgendaRepository {
-    val gson = Gson()
 
-    var lunchEvent = Event(
+    var mockLunchEvent = Event(
         "Almoço",
         "Clicar para escolher refeição",
         "description",
@@ -15,7 +13,7 @@ object AgendaRepository {
         TimestampData(startTime = "12:00", endTime = "13:00", date = "21")
     )
 
-    var dinnerEvent = Event(
+    var mockDinnerEvent = Event(
         "Jantar",
         "Clicar para escolher refeição",
         "description",
