@@ -179,6 +179,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                 }
             }
 
+            /** ---- FILTRAR O TIME INPUT -------- **/
             restrictTimeInput(this, this@ReminderFragment)
 
             with(secondDia) {
