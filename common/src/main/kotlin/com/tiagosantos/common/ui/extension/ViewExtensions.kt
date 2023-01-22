@@ -43,7 +43,6 @@ fun EditText.setEmptyText() {
     this.setText(EMPTY_STRING)
 }
 
-
 fun TextView.setTextSizeRes(@DimenRes rid: Int) {
     setTextSize(TypedValue.COMPLEX_UNIT_PX, this.context.resources.getDimension(rid))
 }
