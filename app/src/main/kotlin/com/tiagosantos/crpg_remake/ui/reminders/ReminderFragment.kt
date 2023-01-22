@@ -28,9 +28,6 @@ import com.tiagosantos.common.ui.utils.InputFilterMinMax
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.databinding.*
-import com.tiagosantos.crpg_remake.ui.reminders.ReminderFragment.Companion.alarmFreqButtonPressed
-import com.tiagosantos.crpg_remake.ui.reminders.ReminderFragment.Companion.alarmTypeButtonPressed
-import com.tiagosantos.crpg_remake.ui.reminders.ReminderFragment.Companion.lembrarButtonPressed
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.newReminder
 import com.tiagosantos.crpg_remake.ui.reminders.helpers.HoursHelper
 
@@ -102,13 +99,6 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
         return viewB.root
     }
 
-    private fun setLayoutClickListeners(list: List<ExpandableLayout>) =
-        viewB.parentLayout.setOnClickListener { list.forEach { it.performClick() } }
-
-    private fun setExpandablesClickListeners(list: List<ExpandableLayout>) {
-        list.forEach { it -> it.parentLayout.setOnClickListener { it.performClick() } }
-    }
-
     private var successFlag = alarmFreqButtonPressed != 0 && alarmTypeButtonPressed != 0
             && lembrarButtonPressed != 0 && hoursMinutesFlag
 
@@ -129,16 +119,18 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
         }
 
         with(viewB) {
-            setLayoutClickListeners(listOf(expandableDia, expandableLembrar, expandableDia))
-            setExpandablesClickListeners(
-                listOf(
-                    expandableHoras,
-                    expandableNotas,
-                    expandableAlerta,
-                    expandableDia
-                )
-            )
+            listOf(
+                expandableDia,
+                expandableLembrar,
+                expandableDia
+            ).setLayoutClickListeners(parentLayout)
 
+            listOf(
+                expandableHoras,
+                expandableNotas,
+                expandableAlerta,
+                expandableDia
+            ).setExpandablesClickListeners()
             when {
                 successFlag || hoursInt in 0..23 -> println("Hello")
             }
@@ -282,15 +274,9 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                     }
 
                     when (lembrarButtonPressed) {
-                        1 -> {
-                            updateButton("Tomar medicacao", MEDICACAO)
-                        }
-                        2 -> {
-                            updateButton("Apanhar bus do CRPG", TRANSPORTE)
-                        }
-                        3 -> {
-                            updateButton("Lembrar escolha de almoço", REFEICAO)
-                        }
+                        1 -> updateButton("Tomar medicacao", MEDICACAO)
+                        2 -> updateButton("Apanhar bus do CRPG", TRANSPORTE)
+                        3 -> updateButton("Lembrar escolha de almoço", REFEICAO)
                         4 -> {
                             updateButton(
                                 secondLembrar.textEditPersonalizado.text.toString(),

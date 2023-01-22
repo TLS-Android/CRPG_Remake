@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.Flow
 import java.io.File
 import java.util.*
 
+@Suppress("UNUSED_PARAMETER")
 class ImplReminderPublicLocalSource(
     application: Application
 ) : RemindersPublicLocalSource {

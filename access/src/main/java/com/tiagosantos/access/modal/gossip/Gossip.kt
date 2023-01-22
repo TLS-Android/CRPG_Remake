@@ -65,12 +65,11 @@ open class Gossip(private val context: Context) : TextToSpeech.OnInitListener {
 
     @Synchronized
     fun talk(
-        text: String,
+        receivedText: String,
         onStart: (suspend () -> Unit)?,
         onDone: (suspend () -> Unit)?,
         onError: (suspend () -> Unit)?
     ) {
-        val text = text
         if (initialized) {
             val utteranceId = UUID.randomUUID().toString()
             if (onStart != null) {
@@ -82,9 +81,9 @@ open class Gossip(private val context: Context) : TextToSpeech.OnInitListener {
             if (onError != null) {
                 onErrorJobs[utteranceId] = onError
             }
-            playInternal(text, utteranceId)
+            playInternal(receivedText, utteranceId)
         } else {
-            playOnInit = text
+            playOnInit = receivedText
         }
     }
 

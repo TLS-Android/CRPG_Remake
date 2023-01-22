@@ -49,10 +49,13 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet(), Parcelable {
         }
     }
 
+    @IgnoredOnParcel
     private var mCallbacks: Callbacks? = null
+    @IgnoredOnParcel
     private lateinit var mAttributes: TimelineAttributes
+    @IgnoredOnParcel
     private var mBottomSheetBehavior: BottomSheetBehavior<*>? = null
-
+    @IgnoredOnParcel
     private lateinit var optionsView: BottomSheetOptionsBinding
 
 
@@ -220,6 +223,7 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet(), Parcelable {
             }.build().show(childFragmentManager, "ColorPicker")
     }
 
+    @IgnoredOnParcel
     private var progressChangeListener: DiscreteSeekBar.OnProgressChangeListener = object : DiscreteSeekBar.OnProgressChangeListener {
 
         override fun onProgressChanged(discreteSeekBar: DiscreteSeekBar, value: Int, b: Boolean) {

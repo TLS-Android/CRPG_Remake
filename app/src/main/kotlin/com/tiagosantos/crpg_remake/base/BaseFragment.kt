@@ -120,7 +120,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == android.R.id.home) {
-            requireActivity().onBackPressed()
+            requireActivity().onBackPressedDispatcher.onBackPressed()
             true
         } else super.onOptionsItemSelected(item)
     }

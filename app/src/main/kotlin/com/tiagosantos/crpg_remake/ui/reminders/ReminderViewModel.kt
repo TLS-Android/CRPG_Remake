@@ -28,7 +28,6 @@ import java.util.Calendar.*
 @Suppress("DUPLICATE_LABEL_IN_WHEN")
 class ReminderViewModel(
     application: Application,
-    context: Context
 ) : AndroidViewModel(application) {
 
     private var mReminderList = ArrayList<Reminder>()

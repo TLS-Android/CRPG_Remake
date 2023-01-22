@@ -114,7 +114,7 @@ class TimeLineAdapter(
                     .setNegativeButton("Fechar") { _, _ -> }.show()
 
                     MEAL -> {
-                        val bundle = Bundle().apply {
+                        Bundle().apply {
                             when (id) {
                                 "ALMOÇO" -> putBoolean("isLunch", true)
                                 "JANTAR" -> putBoolean("isLunch", false)
