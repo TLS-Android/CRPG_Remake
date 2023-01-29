@@ -51,6 +51,11 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
      */
     //abstract override fun onInitDataBinding()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        prefHelper.fetchModalityPreferences(_flag)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         gossip.setContextualHelp(ttsSettings.contextualHelp!!)

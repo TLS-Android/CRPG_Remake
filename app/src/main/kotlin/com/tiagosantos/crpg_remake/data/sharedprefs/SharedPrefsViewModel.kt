@@ -31,7 +31,7 @@ class SharedPrefsViewModel(
         for (i in 1..literalValue.size)  edit().putBoolean(literalValue[i], false).apply()
     }
 
-    private fun fetchModalityPreferences(flag: MutableLiveData<String?>) {
+    fun fetchModalityPreferences(flag: MutableLiveData<String?>) {
         val ttsFlag = modalityPreferences!!.getBoolean(Constants.TTS, false)
         val srFlag = modalityPreferences.getBoolean(Constants.SR, false)
         val hasRun = modalityPreferences.getBoolean(flag.toString(), false)
