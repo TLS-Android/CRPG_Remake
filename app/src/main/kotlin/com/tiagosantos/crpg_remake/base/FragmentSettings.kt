@@ -1,7 +1,6 @@
 package com.tiagosantos.crpg_remake.base
 
 import androidx.annotation.ColorRes
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 
 data class FragmentSettings(

@@ -58,7 +58,7 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
         handleVoiceToActionController()
     }
 
-    private fun listenToUser() =  gotev.speechResult.observe(viewLifecycleOwner){
+    private fun listenToUser() = gotev.speechResult.observe(viewLifecycleOwner){
         performActionWithVoiceCommand(it, actionMap)
     }
 

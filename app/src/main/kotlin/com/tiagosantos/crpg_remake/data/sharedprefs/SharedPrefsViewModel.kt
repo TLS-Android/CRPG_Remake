@@ -6,7 +6,6 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.*
-import com.tiagosantos.common.ui.utils.Constants
 import com.tiagosantos.common.ui.utils.Constants.MODALITY
 import com.tiagosantos.common.ui.utils.Constants.SR
 import com.tiagosantos.common.ui.utils.Constants.TTS
@@ -36,6 +35,8 @@ class SharedPrefsViewModel(
     init {
 
     }
+
+
 
     fun resetAppPreferences() = modalityPreferences!!.apply {
         for (i in 1..literalValue.size) with(helper) { put(literalValue[i], false) }

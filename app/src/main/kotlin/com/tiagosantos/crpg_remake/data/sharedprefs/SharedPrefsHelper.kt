@@ -7,7 +7,6 @@ import com.tiagosantos.common.ui.utils.Constants.MODALITY
 class SharedPrefsHelper(
     ctx: Context
 ) {
-
     private val PREFS_NAME = MODALITY
     private var sharedPref: SharedPreferences
     private val editor: SharedPreferences.Editor
