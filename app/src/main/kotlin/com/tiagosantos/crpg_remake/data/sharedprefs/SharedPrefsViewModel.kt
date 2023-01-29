@@ -7,8 +7,11 @@ import android.app.Application
 import android.content.Context
 import androidx.lifecycle.*
 import com.tiagosantos.common.ui.utils.Constants
+import com.tiagosantos.common.ui.utils.Constants.SR
+import com.tiagosantos.common.ui.utils.Constants.TTS
 import java.util.*
 import java.util.Calendar.*
+
 
 class SharedPrefsViewModel(
     application: Application,
@@ -19,7 +22,8 @@ class SharedPrefsViewModel(
     val modalityPreferences = context?.getSharedPreferences(Constants.MODALITY, Context.MODE_PRIVATE)
     val helper = SharedPrefsHelper(context!!)
 
-    private val literalValue = listOf("meditationHasRun", "selectionHasRun",
+    private val literalValue = listOf(
+        "meditationHasRun", "selectionHasRun",
         "remindersHasRun", "agendaHasRun"
     )
 
@@ -31,10 +35,12 @@ class SharedPrefsViewModel(
         for (i in 1..literalValue.size) with(helper) { put(literalValue[i], false) }
     }
 
-    fun fetchModalityPreferences(flag: MutableLiveData<String?>) {
-        val ttsFlag = modalityPreferences!!.getBoolean(Constants.TTS, false)
-        val srFlag = modalityPreferences.getBoolean(Constants.SR, false)
-        val hasRun = modalityPreferences.getBoolean(flag.toString(), false)
+    fun fetchModalityPreferences(flag: MutableLiveData<String?>) = with(helper) {
+        modalityPreferences!!.apply {
+            val ttsFlag = getBoolean(TTS)
+            val srFlag = getBoolean(SR)
+            val hasRun = getBoolean(flag.toString())
+        }
     }
 
 }
