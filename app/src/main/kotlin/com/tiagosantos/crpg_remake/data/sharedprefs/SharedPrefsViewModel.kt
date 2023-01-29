@@ -28,7 +28,7 @@ class SharedPrefsViewModel(
     }
 
     fun resetAppPreferences() = modalityPreferences!!.apply {
-        for (i in 1..literalValue.size)  edit().putBoolean(literalValue[i], false).apply()
+        for (i in 1..literalValue.size) with(helper) { put(literalValue[i], false) }
     }
 
     fun fetchModalityPreferences(flag: MutableLiveData<String?>) {

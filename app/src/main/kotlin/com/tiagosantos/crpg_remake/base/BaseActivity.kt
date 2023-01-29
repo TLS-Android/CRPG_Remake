@@ -29,7 +29,7 @@ abstract class BaseActivity(
     @LayoutRes
     protected var layoutId: Int ?= null,
     protected var settings: ActivitySettings ?= null,
-    protected var appPreferences: AppPreferencesRepository ?= null,
+    //protected var appPreferences: AppPreferencesRepository ?= null,
 ) : AppCompatActivity(), BaseActivityInterface {
     init {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
@@ -71,7 +71,9 @@ abstract class BaseActivity(
         //finish activity animation
         if (settings!!.closeEnterAnimation != 0 || settings!!.closeExitAnimation != 0)
             overridePendingTransition(settings!!.closeEnterAnimation, settings!!.closeExitAnimation)
-        appPreferences!!.resetAppPreferences()
+        //appPreferences!!.resetAppPreferences()
+
+
     }
 
     override fun setAppBarTitle(titleString: String) {

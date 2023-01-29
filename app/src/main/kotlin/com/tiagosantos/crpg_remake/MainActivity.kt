@@ -39,6 +39,8 @@ class MainActivity : MainActivityInterface, BaseActivity(
     private lateinit var binding: ActivityMainBinding
     private lateinit var navView: BottomNavigationView
 
+    val shared by viewModels<SharedPrefsViewModel>()
+
     /**
     override fun initToolbar() {
         TODO("Not yet implemented")
@@ -92,6 +94,11 @@ class MainActivity : MainActivityInterface, BaseActivity(
             setupActionBarWithNavController(navController, appBarConfiguration)
             navView.setupWithNavController(navController)
         //}
+    }
+
+    override fun finish() {
+        super.finish()
+        shared.resetAppPreferences()
     }
 
     override fun showNavBar() { navView.visibility = VISIBLE }
