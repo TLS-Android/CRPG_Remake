@@ -15,8 +15,8 @@ import com.tiagosantos.access.modal.gotev.GotevViewModel
 import com.tiagosantos.crpg_remake.base.ActivitySettings
 import com.tiagosantos.crpg_remake.base.BaseActivity
 import com.tiagosantos.crpg_remake.base.MainActivityInterface
+import com.tiagosantos.crpg_remake.data.sharedprefs.SharedPrefsViewModel
 import com.tiagosantos.crpg_remake.databinding.ActivityMainBinding
-import com.tiagosantos.crpg_remake.global_preferences.AppPreferencesRepository
 
 /**
 Android framework will try to instantiate an object of your activity.
@@ -58,9 +58,10 @@ class MainActivity : MainActivityInterface, BaseActivity(
                 WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
             )
         )
+        /*
         this.appPreferences = AppPreferencesRepository(
             applicationContext
-        )
+        )*/
     }
 
     /** The modules() function in startKoin load the given list of modules  **/
@@ -69,6 +70,7 @@ class MainActivity : MainActivityInterface, BaseActivity(
         setupParams()
         val gotev by viewModels<GotevViewModel>()
         val gossip by viewModels<GossipViewModel>()
+        val shared by viewModels<SharedPrefsViewModel>()
 
         super.onCreate(savedInstanceState)
 

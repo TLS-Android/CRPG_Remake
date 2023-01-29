@@ -18,6 +18,8 @@ import com.tiagosantos.common.ui.utils.Constants.SR
 import com.tiagosantos.common.ui.utils.Constants.TTS
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.generalHelper
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.numberList
+import com.tiagosantos.crpg_remake.data.sharedprefs.SharedPrefsHelper
+import com.tiagosantos.crpg_remake.data.sharedprefs.SharedPrefsViewModel
 
 abstract class BaseModalFragment<B : ViewDataBinding>(
     @LayoutRes
@@ -32,6 +34,7 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
     layoutId = layoutId,
     settings = settings,
 ) {
+    private val prefHelper: SharedPrefsViewModel by activityViewModels()
     private val gossip: GossipViewModel by activityViewModels()
     private val gotev: GotevViewModel by activityViewModels()
 
@@ -51,17 +54,7 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         gossip.setContextualHelp(ttsSettings.contextualHelp!!)
-        fetchPreferences()
         handleVoiceToActionController()
-    }
-
-    private fun fetchPreferences() {
-        val modalityPreferences = this.requireActivity().getSharedPreferences(MODALITY, Context.MODE_PRIVATE)
-        val ttsFlag = modalityPreferences.getBoolean(TTS, false)
-        val srFlag = modalityPreferences.getBoolean(SR, false)
-        val hasRun = modalityPreferences.getBoolean(flag.toString(), false)
-
-        //setupModality(ttsFlag, srFlag, hasRun)
     }
 
     private fun listenToUser() =  gotev.speechResult.observe(viewLifecycleOwner){
