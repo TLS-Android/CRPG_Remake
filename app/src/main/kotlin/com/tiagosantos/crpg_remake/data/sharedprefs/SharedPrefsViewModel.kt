@@ -12,10 +12,15 @@ import com.tiagosantos.common.ui.utils.Constants.TTS
 import java.util.*
 import java.util.Calendar.*
 
-
 class SharedPrefsViewModel(
     application: Application,
 ) : AndroidViewModel(application), DefaultLifecycleObserver {
+
+    private val _ttsFlag = MutableLiveData<Boolean>()
+    val ttsFlag: LiveData<Boolean> = _ttsFlag
+
+    private val _srFlag = MutableLiveData<Boolean>()
+    val srFlag: LiveData<Boolean> = _srFlag
 
     @SuppressLint("StaticFieldLeak")
     val context: Context? = application.applicationContext
@@ -35,12 +40,15 @@ class SharedPrefsViewModel(
         for (i in 1..literalValue.size) with(helper) { put(literalValue[i], false) }
     }
 
-    fun fetchModalityPreferences(flag: MutableLiveData<String?>) = with(helper) {
+    fun fetchModalityPreferences() = with(helper) {
         modalityPreferences!!.apply {
-            val ttsFlag = getBoolean(TTS)
-            val srFlag = getBoolean(SR)
-            val hasRun = getBoolean(flag.toString())
+            _ttsFlag.value = getBoolean(TTS)
+            _srFlag.value = getBoolean(SR)
         }
+    }
+
+    fun fetchFlag(flag: MutableLiveData<String?>) = with(helper) {
+        val hasRun = getBoolean(flag.toString())
     }
 
 }
