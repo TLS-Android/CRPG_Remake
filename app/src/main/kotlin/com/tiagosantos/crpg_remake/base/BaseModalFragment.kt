@@ -1,6 +1,5 @@
 package com.tiagosantos.crpg_remake.base
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
@@ -13,12 +12,8 @@ import com.tiagosantos.access.modal.gotev.GotevViewModel
 import com.tiagosantos.access.modal.settings.ActionType
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
-import com.tiagosantos.common.ui.utils.Constants.MODALITY
-import com.tiagosantos.common.ui.utils.Constants.SR
-import com.tiagosantos.common.ui.utils.Constants.TTS
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.generalHelper
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.numberList
-import com.tiagosantos.crpg_remake.data.sharedprefs.SharedPrefsHelper
 import com.tiagosantos.crpg_remake.data.sharedprefs.SharedPrefsViewModel
 
 abstract class BaseModalFragment<B : ViewDataBinding>(
@@ -53,7 +48,8 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        prefHelper.fetchModalityPreferences(_flag)
+        prefHelper.fetchModalityPreferences()
+        val hasRun = prefHelper.fetchFlag(_flag)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

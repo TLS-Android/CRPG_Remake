@@ -7,6 +7,7 @@ import android.app.Application
 import android.content.Context
 import androidx.lifecycle.*
 import com.tiagosantos.common.ui.utils.Constants
+import com.tiagosantos.common.ui.utils.Constants.MODALITY
 import com.tiagosantos.common.ui.utils.Constants.SR
 import com.tiagosantos.common.ui.utils.Constants.TTS
 import java.util.*
@@ -24,7 +25,7 @@ class SharedPrefsViewModel(
 
     @SuppressLint("StaticFieldLeak")
     val context: Context? = application.applicationContext
-    val modalityPreferences = context?.getSharedPreferences(Constants.MODALITY, Context.MODE_PRIVATE)
+    val modalityPreferences = context?.getSharedPreferences(MODALITY, Context.MODE_PRIVATE)
     val helper = SharedPrefsHelper(context!!)
 
     private val literalValue = listOf(
