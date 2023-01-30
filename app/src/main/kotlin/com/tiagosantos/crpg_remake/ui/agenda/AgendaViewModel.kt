@@ -47,7 +47,6 @@ class AgendaViewModel(
     val currentMonth: LiveData<Int?> = _currentMonth
 
     private val fullFilename = context?.filesDir.toString() + SLASH + eventFilename
-
     private val calendar = getInstance()
 
     companion object { private val repo = AgendaRepository }
