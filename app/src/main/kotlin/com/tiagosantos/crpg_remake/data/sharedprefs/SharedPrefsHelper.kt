@@ -17,13 +17,11 @@ class SharedPrefsHelper(
     }
 
     fun put(key: String, value: String) {
-        editor.putString(key, value)
-            .apply()
+        editor.putString(key, value).apply()
     }
 
     fun put(key: String, value: Boolean) {
-        editor.putBoolean(key, value)
-            .apply()
+        editor.putBoolean(key, value).apply()
     }
 
     fun getBoolean(key: String): Boolean {
@@ -35,8 +33,7 @@ class SharedPrefsHelper(
     }
 
     fun clear() {
-        editor.clear()
-            .apply()
+        editor.clear().apply()
     }
 
 }
