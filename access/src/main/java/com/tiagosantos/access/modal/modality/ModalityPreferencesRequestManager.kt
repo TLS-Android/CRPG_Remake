@@ -11,17 +11,11 @@ import com.tiagosantos.common.ui.utils.Constants.TTS
 
 class ModalityPreferencesRequestManager(
     private val ctx: Context,
+    private val editor: SharedPreferences.Editor
 ) {
     var alert = 0
 
     fun requestMultiModalityOptions() {
-        println("requestMultiModalityOptions")
-
-        val editor = ctx.getSharedPreferences(
-            MODALITY,
-            Context.MODE_PRIVATE
-        ).edit()
-
         launchAlertDialog(
             "Permitir Sugestões de Áudio",
             "A aplicação possui uma voz virtual que poder dar-lhe indicações de como" +

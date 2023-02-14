@@ -23,7 +23,6 @@ import com.tiagosantos.common.ui.extension.applyStatusBarColor
 import com.tiagosantos.common.ui.extension.dpToPx
 import com.tiagosantos.common.ui.extension.getColorCompatible
 import com.tiagosantos.crpg_remake.R
-import com.tiagosantos.crpg_remake.global_preferences.AppPreferencesRepository
 
 abstract class BaseActivity(
     @LayoutRes

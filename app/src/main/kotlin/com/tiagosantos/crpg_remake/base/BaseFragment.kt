@@ -86,8 +86,8 @@ abstract class BaseFragment<B : ViewDataBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        onInitDataBinding()
-        observeLifecycleEvents()
+  //      onInitDataBinding()
+  //      observeLifecycleEvents()
         applyResources()
 
         requireActivity().onBackPressedDispatcher.addCallback(
