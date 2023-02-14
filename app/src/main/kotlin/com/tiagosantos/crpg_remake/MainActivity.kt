@@ -60,40 +60,25 @@ class MainActivity : MainActivityInterface, BaseActivity(
                 WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
             )
         )
-        /*
-        this.appPreferences = AppPreferencesRepository(
-            applicationContext
-        )*/
     }
 
     /** The modules() function in startKoin load the given list of modules  **/
     @Suppress("UNUSED_PARAMETER")
     override fun onCreate(savedInstanceState: Bundle?) {
         setupParams()
-        val gotev by viewModels<GotevViewModel>()
-        val gossip by viewModels<GossipViewModel>()
-        val shared by viewModels<SharedPrefsViewModel>()
-
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        navView = binding.navView
 
-        //startKoin {
-            //modules(appModule)
-            binding = ActivityMainBinding.inflate(layoutInflater)
-            setContentView(binding.root)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+        val navController = navHostFragment.navController
 
-            //val navView: BottomNavigationView = binding.navView
-            navView = binding.navView
-            //val navController = findNavController(R.id.nav_host_fragment_activity_main)
-
-            val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
-            val navController = navHostFragment.navController
-
-            val appBarConfiguration = AppBarConfiguration(
-                setOf(R.id.navigation_agenda)
-            )
-            setupActionBarWithNavController(navController, appBarConfiguration)
-            navView.setupWithNavController(navController)
-        //}
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.navigation_agenda)
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
 
     override fun finish() {

@@ -60,5 +60,4 @@ class SharedPrefsViewModel(
 
     fun setTextToSpeechFlag(value: Boolean) { _ttsFlag.value = value }
     fun setSpeechRecognitionFlag(value: Boolean) { _srFlag.value = value }
-
 }
