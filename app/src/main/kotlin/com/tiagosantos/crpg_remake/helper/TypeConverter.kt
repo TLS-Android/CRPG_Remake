@@ -1,10 +1,6 @@
 package com.tiagosantos.crpg_remake.helper
 
-import androidx.databinding.InverseMethod
-
 object TypeConverter {
-
-    @InverseMethod("toInt")
     fun toString(value: Int): String = value.toString()
 
     fun toInt(value: String?): Int {
