@@ -31,6 +31,5 @@ class BoardingActivity : Activity() {
             startActivity(intent)
             finish()
         }
-
     }
 }
