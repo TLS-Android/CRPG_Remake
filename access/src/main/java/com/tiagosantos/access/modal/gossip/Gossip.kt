@@ -32,7 +32,6 @@ open class Gossip(private val context: Context) : TextToSpeech.OnInitListener {
     val availableLanguages: Set<Locale>
         get() = textToSpeech.availableLanguages
 
-
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
             initialized = true
@@ -155,7 +154,6 @@ open class Gossip(private val context: Context) : TextToSpeech.OnInitListener {
         }
     }
 
-
     /**
      * Shutdown the [TextToSpeech] object and unregister activity lifecycle callbacks
      */
@@ -229,9 +227,7 @@ open class Gossip(private val context: Context) : TextToSpeech.OnInitListener {
         }
 
 
-    init {
-        this.textToSpeech.setOnUtteranceProgressListener(utteranceProgressListener)
-    }
+    init { this.textToSpeech.setOnUtteranceProgressListener(utteranceProgressListener) }
 
     companion object {
 
@@ -252,6 +248,5 @@ open class Gossip(private val context: Context) : TextToSpeech.OnInitListener {
          */
         const val UTTERANCE_ID_NONE = "-1"
     }
-
 
 }
