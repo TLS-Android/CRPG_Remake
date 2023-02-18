@@ -55,7 +55,6 @@ class AgendaViewModel(
         liveDataList.apply{
             addSource(_publicEventList) { value -> setValue(value) }
             addSource(_privateEventList) { value -> setValue(value) }
-            value?.sortBy { it.timestampData.startTime }
         }
     }
 
@@ -86,17 +85,19 @@ class AgendaViewModel(
         populateFile()
         addMealsToPrivateEvents()
         addMealsToPublicEvents()
-        println("Data List: ${liveDataList.value!!}")
+        //println("Data List: ${liveDataList.value?.size!!}")
+        //liveDataList.value?.sortBy { it.timestampData.startTime }
     }
 
-    private fun addMealsToPrivateEvents(): LiveData<MutableList<Event>?> {
-        _privateEventList.value?.apply { add(mockLunchEvent); add(mockDinnerEvent) }
-        return privateEventList
+    private fun addMealsToPrivateEvents() {
+        _privateEventList.value?.add(mockLunchEvent)
+        _privateEventList.notifyObserver()
+        //println("Private Data List: ${privateEventList.value?.size!!}")
     }
 
-    private fun addMealsToPublicEvents(): LiveData<MutableList<Event>?> {
-        _publicEventList.value?.apply { add(mockLunchEvent); add(mockDinnerEvent) }
-        return publicEventList
+    private fun addMealsToPublicEvents() {
+        //_publicEventList.value?.apply { add(mockDinnerEvent) }
+        //println("Public Data List: ${publicEventList.value?.size!!}")
     }
 
     fun setSelectedDate(date: Date) {
@@ -123,6 +124,10 @@ class AgendaViewModel(
             _currentMonth.value = 11 // 11 == december
         }
         return getDates(mutableListOf())
+    }
+
+    fun <T> MutableLiveData<T>.notifyObserver() {
+        this.value = this.value
     }
 
 }

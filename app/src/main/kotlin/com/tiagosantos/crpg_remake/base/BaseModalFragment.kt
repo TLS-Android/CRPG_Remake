@@ -51,8 +51,8 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        gossip.setContextualHelp(ttsSettings.contextualHelp!!)
-        handleVoiceToActionController()
+        //gossip.setContextualHelp(ttsSettings.contextualHelp!!)
+        //handleVoiceToActionController()
     }
 
     private fun listenToUser() = gotev.speechResult.observe(viewLifecycleOwner){
@@ -61,14 +61,14 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
 
     override fun onStop() {
         super.onStop()
-        gotev.stop()
-        gossip.shutUp()
+        //gotev.stop()
+        //gossip.shutUp()
     }
 
     override fun onPause() {
         super.onPause()
-        gotev.stop()
-        gossip.shutUp()
+        //gotev.stop()
+        //gossip.shutUp()
     }
 
     /**

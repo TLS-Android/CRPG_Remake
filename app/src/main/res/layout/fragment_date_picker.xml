@@ -19,11 +19,11 @@
 
                 <include layout="@layout/selected_calendar_item"
                     android:id="@+id/selected_item"
-                    android:visibility="invisible" />
+                    android:visibility="gone" />
 
                 <include layout="@layout/calendar_item"
                     android:id="@+id/calendar_item"
-                    android:visibility="invisible" />
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/title_selecionar_data"
