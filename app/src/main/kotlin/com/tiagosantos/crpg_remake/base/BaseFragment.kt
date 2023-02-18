@@ -66,8 +66,6 @@ abstract class BaseFragment<B : ViewDataBinding>(
             fragmentTransaction.commit()
     }
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
