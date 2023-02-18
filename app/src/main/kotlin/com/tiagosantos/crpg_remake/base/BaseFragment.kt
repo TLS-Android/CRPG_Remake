@@ -31,10 +31,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
     private var _viewB: B? = null
     val viewB get() = _viewB!!
 
-    val fragment: Fragment
-        get() {
-            TODO()
-        }
+    lateinit var fragment: Fragment
 
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
