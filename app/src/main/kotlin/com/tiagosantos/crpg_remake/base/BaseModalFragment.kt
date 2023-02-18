@@ -9,7 +9,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tiagosantos.access.modal.gossip.GossipViewModel
 import com.tiagosantos.access.modal.gotev.GotevViewModel
-import com.tiagosantos.access.modal.settings.ActionType
+import com.tiagosantos.access.modal.settings.ActionType.REMINDER
+import com.tiagosantos.access.modal.settings.ActionType.GENERAL_VIEW
+import com.tiagosantos.access.modal.settings.ActionType.DATE_PICKER
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.generalHelper
@@ -79,20 +81,19 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
      **/
     private fun createActionMap() {
         actionMap = when(srSettings.actionType) {
-            ActionType.GENERAL_VIEW, ActionType.REMINDER  -> {
+            GENERAL_VIEW, REMINDER  -> {
                 actionList.replaceAll { if (it is View) it.performClick() }
                 srSettings.commandList.zip(actionList).toMap()
             }
-            ActionType.DATE_PICKER ->  srSettings.commandList.zip(numberList).toMap()
+            DATE_PICKER ->  srSettings.commandList.zip(numberList).toMap()
             else -> actionMap
         }
-
     }
 
     open fun handleVoiceToActionController() {
         when(srSettings.actionType) {
-            ActionType.GENERAL_VIEW, ActionType.REMINDER -> { createActionMap(); listenToUser() }
-            ActionType.DATE_PICKER -> { listenToUser() }
+            GENERAL_VIEW, REMINDER -> { createActionMap(); listenToUser() }
+            DATE_PICKER -> { listenToUser() }
             else -> {}
         }
     }

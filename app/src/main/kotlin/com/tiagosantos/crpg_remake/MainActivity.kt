@@ -39,16 +39,6 @@ class MainActivity : MainActivityInterface, BaseActivity(
 
     val shared by viewModels<SharedPrefsViewModel>()
 
-    /**
-    override fun initToolbar() {
-        TODO("Not yet implemented")
-    }
-
-    override fun initViews(layoutView: View) {
-        //layoutView.
-    }
-    **/
-
     private fun setupParams() {
         this.layoutId = R.layout.activity_main
         this.settings = ActivitySettings(
