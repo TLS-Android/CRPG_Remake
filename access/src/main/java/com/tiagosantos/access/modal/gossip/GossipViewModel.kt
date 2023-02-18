@@ -2,6 +2,7 @@ package com.tiagosantos.access.modal.gossip
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.content.Context
 import androidx.lifecycle.*
 import com.tiagosantos.common.ui.utils.Constants
 
@@ -13,9 +14,9 @@ class GossipViewModel(
     val contextualHelp: LiveData<String> = _contextualHelp
 
     @SuppressLint("StaticFieldLeak")
-    val context = application.applicationContext
+    val context: Context? = application.applicationContext
 
-    var gossip: Gossip = Gossip(context)
+    private var gossip: Gossip = Gossip(context!!)
 
     init {
         gossip.run { setLanguage(Constants.myLocale); isMuted }
