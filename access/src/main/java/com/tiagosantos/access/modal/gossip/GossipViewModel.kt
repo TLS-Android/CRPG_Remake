@@ -2,15 +2,10 @@ package com.tiagosantos.access.modal.gossip
 
 import android.annotation.SuppressLint
 import android.app.Application
-import android.content.Context
-import android.content.res.loader.ResourcesProvider
 import androidx.lifecycle.*
 import com.tiagosantos.common.ui.utils.Constants
-import java.lang.ref.WeakReference
 
 class GossipViewModel(
-    //private val resourcesProvider: ResourcesProvider,
-    //context: WeakReference<Context>,
     application: Application,
 ) : AndroidViewModel(application), DefaultLifecycleObserver {
 
