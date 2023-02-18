@@ -39,7 +39,7 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
     private var actionMap = mapOf<String,Any>()
 
     private val _flag = MutableLiveData<String?>()
-    private val flag: LiveData<String?> = _flag
+    val flag: LiveData<String?> = _flag
 
     protected var literalValue: Int? = null
 
