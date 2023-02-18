@@ -46,6 +46,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeLifecycleEvents()
         setAttributes()
     }
 
@@ -88,11 +89,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
         it.orientation = Orientation.VERTICAL
     }
 
-    override fun onInitDataBinding() {
-        TODO("Not yet implemented")
-    }
-
-    override fun observeLifecycleEvents() {
+    private fun observeLifecycleEvents() {
         val ctx = context
         agendaVM.liveDataList.observe(viewLifecycleOwner) {
             setDataListItemsWithoutPopulate()

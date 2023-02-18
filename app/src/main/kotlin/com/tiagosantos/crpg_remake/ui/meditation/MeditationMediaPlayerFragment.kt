@@ -90,14 +90,6 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
         player.stop()
     }
 
-    override fun onInitDataBinding() {
-        TODO("Not yet implemented")
-    }
-
-    override fun observeLifecycleEvents() {
-        TODO("Not yet implemented")
-    }
-
     private fun setBackgroundColor(img: ImageView, str: String) =
         img.setBackgroundColor(android.graphics.Color.parseColor(str))
 

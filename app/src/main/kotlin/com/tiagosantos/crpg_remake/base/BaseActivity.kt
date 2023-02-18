@@ -28,7 +28,6 @@ abstract class BaseActivity(
     @LayoutRes
     protected var layoutId: Int ?= null,
     protected var settings: ActivitySettings ?= null,
-    //protected var appPreferences: AppPreferencesRepository ?= null,
 ) : AppCompatActivity(), BaseActivityInterface {
     init {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)

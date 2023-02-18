@@ -66,12 +66,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
             fragmentTransaction.commit()
     }
 
-    /**
-     * Called to Initialize view data binding variables when fragment view is created.
-     */
-    abstract fun onInitDataBinding()
 
-    abstract fun observeLifecycleEvents()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -86,8 +81,6 @@ abstract class BaseFragment<B : ViewDataBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-  //      onInitDataBinding()
-  //      observeLifecycleEvents()
         applyResources()
 
         requireActivity().onBackPressedDispatcher.addCallback(

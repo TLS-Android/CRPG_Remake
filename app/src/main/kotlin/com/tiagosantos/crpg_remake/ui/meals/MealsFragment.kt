@@ -87,13 +87,5 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
 
     }
 
-    override fun onInitDataBinding() {
-        TODO("Not yet implemented")
-    }
-
-    override fun observeLifecycleEvents() {
-        TODO("Not yet implemented")
-    }
-
     private fun updateFlagMealChosen() { flagMealChosen = !flagMealChosen }
 }

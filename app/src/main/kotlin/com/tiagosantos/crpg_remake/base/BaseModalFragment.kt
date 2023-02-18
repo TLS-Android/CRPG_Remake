@@ -41,11 +41,6 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
 
     protected var literalValue: Int? = null
 
-    /**
-     * Called to Initialize view data binding variables when fragment view is created.
-     */
-    //abstract override fun onInitDataBinding()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         prefHelper.fetchModalityPreferences()

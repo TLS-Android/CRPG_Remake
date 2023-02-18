@@ -146,11 +146,4 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
         }
     }
 
-    override fun onInitDataBinding() {
-        TODO("Not yet implemented")
-    }
-
-    override fun observeLifecycleEvents() {
-        TODO("Not yet implemented")
-    }
 }

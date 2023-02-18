@@ -342,14 +342,6 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
         }
     }
 
-    override fun onInitDataBinding() {
-        TODO("Not yet implemented")
-    }
-
-    override fun observeLifecycleEvents() {
-        TODO("Not yet implemented")
-    }
-
     private fun setButtonColorsReminder(view: LayoutSecondLembrarBinding, pos: Int) {
 
         with(view) {
