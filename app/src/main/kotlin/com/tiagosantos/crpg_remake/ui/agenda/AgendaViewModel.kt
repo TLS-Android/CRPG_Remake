@@ -6,6 +6,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.*
+import androidx.lifecycle.Observer
 import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils
 import com.tiagosantos.common.ui.utils.Constants.SLASH
@@ -34,14 +35,56 @@ class AgendaViewModel(
     val selectedDate: LiveData<String?> = _selectedDate
 
     /** MutableLiveData should always be val; only the contents can be updated **/
-    private val _publicEventList = MutableLiveData<MutableList<Event>?>()
-    val publicEventList: LiveData<MutableList<Event>?> = _publicEventList
+    private val _publicEventList = MutableLiveData<Event>()
+    val publicEventList: LiveData<Event> = _publicEventList
 
-    private val _privateEventList = MutableLiveData<MutableList<Event>?>()
-    val privateEventList: LiveData<MutableList<Event>?> = _privateEventList
+    private val _privateEventList = MutableLiveData<Event>()
+    val privateEventList: LiveData<Event> = _privateEventList
 
     /** MediatorLiveData allows us to merge multiple LiveData sources into one single LiveData which we then can observe.**/
-    val liveDataList = MediatorLiveData<MutableList<Event>?>()
+    val liveDataList = MediatorLiveData<MutableList<Event>>()
+        /**.apply {
+            addSource(_publicEventList) {
+                this.value = it
+            }
+            addSource(_privateEventList) {
+                this.value = it
+            }
+    }**/
+
+    init {
+            var eventList = mutableListOf<Event>()
+            liveDataList.addSource(_publicEventList, object : Observer<Event> {
+                private var count = 1
+
+                override fun onChanged(t: Event) {
+                    println("onChangedPublic")
+                    count++
+                    //liveDataList.postValue(t)
+                    liveDataList.plusAssign(t)
+                }
+            })
+
+            liveDataList.addSource(_privateEventList, object : Observer<Event> {
+                private var count = 1
+
+                override fun onChanged(t: Event) {
+                    println("onChangedPrivate")
+                    count++
+                    //liveDataList.postValue(t)
+                    liveDataList.plusAssign(t)
+                }
+            })
+
+            _publicEventList.value = mockDinnerEvent
+            _privateEventList.value = mockLunchEvent
+    }
+
+    operator fun <T> MutableLiveData<MutableList<T>>.plusAssign(item: T) {
+        val value = this.value ?: mutableListOf()
+        value.add(item)
+        this.value = value
+    }
 
     private val _currentMonth = MutableLiveData<Int?>()
     val currentMonth: LiveData<Int?> = _currentMonth
@@ -50,13 +93,6 @@ class AgendaViewModel(
     private val calendar = getInstance()
 
     companion object { private val repo = AgendaRepository }
-
-    init {
-        liveDataList.apply{
-            addSource(_publicEventList) { value -> setValue(value) }
-            addSource(_privateEventList) { value -> setValue(value) }
-        }
-    }
 
     fun getFutureDatesOfCurrentMonth(): List<Date> {
         _currentMonth.value = calendar[MONTH]
@@ -81,23 +117,18 @@ class AgendaViewModel(
     private val newFile: File = File(fullFilename)
     private fun populateFile() = newFile.apply { createNewFile(); writeText(fileContent) }
 
-    fun getEventCollectionFromJSON() {
+    fun getEventCollection() {
         populateFile()
         addMealsToPrivateEvents()
         addMealsToPublicEvents()
-        //println("Data List: ${liveDataList.value?.size!!}")
-        //liveDataList.value?.sortBy { it.timestampData.startTime }
     }
 
     private fun addMealsToPrivateEvents() {
-        _privateEventList.value?.add(mockLunchEvent)
-        _privateEventList.notifyObserver()
-        //println("Private Data List: ${privateEventList.value?.size!!}")
+        //_privateEventList.value?.plusAssign(mockLunchEvent)
     }
 
     private fun addMealsToPublicEvents() {
-        //_publicEventList.value?.apply { add(mockDinnerEvent) }
-        //println("Public Data List: ${publicEventList.value?.size!!}")
+        //_publicEventList.value?.plusAssign(mockDinnerEvent)
     }
 
     fun setSelectedDate(date: Date) {
@@ -126,8 +157,10 @@ class AgendaViewModel(
         return getDates(mutableListOf())
     }
 
-    fun <T> MutableLiveData<T>.notifyObserver() {
-        this.value = this.value
+    operator fun <T> MutableLiveData<ArrayList<T>>.plusAssign(values: List<T>) {
+        val value = this.value ?: arrayListOf()
+        value.addAll(values)
+        this.value = value
     }
 
 }

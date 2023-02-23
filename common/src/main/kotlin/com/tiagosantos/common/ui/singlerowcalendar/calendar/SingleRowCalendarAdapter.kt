@@ -33,9 +33,7 @@ class SingleRowCalendarAdapter(
                 override fun getPosition(): Int = adapterPosition
                 override fun getSelectionKey(): Long = itemId
             }
-
     }
-
 
     override fun getItemViewType(position: Int): Int {
         return if (selectionTracker.isSelected(position.toLong())) {

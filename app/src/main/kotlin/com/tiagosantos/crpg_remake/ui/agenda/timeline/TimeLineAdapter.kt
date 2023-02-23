@@ -31,12 +31,15 @@ import java.util.*
  * Created by Vipul Asri on 05-12-2015.
  */
 
+/**
+ * Recycler view should not observe LiveData changes directly.
+ * **/
 class TimeLineAdapter(
-    private val mFeedList: LiveData<MutableList<Event>?>,
     private var mAttributes: TimelineAttributes,
     private val ctx: Context,
 ) : RecyclerView.Adapter<TimeLineAdapter.TimeLineViewHolder>() {
 
+    private var mFeedList = mutableListOf<Event>()
     private var overlapArray = mutableListOf(EMPTY_STRING)
     private var concatTime = EMPTY_STRING
 
@@ -57,9 +60,15 @@ class TimeLineAdapter(
         return TimeLineViewHolder(view, viewType)
     }
 
+    fun submitList(newData: MutableList<Event>) {
+        mFeedList.clear()
+        mFeedList.addAll(newData)
+        notifyDataSetChanged()
+    }
+
     override fun onBindViewHolder(holder: TimeLineViewHolder, position: Int) {
 
-        val timeLineModel = mFeedList.value!![position]
+        val timeLineModel = mFeedList[position]
         setContentDescription(holder,timeLineModel)
         setupTimeLine(holder,timeLineModel)
 
@@ -102,15 +111,15 @@ class TimeLineAdapter(
     private fun onCardClicked(holder: TimeLineViewHolder, position: Int) {
         with(_binding!!) {
             card.setOnClickListener {
-                id = mFeedList.value!![position].eventTitle.toString()
-                tipo = mFeedList.value!![position].eventType
+                id = mFeedList[position].eventTitle.toString()
+                tipo = mFeedList[position].eventType
 
                 when (tipo) {
                     ACTIVITY -> MaterialAlertDialogBuilder(
                         ctx,
                         android.R.style.Theme_Material_Dialog_Alert
-                    ).setTitle(mFeedList.value!![position].eventTitle)
-                    .setMessage(mFeedList.value!![position].eventInfo)
+                    ).setTitle(mFeedList[position].eventTitle)
+                    .setMessage(mFeedList[position].eventInfo)
                     .setNegativeButton("Fechar") { _, _ -> }.show()
 
                     MEAL -> {
@@ -192,7 +201,7 @@ class TimeLineAdapter(
 
     }
 
-    override fun getItemCount() = mFeedList.value!!.size
+    override fun getItemCount() = mFeedList.size
 
     inner class TimeLineViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
 

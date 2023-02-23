@@ -3,8 +3,12 @@ package com.tiagosantos.crpg_remake.ui.agenda
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.plataforma.crpg.TimelineView
@@ -12,6 +16,7 @@ import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.Orientation
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.TimelineAttributes
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
+import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.base.FragmentSettings
@@ -27,6 +32,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
     FragmentSettings(
         appBarTitle = R.string.title_agenda,
         sharedPreferencesBooleanName = R.string.agendaHasRun.toString(),
+        showBackButton = false,
     ),
     ttsSettings = TTSSettings(
         "Selecione a janela que pretender para obter mais informaçoes",
@@ -42,12 +48,40 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
 
     private lateinit var mAttributes: TimelineAttributes
     private lateinit var mLayoutManager: LinearLayoutManager
+    private lateinit var adapter: TimeLineAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        var event : MutableList<Event>
+
+        agendaVM.liveDataList.observe(this, Observer<MutableList<Event>> { newEvent ->
+            event = newEvent
+            println("Event: $event")
+        })
+
+    }
+
+    /**
+     * Note that the fragment's viewLifecycleOwner
+     * is only available between onCreateView and onDestroyView lifecycle methods.
+     */
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        super.onCreateView(inflater, container, savedInstanceState)
+
+        //observeLifecycleEvents()
+        //setAttributes()
+        return viewB.root
+    }
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeLifecycleEvents()
-        setAttributes()
+        //observeLifecycleEvents()
+        //setAttributes()
     }
 
     private fun initRecyclerView(ctx: Context) {
@@ -73,15 +107,16 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
 
         viewB.recyclerView.apply {
             layoutManager = mLayoutManager
-            adapter = TimeLineAdapter(agendaVM.liveDataList, mAttributes, ctx)
+            adapter = TimeLineAdapter(mAttributes, ctx)
         }
+
     }
 
     override fun onResume() {
         super.onResume()
-        setDataListItemsWithoutPopulate()
-        ctx?.let { initRecyclerView(it) }
-        updateMAttributes()
+        //setDataListItemsWithoutPopulate()
+        //ctx?.let { initRecyclerView(it) }
+        //updateMAttributes()
     }
 
     private fun updateMAttributes() =  mAttributes.let { it.onOrientationChanged =  { oldValue, newValue ->
@@ -89,19 +124,29 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
         it.orientation = Orientation.VERTICAL
     }
 
+    /**
+     * Make sure the mediatorLiveData has an active observer attached.
+     * addSource method checks whether
+     * any active observers are attached before subscribing to the source.
+     *
+     *
+
+    The first method where it is safe to access the view lifecycle is onCreateView(LayoutInflater, ViewGroup, Bundle) under the condition that you must return a non-null view (an IllegalStateException will be thrown if you access the view lifecycle but don't return a non-null view).
+
+    The view lifecycle remains valid through the call to onDestroyView(), after which getView() will return null, the view lifecycle will be destroyed, and this method will throw an IllegalStateException. Consider using getViewLifecycleOwnerLiveData() or FragmentTransaction.runOnCommit(Runnable) to receive a callback for when the Fragment's view lifecycle is available.
+
+     */
     private fun observeLifecycleEvents() {
         val ctx = context
-        agendaVM.liveDataList.observe(viewLifecycleOwner) {
-            setDataListItemsWithoutPopulate()
-            if (ctx != null) {
-                initRecyclerView(ctx)
-            }
-            updateMAttributes()
-            viewB.recyclerView.adapter?.notifyDataSetChanged()
-        }
+
+
+        println("Hello")
+
+        setDataListItemsWithoutPopulate()
+
     }
 
-    private fun setDataListItemsWithoutPopulate() = agendaVM.getEventCollectionFromJSON()
+    private fun setDataListItemsWithoutPopulate() = agendaVM.getEventCollection()
 
     private fun setAttributes() {
         mAttributes = TimelineAttributes(

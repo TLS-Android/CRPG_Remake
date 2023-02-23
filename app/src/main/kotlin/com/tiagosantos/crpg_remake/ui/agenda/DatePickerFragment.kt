@@ -47,6 +47,8 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        goToFragment(AgendaFragment())
+
         with(viewB) {
             calendar.time = Date()
             val myCalendarViewManager = object : CalendarViewManager {
