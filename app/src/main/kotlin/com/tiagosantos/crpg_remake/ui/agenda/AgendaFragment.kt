@@ -59,6 +59,8 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
             println("Event: $event")
         })
 
+        observeLifecycleEvents()
+
     }
 
     /**
@@ -72,7 +74,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
 
-        //observeLifecycleEvents()
+        //
         //setAttributes()
         return viewB.root
     }
@@ -137,13 +139,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
 
      */
     private fun observeLifecycleEvents() {
-        val ctx = context
-
-
-        println("Hello")
-
         setDataListItemsWithoutPopulate()
-
     }
 
     private fun setDataListItemsWithoutPopulate() = agendaVM.getEventCollection()
