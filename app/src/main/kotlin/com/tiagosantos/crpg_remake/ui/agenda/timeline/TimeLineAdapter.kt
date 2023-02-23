@@ -214,21 +214,25 @@ class TimeLineAdapter(
         val timeline = _binding!!.timeline
 
         init {
-            timeline.initLine(viewType)
-            timeline.markerSize = mAttributes.markerSize
-            timeline.setMarkerColor(mAttributes.markerColor)
-            timeline.isMarkerInCenter = mAttributes.markerInCenter
-            timeline.markerPaddingLeft = mAttributes.markerLeftPadding
-            timeline.markerPaddingTop = mAttributes.markerTopPadding
-            timeline.markerPaddingRight = mAttributes.markerRightPadding
-            timeline.markerPaddingBottom = mAttributes.markerBottomPadding
-            timeline.linePadding = mAttributes.linePadding
-            timeline.lineWidth = mAttributes.lineWidth
-            timeline.setStartLineColor(mAttributes.startLineColor, viewType)
-            timeline.setEndLineColor(mAttributes.endLineColor, viewType)
-            timeline.lineStyle = mAttributes.lineStyle
-            timeline.lineStyleDashLength = mAttributes.lineDashWidth
-            timeline.lineStyleDashGap = mAttributes.lineDashGap
+            timeline.apply {
+                initLine(viewType)
+                markerSize = mAttributes.markerSize
+                setMarkerColor(mAttributes.markerColor)
+                isMarkerInCenter = mAttributes.markerInCenter
+                markerPaddingLeft = mAttributes.markerLeftPadding
+                markerPaddingTop = mAttributes.markerTopPadding
+                markerPaddingRight = mAttributes.markerRightPadding
+                markerPaddingBottom = mAttributes.markerBottomPadding
+                linePadding = mAttributes.linePadding
+                lineWidth = mAttributes.lineWidth
+                setStartLineColor(mAttributes.startLineColor, viewType)
+                setEndLineColor(mAttributes.endLineColor, viewType)
+                lineStyle = mAttributes.lineStyle
+                lineStyleDashLength = mAttributes.lineDashWidth
+                lineStyleDashGap = mAttributes.lineDashGap
+            }
+
+
         }
     }
 

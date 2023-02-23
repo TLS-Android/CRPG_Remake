@@ -46,7 +46,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
 
     private lateinit var mAttributes: TimelineAttributes
     private lateinit var mLayoutManager: LinearLayoutManager
-    lateinit var mFeedList : MutableList<Event>
+    var mFeedList = mutableListOf<Event>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

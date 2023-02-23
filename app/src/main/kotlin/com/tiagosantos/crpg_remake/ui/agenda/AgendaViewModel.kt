@@ -43,18 +43,10 @@ class AgendaViewModel(
 
     /** MediatorLiveData allows us to merge multiple LiveData sources into one single LiveData which we then can observe.**/
     val liveDataList = MediatorLiveData<MutableList<Event>>()
-        /**.apply {
-            addSource(_publicEventList) {
-                this.value = it
-            }
-            addSource(_privateEventList) {
-                this.value = it
-            }
-    }**/
 
     init {
-            liveDataList.addSource(_publicEventList) { t -> liveDataList.plusAssign(t) }
-            liveDataList.addSource(_privateEventList) { t -> liveDataList.plusAssign(t) }
+        liveDataList.addSource(_publicEventList) { t -> liveDataList.plusAssign(t) }
+        liveDataList.addSource(_privateEventList) { t -> liveDataList.plusAssign(t) }
     }
 
     private val _currentMonth = MutableLiveData<Int?>()
