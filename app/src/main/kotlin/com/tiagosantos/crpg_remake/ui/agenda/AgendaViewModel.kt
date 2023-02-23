@@ -6,7 +6,6 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.*
-import androidx.lifecycle.Observer
 import com.tiagosantos.common.ui.extension.plusAssign
 import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils
@@ -106,7 +105,7 @@ class AgendaViewModel(
         return getDates(mutableListOf())
     }
 
-    fun getDatesOfPreviousMonth(): List<Date> {
+    private fun getDatesOfPreviousMonth(): List<Date> {
         _currentMonth.value = currentMonth.value?.minus(1)
         if (currentMonth.value == 12) {
             // we will switch to december of previous year, when we reach first month of year
