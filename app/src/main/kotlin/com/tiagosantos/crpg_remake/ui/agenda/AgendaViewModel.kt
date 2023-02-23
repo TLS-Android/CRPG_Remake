@@ -7,6 +7,7 @@ import android.app.Application
 import android.content.Context
 import androidx.lifecycle.*
 import androidx.lifecycle.Observer
+import com.tiagosantos.common.ui.extension.plusAssign
 import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils
 import com.tiagosantos.common.ui.utils.Constants.SLASH
@@ -113,12 +114,6 @@ class AgendaViewModel(
             _currentMonth.value = 11 // 11 == december
         }
         return getDates(mutableListOf())
-    }
-
-    operator fun <T> MutableLiveData<MutableList<T>>.plusAssign(item: T) {
-        val value = this.value ?: mutableListOf()
-        value.add(item)
-        this.value = value
     }
 
 }

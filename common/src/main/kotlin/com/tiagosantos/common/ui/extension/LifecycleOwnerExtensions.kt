@@ -1,5 +1,3 @@
-
-
 package com.tiagosantos.common.ui.extension
 
 import androidx.lifecycle.LifecycleOwner
