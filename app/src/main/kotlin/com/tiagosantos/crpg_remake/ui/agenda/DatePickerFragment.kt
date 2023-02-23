@@ -116,8 +116,8 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
                 init()
             }
 
-            println("View manager: " + mainSingleRowCalendar.calendarViewManager.toString())
-            println("dates ${mainSingleRowCalendar.getDates()}")
+            //println("View manager: " + mainSingleRowCalendar.calendarViewManager.toString())
+            //println("dates ${mainSingleRowCalendar.getDates()}")
 
             buttonSelecionar.setOnClickListener {
                 if (selected) {

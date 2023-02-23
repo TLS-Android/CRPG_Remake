@@ -1,12 +1,12 @@
 package com.tiagosantos.crpg_remake.ui.agenda.timeline
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.plataforma.crpg.TimelineView
@@ -60,6 +60,7 @@ class TimeLineAdapter(
         return TimeLineViewHolder(view, viewType)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun submitList(newData: MutableList<Event>) {
         mFeedList.clear()
         mFeedList.addAll(newData)
