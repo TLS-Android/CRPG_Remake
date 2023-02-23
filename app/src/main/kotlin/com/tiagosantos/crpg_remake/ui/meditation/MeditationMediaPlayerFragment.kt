@@ -36,7 +36,7 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
         )
 ) {
 
-    private val medViewModel: MeditationViewModel by viewModels()
+    private val viewModel: MeditationViewModel by viewModels()
     private val player = ExoPlayer.Builder(requireContext()).build()
 
     companion object {
@@ -54,8 +54,8 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
         super.onViewCreated(view, savedInstanceState)
 
         with(viewB){
-            textSelectedMood.text = medViewModel.selectedMood
-            medViewModel.setupPlayer(player,this)
+            textSelectedMood.text = viewModel.selectedMood
+            viewModel.setupPlayer(player,this)
             setBackgroundColor(viewB)
 
             buttonReturnMeditation.setOnClickListener {
@@ -69,7 +69,7 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
         binding: FragmentMeditationMediaPlayerBinding,
     ) {
         with(binding.moodColor) {
-            when (medViewModel.selectedMood) {
+            when (viewModel.selectedMood) {
                 "RELAXADO" -> setBackgroundColor(this, "")
                 "FELIZ" -> setBackgroundColor(this, "#87B700")
                 "SONOLENTO" -> setBackgroundColor(this, "#FBC02D")

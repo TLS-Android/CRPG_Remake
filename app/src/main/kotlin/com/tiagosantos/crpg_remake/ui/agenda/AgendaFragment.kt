@@ -68,17 +68,26 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         observeLifecycleEvents()
-        setAttributes()
+
         return viewB.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initRecyclerView(requireActivity().applicationContext)
+        setAttributes()
+
+        val ctx = requireContext()
+
+        initAdapter(ctx)
+
+        initRecyclerView(ctx)
+
+        mAttributes.orientation = Orientation.VERTICAL
+
     }
 
     private fun initRecyclerView(ctx: Context) {
-        initAdapter(ctx)
+
         with(viewB){
             recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 @SuppressLint("LongLogTag")
@@ -100,7 +109,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
 
         viewB.recyclerView.apply {
             layoutManager = mLayoutManager
-            adapter = TimeLineAdapter(mAttributes, ctx).apply { submitList(mFeedList) }
+            adapter = TimeLineAdapter(mAttributes, ctx)
         }
 
     }
@@ -109,7 +118,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
         super.onResume()
         //setDataListItemsWithoutPopulate()
         //ctx?.let { initRecyclerView(it) }
-        updateMAttributes()
+        //updateMAttributes()
     }
 
     private fun updateMAttributes() =  mAttributes.let { it.onOrientationChanged =  { oldValue, newValue ->

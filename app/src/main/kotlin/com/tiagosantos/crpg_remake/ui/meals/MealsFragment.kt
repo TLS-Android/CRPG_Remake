@@ -35,7 +35,7 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
         ),
 ) {
 
-    private val mealsVM: MealsViewModel by viewModels()
+    private val viewModel: MealsViewModel by viewModels()
 
     private var cardList = with(viewB) {
         listOf(frameOpcaoCarne, frameOpcaoPeixe, frameOpcaoDieta, frameOpcaoVegetariano)
@@ -62,8 +62,8 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
 
         activity?.lifecycleScope?.launchWhenCreated {
             fun setChecks(cardList: List<MaterialCardView?>, card: MaterialCardView) {
-                if (!card.isChecked) mealsVM.updateSelectedOption(1)
-                else mealsVM.updateSelectedOption(0)
+                if (!card.isChecked) viewModel.updateSelectedOption(1)
+                else viewModel.updateSelectedOption(0)
                 for (s in cardList) { if (s != card) s?.isChecked = false }
             }
 
@@ -74,10 +74,10 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
 
                 with(success){
                     buttonConfirmMeal.setOnClickListener {
-                        if (mealsVM.selectedOption.value != 0) {
+                        if (viewModel.selectedOption.value != 0) {
                             mealChoiceSuccess.showAndBringToFront()
                             avisoNenhumaRefeicaoChecked.hide()
-                            mealsVM.updateMealChoiceOnLocalStorage(mealsVM.selectedOption, isLunch)
+                            viewModel.updateMealChoiceOnLocalStorage(viewModel.selectedOption, isLunch)
                             buttonOk.setOnClickListener { mealChoiceSuccess.hide() }
                         } else { mealChoiceSuccess.show() }
                     }

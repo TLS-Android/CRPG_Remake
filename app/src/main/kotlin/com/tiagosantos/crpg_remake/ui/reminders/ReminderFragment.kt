@@ -50,13 +50,13 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
     )
 ) {
 
+    private val viewModel: ReminderViewModel by viewModels()
+
     private var _viewIntro: ReminderActivityIntroBinding? = null
     private val viewIntro get() = _viewIntro!!
 
     private var _viewSuccess: ReminderActivitySuccessBinding? = null
     private val viewSuccess get() = _viewSuccess!!
-
-    private val reminderVM: ReminderViewModel by viewModels()
 
     private var hoursInt = 0
     private var minsInt = 0
@@ -102,8 +102,8 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
             && lembrarButtonPressed != 0 && hoursMinutesFlag
 
     private fun launchIntent() {
-        if (activity?.packageManager?.let { it -> reminderVM.alarmIntent.resolveActivity(it) } != null) {
-            startActivity(reminderVM.alarmIntent)
+        if (activity?.packageManager?.let { it -> viewModel.alarmIntent.resolveActivity(it) } != null) {
+            startActivity(viewModel.alarmIntent)
         }
     }
 
@@ -133,8 +133,8 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
 
             with(viewSuccess) {
                 if (successFlag) {
-                    reminderVM.addReminder(newReminder)
-                    if (reminderVM.flagReminderAdded) {
+                    viewModel.addReminder(newReminder)
+                    if (viewModel.flagReminderAdded) {
                         avisoCampos.hide()
                         successLayout.show()
                         buttonOk.setOnClickListener { successLayout.hide() }
@@ -235,7 +235,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
         with(viewB) {
             buttonConfirm.setOnClickListener {
                 if (et.text.toString().length == 2 && etMin.text.toString().length == 2) {
-                    reminderVM.setTime(et, etMin)
+                    viewModel.setTime(et, etMin)
                     hoursInt = secondHoras.editHours.text.toString().toInt()
                     minsInt = secondHoras.editMinutes.text.toString().toInt()
                     hoursMinutesFlag = true
@@ -243,7 +243,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
                     avisoCampos.run { text = getString(R.string.valor_em_falta); show() }
                 }
 
-                with(reminderVM.newReminder) {
+                with(viewModel.newReminder) {
                     fun updateButton(title: String, reminderType: ReminderType) {
                         this.title = title
                         this.reminderType = reminderType

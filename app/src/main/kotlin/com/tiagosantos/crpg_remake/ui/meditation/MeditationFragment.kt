@@ -28,7 +28,7 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
     )
 ) {
 
-    private val medViewModel: MeditationViewModel by viewModels()
+    private val viewModel: MeditationViewModel by viewModels()
 
     /** This property is only valid between onCreateView and onDestroyView. **/
     private val _text = MutableLiveData<String>().apply {
@@ -60,7 +60,7 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
 
     private fun setupButtons() {
         for((mood, value) in feelingsMap) {
-            value.setOnClickListener { medViewModel.selectedMood = mood }.also {
+            value.setOnClickListener { viewModel.selectedMood = mood }.also {
                 goToFragment(MeditationMediaPlayerFragment()) }
         }
     }

@@ -39,10 +39,11 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
         isListening = false,
     )
 ) {
+
+    val viewModel: AgendaViewModel by viewModels()
+
     private var selected = false
     private val calendar = getInstance()
-
-    val vm: AgendaViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -93,7 +94,7 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
                     super.whenSelectionChanged(isSelected, position, date)
                     tvDate.text = buildDateString(date)
                     tvDay.text = getDayName(date)
-                    vm.setSelectedDate(date)
+                    viewModel.setSelectedDate(date)
                     selected = isSelected
                 }
             }
@@ -112,7 +113,7 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
                 calendarViewManager = myCalendarViewManager
                 calendarChangesObserver = myCalendarChangesObserver
                 calendarSelectionManager = mySelectionManager
-                setDates(vm.getFutureDatesOfCurrentMonth())
+                setDates(viewModel.getFutureDatesOfCurrentMonth())
                 init()
             }
 
