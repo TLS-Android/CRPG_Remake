@@ -20,7 +20,6 @@ import com.tiagosantos.common.ui.utils.Constants.selectDinnerText
 import com.tiagosantos.common.ui.utils.Constants.chosenMealisBlankText
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.ItemTimelineBinding
-import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.formatDateTime
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setGone
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setVisible
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.TimelineAttributes
@@ -71,19 +70,19 @@ class TimeLineAdapter(
         setupTimeLine(holder,timeLineModel)
 
         with(_binding!!){
-            when (timeLineModel.eventType) {
+            when (timeLineModel.type) {
                 ACTIVITY -> {
                     cardBackgroundImage.setBackgroundResource(R.drawable.crpg_background)
                     cardCenterIcon.setBackgroundResource(R.drawable.maos)
                     textTimelineTitle.text = "ACTIVIDADE"
-                    textTimelineInfo.text = timeLineModel.eventInfo!!.uppercase(Locale.getDefault())
+                    textTimelineInfo.text = timeLineModel.info!!.uppercase(Locale.getDefault())
                 }
                 MEAL -> {
                     cardBackgroundImage.setBackgroundResource(R.drawable.background_dieta)
                     cardCenterIcon.setBackgroundResource(R.drawable.meal_icon)
 
                     textTimelineTitle.text = if (timeLineModel.mealChoice?.mealType != null) {
-                        when (timeLineModel.eventTitle){
+                        when (timeLineModel.title){
                             "ALMOÇO" -> selectLunchText
                             "JANTAR" -> selectDinnerText
                             else -> { EMPTY_STRING }
@@ -108,15 +107,15 @@ class TimeLineAdapter(
     private fun onCardClicked(holder: TimeLineViewHolder, position: Int) {
         with(_binding!!) {
             card.setOnClickListener {
-                id = mFeedList[position].eventTitle.toString()
-                tipo = mFeedList[position].eventType
+                id = mFeedList[position].title.toString()
+                tipo = mFeedList[position].type
 
                 when (tipo) {
                     ACTIVITY -> MaterialAlertDialogBuilder(
                         ctx,
                         android.R.style.Theme_Material_Dialog_Alert
-                    ).setTitle(mFeedList[position].eventTitle)
-                    .setMessage(mFeedList[position].eventInfo)
+                    ).setTitle(mFeedList[position].title)
+                    .setMessage(mFeedList[position].info)
                     .setNegativeButton("Fechar") { _, _ -> }.show()
 
                     MEAL -> {
@@ -167,8 +166,8 @@ class TimeLineAdapter(
                 textTimelineEndTime.apply { setVisible(); text = newEndTime }
             } else textTimelineEndTime.setGone()
 
-            if (timeLineModel.eventTitle!!.isNotEmpty()) textTimelineTitle.text = timeLineModel.eventTitle
-            if (timeLineModel.eventInfo!!.isNotEmpty()) textTimelineInfo.text = timeLineModel.eventInfo
+            if (timeLineModel.title!!.isNotEmpty()) textTimelineTitle.text = timeLineModel.title
+            if (timeLineModel.info!!.isNotEmpty()) textTimelineInfo.text = timeLineModel.info
 
         }
 
@@ -179,10 +178,10 @@ class TimeLineAdapter(
         timeLineModel: Event,
     ) {
         with(holder.itemView) {
-            contentDescription = when (timeLineModel.eventType) {
+            contentDescription = when (timeLineModel.type) {
                 ACTIVITY -> {
                      "Actividade" +
-                            "com o título ${timeLineModel.eventTitle} e tendo como descrição ${timeLineModel.eventInfo}," +
+                            "com o título ${timeLineModel.title} e tendo como descrição ${timeLineModel.info}," +
                             " que irá" +
                             " começar às ${timeLineModel.timestampData.startTime}. Clique para obter mais informações"
                 }

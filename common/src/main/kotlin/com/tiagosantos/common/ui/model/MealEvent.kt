@@ -2,12 +2,16 @@ package com.tiagosantos.common.ui.model
 
 import com.google.gson.annotations.SerializedName
 
-data class MealChoice(
+data class MealEvent(
+    override val title: String?,
+    override val info: String?,
+    override var type: EventType = EventType.MEAL,
+    override val timestampData: TimestampData?,
     var chosenMealDish: ChosenMealDish? = ChosenMealDish.MEAT,
     var mealType: MealType? = MealType.LUNCH,
-) {
+): Event() {
     override fun toString(): String {
-        return "chosenMealType: ${this.chosenMealDish}, mealType: ${this.mealType} \\n "
+        return "chosenMealType: ${this.chosenMealDish}, mealType: ${this.mealType}"
     }
 }
 
