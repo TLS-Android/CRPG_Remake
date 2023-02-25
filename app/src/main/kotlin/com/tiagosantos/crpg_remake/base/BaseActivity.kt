@@ -54,7 +54,6 @@ abstract class BaseActivity(
             overridePendingTransition(settings!!.openEnterAnimation, settings!!.openExitAnimation)
 
         setContentView(layoutId!!)
-        //initToolbar()
         actionBar = supportActionBar
 
         //populate view
@@ -69,9 +68,6 @@ abstract class BaseActivity(
         //finish activity animation
         if (settings!!.closeEnterAnimation != 0 || settings!!.closeExitAnimation != 0)
             overridePendingTransition(settings!!.closeEnterAnimation, settings!!.closeExitAnimation)
-        //appPreferences!!.resetAppPreferences()
-
-
     }
 
     override fun setAppBarTitle(titleString: String) {
