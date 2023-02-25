@@ -85,12 +85,12 @@ class AgendaViewModel(
         populateFile()
         addMealsToPublicEvents()
         addMealsToPrivateEvents()
-        test()
+        addActivityEvent()
     }
 
     private fun addMealsToPublicEvents() { _publicEventList.value = mockLunchEvent }
     private fun addMealsToPrivateEvents() { _privateEventList.value = mockDinnerEvent }
-    private fun test() { _privateEventList.value = mockActivityEvent }
+    private fun addActivityEvent() { _privateEventList.value = mockActivityEvent }
 
     fun setSelectedDate(date: Date) {
         _selectedDate.value =
