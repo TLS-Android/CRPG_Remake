@@ -40,7 +40,7 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
     )
 ) {
 
-    val viewModel: AgendaViewModel by viewModels()
+    private val viewModel: AgendaViewModel by viewModels()
 
     private var selected = false
     private val calendar = getInstance()
