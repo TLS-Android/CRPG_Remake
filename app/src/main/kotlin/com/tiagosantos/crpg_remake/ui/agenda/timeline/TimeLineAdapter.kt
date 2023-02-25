@@ -10,10 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.plataforma.crpg.TimelineView
 import com.tiagosantos.common.ui.extension.invisible
-import com.tiagosantos.common.ui.model.ChosenMealDish
+import com.tiagosantos.common.ui.model.ActivityEvent
+import com.tiagosantos.common.ui.model.ChosenMealDish.MEAT
+import com.tiagosantos.common.ui.model.ChosenMealDish.FISH
 import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.common.ui.model.EventType
 import com.tiagosantos.common.ui.model.EventType.*
+import com.tiagosantos.common.ui.model.MealEvent
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.common.ui.utils.Constants.selectLunchText
 import com.tiagosantos.common.ui.utils.Constants.selectDinnerText
@@ -69,35 +72,42 @@ class TimeLineAdapter(
         setContentDescription(holder,timeLineModel)
         setupTimeLine(holder,timeLineModel)
 
-        with(_binding!!){
-            when (timeLineModel.type) {
-                ACTIVITY -> {
+        with(_binding!!) {
+            when (timeLineModel) {
+                is MealEvent -> {
+                    cardBackgroundImage.setBackgroundResource(R.drawable.background_dieta)
+                    cardCenterIcon.setBackgroundResource(R.drawable.meal_icon)
+
+                    textTimelineTitle.text = if (timeLineModel.mealType != null) {
+                        when (timeLineModel.title) {
+                            "ALMOÇO" -> selectLunchText
+                            "JANTAR" -> selectDinnerText
+                            else -> {
+                                EMPTY_STRING
+                            }
+                        }
+                    } else { timeLineModel.mealType.toString() }
+
+                    textTimelineInfo.text = if (timeLineModel.chosenMealDish != null) {
+                        when (timeLineModel.chosenMealDish) {
+                            MEAT -> selectLunchText
+                            FISH -> selectDinnerText
+                            else -> {
+                                EMPTY_STRING
+                            }
+                        }
+                    } else { timeLineModel.chosenMealDish.toString() }
+                }
+
+                is ActivityEvent -> {
                     cardBackgroundImage.setBackgroundResource(R.drawable.crpg_background)
                     cardCenterIcon.setBackgroundResource(R.drawable.maos)
                     textTimelineTitle.text = "ACTIVIDADE"
                     textTimelineInfo.text = timeLineModel.info!!.uppercase(Locale.getDefault())
                 }
-                MEAL -> {
-                    cardBackgroundImage.setBackgroundResource(R.drawable.background_dieta)
-                    cardCenterIcon.setBackgroundResource(R.drawable.meal_icon)
-
-                    textTimelineTitle.text = if (timeLineModel.mealChoice?.mealType != null) {
-                        when (timeLineModel.title){
-                            "ALMOÇO" -> selectLunchText
-                            "JANTAR" -> selectDinnerText
-                            else -> { EMPTY_STRING }
-                        }
-                    } else { timeLineModel.mealChoice?.mealType.toString() }
-
-                    textTimelineInfo.text = if (timeLineModel.mealChoice?.chosenMealDish != null) {
-                        when (timeLineModel.mealChoice?.chosenMealDish) {
-                            ChosenMealDish.MEAT -> selectLunchText
-                            ChosenMealDish.FISH -> selectDinnerText
-                            else -> { EMPTY_STRING}
-                        }
-                    } else { timeLineModel.mealChoice?.chosenMealDish.toString() }
+                else -> {
+                    println("nothing happens")
                 }
-                else -> { println("nothing happens") }
             }
         }
 
@@ -135,7 +145,7 @@ class TimeLineAdapter(
         holder: TimeLineViewHolder,
         timeLineModel: Event,
     ) {
-        concatTime = timeLineModel.timestampData.startTime + timeLineModel.timestampData.endTime
+        concatTime = timeLineModel.timestampData?.startTime + timeLineModel.timestampData?.endTime
 
         with(_binding!!){
             if (overlapArray.contains(concatTime)) {
@@ -150,25 +160,24 @@ class TimeLineAdapter(
                 ), mAttributes.markerColor)
             }
 
-            if (timeLineModel.timestampData.date.isNotEmpty()) {
+            if (timeLineModel.timestampData?.date!!.isNotEmpty()) {
                 textTimelineDate.setVisible()
                 textTimelineDate.text = "ola"
                     //timeLineModel.timestampData.date.formatDateTime("yyyy-MM-dd", "dd-MMM-yyyy")
             } else textTimelineDate.setGone()
 
-            if (timeLineModel.timestampData.startTime.isNotEmpty()) {
-                val newStartTime = timeLineModel.timestampData.startTime.apply { "${substring(0, 2)} : ${substring(2, 4)}" }
+            if (timeLineModel.timestampData?.startTime!!.isNotEmpty()) {
+                val newStartTime = timeLineModel.timestampData!!.startTime.apply { "${substring(0, 2)} : ${substring(2, 4)}" }
                 textTimelineStartTime.apply { setVisible(); text = newStartTime }
             } else textTimelineStartTime.setGone()
 
-            if (timeLineModel.timestampData.endTime.isNotEmpty()) {
-                val newEndTime = timeLineModel.timestampData.endTime.apply { "${substring(0, 2)} : ${substring(2, 4)}" }
+            if (timeLineModel.timestampData!!.endTime.isNotEmpty()) {
+                val newEndTime = timeLineModel.timestampData!!.endTime.apply { "${substring(0, 2)} : ${substring(2, 4)}" }
                 textTimelineEndTime.apply { setVisible(); text = newEndTime }
             } else textTimelineEndTime.setGone()
 
             if (timeLineModel.title!!.isNotEmpty()) textTimelineTitle.text = timeLineModel.title
             if (timeLineModel.info!!.isNotEmpty()) textTimelineInfo.text = timeLineModel.info
-
         }
 
     }
@@ -178,18 +187,17 @@ class TimeLineAdapter(
         timeLineModel: Event,
     ) {
         with(holder.itemView) {
-            contentDescription = when (timeLineModel.type) {
-                ACTIVITY -> {
+            contentDescription = when (timeLineModel) {
+                is ActivityEvent -> {
                      "Actividade" +
                             "com o título ${timeLineModel.title} e tendo como descrição ${timeLineModel.info}," +
                             " que irá" +
-                            " começar às ${timeLineModel.timestampData.startTime}. Clique para obter mais informações"
+                            " começar às ${timeLineModel.timestampData?.startTime}. Clique para obter mais informações"
                 }
 
-                MEAL -> {
-                        if (timeLineModel.mealChoice?.chosenMealDish == null) chosenMealisBlankText
-                        else { "Refeição selecionada, o prato escolhido " +
-                                    "foi ${timeLineModel.mealChoice?.chosenMealDish}" }
+                is MealEvent -> {
+                        if (timeLineModel.chosenMealDish == null) chosenMealisBlankText
+                        else { "Refeição selecionada, o prato escolhido foi ${timeLineModel.chosenMealDish}" }
                 }
             }
         }
