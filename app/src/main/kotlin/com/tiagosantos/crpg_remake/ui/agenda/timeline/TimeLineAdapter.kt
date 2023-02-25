@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -55,9 +54,8 @@ class TimeLineAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimeLineViewHolder {
-        if (!::mLayoutInflater.isInitialized) { mLayoutInflater = LayoutInflater.from(parent.context) }
-        val view = mLayoutInflater.inflate(R.layout.item_timeline, parent, false)
-        return TimeLineViewHolder(view, viewType)
+        _binding = ItemTimelineBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return TimeLineViewHolder(_binding!!, viewType)
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -68,7 +66,6 @@ class TimeLineAdapter(
     }
 
     override fun onBindViewHolder(holder: TimeLineViewHolder, position: Int) {
-
         val timeLineModel = mFeedList[position]
         setContentDescription(holder,timeLineModel)
         setupTimeLine(holder,timeLineModel)
@@ -157,7 +154,8 @@ class TimeLineAdapter(
 
             if (timeLineModel.timestampData.date.isNotEmpty()) {
                 textTimelineDate.setVisible()
-                textTimelineDate.text = timeLineModel.timestampData.date.formatDateTime("yyyy-MM-dd", "dd-MMM-yyyy")
+                textTimelineDate.text = "ola"
+                    //timeLineModel.timestampData.date.formatDateTime("yyyy-MM-dd", "dd-MMM-yyyy")
             } else textTimelineDate.setGone()
 
             if (timeLineModel.timestampData.startTime.isNotEmpty()) {
@@ -204,7 +202,7 @@ class TimeLineAdapter(
 
     override fun getItemCount() = mFeedList.size
 
-    inner class TimeLineViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
+    inner class TimeLineViewHolder(private val binding: ItemTimelineBinding, viewType: Int) : RecyclerView.ViewHolder(_binding!!.root) {
 
         val date = _binding!!.textTimelineDate
         val title = _binding!!.textTimelineTitle
@@ -236,4 +234,5 @@ class TimeLineAdapter(
         }
     }
 
+    //inner class TimeLineViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
 }

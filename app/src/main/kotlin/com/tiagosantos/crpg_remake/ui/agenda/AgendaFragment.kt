@@ -3,9 +3,7 @@ package com.tiagosantos.crpg_remake.ui.agenda
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -42,52 +40,43 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
     )
 ) {
     private val viewModel: AgendaViewModel by viewModels()
-    private var ctx = context
+    private lateinit var ctx : Context
 
     private lateinit var mAttributes: TimelineAttributes
     private lateinit var mLayoutManager: LinearLayoutManager
     var mFeedList = mutableListOf<Event>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        viewModel.liveDataList.observe(this) { newEvent ->
-            mFeedList = newEvent
-            println("Event: $mFeedList")
-        }
-    }
+    lateinit var adapterGlobal : TimeLineAdapter
 
     /**
-     * Note that the fragment's viewLifecycleOwner
-     * is only available between onCreateView and onDestroyView lifecycle methods.
+     You must .observe() in onCreateView().
+    Not just for this specific case, but in general you will never need to call .observe() in any other places if you are using LiveData correctly.
+    viewLifecycleOwner is the correct LifecycleOwner to use for observing a LiveData. (Unless you create a custom one.)
+    Depends on the use case but generally instantiate one adapter per RecyclerView, even if your data changes over time.
+    You should swap the data, not the whole adapter.
      */
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        super.onCreateView(inflater, container, savedInstanceState)
-        observeLifecycleEvents()
-
-        return viewB.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setAttributes()
-
         val ctx = requireContext()
 
-        initAdapter(ctx)
+        adapterGlobal = TimeLineAdapter(mAttributes, ctx)
 
         initRecyclerView(ctx)
 
-        mAttributes.orientation = Orientation.VERTICAL
+        //working
+        viewModel.liveDataList.observe(viewLifecycleOwner) { newEvent ->
+            mFeedList = newEvent
+            println("mFeedList: $mFeedList")
+            adapterGlobal.submitList(mFeedList)
+        }
 
+        observeLifecycleEvents()
+        mAttributes.orientation = Orientation.VERTICAL
     }
 
     private fun initRecyclerView(ctx: Context) {
-
+        initAdapter(ctx)
         with(viewB){
             recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 @SuppressLint("LongLogTag")
@@ -109,7 +98,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
 
         viewB.recyclerView.apply {
             layoutManager = mLayoutManager
-            adapter = TimeLineAdapter(mAttributes, ctx)
+            adapter = adapterGlobal
         }
 
     }
