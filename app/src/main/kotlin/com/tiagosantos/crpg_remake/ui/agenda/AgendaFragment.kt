@@ -62,9 +62,8 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
 
         adapterGlobal = TimeLineAdapter(mAttributes, ctx)
 
-        initRecyclerView(ctx)
+        initRecyclerView()
 
-        //working
         viewModel.liveDataList.observe(viewLifecycleOwner) { newEvent ->
             mFeedList = newEvent
             println("mFeedList: $mFeedList")
@@ -75,8 +74,8 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
         mAttributes.orientation = Orientation.VERTICAL
     }
 
-    private fun initRecyclerView(ctx: Context) {
-        initAdapter(ctx)
+    private fun initRecyclerView() {
+        initAdapter()
         with(viewB){
             recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 @SuppressLint("LongLogTag")
@@ -89,7 +88,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
         }
     }
 
-    private fun initAdapter(ctx: Context) {
+    private fun initAdapter() {
         mLayoutManager = if (mAttributes.orientation == Orientation.HORIZONTAL) {
             LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
         } else {
@@ -105,13 +104,11 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
 
     override fun onResume() {
         super.onResume()
-        //setDataListItemsWithoutPopulate()
-        //ctx?.let { initRecyclerView(it) }
-        //updateMAttributes()
+        updateMAttributes()
     }
 
     private fun updateMAttributes() =  mAttributes.let { it.onOrientationChanged =  { oldValue, newValue ->
-        if (oldValue != newValue) initRecyclerView(ctx!!) }
+        if (oldValue != newValue) initRecyclerView() }
         it.orientation = Orientation.VERTICAL
     }
 
