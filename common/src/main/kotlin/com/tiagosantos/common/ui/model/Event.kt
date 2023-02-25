@@ -1,7 +1,6 @@
 package com.tiagosantos.common.ui.model
 
 import com.google.gson.annotations.SerializedName
-import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 
 /**
  * A sealed class is abstract by itself,

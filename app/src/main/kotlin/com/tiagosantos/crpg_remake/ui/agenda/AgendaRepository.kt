@@ -18,7 +18,8 @@ object AgendaRepository {
         info = "Clicar para escolher refeição",
         timestampData = TimestampData(
             startTime = "20:00",
-            endTime = "21:00", date = "21"
+            endTime = "21:00",
+            date = "21"
         )
     )
 
@@ -27,7 +28,19 @@ object AgendaRepository {
         info = "Clicar para mais info",
         timestampData = TimestampData(
             startTime = "16:00",
-            endTime = "17:00", date = "21"
+            endTime = "17:00",
+            date = "21"
         )
+    )
+
+    var mockActivityStrollEvent = ActivityEvent(
+        title = "Passeio",
+        info = "Clicar para mais info",
+        timestampData = TimestampData(
+            startTime = "18:00",
+            endTime = "19:00",
+            date = "21"
+        ),
+        activityType = ActivityType.PASSEIO
     )
 }
