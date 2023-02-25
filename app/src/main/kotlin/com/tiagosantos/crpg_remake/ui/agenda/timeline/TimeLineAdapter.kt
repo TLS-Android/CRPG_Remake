@@ -232,10 +232,6 @@ class TimeLineAdapter(
                 lineStyleDashLength = mAttributes.lineDashWidth
                 lineStyleDashGap = mAttributes.lineDashGap
             }
-
-
         }
     }
-
-    //inner class TimeLineViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
 }
