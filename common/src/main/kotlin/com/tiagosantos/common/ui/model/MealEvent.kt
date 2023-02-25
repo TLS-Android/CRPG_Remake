@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class MealEvent(
     override val title: String?,
     override val info: String?,
-    override var type: EventType = EventType.MEAL,
+    override val type: EventType = EventType.MEAL,
     override val timestampData: TimestampData?,
     var chosenMealDish: ChosenMealDish? = ChosenMealDish.MEAT,
     var mealType: MealType? = MealType.LUNCH,

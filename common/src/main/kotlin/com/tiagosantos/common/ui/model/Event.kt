@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName
 sealed class Event {
     abstract val title: String?
     abstract val info: String?
-    abstract var type: EventType
+    abstract val type: EventType
     abstract val timestampData: TimestampData?
 
     override fun toString(): String {
