@@ -40,13 +40,12 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
     )
 ) {
     private val viewModel: AgendaViewModel by viewModels()
-    private lateinit var ctx : Context
 
     private lateinit var mAttributes: TimelineAttributes
     private lateinit var mLayoutManager: LinearLayoutManager
-    var mFeedList = mutableListOf<Event>()
+    private lateinit var adapterGlobal : TimeLineAdapter
 
-    lateinit var adapterGlobal : TimeLineAdapter
+    var mFeedList = mutableListOf<Event>()
 
     /**
      You must .observe() in onCreateView().
