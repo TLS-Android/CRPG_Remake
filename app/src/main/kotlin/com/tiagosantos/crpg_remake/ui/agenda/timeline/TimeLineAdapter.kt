@@ -82,28 +82,27 @@ class TimeLineAdapter(
                     cardBackgroundImage.setBackgroundResource(R.drawable.background_dieta)
                     cardCenterIcon.setBackgroundResource(R.drawable.meal_icon)
 
-                    textTimelineTitle.text = if (timeLineModel.mealChoice.mealType != null) {
+                    textTimelineTitle.text = if (timeLineModel.mealChoice?.mealType != null) {
                         when (timeLineModel.eventTitle){
                             "ALMOÇO" -> selectLunchText
                             "JANTAR" -> selectDinnerText
                             else -> { EMPTY_STRING }
                         }
-                    } else { timeLineModel.mealChoice.mealType.toString() }
+                    } else { timeLineModel.mealChoice?.mealType.toString() }
 
-                    textTimelineInfo.text = if (timeLineModel.mealChoice.chosenMealDish != null) {
-                        when (timeLineModel.mealChoice.chosenMealDish) {
+                    textTimelineInfo.text = if (timeLineModel.mealChoice?.chosenMealDish != null) {
+                        when (timeLineModel.mealChoice?.chosenMealDish) {
                             ChosenMealDish.MEAT -> selectLunchText
                             ChosenMealDish.FISH -> selectDinnerText
                             else -> { EMPTY_STRING}
                         }
-                    } else { timeLineModel.mealChoice.chosenMealDish.toString() }
+                    } else { timeLineModel.mealChoice?.chosenMealDish.toString() }
                 }
                 else -> { println("nothing happens") }
             }
         }
 
         onCardClicked(holder, position)
-
     }
 
     private fun onCardClicked(holder: TimeLineViewHolder, position: Int) {
@@ -189,11 +188,9 @@ class TimeLineAdapter(
                 }
 
                 MEAL -> {
-                        if (timeLineModel.mealChoice.chosenMealDish != null) chosenMealisBlankText
-                        else {
-                            "Refeição selecionada, o prato escolhido " +
-                                    "foi ${timeLineModel.mealChoice.chosenMealDish}"
-                        }
+                        if (timeLineModel.mealChoice?.chosenMealDish == null) chosenMealisBlankText
+                        else { "Refeição selecionada, o prato escolhido " +
+                                    "foi ${timeLineModel.mealChoice?.chosenMealDish}" }
                 }
             }
         }
@@ -203,7 +200,6 @@ class TimeLineAdapter(
     override fun getItemCount() = mFeedList.size
 
     inner class TimeLineViewHolder(private val binding: ItemTimelineBinding, viewType: Int) : RecyclerView.ViewHolder(_binding!!.root) {
-
         val date = _binding!!.textTimelineDate
         val title = _binding!!.textTimelineTitle
         val info = _binding!!.textTimelineInfo

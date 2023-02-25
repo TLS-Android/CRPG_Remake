@@ -12,6 +12,7 @@ import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils
 import com.tiagosantos.common.ui.utils.Constants.SLASH
 import com.tiagosantos.common.ui.utils.Constants.eventFilename
 import com.tiagosantos.common.ui.utils.Constants.fileContent
+import com.tiagosantos.crpg_remake.ui.agenda.AgendaRepository.mockActivityEvent
 import com.tiagosantos.crpg_remake.ui.agenda.AgendaRepository.mockDinnerEvent
 import com.tiagosantos.crpg_remake.ui.agenda.AgendaRepository.mockLunchEvent
 import java.io.File
@@ -84,10 +85,12 @@ class AgendaViewModel(
         populateFile()
         addMealsToPublicEvents()
         addMealsToPrivateEvents()
+        test()
     }
 
     private fun addMealsToPublicEvents() { _publicEventList.value = mockLunchEvent }
     private fun addMealsToPrivateEvents() { _privateEventList.value = mockDinnerEvent }
+    private fun test() { _privateEventList.value = mockActivityEvent }
 
     fun setSelectedDate(date: Date) {
         _selectedDate.value =

@@ -8,7 +8,7 @@ data class Event(
     val eventInfo: String? = EMPTY_STRING,
     val eventDescription: String? = EMPTY_STRING,
     var eventType: EventType,
-    val mealChoice: MealChoice,
+    val mealChoice: MealChoice? = null,
     val timestampData: TimestampData,
 ) {
     override fun toString(): String {
