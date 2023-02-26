@@ -64,7 +64,7 @@ dependencies {
     testImplementation "io.insert-koin:koin-test:3.2.2"
 
     //GSON
-    implementation 'com.google.code.gson:gson:2.10'
+    implementation 'com.google.code.gson:gson:2.10.1'
 
     //REACTIVEX
     implementation "io.reactivex.rxjava3:rxkotlin:3.0.1"
