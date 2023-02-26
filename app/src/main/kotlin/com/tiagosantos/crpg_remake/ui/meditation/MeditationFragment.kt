@@ -27,7 +27,6 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
         isListening = false,
     )
 ) {
-
     private val viewModel: MeditationViewModel by viewModels()
 
     /** This property is only valid between onCreateView and onDestroyView. **/

@@ -35,8 +35,8 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
             isListening = false,
         )
 ) {
-
     private val viewModel: MeditationViewModel by viewModels()
+
     private val player = ExoPlayer.Builder(requireContext()).build()
 
     companion object {

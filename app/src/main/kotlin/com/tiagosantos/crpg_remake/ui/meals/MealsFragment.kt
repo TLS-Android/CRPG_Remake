@@ -34,7 +34,6 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
             isListening = false,
         ),
 ) {
-
     private val viewModel: MealsViewModel by viewModels()
 
     private var cardList = with(viewB) {

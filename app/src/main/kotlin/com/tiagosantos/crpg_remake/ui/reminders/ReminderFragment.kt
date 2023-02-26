@@ -49,7 +49,6 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
         isListening = false,
     )
 ) {
-
     private val viewModel: ReminderViewModel by viewModels()
 
     private var _viewIntro: ReminderActivityIntroBinding? = null

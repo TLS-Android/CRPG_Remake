@@ -23,6 +23,10 @@ import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.getColorCompat
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setGone
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setVisible
 
+/**
+ * Android doesn't allow using an overloaded constructor for fragments anymore.
+ * You must use the newInstance method.
+ */
 class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
     layoutId = R.layout.fragment_agenda,
     FragmentSettings(
