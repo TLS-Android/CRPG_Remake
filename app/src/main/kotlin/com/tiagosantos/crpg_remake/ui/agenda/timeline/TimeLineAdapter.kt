@@ -62,8 +62,7 @@ class TimeLineAdapter(
 
     @SuppressLint("NotifyDataSetChanged")
     fun submitList(newData: MutableList<Event>) {
-        mFeedList.clear()
-        mFeedList.addAll(newData)
+        mFeedList.apply { clear(); addAll(newData) }
         notifyDataSetChanged()
     }
 
@@ -151,10 +150,7 @@ class TimeLineAdapter(
                 textTimelineEndTime.invisible()
             } else {
                 overlapArray.add(concatTime)
-                timeline.setMarker(ContextCompat.getDrawable(
-                    ctx,
-                    R.drawable.ic_marker_active
-                ), mAttributes.markerColor)
+                timeline.setMarker(ContextCompat.getDrawable(ctx, R.drawable.ic_marker_active), mAttributes.markerColor)
             }
 
             if (timeLineModel.timestampData?.date!!.isNotEmpty()) {
