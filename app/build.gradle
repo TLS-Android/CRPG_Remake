@@ -56,7 +56,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
-    implementation 'androidx.databinding:databinding-runtime:7.4.1'
+    implementation 'androidx.databinding:databinding-runtime:7.4.2'
 
     // Koin Core features
     implementation "io.insert-koin:koin-core:3.2.2"
