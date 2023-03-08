@@ -70,7 +70,7 @@ class TimeLineAdapter(
     override fun onBindViewHolder(holder: TimeLineViewHolder, position: Int) {
         val timeLineModel = mFeedList[position]
         setContentDescription(holder,timeLineModel)
-        setupTimeLine(holder,timeLineModel)
+        setupTimeLine(timeLineModel)
 
         with(_binding!!) {
             when (timeLineModel) {
@@ -111,10 +111,10 @@ class TimeLineAdapter(
             }
         }
 
-        onCardClicked(holder, position)
+        onCardClicked(position)
     }
 
-    private fun onCardClicked(holder: TimeLineViewHolder, position: Int) {
+    private fun onCardClicked(position: Int) {
         with(_binding!!) {
             card.setOnClickListener {
                 id = mFeedList[position].title.toString()
@@ -141,10 +141,7 @@ class TimeLineAdapter(
         }
     }
 
-    private fun setupTimeLine(
-        holder: TimeLineViewHolder,
-        timeLineModel: Event,
-    ) {
+    private fun setupTimeLine(timeLineModel: Event) {
         concatTime = timeLineModel.timestampData?.startTime + timeLineModel.timestampData?.endTime
 
         with(_binding!!){
