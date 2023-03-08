@@ -47,7 +47,6 @@ fun TextView.setTextSizeRes(@DimenRes rid: Int) {
     setTextSize(TypedValue.COMPLEX_UNIT_PX, this.context.resources.getDimension(rid))
 }
 
-
 fun View.px(@DimenRes rid: Int): Int {
     return this.context.resources.getDimensionPixelOffset(rid)
 }
@@ -110,7 +109,6 @@ fun ViewGroup.removeViewsByTag(tag: String) {
     }
 }
 
-
 /**
  * get All the Children's as Iterator
  */
@@ -123,7 +121,6 @@ fun ViewGroup.children() = object : Iterator<View> {
     override fun next(): View {
         return getChildAt(index++)
     }
-
 }
 
 /**

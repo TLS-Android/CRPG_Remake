@@ -40,7 +40,8 @@ fun Context.getDrawableCompatible(@DrawableRes drawableResId: Int): Drawable? {
     return ResourcesCompat.getDrawable(
         resources,
         drawableResId,
-        theme)
+        theme
+    )
 }
 
 fun Context.getThemeDrawable(@AttrRes drawableResId: Int): Drawable? {

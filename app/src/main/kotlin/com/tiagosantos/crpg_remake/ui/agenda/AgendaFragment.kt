@@ -69,7 +69,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
 
         viewModel.liveDataList.observe(viewLifecycleOwner) { newEvent ->
             mFeedList = newEvent
-            println("mFeedList: $mFeedList")
+            println("mFeedList = ${mFeedList}")
             adapterGlobal.submitList(mFeedList)
         }
 
@@ -110,8 +110,10 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
         updateMAttributes()
     }
 
-    private fun updateMAttributes() =  mAttributes.let { it.onOrientationChanged =  { oldValue, newValue ->
-        if (oldValue != newValue) initRecyclerView() }
+    private fun updateMAttributes() =  mAttributes.let {
+        it.onOrientationChanged =  { oldValue, newValue ->
+            if (oldValue != newValue) initRecyclerView()
+        }
         it.orientation = Orientation.VERTICAL
     }
 
@@ -149,5 +151,4 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
 
      */
     private fun observeLifecycleEvents() { addItemsToFeed() }
-
 }

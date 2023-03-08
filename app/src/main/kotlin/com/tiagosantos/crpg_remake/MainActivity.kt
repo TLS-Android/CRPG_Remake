@@ -10,6 +10,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.tiagosantos.common.ui.extension.hide
+import com.tiagosantos.common.ui.extension.show
 import com.tiagosantos.crpg_remake.base.ActivitySettings
 import com.tiagosantos.crpg_remake.base.BaseActivity
 import com.tiagosantos.crpg_remake.base.MainActivityInterface
@@ -75,7 +77,7 @@ class MainActivity : MainActivityInterface, BaseActivity(
         shared.resetAppPreferences()
     }
 
-    override fun showNavBar() { navView.visibility = VISIBLE }
-    override fun hideNavBar() { navView.visibility = INVISIBLE }
+    override fun showNavBar() { navView.show() }
+    override fun hideNavBar() { navView.hide() }
 
 }
