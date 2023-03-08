@@ -50,24 +50,18 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
         super.onCreate(savedInstanceState)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        with(viewB){
+    override fun setupUI() {
+        with(viewB) {
             textSelectedMood.text = viewModel.selectedMood
-            viewModel.setupPlayer(player,this)
+            viewModel.setupPlayer(player, this)
             setBackgroundColor(viewB)
-
             buttonReturnMeditation.setOnClickListener {
                 goToFragment(MeditationFragment())
             }
-
         }
     }
 
-    private fun setBackgroundColor(
-        binding: FragmentMeditationMediaPlayerBinding,
-    ) {
+    private fun setBackgroundColor(binding: FragmentMeditationMediaPlayerBinding) {
         with(binding.moodColor) {
             when (viewModel.selectedMood) {
                 "RELAXADO" -> setBackgroundColor(this, "")

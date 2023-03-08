@@ -51,9 +51,12 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupUI()
         //gossip.setContextualHelp(ttsSettings.contextualHelp!!)
         //handleVoiceToActionController()
     }
+
+    abstract fun setupUI()
 
     private fun listenToUser() = gotev.speechResult.observe(viewLifecycleOwner){
         performActionWithVoiceCommand(it, actionMap)

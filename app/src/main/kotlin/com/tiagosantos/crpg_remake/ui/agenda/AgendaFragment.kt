@@ -60,17 +60,18 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val ctx = requireContext()
+        setupUI()
+    }
 
+    override fun setupUI() {
         setAttributes()
-        adapterGlobal = TimeLineAdapter(mAttributes, ctx)
         initRecyclerView()
-
         observeLifecycleEvents()
         mAttributes.orientation = Orientation.VERTICAL
     }
 
     private fun initRecyclerView() {
+        adapterGlobal = TimeLineAdapter(mAttributes, requireContext())
         initAdapter()
         with(viewB){
             recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
