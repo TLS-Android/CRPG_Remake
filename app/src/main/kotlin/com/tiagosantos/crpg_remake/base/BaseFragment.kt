@@ -100,6 +100,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
         super.onStop()
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         //Menu items are doubling after fragment has been re-created. Need to execute clear()
         menu.clear()
@@ -108,6 +109,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == android.R.id.home) {
             requireActivity().onBackPressedDispatcher.onBackPressed()
