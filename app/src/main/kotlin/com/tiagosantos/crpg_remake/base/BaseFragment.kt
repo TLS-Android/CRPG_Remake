@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.tiagosantos.crpg_remake.base
 
 import android.content.Context
