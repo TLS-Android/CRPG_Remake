@@ -60,18 +60,11 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setAttributes()
         val ctx = requireContext()
 
+        setAttributes()
         adapterGlobal = TimeLineAdapter(mAttributes, ctx)
-
         initRecyclerView()
-
-        viewModel.liveDataList.observe(viewLifecycleOwner) { newEvent ->
-            mFeedList = newEvent
-            println("mFeedList = ${mFeedList}")
-            adapterGlobal.submitList(mFeedList)
-        }
 
         observeLifecycleEvents()
         mAttributes.orientation = Orientation.VERTICAL
@@ -150,5 +143,12 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
     The view lifecycle remains valid through the call to onDestroyView(), after which getView() will return null, the view lifecycle will be destroyed, and this method will throw an IllegalStateException. Consider using getViewLifecycleOwnerLiveData() or FragmentTransaction.runOnCommit(Runnable) to receive a callback for when the Fragment's view lifecycle is available.
 
      */
-    private fun observeLifecycleEvents() { addItemsToFeed() }
+    private fun observeLifecycleEvents() {
+        viewModel.liveDataList.observe(viewLifecycleOwner) { newEvent ->
+            mFeedList = newEvent
+            println("mFeedList = ${mFeedList}")
+            adapterGlobal.submitList(mFeedList)
+        }
+        addItemsToFeed()
+    }
 }
