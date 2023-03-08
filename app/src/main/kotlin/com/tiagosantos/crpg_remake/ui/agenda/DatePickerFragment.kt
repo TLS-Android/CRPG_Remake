@@ -157,5 +157,4 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
             }
         }
     }
-
 }

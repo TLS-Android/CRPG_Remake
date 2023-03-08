@@ -58,32 +58,46 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
                 frameOpcaoDieta, frameOpcaoVegetariano, buttonConfirmMeal)
         }
         super.onCreate(savedInstanceState)
+        setup()
+    }
 
+    override fun setupUI() {
+        TODO("Not yet implemented")
+    }
+
+    private fun setup() {
         activity?.lifecycleScope?.launchWhenCreated {
             fun setChecks(cardList: List<MaterialCardView?>, card: MaterialCardView) {
                 if (!card.isChecked) viewModel.updateSelectedOption(1)
                 else viewModel.updateSelectedOption(0)
-                for (s in cardList) { if (s != card) s?.isChecked = false }
+                for (s in cardList) {
+                    if (s != card) s?.isChecked = false
+                }
             }
 
-            with(viewB){
+            with(viewB) {
                 frameMeals.eachChild {
-                    (it as MaterialCardView).setFrameOnClick(cardList,::setChecks).also { updateFlagMealChosen() }
+                    (it as MaterialCardView).setFrameOnClick(cardList, ::setChecks)
+                        .also { updateFlagMealChosen() }
                 }
 
-                with(success){
+                with(success) {
                     buttonConfirmMeal.setOnClickListener {
                         if (viewModel.selectedOption.value != 0) {
                             mealChoiceSuccess.showAndBringToFront()
                             avisoNenhumaRefeicaoChecked.hide()
-                            viewModel.updateMealChoiceOnLocalStorage(viewModel.selectedOption, isLunch)
+                            viewModel.updateMealChoiceOnLocalStorage(
+                                viewModel.selectedOption,
+                                isLunch
+                            )
                             buttonOk.setOnClickListener { mealChoiceSuccess.hide() }
-                        } else { mealChoiceSuccess.show() }
+                        } else {
+                            mealChoiceSuccess.show()
+                        }
                     }
                 }
             }
         }
-
     }
 
     private fun updateFlagMealChosen() { flagMealChosen = !flagMealChosen }

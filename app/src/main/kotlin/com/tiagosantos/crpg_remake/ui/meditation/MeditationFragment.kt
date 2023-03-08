@@ -54,10 +54,10 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupButtons()
+        setupUI()
     }
 
-    private fun setupButtons() {
+    override fun setupUI() {
         for((mood, value) in feelingsMap) {
             value.setOnClickListener { viewModel.selectedMood = mood }.also {
                 goToFragment(MeditationMediaPlayerFragment()) }
