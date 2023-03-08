@@ -24,6 +24,7 @@ It fails when your class does not have a constructor without parameters.
 So as there is no way you can pass your parameters to default constructor,
 you cannot employ it to work for you.
 */
+@Suppress("DEPRECATION")
 class MainActivity : MainActivityInterface, BaseActivity(
     layoutId = R.layout.activity_main,
     ActivitySettings(

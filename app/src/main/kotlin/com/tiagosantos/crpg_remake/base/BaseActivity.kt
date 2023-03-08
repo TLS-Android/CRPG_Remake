@@ -24,6 +24,7 @@ import com.tiagosantos.common.ui.extension.dpToPx
 import com.tiagosantos.common.ui.extension.getColorCompatible
 import com.tiagosantos.crpg_remake.R
 
+@Suppress("DEPRECATION")
 abstract class BaseActivity(
     @LayoutRes
     protected var layoutId: Int ?= null,
