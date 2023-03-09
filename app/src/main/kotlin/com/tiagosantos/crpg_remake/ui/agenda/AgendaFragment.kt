@@ -2,7 +2,9 @@ package com.tiagosantos.crpg_remake.ui.agenda
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -37,7 +39,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
 ) {
     @Arg
     override var ttsSettings = TTSSettings(
-        "Selecione a janela que pretender para obter mais informaçoes",
+        contextualHelp = R.string.contextual_agenda,
         isSpeaking = true,
     )
 
@@ -54,6 +56,15 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
     private lateinit var adapterGlobal : TimeLineAdapter
 
     var mFeedList = mutableListOf<Event>()
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        println("ttsSettings = ${ttsSettings}")
+        return view
+    }
 
     /**
      You must .observe() in onCreateView().

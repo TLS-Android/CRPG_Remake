@@ -3,6 +3,7 @@ package com.tiagosantos.crpg_remake.ui.agenda
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.extension.hide
@@ -32,10 +33,10 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
         hideBottomNavigationView = true,
     ),
 ) {
+    @Arg
+    override var ttsSettings = TTSSettings(R.string.contextual_date_picker)
 
-    override var ttsSettings = TTSSettings(
-        "Selecione um dia premindo item que pretender"
-    )
+    @Arg
     override var srSettings = SRSettings(
         commandList = listOf(
             "um",

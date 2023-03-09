@@ -40,9 +40,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
 ) {
 
     @Arg
-    override var ttsSettings = TTSSettings(
-        contextualHelp =  "Crie um novo lembrete",
-    )
+    override var ttsSettings = TTSSettings(contextualHelp =  R.string.contextual_reminder)
 
     @Arg
     override var srSettings = SRSettings(

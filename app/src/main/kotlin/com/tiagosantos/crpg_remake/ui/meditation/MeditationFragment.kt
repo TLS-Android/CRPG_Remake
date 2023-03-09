@@ -23,9 +23,7 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
 
 ) {
     @Arg
-    override var ttsSettings = TTSSettings(
-        contextualHelp =  "Indique qual o seu estado de espirito atual",
-    )
+    override var ttsSettings = TTSSettings(contextualHelp =  R.string.contextual_meditation)
 
     @Arg
     override var srSettings = SRSettings(

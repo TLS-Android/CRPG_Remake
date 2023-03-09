@@ -30,7 +30,7 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
 
     @Arg
     override var ttsSettings = TTSSettings(
-        contextualHelp = R.string.indique_refeicao.toString(),
+        contextualHelp = R.string.indique_refeicao,
         isSpeaking = false
     )
 

@@ -1,7 +1,6 @@
 package com.tiagosantos.crpg_remake.ui.meditation
 
 import android.os.Bundle
-import android.view.View
 import android.widget.ImageView
 import androidx.fragment.app.viewModels
 import com.google.android.exoplayer2.ExoPlayer
