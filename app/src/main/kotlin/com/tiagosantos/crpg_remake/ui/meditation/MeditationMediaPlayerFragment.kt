@@ -31,9 +31,8 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
 ) {
 
     @Arg
-    override var ttsSettings = TTSSettings(
-    contextualHelp =  "Indique qual o seu estado de espirito atual",
-    )
+    override var ttsSettings = TTSSettings(contextualHelp =  R.string.contextual_media_player)
+
     @Arg
     override var srSettings = SRSettings(
     commandList = listOf("Tocar", "Parar", "Passar à frente", "Passar a trás", "Regressar"),

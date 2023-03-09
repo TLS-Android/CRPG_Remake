@@ -145,6 +145,7 @@
     <string name="contextual_date_picker">Selecione um dia premindo item que pretender</string>
     <string name="contextual_reminder">Crie um novo lembrete</string>
     <string name="contextual_meditation">Indique qual o seu estado de espirito atual</string>
+    <string name="contextual_media_player">Indique qual o seu estado de espirito atual</string>
 
     <string-array name="line_type">
         <item>Normal</item>
