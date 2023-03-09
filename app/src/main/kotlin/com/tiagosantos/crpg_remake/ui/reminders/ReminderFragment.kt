@@ -152,7 +152,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
     }
 
     /** Kotlin function parameters are read-only values and are not assignable. **/
-    private fun setupUI() {
+    override fun setupUI() {
         with(viewB) {
             with(secondLembrar) {
                 button0.setOnClickListener {
