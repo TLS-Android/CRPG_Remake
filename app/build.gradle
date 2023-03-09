@@ -45,6 +45,10 @@ dependencies {
     implementation project(path: ':access')
     implementation project(path: ':timelineview')
 
+    //FRAGMENT ARGS
+    implementation 'com.hannesdorfmann.fragmentargs:annotation:4.0.0-RC1'
+    annotationProcessor 'com.hannesdorfmann.fragmentargs:processor:4.0.0-RC1'
+
     implementation 'com.google.android.material:material:1.8.0'
 
     implementation 'androidx.core:core-ktx:1.9.0'
