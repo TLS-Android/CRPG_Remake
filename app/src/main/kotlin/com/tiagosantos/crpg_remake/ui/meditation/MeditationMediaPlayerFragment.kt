@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.fragment.app.viewModels
 import com.google.android.exoplayer2.ExoPlayer
+import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.crpg_remake.R
@@ -27,14 +28,19 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
             sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
             showBackButton = true
         ),
-        ttsSettings = TTSSettings(
-           contextualHelp =  "Indique qual o seu estado de espirito atual",
-        ),
-        srSettings = SRSettings(
-            commandList = listOf("Tocar", "Parar", "Passar à frente", "Passar a trás", "Regressar"),
-            isListening = false,
-        )
+
 ) {
+
+    @Arg
+    override var ttsSettings = TTSSettings(
+    contextualHelp =  "Indique qual o seu estado de espirito atual",
+    )
+    @Arg
+    override var srSettings = SRSettings(
+    commandList = listOf("Tocar", "Parar", "Passar à frente", "Passar a trás", "Regressar"),
+    isListening = false,
+    )
+
     private val viewModel: MeditationViewModel by viewModels()
 
     private val player = ExoPlayer.Builder(requireContext()).build()

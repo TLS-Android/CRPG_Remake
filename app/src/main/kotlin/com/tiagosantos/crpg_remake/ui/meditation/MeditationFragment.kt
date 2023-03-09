@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.*
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.crpg_remake.base.FragmentSettings
@@ -19,14 +20,19 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
         sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
         showBackButton = true
     ),
-    ttsSettings = TTSSettings(
-        contextualHelp =  "Indique qual o seu estado de espirito atual",
-    ),
-    srSettings = SRSettings(
-        commandList = listOf("RELAXADO", "FELIZ", "SONOLENTO", "CONFIANTE"),
-        isListening = false,
-    )
+
 ) {
+    @Arg
+    override var ttsSettings = TTSSettings(
+        contextualHelp =  "Indique qual o seu estado de espirito atual",
+    )
+
+    @Arg
+    override var srSettings = SRSettings(
+    commandList = listOf("RELAXADO", "FELIZ", "SONOLENTO", "CONFIANTE"),
+    isListening = false,
+    )
+
     private val viewModel: MeditationViewModel by viewModels()
 
     /** This property is only valid between onCreateView and onDestroyView. **/

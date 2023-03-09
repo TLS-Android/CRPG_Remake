@@ -1,12 +1,12 @@
 package com.tiagosantos.crpg_remake.ui.agenda
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.plataforma.crpg.TimelineView
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.Orientation
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.TimelineAttributes
@@ -33,16 +33,20 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
         appBarTitle = R.string.title_agenda,
         sharedPreferencesBooleanName = R.string.agendaHasRun.toString(),
         showBackButton = false,
-    ),
-    ttsSettings = TTSSettings(
+    )
+) {
+    @Arg
+    override var ttsSettings = TTSSettings(
         "Selecione a janela que pretender para obter mais informaçoes",
         isSpeaking = true,
-    ),
-    srSettings = SRSettings(
+    )
+
+    @Arg
+    override var srSettings = SRSettings(
         commandList = listOf("Almoço", "Jantar"),
         isListening = false,
     )
-) {
+
     private val viewModel: AgendaViewModel by viewModels()
 
     private lateinit var mAttributes: TimelineAttributes

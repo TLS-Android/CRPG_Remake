@@ -7,6 +7,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.hannesdorfmann.fragmentargs.FragmentArgs
+import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.tiagosantos.access.modal.gossip.GossipViewModel
 import com.tiagosantos.access.modal.gotev.GotevViewModel
 import com.tiagosantos.access.modal.settings.ActionType.REMINDER
@@ -22,15 +24,20 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
     @LayoutRes
     layoutId: Int,
     settings: FragmentSettings,
-    /**
-     * Member has the same visibility as one marked as private, but that it is also visible in subclasses.
-     * **/
-    protected val ttsSettings: TTSSettings,
-    protected val srSettings: SRSettings,
 ) : BaseFragment<B>(
     layoutId = layoutId,
     settings = settings,
 ) {
+
+    /**
+     * Member has the same visibility as one marked as private, but that it is also visible in subclasses.
+     * **/
+    @Arg
+    protected open lateinit var ttsSettings: TTSSettings
+
+    @Arg
+    protected open lateinit var srSettings: SRSettings
+
     private val prefHelper: SharedPrefsViewModel by activityViewModels()
     private val gossip: GossipViewModel by activityViewModels()
     private val gotev: GotevViewModel by activityViewModels()
@@ -45,6 +52,7 @@ abstract class BaseModalFragment<B : ViewDataBinding>(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FragmentArgs.inject(this)
         prefHelper.fetchModalityPreferences()
         val hasRun = prefHelper.fetchFlag(_flag)
     }

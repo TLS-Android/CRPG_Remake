@@ -10,6 +10,7 @@ import android.widget.*
 import androidx.core.view.forEach
 import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
+import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.extension.*
@@ -36,10 +37,15 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
         appBarTitle = R.string.title_reminders,
         sharedPreferencesBooleanName = R.string.remindersHasRun.toString(),
     ),
-    ttsSettings = TTSSettings(
+) {
+
+    @Arg
+    override var ttsSettings = TTSSettings(
         contextualHelp =  "Crie um novo lembrete",
-    ),
-    srSettings = SRSettings(
+    )
+
+    @Arg
+    override var srSettings = SRSettings(
         commandList = listOf(
             "Horas", "Dia", "Alerta", "Notas", "Lembrete", "Cancelar", "Guardar",
             "Tomar Medicação", "Apanhar Transporte",
@@ -48,7 +54,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
         ),
         isListening = false,
     )
-) {
+
     private val viewModel: ReminderViewModel by viewModels()
 
     private var _viewIntro: ReminderActivityIntroBinding? = null

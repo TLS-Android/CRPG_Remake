@@ -31,14 +31,26 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
         showBackButton = false,
         hideBottomNavigationView = true,
     ),
-    ttsSettings = TTSSettings(
+) {
+
+    override var ttsSettings = TTSSettings(
         "Selecione um dia premindo item que pretender"
-    ),
-    srSettings = SRSettings(
-        commandList = listOf("um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez"),
+    )
+    override var srSettings = SRSettings(
+        commandList = listOf(
+            "um",
+            "dois",
+            "três",
+            "quatro",
+            "cinco",
+            "seis",
+            "sete",
+            "oito",
+            "nove",
+            "dez"
+        ),
         isListening = false,
     )
-) {
 
     val viewModel: AgendaViewModel by viewModels()
 

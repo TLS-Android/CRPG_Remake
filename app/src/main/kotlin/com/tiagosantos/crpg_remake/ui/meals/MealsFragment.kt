@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.card.MaterialCardView
+import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.extension.*
@@ -25,15 +26,20 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
             appBarTitle = R.string.meal_action_bar_title,
             sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
         ),
-        TTSSettings(
-            contextualHelp = R.string.indique_refeicao.toString(),
-            isSpeaking = false
-        ),
-        srSettings = SRSettings(
-            commandList = listOf("Carne", "Peixe", "Dieta", "Vegetariano", "Guardar"),
-            isListening = false,
-        ),
 ) {
+
+    @Arg
+    override var ttsSettings = TTSSettings(
+        contextualHelp = R.string.indique_refeicao.toString(),
+        isSpeaking = false
+    )
+
+    @Arg
+    override var srSettings = SRSettings(
+        commandList = listOf("Carne", "Peixe", "Dieta", "Vegetariano", "Guardar"),
+        isListening = false,
+    )
+
     private val viewModel: MealsViewModel by viewModels()
 
     private var cardList = with(viewB) {
