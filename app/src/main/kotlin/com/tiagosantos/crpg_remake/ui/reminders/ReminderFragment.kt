@@ -33,13 +33,16 @@ import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.newReminder
 import com.tiagosantos.crpg_remake.ui.reminders.helpers.HoursHelper
 
 @FragmentWithArgs
-class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
-    layoutId = R.layout.reminder_fragment,
-    FragmentSettings(
+class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
+
+    @Arg
+    override var layoutId = R.layout.reminder_fragment
+
+    @Arg
+    override var settings = FragmentSettings(
         appBarTitle = R.string.title_reminders,
         sharedPreferencesBooleanName = R.string.remindersHasRun.toString(),
-    ),
-) {
+    )
 
     @Arg
     override var ttsSettings = TTSSettings(contextualHelp =  R.string.contextual_reminder)

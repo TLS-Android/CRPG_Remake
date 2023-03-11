@@ -17,16 +17,20 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.tiagosantos.common.ui.extension.getColorCompatible
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.common.ui.utils.Constants.MODALITY
 import com.tiagosantos.crpg_remake.MainActivity
 import com.tiagosantos.crpg_remake.R
 
-abstract class BaseFragment<B : ViewDataBinding>(
-    @LayoutRes val layoutId: Int,
-    protected val settings: FragmentSettings,
-) : Fragment() {
+abstract class BaseFragment<B : ViewDataBinding>: Fragment() {
+
+    @LayoutRes @Arg
+    protected open var layoutId: Int = 0
+
+    @Arg
+    protected open lateinit var settings: FragmentSettings
 
     open lateinit var viewBinding: B
 
@@ -181,8 +185,8 @@ abstract class BaseFragment<B : ViewDataBinding>(
             (requireActivity() as BaseActivityInterface).apply {
                 setAppBarTitle(
                     when (settings.appBarTitle) {
-                        is Int -> if (settings.appBarTitle != 0) resources.getString(settings.appBarTitle) else EMPTY_STRING
-                        is String -> settings.appBarTitle.ifEmpty { EMPTY_STRING }
+                        is Int -> if (settings.appBarTitle != 0) settings.appBarTitle.toString() else EMPTY_STRING
+                        is String -> settings.appBarTitle.toString().ifEmpty { EMPTY_STRING }
                         else -> EMPTY_STRING
                     }
                 )
@@ -190,8 +194,8 @@ abstract class BaseFragment<B : ViewDataBinding>(
                 //apply sub-title
                 setAppBarSubTitle(
                     when (settings.appBarSubTitle) {
-                        is Int -> if (settings.appBarSubTitle != 0) resources.getString(settings.appBarSubTitle) else EMPTY_STRING
-                        is String -> settings.appBarSubTitle.ifEmpty { EMPTY_STRING }
+                        is Int -> if (settings.appBarSubTitle != 0) settings.appBarSubTitle.toString() else EMPTY_STRING
+                        is String -> settings.appBarSubTitle.toString().ifEmpty { EMPTY_STRING }
                         else -> EMPTY_STRING
                     }
                 )

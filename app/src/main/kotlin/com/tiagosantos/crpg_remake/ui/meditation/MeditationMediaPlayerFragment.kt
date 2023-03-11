@@ -21,14 +21,17 @@ With that being said, the way to pass stuff to your Fragment so that they are av
 Fragment is recreated by Android is to pass a bundle to the setArguments method
  **/
 @FragmentWithArgs
-class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaPlayerBinding>(
-        layoutId = R.layout.fragment_meditation_media_player,
-        settings = FragmentSettings(
-            appBarTitle = R.string.title_media,
-            sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
-            showBackButton = true
-        ),
-) {
+class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaPlayerBinding>() {
+
+    @Arg
+    override var layoutId = R.layout.fragment_meditation_media_player
+
+    @Arg
+    override var settings = FragmentSettings(
+    appBarTitle = R.string.title_media,
+    sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
+    showBackButton = true
+    )
 
     @Arg
     override var ttsSettings = TTSSettings(contextualHelp =  R.string.contextual_media_player)

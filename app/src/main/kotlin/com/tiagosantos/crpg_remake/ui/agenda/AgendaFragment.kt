@@ -2,9 +2,7 @@ package com.tiagosantos.crpg_remake.ui.agenda
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,14 +29,18 @@ import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setVisible
  * You must use the newInstance method.
  */
 @FragmentWithArgs
-class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
-    layoutId = R.layout.fragment_agenda,
-    FragmentSettings(
+class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>() {
+
+    @Arg
+    override var layoutId = R.layout.fragment_agenda
+
+    @Arg
+    override var settings = FragmentSettings(
         appBarTitle = R.string.title_agenda,
         sharedPreferencesBooleanName = R.string.agendaHasRun.toString(),
         showBackButton = false,
     )
-) {
+
     @Arg
     override var ttsSettings = TTSSettings(
         contextualHelp = R.string.contextual_agenda,
@@ -75,6 +77,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
         setAttributes()
         initRecyclerView()
         observeLifecycleEvents()
+        println()
         mAttributes.orientation = Orientation.VERTICAL
     }
 

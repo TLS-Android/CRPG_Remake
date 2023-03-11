@@ -21,13 +21,16 @@ import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
  * everything has completed.
  */
 @FragmentWithArgs
-class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
-        layoutId = R.layout.meals_fragment,
-        FragmentSettings(
-            appBarTitle = R.string.meal_action_bar_title,
-            sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
-        ),
-) {
+class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
+
+    @Arg
+    override var layoutId = R.layout.meals_fragment.toString()
+
+    @Arg
+    override var settings = FragmentSettings(
+    appBarTitle = R.string.meal_action_bar_title,
+    sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
+    )
 
     @Arg
     override var ttsSettings = TTSSettings(

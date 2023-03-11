@@ -20,14 +20,7 @@ import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.generalHelp
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.numberList
 import com.tiagosantos.crpg_remake.data.sharedprefs.SharedPrefsViewModel
 
-abstract class BaseModalFragment<B : ViewDataBinding>(
-    @LayoutRes
-    layoutId: Int,
-    settings: FragmentSettings,
-) : BaseFragment<B>(
-    layoutId = layoutId,
-    settings = settings,
-) {
+abstract class BaseModalFragment<B : ViewDataBinding>: BaseFragment<B>() {
 
     /**
      * Member has the same visibility as one marked as private, but that it is also visible in subclasses.

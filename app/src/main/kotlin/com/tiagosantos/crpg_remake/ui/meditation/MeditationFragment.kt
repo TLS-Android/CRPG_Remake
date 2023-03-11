@@ -15,15 +15,18 @@ import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationBinding
 
 @FragmentWithArgs
-class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>(
-    layoutId = R.layout.fragment_meditation,
-    settings = FragmentSettings(
+class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>() {
+
+    @Arg
+    override var layoutId = R.layout.fragment_meditation
+
+    @Arg
+    override var settings = FragmentSettings(
         appBarTitle = R.string.title_meditacao,
         sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
         showBackButton = true
-    ),
+    )
 
-) {
     @Arg
     override var ttsSettings = TTSSettings(contextualHelp =  R.string.contextual_meditation)
 

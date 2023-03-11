@@ -26,15 +26,19 @@ import java.util.*
 import java.util.Calendar.*
 
 @FragmentWithArgs
-class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
-    layoutId = R.layout.fragment_date_picker,
-    settings = FragmentSettings(
+class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
+
+    @Arg
+    override var layoutId = R.layout.fragment_date_picker
+
+    @Arg
+    override var settings = FragmentSettings(
         appBarTitle = "ESCOLHER DATA",
         sharedPreferencesBooleanName = R.string.datePickerHasRun.toString(),
         showBackButton = false,
         hideBottomNavigationView = true,
-    ),
-) {
+    )
+
     @Arg
     override var ttsSettings = TTSSettings(R.string.contextual_date_picker)
 
