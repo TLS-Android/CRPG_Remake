@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.fragmentargs.annotation.Arg
+import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
 import com.plataforma.crpg.TimelineView
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.Orientation
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.TimelineAttributes
@@ -29,6 +30,7 @@ import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setVisible
  * Android doesn't allow using an overloaded constructor for fragments anymore.
  * You must use the newInstance method.
  */
+@FragmentWithArgs
 class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
     layoutId = R.layout.fragment_agenda,
     FragmentSettings(

@@ -5,6 +5,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.card.MaterialCardView
 import com.hannesdorfmann.fragmentargs.annotation.Arg
+import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.extension.*
@@ -19,7 +20,7 @@ import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
  * Afterwards, use onActivityCreated() to do any final initialisations you want to do once
  * everything has completed.
  */
-
+@FragmentWithArgs
 class MealsFragment : BaseModalFragment<MealsFragmentBinding>(
         layoutId = R.layout.meals_fragment,
         FragmentSettings(

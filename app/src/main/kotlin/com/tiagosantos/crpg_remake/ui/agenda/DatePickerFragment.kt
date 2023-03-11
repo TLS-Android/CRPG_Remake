@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.hannesdorfmann.fragmentargs.annotation.Arg
+import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.extension.hide
@@ -24,6 +25,7 @@ import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import java.util.*
 import java.util.Calendar.*
 
+@FragmentWithArgs
 class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>(
     layoutId = R.layout.fragment_date_picker,
     settings = FragmentSettings(

@@ -11,6 +11,7 @@ import androidx.core.view.forEach
 import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
 import com.hannesdorfmann.fragmentargs.annotation.Arg
+import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.extension.*
@@ -31,6 +32,7 @@ import com.tiagosantos.crpg_remake.databinding.*
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.newReminder
 import com.tiagosantos.crpg_remake.ui.reminders.helpers.HoursHelper
 
+@FragmentWithArgs
 class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>(
     layoutId = R.layout.reminder_fragment,
     FragmentSettings(
