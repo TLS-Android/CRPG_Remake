@@ -24,12 +24,12 @@ import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
 class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
 
     @Arg
-    override var layoutId = R.layout.meals_fragment.toString()
+    override var layoutId = R.layout.meals_fragment
 
     @Arg
     override var settings = FragmentSettings(
-    appBarTitle = R.string.meal_action_bar_title,
-    sharedPreferencesBooleanName = R.string.mealsHasRun.toString(),
+        appBarTitle = R.string.meal_action_bar_title,
+        sharedPreferencesBooleanName = getString(R.string.mealsHasRun),
     )
 
     @Arg
