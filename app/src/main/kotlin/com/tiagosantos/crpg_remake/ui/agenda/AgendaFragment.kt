@@ -59,15 +59,6 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
 
     var mFeedList = mutableListOf<Event>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        println("ttsSettings = ${ttsSettings}")
-        return view
-    }
-
     /**
      You must .observe() in onCreateView().
     Not just for this specific case, but in general you will never need to call .observe() in any other places if you are using LiveData correctly.
@@ -118,7 +109,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>(
 
     override fun onResume() {
         super.onResume()
-        updateMAttributes()
+        //updateMAttributes()
     }
 
     private fun updateMAttributes() =  mAttributes.let {

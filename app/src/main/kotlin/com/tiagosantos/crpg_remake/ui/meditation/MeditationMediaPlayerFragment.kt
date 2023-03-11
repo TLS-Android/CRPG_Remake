@@ -28,7 +28,6 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
             sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
             showBackButton = true
         ),
-
 ) {
 
     @Arg
@@ -36,12 +35,11 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
 
     @Arg
     override var srSettings = SRSettings(
-    commandList = listOf("Tocar", "Parar", "Passar à frente", "Passar a trás", "Regressar"),
-    isListening = false,
+        commandList = listOf("Tocar", "Parar", "Passar à frente", "Passar a trás", "Regressar"),
+        isListening = false,
     )
 
     private val viewModel: MeditationViewModel by viewModels()
-
     private val player = ExoPlayer.Builder(requireContext()).build()
 
     companion object {
