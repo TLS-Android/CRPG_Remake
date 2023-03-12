@@ -31,12 +31,11 @@ import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setVisible
 @FragmentWithArgs
 class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>() {
 
-    @Arg
-    override var layoutId = R.layout.fragment_agenda
+    @Arg override var layoutId = R.layout.fragment_agenda
 
     @Arg
     override var settings = FragmentSettings(
-        appBarTitle = R.string.title_agenda,
+        appBarTitle = "AGENDA",
         sharedPreferencesBooleanName = R.string.agendaHasRun.toString(),
         showBackButton = false,
     )
@@ -112,7 +111,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>() {
 
     override fun onResume() {
         super.onResume()
-        //updateMAttributes()
+        updateMAttributes()
     }
 
     private fun updateMAttributes() =  mAttributes.let {
