@@ -24,8 +24,8 @@ abstract class BaseModalFragment<B : ViewDataBinding>: BaseFragment<B>() {
     /**
      * Member has the same visibility as one marked as private, but that it is also visible in subclasses.
      * **/
-    @Arg protected open lateinit var ttsSettings: TTSSettings
-    @Arg protected open lateinit var srSettings: SRSettings
+    protected abstract val ttsSettings: TTSSettings
+    protected abstract val srSettings: SRSettings
 
     private val prefHelper: SharedPrefsViewModel by activityViewModels()
     private val gossip: GossipViewModel by activityViewModels()

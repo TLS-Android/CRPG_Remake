@@ -26,7 +26,7 @@ import com.tiagosantos.crpg_remake.R
 
 abstract class BaseFragment<B : ViewDataBinding>: Fragment() {
 
-    @Arg protected open lateinit var settings: FragmentSettings
+    protected abstract val settings: FragmentSettings
     @LayoutRes @Arg protected open var layoutId: Int = 0
 
     open lateinit var viewBinding: B

@@ -26,31 +26,41 @@ import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setVisible
 
 /**
  * Android doesn't allow using an overloaded constructor for fragments anymore.
- * You must use the newInstance method.
+ * You must use the newInstance method.´
+ *
+ * You cannot call requireContext() at a property initialization site because properties
+ * are initialized while the Fragment instance is still being constructed,
+ * which is before it can possibly be attached to a context.
  */
 @FragmentWithArgs
 class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>() {
 
     @Arg override var layoutId = R.layout.fragment_agenda
 
-    @Arg
-    override var settings = FragmentSettings(
-        appBarTitle = "AGENDA",
-        sharedPreferencesBooleanName = R.string.agendaHasRun.toString(),
-        showBackButton = false,
-    )
+    @delegate:Arg
+    override val settings by lazy {
+        FragmentSettings(
+            appBarTitle = getString(R.string.agenda),
+            sharedPreferencesBooleanName = getString(R.string.agendaHasRun),
+            showBackButton = false,
+        )
+    }
 
-    @Arg
-    override var ttsSettings = TTSSettings(
-        contextualHelp = R.string.contextual_agenda,
-        isSpeaking = true,
-    )
+    @delegate:Arg
+    override val ttsSettings by lazy {
+        TTSSettings(
+            contextualHelp = R.string.contextual_agenda,
+            isSpeaking = true,
+        )
+    }
 
-    @Arg
-    override var srSettings = SRSettings(
-        commandList = listOf("Almoço", "Jantar"),
-        isListening = false,
-    )
+    @delegate:Arg
+    override val srSettings by lazy {
+        SRSettings(
+            commandList = listOf("Almoço", "Jantar"),
+            isListening = false,
+        )
+    }
 
     private val viewModel: AgendaViewModel by viewModels()
 
@@ -110,6 +120,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>() {
 
     override fun onResume() {
         super.onResume()
+        println("Resumed")
         updateMAttributes()
     }
 
