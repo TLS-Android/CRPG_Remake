@@ -23,8 +23,7 @@ Fragment is recreated by Android is to pass a bundle to the setArguments method
 @FragmentWithArgs
 class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaPlayerBinding>() {
 
-    @Arg
-    override var layoutId = R.layout.fragment_meditation_media_player
+    @Arg override var layoutId = R.layout.fragment_meditation_media_player
 
     @Arg
     override var settings = FragmentSettings(
@@ -44,10 +43,6 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
 
     private val viewModel: MeditationViewModel by viewModels()
     private val player = ExoPlayer.Builder(requireContext()).build()
-
-    companion object {
-        fun newInstance() = MeditationMediaPlayerFragment()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         viewB.custom.apply {

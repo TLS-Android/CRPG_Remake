@@ -28,8 +28,7 @@ import java.util.Calendar.*
 @FragmentWithArgs
 class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
 
-    @Arg
-    override var layoutId = R.layout.fragment_date_picker
+    @Arg override var layoutId = R.layout.fragment_date_picker
 
     @Arg
     override var settings = FragmentSettings(

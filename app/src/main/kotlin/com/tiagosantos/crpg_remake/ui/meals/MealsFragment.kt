@@ -23,8 +23,7 @@ import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
 @FragmentWithArgs
 class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
 
-    @Arg
-    override var layoutId = R.layout.meals_fragment
+    @Arg override var layoutId = R.layout.meals_fragment
 
     @Arg
     override var settings = FragmentSettings(

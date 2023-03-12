@@ -35,8 +35,7 @@ import com.tiagosantos.crpg_remake.ui.reminders.helpers.HoursHelper
 @FragmentWithArgs
 class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
 
-    @Arg
-    override var layoutId = R.layout.reminder_fragment
+    @Arg override var layoutId = R.layout.reminder_fragment
 
     @Arg
     override var settings = FragmentSettings(

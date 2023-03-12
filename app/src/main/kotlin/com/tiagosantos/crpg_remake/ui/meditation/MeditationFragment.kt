@@ -17,8 +17,7 @@ import com.tiagosantos.crpg_remake.databinding.FragmentMeditationBinding
 @FragmentWithArgs
 class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>() {
 
-    @Arg
-    override var layoutId = R.layout.fragment_meditation
+    @Arg override var layoutId = R.layout.fragment_meditation
 
     @Arg
     override var settings = FragmentSettings(
@@ -47,10 +46,6 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>() {
     private val feelingsMap = with(viewB){
         mapOf("RELAXADO" to buttonMoodRelaxed , "FELIZ" to buttonMoodHappy,
         "SONOLENTO" to buttonMoodSleepy, "CONFIANTE" to buttonMoodConfident)
-    }
-
-    companion object {
-        fun newInstance() = MeditationFragment()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
