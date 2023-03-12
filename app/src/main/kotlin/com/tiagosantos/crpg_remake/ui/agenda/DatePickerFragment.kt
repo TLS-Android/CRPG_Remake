@@ -66,6 +66,8 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         goToFragment(AgendaFragment())
+        //println("layoutId = ${layoutId}")
+        //println("settings = ${settings}")
         super.onViewCreated(view, savedInstanceState)
     }
 

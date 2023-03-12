@@ -37,7 +37,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>() {
     @Arg
     override var settings = FragmentSettings(
         appBarTitle = R.string.title_agenda,
-        sharedPreferencesBooleanName = getString(R.string.agendaHasRun),
+        sharedPreferencesBooleanName = R.string.agendaHasRun.toString(),
         showBackButton = false,
     )
 
