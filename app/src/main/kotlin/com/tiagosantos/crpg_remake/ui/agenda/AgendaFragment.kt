@@ -76,7 +76,6 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>() {
         setAttributes()
         initRecyclerView()
         observeLifecycleEvents()
-        println()
         mAttributes.orientation = Orientation.VERTICAL
     }
 
