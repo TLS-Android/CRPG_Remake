@@ -44,16 +44,8 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
     @Arg
     override var srSettings = SRSettings(
         commandList = listOf(
-            "um",
-            "dois",
-            "três",
-            "quatro",
-            "cinco",
-            "seis",
-            "sete",
-            "oito",
-            "nove",
-            "dez"
+            "um", "dois", "três", "quatro", "cinco",
+                "seis", "sete", "oito", "nove", "dez"
         ),
         isListening = false,
     )
@@ -65,8 +57,6 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         goToFragment(AgendaFragment())
-        //println("layoutId = ${layoutId}")
-        //println("settings = ${settings}")
         super.onViewCreated(view, savedInstanceState)
     }
 

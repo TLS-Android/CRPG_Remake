@@ -31,8 +31,8 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>() {
 
     @Arg
     override var srSettings = SRSettings(
-    commandList = listOf("RELAXADO", "FELIZ", "SONOLENTO", "CONFIANTE"),
-    isListening = false,
+        commandList = listOf("RELAXADO", "FELIZ", "SONOLENTO", "CONFIANTE"),
+        isListening = false,
     )
 
     private val viewModel: MeditationViewModel by viewModels()
