@@ -147,6 +147,7 @@
     <string name="contextual_meditation">Indique qual o seu estado de espirito atual</string>
     <string name="contextual_media_player">Indique qual o seu estado de espirito atual</string>
     <string name="agenda">AGENDA</string>
+    <string name="escolher_data">ESCOLHER DATA</string>
 
     <string-array name="line_type">
         <item>Normal</item>

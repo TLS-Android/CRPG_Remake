@@ -30,25 +30,31 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
 
     @Arg override var layoutId = R.layout.fragment_date_picker
 
-    @Arg
-    override var settings = FragmentSettings(
-        appBarTitle = "ESCOLHER DATA",
-        sharedPreferencesBooleanName = R.string.datePickerHasRun.toString(),
-        showBackButton = false,
-        hideBottomNavigationView = true,
-    )
+    @delegate:Arg
+    override val settings by lazy {
+        FragmentSettings(
+            appBarTitle = getString(R.string.escolher_data),
+            sharedPreferencesBooleanName = R.string.datePickerHasRun.toString(),
+            showBackButton = false,
+            hideBottomNavigationView = true,
+        )
+    }
 
-    @Arg
-    override var ttsSettings = TTSSettings(R.string.contextual_date_picker)
+    @delegate:Arg
+    override val ttsSettings by lazy {
+        TTSSettings(R.string.contextual_date_picker)
+    }
 
-    @Arg
-    override var srSettings = SRSettings(
-        commandList = listOf(
-            "um", "dois", "três", "quatro", "cinco",
+    @delegate:Arg
+    override val srSettings by lazy {
+        SRSettings(
+            commandList = listOf(
+                "um", "dois", "três", "quatro", "cinco",
                 "seis", "sete", "oito", "nove", "dez"
-        ),
-        isListening = false,
-    )
+            ),
+            isListening = false,
+        )
+    }
 
     val viewModel: AgendaViewModel by viewModels()
 
@@ -56,7 +62,7 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
     private val calendar = getInstance()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        goToFragment(AgendaFragment())
+        //goToFragment(AgendaFragment())
         super.onViewCreated(view, savedInstanceState)
     }
 
