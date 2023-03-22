@@ -25,21 +25,27 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
 
     @Arg override var layoutId = R.layout.fragment_meditation_media_player
 
-    @Arg
-    override var settings = FragmentSettings(
-    appBarTitle = R.string.title_media,
-    sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
-    showBackButton = true
-    )
+    @delegate:Arg
+    override val settings by lazy {
+        FragmentSettings(
+            appBarTitle = R.string.title_media,
+            sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
+            showBackButton = true
+        )
+    }
 
-    @Arg
-    override var ttsSettings = TTSSettings(contextualHelp =  R.string.contextual_media_player)
+    @delegate:Arg
+    override val ttsSettings by lazy {
+        TTSSettings(contextualHelp =  R.string.contextual_media_player)
+    }
 
-    @Arg
-    override var srSettings = SRSettings(
-        commandList = listOf("Tocar", "Parar", "Passar à frente", "Passar a trás", "Regressar"),
-        isListening = false,
-    )
+    @delegate:Arg
+    override val srSettings by lazy {
+        SRSettings(
+            commandList = listOf("Tocar", "Parar", "Passar à frente", "Passar a trás", "Regressar"),
+            isListening = false,
+        )
+    }
 
     private val viewModel: MeditationViewModel by viewModels()
     private val player = ExoPlayer.Builder(requireContext()).build()

@@ -37,25 +37,31 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
 
     @Arg override var layoutId = R.layout.reminder_fragment
 
-    @Arg
-    override var settings = FragmentSettings(
-        appBarTitle = R.string.title_reminders,
-        sharedPreferencesBooleanName = R.string.remindersHasRun.toString(),
-    )
+    @delegate:Arg
+    override val settings by lazy {
+        FragmentSettings(
+            appBarTitle = R.string.title_reminders,
+            sharedPreferencesBooleanName = R.string.remindersHasRun.toString(),
+        )
+    }
 
-    @Arg
-    override var ttsSettings = TTSSettings(contextualHelp =  R.string.contextual_reminder)
+    @delegate:Arg
+    override val ttsSettings by lazy {
+        TTSSettings(contextualHelp =  R.string.contextual_reminder)
+    }
 
-    @Arg
-    override var srSettings = SRSettings(
-        commandList = listOf(
-            "Horas", "Dia", "Alerta", "Notas", "Lembrete", "Cancelar", "Guardar",
-            "Tomar Medicação", "Apanhar Transporte",
-            "Escolher Almoço", "O Meu Lembrete",
-            "Som","Vibrar","Ambos","Hoje","Sempre","Escolher Dias"
-        ),
-        isListening = false,
-    )
+    @delegate:Arg
+    override val srSettings by lazy {
+        SRSettings(
+            commandList = listOf(
+                "Horas", "Dia", "Alerta", "Notas", "Lembrete", "Cancelar", "Guardar",
+                "Tomar Medicação", "Apanhar Transporte",
+                "Escolher Almoço", "O Meu Lembrete",
+                "Som","Vibrar","Ambos","Hoje","Sempre","Escolher Dias"
+            ),
+            isListening = false,
+        )
+    }
 
     private val viewModel: ReminderViewModel by viewModels()
 

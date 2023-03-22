@@ -19,21 +19,27 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>() {
 
     @Arg override var layoutId = R.layout.fragment_meditation
 
-    @Arg
-    override var settings = FragmentSettings(
-        appBarTitle = R.string.title_meditacao,
-        sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
-        showBackButton = true
-    )
+    @delegate:Arg
+    override val settings by lazy {
+        FragmentSettings(
+            appBarTitle = R.string.title_meditacao,
+            sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
+            showBackButton = true
+        )
+    }
 
-    @Arg
-    override var ttsSettings = TTSSettings(contextualHelp =  R.string.contextual_meditation)
+    @delegate:Arg
+    override val ttsSettings by lazy {
+        TTSSettings(contextualHelp =  R.string.contextual_meditation)
+    }
 
-    @Arg
-    override var srSettings = SRSettings(
-        commandList = listOf("RELAXADO", "FELIZ", "SONOLENTO", "CONFIANTE"),
-        isListening = false,
-    )
+    @delegate:Arg
+    override val srSettings by lazy {
+        SRSettings(
+            commandList = listOf("RELAXADO", "FELIZ", "SONOLENTO", "CONFIANTE"),
+            isListening = false,
+        )
+    }
 
     private val viewModel: MeditationViewModel by viewModels()
 
