@@ -30,6 +30,9 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
 
     @Arg override var layoutId = R.layout.fragment_date_picker
 
+    /**
+     * Lazy properties: the value is computed only on first access.
+     */
     @delegate:Arg
     override val settings by lazy {
         FragmentSettings(
@@ -66,7 +69,9 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    override fun setupUI() {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
         with(viewB) {
             calendar.time = Date()
             val myCalendarViewManager = object : CalendarViewManager {
@@ -126,34 +131,32 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
                 }
             }
 
-            initCalendar(myCalendarViewManager, myCalendarChangesObserver, mySelectionManager)
-            selectButtonController()
-        }
-    }
-
-    private fun FragmentDatePickerBinding.initCalendar(
-        myCalendarViewManager: CalendarViewManager,
-        myCalendarChangesObserver: CalendarChangesObserver,
-        mySelectionManager: CalendarSelectionManager
-    ) {
-        mainSingleRowCalendar.apply {
-            calendarViewManager = myCalendarViewManager
-            calendarChangesObserver = myCalendarChangesObserver
-            calendarSelectionManager = mySelectionManager
-            setDates(viewModel.getFutureDatesOfCurrentMonth())
-            init()
-        }
-    }
-
-    private fun FragmentDatePickerBinding.selectButtonController() {
-        buttonSelecionar.setOnClickListener {
-            if (selected) {
-                noDateSelectedWarning.hide()
-                goToFragment(AgendaFragment())
-            } else {
-                noDateSelectedWarning.show()
+            mainSingleRowCalendar.apply {
+                calendarViewManager = myCalendarViewManager
+                calendarChangesObserver = myCalendarChangesObserver
+                calendarSelectionManager = mySelectionManager
+                setDates(viewModel.getFutureDatesOfCurrentMonth())
+                init()
+            }
+            buttonSelecionar.setOnClickListener {
+                if (selected) {
+                    noDateSelectedWarning.hide()
+                    goToFragment(AgendaFragment())
+                } else {
+                    noDateSelectedWarning.show()
+                }
             }
         }
+
+    }
+
+    override fun setupUI() {
+
+    }
+
+
+    private fun FragmentDatePickerBinding.selectButtonController() {
+
     }
 
     override fun performActionWithVoiceCommand(

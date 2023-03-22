@@ -48,6 +48,7 @@ open class Gossip(private val context: Context) : TextToSpeech.OnInitListener {
 
     fun talk(text: CharSequence) {
         talk(text.toString(), null, null, null)
+        println("is talking")
     }
 
     fun talkAndOnStart(text: String, onStart: (suspend () -> Unit)?) {

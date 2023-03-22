@@ -27,6 +27,13 @@ abstract class BaseModalFragment<B : ViewDataBinding>: BaseFragment<B>() {
     protected abstract val ttsSettings: TTSSettings
     protected abstract val srSettings: SRSettings
 
+    /**
+     * Property delegation in Kotlin helps you to handoff the getter-setter responsibility to a different class.
+
+    This class (called delegate class) provides getter and setter functions of the property and handles its changes.
+
+    A delegate property is defined using the by clause and a delegate class instance:
+     */
     private val prefHelper: SharedPrefsViewModel by activityViewModels()
     private val gossip: GossipViewModel by activityViewModels()
     private val gotev: GotevViewModel by activityViewModels()
@@ -48,8 +55,8 @@ abstract class BaseModalFragment<B : ViewDataBinding>: BaseFragment<B>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        gossip.setContextualHelp(getString(ttsSettings.contextualHelp))
         setupUI()
-        //gossip.setContextualHelp(ttsSettings.contextualHelp!!)
         //handleVoiceToActionController()
     }
 
@@ -62,13 +69,13 @@ abstract class BaseModalFragment<B : ViewDataBinding>: BaseFragment<B>() {
     override fun onStop() {
         super.onStop()
         //gotev.stop()
-        //gossip.shutUp()
+        gossip.shutUp()
     }
 
     override fun onPause() {
         super.onPause()
         //gotev.stop()
-        //gossip.shutUp()
+        gossip.shutUp()
     }
 
     /**
