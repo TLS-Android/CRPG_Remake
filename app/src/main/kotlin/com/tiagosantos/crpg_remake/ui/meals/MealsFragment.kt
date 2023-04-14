@@ -34,8 +34,8 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
     @delegate:Arg
     override val settings by lazy {
         FragmentSettings(
-            appBarTitle = R.string.meal_action_bar_title,
-            sharedPreferencesBooleanName = R.string.datePickerHasRun.toString(),
+            appBarTitle = getString(R.string.title_refeicao),
+            sharedPreferencesBooleanName = getString(R.string.datePickerHasRun),
         )
     }
 
