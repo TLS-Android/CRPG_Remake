@@ -1,7 +1,7 @@
 package com.tiagosantos.common.ui.model
 
 class MessagesViewModel {
-
+/*
     private val _listMessages = MutableLiveData<List<String>?>()
     private val listMessages: LiveData<List<String>?> = _listMessages
 
@@ -40,4 +40,6 @@ class MessagesViewModel {
                 }
         }
     }
+
+ */
 }
