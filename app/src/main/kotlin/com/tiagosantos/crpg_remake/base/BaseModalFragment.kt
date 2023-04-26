@@ -7,7 +7,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hannesdorfmann.fragmentargs.FragmentArgs
-import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.tiagosantos.access.modal.gossip.GossipViewModel
 import com.tiagosantos.access.modal.gotev.GotevViewModel
 import com.tiagosantos.access.modal.settings.ActionType.REMINDER

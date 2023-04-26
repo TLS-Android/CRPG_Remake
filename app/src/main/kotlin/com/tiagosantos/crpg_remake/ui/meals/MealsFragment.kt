@@ -3,6 +3,7 @@ package com.tiagosantos.crpg_remake.ui.meals
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.card.MaterialCardView
 import com.hannesdorfmann.fragmentargs.annotation.Arg
@@ -14,6 +15,7 @@ import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
+
 
 /**
  * The onCreate() is called first, for doing any non-graphical initialisations.
@@ -83,6 +85,9 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
     }
 
     override fun setupUI() {
+
+        //viewModel.updateSelectedOption(1)
+
         activity?.lifecycleScope?.launchWhenCreated {
             fun setChecks(cardList: List<MaterialCardView?>, card: MaterialCardView) {
                 if (!card.isChecked) viewModel.updateSelectedOption(1)
