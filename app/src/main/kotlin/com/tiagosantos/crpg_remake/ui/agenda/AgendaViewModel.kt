@@ -46,8 +46,10 @@ class AgendaViewModel(
     val liveDataList = MediatorLiveData<MutableList<Event>>()
 
     init {
-        liveDataList.addSource(_publicEventList) { t -> liveDataList.plusAssign(t) }
-        liveDataList.addSource(_privateEventList) { t -> liveDataList.plusAssign(t) }
+        liveDataList.apply {
+            addSource(_publicEventList) { t -> plusAssign(t) }
+            addSource(_privateEventList) { t -> plusAssign(t) }
+        }
     }
 
     private val _currentMonth = MutableLiveData<Int?>()
@@ -90,6 +92,7 @@ class AgendaViewModel(
 
     private fun addMealsToPublicEvents() { _publicEventList.value = mockLunchEvent }
     private fun addMealsToPrivateEvents() { _privateEventList.value = mockDinnerEvent }
+
     private fun test() { _privateEventList.value = mockActivityEvent }
 
     fun setSelectedDate(date: Date) {

@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.google.android.material.card.MaterialCardView
 import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
@@ -74,8 +75,26 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         //isLunch = requireArguments().getBoolean("isLunch")
+
         isLunch = true
         viewB.apply {
+
+            Glide.with(fragment)
+                .load(R.drawable.background_carne)
+                .into(backgroundImageCarne)
+
+            Glide.with(fragment)
+                .load(R.drawable.background_peixe)
+                .into(backgroundImagePeixe)
+
+            Glide.with(fragment)
+                .load(R.drawable.background_dieta)
+                .into(backgroundImageDieta)
+
+            Glide.with(fragment)
+                .load(R.drawable.background_veg)
+                .into(backgroundImageVegetariano)
+
             actionList = mutableListOf(frameOpcaoCarne, frameOpcaoPeixe,
                 frameOpcaoDieta, frameOpcaoVegetariano, buttonConfirmMeal)
             cardList = listOf(frameOpcaoCarne, frameOpcaoPeixe,
