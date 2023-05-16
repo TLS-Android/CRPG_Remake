@@ -110,7 +110,6 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/frame_opcao_peixe"
-
                 android:layout_height="140dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="16dp"
