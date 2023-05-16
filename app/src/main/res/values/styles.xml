@@ -105,9 +105,28 @@
     </style>
 
     <style name="mealCard" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="android:layout_width">140dp</item>
+        <item name="android:layout_height">140dp</item>
         <item name="android:checkable">true</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
+        <item name="cardBackgroundColor">@color/colorGrey50</item>
+        <item name="cardCornerRadius">40dp</item>
+        <item name="cardElevation">5dp</item>
+        <item name="checkedIconMargin">8dp</item>
+        <item name="checkedIconSize">48dp</item>
+        <item name="checkedIconTint">@color/PrimaryGreen</item>
+        <item name="contentPadding">0dp</item>
+        <item name="strokeColor">#F9B401</item>
+        <item name="strokeWidth">3dp</item>
+    </style>
+
+    <style name="mealMainFrame" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:checkable">false</item>
+        <item name="android:clickable">false</item>
+        <item name="android:focusable">false</item>
         <item name="cardBackgroundColor">@color/colorGrey50</item>
         <item name="cardCornerRadius">40dp</item>
         <item name="cardElevation">5dp</item>
