@@ -79,19 +79,19 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
         isLunch = true
         viewB.apply {
 
-            Glide.with(fragment)
+            Glide.with(requireContext())
                 .load(R.drawable.background_carne)
                 .into(backgroundImageCarne)
 
-            Glide.with(fragment)
+            Glide.with(requireContext())
                 .load(R.drawable.background_peixe)
                 .into(backgroundImagePeixe)
 
-            Glide.with(fragment)
+            Glide.with(requireContext())
                 .load(R.drawable.background_dieta)
                 .into(backgroundImageDieta)
 
-            Glide.with(fragment)
+            Glide.with(requireContext())
                 .load(R.drawable.background_veg)
                 .into(backgroundImageVegetariano)
 
@@ -127,10 +127,7 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
                         if (viewModel.selectedOption.value != 0) {
                             mealChoiceSuccess.showAndBringToFront()
                             avisoNenhumaRefeicaoChecked.hide()
-                            viewModel.updateMealChoiceOnLocalStorage(
-                                viewModel.selectedOption,
-                                isLunch
-                            )
+                            viewModel.updateMealChoiceOnLocalStorage(viewModel.selectedOption, isLunch)
                             buttonOk.setOnClickListener { mealChoiceSuccess.hide() }
                         } else {
                             mealChoiceSuccess.show()
