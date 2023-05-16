@@ -44,19 +44,8 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_mood_relaxed"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
                 android:text="@string/relaxado"
-                android:textColor="@color/md_blue_100"
-                android:textSize="32sp"
-                app:backgroundTint="@android:color/transparent"
-                app:cornerRadius="8dp"
-                app:contentPadding="16dp"
-                app:rippleColor="@color/md_blue_100"
-                app:strokeColor="@color/md_blue_100"
-                app:strokeWidth="5dp" />
+                style="@style/moodButton" />
         </FrameLayout>
 
         <FrameLayout
