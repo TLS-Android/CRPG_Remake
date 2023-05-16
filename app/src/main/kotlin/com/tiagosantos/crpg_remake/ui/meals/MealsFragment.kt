@@ -3,7 +3,6 @@ package com.tiagosantos.crpg_remake.ui.meals
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.google.android.material.card.MaterialCardView
@@ -11,12 +10,16 @@ import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
 import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
-import com.tiagosantos.common.ui.extension.*
+import com.tiagosantos.common.ui.extension.eachChild
+import com.tiagosantos.common.ui.extension.hide
+import com.tiagosantos.common.ui.extension.setFrameOnClick
+import com.tiagosantos.common.ui.extension.show
+import com.tiagosantos.common.ui.extension.showAndBringToFront
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
-
+import kotlinx.coroutines.launch
 
 /**
  * The onCreate() is called first, for doing any non-graphical initialisations.
@@ -74,11 +77,8 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
      * and removed once the onCreate() callback is received.
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        //isLunch = requireArguments().getBoolean("isLunch")
-
         isLunch = true
         viewB.apply {
-
             Glide.with(requireContext())
                 .load(R.drawable.background_carne)
                 .into(backgroundImageCarne)
@@ -104,10 +104,7 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
     }
 
     override fun setupUI() {
-
-        //viewModel.updateSelectedOption(1)
-
-        activity?.lifecycleScope?.launchWhenCreated {
+        lifecycleScope.launch {
             fun setChecks(cardList: List<MaterialCardView?>, card: MaterialCardView) {
                 if (!card.isChecked) viewModel.updateSelectedOption(1)
                 else viewModel.updateSelectedOption(0)

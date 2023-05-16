@@ -54,9 +54,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="15dp"
-                android:checkable="true"
-                android:clickable="true"
-                android:focusable="true"
                 style="@style/mealCard"
                 app:layout_constraintEnd_toStartOf="@+id/frame_opcao_peixe"
                 app:layout_constraintStart_toStartOf="parent">
@@ -68,9 +65,6 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="15dp"
-                android:checkable="true"
-                android:clickable="true"
-                android:focusable="true"
                 style="@style/mealCard"
                 app:layout_constraintStart_toStartOf="@+id/frame_meals_card"
                 app:layout_constraintEnd_toEndOf="@+id/frame_meals_card">
@@ -124,13 +118,10 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="15dp"
-                android:checkable="true"
-                android:clickable="true"
-                android:focusable="true"
                 android:layout_gravity="end"
-                style="@style/mealCard"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/frame_opcao_carne">
+                app:layout_constraintStart_toEndOf="@+id/frame_opcao_carne"
+                style="@style/mealCard">
 
                 <FrameLayout
                     android:layout_width="wrap_content"
@@ -183,9 +174,6 @@
                 android:layout_marginTop="180dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="16dp"
-                android:checkable="true"
-                android:clickable="true"
-                android:focusable="true"
                 style="@style/mealCard"
                 tools:ignore="RtlHardcoded">
 
@@ -239,9 +227,6 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
-                android:checkable="true"
-                android:clickable="true"
-                android:focusable="true"
                 style="@style/mealCard">
 
                 <FrameLayout
@@ -253,8 +238,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:contentDescription="@string/imagem_ilustrativa_de_prato_vegetariano"
-                        android:scaleType="centerCrop"
-                        />
+                        android:scaleType="centerCrop" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
