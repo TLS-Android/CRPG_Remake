@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="med"
             type="com.tiagosantos.crpg_remake.ui.meditation.MeditationFragment" />
@@ -24,6 +23,7 @@
             android:text="@string/como_gostaria_de_se_sentir"
             android:textColor="@color/md_blue_100"
             android:textSize="30sp"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -31,7 +31,7 @@
             app:layout_constraintVertical_bias="0.05" />
 
         <FrameLayout
-            android:id="@+id/frame_meditation_top"
+            android:id="@+id/frame_meditation_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -44,11 +44,13 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_mood_relaxed"
-                android:layout_width="160dp"
-                android:layout_height="100dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:text="@string/relaxado"
                 android:textColor="@color/md_blue_100"
-                android:textSize="20sp"
+                android:textSize="32sp"
                 app:backgroundTint="@android:color/transparent"
                 app:cornerRadius="8dp"
                 app:rippleColor="@color/md_blue_100"
@@ -70,6 +72,18 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/frame_"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frame_meditation_1">
+
+        </FrameLayout>
+
+        <FrameLayout
             android:id="@+id/frame_meditation_center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -77,7 +91,7 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frame_meditation_top">
+            app:layout_constraintTop_toBottomOf="@+id/frame_meditation_1">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_mood_sleepy"
