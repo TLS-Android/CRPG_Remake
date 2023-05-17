@@ -1,3 +1,5 @@
+@file:Suppress("KDocUnresolvedReference")
+
 package com.tiagosantos.access.modal.gossip
 
 import android.app.Activity
@@ -13,6 +15,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.util.*
 
+@SuppressWarnings("LeakingThisInConstructor")
 open class Gossip(private val context: Context) : TextToSpeech.OnInitListener {
 
     private val textToSpeech: TextToSpeech = TextToSpeech(context, this)

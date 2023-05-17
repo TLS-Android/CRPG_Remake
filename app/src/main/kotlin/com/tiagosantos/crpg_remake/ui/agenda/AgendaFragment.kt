@@ -167,7 +167,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>() {
     private fun observeLifecycleEvents() {
         viewModel.liveDataList.observe(viewLifecycleOwner) { newEvent ->
             mFeedList = newEvent
-            println("mFeedList = ${mFeedList}")
+            println("mFeedList = $mFeedList")
             adapterGlobal.submitList(mFeedList)
         }
         addItemsToFeed()

@@ -1,8 +1,6 @@
 package com.tiagosantos.crpg_remake
 
 import android.os.Bundle
-import android.view.View.INVISIBLE
-import android.view.View.VISIBLE
 import android.view.WindowManager
 import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -54,7 +52,6 @@ class MainActivity : MainActivityInterface, BaseActivity(
     }
 
     /** The modules() function in startKoin load the given list of modules  **/
-    @Suppress("UNUSED_PARAMETER")
     override fun onCreate(savedInstanceState: Bundle?) {
         setupParams()
         super.onCreate(savedInstanceState)

@@ -29,7 +29,6 @@ import kotlinx.parcelize.Parcelize
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
 
 @Parcelize
-@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class TimelineAttributesBottomSheet : RoundedCornerBottomSheet(), Parcelable {
 
     interface Callbacks {

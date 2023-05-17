@@ -2,7 +2,6 @@ package com.tiagosantos.crpg_remake.ui.reminders
 
 import android.annotation.SuppressLint
 import android.app.Application
-import android.content.Context
 import android.content.Intent
 import android.provider.AlarmClock.*
 import android.widget.EditText

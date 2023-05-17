@@ -115,7 +115,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
             && lembrarButtonPressed != 0 && hoursMinutesFlag
 
     private fun launchIntent() {
-        if (activity?.packageManager?.let { it -> viewModel.alarmIntent.resolveActivity(it) } != null) {
+        if (activity?.packageManager?.let { viewModel.alarmIntent.resolveActivity(it) } != null) {
             startActivity(viewModel.alarmIntent)
         }
     }
