@@ -173,4 +173,10 @@
         <item name="expandable_spinner_gravity">start</item>
     </style>
 
+    <style name="greySeparator">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1dip</item>
+        <item name="android:background">@color/greySeparator</item>
+    </style>
+
 </resources>
