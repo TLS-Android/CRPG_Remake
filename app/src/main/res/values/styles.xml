@@ -147,13 +147,14 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_marginStart">8dp</item>
         <item name="android:layout_marginEnd">8dp</item>
-        <item name="android:textSize">32sp</item>
+        <item name="android:textSize">48sp</item>
         <item name="android:textColor">@color/md_blue_100</item>
         <item name="backgroundTint">@android:color/transparent</item>
         <item name="cornerRadius">8dp</item>
         <item name="rippleColor">@color/md_blue_100</item>
         <item name="strokeColor">@color/md_blue_100</item>
         <item name="strokeWidth">5dp</item>
+        <item name="android:padding">24dp</item>
     </style>
 
     <style name="moodFrame" parent="Widget.Design.ScrimInsetsFrameLayout">
