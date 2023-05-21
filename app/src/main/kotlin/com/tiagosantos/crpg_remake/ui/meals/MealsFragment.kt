@@ -1,10 +1,13 @@
 package com.tiagosantos.crpg_remake.ui.meals
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.ViewTarget
 import com.google.android.material.card.MaterialCardView
 import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
@@ -79,21 +82,10 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         isLunch = true
         viewB.apply {
-            Glide.with(requireContext())
-                .load(R.drawable.background_carne)
-                .into(backgroundImageCarne)
-
-            Glide.with(requireContext())
-                .load(R.drawable.background_peixe)
-                .into(backgroundImagePeixe)
-
-            Glide.with(requireContext())
-                .load(R.drawable.background_dieta)
-                .into(backgroundImageDieta)
-
-            Glide.with(requireContext())
-                .load(R.drawable.background_veg)
-                .into(backgroundImageVegetariano)
+            backgroundImageCarne.load(R.drawable.background_carne)
+            backgroundImagePeixe.load(R.drawable.background_peixe)
+            backgroundImageDieta.load(R.drawable.background_dieta)
+            backgroundImageVegetariano.load(R.drawable.background_veg)
 
             actionList = mutableListOf(frameOpcaoCarne, frameOpcaoPeixe,
                 frameOpcaoDieta, frameOpcaoVegetariano, buttonConfirmMeal)
@@ -140,4 +132,13 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
     }
 
     private fun updateFlagMealChosen() { flagMealChosen = !flagMealChosen }
+}
+
+@JvmSynthetic
+fun ImageView.load(
+    data: Any?,
+): ViewTarget<ImageView, Drawable> {
+    return Glide.with(this)
+        .load(data)
+        .into(this)
 }
