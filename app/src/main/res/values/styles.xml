@@ -165,5 +165,12 @@
         <item name="android:layout_marginEnd">8dp</item>
     </style>
 
+    <style name="reminderExpandableLayout" parent="Widget.Design.ScrimInsetsFrameLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="expandable_duration">300</item>
+        <item name="expandable_isExpanded">false</item>
+        <item name="expandable_spinner_gravity">start</item>
+    </style>
 
 </resources>

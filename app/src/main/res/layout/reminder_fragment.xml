@@ -71,13 +71,9 @@
 
         <com.skydoves.expandablelayout.ExpandableLayout
             android:id="@+id/expandable_lembrar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:expandable_duration="300"
-            app:expandable_isExpanded="false"
+            style="@style/reminderExpandableLayout"
             app:expandable_parentLayout="@layout/layout_parent_lembrar"
-            app:expandable_secondLayout="@layout/layout_second_lembrar"
-            app:expandable_spinner_gravity="start" />
+            app:expandable_secondLayout="@layout/layout_second_lembrar" />
 
         <View
             android:id="@+id/separator"
@@ -87,13 +83,9 @@
 
         <com.skydoves.expandablelayout.ExpandableLayout
             android:id="@+id/expandable_horas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:expandable_duration="300"
-            app:expandable_isExpanded="false"
+            style="@style/reminderExpandableLayout"
             app:expandable_parentLayout="@layout/layout_parent_horas"
-            app:expandable_secondLayout="@layout/layout_second_horas"
-            app:expandable_spinner_gravity="start" />
+            app:expandable_secondLayout="@layout/layout_second_horas" />
 
         <View
             android:id="@+id/separator2"
@@ -103,13 +95,9 @@
 
         <com.skydoves.expandablelayout.ExpandableLayout
             android:id="@+id/expandable_dia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:expandable_duration="300"
-            app:expandable_isExpanded="false"
+            style="@style/reminderExpandableLayout"
             app:expandable_parentLayout="@layout/layout_parent_dia"
-            app:expandable_secondLayout="@layout/layout_second_dia"
-            app:expandable_spinner_gravity="start" />
+            app:expandable_secondLayout="@layout/layout_second_dia" />
 
         <View
             android:id="@+id/separator3"
@@ -119,13 +107,9 @@
 
         <com.skydoves.expandablelayout.ExpandableLayout
             android:id="@+id/expandable_alerta"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:expandable_duration="300"
-            app:expandable_isExpanded="false"
+            style="@style/reminderExpandableLayout"
             app:expandable_parentLayout="@layout/layout_parent_alerta"
-            app:expandable_secondLayout="@layout/layout_second_alerta"
-            app:expandable_spinner_gravity="start" />
+            app:expandable_secondLayout="@layout/layout_second_alerta" />
 
         <View
             android:id="@+id/separator4"
@@ -135,13 +119,9 @@
 
         <com.skydoves.expandablelayout.ExpandableLayout
             android:id="@+id/expandable_notas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:expandable_duration="300"
-            app:expandable_isExpanded="false"
+            style="@style/reminderExpandableLayout"
             app:expandable_parentLayout="@layout/layout_parent_notas"
-            app:expandable_secondLayout="@layout/layout_second_notas"
-            app:expandable_spinner_gravity="start" />
+            app:expandable_secondLayout="@layout/layout_second_notas" />
 
         <View
             android:id="@+id/separator5"
