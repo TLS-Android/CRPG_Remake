@@ -134,6 +134,13 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
     private fun updateFlagMealChosen() { flagMealChosen = !flagMealChosen }
 }
 
+/**
+ *     A construct emitted by a Java compiler must be marked as synthetic if it does not correspond
+ *     to a construct declared explicitly or implicitly in source code, unless the emitted construct
+ *     is a class initialization method (JVMS §2.9).
+ *     The @JvmSynthetic annotation does exactly that: prevent access from source code.
+ *     The method will still appear in reflection and is then marked as synthetic.
+ **/
 @JvmSynthetic
 fun ImageView.load(
     data: Any?,
