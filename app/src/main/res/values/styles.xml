@@ -179,4 +179,14 @@
         <item name="android:background">@color/greySeparator</item>
     </style>
 
+    <style name="alertImage">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_weight">0.3</item>
+        <item name="android:backgroundTint">@color/white_93</item>
+    </style>
+
 </resources>

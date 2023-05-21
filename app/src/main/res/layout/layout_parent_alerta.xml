@@ -9,9 +9,9 @@
     android:gravity="start"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
-    android:paddingStart="20dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
     tools:ignore="UnusedAttribute">
-
 
   <ImageView
       android:layout_width="30dp"

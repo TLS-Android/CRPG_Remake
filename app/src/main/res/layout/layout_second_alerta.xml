@@ -14,33 +14,15 @@
 
     <ImageButton
         android:id="@+id/imageButtonSom"
-        android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:layout_marginRight="8dp"
-        android:scaleType="fitCenter"
-        android:gravity="center_horizontal"
-        android:layout_weight="0.3"
-        android:backgroundTint="@color/white_93" />
+        style="@style/alertImage" />
 
     <ImageButton
         android:id="@+id/imageButtonVibrar"
-        android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="8dp"
-        android:scaleType="fitCenter"
-        android:gravity="center_horizontal"
-        android:layout_weight="0.3"
-        android:backgroundTint="@color/white_93"/>
+        style="@style/alertImage" />
 
     <ImageButton
         android:id="@+id/imageButtonAmbos"
-        android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="8dp"
-        android:scaleType="fitCenter"
-        android:gravity="center_horizontal"
-        android:layout_weight="0.3"
-        android:backgroundTint="@color/white_93" />
+        style="@style/alertImage" />
   </LinearLayout>
 
   <LinearLayout
@@ -101,7 +83,5 @@
         android:layout_margin="5dp"
         android:visibility="invisible"
         android:src="@android:drawable/checkbox_on_background" />
-
   </LinearLayout>
-
 </LinearLayout>
