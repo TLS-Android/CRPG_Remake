@@ -10,7 +10,7 @@
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="horizontal" >
+      android:orientation="horizontal">
 
     <ImageButton
         android:id="@+id/imageButtonSom"
@@ -28,17 +28,12 @@
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="horizontal" >
+      android:orientation="horizontal">
 
     <TextView
         android:id="@+id/textView_som"
         android:layout_height="match_parent"
-        android:layout_width="wrap_content"
-        android:layout_weight="0.003"
-        android:gravity="end"
-        android:text="@string/som"
-        android:textColor="@color/md_blue_100"
-        android:textSize="20sp" />
+        style="@style/textAlert" />
 
     <ImageView
         android:id="@+id/checkbox_som"
@@ -50,13 +45,8 @@
 
     <TextView
         android:id="@+id/textView_vibrar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.005"
-        android:gravity="end"
         android:text="@string/vibrar"
-        android:textSize="20sp"
-        android:textColor="@color/md_blue_100"/>
+       style="@style/textAlert"/>
 
     <ImageView
         android:id="@+id/checkbox_vibrar"
@@ -68,13 +58,8 @@
 
     <TextView
         android:id="@+id/textView_ambos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.003"
-        android:gravity="end"
         android:text="@string/ambos"
-        android:textSize="20sp"
-        android:textColor="@color/md_blue_100"/>
+        style="@style/textAlert" />
 
     <ImageView
         android:id="@+id/checkbox_ambos"
