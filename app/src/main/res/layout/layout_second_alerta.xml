@@ -14,15 +14,15 @@
 
     <ImageButton
         android:id="@+id/imageButtonSom"
-        style="@style/alertImage" />
+        style="@style/alertButton" />
 
     <ImageButton
         android:id="@+id/imageButtonVibrar"
-        style="@style/alertImage" />
+        style="@style/alertButton" />
 
     <ImageButton
         android:id="@+id/imageButtonAmbos"
-        style="@style/alertImage" />
+        style="@style/alertButton" />
   </LinearLayout>
 
   <LinearLayout
@@ -37,24 +37,16 @@
 
     <ImageView
         android:id="@+id/checkbox_som"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_margin="5dp"
-        android:visibility="invisible"
-        android:src="@android:drawable/checkbox_on_background" />
+        style="@style/imageAlert" />
 
     <TextView
         android:id="@+id/textView_vibrar"
         android:text="@string/vibrar"
-       style="@style/textAlert"/>
+        style="@style/textAlert"/>
 
     <ImageView
         android:id="@+id/checkbox_vibrar"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_margin="5dp"
-        android:visibility="invisible"
-        android:src="@android:drawable/checkbox_on_background" />
+        style="@style/imageAlert" />
 
     <TextView
         android:id="@+id/textView_ambos"
@@ -63,10 +55,6 @@
 
     <ImageView
         android:id="@+id/checkbox_ambos"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_margin="5dp"
-        android:visibility="invisible"
-        android:src="@android:drawable/checkbox_on_background" />
+        style="@style/imageAlert" />
   </LinearLayout>
 </LinearLayout>
