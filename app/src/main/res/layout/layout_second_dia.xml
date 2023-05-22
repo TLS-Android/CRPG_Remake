@@ -101,10 +101,5 @@
           android:text="@string/d"
           style="@style/extendedMaterialButtonOutlinedStyle"/>
     </com.google.android.material.button.MaterialButtonToggleGroup>
-
   </LinearLayout>
-
 </LinearLayout>
-
-
-
