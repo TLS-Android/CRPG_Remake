@@ -12,14 +12,9 @@
   android:paddingStart="20dp"
   tools:ignore="UnusedAttribute">
 
-  <ImageView
-      android:layout_width="30dp"
-      android:layout_height="30dp"
-      android:layout_gravity="center_vertical"
-      android:scaleType="fitXY" />
+  <ImageView android:src="@drawable/marker"
+      style="@style/parentLayoutImage" />
 
-  <TextView
-    android:text="@string/em_que_dia"
+  <TextView android:text="@string/em_que_dia"
       style="@style/parentTitle" />
-
 </LinearLayout>

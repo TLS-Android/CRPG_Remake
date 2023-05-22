@@ -13,12 +13,8 @@
   tools:ignore="UnusedAttribute">
 
   <ImageView
-      android:layout_width="30dp"
-      android:layout_height="30dp"
-      android:layout_gravity="center_vertical"
-      android:scaleType="fitXY" />
+      style="@style/parentLayoutImage" />
 
-  <TextView
-    android:text="@string/lembrar_de"
+  <TextView android:text="@string/lembrar_de"
       style="@style/parentTitle" />
 </LinearLayout>

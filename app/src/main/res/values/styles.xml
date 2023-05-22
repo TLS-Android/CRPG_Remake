@@ -245,4 +245,10 @@
         <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Button</item>
     </style>
 
+    <style name="parentLayoutImage">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
 </resources>

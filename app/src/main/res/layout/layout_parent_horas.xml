@@ -19,7 +19,6 @@
       android:scaleType="fitXY"/>
 
   <TextView
-
       android:text="@string/a_que_horas"
       style="@style/parentTitle" />
 </LinearLayout>
