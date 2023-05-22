@@ -12,8 +12,7 @@
     android:paddingStart="20dp"
     tools:ignore="UnusedAttribute">
 
-  <ImageView
-      style="@style/parentLayoutImage" />
+  <ImageView style="@style/parentLayoutImage" />
 
   <TextView android:text="@string/notas_minusculo"
       style="@style/parentTitle" />

@@ -35,8 +35,7 @@
         android:layout_height="match_parent"
         style="@style/textAlert" />
 
-    <ImageView
-        android:id="@+id/checkbox_som"
+    <ImageView android:id="@+id/checkbox_som"
         style="@style/imageAlert" />
 
     <TextView
@@ -44,17 +43,14 @@
         android:text="@string/vibrar"
         style="@style/textAlert"/>
 
-    <ImageView
-        android:id="@+id/checkbox_vibrar"
+    <ImageView android:id="@+id/checkbox_vibrar"
         style="@style/imageAlert" />
 
-    <TextView
-        android:id="@+id/textView_ambos"
+    <TextView android:id="@+id/textView_ambos"
         android:text="@string/ambos"
         style="@style/textAlert" />
 
-    <ImageView
-        android:id="@+id/checkbox_ambos"
+    <ImageView android:id="@+id/checkbox_ambos"
         style="@style/imageAlert" />
   </LinearLayout>
 </LinearLayout>
