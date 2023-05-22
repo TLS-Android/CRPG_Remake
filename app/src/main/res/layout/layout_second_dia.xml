@@ -18,9 +18,7 @@
     android:textSize="22sp" />
 
   <View android:id="@+id/dia_separator1"
-      android:background="@color/white_93"
-      android:layout_width = "fill_parent"
-      android:layout_height="1dip" />
+      style="@style/greySeparator" />
 
   <androidx.appcompat.widget.AppCompatButton
     android:id="@+id/button_todos_dias"
@@ -31,9 +29,7 @@
     android:textSize="22sp" />
 
   <View android:id="@+id/dia_separator2"
-      android:background="@color/white_93"
-      android:layout_width = "fill_parent"
-      android:layout_height="1dip" />
+      style="@style/greySeparator" />
 
   <androidx.appcompat.widget.AppCompatButton
     android:id="@+id/button_personalizado"
