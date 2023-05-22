@@ -14,5 +14,6 @@
       android:paddingRight="10dp"
       android:lines="1"
       android:ems="8"
-      android:inputType="textPersonName"/>
+      android:inputType="textPersonName"
+      android:autofillHints="Nota de texto..."/>
 </LinearLayout>

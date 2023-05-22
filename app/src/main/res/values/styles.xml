@@ -217,4 +217,32 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="editHoursText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">120dp</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_weight">0.5</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLength">2</item>
+        <item name="android:textSize">75sp</item>
+        <item name="android:textColor">@color/white_93</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:inputType">number</item>
+        <item name="android:autofillHints"></item>
+    </style>
+
+    <style name="separator">
+        <item name="android:background">@color/white_93</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1dip</item>
+    </style>
+
+    <style name="extendedMaterialButtonOutlinedStyle" parent="@style/Widget.Material3.Button.OutlinedButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Button</item>
+    </style>
+
 </resources>

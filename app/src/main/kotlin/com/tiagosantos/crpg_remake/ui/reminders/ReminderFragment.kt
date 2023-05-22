@@ -32,6 +32,12 @@ import com.tiagosantos.crpg_remake.databinding.*
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.newReminder
 import com.tiagosantos.crpg_remake.ui.reminders.helpers.HoursHelper
 
+/**
+ * You can't inherit an attribute, you have to inherit a style.
+ *
+ * Choose a button borderless style which matchs your theme to inherit.
+ * All Android internal styles can be found at http://developer.android.com/reference/android/R.style.html
+ */
 @FragmentWithArgs
 class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
 

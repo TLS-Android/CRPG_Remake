@@ -21,6 +21,4 @@
   <TextView
     android:text="@string/lembrar_de"
       style="@style/parentTitle" />
-
-
 </LinearLayout>

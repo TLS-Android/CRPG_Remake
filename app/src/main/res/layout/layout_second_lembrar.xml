@@ -19,9 +19,7 @@
     android:text="@string/tomar_medicacao" />
 
   <View android:id="@+id/lembrar_separator1"
-      android:background="@color/white_93"
-      android:layout_width = "fill_parent"
-      android:layout_height="1dip" />
+      style="@style/separator" />
 
   <androidx.appcompat.widget.AppCompatButton
     android:id="@+id/button1"
@@ -33,9 +31,7 @@
     android:text="@string/apanhar_transporte" />
 
   <View android:id="@+id/lembrar_separator2"
-      android:background="@color/white_93"
-      android:layout_width = "fill_parent"
-      android:layout_height="1dip" />
+      style="@style/separator" />
 
   <androidx.appcompat.widget.AppCompatButton
     android:id="@+id/button2"
@@ -47,9 +43,7 @@
     android:text="@string/escolher_almoco" />
 
   <View android:id="@+id/lembrar_separator3"
-      android:background="@color/white_93"
-      android:layout_width = "fill_parent"
-      android:layout_height="1dip" />
+      style="@style/separator" />
 
   <androidx.appcompat.widget.AppCompatButton
     android:id="@+id/button3"

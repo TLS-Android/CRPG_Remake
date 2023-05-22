@@ -68,66 +68,38 @@
 
       <com.google.android.material.button.MaterialButton
           android:id="@+id/buttonSeg"
-          style="?attr/materialButtonOutlinedStyle"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
           android:text="@string/s"
-          android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
+          style="@style/extendedMaterialButtonOutlinedStyle"/>
 
       <com.google.android.material.button.MaterialButton
           android:id="@+id/buttonTer"
-          style="?attr/materialButtonOutlinedStyle"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
           android:text="@string/t"
-          android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
+          style="@style/extendedMaterialButtonOutlinedStyle"/>
 
       <com.google.android.material.button.MaterialButton
           android:id="@+id/buttonQua"
-          style="?attr/materialButtonOutlinedStyle"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
           android:text="@string/q"
-          android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
+          style="@style/extendedMaterialButtonOutlinedStyle"/>
 
       <com.google.android.material.button.MaterialButton
           android:id="@+id/buttonQui"
-          style="?attr/materialButtonOutlinedStyle"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
           android:text="@string/q"
-          android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
+          style="@style/extendedMaterialButtonOutlinedStyle"/>
 
       <com.google.android.material.button.MaterialButton
           android:id="@+id/buttonSex"
-          style="?attr/materialButtonOutlinedStyle"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
           android:text="@string/s"
-          android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
+          style="@style/extendedMaterialButtonOutlinedStyle"/>
 
       <com.google.android.material.button.MaterialButton
           android:id="@+id/buttonSab"
-          style="?attr/materialButtonOutlinedStyle"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
           android:text="@string/s"
-          android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
+          style="@style/extendedMaterialButtonOutlinedStyle"/>
 
       <com.google.android.material.button.MaterialButton
           android:id="@+id/buttonDom"
-          style="?attr/materialButtonOutlinedStyle"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
           android:text="@string/d"
-          android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
+          style="@style/extendedMaterialButtonOutlinedStyle"/>
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
   </LinearLayout>
