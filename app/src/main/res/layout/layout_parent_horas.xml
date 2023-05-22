@@ -12,11 +12,7 @@
     android:paddingStart="20dp"
     tools:ignore="UnusedAttribute">
 
-  <ImageView
-      android:layout_width="30dp"
-      android:layout_height="30dp"
-      android:layout_gravity="center_vertical"
-      android:scaleType="fitXY"/>
+  <ImageView style="@style/parentLayoutImage" />
 
   <TextView
       android:text="@string/a_que_horas"
