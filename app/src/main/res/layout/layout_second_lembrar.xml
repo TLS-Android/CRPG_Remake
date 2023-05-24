@@ -16,6 +16,7 @@
     android:layout_height="wrap_content"
     android:textColor="@color/white_93"
     android:textSize="22sp"
+
     android:text="@string/tomar_medicacao" />
 
   <View android:id="@+id/lembrar_separator1"
