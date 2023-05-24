@@ -23,24 +23,16 @@
 
   <androidx.appcompat.widget.AppCompatButton
     android:id="@+id/button1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/md_blue_100"
-    android:textSize="22sp"
-    android:textColor="@color/white_93"
-    android:text="@string/apanhar_transporte" />
+    android:text="@string/apanhar_transporte"
+    style="@style/center_button_reminder" />
 
   <View android:id="@+id/lembrar_separator2"
       style="@style/separator" />
 
   <androidx.appcompat.widget.AppCompatButton
     android:id="@+id/button2"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/md_blue_100"
-    android:textColor="@color/white_93"
-    android:textSize="22sp"
-    android:text="@string/escolher_almoco" />
+    android:text="@string/escolher_almoco"
+    style="@style/center_button_reminder" />
 
   <View android:id="@+id/lembrar_separator3"
       style="@style/separator" />

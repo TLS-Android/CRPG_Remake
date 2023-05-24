@@ -251,4 +251,12 @@
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:scaleType">fitXY</item>
     </style>
+
+    <style name="center_button_reminder">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/md_blue_100</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/white_93</item>
+    </style>
 </resources>

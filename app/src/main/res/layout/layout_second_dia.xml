@@ -22,11 +22,8 @@
 
   <androidx.appcompat.widget.AppCompatButton
     android:id="@+id/button_todos_dias"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/md_blue_100"
-    android:textColor="@color/white_93"
-    android:textSize="22sp" />
+    android:textSize="22sp"
+    style="@style/center_button_reminder" />
 
   <View android:id="@+id/dia_separator2"
       style="@style/greySeparator" />
