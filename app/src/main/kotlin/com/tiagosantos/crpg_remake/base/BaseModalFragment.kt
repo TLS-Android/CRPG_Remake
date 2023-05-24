@@ -108,5 +108,4 @@ abstract class BaseModalFragment<B : ViewDataBinding>: BaseFragment<B>() {
         command: String,
         actionMap: Map<String,Any>
     ) = generalHelper(command, actionMap)
-
 }

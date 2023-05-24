@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.*
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.android.material.button.MaterialButton
 import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
 import com.tiagosantos.access.modal.settings.SRSettings
@@ -22,8 +23,8 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>() {
     @delegate:Arg
     override val settings by lazy {
         FragmentSettings(
-            appBarTitle = R.string.title_meditacao,
-            sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
+            appBarTitle = getString(R.string.title_meditacao),
+            sharedPreferencesBooleanName = getString(R.string.meditationHasRun),
             showBackButton = true
         )
     }
@@ -49,22 +50,16 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>() {
     }
     val text: LiveData<String> = _text
 
-    private val feelingsMap = with(viewB){
-        mapOf("RELAXADO" to buttonMoodRelaxed , "FELIZ" to buttonMoodHappy,
-        "SONOLENTO" to buttonMoodSleepy, "CONFIANTE" to buttonMoodConfident)
-    }
+    private lateinit var feelingsMap : Map<String, MaterialButton>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        viewB.apply {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        with(viewB){
+            feelingsMap =  mapOf("RELAXADO" to buttonMoodRelaxed , "FELIZ" to buttonMoodHappy,
+                "SONOLENTO" to buttonMoodSleepy, "CONFIANTE" to buttonMoodConfident)
             actionList = mutableListOf(buttonMoodRelaxed, buttonMoodHappy,
                 buttonMoodSleepy, buttonMoodConfident)
         }
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupUI()
     }
 
     override fun setupUI() {

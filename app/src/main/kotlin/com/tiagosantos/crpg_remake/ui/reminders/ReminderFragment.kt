@@ -46,8 +46,8 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
     @delegate:Arg
     override val settings by lazy {
         FragmentSettings(
-            appBarTitle = R.string.title_reminders,
-            sharedPreferencesBooleanName = R.string.remindersHasRun.toString(),
+            appBarTitle = getString(R.string.title_reminders),
+            sharedPreferencesBooleanName = getString(R.string.remindersHasRun),
         )
     }
 
@@ -95,7 +95,14 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
         var alarmFreqButtonPressed = 0
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
+        super.onCreateView(inflater, container, savedInstanceState)
+        _viewIntro = ReminderActivityIntroBinding.inflate(inflater, container, false)
+        _viewSuccess = ReminderActivitySuccessBinding.inflate(inflater, container, false)
+
         viewB.apply {
             actionList = mutableListOf(
                 expandableHoras, expandableDia, expandableAlerta, expandableNotas, parentLayout,
@@ -104,16 +111,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
                 secondAlerta.imageButtonAmbos, secondDia.buttonHoje, secondDia.buttonTodosDias, secondDia.buttonPersonalizado,
             )
         }
-        super.onCreate(savedInstanceState)
-    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        super.onCreateView(inflater, container, savedInstanceState)
-        _viewIntro = ReminderActivityIntroBinding.inflate(inflater, container, false)
-        _viewSuccess = ReminderActivitySuccessBinding.inflate(inflater, container, false)
         return viewB.root
     }
 
