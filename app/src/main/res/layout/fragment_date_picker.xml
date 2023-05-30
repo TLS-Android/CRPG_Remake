@@ -25,33 +25,32 @@
                     android:id="@+id/calendar_item"
                     android:visibility="gone" />
 
-                <TextView
-                    android:id="@+id/title_selecionar_data"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="@string/selecionar_data"
-                    android:textColor="@color/SecondaryBlue"
-                    android:textSize="25sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" >
+
+                <TextView
+                    android:id="@+id/title_selecionar_data"
+                    android:text="@string/selecionar_data"
+                    android:textSize="25sp"
+                    android:gravity="center_horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.05" />
+                    app:layout_constraintVertical_bias="0.05"
+                    style="@style/date_picker_blue_text" />
 
                 <TextView
                     android:id="@+id/tvDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:text="@+id/tvDate"
-                    android:textColor="@color/SecondaryBlue"
                     android:textSize="20sp"
+                    android:gravity="center_horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/title_selecionar_data"
-                    app:layout_constraintVertical_bias="0.01" />
+                    app:layout_constraintVertical_bias="0.01"
+                    style="@style/date_picker_blue_text" />
 
                 <TextView
                     android:id="@+id/tvDay"
@@ -69,7 +68,6 @@
                     android:layout_height="170dp"
                     app:deselection="false"
                     app:layout_constraintBottom_toBottomOf="@id/selecionar_dia_hint"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvDate"
                     app:layout_constraintVertical_bias="0.2"
                     app:longPress="false"
@@ -84,37 +82,20 @@
                     android:textColor="@color/md_blue_100"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="@+id/button_selecionar"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/main_single_row_calendar"
                     app:layout_constraintVertical_bias="0.3" />
 
-
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_selecionar"
-                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/selecionar_dia_hint"
-                    android:layout_centerHorizontal="true"
                     android:contentDescription="@string/selecionar_dia"
-                    android:elevation="10dp"
-                    android:gravity="center_horizontal"
                     android:text="@string/selecionar"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/white"
                     android:textSize="20sp"
-                    app:backgroundTint="@color/md_blue_100"
-                    app:cornerRadius="32dp"
-                    app:iconPadding="8dp"
-                    app:iconSize="18dp"
-                    app:iconTint="@android:color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/selecionar_dia_hint"
                     app:layout_constraintVertical_bias="0.1"
-                    app:rippleColor="@color/tertiaryText" />
+                    style="@style/blue_button"/>
 
                 <TextView
                     android:id="@+id/no_date_selected_warning"
@@ -134,4 +115,5 @@
                     app:layout_constraintVertical_bias="0.2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
