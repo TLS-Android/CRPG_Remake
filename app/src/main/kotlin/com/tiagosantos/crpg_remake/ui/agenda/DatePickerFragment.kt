@@ -70,7 +70,7 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         //goToFragment(MealsFragment())
         //goToFragment(MeditationFragment())
-        goToFragment(ReminderFragment())
+        //goToFragment(ReminderFragment())
         super.onViewCreated(view, savedInstanceState)
     }
 

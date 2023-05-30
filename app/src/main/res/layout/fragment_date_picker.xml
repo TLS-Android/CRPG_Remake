@@ -17,20 +17,20 @@
             android:background="@color/white"
             tools:context="com.tiagosantos.crpg_remake.ui.agenda.DatePickerFragment">
 
-                <include layout="@layout/selected_calendar_item"
-                    android:id="@+id/selected_item"
-                    android:visibility="gone" />
+        <include layout="@layout/selected_calendar_item"
+            android:id="@+id/selected_item"
+            android:visibility="gone" />
 
-                <include layout="@layout/calendar_item"
-                    android:id="@+id/calendar_item"
-                    android:visibility="gone" />
+        <include layout="@layout/calendar_item"
+            android:id="@+id/calendar_item"
+            android:visibility="gone" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" >
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/title_selecionar_data"
@@ -99,21 +99,12 @@
 
                 <TextView
                     android:id="@+id/no_date_selected_warning"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/button_selecionar"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
                     android:text="@string/nenhum_dia_selecionado_warning"
-                    android:textColor="@android:color/holo_red_dark"
                     android:textSize="16sp"
-                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/button_selecionar"
-                    app:layout_constraintVertical_bias="0.2" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintVertical_bias="0.2"
+                    style="@style/warning_text" />
+        </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
