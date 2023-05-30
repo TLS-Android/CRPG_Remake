@@ -270,4 +270,23 @@
         <item name="android:paddingBottom">10dp</item>
         <item name="android:paddingStart">20dp</item>
     </style>
+
+    <style name="blue_button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">bottom|center</item>
+        <item name="android:backgroundTint">@color/md_blue_100</item>
+    </style>
+
+    <style name="button_transparent_background">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center|bottom</item>
+        <item name="android:backgroundTint">@android:color/transparent</item>
+        <item name="android:textColor">@color/md_blue_100</item>
+        <item name="rippleColor">@color/md_blue_100</item>
+        <item name="strokeColor">@color/md_blue_100</item>
+        <item name="strokeWidth">5dp</item>
+        <item name="cornerRadius">8dp</item>
+    </style>
 </resources>

@@ -274,16 +274,13 @@
 
             <Button
                 android:id="@+id/button_confirm_meal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
                 android:text="@string/guardar"
                 android:textSize="30sp"
-                android:backgroundTint="@color/md_blue_100"
                 app:cornerRadius="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                style="@style/blue_button" />
 
         <TextView
             android:id="@+id/aviso_nenhuma_refeicao_checked"

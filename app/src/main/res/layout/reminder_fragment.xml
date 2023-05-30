@@ -147,31 +147,19 @@
 
       <Button
           android:id="@+id/button_cancel"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
           android:layout_marginEnd="10dp"
           android:text="@string/cancelar"
-          android:textColor="@color/md_blue_100"
           android:textSize="25sp"
-          android:backgroundTint="@android:color/transparent"
-          app:cornerRadius="8dp"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:rippleColor="@color/md_blue_100"
-          app:strokeColor="@color/md_blue_100"
-          app:strokeWidth="5dp"
-          style="?android:attr/buttonBarButtonStyle" />
+          style="@style/button_transparent_background" />
 
       <Button
           android:id="@+id/button_confirm"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
           android:layout_gravity="end"
           android:text="@string/guardar"
           android:textSize="25sp"
-          android:backgroundTint="@color/md_blue_100"
-          app:cornerRadius="8dp"
-          style="?android:attr/buttonBarButtonStyle" />
+          style="@style/blue_button" />
 
     </LinearLayout>
 </LinearLayout>
