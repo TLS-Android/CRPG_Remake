@@ -291,7 +291,7 @@
         <item name="rippleColor">@color/md_blue_100</item>
         <item name="strokeColor">@color/md_blue_100</item>
         <item name="strokeWidth">5dp</item>
-        <item name="cornerRadius">8dp</item>
+        <item name="cornerRadius">16dp</item>
     </style>
 
     <style name="meal_text_title">
