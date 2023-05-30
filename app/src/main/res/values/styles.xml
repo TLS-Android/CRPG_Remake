@@ -276,6 +276,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">bottom|center</item>
         <item name="android:backgroundTint">@color/md_blue_100</item>
+        <item name="cornerRadius">8dp</item>
     </style>
 
     <style name="button_transparent_background">
@@ -288,5 +289,23 @@
         <item name="strokeColor">@color/md_blue_100</item>
         <item name="strokeWidth">5dp</item>
         <item name="cornerRadius">8dp</item>
+    </style>
+
+    <style name="meal_text_title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:maxLength">25</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="meal_text_option">
+        <item name="android:layout_width">140dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:maxLength">30</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">20sp</item>
     </style>
 </resources>

@@ -64,9 +64,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="15dp"
-                style="@style/mealCard"
                 app:layout_constraintStart_toStartOf="@+id/frame_meals_card"
-                app:layout_constraintEnd_toEndOf="@+id/frame_meals_card">
+                app:layout_constraintEnd_toEndOf="@+id/frame_meals_card"
+                style="@style/mealCard" >
 
                 <FrameLayout
                     android:layout_width="wrap_content"
@@ -89,22 +89,12 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/text_titulo_carne"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:maxLength="15"
                             android:text="@string/opcao_carne"
-                            android:textColor="@android:color/black"
-                            android:textSize="15sp" />
+                            style="@style/meal_text_title" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/text_opcao_carne"
-                            android:layout_width="140dp"
-                            android:layout_height="50dp"
-                            android:gravity="center_horizontal"
-                            android:maxLength="20"
-                            android:textColor="@android:color/black"
-                            android:textSize="20sp" />
+                            style="@style/meal_text_option" />
                     </LinearLayout>
                 </FrameLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -142,22 +132,12 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/text_titulo_peixe"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:maxLength="25"
                             android:text="@string/opcao_peixe"
-                            android:textColor="@android:color/black"
-                            android:textSize="15sp" />
+                            style="@style/meal_text_title" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/text_opcao_peixe"
-                            android:layout_width="140dp"
-                            android:layout_height="50dp"
-                            android:gravity="center_horizontal"
-                            android:maxLength="30"
-                            android:textColor="@android:color/black"
-                            android:textSize="20sp" />
+                            style="@style/meal_text_option" />
                     </LinearLayout>
                 </FrameLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -193,22 +173,12 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/text_titulo_dieta"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:maxLength="25"
                             android:text="@string/opcao_dieta"
-                            android:textColor="@android:color/black"
-                            android:textSize="15sp" />
+                            style="@style/meal_text_title" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/text_opcao_dieta"
-                            android:layout_width="140dp"
-                            android:layout_height="50dp"
-                            android:gravity="center_horizontal"
-                            android:maxLength="30"
-                            android:textColor="@android:color/black"
-                            android:textSize="20sp" />
+                            style="@style/meal_text_option" />
                     </LinearLayout>
                 </FrameLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -242,22 +212,12 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/text_titulo_vegetariano"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:maxLength="25"
                             android:text="@string/opcao_veg"
-                            android:textColor="@android:color/black"
-                            android:textSize="15sp" />
+                            style="@style/meal_text_title" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/text_opcao_vegetariano"
-                            android:layout_width="140dp"
-                            android:layout_height="50dp"
-                            android:gravity="center_horizontal"
-                            android:maxLength="30"
-                            android:textColor="@android:color/black"
-                            android:textSize="20sp" />
+                            style="@style/meal_text_option" />
                     </LinearLayout>
                 </FrameLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -276,7 +236,6 @@
                 android:id="@+id/button_confirm_meal"
                 android:text="@string/guardar"
                 android:textSize="30sp"
-                app:cornerRadius="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
