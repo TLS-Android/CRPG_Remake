@@ -101,7 +101,6 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/frame_opcao_peixe"
-                android:layout_height="140dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
@@ -198,7 +197,7 @@
                     <ImageView
                         android:id="@+id/background_image_vegetariano"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
+                        android:layout_height="52dp"
                         android:contentDescription="@string/imagem_ilustrativa_de_prato_vegetariano"
                         android:scaleType="centerCrop" />
 
