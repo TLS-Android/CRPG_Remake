@@ -124,12 +124,7 @@
 
           <TextView
               android:id="@+id/aviso_campos"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:layout_gravity="center_horizontal"
-              android:textColor="@color/design_default_color_error"
-              android:textSize="20sp"
-              android:visibility="gone" />
+              style="@style/warning_text" />
         </LinearLayout>
       </LinearLayout>
     </ScrollView>
