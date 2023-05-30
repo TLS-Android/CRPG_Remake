@@ -235,9 +235,6 @@
                 android:id="@+id/button_confirm_meal"
                 android:text="@string/guardar"
                 android:textSize="30sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 style="@style/blue_button" />
 
         <TextView
