@@ -71,5 +71,4 @@
       app:layout_constraintVertical_bias="0.3"
       app:layout_constraintHeight_default="percent"
       app:layout_constraintHeight_percent="0.1" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
