@@ -30,10 +30,12 @@
                     android:text="@string/selecionar_data"
                     android:textSize="25sp"
                     android:gravity="center_horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.05"
-                    style="@style/date_picker_blue_text" />
+                    style="@style/blue_text_title" />
 
                 <TextView
                     android:id="@+id/tvDate"

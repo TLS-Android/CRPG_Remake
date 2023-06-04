@@ -17,13 +17,8 @@
 
         <TextView
             android:id="@+id/como_gostaria_sentir"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            style="@style/blue_text_title"
             android:text="@string/como_gostaria_de_se_sentir"
-            android:textColor="@color/md_blue_100"
-            android:textSize="30sp"
-            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

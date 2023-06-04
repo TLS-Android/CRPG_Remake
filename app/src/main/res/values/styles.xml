@@ -298,13 +298,14 @@
         <item name="layout_constraintStart_toStartOf">parent</item>
     </style>
 
-    <style name="meal_text_title">
+    <style name="meal_frame_text_title">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center_horizontal</item>
         <item name="android:maxLength">25</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">15sp</item>
+
     </style>
 
     <style name="meal_text_option">
@@ -341,5 +342,14 @@
         <item name="android:layout_marginTop">40dp</item>
         <item name="android:gravity">center</item>
         <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="blue_text_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">top|center</item>
+        <item name="android:textColor">@color/md_blue_100</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:textAlignment">center</item>
     </style>
 </resources>
