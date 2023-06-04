@@ -75,13 +75,7 @@
                         android:contentDescription="@string/imagem_ilutrativa_de_prato_de_carne"
                         android:scaleType="centerCrop" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="40dp"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                    <LinearLayout style="@style/meal_frame_linear_layout">
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/text_titulo_carne"
@@ -117,13 +111,7 @@
                         android:contentDescription="@string/imagem_ilustrativa_de_prato_de_peixe"
                         android:scaleType="centerCrop" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="40dp"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                    <LinearLayout style="@style/meal_frame_linear_layout">
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/text_titulo_peixe"
@@ -158,13 +146,7 @@
                         android:contentDescription="@string/imagem_ilustrativa_de_prato_de_dieta"
                         android:scaleType="centerCrop" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="40dp"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                    <LinearLayout style="@style/meal_frame_linear_layout">
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/text_titulo_dieta"
@@ -197,13 +179,7 @@
                         android:contentDescription="@string/imagem_ilustrativa_de_prato_vegetariano"
                         android:scaleType="centerCrop" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="40dp"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                    <LinearLayout style="@style/meal_frame_linear_layout">
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/text_titulo_vegetariano"
