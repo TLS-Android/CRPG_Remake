@@ -43,9 +43,7 @@
       android:id="@+id/success_text"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:gravity="center_horizontal"
       android:text="@string/refeicao_escolhida_com_sucesso"
-      android:textAlignment="center"
       android:textColor="@color/PrimaryGreen"
       android:textSize="20sp"
       app:layout_constraintBottom_toBottomOf="parent"
@@ -58,12 +56,8 @@
 
   <Button
       android:id="@+id/button_ok"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
       android:text="@string/ok"
-      android:textSize="30sp"
-      android:backgroundTint="@color/md_blue_100"
-      app:cornerRadius="8dp"
+      style="@style/blue_button"
       app:layout_constraintBottom_toBottomOf="@id/white_view"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
