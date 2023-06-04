@@ -289,10 +289,13 @@
         <item name="android:layout_gravity">center|bottom</item>
         <item name="android:backgroundTint">@android:color/transparent</item>
         <item name="android:textColor">@color/md_blue_100</item>
+        <item name="android:textSize">25sp</item>
         <item name="rippleColor">@color/md_blue_100</item>
         <item name="strokeColor">@color/md_blue_100</item>
         <item name="strokeWidth">5dp</item>
         <item name="cornerRadius">16dp</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
     </style>
 
     <style name="meal_text_title">
