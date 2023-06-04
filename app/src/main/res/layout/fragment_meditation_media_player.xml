@@ -50,7 +50,6 @@
             android:id="@+id/frame_player_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
             app:layout_constraintBottom_toTopOf="@id/button_return_meditation"
             app:layout_constraintHeight_default="percent"
             app:layout_constraintHeight_percent="0.25"
