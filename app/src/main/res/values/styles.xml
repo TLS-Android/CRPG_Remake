@@ -271,12 +271,13 @@
         <item name="android:paddingStart">20dp</item>
     </style>
 
-    <style name="blue_button">
+    <style name="blue_button" parent="@style/Widget.MaterialComponents.Button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">bottom|center</item>
         <item name="android:backgroundTint">@color/md_blue_100</item>
         <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">25sp</item>
         <item name="android:elevation">10dp</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="cornerRadius">16dp</item>
@@ -321,10 +322,12 @@
         <item name="android:visibility">gone</item>
     </style>
 
-    <style name="date_picker_blue_text">
-        <item name="android:layout_width">match_parent</item>
+    <style name="date_picker_blue_text" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center_horizontal</item>
         <item name="android:textColor">@color/SecondaryBlue</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
     </style>
 </resources>

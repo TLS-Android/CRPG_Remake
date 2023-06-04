@@ -149,11 +149,10 @@
           app:layout_constraintStart_toStartOf="parent"
           style="@style/button_transparent_background" />
 
-      <Button
+      <com.google.android.material.button.MaterialButton
           android:id="@+id/button_confirm"
           android:layout_gravity="end"
           android:text="@string/guardar"
-          android:textSize="25sp"
           style="@style/blue_button" />
 
     </LinearLayout>

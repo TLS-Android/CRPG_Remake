@@ -25,13 +25,6 @@
             android:id="@+id/calendar_item"
             android:visibility="gone" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
                 <TextView
                     android:id="@+id/title_selecionar_data"
                     android:text="@string/selecionar_data"
@@ -89,7 +82,6 @@
                     android:id="@+id/button_selecionar"
                     android:contentDescription="@string/selecionar_dia"
                     android:text="@string/selecionar"
-                    android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -104,6 +96,5 @@
                     app:layout_constraintTop_toBottomOf="@id/button_selecionar"
                     app:layout_constraintVertical_bias="0.2"
                     style="@style/warning_text" />
-        </FrameLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
