@@ -100,7 +100,6 @@
                 <TextView
                     android:id="@+id/no_date_selected_warning"
                     android:text="@string/nenhum_dia_selecionado_warning"
-                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/button_selecionar"
                     app:layout_constraintVertical_bias="0.2"
