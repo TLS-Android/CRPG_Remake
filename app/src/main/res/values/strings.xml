@@ -3,7 +3,6 @@
     //HOME
     <string name="app_name">CRPG_Remake</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_reminders">Lembretes</string>
     <string name="title_meditacao">Meditacao</string>
@@ -11,11 +10,6 @@
     <string name="title_agenda">AGENDA</string>
     <string name="title_refeicao">ESCOLHER REFEICAO</string>
     <string name="home_fragment_appbar_title">Plataforma CRPG</string>
-
-    <string name="button_sign_in">Sign In</string>
-    <string name="label_or">or</string>
-    <string name="message_trouble_internet_connection">There is a trouble connecting to server.
-        Please, check your internet connection and try again.</string>
 
     //MEALS
     <string name="meal_action_bar_title">Seleção de refeição</string>
@@ -155,6 +149,4 @@
         <item>Normal</item>
         <item>Dashed</item>
     </string-array>
-
-
 </resources>

@@ -6,6 +6,8 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
+import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
 import com.plataforma.crpg.TimelineView
@@ -68,7 +70,7 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>() {
     private lateinit var mLayoutManager: LinearLayoutManager
     private lateinit var adapterGlobal : TimeLineAdapter
 
-    var mFeedList = mutableListOf<Event>()
+    private var mFeedList = mutableListOf<Event>()
 
     /**
      You must .observe() in onCreateView().
@@ -106,9 +108,9 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>() {
 
     private fun initAdapter() {
         mLayoutManager = if (mAttributes.orientation == Orientation.HORIZONTAL) {
-            LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
+            LinearLayoutManager(activity, HORIZONTAL, false)
         } else {
-            LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+            LinearLayoutManager(activity, VERTICAL, false)
         }
 
         viewB.recyclerView.apply {
@@ -120,7 +122,6 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>() {
 
     override fun onResume() {
         super.onResume()
-        println("Resumed")
         updateMAttributes()
     }
 
