@@ -55,14 +55,14 @@ dependencies {
 
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.6.0'
     implementation 'androidx.databinding:databinding-runtime:8.0.2'
 
     // Koin Core features
-    implementation "io.insert-koin:koin-core:3.2.2"
+    implementation 'io.insert-koin:koin-core:3.4.2'
     // Koin Test features
-    testImplementation "io.insert-koin:koin-test:3.2.2"
+    testImplementation 'io.insert-koin:koin-test:3.4.1'
 
     //GSON
     implementation 'com.google.code.gson:gson:2.10.1'
