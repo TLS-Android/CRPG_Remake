@@ -3,8 +3,7 @@
     android:id="@+id/cl_calendar_item"
     android:layout_width="130dp"
     android:layout_height="160dp"
-    android:layout_marginStart="4dp"
-    android:layout_marginEnd="4dp"
+    android:layout_marginHorizontal="@dimen/padding4"
     android:background="@drawable/selected_calendar_item_background"
     android:orientation="vertical">
 

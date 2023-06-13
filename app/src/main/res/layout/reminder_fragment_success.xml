@@ -4,7 +4,7 @@
     android:id="@+id/successLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="50dp"
+    android:padding="@dimen/padding4x"
     android:background="@color/PrimaryGreen"
     android:orientation="vertical">
 

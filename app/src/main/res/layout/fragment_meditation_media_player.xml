@@ -25,20 +25,20 @@
             android:id="@+id/text_selected_mood"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="32dp"
+            android:layout_marginHorizontal="@dimen/padding3x"
             android:background="@color/md_blue_100"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.05" />
+            app:layout_constraintVertical_bias="0.05"/>
 
         <ImageView
             android:id="@+id/mood_color"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginHorizontal="32dp"
+            android:layout_marginHorizontal="@dimen/padding3x"
             android:contentDescription="@string/imagem_associada_estado_selecionado"
             app:layout_constraintHeight_default="percent"
             app:layout_constraintHeight_percent="0.3"
@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/md_blue_100"
-                android:layout_marginHorizontal="16dp"
+                android:layout_marginHorizontal="@dimen/padding"
                 app:buffered_color="@color/md_blue_100"
                 app:controller_layout_id="@layout/custom_player_control_view"
                 app:hide_on_touch="false"
