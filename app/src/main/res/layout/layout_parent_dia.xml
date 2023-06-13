@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/layout_cover"
-    tools:ignore="UnusedAttribute"
-    style="@style/layout_section_base">
+  tools:ignore="UnusedAttribute"
+  style="@style/layout_section_base">
 
   <ImageView android:src="@drawable/marker"
       style="@style/parentLayoutImage" />
