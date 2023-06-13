@@ -277,7 +277,7 @@
         <item name="android:layout_gravity">bottom|center</item>
         <item name="android:backgroundTint">@color/md_blue_100</item>
         <item name="android:gravity">center_horizontal</item>
-        <item name="android:textSize">25sp</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
         <item name="android:elevation">10dp</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="cornerRadius">16dp</item>
@@ -289,7 +289,7 @@
         <item name="android:layout_gravity">center|bottom</item>
         <item name="android:backgroundTint">@android:color/transparent</item>
         <item name="android:textColor">@color/md_blue_100</item>
-        <item name="android:textSize">25sp</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
         <item name="rippleColor">@color/md_blue_100</item>
         <item name="strokeColor">@color/md_blue_100</item>
         <item name="strokeWidth">5dp</item>
@@ -349,7 +349,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">top|center</item>
         <item name="android:textColor">@color/md_blue_100</item>
-        <item name="android:textSize">32sp</item>
+        <item name="android:textSize">@dimen/feature_title_text_size</item>
         <item name="android:textAlignment">center</item>
     </style>
 </resources>
