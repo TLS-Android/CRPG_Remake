@@ -71,10 +71,10 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
 
     private val viewModel: ReminderViewModel by viewModels()
 
-    private var _viewIntro: ReminderActivityIntroBinding? = null
+    private var _viewIntro: ReminderFragmentIntroBinding? = null
     private val viewIntro get() = _viewIntro!!
 
-    private var _viewSuccess: ReminderActivitySuccessBinding? = null
+    private var _viewSuccess: ReminderFragmentSuccessBinding? = null
     private val viewSuccess get() = _viewSuccess!!
 
     private var hoursInt = 0
@@ -100,8 +100,8 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
         savedInstanceState: Bundle?,
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
-        _viewIntro = ReminderActivityIntroBinding.inflate(inflater, container, false)
-        _viewSuccess = ReminderActivitySuccessBinding.inflate(inflater, container, false)
+        _viewIntro = ReminderFragmentIntroBinding.inflate(inflater, container, false)
+        _viewSuccess = ReminderFragmentSuccessBinding.inflate(inflater, container, false)
 
         viewB.apply {
             actionList = mutableListOf(
