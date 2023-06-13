@@ -25,10 +25,8 @@
         android:id="@+id/check_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
         android:text="@string/green_check"
-        android:textAlignment="center"
         android:textColor="@color/PrimaryGreen"
         android:textSize="100sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,8 +34,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/white_view"
         app:layout_constraintVertical_bias="0.1"
-        app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.1"/>
+        app:layout_constraintHeight_default="percent" />
 
     <TextView
         android:id="@+id/success_text"

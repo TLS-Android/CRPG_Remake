@@ -5,10 +5,8 @@
   android:layout_weight=".70"
   android:background="@color/white_93"
   android:orientation="vertical"
-  android:paddingLeft="32dp"
-  android:paddingRight="32dp"
-  android:paddingTop="5dp"
-  android:paddingBottom="5dp">
+  android:paddingHorizontal="@dimen/padding3x"
+  android:paddingVertical="@dimen/padding4">
 
   <androidx.appcompat.widget.AppCompatButton
     android:id="@+id/button_hoje"
