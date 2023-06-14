@@ -117,7 +117,7 @@
         <item name="checkedIconSize">48dp</item>
         <item name="checkedIconTint">@color/PrimaryGreen</item>
         <item name="contentPadding">0dp</item>
-        <item name="strokeColor">#F9B401</item>
+        <item name="strokeColor">@color/PrimaryOrange</item>
         <item name="strokeWidth">3dp</item>
     </style>
 
@@ -134,7 +134,7 @@
         <item name="checkedIconSize">48dp</item>
         <item name="checkedIconTint">@color/PrimaryGreen</item>
         <item name="contentPadding">0dp</item>
-        <item name="strokeColor">#F9B401</item>
+        <item name="strokeColor">@color/PrimaryOrange</item>
         <item name="strokeWidth">3dp</item>
     </style>
 

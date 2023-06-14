@@ -58,7 +58,7 @@
             app:cardCornerRadius="40dp"
             app:cardElevation="5dp"
             app:contentPadding="0dp"
-            app:strokeColor="#F9B401"
+            app:strokeColor="@color/PrimaryOrange"
             app:strokeWidth="3dp">
 
             <FrameLayout
