@@ -103,7 +103,6 @@
                         android:maxLength="40"
                         android:textColor="@android:color/black"
                         android:textSize="18sp" />
-
                 </LinearLayout>
             </FrameLayout>
 

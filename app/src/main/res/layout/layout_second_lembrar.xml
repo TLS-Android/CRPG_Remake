@@ -52,7 +52,7 @@
       android:textAlignment="center"
       android:text="@string/insira_o_nome_do_seu_lembrete"
       android:textSize="20sp"
-      android:textColor="#00BBF2"
+      android:textColor="@color/SecondaryBlue"
       android:visibility="invisible"
       android:labelFor="@id/text_edit_personalizado"/>
 

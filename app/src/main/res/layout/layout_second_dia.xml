@@ -43,9 +43,9 @@
       android:textAlignment="center"
       android:text="@string/selecionar_dias"
       android:textSize="20sp"
-      android:textColor="#00BBF2"
+      android:textColor="@color/SecondaryBlue"
       android:visibility="invisible"
-      tools:text = "ola"
+      tools:text="ola"
       tools:textColor = "@color/black"/>
 
   <LinearLayout

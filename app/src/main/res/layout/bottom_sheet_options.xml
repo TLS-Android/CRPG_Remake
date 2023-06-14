@@ -91,7 +91,6 @@
                     android:id="@+id/rb_vertical"
                     android:text="@string/vertical"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
-
             </RadioGroup>
 
             <include
@@ -111,7 +110,6 @@
                 app:layout_constraintTop_toBottomOf="@id/layout_marker"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
@@ -137,5 +135,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
