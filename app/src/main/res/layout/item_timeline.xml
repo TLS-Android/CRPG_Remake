@@ -22,8 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp">
+        android:layout_marginVertical="@dimen/item_timeline_vertical_margin">
 
         <TextView
             android:id="@+id/text_timeline_start_time"
@@ -75,7 +74,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:gravity="center"
                     android:orientation="vertical">
 
