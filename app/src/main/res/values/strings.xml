@@ -145,6 +145,7 @@
     <string name="escolher_data">ESCOLHER DATA</string>
     <string name="doispontos">:</string>
     <string name="clock_placeholder">...</string>
+    <string name="guarde_notas">Guarde as suas notas (max 150 cars)</string>
 
     <string-array name="line_type">
         <item>Normal</item>
