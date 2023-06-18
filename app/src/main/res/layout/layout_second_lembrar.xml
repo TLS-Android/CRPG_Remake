@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/second_layout"
-  android:paddingVertical="5dp"
-  android:paddingHorizontal="50dp">
+  android:paddingVertical="@dimen/padding"
+  android:paddingHorizontal="@dimen/padding4x">
 
   <androidx.appcompat.widget.AppCompatButton
     android:id="@+id/button0"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textColor="@color/white_93"
-    android:textSize="22sp"
+    android:textSize="@dimen/button_text_size"
 
     android:text="@string/tomar_medicacao" />
 
@@ -17,9 +17,10 @@
       style="@style/separator" />
 
   <androidx.appcompat.widget.AppCompatButton
-    android:id="@+id/button1"
-    android:text="@string/apanhar_transporte"
-    style="@style/center_button_reminder" />
+      android:id="@+id/button1"
+      style="@style/center_button_reminder"
+      android:layout_height="55dp"
+      android:text="@string/apanhar_transporte" />
 
   <View android:id="@+id/lembrar_separator2"
       style="@style/separator" />
@@ -37,14 +38,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textColor="@color/white_93"
-    android:textSize="22sp"
+    android:textSize="@dimen/button_text_size"
     android:text="@string/meu_lembrete" />
 
   <TextView
       android:id="@+id/inserir_titulo_lembrete_personalizado"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:gravity="center"
       android:textAlignment="center"
       android:text="@string/insira_o_nome_do_seu_lembrete"
       android:textSize="20sp"
@@ -53,7 +53,7 @@
       android:labelFor="@id/text_edit_personalizado"/>
 
   <LinearLayout
-      android:layout_width="330dp"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content">
 
     <EditText

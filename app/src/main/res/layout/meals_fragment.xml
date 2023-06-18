@@ -70,14 +70,14 @@
 
                     <LinearLayout style="@style/meal_frame_linear_layout">
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/text_titulo_carne"
-                            android:text="@string/opcao_carne"
-                            style="@style/meal_frame_text_title" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_titulo_carne"
+                        android:text="@string/opcao_carne"
+                        style="@style/meal_frame_text_title" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/text_opcao_carne"
-                            style="@style/meal_text_option" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_opcao_carne"
+                        style="@style/meal_text_option" />
                     </LinearLayout>
                 </FrameLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -105,14 +105,14 @@
 
                     <LinearLayout style="@style/meal_frame_linear_layout">
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/text_titulo_peixe"
-                            android:text="@string/opcao_peixe"
-                            style="@style/meal_frame_text_title" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_titulo_peixe"
+                        android:text="@string/opcao_peixe"
+                        style="@style/meal_frame_text_title" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/text_opcao_peixe"
-                            style="@style/meal_text_option" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text_opcao_peixe"
+                        style="@style/meal_text_option" />
                     </LinearLayout>
                 </FrameLayout>
             </com.google.android.material.card.MaterialCardView>

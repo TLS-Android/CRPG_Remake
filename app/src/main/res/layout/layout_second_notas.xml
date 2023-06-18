@@ -1,14 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/second_layout">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/second_layout"
+    android:paddingHorizontal="@dimen/padding4x"
+    android:paddingVertical="@dimen/padding">
+
+  <com.google.android.material.card.MaterialCardView
+      android:id="@+id/frame_opcao_carne"
+      android:layout_marginStart="@dimen/padding"
+      android:layout_marginVertical="@dimen/padding"
+      app:strokeColor="@color/md_blue_100"
+      app:contentPadding="@dimen/padding"
+      style="@style/mealCard"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent">
+
+  <TextView
+      android:id="@+id/titleTextNotes"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:textColor="@color/md_blue_200"
+      android:text="Guarde as suas notas (max 150 cars)"
+      android:textSize="25sp" />
 
   <EditText
       android:id="@+id/editTextNotes"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:paddingHorizontal="@dimen/padding"
-      android:lines="1"
+      android:minLines="1"
+      android:maxLines="5"
       android:ems="8"
-      android:inputType="textPersonName"
-      android:autofillHints="Nota de texto..."/>
-</LinearLayout>
+      android:inputType="textMultiLine|textCapSentences"
+      android:autofillHints="Nota de texto..."
+      tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " />
+
+  </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

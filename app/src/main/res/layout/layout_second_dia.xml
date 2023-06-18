@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/second_layout"
-    android:paddingHorizontal="@dimen/padding3x"
+    android:paddingHorizontal="@dimen/padding4x"
     android:paddingVertical="@dimen/padding4">
 
   <androidx.appcompat.widget.AppCompatButton
