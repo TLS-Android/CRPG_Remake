@@ -14,7 +14,6 @@
      limitations under the License.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
@@ -32,41 +31,18 @@
 
         <ImageButton
             android:id="@id/exo_rew"
-            style="@style/ExoMediaButton.Rewind"
-            android:layout_width="45dp"
-            android:layout_height="35dp"
-            android:scaleType="fitXY"
-            android:tintMode="src_in" />
+            style="@style/CustomExoMediaButton.Rewind" />
 
         <ImageButton
             android:id="@id/exo_play"
-            style="@style/ExoMediaButton.Play"
-            android:layout_width="45dp"
-            android:layout_height="35dp"
-            android:scaleType="fitXY"
-            android:tintMode="src_in"
-            android:contentDescription="@string/reproduzir_faixa"
-            app:tint="@color/md_blue_100" />
+            style="@style/CustomExoMediaButton.Play" />
 
         <ImageButton
             android:id="@id/exo_pause"
-            style="@style/ExoMediaButton.Pause"
-            android:layout_width="45dp"
-            android:layout_height="35dp"
-            android:scaleType="fitXY"
-            android:tintMode="src_in"
-            android:contentDescription="@string/pausar_reproducao"
-            app:tint="@color/md_blue_100" />
+            style="@style/CustomExoMediaButton.Pause" />
 
         <ImageButton
             android:id="@id/exo_ffwd"
-            style="@style/ExoMediaButton.FastForward"
-            android:layout_width="45dp"
-            android:layout_height="35dp"
-            android:scaleType="fitXY"
-            android:tintMode="src_in"
-            android:contentDescription="@string/avancar_reproducao"
-            app:tint="@color/md_blue_100" />
-
+            style="@style/CustomExoMediaButton.FastForward" />
     </LinearLayout>
 </LinearLayout>

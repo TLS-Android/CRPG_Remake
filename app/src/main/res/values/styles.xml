@@ -229,7 +229,6 @@
         <item name="android:textColor">@color/white_93</item>
         <item name="android:layout_marginEnd">8dp</item>
         <item name="android:inputType">number</item>
-        <item name="android:autofillHints"></item>
     </style>
 
     <style name="separator">
@@ -358,5 +357,37 @@
         <item name="android:layout_weight">.70</item>
         <item name="android:background">@color/white_93</item>
         <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="CustomExoMediaButton.Rewind" parent="ExoMediaButton.Rewind">
+        <item name="android:layout_width">45dp</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:tintMode">src_in</item>
+    </style>
+
+    <style name="CustomExoMediaButton.Play" parent="ExoMediaButton.Play">
+        <item name="android:layout_width">45dp</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:tintMode">src_in</item>
+        <item name="android:contentDescription">@string/reproduzir_faixa</item>
+        <item name="tint">@color/md_blue_100</item>
+    </style>
+
+    <style name="CustomExoMediaButton.Pause" parent="ExoMediaButton.Pause">
+        <item name="android:layout_width">45dp</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:tintMode">src_in</item>
+        <item name="tint">@color/md_blue_100</item>
+    </style>
+
+    <style name="CustomExoMediaButton.FastForward" parent="ExoMediaButton.FastForward">
+        <item name="android:layout_width">45dp</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:tintMode">src_in</item>
+        <item name="tint">@color/md_blue_100</item>
     </style>
 </resources>

@@ -137,7 +137,7 @@
     <string name="apanhar_bus">Apanhar bus do CRPG</string>
     <string name="lembrar_escolha_almoco">Lembrar escolha de almoço</string>
     <string name="contextual_agenda">Selecione a janela que pretender para obter mais informaçoes</string>
-    <string name="contextual_date_picker">Selecione um dia premindo item que pretender</string>
+    <string name="contextual_date_picker">Selecione dia </string>
     <string name="contextual_reminder">Crie um novo lembrete</string>
     <string name="contextual_meditation">Indique qual o seu estado de espirito atual</string>
     <string name="contextual_media_player">Indique qual o seu estado de espirito atual</string>
