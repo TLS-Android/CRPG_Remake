@@ -144,6 +144,7 @@
     <string name="agenda">AGENDA</string>
     <string name="escolher_data">ESCOLHER DATA</string>
     <string name="doispontos">:</string>
+    <string name="clock_placeholder">...</string>
 
     <string-array name="line_type">
         <item>Normal</item>

@@ -30,6 +30,8 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="30sp"
+            android:topLeftRadius="16dp"
+            android:topRightRadius="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.05"/>
@@ -40,6 +42,8 @@
             android:layout_height="0dp"
             android:layout_marginHorizontal="@dimen/padding3x"
             android:contentDescription="@string/imagem_associada_estado_selecionado"
+            android:bottomLeftRadius="16dp"
+            android:bottomRightRadius="16dp"
             app:layout_constraintHeight_default="percent"
             app:layout_constraintHeight_percent="0.3"
             app:layout_constraintTop_toBottomOf="@id/text_selected_mood" />
@@ -71,6 +75,13 @@
                 app:show_vr_button="false"
                 app:surface_type="none" />
         </FrameLayout>
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="top"
+            app:constraint_referenced_ids="button_return_meditation" />
 
         <Button
             android:id="@+id/button_return_meditation"

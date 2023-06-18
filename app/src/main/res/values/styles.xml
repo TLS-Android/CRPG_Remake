@@ -359,6 +359,8 @@
         <item name="android:orientation">vertical</item>
     </style>
 
+    <!-- EXO PLAYER BUTTONS STYLES -->
+
     <style name="CustomExoMediaButton.Rewind" parent="ExoMediaButton.Rewind">
         <item name="android:layout_width">45dp</item>
         <item name="android:layout_height">35dp</item>
