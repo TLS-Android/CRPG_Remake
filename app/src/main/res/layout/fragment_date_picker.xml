@@ -30,9 +30,8 @@
                     android:text="@string/selecionar_data"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/main_single_row_calendar"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.05"
                     style="@style/blue_text_title" />
 
                 <TextView
@@ -86,7 +85,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/selecionar_dia_hint"
-                    app:layout_constraintVertical_bias="0.1"
                     style="@style/blue_button"/>
 
                 <TextView

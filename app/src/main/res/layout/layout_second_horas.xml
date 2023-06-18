@@ -27,7 +27,6 @@
     <EditText
         android:id="@+id/edit_minutes"
         style="@style/editHoursText" />
-
   </LinearLayout>
 
   <LinearLayout
@@ -66,5 +65,4 @@
         android:textColor="@color/md_blue_100"
         android:labelFor="@id/edit_minutes"/>
   </LinearLayout>
-
 </LinearLayout>
