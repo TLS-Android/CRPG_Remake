@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -24,6 +23,7 @@
         <TextView
             android:id="@+id/escolha_refeicao"
             android:text="@string/escolha_a_sua_refeicao"
+            android:layout_margin="@dimen/padding"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -39,21 +39,20 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/frame_meals_card"
+                style="@style/mealMainFrame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="15dp"
-                style="@style/mealMainFrame"
+                android:layout_margin="@dimen/padding"
                 app:layout_constraintEnd_toStartOf="@+id/frame_opcao_peixe"
                 app:layout_constraintStart_toStartOf="parent">
 
-                <include
+                <include android:id="@+id/meals_card_carne"
                     layout="@layout/meals_card_carne" />
-                <include
+                <include android:id="@+id/meals_card_peixe"
                     layout="@layout/meals_card_peixe" />
-                <include
+                <include android:id="@+id/meals_card_dieta"
                     layout="@layout/meals_card_dieta" />
-                <include
+                <include android:id="@+id/meals_card_veg"
                     layout="@layout/meals_card_veg" />
             </com.google.android.material.card.MaterialCardView>
         </FrameLayout>

@@ -82,15 +82,15 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         isLunch = true
         viewB.apply {
-            backgroundImageCarne.load(R.drawable.background_carne)
-            backgroundImagePeixe.load(R.drawable.background_peixe)
-            backgroundImageDieta.load(R.drawable.background_dieta)
-            backgroundImageVegetariano.load(R.drawable.background_veg)
+            mealsCardCarne.backgroundImageCarne.load(R.drawable.background_carne)
+            mealsCardPeixe.backgroundImagePeixe.load(R.drawable.background_peixe)
+            mealsCardDieta.backgroundImageDieta.load(R.drawable.background_dieta)
+            mealsCardVeg.backgroundImageVegetariano.load(R.drawable.background_veg)
 
-            actionList = mutableListOf(frameOpcaoCarne, frameOpcaoPeixe,
-                frameOpcaoDieta, frameOpcaoVegetariano, buttonConfirmMeal)
-            cardList = listOf(frameOpcaoCarne, frameOpcaoPeixe,
-                frameOpcaoDieta, frameOpcaoVegetariano)
+            actionList = mutableListOf(mealsCardCarne.frameOpcaoCarne, mealsCardPeixe.frameOpcaoPeixe,
+                mealsCardDieta.frameOpcaoDieta, mealsCardVeg.frameOpcaoVegetariano, buttonConfirmMeal)
+            cardList = listOf(mealsCardCarne.frameOpcaoCarne, mealsCardPeixe.frameOpcaoPeixe,
+                mealsCardDieta.frameOpcaoDieta, mealsCardVeg.frameOpcaoVegetariano)
         }
         super.onViewCreated(view, savedInstanceState)
     }
