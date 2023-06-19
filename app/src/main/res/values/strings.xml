@@ -79,7 +79,7 @@
     <string name="selecionar_data">Selecionar data</string>
     <string name="nenhum_dia_selecionado_msg">Nenhum dia selecionado</string>
     <string name="indique_refeicao">Por favor selecione indique a refeicao pretendida</string>
-    <string name="como_gostaria_de_se_sentir">Selecionar estado de espirito atual:</string>
+    <string name="selecionar_mindset">Selecionar mindset:</string>
     <string name="relaxado">relaxado</string>
     <string name="feliz">feliz</string>
     <string name="com_sono">com sono</string>
