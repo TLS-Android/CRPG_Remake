@@ -24,11 +24,9 @@
         <TextView
             android:id="@+id/escolha_refeicao"
             android:text="@string/escolha_a_sua_refeicao"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.07"
             style="@style/blue_text_title" />
 
         <FrameLayout
@@ -49,141 +47,14 @@
                 app:layout_constraintEnd_toStartOf="@+id/frame_opcao_peixe"
                 app:layout_constraintStart_toStartOf="parent">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/frame_opcao_carne"
-                android:layout_marginStart="@dimen/padding"
-                android:layout_marginVertical="@dimen/padding"
-                app:layout_constraintStart_toStartOf="@+id/frame_meals_card"
-                app:layout_constraintEnd_toEndOf="@+id/frame_meals_card"
-                style="@style/mealCard">
-
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/background_image_carne"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:contentDescription="@string/imagem_ilutrativa_de_prato_de_carne"
-                        android:scaleType="centerCrop" />
-
-                    <LinearLayout style="@style/meal_frame_linear_layout">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/text_titulo_carne"
-                        android:text="@string/opcao_carne"
-                        style="@style/meal_frame_text_title" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/text_opcao_carne"
-                        style="@style/meal_text_option" />
-                    </LinearLayout>
-                </FrameLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/frame_opcao_peixe"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginVertical="@dimen/padding"
-                android:layout_gravity="end"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/frame_opcao_carne"
-                style="@style/mealCard">
-
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/background_image_peixe"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:contentDescription="@string/imagem_ilustrativa_de_prato_de_peixe"
-                        android:scaleType="centerCrop" />
-
-                    <LinearLayout style="@style/meal_frame_linear_layout">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/text_titulo_peixe"
-                        android:text="@string/opcao_peixe"
-                        style="@style/meal_frame_text_title" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/text_opcao_peixe"
-                        style="@style/meal_text_option" />
-                    </LinearLayout>
-                </FrameLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/frame_opcao_dieta"
-                android:layout_gravity="bottom|start"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="180dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="16dp"
-                style="@style/mealCard"
-                tools:ignore="RtlHardcoded">
-
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/background_image_dieta"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:contentDescription="@string/imagem_ilustrativa_de_prato_de_dieta"
-                        android:scaleType="centerCrop" />
-
-                    <LinearLayout style="@style/meal_frame_linear_layout">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/text_titulo_dieta"
-                            android:text="@string/opcao_dieta"
-                            style="@style/meal_frame_text_title" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/text_opcao_dieta"
-                            style="@style/meal_text_option" />
-                    </LinearLayout>
-                </FrameLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/frame_opcao_vegetariano"
-                android:layout_gravity="bottom|end"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                style="@style/mealCard">
-
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/background_image_vegetariano"
-                        android:layout_width="match_parent"
-                        android:layout_height="52dp"
-                        android:contentDescription="@string/imagem_ilustrativa_de_prato_vegetariano"
-                        android:scaleType="centerCrop" />
-
-                    <LinearLayout style="@style/meal_frame_linear_layout">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/text_titulo_vegetariano"
-                            android:text="@string/opcao_veg"
-                            style="@style/meal_frame_text_title" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/text_opcao_vegetariano"
-                            style="@style/meal_text_option" />
-                    </LinearLayout>
-                </FrameLayout>
-            </com.google.android.material.card.MaterialCardView>
+                <include
+                    layout="@layout/meals_card_carne" />
+                <include
+                    layout="@layout/meals_card_peixe" />
+                <include
+                    layout="@layout/meals_card_dieta" />
+                <include
+                    layout="@layout/meals_card_veg" />
             </com.google.android.material.card.MaterialCardView>
         </FrameLayout>
 
@@ -193,7 +64,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/frame_meals">
+            app:layout_constraintTop_toBottomOf="@id/frame_meals"
+            app:layout_constraintBottom_toBottomOf="parent" >
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_confirm_meal"

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frame_opcao_vegetariano"
+    android:layout_gravity="bottom|end"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="16dp"
+    style="@style/mealCard"
+    tools:showIn="@layout/meals_fragment">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/background_image_vegetariano"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:contentDescription="@string/imagem_ilustrativa_de_prato_vegetariano"
+            android:scaleType="centerCrop" />
+
+        <LinearLayout style="@style/meal_frame_linear_layout">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_titulo_vegetariano"
+                android:text="@string/opcao_veg"
+                style="@style/meal_frame_text_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_opcao_vegetariano"
+                style="@style/meal_text_option" />
+        </LinearLayout>
+    </FrameLayout>
+</com.google.android.material.card.MaterialCardView>

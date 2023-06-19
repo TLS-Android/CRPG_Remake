@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frame_opcao_carne"
+    android:layout_marginStart="@dimen/padding"
+    android:layout_marginVertical="@dimen/padding"
+    app:layout_constraintStart_toStartOf="@+id/frame_meals_card"
+    app:layout_constraintEnd_toEndOf="@+id/frame_meals_card"
+    style="@style/mealCard"
+    tools:showIn="@layout/meals_fragment">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/background_image_carne"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:contentDescription="@string/imagem_ilutrativa_de_prato_de_carne"
+            android:scaleType="centerCrop" />
+
+        <LinearLayout style="@style/meal_frame_linear_layout">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_titulo_carne"
+                android:text="@string/opcao_carne"
+                style="@style/meal_frame_text_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_opcao_carne"
+                style="@style/meal_text_option" />
+        </LinearLayout>
+    </FrameLayout>
+</com.google.android.material.card.MaterialCardView>
