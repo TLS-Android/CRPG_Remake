@@ -16,28 +16,27 @@
         android:background="@color/white">
 
         <TextView
-            android:id="@+id/como_gostaria_sentir"
+            android:id="@+id/meditation_title"
             style="@style/blue_text_title"
-            android:text="@string/como_gostaria_de_se_sentir"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.05" />
+            android:padding="@dimen/padding"
+            android:text="@string/selecionar_mindset"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <FrameLayout
             android:id="@+id/frame_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/padding8"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginHorizontal="@dimen/padding"
+            app:layout_constraintBottom_toBottomOf="@id/frame_2"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/como_gostaria_sentir"
-            app:layout_constraintVertical_bias="0.1">
+            app:layout_constraintTop_toBottomOf="@+id/meditation_title"
+            app:layout_constraintVertical_chainStyle="spread">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_mood_relaxed"
-                android:text="@string/relaxado"
-                style="@style/moodButton" />
+                style="@style/moodButton"
+                android:text="@string/relaxado" />
         </FrameLayout>
 
         <FrameLayout
@@ -45,13 +44,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding8"
-            app:layout_constraintTop_toBottomOf="@+id/frame_1"
-            app:layout_constraintBottom_toTopOf="@+id/frame_3">
+            app:layout_constraintBottom_toTopOf="@+id/frame_3"
+            app:layout_constraintTop_toBottomOf="@+id/frame_1">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_mood_happy"
-                android:text="@string/feliz"
-                style="@style/moodButton" />
+                style="@style/moodButton"
+                android:text="@string/feliz" />
 
         </FrameLayout>
 
@@ -60,13 +59,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding8"
-            app:layout_constraintTop_toBottomOf="@+id/frame_2"
-            app:layout_constraintBottom_toTopOf="@+id/frame_meditation_center">
+            app:layout_constraintBottom_toTopOf="@+id/frame_meditation_center"
+            app:layout_constraintTop_toBottomOf="@+id/frame_2">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_mood_sleepy"
-                android:text="@string/com_sono"
-                style="@style/moodButton" />
+                style="@style/moodButton"
+                android:text="@string/com_sono" />
         </FrameLayout>
 
         <FrameLayout
@@ -74,13 +73,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding8"
-            app:layout_constraintTop_toBottomOf="@+id/frame_3"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frame_3">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_mood_confident"
-                android:text="@string/confiante"
-                style="@style/moodButton" />
+                style="@style/moodButton"
+                android:text="@string/confiante" />
         </FrameLayout>
 
         <androidx.constraintlayout.widget.Barrier
@@ -97,6 +96,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="left"
-            app:constraint_referenced_ids="como_gostaria_sentir" />
+            app:constraint_referenced_ids="meditation_title" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

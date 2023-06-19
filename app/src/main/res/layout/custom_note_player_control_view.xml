@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingTop="4dp">
+        android:paddingTop="@dimen/padding4">
 
         <ImageButton
             android:id="@id/exo_rew"

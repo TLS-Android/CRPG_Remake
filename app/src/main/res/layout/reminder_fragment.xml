@@ -129,16 +129,14 @@
       </LinearLayout>
     </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/parentLayout3"
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_weight="0"
-        android:gravity="center_horizontal"
-        android:paddingHorizontal="@dimen/padding"
-        android:background="@color/white">
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="button_cancel,button_confirm" />
 
-      <com.google.android.material.button.MaterialButton
+    <com.google.android.material.button.MaterialButton
           android:id="@+id/button_cancel"
           android:layout_marginEnd="10dp"
           android:text="@string/cancelar"
@@ -149,6 +147,7 @@
           android:layout_gravity="end"
           android:text="@string/guardar"
           style="@style/blue_button" />
-    </LinearLayout>
+
+
 </LinearLayout>
 </layout>

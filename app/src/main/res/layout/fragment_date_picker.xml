@@ -17,33 +17,36 @@
             android:background="@color/white"
             tools:context="com.tiagosantos.crpg_remake.ui.agenda.DatePickerFragment">
 
-        <include layout="@layout/selected_calendar_item"
-            android:id="@+id/selected_item"
-            android:visibility="gone" />
+                <include
+                    android:id="@+id/selected_item"
+                    layout="@layout/selected_calendar_item"
+                    android:visibility="gone" />
 
-        <include layout="@layout/calendar_item"
-            android:id="@+id/calendar_item"
-            android:visibility="gone" />
+                <include
+                    android:id="@+id/calendar_item"
+                    layout="@layout/calendar_item"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/title_selecionar_data"
+                    style="@style/blue_text_title"
+                    android:layout_marginBottom="@dimen/padding2x"
                     android:text="@string/selecionar_data"
+                    app:layout_constraintBottom_toTopOf="@id/main_single_row_calendar"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.05"
-                    style="@style/blue_text_title" />
+                    app:layout_constraintVertical_chainStyle="spread" />
 
                 <TextView
                     android:id="@+id/tvDate"
+                    style="@style/date_picker_blue_text"
+                    android:gravity="center_horizontal"
                     android:text="@+id/tvDate"
                     android:textSize="20sp"
-                    android:gravity="center_horizontal"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/title_selecionar_data"
-                    app:layout_constraintVertical_bias="0.01"
-                    style="@style/date_picker_blue_text" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
 
                 <TextView
                     android:id="@+id/tvDay"
@@ -58,11 +61,11 @@
                 <com.tiagosantos.common.ui.singlerowcalendar.calendar.SingleRowCalendar
                     android:id="@+id/main_single_row_calendar"
                     android:layout_width="match_parent"
-                    android:layout_height="170dp"
+                    android:layout_height="wrap_content"
                     app:deselection="false"
-                    app:layout_constraintBottom_toBottomOf="@id/selecionar_dia_hint"
-                    app:layout_constraintTop_toBottomOf="@+id/tvDate"
-                    app:layout_constraintVertical_bias="0.2"
+                    app:layout_constraintBottom_toTopOf="@+id/selecionar_dia_hint"
+                    app:layout_constraintTop_toBottomOf="@+id/title_selecionar_data"
+                    app:layout_constraintVertical_bias="0.5"
                     app:longPress="false"
                     app:multiSelection="false" />
 
@@ -75,26 +78,25 @@
                     android:textColor="@color/md_blue_100"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="@+id/button_selecionar"
-                    app:layout_constraintTop_toBottomOf="@+id/main_single_row_calendar"
-                    app:layout_constraintVertical_bias="0.3" />
+                    app:layout_constraintTop_toBottomOf="@+id/main_single_row_calendar" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_selecionar"
+                    style="@style/blue_button"
                     android:contentDescription="@string/selecionar_dia"
                     android:text="@string/selecionar"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/selecionar_dia_hint"
-                    app:layout_constraintVertical_bias="0.1"
-                    style="@style/blue_button"/>
+                    app:layout_constraintTop_toBottomOf="@+id/selecionar_dia_hint" />
 
                 <TextView
                     android:id="@+id/no_date_selected_warning"
+                    style="@style/warning_text"
                     android:text="@string/nenhum_dia_selecionado_warning"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/button_selecionar"
-                    app:layout_constraintVertical_bias="0.2"
-                    style="@style/warning_text" />
+                    app:layout_constraintTop_toBottomOf="@id/button_selecionar" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
