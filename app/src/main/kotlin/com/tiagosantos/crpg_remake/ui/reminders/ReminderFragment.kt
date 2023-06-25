@@ -29,6 +29,8 @@ import com.tiagosantos.common.ui.utils.InputFilterMinMax
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.databinding.*
+import com.tiagosantos.crpg_remake.helper.ResourcesProvider
+import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.filterTime
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.newReminder
 import com.tiagosantos.crpg_remake.ui.reminders.helpers.HoursHelper
 
@@ -76,6 +78,8 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
 
     private var _viewSuccess: ReminderFragmentSuccessBinding? = null
     private val viewSuccess get() = _viewSuccess!!
+
+    private lateinit var provider: ResourcesProvider
 
     private var hoursInt = 0
     private var minsInt = 0
@@ -172,6 +176,8 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
     /** Kotlin function parameters are read-only values and are not assignable. **/
     override fun setupUI() {
         with(viewB) {
+
+
             with(secondLembrar) {
                 button0.setOnClickListener {
                     setLembrarLayout(
@@ -199,7 +205,12 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
             }
 
             /** ---- FILTRAR O TIME INPUT -------- **/
-            restrictTimeInput(this, this@ReminderFragment)
+            et = editHours.apply {
+                filters = arrayOf(InputFilterMinMax("00", "23"), InputFilter.LengthFilter(2))
+            }
+            etMin = editMinutes.apply {
+                filters = arrayOf(InputFilterMinMax("00", "59"), InputFilter.LengthFilter(2))
+            }
 
             with(secondDia) {
                 buttonHoje.setOnClickListener {
@@ -323,43 +334,21 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
         }
 
 
-    private fun restrictTimeInput(
-        reminderFragmentBinding: ReminderFragmentBinding,
-        reminderFragment: ReminderFragment
-    ) {
+    private fun restrictTimeInput(reminderFragmentBinding: ReminderFragmentBinding) {
         with(reminderFragmentBinding.secondHoras) {
-            reminderFragment.et = editHours.apply {
-                filters = arrayOf(InputFilterMinMax("00", "23"), InputFilter.LengthFilter(2))
-            }
-            reminderFragment.etMin = editMinutes.apply {
-                filters = arrayOf(InputFilterMinMax("00", "59"), InputFilter.LengthFilter(2))
-            }
+            et = editHours.filterTime("00", "23")
+            etMin = editMinutes.filterTime("00","59")
         }
     }
 
-    private fun setTypeAndFrequency(newReminder: Reminder) {
-        newReminder.apply {
-            alarmType = when (alarmTypeButtonPressed) {
-                1 -> SOM
-                2 -> VIBRAR
-                3 -> AMBOS
-                else -> {
-                    SOM
-                }
-            }
-
-            alarmFreq = when (alarmFreqButtonPressed) {
-                1 -> HOJE
-                2 -> TODOS_OS_DIAS
-                3 -> PERSONALIZADO
-                else -> {
-                    HOJE
-                }
-            }
-        }
+    private fun setTypeAndFrequency(newReminder: Reminder) = newReminder.apply {
+        provider.alarmTypeStates.getOrDefault(alarmTypeButtonPressed, SOM)
+        provider.alarmFreqStates.getOrDefault(alarmFreqButtonPressed, PERSONALIZADO)
     }
 
     private fun setButtonColorsReminder(view: LayoutSecondLembrarBinding, pos: Int) {
+        val colorInt: Int = context.getColor()
+        val csl = provider.colorList.getColorForState()
 
         with(view) {
             button0.setBackgroundResource(R.color.md_blue_100)
@@ -474,4 +463,5 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
             }
         }
     }
+
 }
