@@ -127,10 +127,6 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
         }
     }
 
-    private fun setup() {
-
-    }
-
     private fun updateFlagMealChosen() { flagMealChosen = !flagMealChosen }
 }
 
