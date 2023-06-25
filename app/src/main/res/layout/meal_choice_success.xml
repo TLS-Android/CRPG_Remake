@@ -16,19 +16,13 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.1"
-      app:layout_constraintHeight_default="percent"
-      app:layout_constraintHeight_percent="0.9"/>
+      app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
       android:id="@+id/check_text"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_centerHorizontal="true"
-      android:gravity="center_horizontal"
       android:text="@string/green_check"
-      android:textAlignment="center"
       android:textColor="@color/PrimaryGreen"
       android:textSize="100sp"
       app:layout_constraintBottom_toBottomOf="parent"
@@ -46,23 +40,18 @@
       android:text="@string/refeicao_escolhida_com_sucesso"
       android:textColor="@color/PrimaryGreen"
       android:textSize="20sp"
-      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintBottom_toTopOf="@id/button_ok"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/check_text"
-      app:layout_constraintVertical_bias="0.2"
-      app:layout_constraintHeight_default="percent"
-      app:layout_constraintHeight_percent="0.1"/>
+      app:layout_constraintHeight_default="percent" />
 
   <Button
       android:id="@+id/button_ok"
       android:text="@string/ok"
       style="@style/blue_button"
+      app:layout_constraintTop_toTopOf="@id/success_text"
       app:layout_constraintBottom_toBottomOf="@id/white_view"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/success_text"
-      app:layout_constraintVertical_bias="0.3"
-      app:layout_constraintHeight_default="percent"
-      app:layout_constraintHeight_percent="0.1" />
+      app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
