@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -24,10 +25,9 @@
             android:id="@+id/escolha_refeicao"
             android:text="@string/escolha_a_sua_refeicao"
             android:layout_margin="@dimen/padding"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            style="@style/blue_text_title" />
+            style="@style/blue_text_title"
+            tools:ignore="MissingConstraints" />
 
         <FrameLayout
             android:id="@+id/frame_meals"

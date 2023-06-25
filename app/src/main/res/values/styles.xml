@@ -349,6 +349,9 @@
         <item name="android:textColor">@color/md_blue_100</item>
         <item name="android:textSize">@dimen/feature_title_text_size</item>
         <item name="android:textAlignment">center</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
     </style>
 
     <style name="second_layout">
