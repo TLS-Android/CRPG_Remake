@@ -22,7 +22,6 @@ import com.tiagosantos.common.ui.model.ReminderType.MEDICACAO
 import com.tiagosantos.common.ui.model.ReminderType.TRANSPORTE
 import com.tiagosantos.common.ui.model.ReminderType.REFEICAO
 import com.tiagosantos.crpg_remake.base.FragmentSettings
-import com.tiagosantos.common.ui.utils.InputFilterMinMax
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.databinding.*

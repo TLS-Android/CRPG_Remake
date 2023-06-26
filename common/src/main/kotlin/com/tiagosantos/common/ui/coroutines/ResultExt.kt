@@ -89,5 +89,4 @@ inline fun <R, T> Result<T>.andThenFlow(transform: (value: T) -> Flow<Result<R>>
     }
 }
 
-
 class None
