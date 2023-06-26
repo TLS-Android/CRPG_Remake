@@ -198,7 +198,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
                 }
             }
 
-            /** ---- FILTRAR O TIME INPUT -------- **/
+            /** ---- FILTRO TIME INPUT -------- **/
             secondHoras.apply {
                 et = editHours.filterTime("00", "23")
                 etMin = editMinutes.filterTime("00", "59")
@@ -217,6 +217,12 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
             }
 
             with(secondAlerta) {
+
+                imageButtonSom.setOnClickListener {
+
+                }
+
+
                 imageButtonSom.setOnClickListener {
                     setSoundLogosVisible(
                         view = secondDia,
@@ -291,7 +297,6 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
                                 .takeLast(3)]
                         }
                     }
-
                     setTypeAndFrequency(newReminder)
                 }
 
@@ -324,14 +329,6 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
                 }
             }
         }
-
-
-    private fun restrictTimeInput(reminderFragmentBinding: ReminderFragmentBinding) {
-        with(reminderFragmentBinding.secondHoras) {
-            et = editHours.filterTime("00", "23")
-            etMin = editMinutes.filterTime("00","59")
-        }
-    }
 
     private fun setTypeAndFrequency(newReminder: Reminder) = newReminder.apply {
         provider.alarmTypeStates.getOrDefault(alarmTypeButtonPressed, SOM)

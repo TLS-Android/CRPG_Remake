@@ -3,23 +3,23 @@
   style="@style/second_layout"
   android:padding="@dimen/padding4">
 
-  <LinearLayout
+  <RadioGroup
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="horizontal">
 
-    <ImageButton
-        android:id="@+id/imageButtonSom"
-        style="@style/alertButton" />
+    <RadioButton  android:id="@+id/imageButtonSom"
+        style="@style/alertButton"
+        android:onClick="onRadioButtonClicked"/>
 
-    <ImageButton
-        android:id="@+id/imageButtonVibrar"
-        style="@style/alertButton" />
+    <RadioButton android:id="@+id/imageButtonVibrar"
+        style="@style/alertButton"
+        android:onClick="onRadioButtonClicked"/>
 
-    <ImageButton
-        android:id="@+id/imageButtonAmbos"
-        style="@style/alertButton" />
-  </LinearLayout>
+    <RadioButton android:id="@+id/imageButtonAmbos"
+        style="@style/alertButton"
+        android:onClick="onRadioButtonClicked"/>
+  </RadioGroup>
 
   <LinearLayout
       android:layout_width="match_parent"
