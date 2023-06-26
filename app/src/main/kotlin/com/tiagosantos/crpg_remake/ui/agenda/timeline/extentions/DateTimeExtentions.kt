@@ -13,5 +13,5 @@ fun String.formatDateTime(originalFormat: String, ouputFormat: String): String {
 }
 
 fun EditText.filterTime(min: String, max: String): EditText {
-     filters = arrayOf(InputFilterMinMax("00", "23"), InputFilter.LengthFilter(2))
+    this.filters = arrayOf(InputFilterMinMax("00", "23"), InputFilter.LengthFilter(2))
 }

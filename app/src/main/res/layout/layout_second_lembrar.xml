@@ -36,7 +36,7 @@
     android:id="@+id/button3"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textColor="@color/white_93"
+    android:textColor="@drawable/selector"
     android:textSize="@dimen/button_text_size"
     android:text="@string/meu_lembrete" />
 

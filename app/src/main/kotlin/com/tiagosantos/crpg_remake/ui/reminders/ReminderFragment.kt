@@ -1,7 +1,6 @@
 package com.tiagosantos.crpg_remake.ui.reminders
 
 import android.os.Bundle
-import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
@@ -17,8 +16,6 @@ import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.extension.*
 import com.tiagosantos.common.ui.model.AlarmFrequency.*
 import com.tiagosantos.common.ui.model.AlarmType.SOM
-import com.tiagosantos.common.ui.model.AlarmType.VIBRAR
-import com.tiagosantos.common.ui.model.AlarmType.AMBOS
 import com.tiagosantos.common.ui.model.Reminder
 import com.tiagosantos.common.ui.model.ReminderType
 import com.tiagosantos.common.ui.model.ReminderType.MEDICACAO
@@ -176,8 +173,6 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
     /** Kotlin function parameters are read-only values and are not assignable. **/
     override fun setupUI() {
         with(viewB) {
-
-
             with(secondLembrar) {
                 button0.setOnClickListener {
                     setLembrarLayout(
@@ -205,11 +200,9 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
             }
 
             /** ---- FILTRAR O TIME INPUT -------- **/
-            et = editHours.apply {
-                filters = arrayOf(InputFilterMinMax("00", "23"), InputFilter.LengthFilter(2))
-            }
-            etMin = editMinutes.apply {
-                filters = arrayOf(InputFilterMinMax("00", "59"), InputFilter.LengthFilter(2))
+            secondHoras.apply {
+                et = editHours.filterTime("00", "23")
+                etMin = editMinutes.filterTime("00", "59")
             }
 
             with(secondDia) {
@@ -346,23 +339,6 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
         provider.alarmFreqStates.getOrDefault(alarmFreqButtonPressed, PERSONALIZADO)
     }
 
-    private fun setButtonColorsReminder(view: LayoutSecondLembrarBinding, pos: Int) {
-
-        with(view) {
-            button0.setBackgroundResource(R.color.md_blue_100)
-            button1.setBackgroundResource(R.color.md_blue_100)
-            button2.setBackgroundResource(R.color.md_blue_100)
-            button3.setBackgroundResource(R.color.md_blue_100)
-
-            when (pos) {
-                1 -> button0.setBackgroundResource(R.color.md_blue_200)
-                2 -> button1.setBackgroundResource(R.color.md_blue_200)
-                3 -> button2.setBackgroundResource(R.color.md_blue_200)
-                4 -> button0.setBackgroundResource(R.color.md_blue_200)
-            }
-        }
-    }
-
     private fun setButtonColorsDays(view: LayoutSecondDiaBinding, pos: Int) {
 
         with(view) {
@@ -408,7 +384,6 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
     ) {
         with(viewLembrar) {
             lembrarButtonPressed = value
-            setButtonColorsReminder(this, lembrarButtonPressed)
             when {
                 isVisible -> inserirTituloLembretePersonalizado.show()
                 !isVisible -> inserirTituloLembretePersonalizado.invisible()

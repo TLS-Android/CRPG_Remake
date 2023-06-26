@@ -42,13 +42,13 @@ interface ResourcesProvider {
     val colorList get() = ColorStateList(states, colors)
     //endregion
 
-    val alarmTypeStates: HashMap<Int, AlarmType>
-        get() = hashMapOf(
+    val alarmTypeStates: Map<Int, AlarmType>
+        get() = mapOf(
             1 to AlarmType.SOM, 2 to AlarmType.VIBRAR, 3 to AlarmType.AMBOS
         )
 
-    val alarmFreqStates: HashMap<Pair<Int, AlarmFrequency>
-        get() = hashMapOf(
+    val alarmFreqStates: Map<Int, AlarmFrequency>
+        get() = mapOf(
             1 to AlarmFrequency.HOJE, 2 to AlarmFrequency.TODOS_OS_DIAS, 3 to AlarmFrequency.PERSONALIZADO
         )
 
