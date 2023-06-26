@@ -41,19 +41,19 @@
     <include layout="@layout/layout_parent_notas"
         android:id="@+id/parent_notas"
         android:visibility="gone"/>
-    <include layout="@layout/layout_second_alerta"
+    <include layout="@layout/layout_child_alerta"
         android:id="@+id/second_alerta"
         android:visibility="gone"/>
-    <include layout="@layout/layout_second_dia"
+    <include layout="@layout/layout_child_dia"
         android:id="@+id/second_dia"
         android:visibility="gone"/>
-    <include layout="@layout/layout_second_horas"
+    <include layout="@layout/layout_child_horas"
         android:id="@+id/second_horas"
         android:visibility="gone"/>
-    <include layout="@layout/layout_second_lembrar"
+    <include layout="@layout/layout_child_lembrar"
         android:id="@+id/second_lembrar"
         android:visibility="gone"/>
-    <include layout="@layout/layout_second_notas"
+    <include layout="@layout/layout_child_notas"
         android:id="@+id/second_notas"
         android:visibility="gone"/>
 
@@ -73,7 +73,7 @@
             android:id="@+id/expandable_lembrar"
             style="@style/reminderExpandableLayout"
             app:expandable_parentLayout="@layout/layout_parent_lembrar"
-            app:expandable_secondLayout="@layout/layout_second_lembrar" />
+            app:expandable_secondLayout="@layout/layout_child_lembrar" />
 
         <View android:id="@+id/separator"
             style="@style/greySeparator" />
@@ -82,7 +82,7 @@
             android:id="@+id/expandable_horas"
             style="@style/reminderExpandableLayout"
             app:expandable_parentLayout="@layout/layout_parent_horas"
-            app:expandable_secondLayout="@layout/layout_second_horas" />
+            app:expandable_secondLayout="@layout/layout_child_horas" />
 
         <View android:id="@+id/separator2"
             style="@style/greySeparator" />
@@ -91,7 +91,7 @@
             android:id="@+id/expandable_dia"
             style="@style/reminderExpandableLayout"
             app:expandable_parentLayout="@layout/layout_parent_dia"
-            app:expandable_secondLayout="@layout/layout_second_dia" />
+            app:expandable_secondLayout="@layout/layout_child_dia" />
 
         <View android:id="@+id/separator3"
             style="@style/greySeparator" />
@@ -100,7 +100,7 @@
             android:id="@+id/expandable_alerta"
             style="@style/reminderExpandableLayout"
             app:expandable_parentLayout="@layout/layout_parent_alerta"
-            app:expandable_secondLayout="@layout/layout_second_alerta" />
+            app:expandable_secondLayout="@layout/layout_child_alerta" />
 
         <View android:id="@+id/separator4"
             style="@style/greySeparator" />
@@ -109,7 +109,7 @@
             android:id="@+id/expandable_notas"
             style="@style/reminderExpandableLayout"
             app:expandable_parentLayout="@layout/layout_parent_notas"
-            app:expandable_secondLayout="@layout/layout_second_notas" />
+            app:expandable_secondLayout="@layout/layout_child_notas" />
 
         <View android:id="@+id/separator5"
             style="@style/greySeparator" />
