@@ -215,3 +215,5 @@ fun Activity.getDisplaySize(): IntArray {
     val displayHeight = displaySize.y
     return intArrayOf(displayWidth, displayHeight)
 }
+
+

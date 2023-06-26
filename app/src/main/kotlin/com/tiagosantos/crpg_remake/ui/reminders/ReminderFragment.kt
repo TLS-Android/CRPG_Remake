@@ -347,8 +347,6 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
     }
 
     private fun setButtonColorsReminder(view: LayoutSecondLembrarBinding, pos: Int) {
-        val colorInt: Int = context.getColor()
-        val csl = provider.colorList.getColorForState()
 
         with(view) {
             button0.setBackgroundResource(R.color.md_blue_100)

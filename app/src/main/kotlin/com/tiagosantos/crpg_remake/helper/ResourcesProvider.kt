@@ -2,6 +2,7 @@ package com.tiagosantos.crpg_remake.helper
 
 import android.content.res.ColorStateList
 import android.graphics.Color
+import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 import com.tiagosantos.common.ui.model.AlarmFrequency
 import com.tiagosantos.common.ui.model.AlarmType
@@ -29,6 +30,18 @@ interface ResourcesProvider {
             Color.BLUE
         )
 
+    fun colorStateListOf(@ColorInt color: Int): ColorStateList {
+        return ColorStateList.valueOf(color)
+    }
+
+    fun colorStateListOf(vararg mapping: Pair<IntArray, Int>): ColorStateList {
+        val (states, colors) = mapping.unzip()
+        return ColorStateList(states.toTypedArray(), colors.toIntArray())
+    }
+
+    val colorList get() = ColorStateList(states, colors)
+    //endregion
+
     val alarmTypeStates: HashMap<Int, AlarmType>
         get() = hashMapOf(
             1 to AlarmType.SOM, 2 to AlarmType.VIBRAR, 3 to AlarmType.AMBOS
@@ -39,5 +52,4 @@ interface ResourcesProvider {
             1 to AlarmFrequency.HOJE, 2 to AlarmFrequency.TODOS_OS_DIAS, 3 to AlarmFrequency.PERSONALIZADO
         )
 
-    val colorList get() = ColorStateList(states, colors)
 }
