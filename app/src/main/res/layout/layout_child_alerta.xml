@@ -21,33 +21,38 @@
         android:onClick="onRadioButtonClicked"/>
   </RadioGroup>
 
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal"
-      android:paddingHorizontal="@dimen/padding">
+  <TableLayout
+    android:stretchColumns="1,3,"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingHorizontal="@dimen/padding2x">
 
-    <TextView
-        android:id="@+id/textView_som"
-        android:text="@string/som"
-        style="@style/textAlert" />
+    <TableRow>
+      <TextView
+          android:id="@+id/textView_som"
+          android:text="@string/som"
+          style="@style/textAlert" />
 
-    <ImageView android:id="@+id/checkbox_som"
-        style="@style/imageAlert" />
+      <ImageView android:id="@+id/checkbox_som"
+          style="@style/imageAlert" />
 
-    <TextView
-        android:id="@+id/textView_vibrar"
-        android:text="@string/vibrar"
-        style="@style/textAlert"/>
+      <TextView
+          android:id="@+id/textView_vibrar"
+          android:text="@string/vibrar"
+          style="@style/textAlert"/>
 
-    <ImageView android:id="@+id/checkbox_vibrar"
-        style="@style/imageAlert" />
+      <ImageView android:id="@+id/checkbox_vibrar"
+          style="@style/imageAlert" />
 
-    <TextView android:id="@+id/textView_ambos"
-        android:text="@string/ambos"
-        style="@style/textAlert" />
+      <TextView android:id="@+id/textView_ambos"
+          android:text="@string/ambos"
+          style="@style/textAlert" />
 
-    <ImageView android:id="@+id/checkbox_ambos"
-        style="@style/imageAlert" />
-  </LinearLayout>
+      <ImageView android:id="@+id/checkbox_ambos"
+          style="@style/imageAlert" />
+    </TableRow>
+
+  </TableLayout>
+
 </LinearLayout>
