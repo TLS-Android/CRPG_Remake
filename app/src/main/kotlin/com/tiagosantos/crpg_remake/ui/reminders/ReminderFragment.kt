@@ -106,8 +106,8 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
         viewB.apply {
             actionList = mutableListOf(
                 expandableHoras, expandableDia, expandableAlerta, expandableNotas, parentLayout,
-                buttonCancel, buttonConfirm, childLembrar.button0, childLembrar.button1, childLembrar.button2,
-                childLembrar.button3, childAlerta.imageButtonSom, childAlerta.imageButtonVibrar,
+                buttonCancel, buttonConfirm, childLembrar.buttonMedicacao, childLembrar.buttonTransporte, childLembrar.buttonAlmoco,
+                childLembrar.buttonLembrete, childAlerta.imageButtonSom, childAlerta.imageButtonVibrar,
                 childAlerta.imageButtonAmbos, childDia.buttonHoje, childDia.buttonTodosDias, childDia.buttonPersonalizado,
             )
         }
@@ -171,29 +171,21 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
     override fun setupUI() {
         with(viewB) {
             with(childLembrar) {
-                button0.setOnClickListener {
-                    setLembrarLayout(
-                        this,
-                        1,
-                        isVisible = true,
-                        isTextVisible = true,
-                    )
+                lembrarRadioGroup.addOnButtonCheckedListener { _, checkedId, _ ->
+                    lembrarButtonPressed = checkedId
+                    when (checkedId) {
+                        R.id.button_medicacao, R.id.button_lembrete -> {
+                            inserirTituloLembretePersonalizado.show()
+                            textEditPersonalizado.show()
+                        }
+
+                        R.id.button_transporte, R.id.button_almoco -> {
+                            inserirTituloLembretePersonalizado.invisible()
+                            textEditPersonalizado.invisible()
+                        }
+                    }
                 }
-                button1.setOnClickListener {
-                    setLembrarLayout(
-                        this, 2, isVisible = false, isTextVisible = false
-                    )
-                }
-                button2.setOnClickListener {
-                    setLembrarLayout(
-                        this, 3, isVisible = false, isTextVisible = false
-                    )
-                }
-                button3.setOnClickListener {
-                    setLembrarLayout(
-                        this, 4, isVisible = true, isTextVisible = true
-                    )
-                }
+
             }
 
             /** ---- FILTRO TIME INPUT -------- **/
@@ -315,25 +307,6 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
         }
     }
 
-    private fun setLembrarLayout(
-        viewLembrar: LayoutChildLembrarBinding,
-        value: Int,
-        isVisible: Boolean,
-        isTextVisible: Boolean,
-    ) {
-        with(viewLembrar) {
-            lembrarButtonPressed = value
-            when {
-                isVisible -> inserirTituloLembretePersonalizado.show()
-                !isVisible -> inserirTituloLembretePersonalizado.invisible()
-            }
-
-            when {
-                isTextVisible -> textEditPersonalizado.show()
-                !isTextVisible -> textEditPersonalizado.invisible()
-            }
-        }
-    }
 
     override fun performActionWithVoiceCommand(
         command: String,
