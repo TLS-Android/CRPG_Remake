@@ -55,10 +55,12 @@
     <string name="lembrar_de">Lembrar de</string>
     <string name="notas_minusculo">Notas</string>
     <string name="escolher_dias">Escolher dias</string>
+
     <string name="selecionar_dias">Selecionar dias</string>
 
 
     <string name="selecionar_dia">Selecionar dia</string>
+
     <string name="em_que_dia">Em que dia?</string>
     <string name="a_que_horas">A que horas?</string>
     <string name="ambos">AMBOS</string>
@@ -146,6 +148,8 @@
     <string name="doispontos">:</string>
     <string name="clock_placeholder">...</string>
     <string name="guarde_notas">Guarde as suas notas (max 150 cars)</string>
+    <string name="todos_os_dias">Todos os dias</string>
+    <string name="hoje">hoje</string>
 
     <string-array name="line_type">
         <item>Normal</item>

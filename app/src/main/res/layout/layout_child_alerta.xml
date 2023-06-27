@@ -4,25 +4,30 @@
   android:padding="@dimen/padding4">
 
   <RadioGroup
+      android:id="@+id/alert_radio_group"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="horizontal">
+      android:orientation="horizontal"
+      android:weightSum="3">
 
     <RadioButton  android:id="@+id/imageButtonSom"
         style="@style/alertButton"
-        android:onClick="onRadioButtonClicked"/>
+        android:onClick="onRadioButtonClicked"
+        android:layout_weight="1"/>
 
     <RadioButton android:id="@+id/imageButtonVibrar"
         style="@style/alertButton"
-        android:onClick="onRadioButtonClicked"/>
+        android:onClick="onRadioButtonClicked"
+        android:layout_weight="1"/>
 
     <RadioButton android:id="@+id/imageButtonAmbos"
         style="@style/alertButton"
-        android:onClick="onRadioButtonClicked"/>
+        android:onClick="onRadioButtonClicked"
+        android:layout_weight="1"/>
   </RadioGroup>
 
   <TableLayout
-    android:stretchColumns="1,3,"
+    android:stretchColumns="0,2"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -52,7 +57,5 @@
       <ImageView android:id="@+id/checkbox_ambos"
           style="@style/imageAlert" />
     </TableRow>
-
   </TableLayout>
-
 </LinearLayout>

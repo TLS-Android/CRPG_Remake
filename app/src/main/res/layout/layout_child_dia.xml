@@ -5,32 +5,46 @@
     android:paddingHorizontal="@dimen/padding4x"
     android:paddingVertical="@dimen/padding4">
 
-  <androidx.appcompat.widget.AppCompatButton
-    android:id="@+id/button_hoje"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textColor="@color/white_93"
-    android:textSize="22sp" />
+  <RadioGroup
+      android:id="@+id/alert_radio_group"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:weightSum="3">
 
-  <View android:id="@+id/dia_separator1"
-      style="@style/greySeparator" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_hoje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white_93"
+        android:textSize="22sp"
+        android:text="@string/hoje"
+        android:layout_weight="1"
+        android:onClick="onRadioButtonClicked"/>
 
-  <androidx.appcompat.widget.AppCompatButton
-    android:id="@+id/button_todos_dias"
-    android:textSize="22sp"
-    style="@style/center_button_reminder" />
+    <View android:id="@+id/dia_separator1"
+        style="@style/greySeparator" />
 
-  <View android:id="@+id/dia_separator2"
-      style="@style/greySeparator" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_todos_dias"
+        android:textSize="22sp"
+        style="@style/center_button_reminder"
+        android:text="@string/todos_os_dias"
+        android:layout_weight="1"/>
 
-  <androidx.appcompat.widget.AppCompatButton
-    android:id="@+id/button_personalizado"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textColor="@color/white_93"
-    android:textSize="22sp"
-    android:text="@string/escolher_dias" />
-  
+    <View android:id="@+id/dia_separator2"
+        style="@style/greySeparator" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_personalizado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white_93"
+        android:textSize="22sp"
+        android:layout_weight="1"
+        android:text="@string/escolher_dias" />
+  </RadioGroup>
+
   <TextView
       android:id="@+id/button_selecionar_dias"
       android:layout_width="match_parent"

@@ -164,9 +164,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
                 }
             }
         }
-
         setupUI()
-
     }
 
     /** Kotlin function parameters are read-only values and are not assignable. **/
@@ -217,34 +215,14 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
             }
 
             with(secondAlerta) {
-
-                imageButtonSom.setOnClickListener {
-
-                }
-
-
-                imageButtonSom.setOnClickListener {
-                    setSoundLogosVisible(
-                        view = secondDia,
-                        1,
-                        soundVisible = true,
-                        vibVisible = false,
-                        bothVisible = false,
-                        checkboxAmbos,
-                        checkboxSom
-                    )
-                }
-                imageButtonVibrar.setOnClickListener {
-                    setSoundLogosVisible(
-                        secondDia, 2, false,
-                        true, false, checkboxVibrar, checkboxSom
-                    )
-                }
-                imageButtonAmbos.setOnClickListener {
-                    setSoundLogosVisible(
-                        secondDia, 3, false,
-                        false, true, checkboxVibrar, checkboxSom
-                    )
+                alertRadioGroup.setOnCheckedChangeListener { _, optionId ->
+                    run {
+                        when (optionId) {
+                            R.id.imageButtonSom -> checkboxSom.show()
+                            R.id.imageButtonVibrar -> checkboxVibrar.show()
+                            R.id.imageButtonAmbos -> checkboxAmbos.show()
+                        }
+                    }
                 }
             }
 
@@ -265,9 +243,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
                     hoursInt = secondHoras.editHours.text.toString().toInt()
                     minsInt = secondHoras.editMinutes.text.toString().toInt()
                     hoursMinutesFlag = true
-                } else {
-                    avisoCampos.run { text = getString(R.string.valor_em_falta); show() }
-                }
+                } else { avisoCampos.run { text = getString(R.string.valor_em_falta); show() } }
 
                 with(viewModel.newReminder) {
                     fun updateButton(title: String, reminderType: ReminderType) {
@@ -284,10 +260,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
                                 secondLembrar.textEditPersonalizado.text.toString(),
                                 ReminderType.PERSONALIZADO
                             )
-                        }
-                        else -> {
-                            println("lembrarButtonPressed is neither!")
-                        }
+                        } else -> { println("lembrarButtonPressed is neither!") }
                     }
 
                     with(secondDia) {
