@@ -214,8 +214,13 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
                 }
             }
 
+            with(secondDia) {
+                diaRadioGroup.setOnCheckedChangeListener { _, optionId -> alarmFreqButtonPressed = optionId }
+            }
+
             with(secondAlerta) {
                 alertRadioGroup.setOnCheckedChangeListener { _, optionId ->
+                    alarmTypeButtonPressed = optionId
                     run {
                         when (optionId) {
                             R.id.imageButtonSom -> checkboxSom.show()
@@ -308,7 +313,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
         provider.alarmFreqStates.getOrDefault(alarmFreqButtonPressed, PERSONALIZADO)
     }
 
-    private fun setButtonColorsDays(view: LayoutSecondDiaBinding, pos: Int) {
+    private fun setButtonColorsDays(view: LayoutChildDiaBinding, pos: Int) {
 
         with(view) {
             buttonHoje.setBackgroundResource(R.drawable.layout_button_round_top)
@@ -323,30 +328,8 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
         }
     }
 
-    private fun setSoundLogosVisible(
-        view: LayoutSecondDiaBinding,
-        value: Int,
-        soundVisible: Boolean,
-        vibVisible: Boolean,
-        bothVisible: Boolean,
-        checkboxVib: ImageView,
-        checkboxSom: ImageView
-    ) {
-        alarmTypeButtonPressed = value
-        checkboxSom.show()
-        checkboxVib.invisible()
-
-        view.buttonSelecionarDias.visibility = when {
-            soundVisible || vibVisible || bothVisible -> VISIBLE
-            !soundVisible || !vibVisible || !bothVisible -> INVISIBLE
-            else -> {
-                INVISIBLE
-            }
-        }
-    }
-
     private fun setLembrarLayout(
-        viewLembrar: LayoutSecondLembrarBinding,
+        viewLembrar: LayoutChildLembrarBinding,
         value: Int,
         isVisible: Boolean,
         isTextVisible: Boolean,
@@ -366,7 +349,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
     }
 
     private fun setSecondLayout(
-        view: LayoutSecondDiaBinding,
+        view: LayoutChildDiaBinding,
         value: Int,
         isbuttonVisible: Boolean,
         isGroupVisible: Boolean,

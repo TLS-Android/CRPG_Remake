@@ -6,7 +6,7 @@
     android:paddingVertical="@dimen/padding4">
 
   <RadioGroup
-      android:id="@+id/alert_radio_group"
+      android:id="@+id/dia_radio_group"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="vertical"
@@ -30,7 +30,8 @@
         android:textSize="22sp"
         style="@style/center_button_reminder"
         android:text="@string/todos_os_dias"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:onClick="onRadioButtonClicked"/>
 
     <View android:id="@+id/dia_separator2"
         style="@style/greySeparator" />
@@ -42,7 +43,8 @@
         android:textColor="@color/white_93"
         android:textSize="22sp"
         android:layout_weight="1"
-        android:text="@string/escolher_dias" />
+        android:text="@string/escolher_dias"
+        android:onClick="onRadioButtonClicked"/>
   </RadioGroup>
 
   <TextView
