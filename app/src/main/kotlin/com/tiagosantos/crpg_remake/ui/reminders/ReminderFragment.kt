@@ -106,9 +106,9 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
         viewB.apply {
             actionList = mutableListOf(
                 expandableHoras, expandableDia, expandableAlerta, expandableNotas, parentLayout,
-                buttonCancel, buttonConfirm, secondLembrar.button0, secondLembrar.button1, secondLembrar.button2,
-                secondLembrar.button3, secondAlerta.imageButtonSom, secondAlerta.imageButtonVibrar,
-                secondAlerta.imageButtonAmbos, secondDia.buttonHoje, secondDia.buttonTodosDias, secondDia.buttonPersonalizado,
+                buttonCancel, buttonConfirm, childLembrar.button0, childLembrar.button1, childLembrar.button2,
+                childLembrar.button3, childAlerta.imageButtonSom, childAlerta.imageButtonVibrar,
+                childAlerta.imageButtonAmbos, childDia.buttonHoje, childDia.buttonTodosDias, childDia.buttonPersonalizado,
             )
         }
 
@@ -170,7 +170,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
     /** Kotlin function parameters are read-only values and are not assignable. **/
     override fun setupUI() {
         with(viewB) {
-            with(secondLembrar) {
+            with(childLembrar) {
                 button0.setOnClickListener {
                     setLembrarLayout(
                         this,
@@ -197,28 +197,17 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
             }
 
             /** ---- FILTRO TIME INPUT -------- **/
-            secondHoras.apply {
+            childHoras.apply {
                 et = editHours.filterTime("00", "23")
                 etMin = editMinutes.filterTime("00", "59")
             }
 
-            with(secondDia) {
-                buttonHoje.setOnClickListener {
-                    setSecondLayout(this, 1, false, isGroupVisible = false)
-                }
-                buttonTodosDias.setOnClickListener {
-                    setSecondLayout(this, 2, false, isGroupVisible = false)
-                }
-                buttonPersonalizado.setOnClickListener {
-                    setSecondLayout(this, 3, true, isGroupVisible = true)
-                }
+            with(childDia) {
+                diaRadioGroup.addOnButtonCheckedListener { _, checkedId, _ ->
+                    alarmFreqButtonPressed = checkedId; setButtonColorsDays(alarmFreqButtonPressed) }
             }
 
-            with(secondDia) {
-                diaRadioGroup.setOnCheckedChangeListener { _, optionId -> alarmFreqButtonPressed = optionId }
-            }
-
-            with(secondAlerta) {
+            with(childAlerta) {
                 alertRadioGroup.setOnCheckedChangeListener { _, optionId ->
                     alarmTypeButtonPressed = optionId
                     run {
@@ -245,8 +234,8 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
             buttonConfirm.setOnClickListener {
                 if (et.text.toString().length == 2 && etMin.text.toString().length == 2) {
                     viewModel.setTime(et, etMin)
-                    hoursInt = secondHoras.editHours.text.toString().toInt()
-                    minsInt = secondHoras.editMinutes.text.toString().toInt()
+                    hoursInt = childHoras.editHours.text.toString().toInt()
+                    minsInt = childHoras.editMinutes.text.toString().toInt()
                     hoursMinutesFlag = true
                 } else { avisoCampos.run { text = getString(R.string.valor_em_falta); show() } }
 
@@ -262,17 +251,16 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
                         3 -> updateButton(getString(R.string.lembrar_escolha_almoco), REFEICAO)
                         4 -> {
                             updateButton(
-                                secondLembrar.textEditPersonalizado.text.toString(),
+                                childLembrar.textEditPersonalizado.text.toString(),
                                 ReminderType.PERSONALIZADO
                             )
                         } else -> { println("lembrarButtonPressed is neither!") }
                     }
 
-                    with(secondDia) {
+                    with(childDia) {
                         for (id in toggleButtonGroup.checkedButtonIds) {
                             val materialButton: MaterialButton = toggleButtonGroup.findViewById(id)
-                            weekMap[resources.getResourceName(materialButton.id)
-                                .takeLast(3)]
+                            weekMap[resources.getResourceName(materialButton.id).takeLast(3)]
                         }
                     }
                     setTypeAndFrequency(newReminder)
@@ -284,7 +272,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
 
     private fun setupCancelButton() =
         with(viewB) {
-            with(secondAlerta) {
+            with(childAlerta) {
                 buttonCancel.setOnClickListener {
                     avisoCampos.hide()
 
@@ -298,12 +286,12 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
                     alarmTypeButtonPressed = 0
                     alarmFreqButtonPressed = 0
 
-                    with(secondHoras) {
+                    with(childHoras) {
                         editHours.setEmptyText()
                         editMinutes.setEmptyText()
                     }
 
-                    secondNotas.editTextNotes.setEmptyText()
+                    childNotas.editTextNotes.setEmptyText()
                 }
             }
         }
@@ -313,9 +301,8 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
         provider.alarmFreqStates.getOrDefault(alarmFreqButtonPressed, PERSONALIZADO)
     }
 
-    private fun setButtonColorsDays(view: LayoutChildDiaBinding, pos: Int) {
-
-        with(view) {
+    private fun setButtonColorsDays(pos: Int) {
+        with(viewB.childDia) {
             buttonHoje.setBackgroundResource(R.drawable.layout_button_round_top)
             buttonTodosDias.setBackgroundResource(R.color.md_blue_100)
             buttonPersonalizado.setBackgroundResource(R.drawable.layout_button_round_bottom)
@@ -348,37 +335,13 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
         }
     }
 
-    private fun setSecondLayout(
-        view: LayoutChildDiaBinding,
-        value: Int,
-        isbuttonVisible: Boolean,
-        isGroupVisible: Boolean,
-    ) {
-        alarmFreqButtonPressed = value
-        setButtonColorsDays(view, alarmFreqButtonPressed)
-        view.buttonSelecionarDias.visibility = when {
-            isbuttonVisible -> VISIBLE
-            !isbuttonVisible -> INVISIBLE
-            else -> {
-                INVISIBLE
-            }
-        }
-
-        view.toggleButtonGroup.visibility = when {
-            isGroupVisible -> VISIBLE
-            !isGroupVisible -> INVISIBLE
-            else -> {
-                INVISIBLE
-            }
-        }
-    }
-
     override fun performActionWithVoiceCommand(
         command: String,
         actionMap: Map<String, Any>
     ) {
         HoursHelper.run {
-            checkHoursCommand(viewB, command); checkMinutesCommand(viewB, command)
+            checkHoursCommand(viewB, command)
+            checkMinutesCommand(viewB, command)
         }
 
         super.performActionWithVoiceCommand(command, actionMap)
