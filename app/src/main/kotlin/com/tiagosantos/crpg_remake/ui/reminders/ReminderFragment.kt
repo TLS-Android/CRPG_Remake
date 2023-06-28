@@ -130,44 +130,46 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
             createReminderActionButton.setOnClickListener { reminderIntroHintLayout.hide() }
         }
 
-        with(viewB) {
-            listOf(
-                expandableDia,
-                expandableLembrar,
-                expandableDia
-            ).setLayoutClickListeners(parentLayout)
-
-            listOf(
-                expandableHoras,
-                expandableNotas,
-                expandableAlerta,
-                expandableDia
-            ).setExpandablesClickListeners()
-
-            when {successFlag || hoursInt in 0..23 -> println("Hello") }
-
-            with(viewSuccess) {
-                if (successFlag) {
-                    viewModel.addReminder(newReminder)
-                    if (viewModel.flagReminderAdded) {
-                        avisoCampos.hide()
-                        successLayout.show()
-                        buttonOk.setOnClickListener { successLayout.hide() }
-                        launchIntent()
-                    }
-                } else if (hoursInt in 0..23 || minsInt in 0..59) {
-                    avisoCampos.run { text = getString(R.string.horas_invalidas); show() }
-                } else {
-                    avisoCampos.run { text = getString(R.string.campos_obrigatorios); show() }
+        with(viewSuccess) {
+            if (successFlag) {
+                viewModel.addReminder(newReminder)
+                if (viewModel.flagReminderAdded) {
+                    viewB.avisoCampos.hide()
+                    successLayout.show()
+                    buttonOk.setOnClickListener { successLayout.hide() }
+                    launchIntent()
                 }
+            } else if (hoursInt in 0..23 || minsInt in 0..59) {
+                viewB.avisoCampos.run { text = getString(R.string.horas_invalidas); show() }
+            } else {
+                viewB.avisoCampos.run { text = getString(R.string.campos_obrigatorios); show() }
             }
         }
+
         setupUI()
+    }
+
+    private fun ReminderFragmentBinding.setupExpandables() {
+        listOf(
+            expandableDia,
+            expandableLembrar,
+            expandableDia
+        ).setLayoutClickListeners(parentLayout)
+
+        listOf(
+            expandableHoras,
+            expandableNotas,
+            expandableAlerta,
+            expandableDia
+        ).setExpandablesClickListeners()
+
+        when {successFlag || hoursInt in 0..23 -> println("Hello") }
     }
 
     /** Kotlin function parameters are read-only values and are not assignable. **/
     override fun setupUI() {
         with(viewB) {
+            setupExpandables()
             with(childLembrar) {
                 lembrarRadioGroup.addOnButtonCheckedListener { _, checkedId, _ ->
                     lembrarButtonPressed = checkedId
