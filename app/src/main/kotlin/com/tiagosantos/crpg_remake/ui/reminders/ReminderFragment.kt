@@ -198,8 +198,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
             }
 
             with(childAlerta) {
-                alertRadioGroup.setOnCheckedChangeListener { _, optionId ->
-                    alarmTypeButtonPressed = optionId
+                alertRadioGroup.setOnCheckedChangeListener { _, optionId -> alarmTypeButtonPressed = optionId
                     run {
                         when (optionId) {
                             R.id.imageButtonSom -> checkboxSom.show()

@@ -9,20 +9,6 @@ import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.nightTimeHour
 
 object HoursHelper {
 
-    /**
-    val colorMap = mapOf (
-        'A' to R.color.colorBgShade1,
-        'B' to R.color.colorBgShade2,
-        ...
-    ...
-    )
-
-    val char = 'G'
-    val bgColor = colorMap[char] ?: R.color.colorBgShade27
-    background.setTint(ContextCompat.getColor(context, bgColor)
-
-    */
-
     private fun getTime(
         command: String,
         map: Map<String, String>
@@ -36,13 +22,11 @@ object HoursHelper {
             contains("meio-dia", t) -> "12"
             contains("meia-noite", t) -> "00"
         }
-        }
+    }
 
     @SuppressLint("SetTextI18n")
     private fun checkDaytimeHoursCommand(command: String) = getTime(command, daytimeHoursMap)
-
     private fun checkAfternoonHoursCommand(command: String) = getTime(command, afternoonHoursMap)
-
     private fun checkNighttimeHoursCommand(command: String) = getTime(command, nightTimeHoursMap)
 
     fun checkMinutesCommand(command: String): String {
