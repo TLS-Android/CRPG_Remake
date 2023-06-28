@@ -17,7 +17,6 @@
     android:id="@+id/button_medicacao"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textColor="@drawable/selector"
     android:textSize="@dimen/button_text_size"
     android:text="@string/tomar_medicacao"
     android:layout_weight="1"/>
@@ -48,7 +47,6 @@
     android:id="@+id/button_lembrete"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textColor="@drawable/selector"
     android:textSize="@dimen/button_text_size"
     android:text="@string/meu_lembrete"
     android:layout_weight="1"/>

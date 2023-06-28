@@ -3,7 +3,6 @@ package com.tiagosantos.crpg_remake.ui.reminders
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.*
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.view.forEach
@@ -111,7 +110,6 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
                 childAlerta.imageButtonAmbos, childDia.buttonHoje, childDia.buttonTodosDias, childDia.buttonPersonalizado,
             )
         }
-
         return viewB.root
     }
 
@@ -241,8 +239,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
                         1 -> updateButton(getString(R.string.tomar_medicacao), MEDICACAO)
                         2 -> updateButton(getString(R.string.apanhar_bus), TRANSPORTE)
                         3 -> updateButton(getString(R.string.lembrar_escolha_almoco), REFEICAO)
-                        4 -> {
-                            updateButton(
+                        4 -> { updateButton(
                                 childLembrar.textEditPersonalizado.text.toString(),
                                 ReminderType.PERSONALIZADO
                             )
@@ -307,22 +304,19 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
         }
     }
 
-
     override fun performActionWithVoiceCommand(
         command: String,
         actionMap: Map<String, Any>
     ) {
         HoursHelper.run {
-            checkHoursCommand(viewB, command)
-            checkMinutesCommand(viewB, command)
+            checkHoursCommand(command)
+            checkMinutesCommand(command)
         }
 
         super.performActionWithVoiceCommand(command, actionMap)
 
-        viewB.apply { if (command.contains("Todos", true)) {
-                expandableGroup.forEach { it.clickAndFocus() }
-            }
+        if (command.contains("Todos", true)) {
+            viewB.expandableGroup.forEach { it.clickAndFocus() }
         }
     }
-
 }

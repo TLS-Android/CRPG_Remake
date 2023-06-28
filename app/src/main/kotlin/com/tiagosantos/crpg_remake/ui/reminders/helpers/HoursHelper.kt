@@ -25,57 +25,41 @@ object HoursHelper {
 
     private fun getTime(
         command: String,
-        map: Map<String, String>,
-        view: ReminderFragmentBinding,
-    ) {
-        with(view.secondHoras) {
-            val value = map[command]
-            editHours.setText(value)
+        map: Map<String, String>
+    ): String? { val value = map[command]; return value }
+
+    fun checkHoursCommand(command: String): String = command.apply {
+        when {
+            contains("da manhã", t) -> checkDaytimeHoursCommand(command)
+            contains("da tarde", t) -> checkAfternoonHoursCommand(command)
+            contains("da noite", t) -> checkNighttimeHoursCommand(command)
+            contains("meio-dia", t) -> "12"
+            contains("meia-noite", t) -> "00"
+        }
+        }
+
+    @SuppressLint("SetTextI18n")
+    private fun checkDaytimeHoursCommand(command: String) = getTime(command, daytimeHoursMap)
+
+    private fun checkAfternoonHoursCommand(command: String) = getTime(command, afternoonHoursMap)
+
+    private fun checkNighttimeHoursCommand(command: String) = getTime(command, nightTimeHoursMap)
+
+    fun checkMinutesCommand(command: String): String {
+        return when {
+            command.contains("e cinco", t) || command.contains(
+                ":05", t
+            ) -> "05"
+
+            command.contains("e um quarto", t) || command.contains(
+                ":15", t
+            ) -> "15"
+
+            command.contains("e meia", t) || command.contains(
+                ":30", t
+            ) -> "30"
+
+            else -> "00"
         }
     }
-
-        fun checkHoursCommand(
-            view: ReminderFragmentBinding,
-            command: String
-        ) {
-
-            with(view.secondHoras) {
-                when {
-                    command.contains("da manhã", t) -> checkDaytimeHoursCommand(view, command)
-                    command.contains("da tarde", t) -> checkAfternoonHoursCommand(view, command)
-                    command.contains("da noite", t) -> checkNighttimeHoursCommand(view, command)
-                    command.contains("meio-dia", t) -> editHours.setText("12")
-                    command.contains("meia-noite", t) -> editHours.setText("00")
-                }
-            }
-        }
-
-        @SuppressLint("SetTextI18n")
-        private fun checkDaytimeHoursCommand(view: ReminderFragmentBinding, command: String)
-                = getTime(command, daytimeHoursMap, view)
-
-        private fun checkAfternoonHoursCommand(view: ReminderFragmentBinding, command: String)
-                = getTime(command, afternoonHoursMap, view)
-
-        private fun checkNighttimeHoursCommand(view: ReminderFragmentBinding, command: String)
-                = getTime(command, nightTimeHoursMap, view)
-
-
-        fun checkMinutesCommand(
-            view: ReminderFragmentBinding,
-            command: String
-        ) {
-            with(view.secondHoras.editMinutes) {
-                when {
-                    command.contains("e cinco", t) || command.contains(
-                        ":05", t) -> setText("05")
-                    command.contains("e um quarto", t) || command.contains(
-                        ":15", t) -> setText("15")
-                    command.contains("e meia", t) || command.contains(
-                        ":30", t) -> setText("30")
-                    else -> {}
-                }
-            }
-        }
-
 }
