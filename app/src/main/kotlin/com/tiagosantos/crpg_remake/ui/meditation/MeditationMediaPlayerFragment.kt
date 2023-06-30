@@ -13,6 +13,7 @@ import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationMediaPlayerBinding
+import com.tiagosantos.crpg_remake.helper.colorId
 
 /**
 If Android decides to recreate your Fragment later,
@@ -67,24 +68,18 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
             //viewModel.setupPlayer(player, this)
             //setBackgroundColor(viewB)
 
+            val mood = Mood.RELAXADO
+            moodColor.apply { setBackgroundColor(resources.getColor(mood.colorId)) }
+
+            println("Hello")
+
             buttonReturnMeditation.setOnClickListener {
                 goToFragment(MeditationFragment())
             }
         }
     }
 
-    private fun setBackgroundColor(binding: FragmentMeditationMediaPlayerBinding) {
-        with(binding.moodColor) {
-            when (viewModel.selectedMood) {
-                "RELAXADO" -> setBackgroundColor(this, "")
-                "FELIZ" -> setBackgroundColor(this, "#87B700")
-                "SONOLENTO" -> setBackgroundColor(this, "#FBC02D")
-                "CONFIANTE" -> setBackgroundColor(this, "#57A8D8")
-                "QUERIDO" -> setBackgroundColor(this, "#AA00FF")
-                "MENTE SÃ" -> setBackgroundColor(this, "#57A8D8")
-            }
-        }
-    }
+
 
     override fun onPause() {
         super.onPause()
@@ -95,8 +90,5 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
         super.onDestroy()
         //player.stop()
     }
-
-    private fun setBackgroundColor(img: ImageView, str: String) =
-        img.setBackgroundColor(android.graphics.Color.parseColor(str))
 
 }

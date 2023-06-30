@@ -2,9 +2,9 @@ package com.tiagosantos.crpg_remake.base
 
 object ResourcesProvider {
 
-    var list: List<String> = null
+    var list: List<String>? = listOf()
         get() {
-            return when(fragment) {
+            return when(null) {
                 "REMINDER_FRAGMENT" -> listOf(
                     "Horas", "Dia", "Alerta", "Notas", "Lembrete", "Cancelar", "Guardar",
                     "Tomar Medicação", "Apanhar Transporte",

@@ -24,6 +24,7 @@ import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.numberMap
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.ui.meals.MealsFragment
 import com.tiagosantos.crpg_remake.ui.meditation.MeditationFragment
+import com.tiagosantos.crpg_remake.ui.meditation.MeditationMediaPlayerFragment
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderFragment
 import java.util.*
 import java.util.Calendar.*
@@ -71,6 +72,7 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
         //goToFragment(MealsFragment())
         //goToFragment(MeditationFragment())
         //goToFragment(ReminderFragment())
+        goToFragment(MeditationMediaPlayerFragment())
         super.onViewCreated(view, savedInstanceState)
     }
 

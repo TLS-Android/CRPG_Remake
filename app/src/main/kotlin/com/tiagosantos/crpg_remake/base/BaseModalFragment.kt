@@ -20,16 +20,11 @@ import com.tiagosantos.crpg_remake.data.sharedprefs.SharedPrefsViewModel
 
 abstract class BaseModalFragment<B : ViewDataBinding>: BaseFragment<B>() {
 
-    private val resProvider: ResourcesProvider()
     /**
      * Member has the same visibility as one marked as private, but that it is also visible in subclasses.
      * **/
     protected abstract val ttsSettings: TTSSettings
-    protected abstract val srSettings by lazy {
-        SRSettings(
-            commandList = resProvider.getResources(),
-        )
-    }
+    protected abstract val srSettings: SRSettings
 
     /**
      * Property delegation in Kotlin helps you to handoff the getter-setter responsibility to a different class.
