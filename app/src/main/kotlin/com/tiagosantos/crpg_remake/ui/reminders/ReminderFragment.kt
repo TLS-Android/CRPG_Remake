@@ -84,6 +84,8 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
     private lateinit var etMin: EditText
 
     companion object {
+        val TAG = "REMINDER_FRAGMENT"
+
         val weekMap = mapOf(
             "Seg" to 1, "Ter" to 2, "Qua" to 3,
             "Qui" to 4, "Sex" to 5, "Sab" to 6, "Dom" to 7
@@ -291,6 +293,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
         provider.alarmFreqStates.getOrDefault(alarmFreqButtonPressed, PERSONALIZADO)
     }
 
+    /** TO DO: USE COLOR STATE LIST **/
     private fun setButtonColorsDays(pos: Int) {
         with(viewB.childDia) {
             buttonHoje.setBackgroundResource(R.drawable.layout_button_round_top)

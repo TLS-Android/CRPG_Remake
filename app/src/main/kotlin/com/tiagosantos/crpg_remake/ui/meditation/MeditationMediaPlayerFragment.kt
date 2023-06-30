@@ -65,7 +65,8 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
         with(viewB) {
             textSelectedMood.text = viewModel.selectedMood
             //viewModel.setupPlayer(player, this)
-            setBackgroundColor(viewB)
+            //setBackgroundColor(viewB)
+
             buttonReturnMeditation.setOnClickListener {
                 goToFragment(MeditationFragment())
             }
