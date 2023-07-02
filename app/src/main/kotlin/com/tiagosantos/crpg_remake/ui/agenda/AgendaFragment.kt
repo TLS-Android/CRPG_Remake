@@ -20,7 +20,6 @@ import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.databinding.FragmentAgendaBinding
-import com.tiagosantos.crpg_remake.helper.ResourcesProvider
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.TimeLineAdapter
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.dpToPx
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.getColorCompat
@@ -70,8 +69,6 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>() {
     private lateinit var mAttributes: TimelineAttributes
     private lateinit var mLayoutManager: LinearLayoutManager
     private lateinit var adapterGlobal : TimeLineAdapter
-
-    private lateinit var provider: ResourcesProvider
 
     private var mFeedList = mutableListOf<Event>()
 
