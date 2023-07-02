@@ -24,5 +24,9 @@ val FeatureType.actionMap: List<String>
             FeatureType.MEDITACAO -> listOf(
                 "RELAXADO", "FELIZ", "SONOLENTO", "CONFIANTE"
             )
+
+            FeatureType.MEDIA_PLAYER -> listOf(
+                "Tocar", "Parar", "Passar à frente", "Passar a trás", "Regressar"
+            )
         }
 }

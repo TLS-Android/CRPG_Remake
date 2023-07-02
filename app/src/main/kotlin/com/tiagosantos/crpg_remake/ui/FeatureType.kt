@@ -4,5 +4,6 @@ enum class FeatureType {
    AGENDA,
    LEMBRETES,
    MEDITACAO,
-   REFEICOES
+   REFEICOES,
+   MEDIA_PLAYER
 }

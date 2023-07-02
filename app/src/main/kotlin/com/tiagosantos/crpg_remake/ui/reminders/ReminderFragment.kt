@@ -23,8 +23,10 @@ import com.tiagosantos.common.ui.model.ReminderType.REFEICAO
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
+import com.tiagosantos.crpg_remake.base.actionMap
 import com.tiagosantos.crpg_remake.databinding.*
 import com.tiagosantos.crpg_remake.helper.ResourcesProvider
+import com.tiagosantos.crpg_remake.ui.FeatureType
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.filterTime
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.newReminder
 import com.tiagosantos.crpg_remake.ui.reminders.helpers.HoursHelper
@@ -39,6 +41,8 @@ import com.tiagosantos.crpg_remake.ui.reminders.helpers.HoursHelper
 class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
 
     @Arg override var layoutId = R.layout.reminder_fragment
+
+    private val feature = FeatureType.LEMBRETES
 
     @delegate:Arg
     override val settings by lazy {
@@ -56,12 +60,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
     @delegate:Arg
     override val srSettings by lazy {
         SRSettings(
-            commandList = listOf(
-                "Horas", "Dia", "Alerta", "Notas", "Lembrete", "Cancelar", "Guardar",
-                "Tomar Medicação", "Apanhar Transporte",
-                "Escolher Almoço", "O Meu Lembrete",
-                "Som","Vibrar","Ambos","Hoje","Sempre","Escolher Dias"
-            ),
+            commandList = feature.actionMap,
             isListening = false,
         )
     }

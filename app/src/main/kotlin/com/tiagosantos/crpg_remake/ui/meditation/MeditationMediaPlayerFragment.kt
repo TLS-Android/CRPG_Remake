@@ -12,8 +12,10 @@ import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.base.FragmentSettings
+import com.tiagosantos.crpg_remake.base.actionMap
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationMediaPlayerBinding
 import com.tiagosantos.crpg_remake.helper.colorId
+import com.tiagosantos.crpg_remake.ui.FeatureType
 
 /**
 If Android decides to recreate your Fragment later,
@@ -26,6 +28,8 @@ Fragment is recreated by Android is to pass a bundle to the setArguments method
 class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaPlayerBinding>() {
 
     @Arg override var layoutId = R.layout.fragment_meditation_media_player
+
+    private val feature = FeatureType.MEDIA_PLAYER
 
     @delegate:Arg
     override val settings by lazy {
@@ -44,7 +48,7 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
     @delegate:Arg
     override val srSettings by lazy {
         SRSettings(
-            commandList = listOf("Tocar", "Parar", "Passar à frente", "Passar a trás", "Regressar"),
+            commandList = feature.actionMap,
             isListening = false,
         )
     }
