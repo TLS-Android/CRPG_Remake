@@ -22,10 +22,9 @@ import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getDayName
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getDayNumber
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.numberMap
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
-import com.tiagosantos.crpg_remake.ui.meals.MealsFragment
-import com.tiagosantos.crpg_remake.ui.meditation.MeditationFragment
+import com.tiagosantos.crpg_remake.base.actionMap
+import com.tiagosantos.crpg_remake.ui.FeatureType
 import com.tiagosantos.crpg_remake.ui.meditation.MeditationMediaPlayerFragment
-import com.tiagosantos.crpg_remake.ui.reminders.ReminderFragment
 import java.util.*
 import java.util.Calendar.*
 
@@ -33,6 +32,8 @@ import java.util.Calendar.*
 class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
 
     @Arg override var layoutId = R.layout.fragment_date_picker
+
+    private val feature = FeatureType.DATE_PICKER
 
     /**
      * Lazy properties: the value is computed only on first access.
@@ -55,10 +56,7 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
     @delegate:Arg
     override val srSettings by lazy {
         SRSettings(
-            commandList = listOf(
-                "um", "dois", "três", "quatro", "cinco",
-                "seis", "sete", "oito", "nove", "dez"
-            ),
+            commandList = feature.actionMap,
             isListening = false,
         )
     }

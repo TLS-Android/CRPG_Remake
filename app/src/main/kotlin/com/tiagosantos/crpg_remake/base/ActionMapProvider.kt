@@ -28,5 +28,10 @@ val FeatureType.actionMap: List<String>
             FeatureType.MEDIA_PLAYER -> listOf(
                 "Tocar", "Parar", "Passar à frente", "Passar a trás", "Regressar"
             )
+
+            FeatureType.DATE_PICKER -> listOf(
+                "um", "dois", "três", "quatro", "cinco",
+                "seis", "sete", "oito", "nove", "dez"
+            )
         }
 }

@@ -83,8 +83,6 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
         }
     }
 
-
-
     override fun onPause() {
         super.onPause()
         player.stop()
