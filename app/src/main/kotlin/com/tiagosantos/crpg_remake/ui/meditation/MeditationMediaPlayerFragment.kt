@@ -61,6 +61,8 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
             actionList = mutableListOf(exoPlay, exoPause, exoFfwd, exoRew, viewB.buttonReturnMeditation)
         }
 
+        println("ActionMap: " + srSettings.commandList)
+
         player = ExoPlayer.Builder(requireContext()).build()
 
         super.onViewCreated(view, savedInstanceState)

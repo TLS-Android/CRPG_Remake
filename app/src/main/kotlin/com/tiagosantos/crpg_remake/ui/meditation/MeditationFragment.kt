@@ -13,12 +13,16 @@ import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
+import com.tiagosantos.crpg_remake.base.actionMap
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationBinding
+import com.tiagosantos.crpg_remake.ui.FeatureType
 
 @FragmentWithArgs
 class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>() {
 
     @Arg override var layoutId = R.layout.fragment_meditation
+
+    private val feature = FeatureType.MEDITACAO
 
     @delegate:Arg
     override val settings by lazy {
@@ -37,7 +41,7 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>() {
     @delegate:Arg
     override val srSettings by lazy {
         SRSettings(
-            commandList = listOf("RELAXADO", "FELIZ", "SONOLENTO", "CONFIANTE"),
+            commandList = feature.actionMap,
             isListening = false,
         )
     }
