@@ -40,7 +40,6 @@ import java.time.DayOfWeek
 @FragmentWithArgs
 class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
 
-
     @delegate:Arg
     override val settings by lazy {
         FragmentSettings(
@@ -80,7 +79,6 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
     private lateinit var etMin: EditText
 
     companion object {
-        val TAG = "REMINDER_FRAGMENT"
 
         /*
         val weekMap = mapOf(
