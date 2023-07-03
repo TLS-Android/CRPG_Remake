@@ -26,7 +26,6 @@ import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.base.actionMap
 import com.tiagosantos.crpg_remake.databinding.*
 import com.tiagosantos.crpg_remake.helper.ResourcesProvider
-import com.tiagosantos.crpg_remake.ui.FeatureType
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.filterTime
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.newReminder
 import com.tiagosantos.crpg_remake.ui.reminders.helpers.HoursHelper
@@ -41,7 +40,6 @@ import java.time.DayOfWeek
 @FragmentWithArgs
 class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
 
-    @Arg override var layoutId = R.layout.reminder_fragment
 
     @delegate:Arg
     override val settings by lazy {

@@ -50,15 +50,6 @@ abstract class BaseModalFragment<B : ViewDataBinding>: BaseFragment<B>() {
 
     protected var literalValue: Int? = null
 
-    protected val feature : FeatureType
-        get() = when(this) {
-            is MealsFragment ->  { println("refeicoes"); FeatureType.REFEICOES }
-            is AgendaFragment -> FeatureType.AGENDA
-            is ReminderFragment -> FeatureType.LEMBRETES
-            is MeditationMediaPlayerFragment -> { println("media player"); FeatureType.MEDIA_PLAYER }
-            else -> { FeatureType.UNKNOWN }
-        }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FragmentArgs.inject(this)

@@ -19,7 +19,6 @@ import com.tiagosantos.crpg_remake.databinding.FragmentMeditationBinding
 @FragmentWithArgs
 class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>() {
 
-    @Arg override var layoutId = R.layout.fragment_meditation
 
     @delegate:Arg
     override val settings by lazy {

@@ -37,7 +37,6 @@ import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setVisible
 @FragmentWithArgs
 class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>() {
 
-    @Arg override var layoutId = R.layout.fragment_agenda
 
     @delegate:Arg
     override val settings by lazy {

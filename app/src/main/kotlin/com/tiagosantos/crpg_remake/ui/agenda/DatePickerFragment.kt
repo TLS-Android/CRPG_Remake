@@ -23,14 +23,12 @@ import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getDayNumber
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.numberMap
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.base.actionMap
-import com.tiagosantos.crpg_remake.ui.reminders.ReminderFragment
+import com.tiagosantos.crpg_remake.ui.meals.MealsFragment
 import java.util.*
 import java.util.Calendar.*
 
 @FragmentWithArgs
 class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
-
-    @Arg override var layoutId = R.layout.fragment_date_picker
 
     /**
      * Lazy properties: the value is computed only on first access.
@@ -64,9 +62,9 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
     private val calendar = getInstance()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        //goToFragment(MealsFragment())
+        goToFragment(MealsFragment())
         //goToFragment(MeditationFragment())
-        goToFragment(ReminderFragment())
+        //goToFragment(ReminderFragment())
         //goToFragment(MeditationMediaPlayerFragment())
         super.onViewCreated(view, savedInstanceState)
     }

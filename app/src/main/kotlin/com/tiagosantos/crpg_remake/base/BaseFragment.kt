@@ -23,11 +23,30 @@ import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
 import com.tiagosantos.common.ui.utils.Constants.MODALITY
 import com.tiagosantos.crpg_remake.MainActivity
 import com.tiagosantos.crpg_remake.R
+import com.tiagosantos.crpg_remake.ui.FeatureType
+import com.tiagosantos.crpg_remake.ui.agenda.AgendaFragment
+import com.tiagosantos.crpg_remake.ui.agenda.DatePickerFragment
+import com.tiagosantos.crpg_remake.ui.layoutId
+import com.tiagosantos.crpg_remake.ui.meals.MealsFragment
+import com.tiagosantos.crpg_remake.ui.meditation.MeditationFragment
+import com.tiagosantos.crpg_remake.ui.meditation.MeditationMediaPlayerFragment
+import com.tiagosantos.crpg_remake.ui.reminders.ReminderFragment
 
 abstract class BaseFragment<B : ViewDataBinding>: Fragment() {
 
+    protected val feature : FeatureType
+    get() = when(this) {
+        is MealsFragment ->  { println("refeicoes"); FeatureType.REFEICOES }
+        is AgendaFragment -> FeatureType.AGENDA
+        is ReminderFragment -> FeatureType.LEMBRETES
+        is MeditationMediaPlayerFragment -> { println("media player"); FeatureType.MEDIA_PLAYER }
+        is MeditationFragment -> { FeatureType.MEDITACAO }
+        is DatePickerFragment -> { FeatureType.DATE_PICKER }
+        else -> { FeatureType.UNKNOWN }
+    }
+
     protected abstract val settings: FragmentSettings
-    @LayoutRes @Arg protected open var layoutId: Int = 0
+    @LayoutRes @Arg protected open var layoutId: Int = feature.layoutId
 
     open lateinit var viewBinding: B
 

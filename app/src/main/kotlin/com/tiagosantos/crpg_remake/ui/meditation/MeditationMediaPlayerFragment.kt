@@ -25,7 +25,6 @@ Fragment is recreated by Android is to pass a bundle to the setArguments method
 @FragmentWithArgs
 class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaPlayerBinding>() {
 
-    @Arg override var layoutId = R.layout.fragment_meditation_media_player
 
     @delegate:Arg
     override val settings by lazy {
