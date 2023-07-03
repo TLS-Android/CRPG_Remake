@@ -43,8 +43,6 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
 
     @Arg override var layoutId = R.layout.reminder_fragment
 
-    //private val feature = FeatureType.LEMBRETES
-
     @delegate:Arg
     override val settings by lazy {
         FragmentSettings(

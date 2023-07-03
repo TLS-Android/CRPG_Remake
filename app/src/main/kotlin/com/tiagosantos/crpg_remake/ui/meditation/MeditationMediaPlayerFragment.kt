@@ -28,8 +28,6 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
 
     @Arg override var layoutId = R.layout.fragment_meditation_media_player
 
-    //private val feature = FeatureType.MEDIA_PLAYER
-
     @delegate:Arg
     override val settings by lazy {
         FragmentSettings(
@@ -47,7 +45,7 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
     @delegate:Arg
     override val srSettings by lazy {
         SRSettings(
-            commandList = feature!!.actionMap,
+            commandList = feature.actionMap,
             isListening = false,
         )
     }
