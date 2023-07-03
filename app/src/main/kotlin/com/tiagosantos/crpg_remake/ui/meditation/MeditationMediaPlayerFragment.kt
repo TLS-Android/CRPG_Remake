@@ -2,7 +2,6 @@ package com.tiagosantos.crpg_remake.ui.meditation
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
 import androidx.fragment.app.viewModels
 import com.google.android.exoplayer2.ExoPlayer
 import com.hannesdorfmann.fragmentargs.annotation.Arg
@@ -55,10 +54,10 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewB.custom.apply {
-            actionList = mutableListOf(exoPlay, exoPause, exoFfwd, exoRew, viewB.buttonReturnMeditation)
+            actionList = mutableListOf(
+                exoPlay, exoPause, exoFfwd, exoRew, viewB.buttonReturnMeditation
+            )
         }
-
-        println("ActionMap: " + srSettings.commandList)
 
         player = ExoPlayer.Builder(requireContext()).build()
 
@@ -68,13 +67,11 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
     override fun setupUI() {
         with(viewB) {
             textSelectedMood.text = viewModel.selectedMood
-            //viewModel.setupPlayer(player, this)
+            viewModel.setupPlayer(player, this)
             //setBackgroundColor(viewB)
 
             val mood = Mood.RELAXADO
             moodColor.apply { setBackgroundColor(resources.getColor(mood.colorId)) }
-
-            println("Hello")
 
             buttonReturnMeditation.setOnClickListener {
                 goToFragment(MeditationFragment())

@@ -62,6 +62,7 @@ abstract class BaseModalFragment<B : ViewDataBinding>: BaseFragment<B>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FragmentArgs.inject(this)
+        println("ActionMap: " + srSettings.commandList)
         prefHelper.fetchModalityPreferences()
         val hasRun = prefHelper.fetchFlag(_flag)
     }
