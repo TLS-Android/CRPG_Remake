@@ -30,6 +30,7 @@ import com.tiagosantos.crpg_remake.ui.FeatureType
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.filterTime
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderRepository.newReminder
 import com.tiagosantos.crpg_remake.ui.reminders.helpers.HoursHelper
+import java.time.DayOfWeek
 
 /**
  * You can't inherit an attribute, you have to inherit a style.
@@ -42,7 +43,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
 
     @Arg override var layoutId = R.layout.reminder_fragment
 
-    private val feature = FeatureType.LEMBRETES
+    //private val feature = FeatureType.LEMBRETES
 
     @delegate:Arg
     override val settings by lazy {
@@ -60,7 +61,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
     @delegate:Arg
     override val srSettings by lazy {
         SRSettings(
-            commandList = feature.actionMap,
+            commandList = feature!!.actionMap,
             isListening = false,
         )
     }
@@ -85,10 +86,11 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
     companion object {
         val TAG = "REMINDER_FRAGMENT"
 
+        /*
         val weekMap = mapOf(
             "Seg" to 1, "Ter" to 2, "Qua" to 3,
             "Qui" to 4, "Sex" to 5, "Sab" to 6, "Dom" to 7
-        )
+        )*/
 
         var lembrarButtonPressed = 0
         var alarmTypeButtonPressed = 0
@@ -251,7 +253,9 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
                     with(childDia) {
                         for (id in toggleButtonGroup.checkedButtonIds) {
                             val materialButton: MaterialButton = toggleButtonGroup.findViewById(id)
-                            weekMap[resources.getResourceName(materialButton.id).takeLast(3)]
+                            for(day in DayOfWeek.values()) day.value
+                            resources.getResourceName(materialButton.id)
+                            //weekMap[resources.getResourceName(materialButton.id).takeLast(3)]
                         }
                     }
                     setTypeAndFrequency(newReminder)

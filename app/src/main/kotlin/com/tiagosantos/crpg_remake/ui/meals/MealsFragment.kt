@@ -23,7 +23,6 @@ import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.base.actionMap
 import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
-import com.tiagosantos.crpg_remake.ui.FeatureType
 import kotlinx.coroutines.launch
 
 /**
@@ -41,8 +40,6 @@ import kotlinx.coroutines.launch
 class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
 
     @Arg override var layoutId = R.layout.meals_fragment
-
-    private val feature = FeatureType.REFEICOES
 
     @delegate:Arg
     override val settings by lazy {
@@ -85,6 +82,8 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         isLunch = true
+
+        println("ActionMap: " + srSettings.commandList)
         viewB.apply {
             mealsCardCarne.backgroundImageCarne.load(R.drawable.background_carne)
             mealsCardPeixe.backgroundImagePeixe.load(R.drawable.background_peixe)

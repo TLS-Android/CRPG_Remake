@@ -33,5 +33,7 @@ val FeatureType.actionMap: List<String>
                 "um", "dois", "três", "quatro", "cinco",
                 "seis", "sete", "oito", "nove", "dez"
             )
+
+            FeatureType.UNKNOWN -> listOf()
         }
 }

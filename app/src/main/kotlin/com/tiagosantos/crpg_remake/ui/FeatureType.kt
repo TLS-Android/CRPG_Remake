@@ -6,5 +6,6 @@ enum class FeatureType {
    LEMBRETES,
    MEDITACAO,
    REFEICOES,
-   MEDIA_PLAYER
+   MEDIA_PLAYER,
+   UNKNOWN
 }

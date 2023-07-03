@@ -15,7 +15,6 @@ import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.base.actionMap
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationMediaPlayerBinding
 import com.tiagosantos.crpg_remake.helper.colorId
-import com.tiagosantos.crpg_remake.ui.FeatureType
 
 /**
 If Android decides to recreate your Fragment later,
@@ -29,7 +28,7 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
 
     @Arg override var layoutId = R.layout.fragment_meditation_media_player
 
-    private val feature = FeatureType.MEDIA_PLAYER
+    //private val feature = FeatureType.MEDIA_PLAYER
 
     @delegate:Arg
     override val settings by lazy {
@@ -48,7 +47,7 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
     @delegate:Arg
     override val srSettings by lazy {
         SRSettings(
-            commandList = feature.actionMap,
+            commandList = feature!!.actionMap,
             isListening = false,
         )
     }

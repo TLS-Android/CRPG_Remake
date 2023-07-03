@@ -17,6 +17,11 @@ import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.generalHelper
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.numberList
 import com.tiagosantos.crpg_remake.data.sharedprefs.SharedPrefsViewModel
+import com.tiagosantos.crpg_remake.ui.FeatureType
+import com.tiagosantos.crpg_remake.ui.agenda.AgendaFragment
+import com.tiagosantos.crpg_remake.ui.meals.MealsFragment
+import com.tiagosantos.crpg_remake.ui.meditation.MeditationMediaPlayerFragment
+import com.tiagosantos.crpg_remake.ui.reminders.ReminderFragment
 
 abstract class BaseModalFragment<B : ViewDataBinding>: BaseFragment<B>() {
 
@@ -44,6 +49,15 @@ abstract class BaseModalFragment<B : ViewDataBinding>: BaseFragment<B>() {
     val flag: LiveData<String?> = _flag
 
     protected var literalValue: Int? = null
+
+    protected val feature : FeatureType
+        get() = when(this) {
+            is MealsFragment ->  { println("refeicoes"); FeatureType.REFEICOES }
+            is AgendaFragment -> FeatureType.AGENDA
+            is ReminderFragment -> FeatureType.LEMBRETES
+            is MeditationMediaPlayerFragment -> { println("media player"); FeatureType.MEDIA_PLAYER }
+            else -> { FeatureType.UNKNOWN }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
