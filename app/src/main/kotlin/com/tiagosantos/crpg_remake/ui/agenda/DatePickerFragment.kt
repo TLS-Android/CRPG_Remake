@@ -23,7 +23,6 @@ import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getDayNumber
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.numberMap
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.base.actionMap
-import com.tiagosantos.crpg_remake.ui.meals.MealsFragment
 import com.tiagosantos.crpg_remake.ui.reminders.ReminderFragment
 import java.util.*
 import java.util.Calendar.*
@@ -153,9 +152,7 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
 
     }
 
-    override fun setupUI() {
-
-    }
+    override fun setupUI() {}
 
     override fun performActionWithVoiceCommand(
         command: String,

@@ -30,7 +30,7 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
     @delegate:Arg
     override val settings by lazy {
         FragmentSettings(
-            appBarTitle = R.string.title_media,
+            appBarTitle = getString(R.string.title_media),
             sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
             showBackButton = true
         )
