@@ -3,8 +3,6 @@ package com.tiagosantos.crpg_remake.ui.meditation
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.*
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.google.android.material.button.MaterialButton
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
@@ -14,13 +12,6 @@ import com.tiagosantos.crpg_remake.databinding.FragmentMeditationBinding
 class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>() {
 
     private val viewModel: MeditationViewModel by viewModels()
-
-    /** This property is only valid between onCreateView and onDestroyView. **/
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
-    }
-    val text: LiveData<String> = _text
-
     private lateinit var feelingsMap : Map<String, MaterialButton>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
