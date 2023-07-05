@@ -34,14 +34,6 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>() {
         TTSSettings(contextualHelp =  R.string.contextual_meditation)
     }
 
-    @delegate:Arg
-    override val srSettings by lazy {
-        SRSettings(
-            commandList = feature.actionMap,
-            isListening = false,
-        )
-    }
-
     private val viewModel: MeditationViewModel by viewModels()
 
     /** This property is only valid between onCreateView and onDestroyView. **/

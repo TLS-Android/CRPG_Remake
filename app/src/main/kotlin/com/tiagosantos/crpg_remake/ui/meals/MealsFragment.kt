@@ -57,14 +57,6 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
         )
     }
 
-    @delegate:Arg
-    override val srSettings by lazy {
-        SRSettings(
-            commandList = feature.actionMap,
-            isListening = false,
-        )
-    }
-
     private val viewModel: MealsViewModel by viewModels()
 
     private lateinit var cardList : List<MaterialCardView>

@@ -53,14 +53,6 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
         TTSSettings(contextualHelp =  R.string.contextual_reminder)
     }
 
-    @delegate:Arg
-    override val srSettings by lazy {
-        SRSettings(
-            commandList = feature!!.actionMap,
-            isListening = false,
-        )
-    }
-
     private val viewModel: ReminderViewModel by viewModels()
 
     private var _viewIntro: ReminderFragmentIntroBinding? = null

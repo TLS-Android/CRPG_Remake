@@ -7,6 +7,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hannesdorfmann.fragmentargs.FragmentArgs
+import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.tiagosantos.access.modal.gossip.GossipViewModel
 import com.tiagosantos.access.modal.gotev.GotevViewModel
 import com.tiagosantos.access.modal.settings.ActionType.REMINDER
@@ -17,11 +18,7 @@ import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.generalHelper
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.numberList
 import com.tiagosantos.crpg_remake.data.sharedprefs.SharedPrefsViewModel
-import com.tiagosantos.crpg_remake.ui.FeatureType
-import com.tiagosantos.crpg_remake.ui.agenda.AgendaFragment
-import com.tiagosantos.crpg_remake.ui.meals.MealsFragment
-import com.tiagosantos.crpg_remake.ui.meditation.MeditationMediaPlayerFragment
-import com.tiagosantos.crpg_remake.ui.reminders.ReminderFragment
+
 
 abstract class BaseModalFragment<B : ViewDataBinding>: BaseFragment<B>() {
 
@@ -29,7 +26,11 @@ abstract class BaseModalFragment<B : ViewDataBinding>: BaseFragment<B>() {
      * Member has the same visibility as one marked as private, but that it is also visible in subclasses.
      * **/
     protected abstract val ttsSettings: TTSSettings
-    protected abstract val srSettings: SRSettings
+
+    @delegate:Arg
+    val srSettings by lazy {
+        SRSettings(commandList = feature.actionMap)
+    }
 
     /**
      * Property delegation in Kotlin helps you to handoff the getter-setter responsibility to a different class.

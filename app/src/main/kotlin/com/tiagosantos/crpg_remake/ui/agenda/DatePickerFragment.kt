@@ -48,14 +48,6 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
         TTSSettings(R.string.contextual_date_picker)
     }
 
-    @delegate:Arg
-    override val srSettings by lazy {
-        SRSettings(
-            commandList = feature.actionMap,
-            isListening = false,
-        )
-    }
-
     val viewModel: AgendaViewModel by viewModels()
 
     private var selected = false

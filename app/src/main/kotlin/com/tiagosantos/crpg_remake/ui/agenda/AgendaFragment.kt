@@ -37,7 +37,6 @@ import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setVisible
 @FragmentWithArgs
 class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>() {
 
-
     @delegate:Arg
     override val settings by lazy {
         FragmentSettings(
@@ -52,14 +51,6 @@ class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>() {
         TTSSettings(
             contextualHelp = R.string.contextual_agenda,
             isSpeaking = true,
-        )
-    }
-
-    @delegate:Arg
-    override val srSettings by lazy {
-        SRSettings(
-            commandList = listOf("Almoço", "Jantar"),
-            isListening = false,
         )
     }
 

@@ -25,7 +25,6 @@ Fragment is recreated by Android is to pass a bundle to the setArguments method
 @FragmentWithArgs
 class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaPlayerBinding>() {
 
-
     @delegate:Arg
     override val settings by lazy {
         FragmentSettings(
@@ -38,14 +37,6 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
     @delegate:Arg
     override val ttsSettings by lazy {
         TTSSettings(contextualHelp =  R.string.contextual_media_player)
-    }
-
-    @delegate:Arg
-    override val srSettings by lazy {
-        SRSettings(
-            commandList = feature.actionMap,
-            isListening = false,
-        )
     }
 
     private val viewModel: MeditationViewModel by viewModels()
