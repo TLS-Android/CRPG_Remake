@@ -6,6 +6,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.hannesdorfmann.fragmentargs.FragmentArgs
 import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.tiagosantos.access.modal.gossip.GossipViewModel
@@ -18,17 +19,24 @@ import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.generalHelper
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.numberList
 import com.tiagosantos.crpg_remake.data.sharedprefs.SharedPrefsViewModel
-
+import com.tiagosantos.crpg_remake.ui.contextualHelp
+import com.tiagosantos.crpg_remake.ui.isSpeaking
 
 abstract class BaseModalFragment<B : ViewDataBinding>: BaseFragment<B>() {
 
     /**
      * Member has the same visibility as one marked as private, but that it is also visible in subclasses.
      * **/
-    protected abstract val ttsSettings: TTSSettings
+    @delegate:Arg
+    protected val ttsSettings by lazy {
+        TTSSettings(
+            contextualHelp = feature.contextualHelp,
+            isSpeaking = feature.isSpeaking,
+        )
+    }
 
     @delegate:Arg
-    val srSettings by lazy {
+    protected val srSettings by lazy {
         SRSettings(commandList = feature.actionMap)
     }
 

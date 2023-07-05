@@ -9,10 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.ViewTarget
 import com.google.android.material.card.MaterialCardView
-import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
-import com.tiagosantos.access.modal.settings.SRSettings
-import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.extension.eachChild
 import com.tiagosantos.common.ui.extension.hide
 import com.tiagosantos.common.ui.extension.setFrameOnClick
@@ -20,8 +17,6 @@ import com.tiagosantos.common.ui.extension.show
 import com.tiagosantos.common.ui.extension.showAndBringToFront
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
-import com.tiagosantos.crpg_remake.base.FragmentSettings
-import com.tiagosantos.crpg_remake.base.actionMap
 import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
 import kotlinx.coroutines.launch
 
@@ -39,25 +34,7 @@ import kotlinx.coroutines.launch
 @FragmentWithArgs
 class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
 
-    @Arg override var layoutId = R.layout.meals_fragment
-
-    @delegate:Arg
-    override val settings by lazy {
-        FragmentSettings(
-            appBarTitle = getString(R.string.title_refeicao),
-            sharedPreferencesBooleanName = getString(R.string.datePickerHasRun),
-        )
-    }
-
-    @delegate:Arg
-    override val ttsSettings by lazy {
-        TTSSettings(
-            contextualHelp = R.string.indique_refeicao,
-            isSpeaking = false
-        )
-    }
-
-    private val viewModel: MealsViewModel by viewModels()
+    //private val viewModel: MealsViewModel by viewModels()
 
     private lateinit var cardList : List<MaterialCardView>
 

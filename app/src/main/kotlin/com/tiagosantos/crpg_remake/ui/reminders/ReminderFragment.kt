@@ -8,10 +8,7 @@ import android.widget.*
 import androidx.core.view.forEach
 import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
-import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
-import com.tiagosantos.access.modal.settings.SRSettings
-import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.extension.*
 import com.tiagosantos.common.ui.model.AlarmFrequency.*
 import com.tiagosantos.common.ui.model.AlarmType.SOM
@@ -20,10 +17,8 @@ import com.tiagosantos.common.ui.model.ReminderType
 import com.tiagosantos.common.ui.model.ReminderType.MEDICACAO
 import com.tiagosantos.common.ui.model.ReminderType.TRANSPORTE
 import com.tiagosantos.common.ui.model.ReminderType.REFEICAO
-import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
-import com.tiagosantos.crpg_remake.base.actionMap
 import com.tiagosantos.crpg_remake.databinding.*
 import com.tiagosantos.crpg_remake.helper.ResourcesProvider
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.filterTime
@@ -39,19 +34,6 @@ import java.time.DayOfWeek
  */
 @FragmentWithArgs
 class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
-
-    @delegate:Arg
-    override val settings by lazy {
-        FragmentSettings(
-            appBarTitle = getString(R.string.title_reminders),
-            sharedPreferencesBooleanName = getString(R.string.remindersHasRun),
-        )
-    }
-
-    @delegate:Arg
-    override val ttsSettings by lazy {
-        TTSSettings(contextualHelp =  R.string.contextual_reminder)
-    }
 
     private val viewModel: ReminderViewModel by viewModels()
 

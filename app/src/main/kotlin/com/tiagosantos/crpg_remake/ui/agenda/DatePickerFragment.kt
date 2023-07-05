@@ -30,24 +30,6 @@ import java.util.Calendar.*
 @FragmentWithArgs
 class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
 
-    /**
-     * Lazy properties: the value is computed only on first access.
-     */
-    @delegate:Arg
-    override val settings by lazy {
-        FragmentSettings(
-            appBarTitle = getString(R.string.escolher_data),
-            sharedPreferencesBooleanName = R.string.datePickerHasRun.toString(),
-            showBackButton = false,
-            hideBottomNavigationView = true,
-        )
-    }
-
-    @delegate:Arg
-    override val ttsSettings by lazy {
-        TTSSettings(R.string.contextual_date_picker)
-    }
-
     val viewModel: AgendaViewModel by viewModels()
 
     private var selected = false

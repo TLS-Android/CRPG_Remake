@@ -25,20 +25,6 @@ Fragment is recreated by Android is to pass a bundle to the setArguments method
 @FragmentWithArgs
 class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaPlayerBinding>() {
 
-    @delegate:Arg
-    override val settings by lazy {
-        FragmentSettings(
-            appBarTitle = getString(R.string.title_media),
-            sharedPreferencesBooleanName = R.string.meditationHasRun.toString(),
-            showBackButton = true
-        )
-    }
-
-    @delegate:Arg
-    override val ttsSettings by lazy {
-        TTSSettings(contextualHelp =  R.string.contextual_media_player)
-    }
-
     private val viewModel: MeditationViewModel by viewModels()
     private lateinit var player : ExoPlayer
 

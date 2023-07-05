@@ -17,6 +17,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModel
 import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.tiagosantos.common.ui.extension.getColorCompatible
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
@@ -26,6 +27,7 @@ import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.ui.FeatureType
 import com.tiagosantos.crpg_remake.ui.agenda.AgendaFragment
 import com.tiagosantos.crpg_remake.ui.agenda.DatePickerFragment
+import com.tiagosantos.crpg_remake.ui.appBarTitleRes
 import com.tiagosantos.crpg_remake.ui.layoutId
 import com.tiagosantos.crpg_remake.ui.meals.MealsFragment
 import com.tiagosantos.crpg_remake.ui.meditation.MeditationFragment
@@ -45,7 +47,14 @@ abstract class BaseFragment<B : ViewDataBinding>: Fragment() {
         else -> { FeatureType.UNKNOWN }
     }
 
-    protected abstract val settings: FragmentSettings
+    @delegate:Arg
+    protected val settings by lazy {
+        FragmentSettings(
+            appBarTitle = getString(feature.appBarTitleRes),
+            sharedPreferencesBooleanName = getString(R.string.agendaHasRun),
+        )
+    }
+
     @LayoutRes @Arg protected open var layoutId: Int = feature.layoutId
 
     open lateinit var viewBinding: B

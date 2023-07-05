@@ -13,7 +13,6 @@ import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
 import com.plataforma.crpg.TimelineView
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.Orientation
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.TimelineAttributes
-import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.crpg_remake.R
@@ -25,6 +24,8 @@ import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.dpToPx
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.getColorCompat
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setGone
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setVisible
+import com.tiagosantos.crpg_remake.ui.appBarTitleRes
+import com.tiagosantos.crpg_remake.ui.meals.MealsViewModel
 
 /**
  * Android doesn't allow using an overloaded constructor for fragments anymore.
@@ -36,23 +37,6 @@ import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setVisible
  */
 @FragmentWithArgs
 class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>() {
-
-    @delegate:Arg
-    override val settings by lazy {
-        FragmentSettings(
-            appBarTitle = getString(R.string.agenda),
-            sharedPreferencesBooleanName = getString(R.string.agendaHasRun),
-            showBackButton = false,
-        )
-    }
-
-    @delegate:Arg
-    override val ttsSettings by lazy {
-        TTSSettings(
-            contextualHelp = R.string.contextual_agenda,
-            isSpeaking = true,
-        )
-    }
 
     private val viewModel: AgendaViewModel by viewModels()
 

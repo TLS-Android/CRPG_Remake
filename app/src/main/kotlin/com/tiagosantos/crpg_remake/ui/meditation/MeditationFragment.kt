@@ -8,31 +8,14 @@ import androidx.lifecycle.MutableLiveData
 import com.google.android.material.button.MaterialButton
 import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
-import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
-import com.tiagosantos.crpg_remake.base.actionMap
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationBinding
 
 @FragmentWithArgs
 class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>() {
-
-
-    @delegate:Arg
-    override val settings by lazy {
-        FragmentSettings(
-            appBarTitle = getString(R.string.title_meditacao),
-            sharedPreferencesBooleanName = getString(R.string.meditationHasRun),
-            showBackButton = true
-        )
-    }
-
-    @delegate:Arg
-    override val ttsSettings by lazy {
-        TTSSettings(contextualHelp =  R.string.contextual_meditation)
-    }
 
     private val viewModel: MeditationViewModel by viewModels()
 
