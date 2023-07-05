@@ -34,7 +34,7 @@ import kotlinx.coroutines.launch
 @FragmentWithArgs
 class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
 
-    //private val viewModel: MealsViewModel by viewModels()
+    private val viewModel: MealsViewModel by viewModels()
 
     private lateinit var cardList : List<MaterialCardView>
 
@@ -52,7 +52,6 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         isLunch = true
 
-        println("ActionMap: " + srSettings.commandList)
         viewB.apply {
             mealsCardCarne.backgroundImageCarne.load(R.drawable.background_carne)
             mealsCardPeixe.backgroundImagePeixe.load(R.drawable.background_peixe)
