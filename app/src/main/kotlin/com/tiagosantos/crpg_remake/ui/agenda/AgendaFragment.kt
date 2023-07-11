@@ -8,24 +8,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
-import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
 import com.plataforma.crpg.TimelineView
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.Orientation
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.TimelineAttributes
-import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
-import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.databinding.FragmentAgendaBinding
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.TimeLineAdapter
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.dpToPx
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.getColorCompat
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setGone
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setVisible
-import com.tiagosantos.crpg_remake.ui.appBarTitleRes
-import com.tiagosantos.crpg_remake.ui.meals.MealsViewModel
 
 /**
  * Android doesn't allow using an overloaded constructor for fragments anymore.
