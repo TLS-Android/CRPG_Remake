@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frame_meals"
@@ -15,9 +15,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding"
-        app:layout_constraintEnd_toStartOf="@+id/frame_opcao_peixe"
+        android:padding="@dimen/padding"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         style="@style/mealMainFrame" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/frame_opcao_carne"
@@ -25,6 +33,7 @@
             android:layout_marginVertical="@dimen/padding"
             app:layout_constraintStart_toStartOf="@+id/frame_meals_card"
             app:layout_constraintEnd_toEndOf="@+id/frame_meals_card"
+            app:
             style="@style/mealCard" >
 
             <FrameLayout
@@ -89,6 +98,8 @@
             android:layout_marginTop="180dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             style="@style/mealCard"
             tools:ignore="RtlHardcoded">
 
@@ -147,4 +158,4 @@
             </FrameLayout>
         </com.google.android.material.card.MaterialCardView>
     </com.google.android.material.card.MaterialCardView>
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
