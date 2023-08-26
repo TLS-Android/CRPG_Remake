@@ -394,4 +394,10 @@
         <item name="android:tintMode">src_in</item>
         <item name="tint">@color/md_blue_100</item>
     </style>
+
+    <style name="meal_option_background_image">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
 </resources>

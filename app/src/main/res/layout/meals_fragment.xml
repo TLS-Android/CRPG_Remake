@@ -29,33 +29,7 @@
             style="@style/blue_text_title"
             tools:ignore="MissingConstraints" />
 
-        <FrameLayout
-            android:id="@+id/frame_meals"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding"
-            android:layout_marginHorizontal="@dimen/padding"
-            app:layout_constraintTop_toBottomOf="@id/escolha_refeicao">
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/frame_meals_card"
-                style="@style/mealMainFrame"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/padding"
-                app:layout_constraintEnd_toStartOf="@+id/frame_opcao_peixe"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <include android:id="@+id/meals_card_carne"
-                    layout="@layout/meals_card_carne" />
-                <include android:id="@+id/meals_card_peixe"
-                    layout="@layout/meals_card_peixe" />
-                <include android:id="@+id/meals_card_dieta"
-                    layout="@layout/meals_card_dieta" />
-                <include android:id="@+id/meals_card_veg"
-                    layout="@layout/meals_card_veg" />
-            </com.google.android.material.card.MaterialCardView>
-        </FrameLayout>
+        <include layout="@layout/layout_frame_meals" />
 
         <FrameLayout
             android:id="@+id/frame_button"
