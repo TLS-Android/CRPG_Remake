@@ -29,7 +29,10 @@
             style="@style/blue_text_title"
             tools:ignore="MissingConstraints" />
 
-        <include layout="@layout/layout_frame_meals" />
+        <include
+            layout="@layout/layout_frame_meals"
+            tools:layout_editor_absoluteX="12dp"
+            tools:layout_editor_absoluteY="104dp" />
 
         <FrameLayout
             android:id="@+id/frame_button"

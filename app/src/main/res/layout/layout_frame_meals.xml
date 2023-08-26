@@ -39,6 +39,7 @@
                     <ImageView
                         android:id="@+id/background_image_carne"
                         android:contentDescription="@string/imagem_ilutrativa_de_prato_de_carne"
+                        android:src="@drawable/background_carne"
                         style="@style/meal_option_background_image" />
 
                     <LinearLayout style="@style/meal_frame_linear_layout">
@@ -69,6 +70,7 @@
                     <ImageView
                         android:id="@+id/background_image_peixe"
                         android:contentDescription="@string/imagem_ilustrativa_de_prato_de_peixe"
+                        android:src="@drawable/background_peixe"
                         style="@style/meal_option_background_image" />
 
                     <LinearLayout style="@style/meal_frame_linear_layout">
@@ -102,6 +104,7 @@
                     <ImageView
                         android:id="@+id/background_image_dieta"
                         android:contentDescription="@string/imagem_ilustrativa_de_prato_de_dieta"
+                        android:src="@drawable/background_dieta"
                         style="@style/meal_option_background_image" />
 
                     <LinearLayout style="@style/meal_frame_linear_layout">
@@ -133,6 +136,7 @@
                     <ImageView
                         android:id="@+id/background_image_vegetariano"
                         android:contentDescription="@string/imagem_ilustrativa_de_prato_vegetariano"
+                        android:src="@drawable/background_veg"
                         style="@style/meal_option_background_image"/>
 
                     <LinearLayout style="@style/meal_frame_linear_layout">
