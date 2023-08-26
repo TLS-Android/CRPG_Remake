@@ -10,20 +10,20 @@
       android:orientation="horizontal"
       android:weightSum="3">
 
-    <RadioButton  android:id="@+id/imageButtonSom"
-        style="@style/alertButton"
-        android:onClick="onRadioButtonClicked"
-        android:layout_weight="1"/>
+    <com.google.android.material.radiobutton.MaterialRadioButton
+        android:id="@+id/imageButtonSom"
+        android:onClick="onRadioButtonSomClicked"
+        style="@style/alertButton" />
 
-    <RadioButton android:id="@+id/imageButtonVibrar"
-        style="@style/alertButton"
-        android:onClick="onRadioButtonClicked"
-        android:layout_weight="1"/>
+    <com.google.android.material.radiobutton.MaterialRadioButton
+        android:id="@+id/imageButtonVibrar"
+        android:onClick="onRadioButtonVibrarClicked"
+        style="@style/alertButton"/>
 
-    <RadioButton android:id="@+id/imageButtonAmbos"
-        style="@style/alertButton"
-        android:onClick="onRadioButtonClicked"
-        android:layout_weight="1"/>
+    <com.google.android.material.radiobutton.MaterialRadioButton
+        android:id="@+id/imageButtonAmbos"
+        android:onClick="onRadioButtonAmbosClicked"
+        style="@style/alertButton" />
   </RadioGroup>
 
   <TableLayout

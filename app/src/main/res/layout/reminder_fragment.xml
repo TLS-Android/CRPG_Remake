@@ -148,6 +148,5 @@
           android:text="@string/guardar"
           style="@style/blue_button" />
 
-
-</LinearLayout>
+  </LinearLayout>
 </layout>

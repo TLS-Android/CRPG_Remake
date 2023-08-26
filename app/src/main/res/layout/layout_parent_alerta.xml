@@ -6,7 +6,7 @@
     style="@style/layout_section_base">
 
   <ImageView style="@style/parentLayoutImage"
-      android:src="@drawable/background_carne"
+      android:src="@drawable/marker"
       android:contentDescription="@string/telemovel" />
 
   <TextView

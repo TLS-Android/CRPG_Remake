@@ -15,14 +15,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding"
-        app:contentPadding="@dimen/padding"
+        app:contentPadding="@dimen/padding_20"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         style="@style/mealMainFrame" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginVertical="@dimen/padding">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/frame_opcao_carne"

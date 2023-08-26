@@ -29,10 +29,7 @@
             style="@style/blue_text_title"
             tools:ignore="MissingConstraints" />
 
-        <include
-            layout="@layout/layout_frame_meals"
-            tools:layout_editor_absoluteX="12dp"
-            tools:layout_editor_absoluteY="104dp" />
+        <include layout="@layout/layout_frame_meals" />
 
         <FrameLayout
             android:id="@+id/frame_button"
@@ -48,13 +45,13 @@
                 android:text="@string/guardar"
                 style="@style/blue_button" />
 
-        <TextView
-            android:id="@+id/aviso_nenhuma_refeicao_checked"
-            android:text="@string/nenhuma_refeicao_selecionada"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/frame_meals"
-            style="@style/warning_text" />
+            <TextView
+                android:id="@+id/aviso_nenhuma_refeicao_checked"
+                android:text="@string/nenhuma_refeicao_selecionada"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/frame_meals"
+                style="@style/warning_text" />
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

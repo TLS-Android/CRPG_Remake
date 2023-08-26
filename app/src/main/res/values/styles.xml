@@ -119,7 +119,7 @@
         <item name="checkedIconTint">@color/PrimaryGreen</item>
         <item name="contentPadding">0dp</item>
         <item name="strokeColor">@color/PrimaryOrange</item>
-        <item name="strokeWidth">3dp</item>
+        <item name="strokeWidth">6dp</item>
     </style>
 
     <style name="mealMainFrame" parent="@style/Widget.MaterialComponents.CardView">
@@ -136,7 +136,7 @@
         <item name="checkedIconTint">@color/PrimaryGreen</item>
         <item name="contentPadding">0dp</item>
         <item name="strokeColor">@color/PrimaryOrange</item>
-        <item name="strokeWidth">3dp</item>
+        <item name="strokeWidth">8dp</item>
     </style>
 
     <style name="myActionBarStyle" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
@@ -181,12 +181,12 @@
     </style>
 
     <style name="alertButton">
-        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_width">80dp</item>
         <item name="android:layout_height">80dp</item>
         <item name="android:layout_marginEnd">8dp</item>
         <item name="android:scaleType">fitCenter</item>
         <item name="android:gravity">center_horizontal</item>
-        <item name="android:layout_weight">0.3</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:backgroundTint">@color/white_93</item>
     </style>
 
@@ -257,6 +257,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@color/md_blue_100</item>
         <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:layout_weight">1</item>
     </style>
 
     <style name="layout_section_base">
@@ -307,13 +308,13 @@
     </style>
 
     <style name="meal_text_option">
-        <item name="android:layout_width">140dp</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center_horizontal</item>
         <item name="android:maxLength">30</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:lines">2</item>
+        <item name="android:lines">3</item>
     </style>
 
     <style name="warning_text">
@@ -401,5 +402,12 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">60dp</item>
         <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <style name="reminder_radio_button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:layout_weight">1</item>
     </style>
 </resources>
