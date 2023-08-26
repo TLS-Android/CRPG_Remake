@@ -21,6 +21,7 @@
         style="@style/mealMainFrame" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ly_meals_options"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginVertical="@dimen/padding">
