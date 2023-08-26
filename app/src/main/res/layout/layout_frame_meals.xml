@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding"
-        android:padding="@dimen/padding"
+        app:contentPadding="@dimen/padding"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         style="@style/mealMainFrame" >
@@ -26,8 +26,6 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/frame_opcao_carne"
-                android:layout_marginStart="@dimen/padding"
-                android:layout_marginVertical="@dimen/padding"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/frame_opcao_peixe"
                 app:layout_constraintTop_toTopOf="parent"
@@ -59,10 +57,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/frame_opcao_peixe"
-                android:layout_marginEnd="@dimen/padding"
-                android:layout_marginVertical="@dimen/padding"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/frame_opcao_vegetariano"
+                app:layout_constraintTop_toTopOf="@id/frame_opcao_carne"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/frame_opcao_carne"
                 style="@style/mealCard">
@@ -92,8 +87,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/frame_opcao_dieta"
-                android:layout_marginStart="@dimen/padding"
-                android:layout_marginVertical="@dimen/padding"
+                android:layout_marginTop="@dimen/padding"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/frame_opcao_vegetariano"
                 app:layout_constraintTop_toBottomOf="@id/frame_opcao_carne"
@@ -126,10 +120,8 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/frame_opcao_vegetariano"
-                android:layout_marginEnd="@dimen/padding"
-                android:layout_marginVertical="@dimen/padding"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/frame_opcao_peixe"
+                app:layout_constraintTop_toTopOf="@id/frame_opcao_dieta"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/frame_opcao_dieta"
                 style="@style/mealCard" >
