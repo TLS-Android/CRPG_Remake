@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/second_layout"
     android:paddingHorizontal="@dimen/padding4x"
-    android:paddingVertical="@dimen/padding">
+    android:paddingVertical="@dimen/padding"
+    android:visibility="gone">
 
   <com.google.android.material.card.MaterialCardView
       android:id="@+id/frame_opcao_carne"

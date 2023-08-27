@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   style="@style/second_layout"
-  android:padding="@dimen/padding4">
+  android:padding="@dimen/padding4"
+  android:visibility="gone">
 
   <RadioGroup
       android:id="@+id/alert_radio_group"

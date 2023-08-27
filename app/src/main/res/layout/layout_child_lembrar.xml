@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/second_layout"
     android:paddingVertical="@dimen/padding"
-    android:paddingHorizontal="@dimen/padding4x">
+    android:paddingHorizontal="@dimen/padding4x"
+    android:visibility="gone">
 
   <RadioGroup
     android:id="@+id/lembrar_radio_group"

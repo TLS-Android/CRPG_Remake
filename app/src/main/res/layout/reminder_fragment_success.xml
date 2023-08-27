@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:padding="@dimen/padding4x"
     android:background="@color/PrimaryGreen"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:visibility="gone">
 
     <View
         android:id="@+id/white_view"

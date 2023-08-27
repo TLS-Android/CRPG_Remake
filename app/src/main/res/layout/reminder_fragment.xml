@@ -17,45 +17,41 @@
     android:orientation="vertical"
     android:weightSum="18">
 
-    <include
-        layout="@layout/reminder_fragment_intro"
-        android:id="@+id/reminder_intro"
-        android:visibility="gone"/>
+    <include layout="@layout/reminder_fragment_intro"
+        android:id="@+id/reminder_intro" />
 
     <include layout="@layout/reminder_fragment_success"
-        android:id="@+id/reminder_success"
-        android:visibility="gone"/>
+        android:id="@+id/reminder_success" />
 
     <include layout="@layout/layout_parent_alerta"
-        android:id="@+id/parent_alerta"
-        android:visibility="gone"/>
+        android:id="@+id/parent_alerta" />
+
     <include layout="@layout/layout_parent_dia"
-        android:id="@+id/parent_dia"
-        android:visibility="gone"/>
+        android:id="@+id/parent_dia" />
+
     <include layout="@layout/layout_parent_horas"
-        android:id="@+id/parent_horas"
-        android:visibility="gone"/>
+        android:id="@+id/parent_horas" />
+
     <include layout="@layout/layout_parent_lembrar"
-        android:id="@+id/parent_lembrar"
-        android:visibility="gone"/>
+        android:id="@+id/parent_lembrar" />
+
     <include layout="@layout/layout_parent_notas"
-        android:id="@+id/parent_notas"
-        android:visibility="gone"/>
+        android:id="@+id/parent_notas" />
+
     <include layout="@layout/layout_child_alerta"
-        android:id="@+id/child_alerta"
-        android:visibility="gone"/>
+        android:id="@+id/child_alerta" />
+
     <include layout="@layout/layout_child_dia"
-        android:id="@+id/child_dia"
-        android:visibility="gone"/>
+        android:id="@+id/child_dia" />
+
     <include layout="@layout/layout_child_horas"
-        android:id="@+id/child_horas"
-        android:visibility="gone"/>
+        android:id="@+id/child_horas" />
+
     <include layout="@layout/layout_child_lembrar"
-        android:id="@+id/child_lembrar"
-        android:visibility="gone"/>
+        android:id="@+id/child_lembrar" />
+
     <include layout="@layout/layout_child_notas"
-        android:id="@+id/child_notas"
-        android:visibility="gone"/>
+        android:id="@+id/child_notas" />
 
     <ScrollView
         android:layout_width="match_parent"

@@ -268,6 +268,7 @@
         <item name="android:gravity">start</item>
         <item name="android:paddingVertical">10dp</item>
         <item name="android:paddingStart">20dp</item>
+        <item name="android:visibility">gone</item>
     </style>
 
     <style name="blue_button" parent="@style/Widget.MaterialComponents.Button">
@@ -362,6 +363,7 @@
         <item name="android:layout_weight">.70</item>
         <item name="android:background">@color/white_93</item>
         <item name="android:orientation">vertical</item>
+        <item name="android:visibility">gone</item>
     </style>
 
     <!-- EXO PLAYER BUTTONS STYLES -->

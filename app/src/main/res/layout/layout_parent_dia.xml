@@ -3,6 +3,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/layout_cover"
   tools:ignore="UnusedAttribute"
+  tools:visibility="visible"
   style="@style/layout_section_base">
 
   <ImageView android:src="@drawable/marker"

@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/second_layout"
     android:paddingHorizontal="@dimen/padding4x"
-    android:paddingVertical="@dimen/padding4">
+    android:paddingVertical="@dimen/padding4"
+    >
 
   <com.google.android.material.button.MaterialButtonToggleGroup
       android:id="@+id/dia_radio_group"
