@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/layout_section_base">
-
-  <com.google.android.material.textview.MaterialTextView
+ <com.google.android.material.textview.MaterialTextView xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
       android:text="@string/a_que_horas"
       android:drawablePadding="@dimen/padding2x"
       app:drawableStartCompat="@drawable/ic_notifications_black_24dp"
       style="@style/parentTitle"
       tools:visibility="visible" />
-</LinearLayout>

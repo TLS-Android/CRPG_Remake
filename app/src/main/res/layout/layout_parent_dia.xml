@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.textview.MaterialTextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:visibility="visible"
-    style="@style/layout_section_base">
-
-  <com.google.android.material.textview.MaterialTextView
-      android:text="@string/em_que_dia"
-      android:drawablePadding="@dimen/padding2x"
-      app:drawableStartCompat="@drawable/ic_notifications_black_24dp"
-      style="@style/parentTitle"
-      tools:visibility="visible" />
-</LinearLayout>
+    android:text="@string/em_que_dia"
+    android:drawablePadding="@dimen/padding2x"
+    app:drawableStartCompat="@drawable/ic_notifications_black_24dp"
+    style="@style/parentTitle"
+    tools:visibility="visible" />
