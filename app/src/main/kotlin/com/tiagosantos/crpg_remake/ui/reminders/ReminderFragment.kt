@@ -94,10 +94,13 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
         viewB.apply {
             actionList = mutableListOf(
                 expandableHoras, expandableDia, expandableAlerta, expandableNotas, parentLayout,
-                buttonCancel, buttonConfirm, childLembrar.buttonMedicacao, childLembrar.buttonTransporte, childLembrar.buttonAlmoco,
-                childLembrar.buttonLembrete, childAlerta.imageButtonSom, childAlerta.imageButtonVibrar,
-                childAlerta.imageButtonAmbos, childDia.buttonHoje, childDia.buttonTodosDias, childDia.buttonPersonalizado,
+                buttonCancel, buttonConfirm,
             )
+            with(lyChildGroup) {
+                actionList.addAll(listOf(childLembrar.buttonTransporte, childLembrar.buttonAlmoco,
+                    childLembrar.buttonLembrete, childAlerta.imageButtonSom, childAlerta.imageButtonVibrar,
+                    childAlerta.imageButtonAmbos, childDia.buttonHoje, childDia.buttonTodosDias, childDia.buttonPersonalizado))
+            }
         }
         return viewB.root
     }
@@ -159,46 +162,51 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
     override fun setupUI() {
         with(viewB) {
             setupExpandables()
-            with(childLembrar) {
-                lembrarRadioGroup.addOnButtonCheckedListener { _, checkedId, _ ->
-                    lembrarButtonPressed = checkedId
-                    when (checkedId) {
-                        R.id.button_medicacao, R.id.button_lembrete -> {
-                            inserirTituloLembretePersonalizado.show()
-                            textEditPersonalizado.show()
-                        }
 
-                        R.id.button_transporte, R.id.button_almoco -> {
-                            inserirTituloLembretePersonalizado.invisible()
-                            textEditPersonalizado.invisible()
+            with(lyChildGroup){
+                with(childLembrar) {
+                    lembrarRadioGroup.addOnButtonCheckedListener { _, checkedId, _ ->
+                        lembrarButtonPressed = checkedId
+                        when (checkedId) {
+                            R.id.button_medicacao, R.id.button_lembrete -> {
+                                inserirTituloLembretePersonalizado.show()
+                                textEditPersonalizado.show()
+                            }
+
+                            R.id.button_transporte, R.id.button_almoco -> {
+                                inserirTituloLembretePersonalizado.invisible()
+                                textEditPersonalizado.invisible()
+                            }
+                        }
+                    }
+
+                }
+
+                /** ---- FILTRO TIME INPUT -------- **/
+                childHoras.apply {
+                    et = editHours.filterTime("00", "23")
+                    etMin = editMinutes.filterTime("00", "59")
+                }
+
+                with(childDia) {
+                    diaRadioGroup.addOnButtonCheckedListener { _, checkedId, _ ->
+                        alarmFreqButtonPressed = checkedId; setButtonColorsDays(alarmFreqButtonPressed) }
+                }
+
+                with(childAlerta) {
+                    alertRadioGroup.setOnCheckedChangeListener { _, optionId -> alarmTypeButtonPressed = optionId
+                        run {
+                            when (optionId) {
+                                R.id.imageButtonSom -> checkboxSom.show()
+                                R.id.imageButtonVibrar -> checkboxVibrar.show()
+                                R.id.imageButtonAmbos -> checkboxAmbos.show()
+                            }
                         }
                     }
                 }
 
             }
 
-            /** ---- FILTRO TIME INPUT -------- **/
-            childHoras.apply {
-                et = editHours.filterTime("00", "23")
-                etMin = editMinutes.filterTime("00", "59")
-            }
-
-            with(childDia) {
-                diaRadioGroup.addOnButtonCheckedListener { _, checkedId, _ ->
-                    alarmFreqButtonPressed = checkedId; setButtonColorsDays(alarmFreqButtonPressed) }
-            }
-
-            with(childAlerta) {
-                alertRadioGroup.setOnCheckedChangeListener { _, optionId -> alarmTypeButtonPressed = optionId
-                    run {
-                        when (optionId) {
-                            R.id.imageButtonSom -> checkboxSom.show()
-                            R.id.imageButtonVibrar -> checkboxVibrar.show()
-                            R.id.imageButtonAmbos -> checkboxAmbos.show()
-                        }
-                    }
-                }
-            }
 
             /** ----- CANCELAR  ------ **/
             setupCancelButton()
@@ -214,8 +222,8 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
             buttonConfirm.setOnClickListener {
                 if (et.text.toString().length == 2 && etMin.text.toString().length == 2) {
                     viewModel.setTime(et, etMin)
-                    hoursInt = childHoras.editHours.text.toString().toInt()
-                    minsInt = childHoras.editMinutes.text.toString().toInt()
+                    hoursInt = lyChildGroup.childHoras.editHours.text.toString().toInt()
+                    minsInt = lyChildGroup.childHoras.editMinutes.text.toString().toInt()
                     hoursMinutesFlag = true
                 } else { avisoCampos.run { text = getString(R.string.valor_em_falta); show() } }
 
@@ -230,13 +238,13 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
                         2 -> updateButton(getString(R.string.apanhar_bus), TRANSPORTE)
                         3 -> updateButton(getString(R.string.lembrar_escolha_almoco), REFEICAO)
                         4 -> { updateButton(
-                                childLembrar.textEditPersonalizado.text.toString(),
+                            lyChildGroup.childLembrar.textEditPersonalizado.text.toString(),
                                 ReminderType.PERSONALIZADO
                             )
                         } else -> { println("lembrarButtonPressed is neither!") }
                     }
 
-                    with(childDia) {
+                    with(lyChildGroup.childDia) {
                         for (id in toggleButtonGroup.checkedButtonIds) {
                             val materialButton: MaterialButton = toggleButtonGroup.findViewById(id)
                             for(day in DayOfWeek.values()) day.value
@@ -253,7 +261,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
 
     private fun setupCancelButton() =
         with(viewB) {
-            with(childAlerta) {
+            with(lyChildGroup.childAlerta) {
                 buttonCancel.setOnClickListener {
                     avisoCampos.hide()
 
@@ -267,12 +275,12 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
                     alarmTypeButtonPressed = 0
                     alarmFreqButtonPressed = 0
 
-                    with(childHoras) {
+                    with(lyChildGroup.childHoras) {
                         editHours.setEmptyText()
                         editMinutes.setEmptyText()
                     }
 
-                    childNotas.editTextNotes.setEmptyText()
+                    lyChildGroup.childNotas.editTextNotes.setEmptyText()
                 }
             }
         }
@@ -284,7 +292,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
 
     /** TO DO: USE COLOR STATE LIST **/
     private fun setButtonColorsDays(pos: Int) {
-        with(viewB.childDia) {
+        with(viewB.lyChildGroup.childDia) {
             buttonHoje.setBackgroundResource(R.drawable.layout_button_round_top)
             buttonTodosDias.setBackgroundResource(R.color.md_blue_100)
             buttonPersonalizado.setBackgroundResource(R.drawable.layout_button_round_bottom)

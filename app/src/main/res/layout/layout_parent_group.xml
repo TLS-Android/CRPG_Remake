@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <include layout="@layout/layout_parent_alerta"
+      android:id="@+id/parent_alerta" />
+
+  <include layout="@layout/layout_parent_dia"
+      android:id="@+id/parent_dia" />
+
+  <include layout="@layout/layout_parent_horas"
+      android:id="@+id/parent_horas" />
+
+  <include layout="@layout/layout_parent_lembrar"
+      android:id="@+id/parent_lembrar" />
+
+  <include layout="@layout/layout_parent_notas"
+      android:id="@+id/parent_notas" />
+
+</merge>
