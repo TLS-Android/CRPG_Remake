@@ -29,7 +29,9 @@
             style="@style/blue_text_title"
             tools:ignore="MissingConstraints" />
 
-        <include layout="@layout/layout_frame_meals" />
+        <include
+            android:id="@+id/ly_frame_meals"
+            layout="@layout/layout_frame_meals" />
 
         <FrameLayout
             android:id="@+id/frame_button"
@@ -37,7 +39,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/frame_meals"
+            app:layout_constraintTop_toBottomOf="@id/ly_frame_meals"
             app:layout_constraintBottom_toBottomOf="parent" >
 
             <com.google.android.material.button.MaterialButton

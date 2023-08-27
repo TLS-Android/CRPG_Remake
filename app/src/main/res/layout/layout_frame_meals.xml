@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frame_meals"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/padding"
@@ -28,20 +27,18 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/frame_opcao_carne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/frame_opcao_peixe"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/frame_opcao_dieta"
                 style="@style/mealCard" >
 
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
                     <ImageView
                         android:id="@+id/background_image_carne"
                         android:contentDescription="@string/imagem_ilutrativa_de_prato_de_carne"
-                        android:src="@drawable/background_carne"
+                        tools:src="@drawable/background_carne"
                         style="@style/meal_option_background_image" />
 
                     <LinearLayout style="@style/meal_frame_linear_layout">
@@ -55,24 +52,21 @@
                             android:id="@+id/text_opcao_carne"
                             style="@style/meal_text_option" />
                     </LinearLayout>
-                </FrameLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/frame_opcao_peixe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="@id/frame_opcao_carne"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/frame_opcao_carne"
                 style="@style/mealCard">
 
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
                     <ImageView
                         android:id="@+id/background_image_peixe"
                         android:contentDescription="@string/imagem_ilustrativa_de_prato_de_peixe"
-                        android:src="@drawable/background_peixe"
+                        tools:src="@drawable/background_peixe"
                         style="@style/meal_option_background_image" />
 
                     <LinearLayout style="@style/meal_frame_linear_layout">
@@ -86,11 +80,12 @@
                             android:id="@+id/text_opcao_peixe"
                             style="@style/meal_text_option" />
                     </LinearLayout>
-                </FrameLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/frame_opcao_dieta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/padding"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/frame_opcao_vegetariano"
@@ -99,14 +94,10 @@
                 style="@style/mealCard"
                 tools:ignore="RtlHardcoded">
 
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
                     <ImageView
                         android:id="@+id/background_image_dieta"
                         android:contentDescription="@string/imagem_ilustrativa_de_prato_de_dieta"
-                        android:src="@drawable/background_dieta"
+                        tools:src="@drawable/background_dieta"
                         style="@style/meal_option_background_image" />
 
                     <LinearLayout style="@style/meal_frame_linear_layout">
@@ -120,25 +111,22 @@
                             android:id="@+id/text_opcao_dieta"
                             style="@style/meal_text_option" />
                     </LinearLayout>
-                </FrameLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/frame_opcao_vegetariano"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/frame_opcao_dieta"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/frame_opcao_dieta"
                 style="@style/mealCard" >
 
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
                     <ImageView
                         android:id="@+id/background_image_vegetariano"
                         android:contentDescription="@string/imagem_ilustrativa_de_prato_vegetariano"
-                        android:src="@drawable/background_veg"
+                        tools:src="@drawable/background_veg"
                         style="@style/meal_option_background_image"/>
 
                     <LinearLayout style="@style/meal_frame_linear_layout">
@@ -152,7 +140,6 @@
                             android:id="@+id/text_opcao_vegetariano"
                             style="@style/meal_text_option" />
                     </LinearLayout>
-                </FrameLayout>
             </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
