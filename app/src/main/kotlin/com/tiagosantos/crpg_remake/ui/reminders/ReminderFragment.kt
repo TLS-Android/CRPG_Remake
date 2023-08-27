@@ -165,7 +165,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
 
             with(lyChildGroup){
                 with(childLembrar) {
-                    lembrarRadioGroup.addOnButtonCheckedListener { _, checkedId, _ ->
+                    lembrarRadioGroup.setOnCheckedChangeListener { _, checkedId ->
                         lembrarButtonPressed = checkedId
                         when (checkedId) {
                             R.id.button_medicacao, R.id.button_lembrete -> {

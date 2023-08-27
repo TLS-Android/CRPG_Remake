@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_cover"
-    tools:ignore="UnusedAttribute"
+    tools:visibility="visible"
     style="@style/layout_section_base">
 
-  <ImageView style="@style/parentLayoutImage"
-      android:src="@drawable/marker"
-      android:contentDescription="@string/telemovel" />
-
-  <TextView
-      android:id="@+id/parent_title_alert"
+  <com.google.android.material.textview.MaterialTextView
       android:text="@string/som_ou_vibracao"
-      style="@style/parentTitle" />
+      android:drawablePadding="@dimen/padding2x"
+      android:contentDescription="@string/telemovel"
+      app:drawableStartCompat="@drawable/marker"
+      style="@style/parentTitle"
+      tools:visibility="visible" />
 </LinearLayout>
