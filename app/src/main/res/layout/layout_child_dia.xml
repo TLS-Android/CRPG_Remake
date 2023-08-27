@@ -5,7 +5,7 @@
     style="@style/second_layout"
     android:paddingHorizontal="@dimen/padding4x"
     android:paddingVertical="@dimen/padding4"
-    >
+    tools:visibility="visible" >
 
   <com.google.android.material.button.MaterialButtonToggleGroup
       android:id="@+id/dia_radio_group"
@@ -15,7 +15,7 @@
       android:weightSum="3"
       app:singleSelection="true">
 
-    <com.google.android.material.button.MaterialButton
+    <RadioButton
         android:id="@+id/button_hoje"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
     <View android:id="@+id/dia_separator1"
         style="@style/greySeparator" />
 
-    <com.google.android.material.button.MaterialButton
+    <RadioButton
         android:id="@+id/button_todos_dias"
         android:textSize="22sp"
         style="@style/center_button_reminder"
@@ -39,7 +39,7 @@
     <View android:id="@+id/dia_separator2"
         style="@style/greySeparator" />
 
-    <com.google.android.material.button.MaterialButton
+    <RadioButton
         android:id="@+id/button_personalizado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -73,7 +73,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:visibility="invisible"
-        android:layout_weight="7">
+        android:layout_weight="7"
+        tools:visibility="visible">
 
       <com.google.android.material.button.MaterialButton
           android:id="@+id/buttonSeg"

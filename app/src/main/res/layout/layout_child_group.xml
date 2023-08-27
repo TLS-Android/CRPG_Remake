@@ -16,4 +16,7 @@
   <include layout="@layout/layout_child_notas"
       android:id="@+id/child_notas" />
 
+  <include layout="@layout/layout_radio_test"
+      android:id="@+id/test" />
+
 </merge>
