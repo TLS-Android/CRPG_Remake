@@ -11,7 +11,6 @@ import com.bumptech.glide.request.target.ViewTarget
 import com.google.android.material.card.MaterialCardView
 import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
-import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.extension.eachChild
 import com.tiagosantos.common.ui.extension.hide
@@ -21,7 +20,6 @@ import com.tiagosantos.common.ui.extension.showAndBringToFront
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.base.FragmentSettings
-import com.tiagosantos.crpg_remake.base.actionMap
 import com.tiagosantos.crpg_remake.databinding.MealsFragmentBinding
 import kotlinx.coroutines.launch
 
@@ -101,24 +99,23 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
             }
 
             with(viewB) {
-                frameMeals.eachChild {
+                lyFrameMeals.lyMealsOptions.eachChild {
                     (it as MaterialCardView).setFrameOnClick(cardList, ::setChecks)
                         .also { updateFlagMealChosen() }
                 }
 
-                with(success) {
-                    buttonConfirmMeal.setOnClickListener {
-                        if (viewModel.selectedOption.value != 0) {
-                            mealChoiceSuccess.showAndBringToFront()
-                            avisoNenhumaRefeicaoChecked.hide()
-                            viewModel.updateMealChoiceOnLocalStorage(viewModel.selectedOption, isLunch)
-                            buttonOk.setOnClickListener { mealChoiceSuccess.hide() }
-                        } else {
-                            mealChoiceSuccess.show()
-                        }
+                buttonConfirmMeal.setOnClickListener {
+                    if (viewModel.selectedOption.value != 0) {
+                        mealChoiceSuccess.showAndBringToFront()
+                        avisoNenhumaRefeicaoChecked.hide()
+                        viewModel.updateMealChoiceOnLocalStorage(viewModel.selectedOption, isLunch)
+                        buttonOk.setOnClickListener { mealChoiceSuccess.hide() }
+                    } else {
+                        mealChoiceSuccess.show()
                     }
                 }
             }
+
         }
     }
 
