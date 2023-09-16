@@ -74,8 +74,10 @@ class BorderedCircle : View {
         }
     }
 
-    override fun onDraw(canvas: Canvas?) {
-        super.onDraw(canvas)
+    override fun onDraw(canvas: Canvas) {
+        if (canvas != null) {
+            super.onDraw(canvas)
+        }
 
         val space = dpToPx(3f)
         val cx = (width/2).toFloat()

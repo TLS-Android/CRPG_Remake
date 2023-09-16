@@ -106,12 +106,12 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
 
                 buttonConfirmMeal.setOnClickListener {
                     if (viewModel.selectedOption.value != 0) {
-                        mealChoiceSuccess.showAndBringToFront()
+                        success.mealChoiceSuccess.showAndBringToFront()
                         avisoNenhumaRefeicaoChecked.hide()
                         viewModel.updateMealChoiceOnLocalStorage(viewModel.selectedOption, isLunch)
-                        buttonOk.setOnClickListener { mealChoiceSuccess.hide() }
+                        success.buttonOk.setOnClickListener { success.mealChoiceSuccess.hide() }
                     } else {
-                        mealChoiceSuccess.show()
+                        success.mealChoiceSuccess.show()
                     }
                 }
             }
