@@ -5,11 +5,11 @@ plugins {
 
 android {
     namespace 'com.plataforma.crpg'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
-        minSdk 29
-        targetSdk 33
+        minSdk 30
+        targetSdk 34
 
         multiDexEnabled true
 
