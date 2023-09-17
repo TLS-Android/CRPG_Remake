@@ -91,8 +91,8 @@ class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
     override fun setupUI() {
         lifecycleScope.launch {
             fun setChecks(cardList: List<MaterialCardView?>, card: MaterialCardView) {
-                if (!card.isChecked) viewModel.updateSelectedOption(1)
-                else viewModel.updateSelectedOption(0)
+                if (!card.isChecked) viewModel.updateSelectedOption(card.id)
+                else viewModel.updateSelectedOption(card.id)
                 for (s in cardList) {
                     if (s != card) s?.isChecked = false
                 }

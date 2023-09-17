@@ -18,7 +18,7 @@ import java.util.*
 @SuppressWarnings("LeakingThisInConstructor")
 open class Gossip(private val context: Context) : TextToSpeech.OnInitListener {
 
-    private val textToSpeech: TextToSpeech = TextToSpeech(context, this)
+    val textToSpeech: TextToSpeech = TextToSpeech(context, this)
 
     private var activity: Activity? = null
 
