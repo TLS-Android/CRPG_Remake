@@ -8,17 +8,14 @@ import androidx.lifecycle.MutableLiveData
 import com.google.android.material.button.MaterialButton
 import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
-import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
-import com.tiagosantos.crpg_remake.base.actionMap
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationBinding
 
 @FragmentWithArgs
 class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>() {
-
 
     @delegate:Arg
     override val settings by lazy {

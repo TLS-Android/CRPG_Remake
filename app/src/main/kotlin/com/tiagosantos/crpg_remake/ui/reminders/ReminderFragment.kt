@@ -71,13 +71,6 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
     private lateinit var etMin: EditText
 
     companion object {
-
-        /*
-        val weekMap = mapOf(
-            "Seg" to 1, "Ter" to 2, "Qua" to 3,
-            "Qui" to 4, "Sex" to 5, "Sab" to 6, "Dom" to 7
-        )*/
-
         var lembrarButtonPressed = 0
         var alarmTypeButtonPressed = 0
         var alarmFreqButtonPressed = 0
@@ -249,12 +242,10 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
                             val materialButton: MaterialButton = toggleButtonGroup.findViewById(id)
                             for(day in DayOfWeek.values()) day.value
                             resources.getResourceName(materialButton.id)
-                            //weekMap[resources.getResourceName(materialButton.id).takeLast(3)]
                         }
                     }
                     setTypeAndFrequency(newReminder)
                 }
-
             }
         }
 

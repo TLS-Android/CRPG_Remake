@@ -56,7 +56,6 @@ class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaP
         with(viewB) {
             textSelectedMood.text = viewModel.selectedMood
             viewModel.setupPlayer(player, this)
-            //setBackgroundColor(viewB)
 
             val mood = Mood.RELAXADO
             moodColor.apply { setBackgroundColor(resources.getColor(mood.colorId)) }
