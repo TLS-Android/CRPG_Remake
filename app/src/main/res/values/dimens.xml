@@ -17,7 +17,7 @@
     <dimen name="bottom_padding_recycler_view">60dp</dimen> <!-- bottom_sheet_peek_height + 10dp -->
 
     <!-- Text sizes for different text views -->
-    <dimen name="feature_title_text_size">32sp</dimen>
+    <dimen name="feature_title_text_size">24sp</dimen>
     <dimen name="feature_subtitle_text_size">20sp</dimen>
     <dimen name="button_text_size">25sp</dimen>
 

@@ -354,7 +354,7 @@
     <style name="blue_text_title">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">top|center</item>
+        <item name="android:layout_gravity">center</item>
         <item name="android:textColor">@color/md_blue_100</item>
         <item name="android:textSize">@dimen/feature_title_text_size</item>
         <item name="android:textAlignment">center</item>
