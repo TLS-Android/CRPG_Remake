@@ -90,9 +90,11 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
             with(lyChildGroup) {
                 actionList.addAll(
                     listOf(
-                    childLembrar.buttonTransporte, childLembrar.buttonAlmoco, childLembrar.buttonLembrete,
-                    childAlerta.imageButtonSom, childAlerta.imageButtonVibrar, childAlerta.imageButtonAmbos,
-                    childDia.buttonHoje, childDia.buttonTodosDias, childDia.buttonPersonalizado)
+                        childLembrar.buttonTransporte, childLembrar.buttonAlmoco,
+                        childLembrar.buttonLembrete, childAlerta.imageButtonSom,
+                        childAlerta.imageButtonVibrar, childAlerta.imageButtonAmbos,
+                        childDia.buttonHoje, childDia.buttonTodosDias, childDia.buttonPersonalizado
+                    )
                 )
             }
         }
@@ -184,7 +186,8 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
 
                 with(childDia) {
                     diaRadioGroup.addOnButtonCheckedListener { _, checkedId, _ ->
-                        alarmFreqButtonPressed = checkedId; setButtonColorsDays(alarmFreqButtonPressed) }
+                        alarmFreqButtonPressed = checkedId;
+                        setButtonColorsDays(alarmFreqButtonPressed) }
                 }
 
                 with(childAlerta) {
@@ -242,7 +245,7 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
                     with(lyChildGroup.childDia) {
                         for (id in toggleButtonGroup.checkedButtonIds) {
                             val materialButton: MaterialButton = toggleButtonGroup.findViewById(id)
-                            for(day in DayOfWeek.values()) day.value
+                            for(day in DayOfWeek.entries) day.value
                             resources.getResourceName(materialButton.id)
                         }
                     }
