@@ -13,7 +13,6 @@ import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
 import com.plataforma.crpg.TimelineView
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.Orientation
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.TimelineAttributes
-import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.model.Event
 import com.tiagosantos.crpg_remake.R

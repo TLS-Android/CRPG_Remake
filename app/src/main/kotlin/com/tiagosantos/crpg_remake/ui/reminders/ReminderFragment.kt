@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
 import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
-import com.tiagosantos.access.modal.settings.SRSettings
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.extension.*
 import com.tiagosantos.common.ui.model.AlarmFrequency.*
@@ -23,7 +22,6 @@ import com.tiagosantos.common.ui.model.ReminderType.REFEICAO
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
-import com.tiagosantos.crpg_remake.base.actionMap
 import com.tiagosantos.crpg_remake.databinding.*
 import com.tiagosantos.crpg_remake.helper.ResourcesProvider
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.filterTime
@@ -90,9 +88,12 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
                 buttonCancel, buttonConfirm,
             )
             with(lyChildGroup) {
-                actionList.addAll(listOf(childLembrar.buttonTransporte, childLembrar.buttonAlmoco,
-                    childLembrar.buttonLembrete, childAlerta.imageButtonSom, childAlerta.imageButtonVibrar,
-                    childAlerta.imageButtonAmbos, childDia.buttonHoje, childDia.buttonTodosDias, childDia.buttonPersonalizado))
+                actionList.addAll(
+                    listOf(
+                    childLembrar.buttonTransporte, childLembrar.buttonAlmoco, childLembrar.buttonLembrete,
+                    childAlerta.imageButtonSom, childAlerta.imageButtonVibrar, childAlerta.imageButtonAmbos,
+                    childDia.buttonHoje, childDia.buttonTodosDias, childDia.buttonPersonalizado)
+                )
             }
         }
         return viewB.root
@@ -187,7 +188,8 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
                 }
 
                 with(childAlerta) {
-                    alertRadioGroup.setOnCheckedChangeListener { _, optionId -> alarmTypeButtonPressed = optionId
+                    alertRadioGroup.setOnCheckedChangeListener { _, optionId ->
+                        alarmTypeButtonPressed = optionId
                         run {
                             when (optionId) {
                                 R.id.imageButtonSom -> checkboxSom.show()
