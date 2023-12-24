@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/padding12"
-    android:layout_marginHorizontal="@dimen/padding12"
+    android:layout_marginHorizontal="@dimen/padding8"
     app:layout_constraintTop_toBottomOf="@id/escolha_refeicao"
     tools:showIn="@layout/meals_fragment">
 

@@ -58,7 +58,9 @@ class GotevViewModel(
                     Log.i("speech", "speech recognition is now active")
                 }
 
-                override fun onSpeechRmsChanged(value: Float) { Log.d("speech", "rms is now: $value") }
+                override fun onSpeechRmsChanged(value: Float) {
+                    Log.d("speech", "rms is now: $value")
+                }
 
                 override fun onSpeechPartialResults(results: List<String>) {
                     val str = StringBuilder()

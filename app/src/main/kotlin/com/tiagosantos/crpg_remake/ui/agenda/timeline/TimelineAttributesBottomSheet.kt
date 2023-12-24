@@ -38,7 +38,11 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet(), Parcelable {
     companion object {
         private const val EXTRA_ATTRIBUTES = "EXTRA_ATTRIBUTES"
 
-        fun showDialog(fragmentManager: FragmentManager, attributes: TimelineAttributes, callbacks: Callbacks) {
+        fun showDialog(
+            fragmentManager: FragmentManager,
+            attributes: TimelineAttributes,
+            callbacks: Callbacks
+        ) {
             val dialog = TimelineAttributesBottomSheet()
             dialog.arguments = bundleOf(
                 EXTRA_ATTRIBUTES to attributes
@@ -62,7 +66,9 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet(), Parcelable {
         super.onStart()
 
         if (dialog != null) {
-            val bottomSheet = dialog!!.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+            val bottomSheet = dialog!!.findViewById<View>(
+                com.google.android.material.R.id.design_bottom_sheet
+            )
             bottomSheet.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
         }
 
@@ -75,9 +81,17 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet(), Parcelable {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val contextThemeWrapper = ContextThemeWrapper(activity, R.style.AppTheme)
-        return inflater.cloneInContext(contextThemeWrapper).inflate(R.layout.bottom_sheet_options, container, false)
+        return inflater.cloneInContext(contextThemeWrapper).inflate(
+            R.layout.bottom_sheet_options,
+            container,
+            false
+        )
     }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -103,8 +117,10 @@ class TimelineAttributesBottomSheet : RoundedCornerBottomSheet(), Parcelable {
                 }
             }
 
-            rgOrientation.check(if (mAttributes.orientation == Orientation.VERTICAL) R.id.rb_vertical else R.id.rb_horizontal)
-
+            rgOrientation.check(
+                if (mAttributes.orientation == Orientation.VERTICAL)
+                    R.id.rb_vertical else R.id.rb_horizontal
+            )
         }
 
         with(optionsView.layoutMarker){
