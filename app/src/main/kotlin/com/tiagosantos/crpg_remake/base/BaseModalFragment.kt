@@ -19,7 +19,6 @@ import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.generalHelp
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.numberList
 import com.tiagosantos.crpg_remake.data.sharedprefs.SharedPrefsViewModel
 
-
 abstract class BaseModalFragment<B : ViewDataBinding>: BaseFragment<B>() {
 
     /**

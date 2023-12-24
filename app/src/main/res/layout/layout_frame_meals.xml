@@ -27,8 +27,8 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/frame_opcao_carne"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/frame_opcao_peixe"
                 app:layout_constraintTop_toTopOf="parent"
@@ -56,8 +56,8 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/frame_opcao_peixe"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="@id/frame_opcao_carne"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/frame_opcao_carne"
@@ -84,8 +84,8 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/frame_opcao_dieta"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/padding12"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/frame_opcao_vegetariano"
@@ -115,7 +115,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/frame_opcao_vegetariano"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/frame_opcao_dieta"
