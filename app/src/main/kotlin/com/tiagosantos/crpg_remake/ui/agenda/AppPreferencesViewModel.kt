@@ -17,11 +17,4 @@ class AppPreferencesViewModel(
         application.getSharedPreferences(Constants.MODALITY, Context.MODE_PRIVATE)
     val ttsFlag = modalityPreferences.getBoolean(Constants.TTS, false)
     val srFlag = modalityPreferences.getBoolean(Constants.SR, false)
-
-    init {
-
-
-    }
-
-
 }
