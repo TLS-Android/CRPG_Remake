@@ -57,12 +57,13 @@ abstract class BaseActivity(
         setContentView(layoutId!!)
         //initToolbar()
         actionBar = supportActionBar
+        //setSupportActionBar(findViewById(R.id.appbar))
 
         //populate view
         val layoutView = (findViewById<View>(android.R.id.content) as ViewGroup).getChildAt(0)
         //initViews(layoutView)
 
-        applyWindowInsets(findViewById(android.R.id.content))
+        //applyWindowInsets(findViewById(android.R.id.content))
     }
 
     override fun finish() {

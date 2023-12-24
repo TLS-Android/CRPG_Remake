@@ -30,8 +30,8 @@ class MainActivity : MainActivityInterface, BaseActivity(
     ActivitySettings(
         isAdjustFontScaleToNormal = true,
         windowFlags = listOf(
-            WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION,
-            WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+            //WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION,
+            //WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
         )
     ),
 ) {
@@ -45,8 +45,8 @@ class MainActivity : MainActivityInterface, BaseActivity(
         this.settings = ActivitySettings(
             isAdjustFontScaleToNormal = true,
             windowFlags = listOf(
-                WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION,
-                WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+                //WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION,
+                //WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
             )
         )
     }

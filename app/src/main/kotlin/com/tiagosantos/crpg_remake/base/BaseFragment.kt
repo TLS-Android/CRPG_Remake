@@ -60,7 +60,10 @@ abstract class BaseFragment<B : ViewDataBinding>: Fragment() {
             val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction: FragmentTransaction =
                 fragmentManager.beginTransaction()
-            fragmentTransaction.replace(androidx.navigation.fragment.R.id.nav_host_fragment_container, fragment)
+            fragmentTransaction.replace(
+                androidx.navigation.fragment.R.id.nav_host_fragment_container,
+                fragment
+            )
             fragmentManager.popBackStack()
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
@@ -141,7 +144,9 @@ abstract class BaseFragment<B : ViewDataBinding>: Fragment() {
         super.onPause()
         val sharedPreferences =
             this.requireActivity().getSharedPreferences(MODALITY, Context.MODE_PRIVATE)
-        sharedPreferences.edit().apply { putBoolean(settings.sharedPreferencesBooleanName, true).apply() }
+        sharedPreferences.edit().apply {
+            putBoolean(settings.sharedPreferencesBooleanName, true).apply()
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
@@ -176,7 +181,10 @@ abstract class BaseFragment<B : ViewDataBinding>: Fragment() {
                 flags = flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
                 view.systemUiVisibility = flags
             }
-            requireActivity().window.statusBarColor = ContextCompat.getColor(requireActivity(), statusBarColor)
+            requireActivity().window.statusBarColor = ContextCompat.getColor(
+                requireActivity(),
+                statusBarColor
+            )
     }
 
     private fun applyResources() {
