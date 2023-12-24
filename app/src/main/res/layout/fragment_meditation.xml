@@ -19,7 +19,7 @@
         <TextView
             android:id="@+id/meditation_title"
             android:text="@string/selecionar_mindset"
-            android:layout_margin="@dimen/padding"
+            android:layout_margin="@dimen/padding12"
             app:layout_constraintTop_toTopOf="parent"
             style="@style/blue_text_title"
             tools:ignore="MissingConstraints" />
@@ -28,7 +28,7 @@
             android:id="@+id/frame_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/padding"
+            android:layout_marginHorizontal="@dimen/padding12"
             app:layout_constraintBottom_toBottomOf="@id/frame_2"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"

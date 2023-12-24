@@ -24,11 +24,13 @@
         <TextView
             android:id="@+id/escolha_refeicao"
             android:text="@string/escolha_a_sua_refeicao"
-            android:layout_margin="@dimen/padding"
+            android:layout_marginTop="@dimen/padding16"
+            android:layout_marginHorizontal="@dimen/padding4x"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/ly_frame_meals"
-            style="@style/blue_text_title"
-            tools:ignore="MissingConstraints" />
+            style="@style/blue_text_title" />
 
         <include
             android:id="@+id/ly_frame_meals"

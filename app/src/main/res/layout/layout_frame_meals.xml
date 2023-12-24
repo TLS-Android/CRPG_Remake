@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/padding"
-    android:layout_marginHorizontal="@dimen/padding"
+    android:layout_marginTop="@dimen/padding12"
+    android:layout_marginHorizontal="@dimen/padding12"
     app:layout_constraintTop_toBottomOf="@id/escolha_refeicao"
     tools:showIn="@layout/meals_fragment">
 
@@ -13,7 +13,7 @@
         android:id="@+id/frame_meals_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/padding"
+        android:layout_margin="@dimen/padding12"
         app:contentPadding="@dimen/padding_20"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,7 +23,7 @@
             android:id="@+id/ly_meals_options"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginVertical="@dimen/padding">
+            android:layout_marginVertical="@dimen/padding12">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/frame_opcao_carne"
@@ -86,7 +86,7 @@
                 android:id="@+id/frame_opcao_dieta"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_marginTop="@dimen/padding"
+                android:layout_marginTop="@dimen/padding12"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/frame_opcao_vegetariano"
                 app:layout_constraintTop_toBottomOf="@id/frame_opcao_carne"

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/second_layout"
-    android:paddingVertical="@dimen/padding"
+    android:paddingVertical="@dimen/padding12"
     android:paddingHorizontal="@dimen/padding4x"
     android:visibility="gone">
 

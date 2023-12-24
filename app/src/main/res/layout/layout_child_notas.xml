@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/second_layout"
     android:paddingHorizontal="@dimen/padding4x"
-    android:paddingVertical="@dimen/padding"
+    android:paddingVertical="@dimen/padding12"
     android:visibility="gone">
 
   <com.google.android.material.card.MaterialCardView
@@ -12,7 +12,7 @@
       android:layout_height="wrap_content"
       android:layout_width="wrap_content"
       app:strokeColor="@color/md_blue_100"
-      app:contentPadding="@dimen/padding"
+      app:contentPadding="@dimen/padding12"
       style="@style/mealCard"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent"

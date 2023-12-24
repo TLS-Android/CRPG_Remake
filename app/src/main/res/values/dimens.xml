@@ -6,7 +6,8 @@
 
     <dimen name="padding4">4dp</dimen>
     <dimen name="padding8">8dp</dimen>
-    <dimen name="padding">12dp</dimen>
+    <dimen name="padding12">12dp</dimen>
+    <dimen name="padding16">16dp</dimen>
     <dimen name="padding_20">20dp</dimen>
     <dimen name="padding2x">24dp</dimen>
     <dimen name="padding3x">36dp</dimen>

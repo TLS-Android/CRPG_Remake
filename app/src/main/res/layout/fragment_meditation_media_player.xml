@@ -62,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/md_blue_100"
-                android:layout_marginHorizontal="@dimen/padding"
+                android:layout_marginHorizontal="@dimen/padding12"
                 app:buffered_color="@color/md_blue_100"
                 app:controller_layout_id="@layout/custom_player_control_view"
                 app:hide_on_touch="false"

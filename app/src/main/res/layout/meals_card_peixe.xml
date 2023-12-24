@@ -5,7 +5,7 @@
     android:id="@+id/frame_opcao_peixe"
     android:layout_marginStart="10dp"
     android:layout_marginEnd="16dp"
-    android:layout_marginVertical="@dimen/padding"
+    android:layout_marginVertical="@dimen/padding12"
     android:layout_gravity="end"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toEndOf="@+id/frame_opcao_carne"
