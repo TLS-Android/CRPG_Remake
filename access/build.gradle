@@ -45,12 +45,12 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.7.7'
     implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
 
-    implementation 'androidx.databinding:databinding-runtime:8.2.2'
+    implementation 'androidx.databinding:databinding-runtime:8.3.1'
     implementation 'com.google.android.material:material:1.11.0'
 
     //Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0'
 
     //GOTEV
     implementation 'net.gotev:speech:1.6.2'
@@ -61,8 +61,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     //Mockito
-    testImplementation 'org.mockito.kotlin:mockito-kotlin:5.1.0'
-    testImplementation 'org.mockito:mockito-core:5.5.0'
+    testImplementation 'org.mockito.kotlin:mockito-kotlin:5.2.1'
+    testImplementation 'org.mockito:mockito-core:5.11.0'
     testImplementation 'org.mockito:mockito-inline:5.2.0'
 
 }

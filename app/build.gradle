@@ -61,12 +61,12 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.7.7'
     implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
-    implementation 'androidx.databinding:databinding-runtime:8.2.2'
+    implementation 'androidx.databinding:databinding-runtime:8.3.1'
 
     // Koin Core features
     implementation 'io.insert-koin:koin-core:3.4.2'
     // Koin Test features
-    testImplementation 'io.insert-koin:koin-test:3.4.1'
+    testImplementation 'io.insert-koin:koin-test:3.5.3'
 
     //GSON
     implementation 'com.google.code.gson:gson:2.10.1'
@@ -77,8 +77,8 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxjava:3.1.8'
 
     //COROUTINES
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0'
 
     //GOTEV
     implementation 'net.gotev:speech:1.6.2'
