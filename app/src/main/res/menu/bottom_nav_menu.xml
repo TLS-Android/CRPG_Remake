@@ -5,4 +5,9 @@
         android:id="@+id/navigation_agenda"
         android:icon="@drawable/ic_home_black_24dp"
         android:title="@string/title_agenda" />
+
+    <item
+        android:id="@+id/navigation_meals"
+        android:icon="@drawable/meal_icon"
+        android:title="@string/title_refeicoes" />
 </menu>

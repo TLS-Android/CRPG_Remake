@@ -309,9 +309,11 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
         }
 
         super.performActionWithVoiceCommand(command, actionMap)
-
+        /*
         if (command.contains("Todos", true)) {
             viewB.expandableGroup.forEach { it.clickAndFocus() }
         }
+
+         */
     }
 }

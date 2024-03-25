@@ -3,11 +3,13 @@ package com.tiagosantos.crpg_remake.ui.agenda
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.extension.hide
 import com.tiagosantos.common.ui.extension.show
+import com.tiagosantos.common.ui.model.Meal
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentDatePickerBinding
@@ -52,6 +54,7 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
     private val calendar = getInstance()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //goToFragment(AgendaFragment())
         goToFragment(MealsFragment())
         //goToFragment(MeditationFragment())
         //goToFragment(ReminderFragment())
@@ -131,7 +134,10 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
             buttonSelecionar.setOnClickListener {
                 if (selected) {
                     noDateSelectedWarning.hide()
-                    goToFragment(AgendaFragment())
+                    findNavController().navigate(
+                      R.id.action_navigation_date_picker_to_navigation_agenda
+                    )
+                    //goToFragment(AgendaFragment())
                 } else {
                     noDateSelectedWarning.show()
                 }

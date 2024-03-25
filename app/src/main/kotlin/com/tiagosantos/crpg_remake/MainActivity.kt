@@ -1,7 +1,6 @@
 package com.tiagosantos.crpg_remake
 
 import android.os.Bundle
-import android.view.WindowManager
 import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.fragment.NavHostFragment
@@ -66,7 +65,10 @@ class MainActivity : MainActivityInterface, BaseActivity(
         val navController = navHostFragment.navController
 
         val appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.navigation_agenda)
+            setOf(
+                R.id.navigation_agenda,
+                R.id.navigation_meals
+            )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)

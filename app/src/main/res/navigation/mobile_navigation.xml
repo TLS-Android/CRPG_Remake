@@ -3,11 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_date_picker">
+    app:startDestination="@+id/navigation_agenda">
 
     <fragment
         android:id="@+id/navigation_date_picker"
         android:name="com.tiagosantos.crpg_remake.ui.agenda.DatePickerFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_date_picker" />
+        tools:layout="@layout/fragment_date_picker" >
+        <action
+            android:id="@+id/action_navigation_date_picker_to_navigation_agenda"
+            app:destination="@id/navigation_agenda" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_agenda"
+        android:name="com.tiagosantos.crpg_remake.ui.agenda.AgendaFragment"
+        android:label="@string/title_agenda"
+        tools:layout="@layout/fragment_agenda" >
+        <action
+            android:id="@+id/action_navigation_agenda_to_navigation_meals"
+            app:destination="@id/navigation_meals" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_meals"
+        android:name="com.tiagosantos.crpg_remake.ui.meals.MealsFragment"
+        android:label="@string/title_refeicoes"
+        tools:layout="@layout/meals_fragment" >
+        <action
+            android:id="@+id/action_navigation_meals_to_navigation_date_picker"
+            app:destination="@id/navigation_date_picker" />
+    </fragment>
 </navigation>
