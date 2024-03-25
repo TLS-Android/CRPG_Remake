@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.view.forEach
 import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
 import com.hannesdorfmann.fragmentargs.annotation.Arg
@@ -204,7 +203,6 @@ class ReminderFragment : BaseModalFragment<ReminderFragmentBinding>() {
                 }
 
             }
-
 
             /** ----- CANCELAR  ------ **/
             setupCancelButton()
