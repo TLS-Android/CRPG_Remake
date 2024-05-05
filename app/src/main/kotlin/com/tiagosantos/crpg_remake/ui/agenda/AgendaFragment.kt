@@ -36,7 +36,8 @@ import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setVisible
  * which is before it can possibly be attached to a context.
  */
 @FragmentWithArgs
-class AgendaFragment : BaseModalFragment<FragmentAgendaBinding, FeatureType>()
+class AgendaFragment :
+    BaseModalFragment<FragmentAgendaBinding, FeatureType>() {
 
     @delegate:Arg
     override val settings by lazy {

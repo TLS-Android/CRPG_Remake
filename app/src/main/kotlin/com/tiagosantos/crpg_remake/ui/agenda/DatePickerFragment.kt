@@ -28,7 +28,8 @@ import java.util.*
 import java.util.Calendar.*
 
 @FragmentWithArgs
-class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding, FeatureType>() {
+class DatePickerFragment:
+    BaseModalFragment<FragmentDatePickerBinding, FeatureType>() {
 
     /**
      * Lazy properties: the value is computed only on first access.

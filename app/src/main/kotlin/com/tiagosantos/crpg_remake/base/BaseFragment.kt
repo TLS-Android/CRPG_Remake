@@ -3,14 +3,12 @@
 package com.tiagosantos.crpg_remake.base
 
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
-import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -54,11 +52,9 @@ abstract class BaseFragment<B : ViewDataBinding, T : FeatureType>: Fragment() {
     }
 
     private fun showBackButton() {
-        if (activity is MainActivity && settings.showBackButton == true) {
-            (activity as MainActivity?)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        } else {
-            (activity as MainActivity?)?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        }
+        (activity as? MainActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(
+            settings.showBackButton ?: false
+        )
     }
 
     override fun onCreateView(
@@ -122,7 +118,6 @@ abstract class BaseFragment<B : ViewDataBinding, T : FeatureType>: Fragment() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.R)
     private fun setLightOrDarkStatusBarContent(@ColorRes statusBarColor: Int, view: View) {
 
         val rgb: Int = requireContext().getColorCompatible(statusBarColor) // 0xAARRGGBB
@@ -136,28 +131,14 @@ abstract class BaseFragment<B : ViewDataBinding, T : FeatureType>: Fragment() {
         //if lum greater than 128, the status bar color is light, so the content should be dark and vise versa
         val isLight = lum > 128 //0..255 : 0 - darkest, 255 - lightest
 
-        //For API 30+
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            view.windowInsetsController?.setSystemBarsAppearance(
-                if (isLight) WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS else 0, // value
-                if (isLight) WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS else 0 // mask
-            )
-        }
-        //for API 23+
-        else
-            if (isLight) {
-                /**
-                 * Migrar view para window.insetsController
-                 *
-                 * var flags = requireActivity().window.insetsController **/
-                var flags = view.systemUiVisibility
-                flags = flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                view.systemUiVisibility = flags
-            }
-            requireActivity().window.statusBarColor = ContextCompat.getColor(
-                requireActivity(),
-                statusBarColor
-            )
+        view.windowInsetsController?.setSystemBarsAppearance(
+            if (isLight) WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS else 0, // value
+            if (isLight) WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS else 0 // mask
+        )
+        requireActivity().window.statusBarColor = ContextCompat.getColor(
+            requireActivity(),
+            statusBarColor
+        )
     }
 
     private fun applyResources() {

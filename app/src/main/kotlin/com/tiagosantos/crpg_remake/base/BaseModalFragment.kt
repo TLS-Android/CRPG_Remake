@@ -20,7 +20,8 @@ import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.numberList
 import com.tiagosantos.crpg_remake.data.sharedprefs.SharedPrefsViewModel
 import com.tiagosantos.crpg_remake.ui.FeatureType
 
-abstract class BaseModalFragment<B : ViewDataBinding, T : FeatureType>: BaseFragment<B,T>() {
+abstract class BaseModalFragment<B : ViewDataBinding, T : FeatureType> :
+    BaseFragment<B,T>() {
 
 
     /**

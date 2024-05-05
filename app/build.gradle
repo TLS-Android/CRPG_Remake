@@ -50,9 +50,9 @@ dependencies {
     implementation 'com.hannesdorfmann.fragmentargs:annotation:4.0.0-RC1'
     annotationProcessor 'com.hannesdorfmann.fragmentargs:processor:4.0.0-RC1'
 
-    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'com.google.android.material:material:1.12.0'
 
-    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.core:core-ktx:1.13.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.core:core-splashscreen:1.0.1'
@@ -66,7 +66,7 @@ dependencies {
     implementation "androidx.navigation:navigation-safe-args-gradle-plugin:2.7.7"
 
 
-    implementation 'androidx.databinding:databinding-runtime:8.3.1'
+    implementation 'androidx.databinding:databinding-runtime:8.4.0'
 
     // Koin Core features
     implementation 'io.insert-koin:koin-core:3.4.2'
@@ -104,7 +104,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.16.0'
 
     //THREE TEN
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.4.6'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.4.7'
 
     //SEEKBAR
     implementation ('org.adw.library:discrete-seekbar:1.0.1') {
