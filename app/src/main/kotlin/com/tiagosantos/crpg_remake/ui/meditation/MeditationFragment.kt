@@ -13,9 +13,10 @@ import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationBinding
+import com.tiagosantos.crpg_remake.ui.FeatureType
 
 @FragmentWithArgs
-class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>() {
+class MeditationFragment : BaseModalFragment<FragmentMeditationBinding, FeatureType>() {
 
     @delegate:Arg
     override val settings by lazy {
@@ -54,7 +55,7 @@ class MeditationFragment : BaseModalFragment<FragmentMeditationBinding>() {
     override fun setupUI() {
         for((mood, value) in feelingsMap) {
             value.setOnClickListener { viewModel.selectedMood = mood }.also {
-                goToFragment(MeditationMediaPlayerFragment()) }
+                navigateToDestination(R.id.navigation_agenda) }
         }
     }
 }

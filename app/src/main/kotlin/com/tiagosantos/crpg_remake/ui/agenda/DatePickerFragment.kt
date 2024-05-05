@@ -23,6 +23,7 @@ import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getDayName
 import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getDayNumber
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.numberMap
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
+import com.tiagosantos.crpg_remake.ui.FeatureType
 import com.tiagosantos.crpg_remake.ui.meals.MealsFragment
 import java.util.*
 import java.util.Calendar.*
@@ -55,11 +56,7 @@ class DatePickerFragment:
     private val calendar = getInstance()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        //goToFragment(AgendaFragment())
-        goToFragment(MealsFragment())
-        //goToFragment(MeditationFragment())
-        //goToFragment(ReminderFragment())
-        //goToFragment(MeditationMediaPlayerFragment())
+        navigateToDestination(R.id.navigation_agenda)
         super.onViewCreated(view, savedInstanceState)
     }
 

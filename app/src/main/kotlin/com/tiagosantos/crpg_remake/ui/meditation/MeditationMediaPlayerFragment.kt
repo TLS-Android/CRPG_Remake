@@ -63,7 +63,7 @@ class MeditationMediaPlayerFragment :
             moodColor.apply { setBackgroundColor(resources.getColor(mood.colorId)) }
 
             buttonReturnMeditation.setOnClickListener {
-                goToFragment(MeditationFragment())
+                navigateToDestination(R.id.navigation_agenda)
             }
         }
     }

@@ -26,7 +26,7 @@ import com.tiagosantos.crpg_remake.ui.layoutId
 abstract class BaseFragment<B : ViewDataBinding, T : FeatureType>: Fragment() {
 
     protected val feature: T by lazy {
-        arguments?.getSerializable(FEATURE_TYPE_KEY)
+        arguments?.getSerializable(FEATURE_TYPE_KEY) as T
     }
 
     protected abstract val settings: FragmentSettings
