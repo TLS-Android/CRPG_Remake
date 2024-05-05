@@ -35,7 +35,7 @@ import kotlinx.coroutines.launch
  * so you should make sure you are re-assigning these properties every time there is a new view.
  */
 @FragmentWithArgs
-class MealsFragment : BaseModalFragment<MealsFragmentBinding>() {
+class MealsFragment : BaseModalFragment<MealsFragmentBinding, FeatureType>() {
 
     @Arg override var layoutId = R.layout.meals_fragment
 

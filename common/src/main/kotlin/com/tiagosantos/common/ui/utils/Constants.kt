@@ -57,4 +57,6 @@ object Constants {
 
     const val eventFilename = "event.json"
 
+    const val FEATURE_TYPE_KEY = "feature_type_key"
+
 }

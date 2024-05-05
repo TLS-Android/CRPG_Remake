@@ -15,34 +15,20 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.fragment.findNavController
 import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.tiagosantos.common.ui.extension.getColorCompatible
 import com.tiagosantos.common.ui.utils.Constants.EMPTY_STRING
+import com.tiagosantos.common.ui.utils.Constants.FEATURE_TYPE_KEY
 import com.tiagosantos.common.ui.utils.Constants.MODALITY
 import com.tiagosantos.crpg_remake.MainActivity
-import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.ui.FeatureType
-import com.tiagosantos.crpg_remake.ui.agenda.AgendaFragment
-import com.tiagosantos.crpg_remake.ui.agenda.DatePickerFragment
 import com.tiagosantos.crpg_remake.ui.layoutId
-import com.tiagosantos.crpg_remake.ui.meals.MealsFragment
-import com.tiagosantos.crpg_remake.ui.meditation.MeditationFragment
-import com.tiagosantos.crpg_remake.ui.meditation.MeditationMediaPlayerFragment
-import com.tiagosantos.crpg_remake.ui.reminders.ReminderFragment
 
-abstract class BaseFragment<B : ViewDataBinding>: Fragment() {
+abstract class BaseFragment<B : ViewDataBinding, T : FeatureType>: Fragment() {
 
-    protected val feature : FeatureType
-    get() = when(this) {
-        is MealsFragment ->  { println("refeicoes"); FeatureType.REFEICOES }
-        is AgendaFragment -> FeatureType.AGENDA
-        is ReminderFragment -> FeatureType.LEMBRETES
-        is MeditationMediaPlayerFragment -> { println("media player"); FeatureType.MEDIA_PLAYER }
-        is MeditationFragment -> { FeatureType.MEDITACAO }
-        is DatePickerFragment -> { FeatureType.DATE_PICKER }
-        else -> { FeatureType.UNKNOWN }
+    protected val feature: T by lazy {
+        arguments?.getSerializable(FEATURE_TYPE_KEY)
     }
 
     protected abstract val settings: FragmentSettings
@@ -57,17 +43,14 @@ abstract class BaseFragment<B : ViewDataBinding>: Fragment() {
 
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
-            val fragmentTransaction: FragmentTransaction =
-                fragmentManager.beginTransaction()
-            fragmentTransaction.replace(
-                androidx.navigation.fragment.R.id.nav_host_fragment_container,
-                fragment
-            )
-            fragmentManager.popBackStack()
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
+            val navController = findNavController()
+            navController.popBackStack()
         }
+    }
+
+    protected fun navigateToDestination(destinationId: Int) {
+        val navController = findNavController()
+        navController.navigate(destinationId)
     }
 
     private fun showBackButton() {
@@ -76,16 +59,6 @@ abstract class BaseFragment<B : ViewDataBinding>: Fragment() {
         } else {
             (activity as MainActivity?)?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
         }
-    }
-
-    protected fun goToFragment(destination: Fragment){
-            val fragment: Fragment = destination
-            val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
-            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, fragment)
-            fragmentManager.popBackStack()
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
     }
 
     override fun onCreateView(

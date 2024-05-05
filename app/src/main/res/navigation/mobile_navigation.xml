@@ -13,6 +13,11 @@
         <action
             android:id="@+id/action_navigation_date_picker_to_navigation_agenda"
             app:destination="@id/navigation_agenda" />
+        <argument
+            android:name="data"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 
     <fragment
@@ -33,5 +38,10 @@
         <action
             android:id="@+id/action_navigation_meals_to_navigation_date_picker"
             app:destination="@id/navigation_date_picker" />
+        <argument
+            android:name="data"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>

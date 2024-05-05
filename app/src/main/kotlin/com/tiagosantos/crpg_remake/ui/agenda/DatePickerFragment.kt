@@ -28,7 +28,7 @@ import java.util.*
 import java.util.Calendar.*
 
 @FragmentWithArgs
-class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
+class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding, FeatureType>() {
 
     /**
      * Lazy properties: the value is computed only on first access.
@@ -143,6 +143,13 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
                 }
             }
         }
+
+
+        val data = "Hello, Destination Fragment!"
+
+        //val action = FragmentDire.actionMobileNavigationToAddNoteFragment().setTaskItem(data)
+
+        //findNavController(it).navigate(action)
 
     }
 

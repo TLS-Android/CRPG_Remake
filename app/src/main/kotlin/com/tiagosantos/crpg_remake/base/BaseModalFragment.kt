@@ -18,8 +18,10 @@ import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.generalHelper
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.numberList
 import com.tiagosantos.crpg_remake.data.sharedprefs.SharedPrefsViewModel
+import com.tiagosantos.crpg_remake.ui.FeatureType
 
-abstract class BaseModalFragment<B : ViewDataBinding>: BaseFragment<B>() {
+abstract class BaseModalFragment<B : ViewDataBinding, T : FeatureType>: BaseFragment<B,T>() {
+
 
     /**
      * Member has the same visibility as one marked as private, but that it is also visible in subclasses.

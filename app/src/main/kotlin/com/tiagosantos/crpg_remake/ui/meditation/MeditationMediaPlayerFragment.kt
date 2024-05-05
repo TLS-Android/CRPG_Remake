@@ -12,6 +12,7 @@ import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.databinding.FragmentMeditationMediaPlayerBinding
 import com.tiagosantos.crpg_remake.helper.colorId
+import com.tiagosantos.crpg_remake.ui.FeatureType
 
 /**
 If Android decides to recreate your Fragment later,
@@ -21,7 +22,8 @@ With that being said, the way to pass stuff to your Fragment so that they are av
 Fragment is recreated by Android is to pass a bundle to the setArguments method
  **/
 @FragmentWithArgs
-class MeditationMediaPlayerFragment : BaseModalFragment<FragmentMeditationMediaPlayerBinding>() {
+class MeditationMediaPlayerFragment :
+    BaseModalFragment<FragmentMeditationMediaPlayerBinding, FeatureType>() {
 
     @delegate:Arg
     override val settings by lazy {

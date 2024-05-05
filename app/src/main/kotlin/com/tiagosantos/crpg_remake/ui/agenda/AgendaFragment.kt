@@ -15,10 +15,12 @@ import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.Orientation
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.model.TimelineAttributes
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.model.Event
+import com.tiagosantos.common.ui.utils.Constants.FEATURE_TYPE_KEY
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.databinding.FragmentAgendaBinding
+import com.tiagosantos.crpg_remake.ui.FeatureType
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.TimeLineAdapter
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.dpToPx
 import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.getColorCompat
@@ -34,7 +36,7 @@ import com.tiagosantos.crpg_remake.ui.agenda.timeline.extentions.setVisible
  * which is before it can possibly be attached to a context.
  */
 @FragmentWithArgs
-class AgendaFragment : BaseModalFragment<FragmentAgendaBinding>() {
+class AgendaFragment : BaseModalFragment<FragmentAgendaBinding, FeatureType>()
 
     @delegate:Arg
     override val settings by lazy {
