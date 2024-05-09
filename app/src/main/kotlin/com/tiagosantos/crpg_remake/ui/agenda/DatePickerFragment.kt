@@ -9,7 +9,6 @@ import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
 import com.tiagosantos.access.modal.settings.TTSSettings
 import com.tiagosantos.common.ui.extension.hide
 import com.tiagosantos.common.ui.extension.show
-import com.tiagosantos.common.ui.model.Meal
 import com.tiagosantos.crpg_remake.base.FragmentSettings
 import com.tiagosantos.crpg_remake.R
 import com.tiagosantos.crpg_remake.databinding.FragmentDatePickerBinding
@@ -24,7 +23,6 @@ import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getDayNumber
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.numberMap
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.ui.FeatureType
-import com.tiagosantos.crpg_remake.ui.meals.MealsFragment
 import java.util.*
 import java.util.Calendar.*
 

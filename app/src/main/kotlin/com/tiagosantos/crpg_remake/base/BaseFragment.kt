@@ -152,19 +152,22 @@ abstract class BaseFragment<B : ViewDataBinding, T : FeatureType>: Fragment() {
 
         (requireActivity() is BaseActivityInterface).apply {
             if (!this) {
-                if (settings.appBarColor != 0)
+                settings.apply {
                     throw UnsupportedOperationException(
-                        "Your activity should extends from 'BaseActivity' to set AppBar color"
-                    )
-                if (settings.appBarTitle as Int != 0 || (settings.appBarTitle as String).isEmpty())
-                    throw UnsupportedOperationException(
-                        "Your activity should extends from 'BaseActivity' to set AppBar title"
-                    )
-                if (settings.appBarSubTitle as Int != 0 || (settings.appBarSubTitle as String).isEmpty())
-                    throw UnsupportedOperationException(
-                        "Your activity should extends from 'BaseActivity' to set AppBar sub-title"
-                    )
+                        when {
+                            appBarColor != 0 ->
+                                "Your activity should extends from 'BaseActivity' to set status bar color"
+
+                            appBarTitle as Int != 0 || (appBarTitle as String).isEmpty() ->
+                                "Your activity should extends from 'BaseActivity' to set AppBar title"
+
+                            appBarSubTitle as Int != 0 || (appBarSubTitle as String).isEmpty() ->
+                                "Your activity should extends from 'BaseActivity' to set AppBar sub-title"
+
+                            else -> "Your activity should extends from 'BaseActivity' to set AppBar sub-title"
+                        })
                 }
+            }
 
             (requireActivity() as BaseActivityInterface).apply {
                 setAppBarTitle(
