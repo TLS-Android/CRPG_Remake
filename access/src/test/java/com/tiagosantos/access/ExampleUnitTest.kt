@@ -4,8 +4,9 @@ import android.speech.tts.TextToSpeech
 import com.tiagosantos.access.modal.gossip.Gossip
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.BeforeEach
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
@@ -38,18 +39,18 @@ class ExampleUnitTest {
     private lateinit var mockException: Exception
 
 
-    @Test
+    @org.junit.jupiter.api.Test
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
     }
 
-    @Before
+    @BeforeEach
     fun setUp() {
         //whenever(mockStringValue).thenReturn("ola")
 
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     fun test_mute_is_successful() {
         whenever(gossip.isMuted).then { gossip.mute() }
 
@@ -59,14 +60,14 @@ class ExampleUnitTest {
 
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     fun test_talk_is_successful() {
         gossip.talk("ola")
 
         verify(gossip, atLeastOnce()).talk(eq("ola"), any(), any(), any())
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     fun test_is_speaking_successful() {
         whenever(gossip.textToSpeech.isSpeaking).thenReturn(true)
 
@@ -74,7 +75,7 @@ class ExampleUnitTest {
     }
 
 
-    @Test
+    @org.junit.jupiter.api.Test
     fun test_set_language_is_successful() {
         whenever(gossip.isMuted).then { gossip.mute() }
 
