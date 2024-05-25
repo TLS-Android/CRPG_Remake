@@ -42,25 +42,25 @@ dependencies {
 
     //Koin
     // Koin Core features
-    implementation 'io.insert-koin:koin-core:3.4.2'
+    implementation 'io.insert-koin:koin-core:3.5.6'
     implementation 'androidx.recyclerview:recyclerview-selection:1.1.0'
 
     // Koin Test features
     testImplementation 'io.insert-koin:koin-test:3.5.6'
 
     //Lifecycle
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.7.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.8.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.7.7'
     implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
-    implementation 'androidx.databinding:databinding-runtime:8.4.0'
+    implementation 'androidx.databinding:databinding-runtime:8.4.1'
 
     //Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1'
 
     //GSON
-    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.google.code.gson:gson:2.11.0'
 
     //EXPANDABLE_LAYOUT
     implementation "com.github.skydoves:expandablelayout:1.0.7"
