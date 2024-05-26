@@ -4,6 +4,8 @@ package com.tiagosantos.access.modal.gossip
 
 import android.app.Activity
 import android.content.Context
+import android.media.AudioAttributes
+import android.media.AudioFocusRequest
 import android.media.AudioManager
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
@@ -124,15 +126,28 @@ open class Gossip(private val context: Context) : TextToSpeech.OnInitListener {
 
     fun requestAudioFocus() {
         val am = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        am.requestAudioFocus(
-            audioFocusChangeListener, AudioManager.STREAM_MUSIC,
-            AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK
-        )
+        val request = AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK)
+            .setAudioAttributes(AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_MEDIA)
+                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                .build())
+            .setAcceptsDelayedFocusGain(true)
+            .setOnAudioFocusChangeListener(audioFocusChangeListener)
+            .build()
+        am.requestAudioFocus(request)
     }
 
     fun abandonAudioFocus() {
         val am = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        am.abandonAudioFocus(audioFocusChangeListener)
+        val request = AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK)
+            .setAudioAttributes(AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_MEDIA)
+                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                .build())
+            .setAcceptsDelayedFocusGain(true)
+            .setOnAudioFocusChangeListener(audioFocusChangeListener)
+            .build()
+        am.abandonAudioFocusRequest(request)
     }
 
     private fun enableVolumeControl(activity: Activity?) {
