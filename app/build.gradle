@@ -50,35 +50,35 @@ dependencies {
     implementation 'com.hannesdorfmann.fragmentargs:annotation:4.0.0-RC1'
     annotationProcessor 'com.hannesdorfmann.fragmentargs:processor:4.0.0-RC1'
 
-    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'com.google.android.material:material:1.12.0'
 
-    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.core:core-ktx:1.13.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.core:core-splashscreen:1.0.1'
 
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.2'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.6'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.7.6'
-    implementation 'androidx.databinding:databinding-runtime:8.2.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.8.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.7'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
+    implementation 'androidx.databinding:databinding-runtime:8.4.1'
 
     // Koin Core features
-    implementation 'io.insert-koin:koin-core:3.4.2'
+    implementation 'io.insert-koin:koin-core:3.5.6'
     // Koin Test features
-    testImplementation 'io.insert-koin:koin-test:3.4.1'
+    testImplementation 'io.insert-koin:koin-test:3.5.6'
 
     //GSON
-    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.google.code.gson:gson:2.11.0'
 
     //REACTIVEX
     implementation "io.reactivex.rxjava3:rxkotlin:3.0.1"
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
-    implementation 'io.reactivex.rxjava3:rxjava:3.1.6'
+    implementation 'io.reactivex.rxjava3:rxjava:3.1.8'
 
     //COROUTINES
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1'
 
     //GOTEV
     implementation 'net.gotev:speech:1.6.2'
@@ -99,7 +99,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.16.0'
 
     //THREE TEN
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.4.6'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.4.7'
 
     //SEEKBAR
     implementation ('org.adw.library:discrete-seekbar:1.0.1') {
