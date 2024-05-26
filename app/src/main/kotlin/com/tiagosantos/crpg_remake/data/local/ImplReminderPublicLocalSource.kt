@@ -32,9 +32,9 @@ class ImplReminderPublicLocalSource(
         val filename = REMINDER_FILENAME
         val fullFilename = ctx.filesDir.toString() + SLASH + filename
         val file = File(fullFilename)
-        val fileExists = file.exists()
-        val reminderList = ArrayList<Reminder>()
-        val isNewFileCreated : Boolean = file.createNewFile()
+//        val fileExists = file.exists()
+//        val reminderList = ArrayList<Reminder>()
+//        val isNewFileCreated : Boolean = file.createNewFile()
     }
 
     val newReminder = Reminder(

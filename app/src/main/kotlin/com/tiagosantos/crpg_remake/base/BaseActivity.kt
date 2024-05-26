@@ -60,7 +60,7 @@ abstract class BaseActivity(
         //setSupportActionBar(findViewById(R.id.appbar))
 
         //populate view
-        val layoutView = (findViewById<View>(android.R.id.content) as ViewGroup).getChildAt(0)
+        //val layoutView = (findViewById<View>(android.R.id.content) as ViewGroup).getChildAt(0)
         //initViews(layoutView)
 
         //applyWindowInsets(findViewById(android.R.id.content))
