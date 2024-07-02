@@ -3,11 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_date_picker">
+    app:startDestination="@+id/navigation_meals">
 
     <fragment
         android:id="@+id/navigation_date_picker"
         android:name="com.tiagosantos.crpg_remake.ui.agenda.DatePickerFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_date_picker" />
+
+    <fragment
+        android:id="@+id/navigation_agenda"
+        android:name="com.tiagosantos.crpg_remake.ui.agenda.AgendaFragment"
+        android:label="@string/title_agenda"
+        tools:layout="@layout/fragment_agenda" />
+
+    <fragment
+        android:id="@+id/navigation_meditation"
+        android:name="com.tiagosantos.crpg_remake.ui.meditation.MeditationFragment"
+        android:label="@string/title_meditacao"
+        tools:layout="@layout/fragment_meditation" />
+
+    <fragment
+        android:id="@+id/navigation_meals"
+        android:name="com.tiagosantos.crpg_remake.ui.meals.MealsFragment"
+        android:label="@string/title_refeicao"
+        tools:layout="@layout/meals_fragment" />
 </navigation>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/datepicker"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -27,11 +28,26 @@
                     layout="@layout/calendar_item"
                     android:visibility="gone" />
 
+                <ImageView
+                    android:id="@+id/logo"
+                    android:layout_width="120dp"
+                    android:layout_height="90dp"
+                    android:layout_marginTop="@dimen/padding16"
+                    android:contentDescription="TODO"
+                    android:scaleType="fitXY"
+                    android:tintMode="src_in"
+                    android:src="@drawable/crpg_logo"
+                    app:layout_constraintVertical_chainStyle="spread"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
                 <TextView
                     android:id="@+id/title_selecionar_data"
                     style="@style/blue_text_title"
                     android:layout_marginBottom="@dimen/padding2x"
                     android:text="@string/selecionar_data"
+                    app:layout_constraintTop_toBottomOf="@id/logo"
                     app:layout_constraintBottom_toTopOf="@id/main_single_row_calendar"
                     app:layout_constraintVertical_chainStyle="spread"
                     tools:ignore="MissingConstraints" />
@@ -42,8 +58,7 @@
                     android:gravity="center_horizontal"
                     android:text="@+id/tvDate"
                     android:textSize="20sp"
-                    app:layout_constraintTop_toBottomOf="@id/title_selecionar_data"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/title_selecionar_data" />
 
                 <TextView
                     android:id="@+id/tvDay"

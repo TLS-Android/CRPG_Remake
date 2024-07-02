@@ -1,7 +1,12 @@
 package com.tiagosantos.crpg_remake.ui.agenda
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.View
+import androidx.core.view.isVisible
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
@@ -22,6 +27,7 @@ import com.tiagosantos.common.ui.singlerowcalendar.utils.DateUtils.getDayNumber
 import com.tiagosantos.common.ui.utils.VoiceCommandsProcessingHelper.numberMap
 import com.tiagosantos.crpg_remake.base.BaseModalFragment
 import com.tiagosantos.crpg_remake.ui.meals.MealsFragment
+import com.tiagosantos.crpg_remake.ui.meditation.MeditationMediaPlayerFragment
 import java.util.*
 import java.util.Calendar.*
 
@@ -52,92 +58,94 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
     private val calendar = getInstance()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        goToFragment(MealsFragment())
-        //goToFragment(MeditationFragment())
-        //goToFragment(ReminderFragment())
-        //goToFragment(MeditationMediaPlayerFragment())
         super.onViewCreated(view, savedInstanceState)
-    }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        Log.d("DatePickerFragment","visibility: ${viewB.root.visibility}")
+        Log.d("DatePickerFragment","visibility: ${viewB.logo.isVisible}")
 
-        with(viewB) {
-            calendar.time = Date()
-            val myCalendarViewManager = object : CalendarViewManager {
-                override fun setCalendarViewResourceId(
-                    position: Int,
-                    date: Date,
-                    isSelected: Boolean,
-                ): Int {
-                    val cal = getInstance().apply { time = date }
-                    if (!isSelected) tvDate.text = getString(R.string.nenhum_dia_selecionado_msg)
+        Log.d("DatePickerFragment", "onViewCreated: DatePicker found? ${viewB.root != null}")
 
-                    return if (isSelected)
-                        when (cal[DAY_OF_WEEK]) {
-                            else -> R.layout.selected_calendar_item
+        Handler(Looper.getMainLooper()).postDelayed({
+            with(viewB) {
+                calendar.time = Date()
+                val myCalendarViewManager = object : CalendarViewManager {
+                    override fun setCalendarViewResourceId(
+                        position: Int,
+                        date: Date,
+                        isSelected: Boolean,
+                    ): Int {
+                        val cal = getInstance().apply { time = date }
+                        if (!isSelected) tvDate.text = getString(R.string.nenhum_dia_selecionado_msg)
+
+                        return if (isSelected)
+                            when (cal[DAY_OF_WEEK]) {
+                                else -> R.layout.selected_calendar_item
+                            }
+                        else
+                            when (cal[DAY_OF_WEEK]) {
+                                else -> R.layout.calendar_item
+                            }
+                    }
+
+                    override fun bindDataToCalendarView(
+                        holder: SingleRowCalendarAdapter.CalendarViewHolder,
+                        date: Date,
+                        position: Int,
+                        isSelected: Boolean,
+                    ) = with(calendarItem) {
+                        tvDateCalendarItem.text = getDayNumber(date)
+                        println("tvDateCalendarItem: ${tvDateCalendarItem.text}")
+                        tvDayCalendarItem.text = getDay3LettersName(date)
+                        println("tvDayCalendarItem: ${tvDayCalendarItem.text}")
+                    }
+                }
+
+                val myCalendarChangesObserver = object :
+                    CalendarChangesObserver {
+                    override fun whenSelectionChanged(
+                        isSelected: Boolean,
+                        position: Int,
+                        date: Date
+                    ) {
+                        super.whenSelectionChanged(isSelected, position, date)
+                        tvDate.text = buildDateString(date)
+                        tvDay.text = getDayName(date)
+                        viewModel.setSelectedDate(date)
+                        selected = isSelected
+                    }
+                }
+
+                val mySelectionManager = object : CalendarSelectionManager {
+                    override fun canBeItemSelected(position: Int, date: Date): Boolean {
+                        val cal = getInstance().apply { time = date }
+                        return when (cal[DAY_OF_WEEK]) {
+                            SATURDAY, SUNDAY -> false
+                            else -> true
                         }
-                    else
-                        when (cal[DAY_OF_WEEK]) {
-                            else -> R.layout.calendar_item
-                        }
+                    }
                 }
 
-                override fun bindDataToCalendarView(
-                    holder: SingleRowCalendarAdapter.CalendarViewHolder,
-                    date: Date,
-                    position: Int,
-                    isSelected: Boolean,
-                ) = with(calendarItem) {
-                    tvDateCalendarItem.text = getDayNumber(date)
-                    println("tvDateCalendarItem: ${tvDateCalendarItem.text}")
-                    tvDayCalendarItem.text = getDay3LettersName(date)
-                    println("tvDayCalendarItem: ${tvDayCalendarItem.text}")
+                mainSingleRowCalendar.apply {
+                    calendarViewManager = myCalendarViewManager
+                    calendarChangesObserver = myCalendarChangesObserver
+                    calendarSelectionManager = mySelectionManager
+                    setDates(viewModel.getFutureDatesOfCurrentMonth())
+                    init()
                 }
-            }
-
-            val myCalendarChangesObserver = object :
-                CalendarChangesObserver {
-                override fun whenSelectionChanged(
-                    isSelected: Boolean,
-                    position: Int,
-                    date: Date
-                ) {
-                    super.whenSelectionChanged(isSelected, position, date)
-                    tvDate.text = buildDateString(date)
-                    tvDay.text = getDayName(date)
-                    viewModel.setSelectedDate(date)
-                    selected = isSelected
-                }
-            }
-
-            val mySelectionManager = object : CalendarSelectionManager {
-                override fun canBeItemSelected(position: Int, date: Date): Boolean {
-                    val cal = getInstance().apply { time = date }
-                    return when (cal[DAY_OF_WEEK]) {
-                        SATURDAY, SUNDAY -> false
-                        else -> true
+                buttonSelecionar.setOnClickListener {
+                    if (selected) {
+                        noDateSelectedWarning.hide()
+                        goToFragment(AgendaFragment())
+                    } else {
+                        noDateSelectedWarning.show()
                     }
                 }
             }
 
-            mainSingleRowCalendar.apply {
-                calendarViewManager = myCalendarViewManager
-                calendarChangesObserver = myCalendarChangesObserver
-                calendarSelectionManager = mySelectionManager
-                setDates(viewModel.getFutureDatesOfCurrentMonth())
-                init()
-            }
-            buttonSelecionar.setOnClickListener {
-                if (selected) {
-                    noDateSelectedWarning.hide()
-                    goToFragment(AgendaFragment())
-                } else {
-                    noDateSelectedWarning.show()
-                }
-            }
-        }
+        }, 2000)
 
+
+        //goToHandler()
     }
 
     override fun setupUI() {}
@@ -158,5 +166,13 @@ class DatePickerFragment: BaseModalFragment<FragmentDatePickerBinding>() {
                 select(literalValue - 1)
             }
         }
+    }
+
+    //FOR DEBUG PURPOSES
+    private fun goToHandler() {
+        //goToFragment(MealsFragment())
+        //goToFragment(MeditationFragment())
+        //goToFragment(ReminderFragment())
+        //goToFragment(MeditationMediaPlayerFragment())
     }
 }
