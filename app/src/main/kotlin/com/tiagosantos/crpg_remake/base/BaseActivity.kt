@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -40,6 +41,15 @@ abstract class BaseActivity(
     //abstract fun initViews(layoutView: View)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setContentView(layoutId ?: run {
+            Log.e("MainActivity", "Error: layoutId is null, cannot set content view")
+            return // Exit early if layoutId is null
+        })
+        Log.d("MainActivity", "setContentView() completed with layoutId: $layoutId")
+
+
         if (settings!!.isAdjustFontScaleToNormal)
             adjustFontScaleToNormal(resources.configuration)
 
@@ -48,13 +58,11 @@ abstract class BaseActivity(
             window.addFlags(it)
         }
 
-        super.onCreate(savedInstanceState)
-
         //set start activity animation
         if (settings!!.openEnterAnimation != 0 || settings!!.openExitAnimation != 0)
             overridePendingTransition(settings!!.openEnterAnimation, settings!!.openExitAnimation)
 
-        setContentView(layoutId!!)
+
         //initToolbar()
         actionBar = supportActionBar
         //setSupportActionBar(findViewById(R.id.appbar))
@@ -72,8 +80,6 @@ abstract class BaseActivity(
         if (settings!!.closeEnterAnimation != 0 || settings!!.closeExitAnimation != 0)
             overridePendingTransition(settings!!.closeEnterAnimation, settings!!.closeExitAnimation)
         //appPreferences!!.resetAppPreferences()
-
-
     }
 
     override fun setAppBarTitle(titleString: String) {

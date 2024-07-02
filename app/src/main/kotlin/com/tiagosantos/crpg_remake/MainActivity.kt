@@ -30,8 +30,8 @@ class MainActivity : MainActivityInterface, BaseActivity(
     ActivitySettings(
         isAdjustFontScaleToNormal = true,
         windowFlags = listOf(
-            //WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION,
-            //WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+            WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION,
+            WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
         )
     ),
 ) {
@@ -45,16 +45,16 @@ class MainActivity : MainActivityInterface, BaseActivity(
         this.settings = ActivitySettings(
             isAdjustFontScaleToNormal = true,
             windowFlags = listOf(
-                //WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION,
-                //WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+                WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION,
+                WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
             )
         )
     }
 
     /** The modules() function in startKoin load the given list of modules  **/
     override fun onCreate(savedInstanceState: Bundle?) {
-        setupParams()
         super.onCreate(savedInstanceState)
+        setupParams()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         navView = binding.navView
