@@ -45,64 +45,50 @@ dependencies {
     implementation project(path: ':access')
     implementation project(path: ':timelineview')
 
-    //FRAGMENT ARGS
-    implementation 'com.hannesdorfmann.fragmentargs:annotation:4.0.0-RC1'
-    annotationProcessor 'com.hannesdorfmann.fragmentargs:processor:4.0.0-RC1'
+    // Fragment Args
+    implementation(libs.fragmentargs.annotation)
+    annotationProcessor(libs.fragmentargs.processor)
 
-    implementation 'com.google.android.material:material:1.8.0'
+    // Material
+    implementation(libs.material)
 
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.core:core-splashscreen:1.0.0'
+    // AndroidX
+    implementation(libs.bundles.androidx) // Using the bundle!
 
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
-    implementation 'androidx.databinding:databinding-runtime:7.4.2'
+    // Koin
+    implementation(libs.koin.core)
+    testImplementation(libs.koin.test)
 
-    // Koin Core features
-    implementation "io.insert-koin:koin-core:3.2.2"
-    // Koin Test features
-    testImplementation "io.insert-koin:koin-test:3.2.2"
+    // Gson
+    implementation(libs.gson)
 
-    //GSON
-    implementation 'com.google.code.gson:gson:2.10.1'
+    // ReactiveX
+    implementation(libs.rxkotlin)
+    implementation(libs.rxandroid)
+    implementation(libs.rxjava)
 
-    //REACTIVEX
-    implementation "io.reactivex.rxjava3:rxkotlin:3.0.1"
-    implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
-    implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
+    // Coroutines
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
 
-    //COROUTINES
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+    // Gotev
+    implementation(libs.speech)
 
-    //GOTEV
-    implementation 'net.gotev:speech:1.6.2'
+    // Expandable Layout
+    implementation(libs.expandablelayout)
 
-    //EXPANDABLE_LAYOUT
-    implementation "com.github.skydoves:expandablelayout:1.0.7"
+    // Exoplayer
+    implementation(libs.exoplayer.core)
+    implementation(libs.exoplayer.ui)
 
-    //EXOPLAYER
-    implementation 'com.google.android.exoplayer:exoplayer-core:2.18.4'
-    implementation 'com.google.android.exoplayer:exoplayer-ui:2.18.4'
+    // Test
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.junit)
+    androidTestImplementation(libs.androidx.test.espresso)
 
-    //TEST
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    // Threeten ABP
+    implementation(libs.threetenabp)
 
-    //THREE TEN
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.4.4'
-
-    implementation ('com.thebluealliance:spectrum:0.7.1') {
-        exclude group: 'com.android.support'
-        exclude module: 'appcompat-v7'
-        exclude module: 'support-v4'
-    }
-
-    implementation 'com.android.support:multidex:2.0.1'
-
+    // Multidex
+    implementation(libs.androidx.multidex)
 }

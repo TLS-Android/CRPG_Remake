@@ -104,3 +104,16 @@ spectrum = { module = "com.thebluealliance:spectrum", version.ref = "spectrum" }
 
 [plugins]
 
+
+[bundles]
+androidx = [
+    "androidx-core-ktx",
+    "androidx-appcompat",
+    "androidx-constraintlayout",
+    "androidx-splashscreen",
+    "androidx-lifecycle-livedata",
+    "androidx-lifecycle-viewmodel",
+    "androidx-navigation-fragment",
+    "androidx-navigation-ui",
+    "androidx-databinding-runtime"
+]
