@@ -97,13 +97,6 @@ dependencies {
     //THREE TEN
     implementation 'com.jakewharton.threetenabp:threetenabp:1.4.4'
 
-    //SEEKBAR
-    implementation ('org.adw.library:discrete-seekbar:1.0.1') {
-        exclude group: 'com.android.support'
-        exclude module: 'appcompat-v7'
-        exclude module: 'support-v4'
-    }
-
     implementation ('com.thebluealliance:spectrum:0.7.1') {
         exclude group: 'com.android.support'
         exclude module: 'appcompat-v7'

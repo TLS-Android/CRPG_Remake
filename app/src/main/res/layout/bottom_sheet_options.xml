@@ -94,24 +94,6 @@
 
             </RadioGroup>
 
-            <include
-                android:id="@+id/layout_marker"
-                layout="@layout/item_bottom_sheet_marker"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/rg_orientation"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <include
-                android:id="@+id/layout_line"
-                layout="@layout/item_bottom_sheet_line"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/layout_marker"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
